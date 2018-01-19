@@ -1,9 +1,9 @@
-Game.util = {}
+Game.Util = {}
 
-Game.util.bit = require "bit"
-Game.util.crypt = require "crypt"
-Game.util.md5 = require "md5"
-Game.util.mime = require "mime"
+Game.Util.bit = require "bit"
+Game.Util.crypt = require "crypt"
+Game.Util.md5 = require "md5"
+Game.Util.mime = require "mime"
 
 require("util.protobuf")
 require("util.color")

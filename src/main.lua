@@ -6,10 +6,10 @@ require "cocos.init"
 --全局变量大写
 
 Game = {}
+require "util.init"
 Game.SceneManager = require("scene.scene_manager")
 
 --TODO
--- require "util.init"
 -- require "manager.init"
 -- require "logic.init"
 
