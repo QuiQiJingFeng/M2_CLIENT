@@ -24,7 +24,7 @@ function prototype:showLayer(l_name, ...)
         if layer then
             self:reorderChild(layer, NORMAL_LAYER_ZORDER)
         else
-            layer = require(string.format("layer.%s", l_name)):create()
+            layer = require(self.scene_dir..".layers."..l_name):create()
             self.layer_map[l_name] = layer
             self:addChild(layer, NORMAL_LAYER_ZORDER)
         end

@@ -3,10 +3,15 @@ cc.FileUtils:getInstance():setPopupNotify(false)
 require "config"
 require "cocos.init"
 
+--全局变量大写
+
 Game = {}
-require "util.init"
-require "manager.init"
-require "logic.init"
+Game.SceneManager = require("scene.scene_manager")
+
+--TODO
+-- require "util.init"
+-- require "manager.init"
+-- require "logic.init"
 
 if CC_SHOW_FPS then
     cc.Director:getInstance():setDisplayStats(true)
@@ -15,8 +20,11 @@ end
 math.newrandomseed()
 
 local function main()
+	--TODO
     -- display.runScene(require("scene.battle"):create(require("tmp"):doBattle()))
-    display.runScene(require("scene.demo"):create())
+    -- display.runScene(require("scene.game_scene"):create())
+
+    Game.SceneManager:runScene("login_scene")
 end
 
 function __G__TRACKBACK__(msg)
