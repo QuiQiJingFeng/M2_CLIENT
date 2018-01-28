@@ -28,7 +28,7 @@ function prototype:showLayer(l_name, ...)
             self.layer_map[l_name] = layer
             self:addChild(layer, NORMAL_LAYER_ZORDER)
         end
-
+        layer.scene = self
         layer:show(...)
         return layer
     end

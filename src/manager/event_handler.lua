@@ -1,9 +1,8 @@
-Game.manager.event_handler = {}
+local event_handler = {}
 
 local handler_id = 0
 local handler_map = {}
 
-local event_handler = Game.manager.event_handler
 function event_handler:on(event_name, callback)
     if not handler_map[event_name] then
         handler_map[event_name] = {}
@@ -33,3 +32,5 @@ function event_handler:emit(event_name, ...)
         end
     end
 end
+
+return event_handler

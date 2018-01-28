@@ -1,6 +1,6 @@
 {
     "init_cfg":{
-       "isLandscape": false,
+       "isLandscape": true,
        "isWindowTop": false,
        "name": "aam2_client",
        "width": 1136,

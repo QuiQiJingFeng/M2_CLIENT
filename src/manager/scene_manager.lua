@@ -1,9 +1,7 @@
 local manager = class("scene_manager")
 
 function manager:ctor()
-	self.cur_scene = nil
-	self.cur_scene_name = nil
-	self.cur_scene_path = nil
+
 end
 
 function manager:runScene(name,transition, time, more,...)

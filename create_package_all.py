@@ -7,8 +7,10 @@ from Utils import Utils
 
 VERSION = "1.0.0"
 
+URL = "192.168.1.100:3000"
+
 VERSION_INFO = {
-    "packageUrl": "http://192.168.1.100:3000/package",
+    "packageUrl": "http://"+URL+"/package",
     "version": VERSION,
     "remoteVersionUrl": "http://192.168.1.100:3000/package/version.manifest",
     "remoteManifestUrl": "http://192.168.1.100:3000/package/project.manifest",

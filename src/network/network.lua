@@ -1,11 +1,8 @@
-Game.manager.network = {}
-
 local luasocket = require "socket"
 
-local util = Game.util
-local crypt = util.crypt
-local bit = util.bit
-local log = util.log
+local bit = App.Util.bit
+local crypt = App.Util.crypt
+local event_manager = App.EventManager
 
 -- 重连最大次数
 local RETRY_MAX_COUNT = 3
@@ -50,7 +47,7 @@ local heart_beat_dt = 0
 local session_id = 0
 local send_data_map = {}
 
-local network = Game.manager.network
+local network = {}
 function network:init()
     -- 注册protobuf协议
     protobuf.register(cc.FileUtils:getInstance():getStringFromFile("proto/protocol.pb"))
@@ -71,7 +68,7 @@ end
 
 local function changeStatus(status)
     cur_status = NETWORK_STATUS[status]
-    Game.manager.event_handler:emit("network_status", status)
+    event_manager:emit("network_status", status)
 end
 
 local function unpackData()
@@ -94,7 +91,7 @@ local function unpackData()
             if not err then
                 return data_content
             else
-                log.errorf("encode Protobuf Error: %s", err)
+                print("encode Protobuf Error: %s", err)
             end
         end
     end
@@ -120,12 +117,12 @@ end
 local function send(data_content)
     local success, data, err = pcall(protobuf.encode, "C2S", data_content)
     if not success or err then
-        log.errorf("encode protobuf error:", err)
+        print("encode protobuf error:", err)
     elseif data then
         if secret then
             success, data = pcall(crypt.desencode, secret, data) 
             if not success then
-                log.error("desencode error")
+                print("desencode error")
                 return false
             end
         end
@@ -161,7 +158,7 @@ local function onData(data_content)
         end
     else
         local rsp_name, rsp_msg = next(data_content)
-        Game.manager.event_handler:emit(rsp_name, rsp_msg)
+        event_manager:emit(rsp_name, rsp_msg)
     end
 end
 
@@ -176,9 +173,23 @@ local function checkheartbeat(dt)
     end
 end
 
+function network:login(account,passowrd)
+    local req_msg = {}
+    req_msg.user_id = account
+    if is_reconnect and reconnect_token then
+        req_msg.login_type = "reconnect"
+        req_msg.token = reconnect_token
+    else
+        req_msg.login_type = "debug"
+        req_msg.token = passowrd
+    end
+    send({["login"] = req_msg})
+
+    changeStatus("wait_login")
+end
+
 local function update(dt)
     if socket then
-        log.debug(cur_status)
         if cur_status == NETWORK_STATUS["unconnected"] then
             -- 未连接
             -- 理论上不做任何事
@@ -209,18 +220,7 @@ local function update(dt)
 
                 connect_dt = 0
 
-                local req_msg = {}
-                req_msg.user_id = "ABCDE"
-                if is_reconnect and reconnect_token then
-                    req_msg.login_type = "reconnect"
-                    req_msg.token = reconnect_token
-                else
-                    req_msg.login_type = "debug"
-                    req_msg.token = "123456"
-                end
-                send({["login"] = req_msg})
-
-                changeStatus("wait_login")
+                event_manager:emit("handshake_success")
             else
                 checkheartbeat(dt)
             end
@@ -246,7 +246,8 @@ local function update(dt)
                 else
                     changeStatus("unconnected")
                 end
-                Game.manager.event_handler:emit("login_result", rsp_msg)
+                
+                event_manager:emit("login_result", rsp_msg)
             else
                 checkheartbeat(dt)
             end
