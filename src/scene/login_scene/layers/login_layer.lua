@@ -49,7 +49,7 @@ function layer:ctor()
     login_btn:setPosition(400,display.cy*2 - 350)
     login_btn:addClickEventListener(function(sender)
         print("FYD+++++++登陆")
-        self.scene.logic_login:connect()
+        self.scene.logic_login:login(edit_account:getText(),edit_password:getText())
     end)
     self:addChild(login_btn)
 end

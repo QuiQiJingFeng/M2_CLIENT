@@ -175,7 +175,7 @@ end
 
 function network:login(account,passowrd)
     local req_msg = {}
-    req_msg.user_id = account
+    req_msg.account = account
     if is_reconnect and reconnect_token then
         req_msg.login_type = "reconnect"
         req_msg.token = reconnect_token
