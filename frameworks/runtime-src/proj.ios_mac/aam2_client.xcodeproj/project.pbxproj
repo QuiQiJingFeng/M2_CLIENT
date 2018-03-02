@@ -11,10 +11,6 @@
 		1472BBB61F8223AC00FF0B1B /* JSONManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */; };
 		1472BBB91F8223C400FF0B1B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB71F8223C400FF0B1B /* Utils.cpp */; };
 		1472BBBA1F8223C400FF0B1B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB71F8223C400FF0B1B /* Utils.cpp */; };
-		1472BBBD1F82302900FF0B1B /* lua_CUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBBB1F82302900FF0B1B /* lua_CUtils.cpp */; };
-		1472BBBE1F82302900FF0B1B /* lua_CUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBBB1F82302900FF0B1B /* lua_CUtils.cpp */; };
-		14A23A8F1F89095600E59344 /* TestLuaOC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14A23A8E1F89095600E59344 /* TestLuaOC.mm */; };
-		14A23A901F89095600E59344 /* TestLuaOC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14A23A8E1F89095600E59344 /* TestLuaOC.mm */; };
 		14EF82D41F83DE5400C25D68 /* package in Resources */ = {isa = PBXBuildFile; fileRef = 14EF82D31F83DE5400C25D68 /* package */; };
 		15427CD3198F221400DC375D /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4251834BDA200142BE0 /* libcocos2d iOS.a */; };
 		15427CD5198F222200DC375D /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CD2198F220600DC375D /* libluacocos2d iOS.a */; };
@@ -232,10 +228,6 @@
 		1472BBB41F8223AC00FF0B1B /* JSONManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONManager.h; path = ../Classes/common/JSONManager.h; sourceTree = "<group>"; };
 		1472BBB71F8223C400FF0B1B /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = ../Classes/common/Utils.cpp; sourceTree = "<group>"; };
 		1472BBB81F8223C400FF0B1B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = ../Classes/common/Utils.h; sourceTree = "<group>"; };
-		1472BBBB1F82302900FF0B1B /* lua_CUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lua_CUtils.cpp; path = ../Classes/common/lua_CUtils.cpp; sourceTree = "<group>"; };
-		1472BBBC1F82302900FF0B1B /* lua_CUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_CUtils.h; path = ../Classes/common/lua_CUtils.h; sourceTree = "<group>"; };
-		14A23A8D1F89095600E59344 /* TestLuaOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLuaOC.h; sourceTree = "<group>"; };
-		14A23A8E1F89095600E59344 /* TestLuaOC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestLuaOC.mm; sourceTree = "<group>"; };
 		14EF82D31F83DE5400C25D68 /* package */ = {isa = PBXFileReference; lastKnownFileType = folder; name = package; path = ../../../package; sourceTree = "<group>"; };
 		15427CE2198F237300DC375D /* lua_module_register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_module_register.h; path = ../Classes/lua_module_register.h; sourceTree = "<group>"; };
 		15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = "../../cocos2d-x/build/cocos2d_libs.xcodeproj"; sourceTree = "<group>"; };
@@ -380,8 +372,6 @@
 				1472BBB41F8223AC00FF0B1B /* JSONManager.h */,
 				1472BBB71F8223C400FF0B1B /* Utils.cpp */,
 				1472BBB81F8223C400FF0B1B /* Utils.h */,
-				1472BBBB1F82302900FF0B1B /* lua_CUtils.cpp */,
-				1472BBBC1F82302900FF0B1B /* lua_CUtils.h */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -412,8 +402,6 @@
 				5023811517EBBCAC00990C9B /* Prefix.pch */,
 				5023811617EBBCAC00990C9B /* RootViewController.h */,
 				5023811717EBBCAC00990C9B /* RootViewController.mm */,
-				14A23A8D1F89095600E59344 /* TestLuaOC.h */,
-				14A23A8E1F89095600E59344 /* TestLuaOC.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -845,11 +833,9 @@
 				1472BBB61F8223AC00FF0B1B /* JSONManager.cpp in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
 				1472BBBA1F8223C400FF0B1B /* Utils.cpp in Sources */,
-				14A23A901F89095600E59344 /* TestLuaOC.mm in Sources */,
 				98DF42331F1E0E4D00E1BF12 /* pbc-lua.c in Sources */,
 				982525AC1F56629400054F71 /* lua-crypt.c in Sources */,
 				982525AA1F56629400054F71 /* lsha1.c in Sources */,
-				1472BBBE1F82302900FF0B1B /* lua_CUtils.cpp in Sources */,
 				98DF410D1F1DF3A700E1BF12 /* bit.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -866,11 +852,9 @@
 				1472BBB51F8223AC00FF0B1B /* JSONManager.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
 				1472BBB91F8223C400FF0B1B /* Utils.cpp in Sources */,
-				14A23A8F1F89095600E59344 /* TestLuaOC.mm in Sources */,
 				98DF42321F1E0E4D00E1BF12 /* pbc-lua.c in Sources */,
 				982525AB1F56629400054F71 /* lua-crypt.c in Sources */,
 				982525A91F56629400054F71 /* lsha1.c in Sources */,
-				1472BBBD1F82302900FF0B1B /* lua_CUtils.cpp in Sources */,
 				98DF410C1F1DF3A700E1BF12 /* bit.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

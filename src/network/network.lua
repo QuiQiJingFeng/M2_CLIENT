@@ -1,63 +1,43 @@
 local luasocket = require "socket"
+local crypt = require "crypt"
+local bit = require "bit"
+local network = {}
 
-local bit = App.Util.bit
-local crypt = App.Util.crypt
-local event_manager = App.EventManager
+local NETSTATE = {
+	--未连接状态
+	UN_CONNECTED = 0,
+	CONNECTING = 1,
+	WAIT_LOGIN = 2,
+	CONNECTED = 3,
+	WAIT_RECONNECTED = 4,
+}
 
--- 重连最大次数
-local RETRY_MAX_COUNT = 3
--- 重连间隔指数
-local RETRY_POW_X = 2
--- 超时时长
-local CONNECT_TIMEOUT = 3
--- 心跳间隔
+--心跳间隔
 local HEART_BEAT_DT = 60
+
 -- 数据包头长度
 local HEADER_SIZE = 2
 
--- 网络状态
-local NETWORK_STATUS = {
-    ["unconnected"] = 0,
-    ["connecting"] = 1,
-    ["wait_login"] = 2,
-    ["connected"] = 3,
-    ["wait_reconnect"] = 4,
-}
+--连接超时时间
+local CONNECT_TIMEOUT = 3
 
-local socket = nil
-local server_address = nil
-local server_port = nil
-local is_reconnect = nil
-local reconnect_token = nil
-
-local cur_status = NETWORK_STATUS["unconnected"]
-local receive_data = ""
-local connect_dt = 0
-
-local challenge = nil
-local clientkey = nil
-local serverkey = nil
-local secret = nil
-
-local retry_count = 0
-local retry_dt = 0
-
-local heart_beat_dt = 0
-
-local session_id = 0
-local send_data_map = {}
-
-local network = {}
 function network:init()
     -- 注册protobuf协议
     protobuf.register(cc.FileUtils:getInstance():getStringFromFile("proto/protocol.pb"))
 
+    self._net_state = NETSTATE.UN_CONNECTED
+
+
+    AppEvent:registerEvent("heartbeat", function() 
+    		--如果收到心跳包返回
+    		self._waite_heartbeat = nil
+    	end)
     return self
 end
 
-local function isIPv6(address)
+function network:isIPV6(host)
     -- 使用socket.dns判断服务器地址是否为IPv6地址
-    for k,v in pairs(luasocket.dns.getaddrinfo(address) or {}) do
+    for k,v in pairs(luasocket.dns.getaddrinfo(host) or {}) do
         if v.family == "inet6" then
             return true  
         end
@@ -66,25 +46,118 @@ local function isIPv6(address)
     return false
 end
 
-local function changeStatus(status)
-    cur_status = NETWORK_STATUS[status]
-    event_manager:emit("network_status", status)
+function network:updateState(state)
+	self._net_state = state
 end
 
-local function unpackData()
+--重新建立连接
+function network:reconnect()
+	--关掉原来的socket
+	self._socket:close()
+	--清空数据缓存
+	self._receive_data = ""
+	--重置密钥交换字段
+    self._challenge = nil
+    self._clientkey = nil
+    self._serverkey = nil
+    self._secret = nil
+    --重置连接超时字段
+    self._connect_dt = 0
+
+    self._session_id = 0
+
+    self._heart_dt = 0
+
+    self._send_map = {}
+
+    local host,port = self._host,self._port
+    if self:isIPV6(host) then
+    	self._socket = luasocket.tcp6()
+    else
+    	self._socket = luasocket.tcp()
+    end
+    -- 由于是阻塞socket，所以将超时时间设为0防止阻塞，也因此不再根据connect的返回值判断是否连接成功
+    self._socket:settimeout(0)
+
+    self._socket:connect(host,port)
+
+    self:updateState(NETSTATE.CONNECTING)
+end
+
+--连接
+function network:connect(host,port,callback)
+	assert(host,"host must be none nil")
+	assert(port,"port must be none nil")
+	--连接成功后的回调
+	self._callback = callback
+	--记录下地址和端口号  自动重连的时候会用到
+	self._host = host
+	self._port = port
+
+	--数据接收缓存
+	self._receive_data = ""
+
+    --交换密钥的字段
+    self._challenge = nil
+    self._clientkey = nil
+    self._serverkey = nil
+    self._secret = nil
+
+    --连接超时计算
+    self._connect_dt = 0
+
+    --session id
+    self._session_id = 0
+
+    self._heart_dt = 0
+
+    self._send_map = {}
+
+    if self:isIPV6(host) then
+    	self._socket = luasocket.tcp6()
+    else
+    	self._socket = luasocket.tcp()
+    end
+    -- 由于是阻塞socket，所以将超时时间设为0防止阻塞，也因此不再根据connect的返回值判断是否连接成功
+    self._socket:settimeout(0)
+
+    self._socket:connect(host,port)
+
+    self:updateState(NETSTATE.CONNECTING)
+end
+
+-- 收包
+function network:receive()
+    local pattern, err, partial = nil, true, nil
+
+    if self._socket and self._net_state >= NETSTATE.CONNECTING and self._net_state <= NETSTATE.CONNECTED then
+        pattern, err, partial = self._socket:receive("*a")
+    end
+
+    assert(err,"receive data cache error")
+
+    -- 拼接数据
+    if pattern then
+        self._receive_data = self._receive_data .. pattern
+    elseif partial then
+        self._receive_data = self._receive_data .. partial
+    end
+end
+
+function network:unpackData()
     -- 按照大段编码规则分割数据
-    local receive_size = #receive_data
+    local receive_size = #self._receive_data
     if receive_size >= HEADER_SIZE then
-        local data_size = receive_data:byte(1) * 256 + receive_data:byte(2)
+        local data_size = self._receive_data:byte(1) * 256 + self._receive_data:byte(2)
         local data_end_pos = data_size + HEADER_SIZE
         if receive_size >= data_end_pos then
             -- 获取完整的一个包数据，进行解析
-            local data = crypt.base64decode(receive_data:sub(HEADER_SIZE + 1, data_end_pos))
+            local data = crypt.base64decode(self._receive_data:sub(HEADER_SIZE + 1, data_end_pos))
             -- 剩余数据等待下一次解析
-            receive_data = receive_data:sub(data_end_pos + 1)
+            self._receive_data = self._receive_data:sub(data_end_pos + 1)
 
-            if secret then
-                data = crypt.desdecode(secret, data)
+            if self._secret then
+                data = crypt.desdecode(self._secret, data)
             end
 
             local data_content, err = protobuf.decode("S2C", data)
@@ -97,30 +170,119 @@ local function unpackData()
     end
 end
 
--- 收包
-local function receive()
-    local pattern, err, partial = nil, true, nil
-    if socket and cur_status >= NETWORK_STATUS["connecting"] and cur_status <= NETWORK_STATUS["connected"] then
-        pattern, err, partial = socket:receive("*a")
-    end
-
-    -- 拼接数据
-    if pattern then
-        receive_data = receive_data .. pattern
-    elseif partial then
-        receive_data = receive_data .. partial
-    end
-
-    return err
+--计算连接时间,如果超时需要重新连接
+function network:caculateConnectTime(dt)
+	if self._connect_dt > CONNECT_TIMEOUT then
+		--连接超时,尝试重新连接
+		self:updateState(NETSTATE.WAIT_RECONNECTED)
+	else
+		self._connect_dt = self._connect_dt +dt
+	end
 end
 
-local function send(data_content)
+function network:update(dt)
+
+	if self._net_state == NETSTATE.UN_CONNECTED then
+		return
+	end
+
+	if self._net_state == NETSTATE.CONNECTING then
+		-- 与服务器端约定：链接建立后服务端立刻回发一个握手包，用于确认连接成功
+        self:receive()
+
+        local data_content = self:unpackData() or {}
+
+        -- 判断收到的第一个包是否为握手包
+        if data_content["handshake"] then
+            local rsp_msg = data_content["handshake"]
+            self._challenge = crypt.base64decode(rsp_msg["v1"])
+            self._clientkey = crypt.randomkey()
+            self._serverkey = crypt.base64decode(rsp_msg["v2"])
+            local secret = crypt.dhsecret(self._serverkey, self._clientkey)
+            local req_msg = {}
+            req_msg["v1"] = crypt.base64encode(crypt.dhexchange(self._clientkey))
+            req_msg["v2"] = crypt.base64encode(crypt.hmac64(self._challenge, secret))
+
+            --发送回应包
+            self:send({["handshake"] = req_msg},nil,true)
+
+            self._secret = secret
+
+            --连接成功,连接计时重置为0
+            self._connect_dt = 0
+            --状态置为已连接
+            self._net_state = NETSTATE.CONNECTED
+            --连接成功回调 之后可以进行登录
+            self._callback()
+        else
+            self:caculateConnectTime(dt)
+        end
+    elseif self._net_state == NETSTATE.CONNECTED then
+    	--收包
+    	self:receive()
+    	--TODO
+    	local data_content = self:unpackData()
+    	if not data_content then
+    		return
+    	end
+    	local new_session_id = nil
+
+    	local rsp_name,rsp_msg
+    	for k,v in pairs(data_content) do
+    		if k == "session_id" then
+    			new_session_id = v
+    		else
+    			rsp_name = k
+    			rsp_msg = v
+    		end
+    	end
+
+        print("rsp_name ==>",rsp_name,new_session_id)
+    	local item = self._send_map[new_session_id]
+    	if item then
+    		--如果是请求返回
+    		item.callback(rsp_msg)
+    	else
+            --如果是推送 走这里
+            AppEvent:dispatchEvent(rsp_name, rsp_msg)
+        end
+
+    	--心跳相关处理
+    	if self._heart_dt > HEART_BEAT_DT then
+    		self._heart_dt = 0
+    		--发送心跳包
+    		self:send({["heartbeat"] = {}},nil,true)
+    		self._waite_heartbeat = true
+    	else
+    		--累计心跳间隔时间
+    		self._heart_dt = self._heart_dt + dt
+    		if self._waite_heartbeat then
+    			--如果100ms内都没有收到心跳回包 则按断开处理
+    			self:updateState(NETSTATE.WAIT_RECONNECTED)
+    		end
+    	end
+	end
+end
+
+function network:send(data_content,callback,ignore_session)
+
+	if not (self._socket and (self._net_state == NETSTATE.CONNECTING or self._net_state == NETSTATE.CONNECTED)) then
+		return false
+	end
+
+	if not ignore_session then
+		self._session_id = self._session_id + 1
+		data_content.session_id = self._session_id
+		--记录一下 发送的包,收到回包之后删除
+		self._send_map[self._session_id] = {data_content = data_content,callback = callback}
+	end
+	print("FYD+++++",data_content)
     local success, data, err = pcall(protobuf.encode, "C2S", data_content)
     if not success or err then
         print("encode protobuf error:", err)
     elseif data then
-        if secret then
-            success, data = pcall(crypt.desencode, secret, data) 
+        if self._secret then
+            success, data = pcall(crypt.desencode, self._secret, data) 
             if not success then
                 print("desencode error")
                 return false
@@ -131,9 +293,9 @@ local function send(data_content)
         local size = #data
         data = string.char(bit.band(bit.rshift(size, 8), 0xff)) .. string.char(bit.band(size, 0xff)) .. data
 
-        local _, err = socket:send(data)
+        local _, err = self._socket:send(data)
         if err then
-            changeStatus("wait_reconnect")
+            self:updateState(NETSTATE.WAIT_RECONNECTED)
         end
 
         return true
@@ -142,233 +304,10 @@ local function send(data_content)
     return false
 end
 
-local function onData(data_content)
-    if data_content["session_id"] then
-        local session_id = data_content["session_id"]
-        data_content["session_id"] = nil
-
-        local msg_item = send_data_map[session_id]
-        if msg_item then
-            local rsp_name, rsp_msg = next(data_content)
-            local callback = msg_item.callback
-            if isfunction(callback) then
-                callback(rsp_msg)
-            end
-            send_data_map[session_id] = nil
-        end
-    else
-        local rsp_name, rsp_msg = next(data_content)
-        event_manager:emit(rsp_name, rsp_msg)
-    end
-end
-
-local function checkheartbeat(dt)
-    -- 累计连接耗时
-    if connect_dt > CONNECT_TIMEOUT then
-        -- 连接超时，尝试重连
-        changeStatus("wait_reconnect")
-    else
-        -- 未超时，累计连接耗时
-        connect_dt = connect_dt + dt
-    end
-end
-
-function network:login(account,passowrd)
-    local req_msg = {}
-    req_msg.account = account
-    if is_reconnect and reconnect_token then
-        req_msg.login_type = "reconnect"
-        req_msg.token = reconnect_token
-    else
-        req_msg.login_type = "debug"
-        req_msg.token = passowrd
-    end
-    send({["login"] = req_msg})
-
-    changeStatus("wait_login")
-end
-
-local function update(dt)
-    if socket then
-        if cur_status == NETWORK_STATUS["unconnected"] then
-            -- 未连接
-            -- 理论上不做任何事
-        elseif cur_status == NETWORK_STATUS["connecting"] then
-            -- 正在连接
-            -- 与服务器端约定：链接建立后服务端立刻回发一个握手包，用于确认连接成功
-            local err = receive()
-            local data_content = unpackData() or {}
-
-            -- 判断收到的第一个包是否为握手包
-            if data_content["handshake"] then
-                local rsp_msg = data_content["handshake"]
-                challenge = crypt.base64decode(rsp_msg["v1"])
-                clientkey = crypt.randomkey()
-                serverkey = crypt.base64decode(rsp_msg["v2"])
-                local _secret = crypt.dhsecret(serverkey, clientkey)
-                local req_msg = {}
-                req_msg["v1"] = crypt.base64encode(crypt.dhexchange(clientkey))
-                req_msg["v2"] = crypt.base64encode(crypt.hmac64(challenge, _secret))
-
-                send({["handshake"] = req_msg})
-
-                secret = _secret
-
-                -- 重置计时
-                retry_count = 0
-                heart_beat_dt = 0
-
-                connect_dt = 0
-
-                event_manager:emit("handshake_success")
-            else
-                checkheartbeat(dt)
-            end
-        elseif cur_status == NETWORK_STATUS["wait_login"] then
-            local err = receive()
-            local data_content = unpackData() or {}
-
-            if data_content["login"] then
-                local rsp_msg = data_content["login"]
-                if rsp_msg.result == "success" then
-                    reconnect_token = rsp_msg.reconnect_token
-
-                    -- 连接成功
-                    changeStatus("connected")
-
-                    -- 重发缓存包
-                    local keys = table.keys(send_data_map)
-                    table.sort(keys)
-                    for _,key in ipairs(keys) do
-                        local send_data = send_data_map[key]
-                        send(send_data.data_content)
-                    end 
-                else
-                    changeStatus("unconnected")
-                end
-                
-                event_manager:emit("login_result", rsp_msg)
-            else
-                checkheartbeat(dt)
-            end
-        elseif cur_status == NETWORK_STATUS["connected"] then
-            -- 已连接
-            -- 收包
-            local err = receive()
-
-            -- 先循环分割并处理数据包
-            local data_content = unpackData()
-            while data_content do
-                onData(data_content)
-                data_content = unpackData()
-            end
-
-            -- 如果收包时发生错误，尝试重连
-            if err and err ~= "timeout" then
-                changeStatus("wait_reconnect")
-                return
-            end
-
-            -- 心跳包
-            if heart_beat_dt > HEART_BEAT_DT then
-                heart_beat_dt = 0
-
-                -- 发送心跳包
-                send({["heartbeat"] = { ["timestamp"] = 123 }})
-            else
-                -- 累计心跳间隔时长
-                heart_beat_dt = heart_beat_dt + dt
-            end
-        elseif cur_status == NETWORK_STATUS["wait_reconnect"] then
-            -- 等待重连
-            -- 判断是否超过最大重连次数
-            if retry_count < RETRY_MAX_COUNT then
-                -- 尝试重连
-                -- 根据重连次数指数级增长间隔时长
-                if retry_dt > math.pow(RETRY_POW_X, retry_count + 1) then
-                    -- 连接
-                    retry_count = retry_count + 1
-                    retry_dt = 0
-                    network:connect(server_address, server_port, true)
-                else
-                    -- 累计重连间隔时长
-                    retry_dt = retry_dt + dt
-                end
-            else
-                -- 超过最大重连次数，通知断开连接
-                -- TODO:通知断开连接
-                changeStatus("unconnected")
-            end
-        end
-    end
-end
-
--- 发包
-function network:send(data_content, callback)
-    if socket and cur_status == NETWORK_STATUS["connected"] then
-        session_id = session_id + 1
-        data_content.session_id = session_id
-
-        local msg_item = {}
-        msg_item.data_content = data_content
-        msg_item.callback = callback
-        send_data_map[session_id] = msg_item
-
-        return send(data_content)
-    end
-    return false
-end
-
--- 连接
-function network:connect(address, port, is_reconnect)
-    assert(address)
-    assert(port)
-
-    challenge = nil
-    clientkey = nil
-    serverkey = nil
-    secret = nil
-
-    connect_dt = 0
-
-    server_address = address
-    server_port = port
-    is_reconnect = is_reconnect
-    receive_data = ""
-
-    -- 判断是否为IPv6
-    if isIPv6(address) then
-        socket = luasocket.tcp6()
-    else
-        socket = luasocket.tcp()
-    end
-
-    -- 由于是阻塞socket，所以将超时时间设为0防止阻塞，也因此不再根据connect的返回值判断是否连接成功
-    socket:settimeout(0)
-    socket:connect(server_address, server_port)
-    changeStatus("connecting")
-end
-
--- 断开连接
-function network:disconnect()
-    if socket then
-        socket:close()
-    end
-    changeStatus("unconnected")
-    socket = nil
-    server_address = nil
-    server_port = nil
-    is_reconnect = nil
-    reconnect_token = nil
-    receive_data = ""
-    session_id = 0
-    send_data_map = {}
-end
-
 -- 定时update
 local scheduler = cc.Director:getInstance():getScheduler()
 network.schedule_id = scheduler:scheduleScriptFunc(function(dt)
-    update(dt)
+    network:update(dt)
 end, 0.1, false)
 
 return network

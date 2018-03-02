@@ -8,22 +8,21 @@ App = {}
 
 --初始化工具库
 App.Util = {}
-App.Util.bit = require "bit"
-App.Util.crypt = require "crypt"
-App.Util.md5 = require "md5"
-App.Util.mime = require "mime"
 
---初始化事件分发器
-App.EventManager = require("manager.event_handler")
+App.Configuration = require("manager.configuration")
+App.Configuration:Init()
 
---初始化网络库
-require "network.protobuf"
-App.NetWork = require("network.network"):init()
+
 
 --初始化场景管理器
 App.SceneManager = require("manager.scene_manager")
 
 
+--事件触发器
+AppEvent = require("manager.event_manager")
+--初始化网络库
+require "network.protobuf"
+AppNet = require("network.network"):init()
 
 --TODO
 -- require "manager.init"

@@ -1,14 +1,16 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DEE8C6BDEBE0411BDE4647C2EFEFE267F727F663",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1A78DFF7DA466DA8CAD73694BC25A0F1CB116F9C",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1A78DFF7DA466DA8CAD73694BC25A0F1CB116F9C" : 9223372036854775807,
     "DEE8C6BDEBE0411BDE4647C2EFEFE267F727F663" : 9223372036854775807,
     "C3ACB3BCC5A2B1FA58FF5869E85E82DC6BB535A7" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AB6F1682-73F4-4F6A-9E83-C44487380E08",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1A78DFF7DA466DA8CAD73694BC25A0F1CB116F9C" : "M2_CLIENT\/",
     "DEE8C6BDEBE0411BDE4647C2EFEFE267F727F663" : "client\/",
     "C3ACB3BCC5A2B1FA58FF5869E85E82DC6BB535A7" : "client\/frameworks\/cocos2d-x\/"
   },
@@ -16,6 +18,11 @@
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "frameworks\/runtime-src\/proj.ios_mac\/aam2_client.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/QuiQiJingFeng\/M2_CLIENT.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1A78DFF7DA466DA8CAD73694BC25A0F1CB116F9C"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "gitlab.mu77.com:aam2\/cocos2d-x.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

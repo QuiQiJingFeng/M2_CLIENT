@@ -7,9 +7,7 @@ end
 
 function scene:onEnter()
 	--UI初始化
-	 print("FYD  onEnter")
-	local sp = cc.Sprite:create("card_heap.png")
-	self:addChild(sp)
+	self:showLayer("main_layer")
 end
 
 function scene:onUpdate(dt)

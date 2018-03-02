@@ -21,7 +21,7 @@ using namespace CocosDenshion;
 
 #include "JSONManager.h"
 #include "Utils.h"
-#include "lua_CUtils.h"
+
 USING_NS_CC;
 using namespace std;
 
@@ -73,13 +73,11 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_module_register(L);
 
     register_all_packages();
-    luaopen_CUtils(L);
     LuaStack* stack = engine->getLuaStack();
     stack->setXXTEAKeyAndSign("10cc4fdee2fcd047", strlen("10cc4fdee2fcd047"), "gclR3cu9", strlen("gclR3cu9"));
     
     //register custom function
     register_custom_function(L);
-    
     
     
     //如果是IOS/ANDROID 第一次启动 需要解压缩文件
