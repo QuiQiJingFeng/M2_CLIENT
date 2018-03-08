@@ -689,7 +689,7 @@ FileUtils::Status FileUtils::getContents(const std::string& filename, ResizableB
         return Status::ReadFailed;
     }
     //-----对资源进行解密
-    if(filename.find(".lua") == -1 &&_xxteaKey.size() != 0 && _xxteaSigin.size() != 0 && strncmp((const char *)buffer->buffer(), _xxteaSigin.c_str(), _xxteaSigin.size()) == 0){
+   /* if(filename.find(".lua") == -1 &&_xxteaKey.size() != 0 && _xxteaSigin.size() != 0 && strncmp((const char *)buffer->buffer(), _xxteaSigin.c_str(), _xxteaSigin.size()) == 0){
         xxtea_long len = 0;
         unsigned char* result = xxtea_decrypt((unsigned char*)buffer->buffer() + _xxteaSigin.size(),
                                               (xxtea_long)(size - _xxteaSigin.size()),
@@ -699,7 +699,7 @@ FileUtils::Status FileUtils::getContents(const std::string& filename, ResizableB
         buffer->resize(len);
         memcpy(buffer->buffer(), result, len);
         free(result);
-    }
+    }*/
     
     return Status::OK;
 }

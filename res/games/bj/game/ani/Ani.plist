@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>games/bj/game/ani/record1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,95},{31,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{31,46}</string>
+			</dict>
+			<key>games/bj/game/ani/record2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{49,92},{31,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{31,46}</string>
+			</dict>
+			<key>games/bj/game/ani/record3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{46,1},{31,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{31,46}</string>
+			</dict>
+			<key>games/bj/game/ani/record4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{79,1},{31,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{31,46}</string>
+			</dict>
+			<key>games/bj/game/ani/record5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{84,49},{31,46}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{31,46}</string>
+			</dict>
+			<key>games/bj/game/ani/Voice1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{43,47}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{43,47}</string>
+			</dict>
+			<key>games/bj/game/ani/Voice2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,50},{40,43}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{43,47}</string>
+			</dict>
+			<key>games/bj/game/ani/Voice3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{43,50},{40,39}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{43,47}</string>
+			</dict>
+			<key>games/bj/game/ani/Voice4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{112,1},{36,39}}</string>
+				<key>offset</key>
+				<string>{1,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{43,47}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>Ani.png</string>
+			<key>realTextureFileName</key>
+			<string>Ani.png</string>
+			<key>size</key>
+			<string>{256,128}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>256</integer>
+			<key>height</key>
+			<integer>128</integer>
+		</dict>
+	</dict>
+</plist>

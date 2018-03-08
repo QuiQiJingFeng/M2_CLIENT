@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>games/szmj/game/mj_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{667,750}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{667,750}</string>
+			</dict>
+			<key>games/szmj/game/szmjShareGameName.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,753},{547,175}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{547,175}</string>
+			</dict>
+			<key>games/szmj/game/btn_ruleTop11.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,930},{337,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{337,70}</string>
+			</dict>
+			<key>games/szmj/game/btn_ruleTop12.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{340,930},{337,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{337,70}</string>
+			</dict>
+			<key>games/szmj/game/btn_ruleTop21.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{550,753},{337,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{337,70}</string>
+			</dict>
+			<key>games/szmj/game/btn_ruleTop22.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{550,825},{337,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{337,70}</string>
+			</dict>
+			<key>games/szmj/game/wordDNXB.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{679,897},{110,113}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{110,113}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>game_2.png</string>
+			<key>realTextureFileName</key>
+			<string>game_2.png</string>
+			<key>size</key>
+			<string>{888,1011}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>888</integer>
+			<key>height</key>
+			<integer>1011</integer>
+		</dict>
+	</dict>
+</plist>

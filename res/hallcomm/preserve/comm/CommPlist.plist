@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hallcomm/preserve/comm/image_Bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,181},{54,390}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{54,390}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/image_Coin.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{553,2},{154,113}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{154,113}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/image_Horn.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{977,2},{54,32}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{54,32}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/text_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{396,181},{250,34}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{250,34}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/text_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{650,160},{223,34}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{223,34}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/text_3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{795,198},{140,33}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{140,33}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/text_4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{939,2},{113,34}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{113,34}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/text_5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{396,219},{250,34}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{250,34}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/text_6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{650,198},{141,34}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{141,34}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/text_7.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{877,119},{97,33}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{97,33}</string>
+			</dict>
+			<key>hallcomm/preserve/comm/img_Title.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{547,175}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{547,175}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>CommPlist.png</string>
+			<key>realTextureFileName</key>
+			<string>CommPlist.png</string>
+			<key>size</key>
+			<string>{1024,256}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>256</integer>
+		</dict>
+	</dict>
+</plist>

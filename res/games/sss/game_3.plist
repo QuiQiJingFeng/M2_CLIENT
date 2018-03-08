@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>games/sss/game/Text_11.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,238},{303,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{303,114}</string>
+			</dict>
+			<key>games/sss/game/Text_12.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,800},{303,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{303,114}</string>
+			</dict>
+			<key>games/sss/game/Text_13.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{120,356},{303,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{303,114}</string>
+			</dict>
+			<key>games/sss/game/Text_14.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{395,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{395,114}</string>
+			</dict>
+			<key>games/sss/game/Text_15.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{401,2},{395,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{395,114}</string>
+			</dict>
+			<key>games/sss/game/Text_16.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{120,663},{303,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{303,114}</string>
+			</dict>
+			<key>games/sss/game/Text_17.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{309,238},{254,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{254,114}</string>
+			</dict>
+			<key>games/sss/game/Text_18.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{401,120},{254,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{254,114}</string>
+			</dict>
+			<key>games/sss/game/Text_19.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{800,2},{395,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{395,114}</string>
+			</dict>
+			<key>games/sss/game/Text_20.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,401},{395,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{395,114}</string>
+			</dict>
+			<key>games/sss/game/Text_21.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,120},{395,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{395,114}</string>
+			</dict>
+			<key>games/sss/game/Text_22.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{238,356},{303,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{303,114}</string>
+			</dict>
+			<key>games/sss/game/Text_23.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{659,120},{254,114}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{254,114}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>game_3.png</string>
+			<key>realTextureFileName</key>
+			<string>game_3.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

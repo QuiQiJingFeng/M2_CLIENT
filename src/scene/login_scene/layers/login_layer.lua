@@ -6,8 +6,9 @@ function layer:ctor()
     login_btn:setTitleText("登陆")
     login_btn:setTitleFontSize(28)
     login_btn:addClickEventListener(function(sender)
-            AppNet:connect("127.0.0.1",8888,function() 
-                AppNet:send({["login"]={account="FYD3",token="FYD",login_type="debug"}},function(msg)
+            AppNet:connect("47.52.99.120",8888,function()
+                local arg = {account="FYD3",token="FYD",login_type="debug"}--weixin
+                AppNet:send({["login"]=arg},function(msg)
                         if msg.result == "success" then
                             local user_id = msg.user_id
                             local reconnect_token = msg.reconnect_token
@@ -19,6 +20,7 @@ function layer:ctor()
                             print("登陆失败")
                         end
                     end)
+                
             end)
         end)
     login_btn:setPosition(display.cx,display.cy)

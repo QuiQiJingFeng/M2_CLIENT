@@ -22,6 +22,9 @@
     <Filter Include="Classes\pbc">
       <UniqueIdentifier>{01747b67-3f2f-45a3-9945-8b041f5f2036}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\common">
+      <UniqueIdentifier>{5d673e8b-3b40-4c21-a01b-7688f804cd29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">

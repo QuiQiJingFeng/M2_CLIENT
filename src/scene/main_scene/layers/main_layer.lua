@@ -58,7 +58,7 @@ function layer:ctor()
     join_room_btn:setPosition(display.cx,display.cy-300)
     self:addChild(join_room_btn)
 
-    AppEvent:registerEvent("refresh_room_info", function(msg) 
+    lt.GameEventManager:registerEvent("refresh_room_info", function(msg) 
             print("refresh_room_info")
             local str = ""
             for i=1,#msg.players do

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hallcomm/common/gps/img_And.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{478,2},{66,31}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{66,31}</string>
+			</dict>
+			<key>hallcomm/common/gps/img_Bi.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,130},{46,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{46,40}</string>
+			</dict>
+			<key>hallcomm/common/gps/img_Bubble.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,213},{80,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{80,40}</string>
+			</dict>
+			<key>hallcomm/common/gps/img_BubbleFrame.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{302,124}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{302,124}</string>
+			</dict>
+			<key>hallcomm/common/gps/img_Fang.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{297,213},{46,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{46,40}</string>
+			</dict>
+			<key>hallcomm/common/gps/img_IP.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{478,114},{28,31}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{28,31}</string>
+			</dict>
+			<key>hallcomm/common/gps/img_Location.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{478,72},{27,38}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{27,38}</string>
+			</dict>
+			<key>hallcomm/common/gps/img_Zuo.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{347,213},{46,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{46,40}</string>
+			</dict>
+			<key>hallcomm/common/gps/btn_Join.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{308,2},{207,81}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{207,81}</string>
+			</dict>
+			<key>hallcomm/common/gps/btn_Leave.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{393,2},{207,81}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{207,81}</string>
+			</dict>
+			<key>hallcomm/common/gps/btn_OpenPosition.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{86,130},{207,81}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{207,81}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>gpsUi.png</string>
+			<key>realTextureFileName</key>
+			<string>gpsUi.png</string>
+			<key>size</key>
+			<string>{512,256}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>512</integer>
+			<key>height</key>
+			<integer>256</integer>
+		</dict>
+	</dict>
+</plist>

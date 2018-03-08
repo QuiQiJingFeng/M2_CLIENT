@@ -19,8 +19,8 @@ using namespace cocos2d::experimental;
 using namespace CocosDenshion;
 #endif
 
-#include "JSONManager.h"
-#include "Utils.h"
+#include "common/JSONManager.h"
+#include "common/Utils.h"
 
 USING_NS_CC;
 using namespace std;

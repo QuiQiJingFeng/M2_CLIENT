@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hallcomm/lobby/snow/img_snow_ newbie.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{530,32},{74,17}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{74,17}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_btton.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{587,2},{51,27}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{51,27}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_fish.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{292,67},{40,28}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{40,28}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_friend1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{311,2},{215,61}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{215,61}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_friend2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,49},{215,61}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{215,61}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_recharge.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{221,49},{67,48}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{67,48}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_roof.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{530,2},{53,26}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{53,26}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_room.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{305,43}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{305,43}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_rotary.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{336,67},{43,19}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{43,19}</string>
+			</dict>
+			<key>hallcomm/lobby/snow/img_snow_rule.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{551,32},{74,17}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{74,17}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>LobbyPlist2.png</string>
+			<key>realTextureFileName</key>
+			<string>LobbyPlist2.png</string>
+			<key>size</key>
+			<string>{1024,128}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>128</integer>
+		</dict>
+	</dict>
+</plist>
