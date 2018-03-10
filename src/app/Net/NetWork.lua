@@ -131,13 +131,17 @@ end
 
 -- 收包
 function network:receive()
-    local pattern, err, partial = nil, true, nil
+    local pattern, status, partial = nil, true, nil
 
     if self._socket and self._net_state >= NETSTATE.CONNECTING and self._net_state <= NETSTATE.CONNECTED then
-        pattern, err, partial = self._socket:receive("*a")
+        pattern, status, partial = self._socket:receive("*a")
     end
 
-    assert(err,"receive data cache error")
+    --如果网络断开
+    if status == "closed" then
+        self:reconnect()
+    end
+    assert(status,"receive data cache error")
 
     -- 拼接数据
     if pattern then
