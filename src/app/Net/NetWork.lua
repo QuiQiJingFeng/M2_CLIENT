@@ -137,10 +137,6 @@ function network:receive()
         pattern, status, partial = self._socket:receive("*a")
     end
 
-    --如果网络断开
-    if status == "closed" then
-        self:reconnect()
-    end
     assert(status,"receive data cache error")
 
     -- 拼接数据
