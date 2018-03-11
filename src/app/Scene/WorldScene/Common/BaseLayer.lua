@@ -2,7 +2,7 @@ local BaseLayer = class("BaseLayer", function()
 	return display.newLayer()
 end)
 
-function BaseLayer:ctor(deleget, ...)
+function BaseLayer:ctor(deleget)
 	--self:setNodeEventEnabled(true)
 
     local function onNodeEvent(event)

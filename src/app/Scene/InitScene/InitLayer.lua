@@ -1,10 +1,10 @@
 
-local InitLayer = class("InitLayer",lt.BaseLayer,function()
+local InitLayer = class("InitLayer", lt.BaseLayer, function()
     return cc.CSLoader:createNode("games/comm/launch/LaunchLayer.csb")
 end)
 
-function InitLayer:ctor(...)
-    InitLayer.super.ctor(self, ...)
+function InitLayer:ctor()
+    InitLayer.super.ctor(self)
     self._rootNode = self
     --self._updateLayer = cc.CSLoader:createNode("games/comm/launch//UpdateLayer.csb")
 
@@ -20,15 +20,20 @@ function InitLayer:ctor(...)
 end
 
 function InitLayer:onConnectResponse(msg)--连接成功回调
+    print("_________________________________连接成功")
     self._connectSuccess = true
 end
 
 function InitLayer:onLogin()--登录微信
     -- 正常游戏
 
+    if not self._connectSuccess then
+        lt.NetWork:connect("47.52.99.120", 8888, handler(self, self.onConnectResponse))
+    end
+
     if self._connectSuccess then
         local arg = {account="FYD3",token="FYD",login_type="debug"}--weixin
-        lt.NetWork:send({["login"]=arg})
+        lt.NetWork:send({["login"]=arg}, handler(self, self.onLoginResponse))
     end
 
     -- local worldScene = lt.WorldScene.new()

@@ -1117,7 +1117,7 @@ function CommonUtil:addNodeClickEvent(node, callBack)
         elseif event_type == ccui.TouchEventType.ended then
             node:setScale(1)
             if callBack then
-                callBack()
+                callBack(node)
             end
         elseif event_type == ccui.TouchEventType.canceled then   
             node:setScale(1)

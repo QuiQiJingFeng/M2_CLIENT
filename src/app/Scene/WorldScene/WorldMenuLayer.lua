@@ -33,8 +33,8 @@ function WorldMenuLayer:ctor()
     local joinRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_JoinRoom")
     
     lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
-    lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickSetBtn))
-    lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickSetBtn))
+    lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickCreateRoomBtn))
+    lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickJoinRoomBtn))
     -- self:checkRightBtnNode()
     -- self:updateNewFlagInfo()
     --lt.UILayerManager:addLayer(commonAlertLayer, true)
@@ -51,7 +51,7 @@ function WorldMenuLayer:onClickCreateRoomBtn(event)
 end
 
 function WorldMenuLayer:onClickJoinRoomBtn(event)
-    local setLayer = lt.SetLayer.new()
+    local setLayer = lt.JoinRoomLayer.new()
     lt.UILayerManager:addLayer(setLayer, true)
 end
 
