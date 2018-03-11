@@ -1,9 +1,10 @@
 
-local InitLayer = class("InitLayer", function()
+local InitLayer = class("InitLayer",lt.BaseLayer,function()
     return cc.CSLoader:createNode("games/comm/launch/LaunchLayer.csb")
 end)
 
-function InitLayer:ctor()
+function InitLayer:ctor(...)
+    InitLayer.super.ctor(self, ...)
     self._rootNode = self
     --self._updateLayer = cc.CSLoader:createNode("games/comm/launch//UpdateLayer.csb")
 
@@ -15,10 +16,7 @@ function InitLayer:ctor()
     local Pl_Bg = self._loginLayer:getChildByName("Pl_Bg")
     self._loginBtn = Pl_Bg:getChildByName("Bn_Login")
 
-    self:RegisterEvent()
     self:RegisterWidgetEvent()
-
-    lt.NetWork:connect("47.52.99.120", 8888, handler(self, self.onConnectResponse))
 end
 
 function InitLayer:onConnectResponse(msg)--连接成功回调
@@ -52,13 +50,24 @@ function InitLayer:onLoginResponse(msg)--登录回调
 end
 
 function InitLayer:RegisterEvent()--注册事件的回调
-    lt.GameEventManager:addListener("login", handler(self, self.onLoginResponse), "InitLayer:onLoginResponse")
+    
 end
 
 function InitLayer:RegisterWidgetEvent()
     lt.CommonUtil:addNodeClickEvent(self._loginBtn, handler(self, self.onLogin))
 end
 
+function InitLayer:onEnter()   
+    print("InitLayer:onEnter")
+    lt.GameEventManager:addListener("login", handler(self, self.onLoginResponse), "InitLayer:onLoginResponse")
+
+    lt.NetWork:connect("47.52.99.120", 8888, handler(self, self.onConnectResponse))
+end
+
+function InitLayer:onExit()
+    print("InitLayer:onExit")
+    lt.GameEventManager:removeListener("login", "InitLayer:onLoginResponse")
+end
 
 --[[
     下面代码先放着，以后再说看看
