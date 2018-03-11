@@ -26,10 +26,15 @@ function WorldMenuLayer:ctor()
 
     local baseLayer = self:getChildByName("Ie_Bg") --csd
 
+    --设置按钮
     local setBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Bn_Set")
 
-    lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
+    local createRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_CreateRoom")
+    local joinRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_JoinRoom")
     
+    lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
+    lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickSetBtn))
+    lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickSetBtn))
     -- self:checkRightBtnNode()
     -- self:updateNewFlagInfo()
     --lt.UILayerManager:addLayer(commonAlertLayer, true)
@@ -39,6 +44,17 @@ function WorldMenuLayer:onClickSetBtn(event)
     local setLayer = lt.SetLayer.new()
     lt.UILayerManager:addLayer(setLayer, true)
 end
+
+function WorldMenuLayer:onClickCreateRoomBtn(event)
+    local setLayer = lt.SetLayer.new()
+    lt.UILayerManager:addLayer(setLayer, true)
+end
+
+function WorldMenuLayer:onClickJoinRoomBtn(event)
+    local setLayer = lt.SetLayer.new()
+    lt.UILayerManager:addLayer(setLayer, true)
+end
+
 
 --右上角按钮状态
 function WorldMenuLayer:checkRightBtnNode(flag)

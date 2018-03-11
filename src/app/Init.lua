@@ -42,6 +42,7 @@ ltMetaTable["UILayerManager"] = "app.Manager.UILayerManager"
 --net
 ltMetaTable["Protobuf"] = "app.Net.Protobuf"
 ltMetaTable["NetWork"] = "app.Net.NetWork"
+ltMetaTable["SocketConstants"] = "app.Net.SocketConstants"
 
 --Scene
 ltMetaTable["InitLayer"] = "app.Scene.InitScene.InitLayer"

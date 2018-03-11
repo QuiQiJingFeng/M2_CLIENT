@@ -1,6 +1,6 @@
 
 local SetLayer = class("SetLayer", function()
-    return cc.CSLoader:createNode("hallcomm/lobby/FriendLayer.csb")
+    return cc.CSLoader:createNode("hallcomm/lobby/LobbySetLayer.csb")--  FriendLayer
 end)
 
 function SetLayer:ctor()

@@ -7,7 +7,7 @@ function InitLayer:ctor()
     self._rootNode = self
     --self._updateLayer = cc.CSLoader:createNode("games/comm/launch//UpdateLayer.csb")
 
-    self._loginLayer = cc.CSLoader:createNode("games/comm/launch//LoginLayer.csb")
+    self._loginLayer = cc.CSLoader:createNode("games/comm/launch/LoginLayer.csb")
 
     --self._rootNode:addChild(self._updateLayer)
     self._rootNode:addChild(self._loginLayer)
@@ -15,22 +15,54 @@ function InitLayer:ctor()
     local Pl_Bg = self._loginLayer:getChildByName("Pl_Bg")
     self._loginBtn = Pl_Bg:getChildByName("Bn_Login")
 
+    self:RegisterEvent()
+    self:RegisterWidgetEvent()
+
+    lt.NetWork:connect("47.52.99.120", 8888, handler(self, self.onConnectResponse))
+end
+
+function InitLayer:onConnectResponse(msg)--连接成功回调
+    self._connectSuccess = true
+end
+
+function InitLayer:onLogin()--登录微信
+    -- 正常游戏
+
+    if self._connectSuccess then
+        local arg = {account="FYD3",token="FYD",login_type="debug"}--weixin
+        lt.NetWork:send({["login"]=arg})
+    end
+
+    -- local worldScene = lt.WorldScene.new()
+    -- lt.SceneManager:replaceScene(worldScene)
+end
+
+function InitLayer:onLoginResponse(msg)--登录回调
+    if msg.result == "success" then
+        local user_id = msg.user_id
+        local reconnect_token = msg.reconnect_token
+        --user:init(user_id,reconnect_token)
+        print("登陆成功  user_id="..msg.user_id.." reconnect_token=",msg.reconnect_token)
+
+        local worldScene = lt.WorldScene.new()
+        lt.SceneManager:replaceScene(worldScene)
+    else
+        print("登陆失败")
+    end
+end
+
+function InitLayer:RegisterEvent()--注册事件的回调
+    lt.GameEventManager:addListener("login", handler(self, self.onLoginResponse), "InitLayer:onLoginResponse")
+end
+
+function InitLayer:RegisterWidgetEvent()
     lt.CommonUtil:addNodeClickEvent(self._loginBtn, handler(self, self.onLogin))
 end
 
-function InitLayer:show()
-    self._rootNode:setVisible(true)
-end
 
-function InitLayer:getRootNode()
-    return self._rootNode
-end
-
-function InitLayer:onLogin()
-    -- 正常游戏
-    local worldScene = lt.WorldScene.new()
-    lt.SceneManager:replaceScene(worldScene)
-end
+--[[
+    下面代码先放着，以后再说看看
+]]--
 
 function InitLayer:initGame()
     self._progress:setPercentage(self.PERCENTAGE.INIT_GAME)
