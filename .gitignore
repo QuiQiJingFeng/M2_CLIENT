@@ -108,3 +108,5 @@ frameworks/runtime-src/proj.win32/aam2_client.opensdf
 frameworks/runtime-src/proj.win32/aam2_client.sdf
 frameworks/runtime-src/proj.win32/aam2_client.v12.suo
 simulator/
+RYMJ.udf
+RYMJ.cfg
