@@ -66,7 +66,7 @@ function AppGame:init()
 
     lt.CacheManager:init()
     -- 数据初始化
-    --lt.DataManager:init()
+    lt.DataManager:init()
 
     -- -- 推送初始化 -未获取玩家palyerid
     -- lt.PushManager:init()

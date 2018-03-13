@@ -32,8 +32,8 @@ function InitLayer:onLogin()--登录微信
     end
 
     if self._connectSuccess then
-        local arg = {account="FYD3",token="FYD",login_type="debug"}--weixin
-        lt.NetWork:send({["login"]=arg}, handler(self, self.onLoginResponse))
+        local arg = {account="FYD3",token="FYD",login_type="weixin",user_name = "测试测试", user_pic = "www"}--weixin
+        lt.NetWork:sendTo(lt.GameEventManager.EVENT.LOGIN, arg)
     end
 
     -- local worldScene = lt.WorldScene.new()
@@ -41,11 +41,11 @@ function InitLayer:onLogin()--登录微信
 end
 
 function InitLayer:onLoginResponse(msg)--登录回调
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++111111111111111111111111111")
     if msg.result == "success" then
-        local user_id = msg.user_id
         local reconnect_token = msg.reconnect_token
         --user:init(user_id,reconnect_token)
-        print("登陆成功  user_id="..msg.user_id.." reconnect_token=",msg.reconnect_token)
+        print( "reconnect_token=",msg.reconnect_token)
 
         local worldScene = lt.WorldScene.new()
         lt.SceneManager:replaceScene(worldScene)
@@ -54,24 +54,20 @@ function InitLayer:onLoginResponse(msg)--登录回调
     end
 end
 
-function InitLayer:RegisterEvent()--注册事件的回调
-    
-end
-
 function InitLayer:RegisterWidgetEvent()
     lt.CommonUtil:addNodeClickEvent(self._loginBtn, handler(self, self.onLogin))
 end
 
 function InitLayer:onEnter()   
     print("InitLayer:onEnter")
-    lt.GameEventManager:addListener("login", handler(self, self.onLoginResponse), "InitLayer:onLoginResponse")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.LOGIN, handler(self, self.onLoginResponse), "InitLayer:onLoginResponse")
 
     lt.NetWork:connect("47.52.99.120", 8888, handler(self, self.onConnectResponse))
 end
 
 function InitLayer:onExit()
     print("InitLayer:onExit")
-    lt.GameEventManager:removeListener("login", "InitLayer:onLoginResponse")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.LOGIN, "InitLayer:onLoginResponse")
 end
 
 --[[

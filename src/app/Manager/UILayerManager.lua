@@ -25,6 +25,7 @@ function UILayerManager:setWorldUILayer(worldUILayer)
 end
 function UILayerManager:clearWorldUILayer()
 	self._worldUILayer = nil
+	self:resetStack()
 end
 
 function UILayerManager:addLayer(uilayer, coexist, params)
@@ -182,6 +183,10 @@ function UILayerManager:clearAllLayers()
 	self._worldMenuLayer:setVisible(true)
 	self._worldMenuLayer:resetAllLayer()
 
+	self:resetStack()
+end
+
+function UILayerManager:resetStack()
 	self.ZORDER = 1
 
 	self._topLayerStack = {}

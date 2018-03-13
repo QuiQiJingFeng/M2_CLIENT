@@ -163,7 +163,7 @@ function network:unpackData()
                 data = crypt.desdecode(self._secret, data)
             end
 
-            local data_content, err = protobuf.decode("S2C", data)
+            local data_content, err = protobuf.decode2("S2C", data)
             if not err then
                 return data_content
             else
@@ -247,9 +247,11 @@ function network:update(dt)
             if item.callback then
                 item.callback(rsp_msg)
             else
+                print("FYD++++++>>>>>>>>>111111111",rsp_name)
                 lt.GameEventManager:post(rsp_name, rsp_msg)
             end
     	else
+            print("FYD++++++>>>>>>>>>22222222",rsp_name)
             --如果是推送 走这里
             lt.GameEventManager:post(rsp_name, rsp_msg)
         end
@@ -269,6 +271,11 @@ function network:update(dt)
     		end
     	end
 	end
+end
+
+function network:sendTo(key,data_content,callback,ignore_session)
+    local arg = {[key] = data_content}
+    self:send(arg, callback, ignore_session)
 end
 
 function network:send(data_content,callback,ignore_session)

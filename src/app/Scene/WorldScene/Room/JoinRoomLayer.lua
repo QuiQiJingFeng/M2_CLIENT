@@ -47,6 +47,9 @@ function JoinRoomLayer:onClickNumKey(event)
 		for i,v in ipairs(self._numberArray) do
 			roomNum = roomNum..v
 		end
+		local arg = {room_id = roomNum}--weixin
+		lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+
 		print("%%%%%%%%%%%%%%%%%%%%%%%%%%", tonumber(roomNum))
 	end
 end
@@ -74,6 +77,28 @@ function JoinRoomLayer:onClickReset(event)
 		self._numberArray = {}
 		self:configRoomNum()
 	end
+end
+
+function JoinRoomLayer:onjoinRoomResponse(msg)
+	
+	print("__________________________", msg.result)
+    if msg.result == "success" then
+    	print("加入房间")
+		local gameScene = lt.GameScene.new()
+        lt.SceneManager:replaceScene(gameScene)
+    else
+        print("加入房间失败")
+    end
+end
+
+function JoinRoomLayer:onEnter()   
+    print("JoinRoomLayer:onEnter")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.JOIN_ROOM, handler(self, self.onjoinRoomResponse), "JoinRoomLayer:onjoinRoomResponse")
+end
+
+function JoinRoomLayer:onExit()
+    print("JoinRoomLayer:onExit")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.JOIN_ROOM, "JoinRoomLayer:onjoinRoomResponse")
 end
 
 function JoinRoomLayer:onClose(event)

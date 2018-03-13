@@ -9,18 +9,10 @@ function WorldUILayer:ctor(delegate)
 	self:setTouchEnabled(true)
 	--self:setSwallowTouches(true)
 	self._delegate = delegate
-
-	-- self._topBanner = lt.TopBannerr.new(self._delegate)
-	-- self._topBanner:setVisible(false)
-	-- self:addChild(self._topBanner, 10000)
 end
 
 function WorldUILayer:clearAllLayers()
 	self:removeAllChildren()
-
-	-- self._topBanner = lt.TopBanner.new(self._delegate)
-	-- self._topBanner:setVisible(false)
-	-- self:addChild(self._topBanner, 10000)
 end
 
 function WorldUILayer:onEnter()
@@ -40,12 +32,10 @@ end
 
 function WorldUILayer:topShow(zorder)
 	zorder = zorder or 10000
-	-- self._topBanner:setVisible(true)
-	-- self._topBanner:setLocalZOrder(zorder + 1)
 end
 
 function WorldUILayer:topHide()
-	--self._topBanner:setVisible(false)
+
 end
 
 -- temp

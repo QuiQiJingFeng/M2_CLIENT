@@ -537,21 +537,60 @@ function decode_message_mt.__pairs(tbl)
 	return pairs(tbl)
 end
 
+-- local function set_default(typename, tbl)
+-- 	for k,v in pairs(tbl) do
+-- 		if type(v) == "table" then
+-- 			local t, msg = c._env_type(P, typename, k)
+-- 			if t == 6 then
+-- 				set_default(msg, v)
+-- 			elseif t == 128+6 then
+-- 				for _,v in ipairs(v) do
+-- 					set_default(msg, v)
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- 	return setmetatable(tbl , default_table(typename))
+-- end
+
 local function set_default(typename, tbl)
-	for k,v in pairs(tbl) do
-		if type(v) == "table" then
-			local t, msg = c._env_type(P, typename, k)
-			if t == 6 then
-				set_default(msg, v)
-			elseif t == 128+6 then
-				for _,v in ipairs(v) do
-					set_default(msg, v)
-				end
-			end
-		end
-	end
-	return setmetatable(tbl , default_table(typename))
-end
+    for k,v in pairs(tbl) do
+        if type(v) == "table" then
+            local t, msg = c._env_type(P, typename, k)
+            if t == 6 then
+                set_default(msg, v)
+                elseif t == 128+6 then
+                    for _,v in ipairs(v) do
+                        set_default(msg, v)
+                    end
+                end
+            end
+        end
+        return setmetatable(tbl , default_table(typename))
+    end
+
+    local function decode2_message_cb(typename, buffer)
+        local ret = {}
+        assert(c._decode(P, decode2_message_cb , ret, typename, buffer), typename)
+        return ret
+    end
+
+    -- expand all message in decode2 and no default value
+    function decode2(typename, buffer, lenght)
+        local ret = {}
+        local ok = c._decode(P, decode2_message_cb, ret, typename, buffer, lenght)
+        if ok then
+            return ret
+        else
+            return false, c._last_error(P)
+        end
+    end
+
+    function register( buffer)
+        print(c._env_register(P, buffer))
+    end
+
+    default=set_default
 
 function register( buffer)
 	c._env_register(P, buffer)

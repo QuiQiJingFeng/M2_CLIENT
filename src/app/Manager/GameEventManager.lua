@@ -2,8 +2,10 @@
 local GameEventManager = {}
 
 GameEventManager.EVENT = {
-	APP_ENTER_BACKGROUND = "APP_ENTER_BACKGROUND",
-	APP_ENTER_FOREGROUND = "APP_ENTER_FOREGROUND",
+	LOGIN = "login",
+	JOIN_ROOM = "join_room",
+    PUSH_USER_INFO = "push_user_info",
+    REFRESH_ROOM_INFO = "refresh_room_info",
 }
 
 local handler_id = 0

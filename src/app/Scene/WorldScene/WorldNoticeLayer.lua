@@ -11,11 +11,10 @@ end
 function WorldNoticeLayer:onEnter()   
 	self:setTouchEnabled(false)
 
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.APP_ENTER_BACKGROUND, handler(self, self.onRedPacketNotice), "WorldNoticeLayer:onRedPacketNotice")
 end
 
 function WorldNoticeLayer:onExit()
-    lt.GameEventManager:removeListener("WorldNoticeLayer:onRedPacketNotice")
+
 end
 
 -- ############################## Loading效果(只用于显示) ############################## 
