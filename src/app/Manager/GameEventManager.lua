@@ -3,7 +3,8 @@ local GameEventManager = {}
 
 GameEventManager.EVENT = {
 	LOGIN = "login",
-	JOIN_ROOM = "join_room",
+    JOIN_ROOM = "join_room",
+	CREATE_ROOM = "create_room",
     PUSH_USER_INFO = "push_user_info",
     REFRESH_ROOM_INFO = "refresh_room_info",
 }

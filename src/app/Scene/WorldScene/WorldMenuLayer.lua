@@ -46,7 +46,7 @@ function WorldMenuLayer:onClickSetBtn(event)
 end
 
 function WorldMenuLayer:onClickCreateRoomBtn(event)
-    local setLayer = lt.SetLayer.new()
+    local setLayer = lt.CreateRoomLayer.new()
     lt.UILayerManager:addLayer(setLayer, true)
 end
 

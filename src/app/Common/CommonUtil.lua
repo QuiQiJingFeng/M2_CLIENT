@@ -1097,30 +1097,45 @@ function CommonUtil:copyToClipboard(message)
     end
 end
 
-function CommonUtil:addNodeClickEvent(node, callBack)
-    local oldScale = 1
-    local newScale = oldScale
-    node:setTouchEnabled(true)
-   -- TOUCH_EVENT_BEGAN                      = ccui.TouchEventType.began
-   -- TOUCH_EVENT_MOVED                      = ccui.TouchEventType.moved
-   -- TOUCH_EVENT_ENDED                      = ccui.TouchEventType.ended
-   -- TOUCH_EVENT_CANCELED                   = ccui.TouchEventType.canceled
-   --local sequence = cc.Sequence:create(delay, cc.CallFunc:create(callback))
+function CommonUtil:addNodeClickEvent(node, callBack, isScale)
+    -- local oldScale = 1
+    -- local newScale = oldScale
 
-    -- local action1 = cc.ScaleTo:create(0.08, 1.1)
-    -- local action2 = cc.ScaleTo:create(0.04, 1)
+    if not node then
+        print("ERROR:: addNodeClickEvent node is nil, Please examine the node\n")
+        return
+    end
+
+    isScale = isScale == nil and true or isScale
+
+    node:setTouchEnabled(true)
+
+    if callBack then
+        if node.onClick then
+            print("Warning:: node.onClick is exist, Duplicate assignment onClick\n")
+        end
+        node.onClick  = callBack
+    end
+
+    local oldScaleX = node:getScaleX()
+    local oldScaleY = node:getScaleY()
 
     node:addTouchEventListener(function(widget, event_type)
         if event_type == ccui.TouchEventType.began then
-                        -- 缩放
-            node:setScale(0.9)
+            -- 缩放
+            if isScale then
+                node:setScale(oldScaleX-0.1, oldScaleY-0.1)
+            end
         elseif event_type == ccui.TouchEventType.ended then
-            node:setScale(1)
+           
+            if isScale then
+                node:setScale(oldScaleX, oldScaleY)
+            end
             if callBack then
                 callBack(node)
             end
         elseif event_type == ccui.TouchEventType.canceled then   
-            node:setScale(1)
+            node:setScale(oldScaleX, oldScaleY)
         end
     end)
 end

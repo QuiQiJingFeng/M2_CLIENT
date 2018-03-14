@@ -67,6 +67,7 @@ ltMetaTable["BaseLayer"]			    = "app.Scene.WorldScene.Common.BaseLayer"
 ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.Setting.SetLayer"
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
+ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
 
 -- Widget
 ltMetaTable["BigOccupaitonIcon"]		= "app.Widget.BigOccupaitonIcon"
