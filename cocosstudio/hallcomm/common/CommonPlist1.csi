@@ -1,0 +1,34 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="CommonPlist1" Type="Plist" ID="9d8b1cd4-f22e-47dd-b279-20c5210e64d0" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hallcomm/common/img/BG16.png" />
+      <FilePathData Path="hallcomm/common/img/BG24.png" />
+      <FilePathData Path="hallcomm/common/img/BG25.png" />
+      <FilePathData Path="hallcomm/common/img/BG29.png" />
+      <FilePathData Path="hallcomm/common/img/BG34.png" />
+      <FilePathData Path="hallcomm/common/img/BG35.png" />
+      <FilePathData Path="hallcomm/common/img/ButtonCanel.png" />
+      <FilePathData Path="hallcomm/common/img/ButtonEnabled0.png" />
+      <FilePathData Path="hallcomm/common/img/ButtonSure.png" />
+      <FilePathData Path="hallcomm/common/img/ButtonSure1.png" />
+      <FilePathData Path="hallcomm/common/img/ButtonWX0.png" />
+      <FilePathData Path="hallcomm/common/img/ButtonWX1.png" />
+      <FilePathData Path="hallcomm/common/img/Check2.png" />
+      <FilePathData Path="hallcomm/common/img/Check3.png" />
+      <FilePathData Path="hallcomm/common/img/img_smallBgRecharge.png" />
+      <FilePathData Path="hallcomm/common/img/img_VipBg.png" />
+      <FilePathData Path="hallcomm/common/img/Btn_mobel.png" />
+      <FilePathData Path="hallcomm/common/img/Btn_wechat.png" />
+      <FilePathData Path="hallcomm/common/img/Image_qipao1.png" />
+      <FilePathData Path="hallcomm/common/img/Image_qipao2.png" />
+      <FilePathData Path="hallcomm/common/img/img_rotaryTable1.png" />
+      <FilePathData Path="hallcomm/common/img/img_rotaryTable2.png" />
+      <FilePathData Path="hallcomm/common/img/Btn_rotaryTable.png" />
+      <FilePathData Path="hallcomm/common/img/img_smz.png" />
+      <FilePathData Path="hallcomm/common/img/img_rotarylight_1.png" />
+      <FilePathData Path="hallcomm/common/img/img_rotarylight_2.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="512" />
+  </Content>
+</PlistInfoProjectFile>

@@ -1,0 +1,61 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_3" Type="Plist" ID="c3a1f416-4b41-4482-84e8-7bcff1c17674" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="True" AllowTrim="True" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/bj/game/Sp_TongGuanLight.png" />
+      <FilePathData Path="games/bj/game/Sp_TongGuan.png" />
+      <FilePathData Path="games/bj/game/cards/BigGui.png" />
+      <FilePathData Path="games/bj/game/cards/SmalGui.png" />
+      <FilePathData Path="games/bj/game/cards/Sp_OtherPai.png" />
+      <FilePathData Path="games/bj/game/Sp_LeaveRoom.png" />
+      <FilePathData Path="games/bj/game/Sp_Sure.png" />
+      <FilePathData Path="games/bj/game/Sp_Continue.png" />
+      <FilePathData Path="games/bj/game/Sp_Cancel.png" />
+      <FilePathData Path="games/bj/game/Sp_MaxAndMin.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai1.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai10.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai11.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai12.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai2.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai3.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai4.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai5.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai6.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai7.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai8.png" />
+      <FilePathData Path="games/bj/game/Sp_XiPai9.png" />
+      <FilePathData Path="games/bj/game/button/btnBackY.png" />
+      <FilePathData Path="games/bj/game/button/btnChatY.png" />
+      <FilePathData Path="games/bj/game/button/btnClose.png" />
+      <FilePathData Path="games/bj/game/button/btnCloseBullInfo.png" />
+      <FilePathData Path="games/bj/game/button/btnDissolution.png" />
+      <FilePathData Path="games/bj/game/button/btnHelpY.png" />
+      <FilePathData Path="games/bj/game/button/btnMore.png" />
+      <FilePathData Path="games/bj/game/button/btnRule.png" />
+      <FilePathData Path="games/bj/game/button/btnSettingY.png" />
+      <FilePathData Path="games/bj/game/button/btnSurplus.png" />
+      <FilePathData Path="games/bj/game/button/btnTab.png" />
+      <FilePathData Path="games/bj/game/button/btnTipsY.png" />
+      <FilePathData Path="games/bj/game/button/btnVoiceY.png" />
+      <FilePathData Path="games/bj/game/button/textDis.png" />
+      <FilePathData Path="games/bj/game/button/textReturn.png" />
+      <FilePathData Path="games/bj/game/button/textReturnLobby.png" />
+      <FilePathData Path="games/bj/game/button/textRule.png" />
+      <FilePathData Path="games/bj/game/button/textSetting.png" />
+      <FilePathData Path="games/bj/game/img/iconPlayer.png" />
+      <FilePathData Path="games/bj/game/img/iconClock.png" />
+      <FilePathData Path="games/bj/game/img/iconBigWinner.png" />
+      <FilePathData Path="games/bj/game/img/BG20.png" />
+      <FilePathData Path="games/bj/game/img/BG19.png" />
+      <FilePathData Path="games/bj/game/img/BG14.png" />
+      <FilePathData Path="games/bj/game/img/BG15.png" />
+      <FilePathData Path="games/bj/game/Sp_settle1.png" />
+      <FilePathData Path="games/bj/game/Sp_settle2.png" />
+      <FilePathData Path="games/bj/game/Sp_settle3.png" />
+      <FilePathData Path="games/bj/game/Sp_Ready.png" />
+      <FilePathData Path="games/bj/game/Sp_RoomStart.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

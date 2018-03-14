@@ -5,7 +5,7 @@ local CreateRoomLayer = class("CreateRoomLayer", lt.BaseLayer, function()
 end)
 
 
-local SelectColor = cc.c3b(38,147, 0)
+local SelectColor = cc.c3b(38, 147, 0)
 local NormalColor = cc.c3b(95,95,94)
 local TitleColor = cc.c3b(173,63,33)
 local FixedTwoOrThreeItemWidth = 250 --三个或两个选项的
@@ -39,8 +39,6 @@ local RuleBtnType = {
     eSuppressOneOption = 7, --可隐藏单选项
 }
 
-
-
 local GameConf = require("app.common.GameConf")
 
 function CreateRoomLayer:ctor()
@@ -67,9 +65,6 @@ function CreateRoomLayer:ctor()
     self.bnClose = bg:getChildByName("Bn_Close")--关闭按钮
     self.bnCreateSure = bg:getChildByName("Bn_CreateSure")--创建房间按钮
     self.createMoneyText = self.bnCreateSure:getChildByName("Tt_GMoney")--创建房间花费
-
-
-
 
     -- 暂时不需要捕鱼界面
     self.bnInterHLBYGame = bg:getChildByName("Bn_InterHLBYGame")--进入捕鱼游戏宣传界面
@@ -170,10 +165,7 @@ function CreateRoomLayer:createGameList(iGameId, index, iGameIds)
     self.gameBtnNormalList = {} 
     self.gameBtnSelectList = {}
     local intPosY = 0
-    -- for var = 1, iItemCount do
-	-- dump(currGameList)
-    local var = 0
-
+   
     --[[
 	    item 参数：
 	    1.gameID
@@ -183,7 +175,7 @@ function CreateRoomLayer:createGameList(iGameId, index, iGameIds)
 	    5.是否显示免费图标（0:不显示  1:显示）
 	    6.打折
 	]]
-
+    local var = 0
     local selectBtn = nil
     for i , v in pairs(currGameList) do 
     	var = var + 1
@@ -257,31 +249,13 @@ end
 function CreateRoomLayer:gameBtnOnTap(gameId, index, gameIds)
 
 	local gameList = self:getGameList()
-
-	-- dump(gameList, "gameList")
-	-- dump(gameId, "gameId")
-	-- dump(gameList[gameId], "gameList[gameId]")
-
 	self.tGamesRuleConfig = gameList[gameId][6]
-	
-
 	-- 红中麻将
 	if gameId == "HZMJ" then
-
-        -- if self.m_hzmjRule:isVisible() == true then
-        --     return
-        -- end
-
 		self.m_hzmjRule:setVisible(true)
 		-- 设置一下数据
 		self:initHZMJRule()
 	end
-
-	-- self:createPayPanel()--扣费方式
- --    self:createRoundPanel()--圈数
- --    self:createBasePanel() --底分   
- --    self:createRulePanel()--规则选项
- --    self.optionalPosY  =  self.startPosY 
 end
 
 
@@ -289,19 +263,18 @@ function CreateRoomLayer:initHZMJRule( ... )
 
 	-- 当前选中的数据
 	self.selectTable = {}
-    self.selectTable.other_setting = {0, 0, 0, 0}
+    self.selectTable.other_setting = {1, 0, 0, 0, 0}
 	if not self.tGamesRuleConfig then
 		dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
 		return
 	end
 
 	-- 游戏设置项[数组]
-	-- [1] 奖码的个数
-	-- [2] 七对胡牌
-	-- [3] 喜分
-	-- [4] 一码不中当全中
-
-    
+    -- [1] 底分
+	-- [2] 奖码的个数
+	-- [3] 七对胡牌
+	-- [4] 喜分
+	-- [5] 一码不中当全中
 
 	local payTable = {}
 	local roundTable = {}
@@ -314,7 +287,15 @@ function CreateRoomLayer:initHZMJRule( ... )
 	local jiangType = {2, 4, 6}
 	local ruleType = {0, 0, 0}
 
+    -- 房主出资， 对应局数多少
+    local allPay = {20, 40, 80}
+    local everyPay = {5, 10, 20}
+
+
+    -- 玩家平分， 对应多少
 	for i = 1, 3 do 
+
+        -- 支付方式，
 		local payPanel = self.m_hzmjRule:getChildByName("Panel_Pay".. i)	
 		payPanel.selectNode = payPanel:getChildByName("Image_Select")
 		payPanel._textNode = payPanel:getChildByName("Text_Pay")
@@ -326,6 +307,16 @@ function CreateRoomLayer:initHZMJRule( ... )
 	    			v.selectNode:setVisible(true)
 	    			v._textNode:setColor(SelectColor)
 	    			self.selectTable.pay = payType[i]
+                    --  
+                    if i == 1 or i == 3 then
+                        for j = 1, 3 do 
+                            roundTable[j]._textNode2:setString("(".. allPay[j] .. "金币)")
+                        end
+                    else
+                        for j = 1, 3 do 
+                            roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
+                        end
+                    end
 	    		else
 	    			v.selectNode:setVisible(false)
 	    			v._textNode:setColor(NormalColor)
@@ -333,10 +324,11 @@ function CreateRoomLayer:initHZMJRule( ... )
 	    	end
 	    end, false)
 	
-
+        -- 圈数
 		local roundPalel = 	self.m_hzmjRule:getChildByName("Panel_Round".. i)
 		roundPalel.selectNode = roundPalel:getChildByName("Image_Select")	
 		roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
+        roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
 		roundTable[i] = roundPalel
 
 		lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
@@ -344,14 +336,17 @@ function CreateRoomLayer:initHZMJRule( ... )
 	    		if v == roundPalel then
 	    			v.selectNode:setVisible(true)
 	    			v._textNode:setColor(SelectColor)
+                    v._textNode2:setColor(SelectColor)
 	    			self.selectTable.round = roundType[i]
 	    		else
 	    			v.selectNode:setVisible(false)
+                    v._textNode2:setColor(NormalColor)
 	    			v._textNode:setColor(NormalColor)
 	    		end
 	    	end
 	    end, false)
 
+        -- 人数
 		local playNumPalel = self.m_hzmjRule:getChildByName("Panel_PlayNum".. i)
 		playNumPalel.selectNode = playNumPalel:getChildByName("Image_Select")	
 		playNumPalel._textNode = playNumPalel:getChildByName("Text_Pay")
@@ -382,7 +377,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 	    		if v == jiangPalel then
 	    			v.selectNode:setVisible(true)
 	    			v._textNode:setColor(SelectColor)
-	    			self.selectTable.other_setting[1] = jiangType[i]
+	    			self.selectTable.other_setting[2] = jiangType[i]
 	    		else
 	    			v.selectNode:setVisible(false)
 	    			v._textNode:setColor(NormalColor)
@@ -402,11 +397,11 @@ function CreateRoomLayer:initHZMJRule( ... )
 			if playRule[i].isSelect == false then
 				playRule[i].isSelect = true
 				playRule[i].selectNode:setVisible(true)	
-				self.selectTable.other_setting[i+1] = 1
+				self.selectTable.other_setting[i+2] = 1
 				playRule[i]._textNode:setColor(SelectColor)
 			else
                 dump(self.selectTable)
-				self.selectTable.other_setting[i+1] = 0
+				self.selectTable.other_setting[i+2] = 0
 				playRule[i].isSelect = false
 				playRule[i].selectNode:setVisible(false)
 				playRule[i]._textNode:setColor(NormalColor)	
@@ -427,6 +422,9 @@ function CreateRoomLayer:initHZMJRule( ... )
 	baseScore.baseNums = 1
 
 
+    self.selectTable.other_setting[1] = 1
+
+
 	-- 上面配置
 	local iTableBase = self.iBaseScore
 
@@ -439,8 +437,8 @@ function CreateRoomLayer:initHZMJRule( ... )
 		if baseIndex > #iTableBase then
 			baseIndex = #iTableBase
 		end
-		baseScore.baseNums = iTableBase[baseIndex]
-		baseScore:setString(baseScore.baseNums)
+        self.selectTable.baseNums = iTableBase[baseIndex]
+		baseScore:setString(self.selectTable.other_setting[1])
 	end)
 
 	lt.CommonUtil:addNodeClickEvent(delBtn, function( ... )
@@ -452,8 +450,9 @@ function CreateRoomLayer:initHZMJRule( ... )
 		if baseIndex < 1 then
 			baseIndex = 1
 		end
-		baseScore.baseNums = iTableBase[baseIndex]
-		baseScore:setString(baseScore.baseNums)
+		-- baseScore.baseNums = iTableBase[baseIndex]
+        self.selectTable.baseNums = iTableBase[baseIndex]
+        baseScore:setString(self.selectTable.other_setting[1])
 	end)
 
 	payTable[1]:onClick()

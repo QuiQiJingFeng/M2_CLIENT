@@ -1,0 +1,66 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_1" Type="Plist" ID="3402af68-22a9-4445-b1b2-da9c5f88e71f" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/mlnn/ani/banker_1.png" />
+      <FilePathData Path="games/mlnn/ani/banker_12.png" />
+      <FilePathData Path="games/mlnn/ani/banker_13.png" />
+      <FilePathData Path="games/mlnn/ani/banker_2.png" />
+      <FilePathData Path="games/mlnn/ani/banker_21.png" />
+      <FilePathData Path="games/mlnn/ani/banker_22.png" />
+      <FilePathData Path="games/mlnn/ani/banker_23.png" />
+      <FilePathData Path="games/mlnn/ani/banker_3.png" />
+      <FilePathData Path="games/mlnn/ani/banker_31.png" />
+      <FilePathData Path="games/mlnn/ani/banker_32.png" />
+      <FilePathData Path="games/mlnn/ani/banker_33.png" />
+      <FilePathData Path="games/mlnn/ani/banker_34.png" />
+      <FilePathData Path="games/mlnn/cards/big_type_1.png" />
+      <FilePathData Path="games/mlnn/cards/big_type_2.png" />
+      <FilePathData Path="games/mlnn/cards/big_type_3.png" />
+      <FilePathData Path="games/mlnn/cards/card_bg_1.png" />
+      <FilePathData Path="games/mlnn/cards/card_bg_2.png" />
+      <FilePathData Path="games/mlnn/cards/small_type_1.png" />
+      <FilePathData Path="games/mlnn/cards/small_type_2.png" />
+      <FilePathData Path="games/mlnn/cards/small_type_3.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_1.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_10.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_11.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_12.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_13.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_2.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_3.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_4.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_5.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_6.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_7.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_8.png" />
+      <FilePathData Path="games/mlnn/cards/value_1_9.png" />
+      <FilePathData Path="games/mlnn/cards/value_4_1.png" />
+      <FilePathData Path="games/mlnn/cards/value_4_2.png" />
+      <FilePathData Path="games/mlnn/game/light_bg.png" />
+      <FilePathData Path="games/mlnn/game/button_green.png" />
+      <FilePathData Path="games/mlnn/game/button_orange.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_1.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_10.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_11.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_12.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_13.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_2.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_3.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_4.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_5.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_6.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_7.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_8.png" />
+      <FilePathData Path="games/mlnn/cards/value_0_9.png" />
+      <FilePathData Path="games/mlnn/cards/big_type_0.png" />
+      <FilePathData Path="games/mlnn/cards/small_type_0.png" />
+      <FilePathData Path="games/mlnn/game/chat_menu_1_1.png" />
+      <FilePathData Path="games/mlnn/game/chat_menu_1_2.png" />
+      <FilePathData Path="games/mlnn/game/chat_menu_2_1.png" />
+      <FilePathData Path="games/mlnn/game/chat_menu_2_2.png" />
+      <FilePathData Path="games/mlnn/game/text_base_2.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

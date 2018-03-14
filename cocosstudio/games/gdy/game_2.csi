@@ -1,0 +1,48 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_2" Type="Plist" ID="39da9a07-af84-4dd1-b9f0-d6ee616f173d" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/gdy/cards/16.png" />
+      <FilePathData Path="games/gdy/cards/17.png" />
+      <FilePathData Path="games/gdy/cards/black_1.png" />
+      <FilePathData Path="games/gdy/cards/black_10.png" />
+      <FilePathData Path="games/gdy/cards/black_11.png" />
+      <FilePathData Path="games/gdy/cards/black_12.png" />
+      <FilePathData Path="games/gdy/cards/black_13.png" />
+      <FilePathData Path="games/gdy/cards/black_2.png" />
+      <FilePathData Path="games/gdy/cards/black_3.png" />
+      <FilePathData Path="games/gdy/cards/black_4.png" />
+      <FilePathData Path="games/gdy/cards/black_5.png" />
+      <FilePathData Path="games/gdy/cards/black_6.png" />
+      <FilePathData Path="games/gdy/cards/black_7.png" />
+      <FilePathData Path="games/gdy/cards/black_8.png" />
+      <FilePathData Path="games/gdy/cards/black_9.png" />
+      <FilePathData Path="games/gdy/cards/card_bg.png" />
+      <FilePathData Path="games/gdy/cards/cover.png" />
+      <FilePathData Path="games/gdy/cards/HuaSe_1.png" />
+      <FilePathData Path="games/gdy/cards/HuaSe_2.png" />
+      <FilePathData Path="games/gdy/cards/HuaSe_3.png" />
+      <FilePathData Path="games/gdy/cards/HuaSe_4.png" />
+      <FilePathData Path="games/gdy/cards/lz.png" />
+      <FilePathData Path="games/gdy/cards/red_1.png" />
+      <FilePathData Path="games/gdy/cards/red_10.png" />
+      <FilePathData Path="games/gdy/cards/red_11.png" />
+      <FilePathData Path="games/gdy/cards/red_12.png" />
+      <FilePathData Path="games/gdy/cards/red_13.png" />
+      <FilePathData Path="games/gdy/cards/red_2.png" />
+      <FilePathData Path="games/gdy/cards/red_3.png" />
+      <FilePathData Path="games/gdy/cards/red_4.png" />
+      <FilePathData Path="games/gdy/cards/red_5.png" />
+      <FilePathData Path="games/gdy/cards/red_6.png" />
+      <FilePathData Path="games/gdy/cards/red_7.png" />
+      <FilePathData Path="games/gdy/cards/red_8.png" />
+      <FilePathData Path="games/gdy/cards/red_9.png" />
+      <FilePathData Path="games/gdy/cards/SHuaSe_1.png" />
+      <FilePathData Path="games/gdy/cards/SHuaSe_2.png" />
+      <FilePathData Path="games/gdy/cards/SHuaSe_3.png" />
+      <FilePathData Path="games/gdy/cards/SHuaSe_4.png" />
+      <FilePathData Path="games/gdy/cards/card_bg_2.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

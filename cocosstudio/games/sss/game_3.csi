@@ -1,0 +1,21 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_3" Type="Plist" ID="c3a1f416-4b41-4482-84e8-7bcff1c17674" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/sss/game/Text_11.png" />
+      <FilePathData Path="games/sss/game/Text_12.png" />
+      <FilePathData Path="games/sss/game/Text_13.png" />
+      <FilePathData Path="games/sss/game/Text_14.png" />
+      <FilePathData Path="games/sss/game/Text_15.png" />
+      <FilePathData Path="games/sss/game/Text_16.png" />
+      <FilePathData Path="games/sss/game/Text_17.png" />
+      <FilePathData Path="games/sss/game/Text_18.png" />
+      <FilePathData Path="games/sss/game/Text_19.png" />
+      <FilePathData Path="games/sss/game/Text_20.png" />
+      <FilePathData Path="games/sss/game/Text_21.png" />
+      <FilePathData Path="games/sss/game/Text_22.png" />
+      <FilePathData Path="games/sss/game/Text_23.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

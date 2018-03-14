@@ -1,0 +1,33 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_ani_1" Type="Plist" ID="f40c61ba-3cc9-4c5d-ba66-6482fc29c655" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/pdk/game/shunzi1.png" />
+      <FilePathData Path="games/pdk/game/shunzi13.png" />
+      <FilePathData Path="games/pdk/game/shunzi14.png" />
+      <FilePathData Path="games/pdk/game/shunzi15.png" />
+      <FilePathData Path="games/pdk/game/shunzi19.png" />
+      <FilePathData Path="games/pdk/game/shunzi2.png" />
+      <FilePathData Path="games/pdk/game/wangzha1.png" />
+      <FilePathData Path="games/pdk/game/wangzha10.png" />
+      <FilePathData Path="games/pdk/game/wangzha11.png" />
+      <FilePathData Path="games/pdk/game/wangzha12.png" />
+      <FilePathData Path="games/pdk/game/wangzha2.png" />
+      <FilePathData Path="games/pdk/game/wangzha3.png" />
+      <FilePathData Path="games/pdk/game/wangzha4.png" />
+      <FilePathData Path="games/pdk/game/wangzha5.png" />
+      <FilePathData Path="games/pdk/game/wangzha6.png" />
+      <FilePathData Path="games/pdk/game/wangzha7.png" />
+      <FilePathData Path="games/pdk/game/wangzha8.png" />
+      <FilePathData Path="games/pdk/game/wangzha9.png" />
+      <FilePathData Path="games/pdk/game/zhadan1.png" />
+      <FilePathData Path="games/pdk/game/zhadan2.png" />
+      <FilePathData Path="games/pdk/game/zhadan3.png" />
+      <FilePathData Path="games/pdk/game/zhadan4.png" />
+      <FilePathData Path="games/pdk/game/feiji0.png" />
+      <FilePathData Path="games/pdk/game/feiji1.png" />
+      <FilePathData Path="games/pdk/game/feiji2.png" />
+    </ImageFiles>
+    <MaxSize Width="2048" Height="2048" />
+  </Content>
+</PlistInfoProjectFile>

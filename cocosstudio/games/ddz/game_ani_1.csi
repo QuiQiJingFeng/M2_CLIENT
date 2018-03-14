@@ -1,0 +1,48 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_ani_1" Type="Plist" ID="3aa80832-0b1a-4739-8680-cdc52fe62994" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="True" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/ddz/game/feiji0.png" />
+      <FilePathData Path="games/ddz/game/feiji1.png" />
+      <FilePathData Path="games/ddz/game/feiji2.png" />
+      <FilePathData Path="games/ddz/game/liandui1.png" />
+      <FilePathData Path="games/ddz/game/liandui10.png" />
+      <FilePathData Path="games/ddz/game/liandui2.png" />
+      <FilePathData Path="games/ddz/game/liandui3.png" />
+      <FilePathData Path="games/ddz/game/liandui4.png" />
+      <FilePathData Path="games/ddz/game/liandui5.png" />
+      <FilePathData Path="games/ddz/game/liandui6.png" />
+      <FilePathData Path="games/ddz/game/liandui7.png" />
+      <FilePathData Path="games/ddz/game/liandui8.png" />
+      <FilePathData Path="games/ddz/game/liandui9.png" />
+      <FilePathData Path="games/ddz/game/shunzi.png" />
+      <FilePathData Path="games/ddz/game/shunzi1.png" />
+      <FilePathData Path="games/ddz/game/shunzi10.png" />
+      <FilePathData Path="games/ddz/game/shunzi11.png" />
+      <FilePathData Path="games/ddz/game/shunzi12.png" />
+      <FilePathData Path="games/ddz/game/shunzi13.png" />
+      <FilePathData Path="games/ddz/game/shunzi14.png" />
+      <FilePathData Path="games/ddz/game/shunzi15.png" />
+      <FilePathData Path="games/ddz/game/shunzi16.png" />
+      <FilePathData Path="games/ddz/game/shunzi17.png" />
+      <FilePathData Path="games/ddz/game/shunzi18.png" />
+      <FilePathData Path="games/ddz/game/shunzi19.png" />
+      <FilePathData Path="games/ddz/game/shunzi2.png" />
+      <FilePathData Path="games/ddz/game/shunzi20.png" />
+      <FilePathData Path="games/ddz/game/shunzi21.png" />
+      <FilePathData Path="games/ddz/game/shunzi22.png" />
+      <FilePathData Path="games/ddz/game/shunzi23.png" />
+      <FilePathData Path="games/ddz/game/shunzi3.png" />
+      <FilePathData Path="games/ddz/game/shunzi4.png" />
+      <FilePathData Path="games/ddz/game/shunzi5.png" />
+      <FilePathData Path="games/ddz/game/shunzi6.png" />
+      <FilePathData Path="games/ddz/game/shunzi7.png" />
+      <FilePathData Path="games/ddz/game/shunzi8.png" />
+      <FilePathData Path="games/ddz/game/shunzi9.png" />
+      <FilePathData Path="games/ddz/game/chuntian12.png" />
+      <FilePathData Path="games/ddz/game/chuntian13.png" />
+      <FilePathData Path="games/ddz/game/chuntian14.png" />
+    </ImageFiles>
+    <MaxSize Width="2048" Height="2048" />
+  </Content>
+</PlistInfoProjectFile>

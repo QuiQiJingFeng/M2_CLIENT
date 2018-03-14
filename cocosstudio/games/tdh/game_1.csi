@@ -1,0 +1,19 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_1" Type="Plist" ID="3916df82-ed7a-4bf8-900a-07444f832683" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="True" AllowTrim="True" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/tdh/game/resultNumLost.png" />
+      <FilePathData Path="games/tdh/game/resultNumWin.png" />
+      <FilePathData Path="games/tdh/game/tdh_bgLogo.png" />
+      <FilePathData Path="games/tdh/game/img_DiFen.png" />
+      <FilePathData Path="games/tdh/game/mask_bg.png" />
+      <FilePathData Path="games/tdh/game/btn_ruleTop11.png" />
+      <FilePathData Path="games/tdh/game/btn_ruleTop12.png" />
+      <FilePathData Path="games/tdh/game/btn_ruleTop21.png" />
+      <FilePathData Path="games/tdh/game/btn_ruleTop22.png" />
+      <FilePathData Path="games/tdh/game/tdhShareGameName.png" />
+      <FilePathData Path="games/tdh/game/shareFlower.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

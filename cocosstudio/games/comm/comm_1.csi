@@ -1,0 +1,11 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="comm_1" Type="Plist" ID="76b8c949-ad12-46e1-8b49-8f905171ed2d" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/comm/shareQRCode.png" />
+      <FilePathData Path="games/comm/SharePeople.png" />
+      <FilePathData Path="games/comm/shareIcon.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

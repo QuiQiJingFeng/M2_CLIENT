@@ -1,0 +1,47 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="LobbyPlist0" Type="Plist" ID="5370afd7-2236-4c2e-a097-74b29a92111e" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hallcomm/lobby/img/BG305.png" />
+      <FilePathData Path="hallcomm/lobby/img/BG350.png" />
+      <FilePathData Path="hallcomm/lobby/img/BG47.png" />
+      <FilePathData Path="hallcomm/lobby/img/BG51.png" />
+      <FilePathData Path="hallcomm/lobby/img/BG52.png" />
+      <FilePathData Path="hallcomm/lobby/img/BG53.png" />
+      <FilePathData Path="hallcomm/lobby/img/bgLobbyTop.png" />
+      <FilePathData Path="hallcomm/lobby/img/BgMyRoomText.png" />
+      <FilePathData Path="hallcomm/lobby/img/btnCreateJoinBown.png" />
+      <FilePathData Path="hallcomm/lobby/img/ButtonCreate2.png" />
+      <FilePathData Path="hallcomm/lobby/img/ButtonCreateJoin.png" />
+      <FilePathData Path="hallcomm/lobby/img/ImageText84.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_1280coins.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_180coins.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_300coins.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_3280coins.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_60coins.png" />
+      <FilePathData Path="hallcomm/lobby/img/btnVIP.png" />
+      <FilePathData Path="hallcomm/lobby/img/ButtonHelpText.png" />
+      <FilePathData Path="hallcomm/lobby/img/ButtonMyRoom1.png" />
+      <FilePathData Path="hallcomm/lobby/img/ButtonMyRoom2.png" />
+      <FilePathData Path="hallcomm/lobby/img/ButtonMyRoom3.png" />
+      <FilePathData Path="hallcomm/lobby/img/ImageText57.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_ArrowToZhanji.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_ErWeiCodeBg.png" />
+      <FilePathData Path="hallcomm/lobby/img/record_button_1.png" />
+      <FilePathData Path="hallcomm/lobby/img/record_button_2.png" />
+      <FilePathData Path="hallcomm/lobby/img/updateNo.png" />
+      <FilePathData Path="hallcomm/lobby/img/updateOk.png" />
+      <FilePathData Path="hallcomm/lobby/img/wordVIP.png" />
+      <FilePathData Path="hallcomm/lobby/img/ButtonJoin2.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_NoticeText.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_NoticeBg.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_NoticeClose.png" />
+      <FilePathData Path="hallcomm/lobby/img/img_NoticeShow.png" />
+      <FilePathData Path="hallcomm/lobby/img/btn_NoticeBegin.png" />
+      <FilePathData Path="hallcomm/lobby/img/lobby_myRoom_bg.png" />
+      <FilePathData Path="hallcomm/lobby/img/lobby_addFriend_btnSelect.png" />
+      <FilePathData Path="hallcomm/lobby/img/lobby_addFriend_btnNormal.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="2048" />
+  </Content>
+</PlistInfoProjectFile>

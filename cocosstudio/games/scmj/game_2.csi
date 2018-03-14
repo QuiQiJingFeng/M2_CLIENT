@@ -1,0 +1,34 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_2" Type="Plist" ID="4e6555dc-7426-4ee4-b7f0-21d81954f9c3" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/scmj/game/water_1.png" />
+      <FilePathData Path="games/scmj/game/water_10.png" />
+      <FilePathData Path="games/scmj/game/water_11.png" />
+      <FilePathData Path="games/scmj/game/water_12.png" />
+      <FilePathData Path="games/scmj/game/water_13.png" />
+      <FilePathData Path="games/scmj/game/water_14.png" />
+      <FilePathData Path="games/scmj/game/water_15.png" />
+      <FilePathData Path="games/scmj/game/water_16.png" />
+      <FilePathData Path="games/scmj/game/water_17.png" />
+      <FilePathData Path="games/scmj/game/water_18.png" />
+      <FilePathData Path="games/scmj/game/water_19.png" />
+      <FilePathData Path="games/scmj/game/water_2.png" />
+      <FilePathData Path="games/scmj/game/water_20.png" />
+      <FilePathData Path="games/scmj/game/water_21.png" />
+      <FilePathData Path="games/scmj/game/water_22.png" />
+      <FilePathData Path="games/scmj/game/water_3.png" />
+      <FilePathData Path="games/scmj/game/water_4.png" />
+      <FilePathData Path="games/scmj/game/water_5.png" />
+      <FilePathData Path="games/scmj/game/water_6.png" />
+      <FilePathData Path="games/scmj/game/water_7.png" />
+      <FilePathData Path="games/scmj/game/water_8.png" />
+      <FilePathData Path="games/scmj/game/water_9.png" />
+      <FilePathData Path="games/scmj/game/msgBox_bg.png" />
+      <FilePathData Path="games/scmj/game/Img_HJZY1.png" />
+      <FilePathData Path="games/scmj/game/Img_HJZY2.png" />
+      <FilePathData Path="games/scmj/game/Img_HJZY3.png" />
+    </ImageFiles>
+    <MaxSize Width="2048" Height="2048" />
+  </Content>
+</PlistInfoProjectFile>

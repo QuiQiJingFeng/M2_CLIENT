@@ -1,0 +1,19 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="CommPlist" Type="Plist" ID="82ec91c4-0fdc-425f-bceb-e4c602da17d8" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hallcomm/preserve/comm/image_Bg.png" />
+      <FilePathData Path="hallcomm/preserve/comm/image_Coin.png" />
+      <FilePathData Path="hallcomm/preserve/comm/image_Horn.png" />
+      <FilePathData Path="hallcomm/preserve/comm/text_1.png" />
+      <FilePathData Path="hallcomm/preserve/comm/text_2.png" />
+      <FilePathData Path="hallcomm/preserve/comm/text_3.png" />
+      <FilePathData Path="hallcomm/preserve/comm/text_4.png" />
+      <FilePathData Path="hallcomm/preserve/comm/text_5.png" />
+      <FilePathData Path="hallcomm/preserve/comm/text_6.png" />
+      <FilePathData Path="hallcomm/preserve/comm/text_7.png" />
+      <FilePathData Path="hallcomm/preserve/comm/img_Title.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="256" />
+  </Content>
+</PlistInfoProjectFile>

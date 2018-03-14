@@ -1,0 +1,39 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_ani_4" Type="Plist" ID="02bd8aab-4828-41eb-8410-d77d61eb4d4b" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="True" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/ddz/game/zhadan1.png" />
+      <FilePathData Path="games/ddz/game/zhadan10.png" />
+      <FilePathData Path="games/ddz/game/zhadan11.png" />
+      <FilePathData Path="games/ddz/game/zhadan12.png" />
+      <FilePathData Path="games/ddz/game/zhadan13.png" />
+      <FilePathData Path="games/ddz/game/zhadan14.png" />
+      <FilePathData Path="games/ddz/game/zhadan15.png" />
+      <FilePathData Path="games/ddz/game/zhadan16.png" />
+      <FilePathData Path="games/ddz/game/zhadan17.png" />
+      <FilePathData Path="games/ddz/game/zhadan18.png" />
+      <FilePathData Path="games/ddz/game/zhadan19.png" />
+      <FilePathData Path="games/ddz/game/zhadan2.png" />
+      <FilePathData Path="games/ddz/game/zhadan20.png" />
+      <FilePathData Path="games/ddz/game/zhadan21.png" />
+      <FilePathData Path="games/ddz/game/zhadan22.png" />
+      <FilePathData Path="games/ddz/game/zhadan3.png" />
+      <FilePathData Path="games/ddz/game/zhadan4.png" />
+      <FilePathData Path="games/ddz/game/zhadan5.png" />
+      <FilePathData Path="games/ddz/game/zhadan6.png" />
+      <FilePathData Path="games/ddz/game/zhadan7.png" />
+      <FilePathData Path="games/ddz/game/zhadan8.png" />
+      <FilePathData Path="games/ddz/game/zhadan9.png" />
+      <FilePathData Path="games/ddz/game/wangzha6.png" />
+      <FilePathData Path="games/ddz/game/wangzha7.png" />
+      <FilePathData Path="games/ddz/game/wangzha8.png" />
+      <FilePathData Path="games/ddz/game/wangzha9.png" />
+      <FilePathData Path="games/ddz/game/wangzha20.png" />
+      <FilePathData Path="games/ddz/game/wangzha12.png" />
+      <FilePathData Path="games/ddz/game/wangzha16.png" />
+      <FilePathData Path="games/ddz/game/huojian.png" />
+      <FilePathData Path="games/ddz/game/wangzha22.png" />
+    </ImageFiles>
+    <MaxSize Width="2048" Height="2048" />
+  </Content>
+</PlistInfoProjectFile>

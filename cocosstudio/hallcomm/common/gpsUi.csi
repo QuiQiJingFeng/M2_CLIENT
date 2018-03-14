@@ -1,0 +1,19 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="gpsUi" Type="Plist" ID="0f5b6859-c9e9-4f16-832a-672a51d82c9a" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hallcomm/common/gps/img_And.png" />
+      <FilePathData Path="hallcomm/common/gps/img_Bi.png" />
+      <FilePathData Path="hallcomm/common/gps/img_Bubble.png" />
+      <FilePathData Path="hallcomm/common/gps/img_BubbleFrame.png" />
+      <FilePathData Path="hallcomm/common/gps/img_Fang.png" />
+      <FilePathData Path="hallcomm/common/gps/img_IP.png" />
+      <FilePathData Path="hallcomm/common/gps/img_Location.png" />
+      <FilePathData Path="hallcomm/common/gps/img_Zuo.png" />
+      <FilePathData Path="hallcomm/common/gps/btn_Join.png" />
+      <FilePathData Path="hallcomm/common/gps/btn_Leave.png" />
+      <FilePathData Path="hallcomm/common/gps/btn_OpenPosition.png" />
+    </ImageFiles>
+    <MaxSize Width="512" Height="256" />
+  </Content>
+</PlistInfoProjectFile>

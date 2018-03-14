@@ -1,0 +1,12 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_3" Type="Plist" ID="68e9d53a-e69b-4e10-bd26-7f3e76be43c0" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/mlnn/game/game_bg_1.png" />
+      <FilePathData Path="games/mlnn/game/game_bg_3.png" />
+      <FilePathData Path="games/mlnn/game/game_bg_4.png" />
+      <FilePathData Path="games/mlnn/game/game_bg_5.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

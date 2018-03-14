@@ -1,0 +1,46 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_1" Type="Plist" ID="80d5bcc6-bbc7-4fc4-8e0f-de63e20bcc95" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/ddz/game/BG19.png" />
+      <FilePathData Path="games/ddz/game/ImageText16.png" />
+      <FilePathData Path="games/ddz/game/BG5.png" />
+      <FilePathData Path="games/ddz/game/BG6.png" />
+      <FilePathData Path="games/ddz/game/BG7.png" />
+      <FilePathData Path="games/ddz/game/BG8.png" />
+      <FilePathData Path="games/ddz/game/ImageText23.png" />
+      <FilePathData Path="games/ddz/game/ImageText24.png" />
+      <FilePathData Path="games/ddz/game/ImageText25.png" />
+      <FilePathData Path="games/ddz/game/ImageText26.png" />
+      <FilePathData Path="games/ddz/game/ImageText27.png" />
+      <FilePathData Path="games/ddz/game/ImageText28.png" />
+      <FilePathData Path="games/ddz/game/ImageText29.png" />
+      <FilePathData Path="games/ddz/game/ImageText30.png" />
+      <FilePathData Path="games/ddz/game/ImageText31.png" />
+      <FilePathData Path="games/ddz/game/ImageText32.png" />
+      <FilePathData Path="games/ddz/game/ImageText40.png" />
+      <FilePathData Path="games/ddz/game/ImageText41.png" />
+      <FilePathData Path="games/ddz/game/ImageText42.png" />
+      <FilePathData Path="games/ddz/game/ImageText35.png" />
+      <FilePathData Path="games/ddz/game/ddzShareGameName.png" />
+      <FilePathData Path="games/ddz/game/bgAlphaRect.png" />
+      <FilePathData Path="games/ddz/game/bgBtnHelp.png" />
+      <FilePathData Path="games/ddz/game/btnBackY.png" />
+      <FilePathData Path="games/ddz/game/btnDissolution.png" />
+      <FilePathData Path="games/ddz/game/btnHelpY.png" />
+      <FilePathData Path="games/ddz/game/btnMore.png" />
+      <FilePathData Path="games/ddz/game/btnRule.png" />
+      <FilePathData Path="games/ddz/game/btnSettingY.png" />
+      <FilePathData Path="games/ddz/game/textDis.png" />
+      <FilePathData Path="games/ddz/game/textReturn.png" />
+      <FilePathData Path="games/ddz/game/textReturnLobby.png" />
+      <FilePathData Path="games/ddz/game/textRule.png" />
+      <FilePathData Path="games/ddz/game/textSetting.png" />
+      <FilePathData Path="games/ddz/game/BG4.png" />
+      <FilePathData Path="games/ddz/game/BG1.png" />
+      <FilePathData Path="games/ddz/game/BG2.png" />
+      <FilePathData Path="games/ddz/game/BG3.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

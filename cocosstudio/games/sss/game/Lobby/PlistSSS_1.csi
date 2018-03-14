@@ -1,0 +1,15 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="PlistSSS_1" Type="Plist" ID="ef2fcef9-20fd-49d7-b63f-95dcff4604de" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/sss/game/Lobby/BG3.png" />
+      <FilePathData Path="games/sss/game/Lobby/Image_Login1.png" />
+      <FilePathData Path="games/sss/game/Lobby/Image_Login2.png" />
+      <FilePathData Path="games/sss/game/Lobby/Image_Login3.png" />
+      <FilePathData Path="games/sss/game/Lobby/Image_Login4.png" />
+      <FilePathData Path="games/sss/game/Lobby/lobby_man.png" />
+      <FilePathData Path="games/sss/game/Lobby/lobby_woman.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

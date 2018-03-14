@@ -1,0 +1,35 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_4" Type="Plist" ID="78128018-454a-4e94-a896-49419755a0e3" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/gdy/Ani/feiji0.png" />
+      <FilePathData Path="games/gdy/Ani/feiji1.png" />
+      <FilePathData Path="games/gdy/Ani/feiji2.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha1.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha10.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha11.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha2.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha3.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha4.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha5.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha6.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha7.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha8.png" />
+      <FilePathData Path="games/gdy/Ani/wangzha9.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan1.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan10.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan11.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan2.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan3.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan4.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan5.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan6.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan7.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan8.png" />
+      <FilePathData Path="games/gdy/Ani/zhadan9.png" />
+      <FilePathData Path="games/gdy/Ani/ImageText33.png" />
+      <FilePathData Path="games/gdy/Ani/ImageText34.png" />
+    </ImageFiles>
+    <MaxSize Width="2048" Height="2048" />
+  </Content>
+</PlistInfoProjectFile>

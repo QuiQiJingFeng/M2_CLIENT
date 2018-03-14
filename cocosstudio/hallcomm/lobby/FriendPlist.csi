@@ -1,0 +1,45 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="FriendPlist" Type="Plist" ID="e3bd6a3f-248f-4d95-8a53-4d5971180e13" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hallcomm/lobby/img/firend_addFriend_box.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_bg.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_addBlacklist.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_addBlacklist_1.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_addFriend.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_addFriend_1.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_addFriend_2.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_back.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_blacklist_normal.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_blacklist_select.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_deleFriend.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_goodFriend_normal.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_goodFriend_select.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_lately_normal.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_lately_select.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_sure.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_head_bg.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_input_bg.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_player_bg.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_titleBg.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_text_1.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_text_2.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_text_3.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_text_4.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_line.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_head_default.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_icon_blacklist.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_icon_goodFriend.png" />
+      <FilePathData Path="hallcomm/lobby/img/Friend_mark.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_head_box.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_smClose.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_close.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_cancelBlacklist.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_delBlacklist.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_btn_delFriend.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_touchBg.png" />
+      <FilePathData Path="hallcomm/lobby/img/friend_realName.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

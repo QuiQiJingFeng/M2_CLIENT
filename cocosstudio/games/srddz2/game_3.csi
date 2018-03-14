@@ -1,0 +1,25 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_3" Type="Plist" ID="503d9626-2f3d-4670-8dd3-92b89143c589" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/srddz2/game/iocnPeasant.png" />
+      <FilePathData Path="games/srddz2/game/game_lite.png" />
+      <FilePathData Path="games/srddz2/game/guize.png" />
+      <FilePathData Path="games/srddz2/game/iconAmount.png" />
+      <FilePathData Path="games/srddz2/game/iconLandlord.png" />
+      <FilePathData Path="games/srddz2/game/bgClockDi.png" />
+      <FilePathData Path="games/srddz2/game/bgName.png" />
+      <FilePathData Path="games/srddz2/game/bgNameScore.png" />
+      <FilePathData Path="games/srddz2/game/bgPlayerName.png" />
+      <FilePathData Path="games/srddz2/game/bgPlayerNameCode.png" />
+      <FilePathData Path="games/srddz2/game/wordIconDifen.png" />
+      <FilePathData Path="games/srddz2/game/wordIconBeishu.png" />
+      <FilePathData Path="games/srddz2/game/num_result_lose.png" />
+      <FilePathData Path="games/srddz2/game/num_result_win.png" />
+      <FilePathData Path="games/srddz2/game/showCardBg.png" />
+      <FilePathData Path="games/srddz2/game/BG9.png" />
+      <FilePathData Path="games/srddz2/game/Button_21.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

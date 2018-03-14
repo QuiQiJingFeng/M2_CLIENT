@@ -1,0 +1,28 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="game_1" Type="Plist" ID="a881f577-421b-4334-b996-8112faf481ef" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/cgmj/game/btn_ruleTop11.png" />
+      <FilePathData Path="games/cgmj/game/btn_ruleTop12.png" />
+      <FilePathData Path="games/cgmj/game/btn_ruleTop21.png" />
+      <FilePathData Path="games/cgmj/game/btn_ruleTop22.png" />
+      <FilePathData Path="games/cgmj/game/huiIcon.png" />
+      <FilePathData Path="games/cgmj/game/jushuTextbg.png" />
+      <FilePathData Path="games/cgmj/game/menu_title_1.png" />
+      <FilePathData Path="games/cgmj/game/menu_title_2.png" />
+      <FilePathData Path="games/cgmj/game/menu_title_3.png" />
+      <FilePathData Path="games/cgmj/game/menu_title_4.png" />
+      <FilePathData Path="games/cgmj/game/menu_title_5.png" />
+      <FilePathData Path="games/cgmj/game/surplusCardTextBg.png" />
+      <FilePathData Path="games/cgmj/game/BG20.png" />
+      <FilePathData Path="games/cgmj/game/shangJingHint.png" />
+      <FilePathData Path="games/cgmj/game/xiaJing.png" />
+      <FilePathData Path="games/cgmj/game/fuJing.png" />
+      <FilePathData Path="games/cgmj/game/baWang.png" />
+      <FilePathData Path="games/cgmj/game/chongGuan.png" />
+      <FilePathData Path="games/cgmj/game/cgmjShareGameName.png" />
+      <FilePathData Path="games/cgmj/game/GameNameImg.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="512" />
+  </Content>
+</PlistInfoProjectFile>
