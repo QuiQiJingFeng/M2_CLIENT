@@ -426,7 +426,6 @@ function CreateRoomLayer:initHZMJRule( ... )
 	baseScore:setString(1)
 	baseScore.baseNums = 1
 
-    self.
 
 	-- 上面配置
 	local iTableBase = self.iBaseScore
