@@ -40,7 +40,7 @@
 			<key>game/mjcomm/part/BG4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{976,522},{2,2}}</string>
+				<string>{{976,571},{2,2}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -51,7 +51,7 @@
 			<key>game/mjcomm/part/BG7.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{976,515},{3,3}}</string>
+				<string>{{976,564},{3,3}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -73,7 +73,7 @@
 			<key>game/mjcomm/part/bgBlackRect.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{968,515},{4,4}}</string>
+				<string>{{968,564},{4,4}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1862,6 +1862,17 @@
 				<false />
 				<key>sourceSize</key>
 				<string>{44,91}</string>
+			</dict>
+			<key>game/mjcomm/part/image_oppTing.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{968,515},{45,11}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{45,11}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>

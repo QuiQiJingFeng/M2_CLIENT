@@ -53,7 +53,95 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Node_Light_2" ActionTag="-101006181" Tag="4519" RotationSkewX="-90.0000" RotationSkewY="-90.0000" IconVisible="True" LeftMargin="1.2233" RightMargin="-1.2233" TopMargin="27.1295" BottomMargin="-27.1295" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_Light_1" Visible="False" ActionTag="-512689904" Tag="4513" IconVisible="True" LeftMargin="-28.0001" RightMargin="28.0001" TopMargin="-1.0000" BottomMargin="1.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="Sprite_Light" ActionTag="-439281925" Tag="15111" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-65.5000" RightMargin="-37.5000" TopMargin="-13.5000" BottomMargin="-13.5000" ctype="SpriteObjectData">
+                    <Size X="103.0000" Y="27.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-14.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/part/bgClockLight.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Sprite_LightRed" ActionTag="-542134157" Tag="4518" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-65.5000" RightMargin="-37.5000" TopMargin="-13.5001" BottomMargin="-13.4999" ctype="SpriteObjectData">
+                    <Size X="103.0000" Y="27.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-14.0000" Y="0.0001" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/part/bgClockLightRed.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="-28.0001" Y="1.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Node_DNXB_1" Visible="False" ActionTag="-1510338229" Tag="2271" IconVisible="True" LeftMargin="-28.0000" RightMargin="28.0000" TopMargin="-1.0000" BottomMargin="1.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="Sprite_Dong" Visible="False" ActionTag="662122266" Tag="4514" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-27.5000" RightMargin="0.5000" TopMargin="-14.0001" BottomMargin="-11.9999" ctype="SpriteObjectData">
+                    <Size X="27.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-14.0000" Y="1.0001" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordDong.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Sprite_Nan" Visible="False" ActionTag="-613003228" Tag="4515" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-27.5000" RightMargin="0.5000" TopMargin="-14.0001" BottomMargin="-11.9999" ctype="SpriteObjectData">
+                    <Size X="27.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-14.0000" Y="1.0001" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordNan.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Sprite_Xi" ActionTag="-392154376" Tag="4516" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-27.5000" RightMargin="0.5000" TopMargin="-14.0001" BottomMargin="-11.9999" ctype="SpriteObjectData">
+                    <Size X="27.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-14.0000" Y="1.0001" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordXi.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Sprite_Bei" Visible="False" ActionTag="-910633858" Tag="4517" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-27.5000" RightMargin="0.5000" TopMargin="-14.0001" BottomMargin="-11.9999" ctype="SpriteObjectData">
+                    <Size X="27.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-14.0000" Y="1.0001" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordBei.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="-28.0000" Y="1.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Node_Light_2" Visible="False" ActionTag="-101006181" Tag="4519" RotationSkewX="-90.0000" RotationSkewY="-90.0000" IconVisible="True" LeftMargin="1.2233" RightMargin="-1.2233" TopMargin="27.1295" BottomMargin="-27.1295" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="Sprite_Light" ActionTag="707225157" Tag="4520" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-65.5000" RightMargin="-37.5000" TopMargin="-13.5000" BottomMargin="-13.5000" ctype="SpriteObjectData">
@@ -86,7 +174,7 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Node_DNXB_2" ActionTag="1253652036" Tag="2272" RotationSkewX="-90.0000" RotationSkewY="-90.0000" IconVisible="True" LeftMargin="1.2200" RightMargin="-1.2200" TopMargin="27.1300" BottomMargin="-27.1300" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_DNXB_2" Visible="False" ActionTag="1253652036" Tag="2272" RotationSkewX="-90.0000" RotationSkewY="-90.0000" IconVisible="True" LeftMargin="1.2200" RightMargin="-1.2200" TopMargin="27.1300" BottomMargin="-27.1300" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="Sprite_Dong" Visible="False" ActionTag="-1012324013" Tag="4522" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-29.4998" RightMargin="2.4998" TopMargin="-11.9994" BottomMargin="-14.0006" ctype="SpriteObjectData">
@@ -141,7 +229,95 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Node_Light_4" ActionTag="1873976648" Tag="2134" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="True" LeftMargin="1.1009" RightMargin="-1.1009" TopMargin="-29.4863" BottomMargin="29.4863" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_Light_3" Visible="False" ActionTag="2087087990" Tag="2127" RotationSkewX="-180.0000" RotationSkewY="-180.0000" IconVisible="True" LeftMargin="30.0565" RightMargin="-30.0565" TopMargin="-1.4401" BottomMargin="1.4401" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="Sprite_Light" ActionTag="707532294" Tag="2128" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-65.5000" RightMargin="-37.5000" TopMargin="-13.5000" BottomMargin="-13.5000" ctype="SpriteObjectData">
+                    <Size X="103.0000" Y="27.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-14.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/part/bgClockLight.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Sprite_LightRed" ActionTag="1542373304" Tag="2129" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-65.5000" RightMargin="-37.5000" TopMargin="-13.5001" BottomMargin="-13.4999" ctype="SpriteObjectData">
+                    <Size X="103.0000" Y="27.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-14.0000" Y="0.0001" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/part/bgClockLightRed.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="30.0565" Y="1.4401" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Node_DNXB_3" Visible="False" ActionTag="-141119050" Tag="2273" RotationSkewX="-180.0000" RotationSkewY="-180.0000" IconVisible="True" LeftMargin="30.0600" RightMargin="-30.0600" TopMargin="-1.4400" BottomMargin="1.4400" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="Sprite_Dong" ActionTag="1531483296" Tag="2130" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5003" RightMargin="1.5003" TopMargin="-11.0001" BottomMargin="-14.9999" ctype="SpriteObjectData">
+                    <Size X="27.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-15.0003" Y="-1.9999" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordDong.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Sprite_Nan" Visible="False" ActionTag="1552562785" Tag="2131" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5003" RightMargin="1.5003" TopMargin="-11.0001" BottomMargin="-14.9999" ctype="SpriteObjectData">
+                    <Size X="27.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-15.0003" Y="-1.9999" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordNan.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Sprite_Xi" Visible="False" ActionTag="1665582731" Tag="2132" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5003" RightMargin="1.5003" TopMargin="-11.0001" BottomMargin="-14.9999" ctype="SpriteObjectData">
+                    <Size X="27.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-15.0003" Y="-1.9999" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordXi.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Sprite_Bei" Visible="False" ActionTag="-2086744124" Tag="2133" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5003" RightMargin="1.5003" TopMargin="-11.0001" BottomMargin="-14.9999" ctype="SpriteObjectData">
+                    <Size X="27.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="-15.0003" Y="-1.9999" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordBei.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <BlendFunc Src="1" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="30.0600" Y="1.4400" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Node_Light_4" Visible="False" ActionTag="1873976648" Tag="2134" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="True" LeftMargin="1.1009" RightMargin="-1.1009" TopMargin="-29.4863" BottomMargin="29.4863" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="Sprite_Light" ActionTag="617853971" Tag="2135" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-65.5000" RightMargin="-37.5000" TopMargin="-13.5000" BottomMargin="-13.5000" ctype="SpriteObjectData">
@@ -174,7 +350,7 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Node_DNXB_4" ActionTag="-1541864263" Tag="2274" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="True" LeftMargin="1.1000" RightMargin="-1.1000" TopMargin="-29.4900" BottomMargin="29.4900" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_DNXB_4" Visible="False" ActionTag="-1541864263" Tag="2274" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="True" LeftMargin="1.1000" RightMargin="-1.1000" TopMargin="-29.4900" BottomMargin="29.4900" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="Sprite_Dong" Visible="False" ActionTag="-1456643477" Tag="2137" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5001" RightMargin="1.5001" TopMargin="-11.9998" BottomMargin="-14.0002" ctype="SpriteObjectData">
@@ -199,7 +375,7 @@
                     <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordNan.png" Plist="game/mjcomm/mjPartUi.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Sprite_Xi" ActionTag="1597587980" Tag="2139" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5001" RightMargin="1.5001" TopMargin="-11.9998" BottomMargin="-14.0002" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="Sprite_Xi" Visible="False" ActionTag="1597587980" Tag="2139" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5001" RightMargin="1.5001" TopMargin="-11.9998" BottomMargin="-14.0002" ctype="SpriteObjectData">
                     <Size X="27.0000" Y="26.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="-15.0001" Y="-1.0002" />
@@ -210,7 +386,7 @@
                     <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordXi.png" Plist="game/mjcomm/mjPartUi.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Sprite_Bei" Visible="False" ActionTag="1590971792" Tag="2140" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5001" RightMargin="1.5001" TopMargin="-11.9998" BottomMargin="-14.0002" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="Sprite_Bei" ActionTag="1590971792" Tag="2140" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-28.5001" RightMargin="1.5001" TopMargin="-11.9998" BottomMargin="-14.0002" ctype="SpriteObjectData">
                     <Size X="27.0000" Y="26.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="-15.0001" Y="-1.0002" />
@@ -1974,10 +2150,10 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Node_CurOutCardArrow" CanEdit="False" ActionTag="87458386" Tag="1851" IconVisible="True" LeftMargin="727.6559" RightMargin="606.3441" TopMargin="217.2451" BottomMargin="532.7549" ctype="SingleNodeObjectData">
+          <AbstractNodeData Name="Node_CurOutCardArrow" ActionTag="87458386" Tag="1851" IconVisible="True" LeftMargin="727.6559" RightMargin="606.3441" TopMargin="217.2451" BottomMargin="532.7549" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="Sprite_CurOutCardArrow" CanEdit="False" ActionTag="1977126637" Tag="1852" IconVisible="False" LeftMargin="-12.0000" RightMargin="-12.0000" TopMargin="-33.0000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="Sprite_CurOutCardArrow" ActionTag="1977126637" Tag="1852" IconVisible="False" LeftMargin="-12.0000" RightMargin="-12.0000" TopMargin="-33.0000" ctype="SpriteObjectData">
                 <Size X="24.0000" Y="33.0000" />
                 <AnchorPoint ScaleX="0.5000" />
                 <Position />

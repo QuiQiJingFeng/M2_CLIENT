@@ -226,6 +226,10 @@ function CreateRoomLayer:onjoinRoomResponse( tObj )
 
     if tObj.result == "success" then
         self:onClose()
+
+        local gameScene = lt.GameScene.new()
+        lt.SceneManager:replaceScene(gameScene)
+        
     else
         print("创建房间失败", tObj.result)
     end

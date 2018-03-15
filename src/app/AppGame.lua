@@ -37,7 +37,7 @@ function AppGame:init()
     cc.Device:setKeepScreenOn(true)
 
     -- 初始化随机种子
-    --math.newrandomseed()
+    math.newrandomseed()
 
 
 	--初始化工具库

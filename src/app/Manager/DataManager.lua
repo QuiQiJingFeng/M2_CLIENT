@@ -27,6 +27,8 @@ function DataManager:init()
     -- 登陆
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_ROOM_INFO, handler(self, self.onRefreshRoomInfo), "DataManager.onRefreshRoomInfo")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_USER_INFO, handler(self, self.onPushUserInfo), "DataManager.onPushUserInfo")
+
 end                                                                      
 
 function DataManager:reset()
@@ -46,6 +48,23 @@ end
 --[[ ################################################## server ##################################################
     服务器
     ]]
+
+
+function DataManager:getPlayerInfo()
+    if not self._playerInfo then
+        self._playerInfo = {}
+    end
+    return self._playerInfo
+end
+
+function DataManager:onPushUserInfo(msg)
+    dump(msg)
+    local palyerInfo = self:getPlayerInfo()
+    palyerInfo.user_id = msg.user_id
+    palyerInfo.user_id = msg.user_name
+    palyerInfo.user_id = msg.user_pic
+    palyerInfo.user_id = msg.gold_num
+end
 
 function DataManager:getGameRoomInfo()
     if not self._gameRoomInfo then

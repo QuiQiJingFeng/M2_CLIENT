@@ -32,7 +32,9 @@ function InitLayer:onLogin()--登录微信
     end
 
     if self._connectSuccess then
-        local arg = {account="FYD3",token="FYD",login_type="weixin",user_name = "测试测试", user_pic = "www"}--weixin
+        local account = "AAAAA"..tostring(math.random(1111,9999))
+        print("FYD+++++>account",account)
+        local arg = {account=account,token="lalal",login_type="weixin",user_name = "lalalal", user_pic = "www"}--weixin
         lt.NetWork:sendTo(lt.GameEventManager.EVENT.LOGIN, arg)
     end
 
