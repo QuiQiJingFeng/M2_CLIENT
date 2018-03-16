@@ -34,7 +34,7 @@ login_type (2.msg.login.LoginTypeR	loginType
 fail
 unknow_login_type
 	auth_fail
-ç
+ò
 msg/user.protomsg.user"¶
 UserInfo
 user_id (	RuserId
@@ -107,8 +107,15 @@ GameCmdRsp(
 cards (Rcards";
 PushDrawCard
 user_id (	RuserId
-card (Rcard"
-PushPlayCard"=
+card (Rcard"2
+GPItem
+value (Rvalue
+type (Rtype"¢
+PushPlayCard
+user_id (	RuserId
+	card_list (RcardList-
+	peng_list (2.msg.user.GPItemRpengList-
+	gang_list (2.msg.user.GPItemRgangList"=
 NoticePlayCard
 user_id (	RuserId
 card (Rcard"=
@@ -127,7 +134,7 @@ GameCmdRsp(
 	card_list (RcardList"N
 NoticeGameOver
 type (Rtype(
-players (2.msg.user.ItemRplayers*Î
+players (2.msg.user.ItemRplayers*≠
 Result
 success
 fail
@@ -142,7 +149,10 @@ GameCmdRsp(
 
 cord_command
 not_exist_room
-sit_already_has*5
+sit_already_has
+no_bind_room_id
+call_center_fail
+invalid_paramater*5
 GangType
 AN_GANG
 	MING_GANG
