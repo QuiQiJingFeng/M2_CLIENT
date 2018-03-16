@@ -8,12 +8,12 @@ GameRoomLayer.POSITION_TYPE = {
 	BEI = 4,
 }
 
--- GameRoomLayer.POSITION_EXCHANGE = {
--- 	1 = 3,
--- 	2 = 4,
--- 	3 = 1,
--- 	4 = 2,
--- }
+GameRoomLayer.CARD_TYPE = {
+	ZHONG = 0,
+	WAN = 1, 
+	TIAO = 2,
+	TONG = 3,
+}
 
 
 function GameRoomLayer:ctor()
@@ -52,8 +52,15 @@ function GameRoomLayer:ctor()
 	self:addChild(self._setNode)
 	self:addChild(self._infoNode)
 
-	--local Ie_Bg = self:getChildByName("Ie_Bg")
 
+	--设置
+	local ruleBtn = self._setNode:getChildByName("Button_GameRule")
+	local setBtn = self._setNode:getChildByName("Button_More")
+
+	lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onSetClick))
+	lt.CommonUtil:addNodeClickEvent(ruleBtn, handler(self, self.onRuleClick))
+
+	--玩家界面
 	self._tingLogoArray = {}--听牌的logo  
 	self._playerLogoArray = {}--玩家的logo  
 	self._allPlayerPosArray = {}--玩家座位的logo 
@@ -76,9 +83,14 @@ function GameRoomLayer:ctor()
 		getChildByName("Sprite_Word")--座位 东西南北 1 2 3 4
 		
 	]]
+
+	self._infoNode:getChildByName("Node_TableInfo"):getChildByName("Text_RoomNo"):setString(lt.DataManager:getGameRoomInfo().room_id)
+
+
 	self._nodeNoPlayer = self._playerNode:getChildByName("Node_NoPlayer")--两个方置 可以用来旋转
 
 	self._handSelect = self._nodeNoPlayer:getChildByName("Node_SitDownTips")
+	self._handSelect:setVisible(false)
 
 	for i=1,4 do 
 		table.insert(self._tingLogoArray, self._playerNode:getChildByName("Image_Ting_"..i))
@@ -102,29 +114,47 @@ function GameRoomLayer:ctor()
 	--self._selectPosition = self.POSITION_TYPE.NAN
 	self:hzmj2p()
 	self:configCards()
-
+	self:configPlayer()
+	self:configRotation()
 end
 
 function GameRoomLayer:hzmj2p()  
+	self._currentSitPosArray = {}--玩家入座时的位置
+	self._currentPlayerLogArray = {}--玩家打牌中头像
 
-	for i=1,4 do--西南
-
-		if i == self.POSITION_TYPE.XI then
-			self._allPlayerPosArray[i]:setVisible(true)
-			self._allPlayerPosArray[i]:setPosition(self._allPlayerPosArray[self.POSITION_TYPE.BEI]:getPosition())
-			self._allPlayerPosArray[i]["atDirection"] = 4
+	for pos,v in ipairs(self._allPlayerPosArray) do--西南
+		if pos == self.POSITION_TYPE.XI or pos == self.POSITION_TYPE.NAN then
+			if pos == self.POSITION_TYPE.XI then
+				v:setPosition(self._allPlayerPosArray[self.POSITION_TYPE.BEI]:getPosition())
+				v["atDirection"] = self.POSITION_TYPE.BEI
+			else
+				v["atDirection"] = self.POSITION_TYPE.NAN
+			end
+			v:setVisible(true)
+			v:setTag(pos)
+			self._currentSitPosArray[pos] = v
+			lt.CommonUtil:addNodeClickEvent(v, handler(self, self.onSitDownClick))
+		else
+			v:setVisible(false)
 		end
+	end
 
-		if i == self.POSITION_TYPE.NAN then
-			self._allPlayerPosArray[i]:setVisible(true)
-			self._allPlayerPosArray[i]["atDirection"] = 2
-		end
 
-		if i == 3 or i == 4 then
-			self._allPlayerPosArray[i]:setVisible(false)
+	for pos,playerLogo in ipairs(self._playerLogoArray) do
+		playerLogo:getChildByName("Fzb_Tips"):setVisible(false)
+		playerLogo:getChildByName("Node_Warning"):setVisible(false)
+
+		playerLogo:setVisible(false)
+
+		if pos == self.POSITION_TYPE.BEI or pos == self.POSITION_TYPE.NAN then
+			if pos == self.POSITION_TYPE.BEI then
+				self._currentPlayerLogArray[self.POSITION_TYPE.XI] = playerLogo
+			else
+				self._currentPlayerLogArray[pos] = playerLogo
+			end
+			
+			--lt.CommonUtil:addNodeClickEvent(playerLogo, handler(self, self.onSitDownClick))
 		end
-		self._allPlayerPosArray[i]:setTag(i)
-		lt.CommonUtil:addNodeClickEvent(self._allPlayerPosArray[i], handler(self, self.onSitDownClick))
 	end
 
 	local nodeClock = self._cardsNode:getChildByName("Node_Clock")--中间方向盘
@@ -183,11 +213,11 @@ function GameRoomLayer:hzmj2p()
 
 	local panelVertical = self._cardsNode:getChildByName("Panel_Vertical")--手牌
 
-	self._topCpgCards = {}
-	self._topHandCards = {}
+	self._topCpgCardsNode = {}
+	self._topHandCardsNode = {}
 
-	self._mySelfCpgCards = {}
-	self._mySelfHandCards = {}
+	self._mySelfCpgCardsNode = {}
+	self._mySelfHandCardsNode = {}
 
 	-- panelVertical:getChildByName("Node_CpgCards_1")--对面吃碰杠
 	-- panelVertical:getChildByName("Node_HandCards_1")--对面手牌 立着
@@ -196,61 +226,176 @@ function GameRoomLayer:hzmj2p()
 	-- panelVertical:getChildByName("Node_HandCards_2")-- 
 
 	for i=1,5 do
-		table.insert(self._topCpgCards, panelVertical:getChildByName("Node_CpgCards_1"):getChildByName("Layer_Cpg_"..i))
-		table.insert(self._mySelfCpgCards, panelVertical:getChildByName("Node_CpgCards_2"):getChildByName("Layer_Cpg_"..i))
+		table.insert(self._topCpgCardsNode, panelVertical:getChildByName("Node_CpgCards_1"):getChildByName("Layer_Cpg_"..i))
+		table.insert(self._mySelfCpgCardsNode, panelVertical:getChildByName("Node_CpgCards_2"):getChildByName("Layer_Cpg_"..i))
 	end
 
 	for i=1,14 do
-		table.insert(self._topHandCards, panelVertical:getChildByName("Node_HandCards_1"):getChildByName("MJ_Stand_14"..i))
-		table.insert(self._mySelfHandCards, panelVertical:getChildByName("Node_HandCards_2"):getChildByName("MJ_Stand_14"..i))
+		table.insert(self._topHandCardsNode, panelVertical:getChildByName("Node_HandCards_1"):getChildByName("MJ_Stand_"..i))
+		table.insert(self._mySelfHandCardsNode, panelVertical:getChildByName("Node_HandCards_2"):getChildByName("MJ_Stand_"..i))
 	end
 
 	self._curOutCardArrow = self._cardsNode:getChildByName("Node_CurOutCardArrow")--
 end
 
-function GameRoomLayer:configCards() 
+function GameRoomLayer:configPlayer() 
+    local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 
-	for i,v in ipairs(self._mySelfOutCards) do
-		v:setVisible(false)
-	end
+    print("++++++++++++++++++++++++++++444444444444444444444444444444444")
+
+    for i,v in pairs(self._currentSitPosArray) do--如果有玩家退房
+    	if v:getChildByTag(1111) then
+    		v:getChildByTag(1111):setString("")
+    	end
+
+    	if v:getChildByTag(2222) then
+    		v:getChildByTag(2222):setString("")
+    	end
+    end
+
+    for i,player in ipairs(gameRoomInfo.players) do
+
+        -- info.user_id = 
+        -- info.user_name = player.user_name
+        -- info.user_pic = player.user_pic
+        -- info.user_ip = player.user_ip
+        -- info.user_pos = player.user_pos
+
+		if self._currentPlayerLogArray[player.user_pos] then
+			local name = self._currentPlayerLogArray[player.user_pos]:getChildByName("Text_Name")
+			if name then
+				name:setString(player.user_name)
+			end
+		end
+
+		local sitNode = self._currentSitPosArray[player.user_pos]
+
+
+        if sitNode then
+
+        	if not sitNode:getChildByTag(1111) then
+	        	local label = cc.Label:createWithSystemFont("" , "", 24)
+	        	label:setTag(1111)
+	        	sitNode:addChild(label)
+        	end
+
+        	if not sitNode:getChildByTag(2222) then
+	        	local label = cc.Label:createWithSystemFont("准备OK" , "", 24)
+	        	label:setTag(2222)
+	        	sitNode:addChild(label)
+        	end
+        	print("(((((((((((((((((((((((((", player.is_sit)
+        	if player.is_sit then
+        		sitNode:getChildByTag(1111):setString(player.user_name)
+        		sitNode:setVisible(true)
+        		sitNode:getChildByTag(2222):setVisible(true)
+        	else
+        		sitNode:getChildByTag(2222):setVisible(false)
+        		if player.user_id ~= lt.DataManager:getPlayerInfo().user_id then
+        			sitNode:getChildByTag(1111):setString(player.user_name)
+        		end
+        	end
+        end
+
+     end
+end
+
+
+function GameRoomLayer:configCards() 
 
 	for i,v in ipairs(self._topOutCards) do
 		v:setVisible(false)
 	end
 
-	for i,v in ipairs(self._topCpgCards) do
+	for i,v in ipairs(self._topCpgCardsNode) do
 		v:setVisible(false)
 	end
 
-	for i,v in ipairs(self._topHandCards) do
+	for i,v in ipairs(self._topHandCardsNode) do
 		v:setVisible(false)
 	end
 
-	for i,v in ipairs(self._mySelfCpgCards) do
+	for i,v in ipairs(self._mySelfOutCards) do
+		v:setVisible(false)
+	end
+
+	for i,v in ipairs(self._mySelfCpgCardsNode) do
 		v:setVisible(false)
 	end
 	
-	for i,v in ipairs(self._mySelfHandCards) do
+	for i,v in ipairs(self._mySelfHandCardsNode) do
 		v:setVisible(false)
 	end
 end
 
-function GameRoomLayer:onSitDownClick(event) 
-	print("**********************************", event:getTag())
+function GameRoomLayer:configSendCards() --游戏刚开始的发牌
 
-	self._selectPositionNode = event
+	for pos,SitPos in pairs(self._currentSitPosArray) do
+		SitPos:setVisible(false)
+	end
 
-	local arg = {pos = event:getTag()}--weixin
-    lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
+	for pos,playerLog in pairs(self._currentPlayerLogArray) do
+		playerLog:setVisible(true)
+		playerLog:getChildByName("Sprite_Zhuang"):setVisible(false)
+	end
+
+	-- self._topCpgCardsNode = {}
+	-- self._topHandCardsNode = {}
+
+
+	for i,v in ipairs(self._topHandCardsNode) do
+		v:setVisible(true)
+	end
+
+
+	-- self._mySelfCpgCardsNode = {}
+	-- self._mySelfHandCardsNode = {}
+
+	if self._currentPlayerLogArray[self._zhuangPos] then
+		self._currentPlayerLogArray[self._zhuangPos]:getChildByName("Sprite_Zhuang"):setVisible(true)
+	end
+
+	local index = 1
+	for num = 1, 4 do--红中 万 条 筒
+		local cardType = num - 1
+		local node = nil
+		
+		if self._mySelfHandCardsNode[index]:getChildByName("Node_Mj") then
+
+			if self._mySelfHandCardsNode[index]:getChildByName("Node_Mj"):getChildByName("Sprite_Face") then
+				node = self._mySelfHandCardsNode[index]:getChildByName("Node_Mj"):getChildByName("Sprite_Face")
+			end
+		end
+
+		if node then
+			for i,card in ipairs(self._mySelfHandCards[cardType]) do
+				if cardType == self.CARD_TYPE.ZHONG then
+
+					node:setTexture("game/mjcomm/cards/card_4_5.png")
+				else
+					node:setTexture("game/mjcomm/cards/card_"..cardType.."_"..card..".png")
+				end
+				index = index + 1
+			end
+			self._mySelfHandCardsNode[index]:setVisible(true)
+		end
+	end
+
 end
 
-function GameRoomLayer:onSitDownResponse(msg) 
-	print("__________________________", msg.result)
-    if msg.result == "success" then
-	    print("入座成功")
-	    self._handSelect:setVisible(false)
-	    for i,v in ipairs(self._allPlayerPosArray) do
-	    	if v:getTag() ~= self._selectPositionNode:getTag() then
+function GameRoomLayer:configRotation(isClick) 
+	self._handSelect:setVisible(false)
+
+	if isClick then
+	    for i,v in pairs(self._currentSitPosArray) do
+	    	local player = lt.DataManager:getPlayerInfoByPos(v:getTag())
+
+	    	local is_sit = false
+	    	if player then
+	    		is_sit = player.is_sit
+	    	end
+
+	    	if v:getTag() ~= self._selectPositionNode:getTag() and not is_sit then
 	    		v:setVisible(false)
 	    	end
 	    end
@@ -267,27 +412,140 @@ function GameRoomLayer:onSitDownResponse(msg)
 		local action1 = function ( )
 			local action4 = cc.RotateBy:create(0.5, du)
 			self._spriteDnxb:runAction(action4)
-
-
-
-
-
 		end
 
 		local spawn = cc.Spawn:create(cc.CallFunc:create(action1), action, cc.CallFunc:create(action2))
 		self._nodeNoPlayer:runAction(spawn)
+	else
+		local mySelfPosition = lt.DataManager:getMyselfPositionInfo().user_pos
 
+		local du = 0
+
+		local mySelfPositionNode = self._currentSitPosArray[mySelfPosition]
+
+		if mySelfPositionNode then
+			du = (mySelfPositionNode.atDirection - self.POSITION_TYPE.NAN) * 90
+		end
+
+		for i,v in pairs(self._allPlayerPosArray) do
+			v:setRotation(-du)
+		end
+
+
+		self._nodeNoPlayer:setRotation(du)
+		
+		self._spriteDnxb:setRotation(du)
+
+
+
+		local PosNum = #self._currentSitPosArray--不是数组
+
+		if PosNum == 2 then--两个方向
+			offPos = 2
+		elseif PosNum == 3 or PosNum == 4 then
+			offPos = 1
+		end
+
+		for pos,v in pairs(self._currentSitPosArray) do
+			if pos == mySelfPosition then
+				v["atDirection"] = self.POSITION_TYPE.NAN
+			end
+
+			local x = pos - mySelfPosition
+
+			v["atDirection"] = self.POSITION_TYPE.NAN + x * offPos
+		end
+
+	end
+end
+
+function GameRoomLayer:onSetClick(event) 
+
+	local setLayer = lt.SettingLayer.new()
+    lt.UILayerManager:addLayer(setLayer, true)
+end
+
+function GameRoomLayer:onRuleClick(event) 
+
+end
+
+function GameRoomLayer:onSitDownClick(event) 
+	print("**********************************", event:getTag())
+
+	self._selectPositionNode = event
+
+	local arg = {pos = event:getTag()}--weixin
+    lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
+end
+
+function GameRoomLayer:onSitDownResponse(msg) 
+	print("__________________________", msg.result)
+    if msg.result == "success" then
+	    print("入座成功")
+	    self:configRotation(true)
     else
         print("入座失败")
     end
 end
 
-function GameRoomLayer:onDealDown(msg)   --发13张手牌
+function GameRoomLayer:onDealDown(msg)   --发牌13张手牌
 	dump(msg)
+
+	self._mySelfHandCards = {}
+
+	self._mySelfHandWanCards = {}
+	self._mySelfHandTiaoCards = {}
+	self._mySelfHandTongCards = {}
+	self._mySelfHandZhongCards = {}
+
+	self._zhuangPos = msg.zpos
+	for i,card in ipairs(msg.cards) do
+
+		if 0 < card and card < 10 then --万
+			table.insert(self._mySelfHandWanCards, card)
+		elseif 10 < card and card <= 20 then--条
+			table.insert(self._mySelfHandTiaoCards, card)
+		elseif 10 < card and card <= 20 then--筒
+			table.insert(self._mySelfHandTongCards, card)
+		elseif card == 35 then
+			table.insert(self._mySelfHandZhongCards, card)
+		end
+	end
+	local sortFun = function(a, b)
+		return a < b
+	end
+
+	table.sort( self._mySelfHandWanCards, sortFun)
+	table.sort( self._mySelfHandTiaoCards, sortFun)
+	table.sort( self._mySelfHandTongCards, sortFun)
+	table.sort( self._mySelfHandZhongCards, sortFun)
+
+	self._mySelfHandCards[self.CARD_TYPE.WAN] = self._mySelfHandWanCards
+	self._mySelfHandCards[self.CARD_TYPE.TIAO] = self._mySelfHandTiaoCards
+	self._mySelfHandCards[self.CARD_TYPE.TONG] = self._mySelfHandTongCards
+	self._mySelfHandCards[self.CARD_TYPE.ZHONG] = self._mySelfHandZhongCards
+
+	self:configSendCards()
 end
 
 function GameRoomLayer:onPushSitDown(msg) --推送坐下的信息  
 	dump(msg)
+
+	if msg.room_id == lt.DataManager:getGameRoomInfo().room_id then
+
+		local sitList = msg.sit_list or {}
+
+		for i,player in ipairs(lt.DataManager:getGameRoomInfo().players) do
+
+			for k,sitPlayer in ipairs(sitList) do
+				if player.user_id == sitPlayer.user_id then
+					player.is_sit = true
+					player.user_pos = sitPlayer.user_pos
+				end
+			end
+		end
+	end
+	lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)
 end
 
 function GameRoomLayer:onPushDrawCard(msg)   --通知其他人有人摸牌 
@@ -331,6 +589,8 @@ function GameRoomLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_GANG_CARD, handler(self, self.onNoticeGangCard), "GameRoomLayer.onNoticeGangCard")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, handler(self, self.onPushPlayerOperatorState), "GameRoomLayer.onPushPlayerOperatorState")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_GAME_OVER, handler(self, self.onNoticeGameOver), "GameRoomLayer.onNoticeGameOver")
+
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.configPlayer), "GameRoomLayer.configPlayer")
 end
 
 function GameRoomLayer:onExit()
@@ -346,6 +606,7 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_GANG_CARD, "GameRoomLayer:onNoticeGangCard")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, "GameRoomLayer:onPushPlayerOperatorState")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_GAME_OVER, "GameRoomLayer:onNoticeGameOver")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "GameRoomLayer:configPlayer")
 end
 
 

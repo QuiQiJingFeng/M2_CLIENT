@@ -1140,4 +1140,25 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale)
     end)
 end
 
+
+function CommonUtil:createEventListenerTouchOneByOne(node, onTouchBegan, onTouchEnded)
+
+    local listener = cc.EventListenerTouchOneByOne:create()
+    listener:setSwallowTouches(false)
+
+    listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
+    --listener:registerScriptHandler(onTouchMoved, cc.Handler.EVENT_TOUCH_MOVED)
+    listener:registerScriptHandler(onTouchEnded, cc.Handler.EVENT_TOUCH_ENDED)
+    --listener:registerScriptHandler(onTouchCancelled, cc.Handler.EVENT_TOUCH_CANCELLED)
+    local eventDispatcher = node:getEventDispatcher()
+    eventDispatcher:addEventListenerWithSceneGraphPriority(listener, node)
+
+    return listener
+end
+
+function CommonUtil:removeEventListenerTouchOneByOne(node, listener)
+    local eventDispatcher = node:getEventDispatcher()
+    eventDispatcher:removeEventListener(listener)
+end
+
 return CommonUtil

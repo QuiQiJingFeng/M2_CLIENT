@@ -2,10 +2,15 @@
 local GameEventManager = {}
 
 GameEventManager.EVENT = {
+    --客户端自己用的
+    REFRESH_POSITION_INFO = "refresh_position_info",
+
+    --请求
 	LOGIN = "login",
     JOIN_ROOM = "join_room",
 	CREATE_ROOM = "create_room",
     SIT_DOWN = "sit_down",
+    LEAVE_ROOM = "leave_room",--回到大厅
 
     --推送
     PUSH_USER_INFO = "push_user_info",

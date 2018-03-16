@@ -274,6 +274,7 @@ function network:update(dt)
 end
 
 function network:sendTo(key,data_content,callback,ignore_session)
+    data_content = data_content or {}
     local arg = {[key] = data_content}
     self:send(arg, callback, ignore_session)
 end

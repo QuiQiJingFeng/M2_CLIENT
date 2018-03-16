@@ -57,13 +57,21 @@ function DataManager:getPlayerInfo()
     return self._playerInfo
 end
 
+function DataManager:getPlayerUid()
+    return self._playerInfo.user_id
+end
+
+function DataManager:getPlayerName()
+    return self._playerInfo.user_name
+end
+
 function DataManager:onPushUserInfo(msg)
     dump(msg)
     local palyerInfo = self:getPlayerInfo()
     palyerInfo.user_id = msg.user_id
-    palyerInfo.user_id = msg.user_name
-    palyerInfo.user_id = msg.user_pic
-    palyerInfo.user_id = msg.gold_num
+    palyerInfo.user_name = msg.user_name
+    palyerInfo.user_pic = msg.user_pic
+    palyerInfo.gold_num = msg.gold_num
 end
 
 function DataManager:getGameRoomInfo()
@@ -88,6 +96,9 @@ function DataManager:onRefreshRoomInfo(msg)
         info.user_name = player.user_name
         info.user_pic = player.user_pic
         info.user_ip = player.user_ip
+        info.user_pos = player.user_pos
+        info.is_sit = player.is_sit
+        
         table.insert(gameRoomInfo.players, info)
     end
     gameRoomInfo.round = msg.round
@@ -97,9 +108,27 @@ function DataManager:onRefreshRoomInfo(msg)
     gameRoomInfo.is_open_voice = msg.is_open_voice
     gameRoomInfo.is_open_gps = msg.is_open_gps
 
+
+    lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)
+
     --other_setting
 end
 
+function DataManager:getMyselfPositionInfo()
+    for i,player in ipairs(self:getGameRoomInfo().players) do
+        if player.user_id == self:getPlayerUid() then
+            return player
+        end
+    end
+end
+
+function DataManager:getPlayerInfoByPos(pos)
+    for i,player in ipairs(self:getGameRoomInfo().players) do
+        if player.user_pos == pos then
+            return player
+        end
+    end
+end
 
 return DataManager
 

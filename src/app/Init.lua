@@ -61,6 +61,7 @@ ltMetaTable["WorldScene"] = "app.Scene.WorldScene.WorldScene"
 
 ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
 ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.GameRoomLayer"
+ltMetaTable["SettingLayer"] = "app.Scene.GameScene.SettingLayer"
 
 --layer
 ltMetaTable["BaseLayer"]			    = "app.Scene.WorldScene.Common.BaseLayer"
