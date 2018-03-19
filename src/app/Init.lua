@@ -38,6 +38,7 @@ ltMetaTable["PreferenceManager"] = "app.Manager.PreferenceManager"
 ltMetaTable["PushManager"] = "app.Manager.PushManager"
 ltMetaTable["StringManager"] = "app.Manager.StringManager"
 ltMetaTable["UILayerManager"] = "app.Manager.UILayerManager"
+ltMetaTable["ResourceManager"] = "app.Manager.ResourceManager"
 
 --net
 ltMetaTable["Protobuf"] = "app.Net.Protobuf"

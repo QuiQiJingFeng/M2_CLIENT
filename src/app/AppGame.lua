@@ -37,7 +37,7 @@ function AppGame:init()
     cc.Device:setKeepScreenOn(true)
 
     -- 初始化随机种子
-    math.newrandomseed()
+    math.randomseed(tostring(os.time()):reverse():sub(1, 6))  
 
 
 	--初始化工具库
@@ -59,7 +59,7 @@ function AppGame:init()
     --lt.SocketApi:init()
 
     -- 初始化资源管理
-    --lt.ResourceManager:init()
+    lt.ResourceManager:init()
 
     -- 初始化游戏文本
     --lt.StringManager:init()
@@ -118,6 +118,8 @@ function AppGame:init()
     --         cpp.GamePlatform:clearAllPush()--清除手机系统所有推送
     --     end
     -- end
+
+    self:loadSpriteFrames()
 end
 
 function AppGame:run()
@@ -127,6 +129,16 @@ function AppGame:run()
     -- local debugScene = lt.DebugTestScene.new()
     -- lt.SceneManager:replaceScene(debugScene)
 end
+
+function AppGame:loadSpriteFrames()
+    lt.ResourceManager:addSpriteFrames("game/mjcomm/mjTingAni.plist", "game/mjcomm/mjTingAni.png")
+    lt.ResourceManager:addSpriteFrames("game/mjcomm/mjActionAni.plist", "game/mjcomm/mjActionAni.png")
+    
+end
+
+-- display.removeSpriteFrames("games/comm/launch/LaunchPlist0.plist", "games/comm/launch/LaunchPlist0.png")
+-- display.removeSpriteFrames("games/comm/launch/LaunchPlist1.plist", "games/comm/launch/LaunchPlist1.png")
+
 
 
 return AppGame

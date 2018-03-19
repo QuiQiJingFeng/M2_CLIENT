@@ -116,6 +116,7 @@ function GameRoomLayer:ctor()
 	self:configCards()
 	self:configPlayer()
 	self:configRotation()
+
 end
 
 function GameRoomLayer:hzmj2p()  
@@ -284,7 +285,6 @@ function GameRoomLayer:configPlayer()
 	        	label:setTag(2222)
 	        	sitNode:addChild(label)
         	end
-        	print("(((((((((((((((((((((((((", player.is_sit)
         	if player.is_sit then
         		sitNode:getChildByTag(1111):setString(player.user_name)
         		sitNode:setVisible(true)
@@ -342,11 +342,15 @@ function GameRoomLayer:configSendCards() --游戏刚开始的发牌
 	-- self._topCpgCardsNode = {}
 	-- self._topHandCardsNode = {}
 
+	-- for i,v in ipairs(self._topHandCardsNode) do
+	-- 	v:setVisible(true)
+	-- end
 
-	for i,v in ipairs(self._topHandCardsNode) do
-		v:setVisible(true)
+	for i=1,13 do--发牌发13张
+		if self._topHandCardsNode[i] then
+			self._topHandCardsNode[i]:setVisible(true)
+		end
 	end
-
 
 	-- self._mySelfCpgCardsNode = {}
 	-- self._mySelfHandCardsNode = {}
@@ -355,30 +359,24 @@ function GameRoomLayer:configSendCards() --游戏刚开始的发牌
 		self._currentPlayerLogArray[self._zhuangPos]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	end
 
-	local index = 1
-	for num = 1, 4 do--红中 万 条 筒
-		local cardType = num - 1
+	for index,value in ipairs(self._mySelfHandCards) do
 		local node = nil
 		
 		if self._mySelfHandCardsNode[index]:getChildByName("Node_Mj") then
-
 			if self._mySelfHandCardsNode[index]:getChildByName("Node_Mj"):getChildByName("Sprite_Face") then
 				node = self._mySelfHandCardsNode[index]:getChildByName("Node_Mj"):getChildByName("Sprite_Face")
 			end
-		end
+		end		
 
 		if node then
-			for i,card in ipairs(self._mySelfHandCards[cardType]) do
-				if cardType == self.CARD_TYPE.ZHONG then
 
-					node:setTexture("game/mjcomm/cards/card_4_5.png")
-				else
-					node:setTexture("game/mjcomm/cards/card_"..cardType.."_"..card..".png")
-				end
-				index = index + 1
-			end
+			local cardType = math.floor(value / 10) + 1
+			local cardValue = value % 10
+			node:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
 			self._mySelfHandCardsNode[index]:setVisible(true)
+
 		end
+
 	end
 
 end
@@ -493,39 +491,64 @@ function GameRoomLayer:onDealDown(msg)   --发牌13张手牌
 
 	self._mySelfHandCards = {}
 
-	self._mySelfHandWanCards = {}
-	self._mySelfHandTiaoCards = {}
-	self._mySelfHandTongCards = {}
-	self._mySelfHandZhongCards = {}
-
 	self._zhuangPos = msg.zpos
-	for i,card in ipairs(msg.cards) do
 
-		if 0 < card and card < 10 then --万
-			table.insert(self._mySelfHandWanCards, card)
-		elseif 10 < card and card <= 20 then--条
-			table.insert(self._mySelfHandTiaoCards, card)
-		elseif 10 < card and card <= 20 then--筒
-			table.insert(self._mySelfHandTongCards, card)
-		elseif card == 35 then
-			table.insert(self._mySelfHandZhongCards, card)
-		end
+	for i,card in ipairs(msg.cards) do
+		table.insert(self._mySelfHandCards, card)
+
 	end
 	local sortFun = function(a, b)
 		return a < b
 	end
 
-	table.sort( self._mySelfHandWanCards, sortFun)
-	table.sort( self._mySelfHandTiaoCards, sortFun)
-	table.sort( self._mySelfHandTongCards, sortFun)
-	table.sort( self._mySelfHandZhongCards, sortFun)
+	table.sort( self._mySelfHandCards, sortFun)
 
-	self._mySelfHandCards[self.CARD_TYPE.WAN] = self._mySelfHandWanCards
-	self._mySelfHandCards[self.CARD_TYPE.TIAO] = self._mySelfHandTiaoCards
-	self._mySelfHandCards[self.CARD_TYPE.TONG] = self._mySelfHandTongCards
-	self._mySelfHandCards[self.CARD_TYPE.ZHONG] = self._mySelfHandZhongCards
 
-	self:configSendCards()
+	--播放筛子动画
+	local action_node = cc.CSLoader:createNode("game/mjcomm/csb/base/ShaiZiAni.csb")
+	self:addChild(action_node)
+	local tlAct = cc.CSLoader:createTimeline("game/mjcomm/csb/base/ShaiZiAni.csb")
+	action_node:getChildByName("pointNum_1"):setVisible(false)
+	action_node:getChildByName("pointNum_2"):setVisible(false)
+
+	local func = function ( frame )
+		local event = frame:getEvent()
+		if event == "END" then
+			local random1 = math.random(1,6)
+			local random2 = math.random(1,6)
+
+			local num1 = "game/mjcomm/animation/aniShaiZi/aniShaiZi_"..random1..".png"
+			local num2 = "game/mjcomm/animation/aniShaiZi/aniShaiZi_"..random2..".png"
+			action_node:getChildByName("action_1"):setVisible(false)
+			action_node:getChildByName("action_2"):setVisible(false)
+			action_node:getChildByName("pointNum_1"):setVisible(true)
+			action_node:getChildByName("pointNum_2"):setVisible(true)
+			action_node:getChildByName("pointNum_1"):setSpriteFrame(num1)
+			action_node:getChildByName("pointNum_2"):setSpriteFrame(num2)
+
+
+    		local delay = cc.DelayTime:create(0.5)
+
+    		local removeShaiZi = function( )
+    			action_node:removeFromParent()
+    		end
+
+
+    		local func1 = cc.CallFunc:create(removeShaiZi)
+
+    		local func2 = cc.CallFunc:create(handler(self, self.configSendCards))
+
+
+      		local sequence = cc.Sequence:create(delay, func1, func2)
+      		self:runAction(sequence)
+
+		end
+	end
+	
+ 	action_node:runAction(tlAct)
+	tlAct:gotoFrameAndPlay(0, false)
+    tlAct:clearFrameEventCallFunc() 
+    tlAct:setFrameEventCallFunc(func)
 end
 
 function GameRoomLayer:onPushSitDown(msg) --推送坐下的信息  
