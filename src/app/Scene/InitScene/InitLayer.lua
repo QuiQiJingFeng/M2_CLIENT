@@ -65,6 +65,27 @@ function InitLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.LOGIN, handler(self, self.onLoginResponse), "InitLayer:onLoginResponse")
 
     lt.NetWork:connect("47.52.99.120", 8888, handler(self, self.onConnectResponse))
+
+
+    -- local times = 0
+    -- lt.GameEventManager:addListener("wait_reconnect",function() 
+    --         print("断线重连-------")
+    --         times = times + 1
+    --         if times <= 3 then
+    --             lt.NetWork:connect("127.0.0.1", 8888, function() 
+    --                     print("connect success")
+    --                     lt.NetWork:send({["reconnect"] = {token = msg.reconnect_token}},function(recv_msg)
+    --                         print("-----------------reconnect----------")
+    --                         print("因为客户端并没有退出,所以不需要重新拉取数据")
+    --                         times = 0
+    --                      end)
+    --                 end)
+    --         else
+    --             print("弹框: 网络断开")
+    --         end
+    --     end,1)
+
+
 end
 
 function InitLayer:onExit()

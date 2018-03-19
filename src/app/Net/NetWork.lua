@@ -51,40 +51,9 @@ end
 
 function network:updateState(state)
 	self._net_state = state
-end
-
---重新建立连接
-function network:reconnect()
-	--关掉原来的socket
-	self._socket:close()
-	--清空数据缓存
-	self._receive_data = ""
-	--重置密钥交换字段
-    self._challenge = nil
-    self._clientkey = nil
-    self._serverkey = nil
-    self._secret = nil
-    --重置连接超时字段
-    self._connect_dt = 0
-
-    self._session_id = 0
-
-    self._heart_dt = 0
-
-    self._send_map = {}
-
-    local host,port = self._host,self._port
-    if self:isIPV6(host) then
-    	self._socket = luasocket.tcp6()
-    else
-    	self._socket = luasocket.tcp()
+    if state == NETSTATE.WAIT_RECONNECTED then
+        lt.GameEventManager:post("wait_reconnect")
     end
-    -- 由于是阻塞socket，所以将超时时间设为0防止阻塞，也因此不再根据connect的返回值判断是否连接成功
-    self._socket:settimeout(0)
-
-    self._socket:connect(host,port)
-
-    self:updateState(NETSTATE.CONNECTING)
 end
 
 --连接
@@ -129,6 +98,15 @@ function network:connect(host,port,callback)
     self:updateState(NETSTATE.CONNECTING)
 end
 
+function network:disconnect( ... )
+    self._socket:close()
+end
+
+function network:reconnect(host,port,callback)
+    self._socket:close()
+    self:connect(host,port,callback)
+end
+
 -- 收包
 function network:receive()
     local pattern, status, partial = nil, true, nil
@@ -136,8 +114,9 @@ function network:receive()
     if self._socket and self._net_state >= NETSTATE.CONNECTING and self._net_state <= NETSTATE.CONNECTED then
         pattern, status, partial = self._socket:receive("*a")
     end
-
-    assert(status,"receive data cache error")
+    if status == "closed" then
+        self:updateState(NETSTATE.WAIT_RECONNECTED)
+    end
 
     -- 拼接数据
     if pattern then
@@ -179,12 +158,11 @@ function network:caculateConnectTime(dt)
 		--连接超时,尝试重新连接
 		self:updateState(NETSTATE.WAIT_RECONNECTED)
 	else
-		self._connect_dt = self._connect_dt +dt
+		self._connect_dt = self._connect_dt + dt
 	end
 end
 
 function network:update(dt)
-
 	if self._net_state == NETSTATE.UN_CONNECTED then
 		return
 	end
@@ -194,7 +172,6 @@ function network:update(dt)
         self:receive()
 
         local data_content = self:unpackData() or {}
-
         -- 判断收到的第一个包是否为握手包
         if data_content["handshake"] then
             local rsp_msg = data_content["handshake"]
@@ -208,7 +185,6 @@ function network:update(dt)
 
             --发送回应包
             self:send({["handshake"] = req_msg},nil,true)
-
             self._secret = secret
 
             --连接成功,连接计时重置为0
@@ -291,7 +267,7 @@ function network:send(data_content,callback,ignore_session)
 		--记录一下 发送的包,收到回包之后删除
 		self._send_map[self._session_id] = {data_content = data_content,callback = callback}
 	end
-	print("FYD+++++",data_content)
+
     local success, data, err = pcall(protobuf.encode, "C2S", data_content)
     if not success or err then
         print("encode protobuf error:", err)
