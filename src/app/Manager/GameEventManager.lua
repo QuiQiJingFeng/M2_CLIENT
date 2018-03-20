@@ -11,6 +11,11 @@ GameEventManager.EVENT = {
 	CREATE_ROOM = "create_room",
     SIT_DOWN = "sit_down",
     LEAVE_ROOM = "leave_room",--回到大厅
+    GAME_CMD = "game_cmd",  --[[游戏中的请求 DEAL_FINISH  发牌完毕
+PLAY_CARD  出牌
+PENG    碰
+GANG    杠
+GUO     过]]--
 
     --推送
     PUSH_USER_INFO = "push_user_info",

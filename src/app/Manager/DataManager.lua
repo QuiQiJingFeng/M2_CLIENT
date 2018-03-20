@@ -74,8 +74,8 @@ function DataManager:onPushUserInfo(msg)
     palyerInfo.gold_num = msg.gold_num
 end
 
-function DataManager:getGameRoomInfo()
-    if not self._gameRoomInfo then
+function DataManager:getGameRoomInfo(flag)
+    if not self._gameRoomInfo or flag then
         self._gameRoomInfo = {}
     end
     return self._gameRoomInfo
@@ -84,7 +84,7 @@ end
 function DataManager:onRefreshRoomInfo(msg)
     dump(msg)
 
-    local gameRoomInfo = self:getGameRoomInfo()
+    local gameRoomInfo = self:getGameRoomInfo(true)
     gameRoomInfo.room_id = msg.room_id
     gameRoomInfo.game_type = msg.game_type
 
@@ -128,6 +128,7 @@ function DataManager:getPlayerInfoByPos(pos)
             return player
         end
     end
+    return nil
 end
 
 return DataManager
