@@ -647,7 +647,7 @@ function CreateRoomLayer:sendCreateRoom( ... )
 
     dump(tempTable, "tempTable")
 
-    local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = tempTable}
+    local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = { room_setting = tempTable}}
 	-- 发送消息
 	lt.NetWork:send(msg)
 end
