@@ -83,31 +83,7 @@ end
 
 function DataManager:onRefreshRoomInfo(msg)
     dump(msg)
-
-    local gameRoomInfo = self:getGameRoomInfo(true)
-    gameRoomInfo.room_id = msg.room_id
-    gameRoomInfo.game_type = msg.game_type
-
-    gameRoomInfo.players = {}
-
-    for i,player in ipairs(msg.players) do
-        local info = {}
-        info.user_id = player.user_id
-        info.user_name = player.user_name
-        info.user_pic = player.user_pic
-        info.user_ip = player.user_ip
-        info.user_pos = player.user_pos
-        info.is_sit = player.is_sit
-        
-        table.insert(gameRoomInfo.players, info)
-    end
-    gameRoomInfo.round = msg.round
-    gameRoomInfo.pay_type = msg.pay_type
-    gameRoomInfo.seat_num = msg.seat_num
-    gameRoomInfo.is_friend_room = msg.is_friend_room
-    gameRoomInfo.is_open_voice = msg.is_open_voice
-    gameRoomInfo.is_open_gps = msg.is_open_gps
-
+    self._gameRoomInfo = msg
 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)
 
