@@ -1,64 +1,9 @@
 local GameConf = {}
+-- 采用配置
+local hzmjConf = require("app.Scene.GameScene.HZMJconfig")
+local ddzConf = require("app.Scene.GameScene.ddz.ddzConf")
 
 
-local hzmjConf =
-{
-    intGameId = "HZMJ",
-    intGamePlayer = 4,
-    tFastInfo = {
-        "快点啊，都等的我花儿都谢了！",
-        "别吵了，专心玩游戏！",
-        "你是妹妹还是哥哥啊？",
-        "大家好,很高兴见到各位！",
-        "又断线了，网络怎么这么差！",
-        "和你合作真是太愉快了",
-        "下次再玩吧，我要走了。",
-        "不要走，决战到天亮。",
-        "我们交个朋友吧，告诉我你的联系方法。",
-        "各位，真不好意思，我要离开会。", 
-    },
-    tGamesRule = {
-        pay = {
-            "玩家平摊",
-            "房主出资",
-            "大赢家出资",
-        },
-        -- 圈数信息
-        round = {
-            {
-                "4局",
-                20,
-                5,
-                4,
-            },
-            {
-                "8局",
-                40,
-                10,
-                8,
-            },
-            {
-                "16局",
-                80,
-                20,
-                16,
-            }
-        },   
-        -- 底分
-        baseScore = {1,2,5,10,20,40,50,100},
-        --胡牌信息
-        playRule = { 
-            {"可胡七对",0},    
-        },
-        --奖码规则
-        winRule = {
-            "2个",
-            "4个",
-            "6个",
-        },
-        tStartRule = {0,0,1,0,0,0,0,0,0,1},
-     },
-}
 
 --[[
     item 参数：
@@ -76,7 +21,8 @@ local hzmjConf =
 ]]
 
 GameConf.GameIDList = {
-	HZMJ = {"HZMJ", "ImageText0", "ImageText2", false, false, hzmjConf}
+    HZMJ = {"HZMJ", "ImageText0", "ImageText2", false, false, hzmjConf},
+	DDZ = {"DDZ", "ImageText120", "ImageText119", false, false, ddzConf},
 }
 
 return GameConf

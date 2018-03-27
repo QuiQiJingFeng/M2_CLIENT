@@ -1161,4 +1161,23 @@ function CommonUtil:removeEventListenerTouchOneByOne(node, listener)
     eventDispatcher:removeEventListener(listener)
 end
 
+
+----------------------------------------------------------------------------------
+-- 储存本地信息
+function CommonUtil:saveLocalUserInfo(g_tLocalUserData)
+    if g_tLocalUserData.iMusicSetBackups then
+        g_tLocalUserData.iMusicSet = g_tLocalUserData.iMusicSetBackups
+    end
+
+    local writablePath = cc.FileUtils:getInstance():getWritablePath()
+
+    cc.FileUtils:getInstance():createDirectory( writablePath.."res/json") 
+    cc.FileUtils:getInstance():writeStringToFile(json.encode(g_tLocalUserData), writablePath.."res/json/UserInfo.json")
+
+    if g_tLocalUserData.iMusicSetBackups then
+        g_tLocalUserData.iMusicSet = 0
+    end
+end
+
+
 return CommonUtil

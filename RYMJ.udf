@@ -1,0 +1,26 @@
+<UserData Version="3.10.0.0">
+  <Properties>
+    <Item Key="CocosRecentOperation">
+      <Value ctype="CocosRecentOperation">
+        <LastPublishType Value="Resource" />
+        <IsLastPublish Value="True" />
+        <LastRunType Value="Windows" />
+      </Value>
+    </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="games/ddz/EndRequestLayer.csd" />
+          <FilePathData Path="games/ddz/GameLayerLandscape.csd" />
+          <FilePathData Path="games/ddz/Layer.csd" />
+          <FilePathData Path="games/ddz/GameRuleLayer.csd" />
+          <FilePathData Path="games/ddz/GameSetLayer.csd" />
+          <FilePathData Path="games/ddz/PlayerInfoLayer.csd" />
+          <FilePathData Path="games/ddz/TotalResultLayer.csd" />
+          <FilePathData Path="games/ddz/WaitLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="games/ddz/WaitLayer.csd" />
+      </Value>
+    </Item>
+  </Properties>
+</UserData>

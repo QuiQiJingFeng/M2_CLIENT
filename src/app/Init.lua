@@ -71,6 +71,17 @@ ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.Setting.SetLayer"
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
 ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
 
+
+ltMetaTable["MsgboxLayer"]			= "app.Scene.WorldScene.common.MsgboxLayer"
+
+
+-- ddz
+ltMetaTable["DDZGameLayer"]			= "app.Scene.GameScene.ddz.DDZGameLayer"
+ltMetaTable["DDZGameScene"]			= "app.Scene.GameScene.ddz.DDZGameScene"
+
+
+
+
 -- Widget
 ltMetaTable["BigOccupaitonIcon"]		= "app.Widget.BigOccupaitonIcon"
 ltMetaTable["BubbleIcon"]				= "app.Widget.BubbleIcon"

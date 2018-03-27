@@ -6,20 +6,20 @@
       <ObjectData Name="Layer" Tag="10" ctype="GameLayerObjectData">
         <Size X="1334.0000" Y="750.0000" />
         <Children>
-          <AbstractNodeData Name="Ie_Mark" ActionTag="-748399147" Tag="72" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="-0.8749" RightMargin="0.8749" TopMargin="-0.0001" BottomMargin="0.0001" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="33" Scale9Height="28" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Ie_Mark" ActionTag="-748399147" Tag="72" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" TopMargin="-0.0001" BottomMargin="0.0001" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="33" Scale9Height="28" ctype="ImageViewObjectData">
             <Size X="1334.0000" Y="750.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="666.1251" Y="375.0001" />
+            <Position X="667.0000" Y="375.0001" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4993" Y="0.5000" />
+            <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="MarkedSubImage" Path="hallcomm/common/img/BG6.png" Plist="hallcomm/common/CommonPlist0.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="Ie_Bg" ActionTag="-2042818835" Tag="606" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="301.0000" RightMargin="301.0000" TopMargin="215.0000" BottomMargin="215.0000" TouchEnable="True" Scale9Enable="True" LeftEage="30" RightEage="30" TopEage="30" BottomEage="30" Scale9OriginX="30" Scale9OriginY="30" Scale9Width="69" Scale9Height="75" ctype="ImageViewObjectData">
             <Size X="732.0000" Y="320.0000" />
             <Children>
-              <AbstractNodeData Name="Tt_Countent" ActionTag="835545276" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="51.0000" RightMargin="51.0000" TopMargin="-18.0000" BottomMargin="78.0000" IsCustomSize="True" FontSize="30" LabelText="" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="Tt_Countent" ActionTag="835545276" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="51.0000" RightMargin="51.0000" TopMargin="-18.0000" BottomMargin="78.0000" IsCustomSize="True" FontSize="30" LabelText="你是我的小呀小苹果&#xA;怎么爱你都不嫌多&#xA;咿呀咿呀哟" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="630.0000" Y="260.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="366.0000" Y="208.0000" />
