@@ -1161,7 +1161,6 @@ function CommonUtil:removeEventListenerTouchOneByOne(node, listener)
     eventDispatcher:removeEventListener(listener)
 end
 
-
 function CommonUtil:getChildByNames(root,...)
     local args = {...}
     local temp_node = root
@@ -1233,5 +1232,446 @@ function CommonUtil:show(...)
 end
 
 
+--###########################################处理手牌###################################
+
+---特殊处理  检测是否4个红中，以及处理7对 红中不能作为万能牌使用的问题
+CommonUtil.TempResult = {
+        iChiNum = 0;    
+        iPengNum = 0;       
+        iHuiNum = 0;        
+        bJiangOK = false;
+        iHuiType = 0;   
+        chiType = {
+            [1] = {iType = 0,iFirstValue = 0,iFromPost = 0},
+            [2] = {iType = 0,iFirstValue = 0,iFromPost = 0},
+            [3] = {iType = 0,iFirstValue = 0,iFromPost = 0},
+            [4] = {iType = 0,iFirstValue = 0,iFromPost = 0},
+
+        };
+        pengType = {
+            [1] = {iType = 0,iValue = 0,iFromPost = 0},
+            [2] = {iType = 0,iValue = 0,iFromPost = 0},
+            [3] = {iType = 0,iValue = 0,iFromPost = 0},
+            [4] = {iType = 0,iValue = 0,iFromPost = 0},
+
+        };
+        jiangType = {
+            [1] = {iType = 0,iValue = 0},
+            [2] = {iType = 0,iValue = 0},
+            [3] = {iType = 0,iValue = 0},
+            [4] = {iType = 0,iValue = 0},
+
+        }
+    }
+    CommonUtil.TempResult.iHuiCard = 35
+
+function CommonUtil:changehandCardsData(allPai)--整理下手牌的数据结构 allPai 不缺牌情况下的所有手牌 
+
+    local handle_cards = { }
+    for i= 1,4 do
+        handle_cards[i] = {}
+        for j= 1,10 do
+            handle_cards[i][j] = 0
+        end
+    end
+
+    for _,value in ipairs(allPai) do
+        local card_type = math.floor(value / 10) + 1
+        local card_value = value % 10
+        handle_cards[card_type][10] = handle_cards[card_type][10] + 1
+        handle_cards[card_type][card_value] = handle_cards[card_type][card_value] + 1
+    end
+    return handle_cards
+end
+
+function CommonUtil:getAllCanHuCards(handCards, bQiDuiHu)--目前在缺一张牌的情况下 找到能胡的牌
+    -- 1-》9
+    -- 11-》19
+    -- 21-》29
+    -- 31-》36
+    local allCards = {
+        1,2,3,4,5,6,7,8,9,
+        11,12,13,14,15,16,17,18,19,
+        21,22,23,24,25,26,27,28,29,
+        35,
+    }
+
+    local canHuCards = {}
+
+    local temp = {}
+    for k,v in ipairs(handCards) do
+        table.insert(temp, v)
+    end
+
+
+    for i,v in ipairs(allCards) do
+        table.insert(temp, 1, v)--将检测的牌加入手牌  
+
+        local handCardsDada = self:changehandCardsData(temp)
+        if self:JudgeIfHu2(handCardsDada, self.TempResult, bQiDuiHu) then
+            table.insert(canHuCards, v)
+        end
+        table.remove(temp, 1)
+    end
+    return canHuCards
+end
+
+function CommonUtil:getCanAnGangCards(handCards)--检测card 暗杠
+    local canAnGangCards = {}--可以暗杠的牌
+    local temp = {}
+    for k,v in pairs(handCards) do
+        table.insert(temp, v)
+    end
+    --table.insert(temp, 1, card)--将检测的牌加入手牌  
+
+    local handCardsDada = self:changehandCardsData(temp)
+
+    for type, cards in ipairs(handCardsDada) do--cards 1->9
+        for card,num in ipairs(cards) do
+            if num >= 4 and card ~= 10 and type ~= 4 then
+                table.insert(canAnGangCards, card)
+            end
+        end
+    end
+
+    return canAnGangCards
+end
+
+function CommonUtil:getCanPengGangCards(CpgCards, handCards)--检测回头杠 CpgCards = self._allPlayerCpgCards[direction]
+    local canPengCards = {}
+    CpgCards = CpgCards or {}
+    handCards = handCards or {}
+    for k,cardInfo in ipairs(CpgCards) do
+        local value = cardInfo.value
+        local gang_type = cardInfo.gang_type--1 暗杠 2 明杠 3 碰杠
+        local from = cardInfo.from
+        local type = cardInfo.type--1 碰 2 杠 3 吃
+
+        if type == 1 then--CPG里面的碰
+            for i,handCard in ipairs(handCards) do
+                if value == handCard then
+                    table.insert(canPengCards, card)
+                end
+                break
+            end
+        end
+    end
+    return canPengCards
+end
+
+
+--######################################检测胡牌算法$##################################
+function CommonUtil:checkIsHu(allPai, bQiDuiHu)
+
+    local tempStandCards = self:changehandCardsData(allPai)
+    local hu = self:JudgeIfHu2(tempStandCards, self.TempResult, bQiDuiHu)
+    return hu
+end
+
+function CommonUtil:JudgeSpecialHu(allPai,resultType,bQiDuiHu)
+
+    --如果红中大于4个则直接胡
+    if resultType.iHuiNum >= 4 then
+        return true
+    end
+
+    if bQiDuiHu and resultType.iChiNum + resultType.iPengNum == 0 then
+        local iNums = 0
+        for i=1,4 do
+            for j=1,9 do
+                if allPai[i][j] == 2 then
+                    iNums = iNums + 1
+                elseif allPai[i][j] == 4 then
+                    iNums = iNums + 2
+                end
+            end
+        end
+        --7对 红中不能当成万能牌
+        if resultType.iHuiNum % 2 == 0 and iNums + math.floor(resultType.iHuiNum/2) == 7 then
+            return true
+        end
+    end
+
+    return false
+end
+
+function CommonUtil:JudgeIfHu2(allPai,resultType,bQiDuiHu)
+
+    local iTotalCardNum = 0
+
+    --校验一下
+    for i=1,4 do
+        local iTypeCardNum = 0;
+        for j=1,9 do
+            iTypeCardNum = iTypeCardNum + allPai[i][j];
+            iTotalCardNum = iTotalCardNum + allPai[i][j];
+        end
+        if iTypeCardNum ~= allPai[i][10] then
+            print(string.format("TypeCardNum Error iTypeCardNum[%d] [%d][%d]\n",iTypeCardNum,i,allPai[i][10]));
+            return false
+        end
+    end
+
+    if iTotalCardNum ~= 2 and iTotalCardNum ~= 5 and iTotalCardNum ~= 8 and iTotalCardNum ~= 11 and iTotalCardNum ~= 14 then
+        print(string.format("iTotalCardNum Error iTotalCardNum[%d]\n",iTotalCardNum));
+        return false
+    end
+    
+    --会牌的类型和值
+    local value = resultType.iHuiCard
+    local iType = math.floor(value / 10) + 1
+    local iValue = value % 10
+    local iHuiNum = allPai[iType][iValue];
+    resultType.iHuiNum = iHuiNum
+
+    --更新牌型数量 去掉红中的数量
+    allPai[iType][10] = allPai[iType][10] - iHuiNum
+    --将红中的个数设置为0
+    allPai[iType][iValue] = 0;
+
+    --检测特殊胡牌类型
+    if self:JudgeSpecialHu(allPai,resultType, bQiDuiHu) then
+        return true
+    elseif self:JudgeNormalHu(allPai,resultType) then
+        return true
+    end
+
+    return false
+end
+
+--正常流程 检测胡牌
+function CommonUtil:JudgeNormalHu(allPai,resultType)
+    if self:Analyze(allPai,1,resultType) then
+        return true
+    end
+
+    return false
+end
+
+--分析胡牌  检测同一个类型的牌 的所有的组合
+function CommonUtil:Analyze(allPai,iType,resultType)
+    local index = nil
+    local result
+    --如果该类型的牌数量为0
+    if allPai[iType][10] == 0 then
+        result = true;
+
+        if iType <= 3 then
+            result = self:Analyze(allPai,iType+1,resultType);
+        else
+            if resultType.iHuiNum >= 2 then
+                if not resultType.bJiangOK then
+                    local value = resultType.iHuiCard
+                    local iType = math.floor(value / 10) + 1
+                    local iValue = value % 10
+
+                    resultType.bJiangOK = true;
+                    resultType.jiangType.iType = iType;
+                    resultType.jiangType.iValue = iValue;
+                end
+            end
+        end
+        return result;
+    end
+    --否则 循环查找该类型中不为0的有效牌
+    for i=1,9 do
+        if allPai[iType][i] ~= 0 then
+            index = i
+            break;
+        end
+    end
+-- 333 4 5
+    --检查该牌 是否可以构成 3刻子
+    if allPai[iType][index] >= 3 then
+
+        allPai[iType][index] = allPai[iType][index] - 3;
+        allPai[iType][10] = allPai[iType][10] - 3;
+
+        result = self:Analyze(allPai,iType,resultType);
+
+        allPai[iType][index] = allPai[iType][index] + 3;
+        allPai[iType][10] = allPai[iType][10] + 3;
+
+        if result then
+            resultType.pengType[resultType.iPengNum+1].iType = iType;
+            resultType.pengType[resultType.iPengNum+1].iValue = index;
+            resultType.iPengNum = resultType.iPengNum + 1;
+    
+            return result;
+        end
+    end
+
+    --如果牌的类型是 万条筒
+    if iType <= 3 then
+        --检测是否可以构成 连
+        if index < 8 and allPai[iType][index+1] > 0 and allPai[iType][index+2]>0 then
+            allPai[iType][index] = allPai[iType][index] - 1;
+            allPai[iType][index+1] = allPai[iType][index+1] - 1;
+            allPai[iType][index+2] = allPai[iType][index+2] - 1;
+            allPai[iType][10] = allPai[iType][10] - 3;
+            result=self:Analyze(allPai,iType,resultType);
+            allPai[iType][index] = allPai[iType][index]+ 1;
+            allPai[iType][index+1] = allPai[iType][index+1] + 1;
+            allPai[iType][index+2] = allPai[iType][index+2] + 1;
+            allPai[iType][10] = allPai[iType][10] + 3;
+
+            if result then
+                resultType.chiType[resultType.iChiNum+1].iType = iType;
+                resultType.chiType[resultType.iChiNum+1].iFirstValue = index;
+                resultType.iChiNum = resultType.iChiNum + 1;
+                return result;
+            end
+        end
+
+        --如果红中数量大于0
+        if resultType.iHuiNum > 0 then
+            --会牌数量-1
+            resultType.iHuiNum = resultType.iHuiNum - 1
+            --检测如果有一张会牌的情况下 组合成连的情况
+            --A X C
+            if index < 8 and allPai[iType][index+1]==0 and allPai[iType][index+2]>0 then
+                allPai[iType][index] = allPai[iType][index] -1;
+                allPai[iType][index+2] = allPai[iType][index+2] -1;
+                allPai[iType][10] = allPai[iType][10] - 2;
+                result = self:Analyze(allPai,iType,resultType);
+                allPai[iType][index] = allPai[iType][index] + 1;
+                allPai[iType][index+2] = allPai[iType][index+2] + 1;
+                allPai[iType][10] = allPai[iType][10] + 2;
+                if result then
+                    resultType.chiType[resultType.iChiNum+1].iType = iType;
+                    resultType.chiType[resultType.iChiNum+1].iFirstValue = index;
+                    resultType.iChiNum = resultType.iChiNum + 1;
+
+                    return result;
+                end
+            --A B X  /  X A B
+            elseif index < 9 and allPai[iType][index+1]>0 then
+                allPai[iType][index] = allPai[iType][index] - 1;
+                allPai[iType][index+1] = allPai[iType][index+1] - 1;
+                allPai[iType][10] = allPai[iType][10] - 2;
+
+                result=self:Analyze(allPai,iType,resultType);
+
+                allPai[iType][index] = allPai[iType][index] + 1;
+                allPai[iType][index+1] = allPai[iType][index+1] + 1;
+                allPai[iType][10] = allPai[iType][10] + 2;
+
+                if result then
+                    resultType.chiType[resultType.iChiNum+1].iFirstValue = index;
+                    resultType.chiType[resultType.iChiNum+1].iType = iType;
+                    resultType.iChiNum = resultType.iChiNum + 1;
+
+                    return result;
+                end
+            end
+
+            --A X X
+            --如果有一张有效牌 和两个会牌 可以组成3刻 或者连
+            if index <= 9 and allPai[iType][index] == 1 and resultType.iHuiNum > 0 then
+
+                resultType.iHuiNum = resultType.iHuiNum - 1
+
+                allPai[iType][index] = allPai[iType][index] - 1;
+                allPai[iType][10] = allPai[iType][10] - 1;
+
+                result = self:Analyze(allPai,iType,resultType);
+
+                allPai[iType][index] = allPai[iType][index] + 1;
+                allPai[iType][10] = allPai[iType][10] + 1;
+
+                if result then
+                    resultType.chiType[resultType.iChiNum+1].iFirstValue = index;
+                    resultType.chiType[resultType.iChiNum+1].iType = iType;
+                    resultType.iChiNum = resultType.iChiNum + 1;
+
+                    return result;
+                end
+            end
+            resultType.iHuiNum = resultType.iHuiNum + 1
+        end
+    end
+
+    --检查 将牌（对儿）
+    if not resultType.bJiangOK then
+        local iNum = 0
+        if allPai[iType][index] >= 2 then
+            iNum = 2;
+        else
+            if resultType.iHuiNum > 0 then
+                iNum = 1
+                resultType.iHuiNum = resultType.iHuiNum - 1;
+            else
+                return false
+            end
+        end
+        resultType.bJiangOK = true;
+
+        allPai[iType][index] = allPai[iType][index] - iNum;
+        allPai[iType][10] = allPai[iType][10] - iNum;
+
+        result=self:Analyze(allPai,iType,resultType);
+
+        allPai[iType][index] = allPai[iType][index] + iNum;
+        allPai[iType][10] = allPai[iType][10] + iNum;
+        
+        if result then
+            resultType.jiangType.iType = iType;
+            resultType.jiangType.iValue = index;
+            
+            return result;
+        end
+        --如果没有凑成对儿,那么将会牌+1
+        if allPai[iType][index] < 2 then
+            resultType.iHuiNum = resultType.iHuiNum + 1;
+        end
+
+        resultType.bJiangOK = false;
+    --检查带会牌的碰
+    elseif resultType.iHuiNum > 0 and allPai[iType][index] >= 2 then
+        resultType.iHuiNum = resultType.iHuiNum - 1;
+
+        allPai[iType][index] = allPai[iType][index] - 2;
+        allPai[iType][10] = allPai[iType][10] - 2;
+
+        result = self:Analyze(allPai,iType,resultType);
+
+        allPai[iType][index] = allPai[iType][index] + 2;
+        allPai[iType][10] = allPai[iType][10] + 2;
+
+        if result then
+            resultType.pengType[resultType.iPengNum+1].iType = iType;
+            resultType.pengType[resultType.iPengNum+1].iValue = index;
+            resultType.iPengNum = resultType.iPengNum + 1;
+
+            return result;
+        end
+
+        resultType.iHuiNum = resultType.iHuiNum + 1;
+    --如果有两张会牌
+    elseif resultType.iHuiNum >= 2 then
+        resultType.iHuiNum = resultType.iHuiNum - 2;
+
+        allPai[iType][index] = allPai[iType][index] - 1;
+        allPai[iType][10] = allPai[iType][10] - 1;
+
+        result = self:Analyze(allPai,iType,resultType);
+
+        allPai[iType][index] = allPai[iType][index] + 1;
+        allPai[iType][10] = allPai[iType][10] + 1;
+
+        if result then
+            resultType.pengType[resultType.iPengNum+1].iType = iType;
+            resultType.pengType[resultType.iPengNum+1].iValue = index;
+            resultType.iPengNum = resultType.iPengNum + 1;
+
+            return result;
+        end
+
+        resultType.iHuiNum = resultType.iHuiNum + 2;
+    end
+
+
+    return false;
+end
 
 return CommonUtil

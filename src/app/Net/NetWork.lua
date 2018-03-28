@@ -258,7 +258,8 @@ end
 function network:send(data_content,callback,ignore_session)
 
 	if not (self._socket and (self._net_state == NETSTATE.CONNECTING or self._net_state == NETSTATE.CONNECTED)) then
-		return false
+		print("networkerror!!!!!!!!!!!!!!!!!!!!!!!")
+        return false
 	end
 
 	if not ignore_session then

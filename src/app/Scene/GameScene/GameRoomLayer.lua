@@ -35,6 +35,11 @@ function GameRoomLayer:ctor()
 
 	self._infoNode = cc.CSLoader:createNode("game/mjcomm/csb/base/GameTableInfo.csb")--房间信息
 
+	self._actionBtnsPanel = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjActionBtnsPanel.csb")--房间信息
+
+	--self._actionBtnsPanel:setTouchEnabled(true)
+	--self._actionBtnsPanel:setSwallowTouches(true)
+
 	self._setNode:getChildByName("Bg_Help_Start"):setVisible(false)
 	self._setNode:getChildByName("Bg_Help_NoStart"):setVisible(false)
 	self._setNode:getChildByName("Bg_MaskLead"):setVisible(false)
@@ -45,13 +50,14 @@ function GameRoomLayer:ctor()
 	self._setNode:getChildByName("Panel_RecordCtrl"):setVisible(false)
 	self._setNode:getChildByName("Node_InviteView"):setVisible(false)
 	self._setNode:getChildByName("Bg_ShareLayer"):setVisible(false)
+	self._setNode:getChildByName("Button_Invite"):setVisible(false)
 
 	self:addChild(self._bgNode)
 	self:addChild(self._cardsNode)
 	self:addChild(self._playerNode)
 	self:addChild(self._setNode)
 	self:addChild(self._infoNode)
-
+	self:addChild(self._actionBtnsPanel)
 
 	--设置
 	local ruleBtn = self._setNode:getChildByName("Button_GameRule")
@@ -111,13 +117,91 @@ function GameRoomLayer:ctor()
 		v:setVisible(false)
 	end
 
+
+    --动作按钮 self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Ting")
+
+    self.m_objCommonUi = {}
+
+
+    self.m_objCommonUi.m_nodeActionBtns = self._actionBtnsPanel:getChildByName("Node_ActionBtns") --吃碰杠胡按钮
+    self.m_objCommonUi.m_btnChi =  self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Chi") 
+    self.m_objCommonUi.m_btnPeng = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Peng")
+    self.m_objCommonUi.m_btnGang = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Gang")
+    self.m_objCommonUi.m_btnHu = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Hu")
+    self.m_objCommonUi.m_btnPass = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Pass")
+    self.m_objCommonUi.m_btnTing = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Ting")
+    self.m_objCommonUi.m_tArrActionBtn = {}
+    if self.m_objCommonUi.m_btnChi then
+        table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnChi)
+    end
+    if self.m_objCommonUi.m_btnPeng then
+        table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnPeng)
+    end
+    if self.m_objCommonUi.m_btnGang then
+        table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnGang)
+    end
+    if self.m_objCommonUi.m_btnHu then
+        table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnHu)
+    end
+    if self.m_objCommonUi.m_btnTing then
+        table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnTing)
+    end
+    if self.m_objCommonUi.m_btnPass then
+        table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnPass)
+    end
+    local tArrNodeActionBtnsChildren = self.m_objCommonUi.m_nodeActionBtns:getChildren()
+    for i = 1, #tArrNodeActionBtnsChildren do
+        tArrNodeActionBtnsChildren[i].orgPos = cc.p(tArrNodeActionBtnsChildren[i]:getPosition())
+    end
+
+    for k,node in pairs(self.m_objCommonUi.m_tArrActionBtn) do
+    	lt.CommonUtil:addNodeClickEvent(node, handler(self, self.onClickCpghEvent))
+    end
+
+    self.m_objCommonUi.m_nodeCardsMenu = self._actionBtnsPanel:getChildByName("Node_CardsMenu") --吃碰杠胡二级菜单
+    self.m_objCommonUi.m_btnMenuPass = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Button_Pass")
+    self.m_objCommonUi.m_imgCardsMenuBg = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Image_Bg")
+    self.m_objCommonUi.m_panelMenuItems = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Panel_MenuItems")
+    self.m_objCommonUi.m_panelMenuItems:removeAllChildren()
+
+    self.m_objCommonUi.m_panelCurOutCard = self._actionBtnsPanel:getChildByName("Panel_CurOutCard")
+    local shaizi1 = self._actionBtnsPanel:getChildByName("Sprite_DicePoint_1")
+    local shaizi2 = self._actionBtnsPanel:getChildByName("Sprite_DicePoint_2")
+
+    --胡牌提示  self.m_objCommonUi.m_nodeHuCardTips:getChildByName("Button_ToMax")
+    self.m_objCommonUi.m_nodeHuCardTips = self._actionBtnsPanel:getChildByName("Node_HuCardTips")
+    if self.m_objCommonUi.m_nodeHuCardTips then
+        self.m_objCommonUi.m_imgHuCardTipsBg = self.m_objCommonUi.m_nodeHuCardTips:getChildByName("Image_Bg")
+        self.m_objCommonUi.m_panelHuCardTipsContent = self.m_objCommonUi.m_nodeHuCardTips:getChildByName("Panel_Content")
+        self.m_objCommonUi.m_mjTips = self.m_objCommonUi.m_panelHuCardTipsContent:getChildByName("MJ_Tips")
+        if self.m_objCommonUi.m_mjTips then
+            self.m_objCommonUi.m_iHuTipsScale = self.m_objCommonUi.m_mjTips:getScale() --缩放
+            self.m_objCommonUi.m_mjTips = nil
+        end
+        self.m_objCommonUi.m_btnToMin = self.m_objCommonUi.m_nodeHuCardTips:getChildByName("Button_ToMin")
+        self.m_objCommonUi.m_btnToMax = self.m_objCommonUi.m_nodeHuCardTips:getChildByName("Button_ToMax")
+    end
+
+    shaizi1:setVisible(false)
+    shaizi2:setVisible(false)
+
+    self.m_objCommonUi.m_nodeCardsMenu:setVisible(false)
+    self.m_objCommonUi.m_nodeActionBtns:setVisible(false)
+    self.m_objCommonUi.m_panelCurOutCard:setVisible(false)
+    self.m_objCommonUi.m_nodeHuCardTips:setVisible(false)
 	--self._selectPosition = self.POSITION_TYPE.NAN
 	self:hzmj2p()
 	self:configRotation()
 	self:configCards()
 	self:configPlayer()
 
+	self._allPlayerHandCards = {}--所有方位的手牌
+
 	self._allPlayerOutInitCards = {}--所有方位的已经出过的  初始化过的牌
+
+	self._allPlayerCpgCards = {}--所有方位的吃椪杠
+	self._allPlayerCpgInitCards = {}--所有方位的吃椪杠  初始化过的牌
+
 end
 
 function GameRoomLayer:hzmj2p()  
@@ -228,12 +312,8 @@ function GameRoomLayer:hzmj2p()
 
 	local panelVertical = self._cardsNode:getChildByName("Panel_Vertical")--手牌
 
-	-- self._topHandCardsNode = {}
-	-- self._mySelfHandCardsNode = {}
-
-
-	self._allPlayerHandCards = {}
-	self._allPlayerCpgCards = {}
+	self._allPlayerHandCardsNode = {}
+	self._allPlayerCpgCardsNode = {}
 
 	-- panelVertical:getChildByName("Node_CpgCards_1")--对面吃碰杠
 	-- panelVertical:getChildByName("Node_HandCards_1")--对面手牌 立着
@@ -249,21 +329,20 @@ function GameRoomLayer:hzmj2p()
 		else
 			direction = self.POSITION_TYPE.NAN
 		end
-		self._allPlayerHandCards[direction] = {}
+		self._allPlayerHandCardsNode[direction] = {}
 		local node = panelVertical:getChildByName("Node_HandCards_"..index)
 		if node then
 			for i=1,14 do
-				table.insert(self._allPlayerHandCards[direction], node:getChildByName("MJ_Stand_"..i))
+				table.insert(self._allPlayerHandCardsNode[direction], node:getChildByName("MJ_Stand_"..i))
 			end
 		end
 
 		--吃椪杠
-		self._allPlayerCpgCards[direction] = {}
+		self._allPlayerCpgCardsNode[direction] = {}
 		local node = panelVertical:getChildByName("Node_CpgCards_"..index)
-
 		if node then
 			for i=1,5 do
-				table.insert(self._allPlayerCpgCards[direction], node:getChildByName("Layer_Cpg_"..i))
+				table.insert(self._allPlayerCpgCardsNode[direction], node:getChildByName("Layer_Cpg_"..i))
 			end
 		end
 	end
@@ -333,7 +412,7 @@ function GameRoomLayer:configCards()
 	end
 
 
-	for direction,cards in pairs(self._allPlayerHandCards) do
+	for direction,cards in pairs(self._allPlayerHandCardsNode) do
 		for i,v in ipairs(cards) do
 			v:setVisible(false)
 			if direction == self.POSITION_TYPE.NAN then
@@ -346,7 +425,7 @@ function GameRoomLayer:configCards()
 		end
 	end
 
-	for direction, cards in pairs(self._allPlayerCpgCards) do
+	for direction, cards in pairs(self._allPlayerCpgCardsNode) do
 		for i,v in ipairs(cards) do
 			v:setVisible(false)
 		end
@@ -368,9 +447,9 @@ function GameRoomLayer:configSendCards() --游戏刚开始的发牌
 		v:runAction(run)
 	end
 
-	--_allPlayerCpgCards
-	self._sendDealFinish = false
-	for direction,cards in pairs(self._allPlayerHandCards) do--发牌发13张
+	--_allPlayerCpgCardsNode
+	local sendDealFinish = false
+	for direction,cards in pairs(self._allPlayerHandCardsNode) do--发牌发13张
 		local time = 0.1
 		for i=1,13 do
 			time = time + 0.1
@@ -378,7 +457,7 @@ function GameRoomLayer:configSendCards() --游戏刚开始的发牌
 
 				if direction == self.POSITION_TYPE.NAN then
 
-					local value = self._mySelfHandCards[i]--手牌值
+					local value = self._allPlayerHandCards[direction][i]--手牌值
 					local node = cards[i]:getChildByName("Node_Mj")
 					local face = node:getChildByName("Sprite_Face")
 
@@ -387,17 +466,17 @@ function GameRoomLayer:configSendCards() --游戏刚开始的发牌
 						local cardValue = value % 10
 						face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
 						node:getChildByName("Image_Bg"):setTag(value)
+						node:getChildByName("Image_Bg")["CardIndex"] = i
 					end
 				end
 
 				local func = function( )
 					cards[i]:setVisible(true)
 
-					if i == 13 and not self._sendDealFinish then
-						self._sendDealFinish = true
+					if i == 13 and not sendDealFinish then
+						sendDealFinish = true
 						local arg = {command = "DEAL_FINISH"}
 						lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
-						print("+++++++++++++++++++++++发牌圣诞节放假")
 					end
 				end
 				local delay = cc.DelayTime:create(time)
@@ -408,55 +487,6 @@ function GameRoomLayer:configSendCards() --游戏刚开始的发牌
 			end
 		end
 	end
-
-
-	-- for i=1,13 do--发牌发13张
-	-- 	if self._topHandCardsNode[i] then
-	-- 		local func = function( )
-	-- 			self._topHandCardsNode[i]:setVisible(true)
-	-- 		end
-	-- 		local delay = cc.DelayTime:create(2)
-	-- 		local func1 = cc.CallFunc:create(func)
-	-- 		local sequence = cc.Sequence:create(delay, func1)
-	-- 		self:runAction(sequence)
-	-- 	end
-	-- end
-
-	-- self._myselfHandCardNum = 0
-	-- self._sendDealFinish = false
-	-- for index,value in ipairs(self._mySelfHandCards) do
-	-- 	local node = nil
-	-- 	self._myselfHandCardNum = self._myselfHandCardNum + 1
-	-- 	if self._mySelfHandCardsNode[index]:getChildByName("Node_Mj") then
-	-- 		if self._mySelfHandCardsNode[index]:getChildByName("Node_Mj"):getChildByName("Sprite_Face") then
-	-- 			node = self._mySelfHandCardsNode[index]:getChildByName("Node_Mj"):getChildByName("Sprite_Face")
-	-- 		end
-	-- 	end		
-
-	-- 	if node then
-			
-	-- 		local cardType = math.floor(value / 10) + 1
-	-- 		local cardValue = value % 10
-	-- 		node:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
-	-- 		self._mySelfHandCardsNode[index]:setVisible(true)
-
-	-- 		self._mySelfHandCardsNode[index]:getChildByName("Node_Mj"):getChildByName("Image_Bg"):setTag(value)
-
-	-- 		local func = function( )
-	-- 			self._mySelfHandCardsNode[index]:setVisible(true)
-	-- 			if self._myselfHandCardNum == #self._mySelfHandCards and (not self._sendDealFinish) then
-	-- 				self._sendDealFinish = true
-	-- 				local arg = {command = "DEAL_FINISH"}
-	-- 				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
-	-- 			end
-	-- 		end
-	-- 		local delay = cc.DelayTime:create(2)
-	-- 		local func1 = cc.CallFunc:create(func)
-	-- 		local sequence = cc.Sequence:create(delay, func1)
-	-- 		self:runAction(sequence)
-	-- 	end
-
-	-- end
 
 end
 
@@ -595,56 +625,244 @@ function GameRoomLayer:getPlayerDirectionByPos(playerPos)
 	return nil
 end
 
-function GameRoomLayer:onClickCard(event) 
-	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", event:getTag())
+function GameRoomLayer:configAllPlayerCards(direction)--吃椪杠 手牌
 
-	if event.statu == 0 then
-		if self._currentMoveCard then
-			local move = cc.MoveBy:create(0.5, cc.p(0, -event:getContentSize().height / 4))
-			self._currentMoveCard:runAction(move)
-			self._currentMoveCard.statu = 0 --静牌
-		end
+	if not self._allPlayerCpgCardsNode[direction] then
+		return
+	end
 
-		local move = cc.MoveBy:create(0.5, cc.p(0, event:getContentSize().height / 4))
-		move:runAction(move)
-		event.statu = 1--待出
-		self._currentMoveCard = event
-	elseif event.statu == 1 then--再次点击出牌
+	local chiPengCount = 0
+	local gangCount = 0
+	self._allPlayerCpgCards[direction] = self._allPlayerCpgCards[direction] or {}
+	for index,CpgNode in ipairs(self._allPlayerCpgCardsNode[direction]) do
+		local cardInfo = self._allPlayerCpgCards[direction][index]
+		print("666666666666666666666666666666666666")
+		dump(tostring(cardInfo))
+		if cardInfo then
+			local value = cardInfo.value
+			local gang_type = cardInfo.gang_type--1 暗杠 2 明杠 3 碰杠
+			local from = cardInfo.from
+			local type = cardInfo.type--1 碰 2 杠 3 吃
 
-		local moveBack = cc.MoveBy:create(0.5, cc.p(0, -event:getContentSize().height / 4))
+			local cardType = math.floor(value / 10) + 1
+			local cardValue = value % 10
 
+			local visibleType = 1 --1 碰 2 碰杠 3 明杠 4 暗杠 5 吃
 
-		local move = cc.MoveTo:create(0.5, ccp(self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]:getPositionX(), self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]:getPositionY()))
-		local scale = cc.ScaleTo:create(0.5, 0.8, 0.8)
-		local spawn = cc.Spawn:create(move, scale)
-
-		local func = cc.CallFunc:create(
-			function ( )
-				self._currentMoveCard = nil
-
-				local node =  self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]
-				local face = node:getChildByName("Sprite_Face")
-
-				local cardType = math.floor(event:getTag() / 10) + 1
-				local cardValue = event:getTag() % 10
+			if type == 2 then
+				gangCount = gangCount + 1
+				if gang_type == 1 then--暗杠
+					visibleType = 4
+				elseif gang_type == 2 then--明杠
+					visibleType = 3
+				elseif gang_type == 3 then--碰杠
+					visibleType = 2
+				end
+			else
+				visibleType = 1
+				chiPengCount = chiPengCount + 1
+			end
+			CpgNode:setVisible(true)
+			for i=1,5 do
+				CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
+				CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_MaskRed"):setVisible(false)
+				
+				local face = CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Face")
 				face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
-				node:setVisible(true)
-				node:setTag(event:getTag())
-				table.remove(self._allPlayerOutCards[self.POSITION_TYPE.NAN], 1)
-				if not self._allPlayerOutInitCards[self.POSITION_TYPE.NAN] then
-					self._allPlayerOutInitCards[self.POSITION_TYPE.NAN] = {}
+				if visibleType == 1 then
+					if i <= 3 then
+						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
+					else
+						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
+					end
+				elseif visibleType == 2 or visibleType == 3 then
+					if i <= 4 then
+						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
+					else
+						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
+					end
+				elseif visibleType == 4 then
+					if i <= 4 then
+						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
+						CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(true)
+					else
+						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
+					end
 				end
 
-				table.insert(self._allPlayerOutInitCards[self.POSITION_TYPE.NAN], node)
+			end 
+		else
+			CpgNode:setVisible(false)
+		end
+	end
+
+	if not self._allPlayerHandCardsNode[direction] then
+		return
+	end
+	self._allPlayerHandCards[direction] = self._allPlayerHandCards[direction] or {}
+
+
+	--local CpgCount = #self._allPlayerCpgCards)[direction]--吃椪杠的个数
+
+	local startIndex = chiPengCount * 3 + gangCount * 3
+	print("吃椪杠的个数", chiPengCount, gangCount, startIndex)
+	local initIndex = 1
+	for i=1,14 do
+		if direction ~= self.POSITION_TYPE.NAN then--不是自己
+			if i <= startIndex then
+				self._allPlayerHandCardsNode[direction][i]:setVisible(false)
+			else
+				self._allPlayerHandCardsNode[direction][i]:setVisible(true)
 			end
-			)
+		else
+			if i <= startIndex then
+				self._allPlayerHandCardsNode[direction][i]:setVisible(false)
+			else
+				local card = self._allPlayerHandCardsNode[direction][i]
+				
+				if self._allPlayerHandCards[direction][initIndex] and card then
+					card:setVisible(true)
+					local value = self._allPlayerHandCards[direction][initIndex]--手牌值
+					local node = card:getChildByName("Node_Mj")
+					local face = node:getChildByName("Sprite_Face")
 
-		local seque = cc.Sequence:create(moveBack, spawn, func)
-		event:runAction(seque)
+					if node and face then
+						local cardType = math.floor(value / 10) + 1
+						local cardValue = value % 10
+						face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+						node:getChildByName("Image_Bg"):setTag(value)
+						node:getChildByName("Image_Bg")["CardIndex"] = i
+					end
+					initIndex = initIndex + 1
+				else
+					if card then
+						card:setVisible(face)
+					end
+				end
+			end
+		end
+	end
+end
 
-		local arg = {command = "PLAY_CARD", card = event:getTag()}
+
+
+function GameRoomLayer:onClickCard(event) 
+
+
+	if self.m_objCommonUi.m_nodeActionBtns:isVisible() then
+		print("碰杠胡了不能点牌了")
+		return
+	end
+
+
+
+	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", event:getTag(), event.CardIndex)
+
+
+
+
+
+
+
+	--[[
+	出牌处理
+
+	在进入房间的时候记录一下14张牌的原始位置 originpos = {}
+
+	出牌的时候将要出的牌的ui，从手牌里面抽出移动到桌面上该放的位置，
+	放完之后再将这张ui的位置设置到originpos[index]对应的位置并隐藏 记录出去牌 outindex
+
+
+	如果出的这张牌是最后一张则不用挪动其他牌的位置
+	如果出的不是最后一张 便利所有手牌ui   
+
+	当 value > getvalue的 indexs
+
+	outindex < index   --这之间的牌统一向左移动一个牌位
+
+	index < outindex --这之间的牌统一向右移动一个牌位
+	将摸得牌放到index位置
+	这些动作完成之后 将当前手牌排序 然后便利14个手牌ui将手牌值初始化
+	]]
+
+
+	local cardNode = self._allPlayerHandCardsNode[self.POSITION_TYPE.NAN][event.CardIndex]
+	if not cardNode then
+		return
+	end
+	local value = event:getTag()
+	if self._currentOutPutPlayerPos == lt.DataManager:getMyselfPositionInfo().user_pos then
+		print("出牌", value)
+
+		-- local node =  self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]
+		-- local face = node:getChildByName("Sprite_Face")
+
+		-- local cardType = math.floor(event:getTag() / 10) + 1
+		-- local cardValue = event:getTag() % 10
+		-- face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+		-- node:setVisible(true)
+		-- node:setTag(event:getTag())
+		-- table.remove(self._allPlayerOutCards[self.POSITION_TYPE.NAN], 1)
+		-- table.insert(self._allPlayerOutInitCards[self.POSITION_TYPE.NAN], node)
+
+		-- for k,card in pairs(self._mySelfHandCards) do  self._allPlayerHandCards[direction]
+		-- 	if card == value then
+		-- 		table.remove(self._mySelfHandCards, k)
+		-- 		break
+		-- 	end
+		-- end
+
+		-- self:configAllPlayerCards(pos)
+		print("___________________________", value)
+		local arg = {command = "PLAY_CARD", card = value}
 		lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 	end
+
+	-- if not event.statu or event.statu == 0 then
+	-- 	if self._currentMoveCard then
+	-- 		local move = cc.MoveBy:create(0.5, cc.p(0, -event:getContentSize().height / 4))
+	-- 		self._currentMoveCard:runAction(move)
+	-- 		self._currentMoveCard.statu = 0 --静牌
+	-- 	end
+
+	-- 	local move = cc.MoveBy:create(0.5, cc.p(0, 40))
+	-- 	cardNode:runAction(move)
+	-- 	event.statu = 1--待出
+	-- 	self._currentMoveCard = event
+	-- 	print("________________=====================______________________________________")
+	-- elseif event.statu == 1 then--再次点击出牌
+	-- 	print("_________________------------------------_____________________________________")
+	-- 	local moveBack = cc.MoveBy:create(0.5, cc.p(0, -event:getContentSize().height / 4))
+
+
+	-- 	local move = cc.MoveTo:create(0.5, ccp(self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]:getPositionX(), self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]:getPositionY()))
+	-- 	local scale = cc.ScaleTo:create(0.5, 0.52, 0.52)
+	-- 	local spawn = cc.Spawn:create(move, scale)
+
+	-- 	local func = cc.CallFunc:create(
+	-- 		function ( )
+	-- 			self._currentMoveCard = nil
+
+	-- 			local node =  self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]
+	-- 			local face = node:getChildByName("Sprite_Face")
+
+	-- 			local cardType = math.floor(event:getTag() / 10) + 1
+	-- 			local cardValue = event:getTag() % 10
+	-- 			face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+	-- 			node:setVisible(true)
+	-- 			node:setTag(event:getTag())
+	-- 			table.remove(self._allPlayerOutCards[self.POSITION_TYPE.NAN], 1)
+	-- 			if not self._allPlayerOutInitCards[self.POSITION_TYPE.NAN] then
+	-- 				self._allPlayerOutInitCards[self.POSITION_TYPE.NAN] = {}
+	-- 			end
+
+	-- 			table.insert(self._allPlayerOutInitCards[self.POSITION_TYPE.NAN], node)
+	-- 		end
+	-- 		)
+
+	-- 	local seque = cc.Sequence:create(moveBack, spawn, func)
+	-- 	cardNode:runAction(seque)
+	-- end
 end
 
 function GameRoomLayer:onSetClick(event) 
@@ -679,7 +897,7 @@ end
 function GameRoomLayer:onDealDown(msg)   --发牌13张手牌
 	dump(msg)
 
-	self._mySelfHandCards = {}
+	self._allPlayerHandCards[self.POSITION_TYPE.NAN] = {}
 
 	self._zhuangPos = msg.zpos
 
@@ -696,14 +914,14 @@ function GameRoomLayer:onDealDown(msg)   --发牌13张手牌
 	end
 
 	for i,card in ipairs(msg.cards) do
-		table.insert(self._mySelfHandCards, card)
+		table.insert(self._allPlayerHandCards[self.POSITION_TYPE.NAN], card)
 
 	end
 	local sortFun = function(a, b)
 		return a < b
 	end
 
-	table.sort( self._mySelfHandCards, sortFun)
+	table.sort(self._allPlayerHandCards[self.POSITION_TYPE.NAN], sortFun)
 
 	--播放筛子动画
 	local action_node = cc.CSLoader:createNode("game/mjcomm/csb/base/ShaiZiAni.csb")
@@ -752,6 +970,29 @@ function GameRoomLayer:onDealDown(msg)   --发牌13张手牌
     tlAct:setFrameEventCallFunc(func)
 end
 
+function GameRoomLayer:onClickSelectCard(event) --多 选择
+
+	if event.selectCardData then
+		if event.selectCardData.card and event.selectCardData.type then
+			if event.selectCardData.type == 1 then--吃碰杠胡
+
+			elseif event.selectCardData.type == 2 then
+				local arg = {command = "PENG"}
+				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+			elseif event.selectCardData.type == 3 then
+				local arg = {command = "GANG", card = event.selectCardData.card }
+				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+			elseif event.selectCardData.type == 4 then
+				local arg = {command = "HU"}
+				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+			end
+		end
+	else
+		print("选择数据出错！！！！！")
+	end
+	self:viewHideActPanelAndMenu()
+end
+
 function GameRoomLayer:onPushSitDown(msg) --推送坐下的信息  
 	dump(msg)
 
@@ -775,47 +1016,602 @@ end
 function GameRoomLayer:onPushDrawCard(msg)   --通知其他人有人摸牌 
 	dump(msg)
 
-	local value = msg.card
-	print("!!!!!!!!!!!!!!!!!",  msg.user_pos)
-	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then
+	--检测是否胡牌
 
-		if self._allPlayerHandCards[self.POSITION_TYPE.NAN] then
-			
-			local node =  self._allPlayerHandCards[self.POSITION_TYPE.NAN][14]:getChildByName("Node_Mj"):getChildByName("Sprite_Face")
-			local cardType = math.floor(value / 10) + 1
-			local cardValue = value % 10
-			node:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
-			self._allPlayerHandCards[self.POSITION_TYPE.NAN][14]:setVisible(true)
-			self._allPlayerHandCards[self.POSITION_TYPE.NAN][14]:getChildByName("Node_Mj"):getChildByName("Image_Bg"):setTag(value)
-		end
-
-	else
-		local direction = self:getPlayerDirectionByPos(msg.user_pos)
-		if direction and self._allPlayerHandCards[direction] then
-			self._allPlayerHandCards[direction][14]:setVisible(true)
-		end
-
+	if not msg.user_pos or not msg.card then
+		print("摸牌出错！！！！！！！！！！！")
+		return
 	end
+
+	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
+
+	    local tObjCpghObj = {
+	        tObjChi = nil,
+	        tObjPeng = nil,
+	        tObjGang = nil,
+	        tObjHu = nil--抢杠胡  自摸
+	    }
+	    --检测杠
+		local tempHandCards = {}
+
+		for k,v in pairs(self._allPlayerHandCards[self.POSITION_TYPE.NAN]) do
+			table.insert(tempHandCards, v)
+		end
+
+		table.insert(tempHandCards, msg.card)
+		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
+		dump(anGangCards)
+
+		local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgInitCards[self.POSITION_TYPE.NAN], tempHandCards)
+		dump(pengGang)
+
+		if #anGangCards > 0 or #pengGang > 0 then
+			tObjCpghObj.tObjGang = {}
+		end
+
+		for i,v in ipairs(anGangCards) do
+			table.insert(tObjCpghObj.tObjGang, v)
+		end
+
+		for i,v in ipairs(pengGang) do
+			table.insert(tObjCpghObj.tObjGang, v)
+		end
+
+		--检测胡
+		print("______fsdfsdf胡牌——————————————————————————", tostring(tempHandCards))
+		if lt.CommonUtil:checkIsHu(tempHandCards, true) then
+			print("自摸了###########################################")
+			tObjCpghObj.tObjHu = {}
+		else
+			print("自摸了###########################################")
+		end
+
+        --显示吃碰杠胡控件
+        self:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
+		self:viewActionButtons(tObjCpghObj, false)
+	end
+
+	-- local value = msg.card
+	-- print("!!!!!!!!!!!!!!!!!",  msg.user_pos)
+	-- if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then
+
+	-- else
+	-- 	local direction = self:getPlayerDirectionByPos(msg.user_pos)
+	-- 	if direction and self._allPlayerHandCardsNode[direction] then
+	-- 		self._allPlayerHandCardsNode[direction][14]:setVisible(true)
+	-- 	end
+
+	-- end
 end
 
 function GameRoomLayer:onPushPlayCard(msg)   --通知玩家该出牌了 
 	dump(msg)
+	self._currentOutPutPlayerPos = msg.user_pos
+
+	msg.card_list = msg.card_list or {}
+	msg.peng_list = msg.peng_list or {}
+	msg.gang_list = msg.gang_list or {}
+
+	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
+
+		self._allPlayerHandCards[self.POSITION_TYPE.NAN] = {}
+
+		self._allPlayerCpgCards[self.POSITION_TYPE.NAN] = {}
+
+		--摸牌 ->出牌
+		local newCard = nil
+
+		if msg.operator == 1 then--     还有没有摸牌不能胡牌
+			newCard = msg.card_list[#msg.card_list]--摸到的牌
+
+			for i,card in ipairs(msg.card_list) do
+				if i ~= #msg.card_list then
+					table.insert(self._allPlayerHandCards[self.POSITION_TYPE.NAN], card)
+				end
+			end
+		else
+			for i,card in ipairs(msg.card_list) do
+				table.insert(self._allPlayerHandCards[self.POSITION_TYPE.NAN], card)
+			end
+		end
+
+		if msg.card_stack then
+			for i,cardInfo in ipairs(msg.card_stack) do--吃椪杠
+
+				local info = {}
+				info["value"] = cardInfo.value
+				info["gang_type"] = cardInfo.gang_type
+				info["from"] = cardInfo.from
+				info["type"] = cardInfo.type
+
+				table.insert(self._allPlayerCpgCards[self.POSITION_TYPE.NAN], info)
+			end
+		end
+
+		local sortFun = function(a, b)
+			return a < b
+		end
+
+		table.sort( self._allPlayerHandCards[self.POSITION_TYPE.NAN], sortFun)
+		if newCard then
+			table.insert(self._allPlayerHandCards[self.POSITION_TYPE.NAN], newCard)--将新摸得牌放到最后14号位
+		end
+		print("________________________________________")
+		self:configAllPlayerCards(self.POSITION_TYPE.NAN)
+
+	else--不是本人
+		if msg.operator == 1 then--     还有没有摸牌不能胡牌
+			local direction = self:getPlayerDirectionByPos(msg.user_pos)
+			if direction and self._allPlayerHandCardsNode[direction] then
+				self._allPlayerHandCardsNode[direction][14]:setVisible(true)
+			end
+		end
+	end
 end
 
 function GameRoomLayer:onNoticePlayCard(msg)   --通知其他人有人出牌 
 	dump(msg)
+
+	local value = msg.card
+	local direction = self:getPlayerDirectionByPos(msg.user_pos) 
+	if not direction then
+		return 
+	end
+
+	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
+
+		self._allPlayerHandCards[direction] = self._allPlayerHandCards[direction] or {}
+
+		for index,card in pairs(self._allPlayerHandCards[direction]) do
+			if card == value then
+				table.remove(self._allPlayerHandCards[direction], index)
+				break
+			end
+		end
+
+		self:configAllPlayerCards(self.POSITION_TYPE.NAN)
+	else
+		local direction = self:getPlayerDirectionByPos(msg.user_pos)
+		if direction and self._allPlayerHandCardsNode[direction] then
+			self._allPlayerHandCardsNode[direction][14]:setVisible(false)
+		end
+		
+	end
+	
+	if self._allPlayerOutCards[direction] then
+		local node =  self._allPlayerOutCards[direction][1]
+		local face = node:getChildByName("Sprite_Face")
+
+		local cardType = math.floor(value / 10) + 1
+		local cardValue = value % 10
+		face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+		node:setVisible(true)
+		node:setTag(value)
+		table.remove(self._allPlayerOutCards[direction], 1)
+
+		if not self._allPlayerOutInitCards[direction] then
+			self._allPlayerOutInitCards[direction] = {}
+		end
+
+		table.insert(self._allPlayerOutInitCards[direction], node)
+	end
+
 end
 
 function GameRoomLayer:onNoticePengCard(msg)   --通知其他人有人碰牌 
 	dump(msg)
+
+	local direction = self:getPlayerDirectionByPos(msg.user_pos) 
+	if not direction then
+		return
+	end
+
+	local info = nil
+	if msg.item then
+		info = {}
+		info["value"] = msg.item["value"]
+		info["gang_type"] = msg.item["gang_type"]
+		info["from"] = msg.item["from"]
+		info["type"] = msg.item["type"]
+
+	end
+
+	if not self._allPlayerCpgCards[direction] then
+		self._allPlayerCpgCards[direction] = {}
+	end
+	if info then
+		table.insert(self._allPlayerCpgCards[direction], info)
+
+		self:configAllPlayerCards(direction)
+	end
 end
 
 function GameRoomLayer:onNoticeGangCard(msg)   --通知其他人有人杠牌 
 	dump(msg)
+	local direction = self:getPlayerDirectionByPos(msg.user_pos) 
+	if not direction then
+		return
+	end
+
+	local info = nil
+	if msg.item then
+		info = {}
+		info["value"] = msg.item["value"]
+		info["gang_type"] = msg.item["gang_type"]
+		info["from"] = msg.item["from"]
+		info["type"] = msg.item["type"]
+
+	end
+
+	if not self._allPlayerCpgCards[direction] then
+		self._allPlayerCpgCards[direction] = {}
+	end
+
+	if info then
+		local change = false
+		for k,v in pairs(self._allPlayerCpgCards[direction]) do
+			if v.value == info.value then--之前是碰  变成了回头杠
+				change = true
+				v = info
+				break
+			end
+		end
+
+		if not change then
+			table.insert(self._allPlayerCpgCards[direction], info)
+		end
+
+		self:configAllPlayerCards(direction)
+	end
 end
 
 function GameRoomLayer:onPushPlayerOperatorState(msg)   --通知客户端当前 碰/杠 状态
 	dump(msg)
+
+	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
+
+
+		-- if msg.card then--要吃椪杠的牌
+		-- 	tabel.insert(data, msg.card)
+		-- end
+
+		--我的吃碰杠通知
+        local tObjCpghObj = {
+            tObjChi = nil,
+            tObjPeng = nil,
+            tObjGang = nil,
+            tObjHu = nil--抢杠胡
+        }
+        if msg.operator_list then
+	        for k,state in pairs(msg.operator_list) do
+
+	        	if state == "PENG" then
+	        		tObjCpghObj.tObjPeng = {}
+
+	        		--table.insert(tObjCpghObj.tObjPeng, msg.card)
+	        	elseif state == "GANG" then
+	        		if msg.card then
+	        			tObjCpghObj.tObjGang = {}
+	        			table.insert(tObjCpghObj.tObjGang, msg.card)
+	        		end
+	        	elseif state == "HU" then--抢杠胡
+	        		tObjCpghObj.tObjHu = {}
+
+	        	end
+	        end
+        end
+
+        --显示吃碰杠胡控件
+        self:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
+        self:viewActionButtons(tObjCpghObj, true)
+	end
+end
+
+function GameRoomLayer:setBtnEnabled(btn, bIsEnable)
+    if btn == nil then
+        return
+    end
+    local cDisable = cc.c3b(127, 127, 127)
+    local cNormal = cc.c3b(255, 255, 255)
+
+    btn:setVisible(bIsEnable)
+    btn:setTouchEnabled(bIsEnable)
+    btn:setColor(bIsEnable and cNormal or cDisable)
+end
+
+--显示吃碰杠胡按钮
+function GameRoomLayer:viewActionButtons(tObjCpghObj, isPassSendMsg)
+    --显示吃碰杠胡按钮
+
+    if self.m_objCommonUi.m_btnChi then
+        local isChi = tObjCpghObj.tObjChi ~= nil
+
+        self:setBtnEnabled(self.m_objCommonUi.m_btnChi, isChi)
+    end
+
+    if self.m_objCommonUi.m_btnPeng then
+        local isPeng = tObjCpghObj.tObjPeng ~= nil
+        self:setBtnEnabled(self.m_objCommonUi.m_btnPeng, isPeng)
+    end
+
+    if self.m_objCommonUi.m_btnGang then
+        local isGang = tObjCpghObj.tObjGang ~= nil
+        self:setBtnEnabled(self.m_objCommonUi.m_btnGang, isGang)
+    end
+
+    if self.m_objCommonUi.m_btnTing then
+        local isTing = tObjCpghObj.tObjTind ~= nil
+        self:setBtnEnabled(self.m_objCommonUi.m_btnTing, isTing)
+    end
+
+    if self.m_objCommonUi.m_btnHu then
+        local isHu = tObjCpghObj.tObjHu ~= nil
+        self:setBtnEnabled(self.m_objCommonUi.m_btnHu, isHu)
+    end
+
+    self:setBtnEnabled(self.m_objCommonUi.m_btnPass, true)
+
+    self.m_objCommonUi.m_btnPass.isPassSendMsg = isPassSendMsg --是否发请求
+
+    local count = 0
+    for k,v in pairs(tObjCpghObj) do
+    	print("sdflsj!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!dfjsdjfsldjfsjfljsdfljs", k,tostring(v))
+        count = count + 1
+    end
+
+    self.m_objCommonUi.m_nodeActionBtns:setVisible(count > 0)
+
+    if count > 0 then --有按钮需要排位置
+        local arr = self.m_objCommonUi.m_nodeActionBtns:getChildren()
+        local arrBtn = {}
+        for i = 1, #arr do
+            local isBtn = arr[i]:getDescription() == "Button" 
+
+            if isBtn and arr[i]:isVisible() then
+                table.insert(arrBtn, arr[i])
+            end
+        end
+
+        --按照x轴排序
+        local function comps(a,b)
+            return a.orgPos.x < b.orgPos.x
+        end
+
+        table.sort(arrBtn, comps)
+
+        --从右往左排位置
+        local lastX = self.m_objCommonUi.m_btnPass.orgPos.x + self.m_objCommonUi.m_btnPass:getContentSize().width * self.m_objCommonUi.m_btnPass:getScaleX()
+        for i = #arrBtn, 1, -1 do
+            arrBtn[i]:setPositionX(lastX - (arrBtn[i]:getContentSize().width * arrBtn[i]:getScaleX()))
+            lastX = arrBtn[i]:getPositionX()
+        end
+    end
+
+end
+
+function GameRoomLayer:resetActionButtonsData(tObjCpghObj)
+    if self.m_objCommonUi.m_btnChi then
+        self.m_objCommonUi.m_btnChi.tObjData = tObjCpghObj.tObjChi
+    end
+    if self.m_objCommonUi.m_btnPeng then
+        self.m_objCommonUi.m_btnPeng.tObjData = tObjCpghObj.tObjPeng
+    end
+    if self.m_objCommonUi.m_btnGang then
+    self.m_objCommonUi.m_btnGang.tObjData = tObjCpghObj.tObjGang
+    end
+    if self.m_objCommonUi.m_btnTing then
+        self.m_objCommonUi.m_btnTing.tObjData = tObjCpghObj.tObjTing
+    end
+    if self.m_objCommonUi.m_btnHu then
+        self.m_objCommonUi.m_btnHu.tObjData = tObjCpghObj.tObjHu
+    end
+
+    -- --判断是不是自摸胡，按钮显示不一样
+    -- local isZm = self.m_objModel:getIsMeCurMo()
+    -- local huBtnSkin = (isZm and not self.m_objModel:getMjConfig().isZmShowHuBtnAndAni) and "game/mjcomm/button/btnZm.png" or "game/mjcomm/button/btnHu.png"
+    -- self.m_objCommonUi.m_btnHu:loadTextureNormal(huBtnSkin, 1)
+    -- self.m_objCommonUi.m_btnHu:loadTexturePressed(huBtnSkin, 1)
+    -- self.m_objCommonUi.m_btnHu:loadTextureDisabled(huBtnSkin, 1)
+end
+
+function GameRoomLayer:onClickCpghEvent(pSender)
+    if pSender == self.m_objCommonUi.m_btnChi then
+        -- if #pSender.tObjData > 1 then
+        --     self:viewChiMenu(pSender.tObjData)
+        -- else
+        --     self:onChiAction(pSender.tObjData, 1)
+        --     self:viewHideActPanelAndMenu()
+        -- end
+    elseif pSender == self.m_objCommonUi.m_btnPeng then
+
+    	if #pSender.tObjData > 1 then
+    		self:viewPengMenu(pSender.tObjData)
+    	else
+	    	self:onPengAction(pSender.tObjData, 1)
+	        self:viewHideActPanelAndMenu()
+    	end
+
+    elseif pSender == self.m_objCommonUi.m_btnGang then
+
+        if #pSender.tObjData > 1 then
+            self:viewGangMenu(pSender.tObjData)
+        else
+            self:onGangAction(pSender.tObjData, 1)
+            self:viewHideActPanelAndMenu()
+        end
+
+    elseif pSender == self.m_objCommonUi.m_btnTing then
+        -- if self.onTingAction then
+        --     self:onTingAction()
+        -- else
+        --     self.m_objCommonUi.m_btnTing:setEnabled(false)
+        --     self.m_objCommonUi.m_btnTing:setVisible(false)
+        --     self:viewDisableAllActionButtonsByTing()
+        --     self:viewHandCardsByTing(self.m_objCommonUi.m_btnTing.tObjData.tObjCards)
+        -- end
+    elseif pSender == self.m_objCommonUi.m_btnHu then
+
+        if #pSender.tObjData > 1 then
+            self:viewHuMenu(pSender.tObjData)
+        else
+            self:onHuAction(pSender.tObjData, 1)
+            self:viewHideActPanelAndMenu()
+        end
+
+    elseif pSender == self.m_objCommonUi.m_btnPass then
+        if pSender.isPassSendMsg then
+            self:onPassAction()
+        else
+            self:onPassClick()
+            --self:refreshHandCards()
+            --self.m_objModel.tObjCpghByMoPai = nil
+            --重置倒计时
+            --self:viewSendCardDelayTime({cTableNumExtra=self.m_objModel:getMeTableNumExtra()})
+        end
+        --self.m_objModel.m_chiPengGangTing = 0
+        self:viewHideActPanelAndMenu()
+
+    elseif pSender == self.m_objCommonUi.m_btnMenuPass then -- 二级菜单的【过】按钮
+        if pSender.isPassSendMsg then
+            self:onPassAction()
+        else
+            self:onPassClick()
+        end
+        self:viewHideActPanelAndMenu()
+    -- elseif pSender == self.m_objCommonUi.m_btnToMin then
+    --     if #self.m_objModel.m_tArrTingCards > 0 then
+    --         self:showHuCardsTipsMj()
+    --     else
+    --         self:hideHuCardsTipsMj()
+    --     end
+    -- elseif pSender == self.m_objCommonUi.m_btnToMax then
+    --     if #self.m_objModel.m_tArrTingCards > 0 then
+    --         self:showHuCardsTipsMj(self.m_objModel.m_tArrTingCards, self.m_objModel.m_tArrTingCardsFan)
+    --     else
+    --         self:hideHuCardsTipsMj()
+    --     end
+    end
+end
+
+
+function GameRoomLayer:viewMenuBase(tObj, iType)
+    self:viewHideActPanelAndMenu()
+    
+    --tObj = {5, 16}
+    --显示二级菜单  getTouchEndPosition  getTouchBeganPosition
+    local panelMenu = self.m_objCommonUi.m_panelMenuItems
+    local iStartX = 0
+    local iGap = 10
+    local iPanelMenuWidth = 0
+    for i = 1, #tObj do
+        local uiItem = self:createMenuItem()
+        uiItem:setScale(0.65)
+		local value = tObj[i]
+
+        local face = uiItem:getChildByName("Node_Mj"):getChildByName("Sprite_Face")
+        local imageBg = uiItem:getChildByName("Node_Mj"):getChildByName("Image_Bg")
+        imageBg.selectCardData = {card = value, type = iType}
+
+		local cardType = math.floor(value / 10) + 1
+		local cardValue = value % 10
+		face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+
+		panelMenu:addChild(uiItem)
+
+		uiItem:setPosition(cc.p(iStartX, panelMenu:getContentSize().height/2 - uiItem:getBoundingBox().height/2))
+		iStartX = iStartX + uiItem:getBoundingBox().width + iGap
+		iPanelMenuWidth = iPanelMenuWidth + uiItem:getBoundingBox().width
+
+		lt.CommonUtil:addNodeClickEvent(imageBg, handler(self, self.onClickSelectCard))
+    end
+
+    --添加
+
+    iPanelMenuWidth = iPanelMenuWidth + (#tObj - 1) * iGap
+
+    --胡牌提示滚动面板的实际尺寸
+    local panelSize = cc.size(iPanelMenuWidth, panelMenu:getContentSize().height)
+    --胡牌提示滚动面板的滚动尺寸
+    panelMenu:setInnerContainerSize(panelSize)
+    -- if panelSize.width > 300 then --长度超过了 x 就设置成x，同时允许滚动
+    --     panelSize.width = 300
+    --     self:setHuTipsScrollBarEnabled(panelMenu, true)
+    -- else --否则有足够的空间，不需要滚动
+    --     self:setHuTipsScrollBarEnabled(panelMenu, false)
+    -- end
+    panelMenu:setContentSize(panelSize)
+
+    --背景变化
+    local imgMenuBg = self.m_objCommonUi.m_imgCardsMenuBg
+    imgMenuBg:setContentSize(cc.size(-panelMenu:getPositionX() + panelMenu:getContentSize().width + iGap, imgMenuBg:getContentSize().height))
+
+    self.m_objCommonUi.m_nodeCardsMenu:setVisible(true)
+
+
+
+
+
+
+
+end
+
+--显示吃的二级菜单
+function GameRoomLayer:viewChiMenu(tObj)
+    self:viewMenuBase(tObj, 1)
+end
+
+--显示碰的二级菜单
+function GameRoomLayer:viewPengMenu(tObj)
+    self:viewMenuBase(tObj, 2)
+end
+
+--显示杠的二级菜单
+function GameRoomLayer:viewGangMenu(tObj)
+    self:viewMenuBase(tObj, 3)
+end
+
+--显示胡的二级菜单
+function GameRoomLayer:viewHuMenu(tObj)
+    self:viewMenuBase(tObj, 4)
+end
+
+function GameRoomLayer:viewHideActPanelAndMenu()
+    self.m_objCommonUi.m_nodeActionBtns:setVisible(false)
+    self.m_objCommonUi.m_nodeCardsMenu:setVisible(false)
+end
+
+function GameRoomLayer:createMenuItem()
+    local mj = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjStandFaceItem.csb")
+
+    return mj
+end
+
+--发送碰按钮的请求
+function GameRoomLayer:onPengAction(tObj, index)
+	local arg = {command = "PENG"}
+	lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+end
+
+--发送杠按钮的请求
+function GameRoomLayer:onGangAction(tObj, index)
+	local arg = {command = "GANG"}
+	lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+end
+
+--发送胡按钮的请求
+function GameRoomLayer:onHuAction(tObj, index)
+	local arg = {command = "HU"}
+	lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+end
+
+--发送过按钮的请求
+function GameRoomLayer:onPassAction()
+	local arg = {command = "GUO"}
+	lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+end
+
+function GameRoomLayer:onPassClick()
+
 end
 
 function GameRoomLayer:onNoticeGameOver(msg)   --通知客户端 本局结束 带结算
