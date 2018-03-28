@@ -82,10 +82,27 @@ end
 function JoinRoomLayer:onjoinRoomResponse(msg)
 	
 	print("__________________________", msg.result)
+	dump(msg, "msg")
     if msg.result == "success" then
     	print("加入房间")
-		local gameScene = lt.GameScene.new()
-        lt.SceneManager:replaceScene(gameScene)
+
+    	local gameInfo = lt.DataManager:getGameRoomInfo()
+
+    	dump(gameInfo, "gameInfo")
+    	local gameid = 1
+
+    	if gameInfo and gameInfo.room_setting and gameInfo.room_setting.game_type then
+    		gameid = gameInfo.room_setting.game_type
+    	end
+
+    	if gameid == 1 then --红中麻将
+			local gameScene = lt.GameScene.new()
+	        lt.SceneManager:replaceScene(gameScene)
+    	elseif gameid == 2 then --斗地主
+    		local gameScene = lt.DDZGameScene.new()
+	        lt.SceneManager:replaceScene(gameScene)
+    	end		
+
     else
         print("加入房间失败")
     end

@@ -3,6 +3,46 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Folder Name="card">
+          <Image Name="danwang.png" />
+          <Image Name="dawang1.png" />
+          <Image Name="paibei.png" />
+          <Image Name="paimian.png" />
+          <Image Name="pokerColor0.png" />
+          <Image Name="pokerColor1.png" />
+          <Image Name="pokerColor2.png" />
+          <Image Name="pokerColor3.png" />
+          <Image Name="pokerColorX0.png" />
+          <Image Name="pokerColorX1.png" />
+          <Image Name="pokerColorX2.png" />
+          <Image Name="pokerColorX3.png" />
+          <Image Name="PokerIndex01.png" />
+          <Image Name="PokerIndex101.png" />
+          <Image Name="PokerIndex102.png" />
+          <Image Name="PokerIndex111.png" />
+          <Image Name="PokerIndex112.png" />
+          <Image Name="PokerIndex12.png" />
+          <Image Name="PokerIndex121.png" />
+          <Image Name="PokerIndex122.png" />
+          <Image Name="PokerIndex21.png" />
+          <Image Name="PokerIndex22.png" />
+          <Image Name="PokerIndex31.png" />
+          <Image Name="PokerIndex32.png" />
+          <Image Name="PokerIndex41.png" />
+          <Image Name="PokerIndex42.png" />
+          <Image Name="PokerIndex51.png" />
+          <Image Name="PokerIndex52.png" />
+          <Image Name="PokerIndex61.png" />
+          <Image Name="PokerIndex62.png" />
+          <Image Name="PokerIndex71.png" />
+          <Image Name="PokerIndex72.png" />
+          <Image Name="PokerIndex91.png" />
+          <Image Name="PokerIndex92.png" />
+          <Image Name="PokerMark.png" />
+          <Image Name="PokerTopMark.png" />
+          <Image Name="xiaowang.png" />
+          <Image Name="xiaowang1.png" />
+        </Folder>
         <Folder Name="game">
           <Folder Name="common">
             <Folder Name="hlby">
@@ -1560,6 +1600,7 @@
             </Folder>
             <PlistInfo Name="zpcommPlist_1.csi" Type="Plist" />
           </Folder>
+          <Project Name="Ani_shaizi.csd" Type="Node" />
         </Folder>
         <Folder Name="games">
           <Folder Name="bj">

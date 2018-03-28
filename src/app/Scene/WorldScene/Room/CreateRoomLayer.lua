@@ -17,27 +17,17 @@ local eWidgetTag = {
     ePay = 0,-- 起始为0 但实际是num+ePay 从1开始
     eRound = 3,-- 起始为3 但实际是num+eRount 从4开始
 }
---数据类型
-local GameDataType = {
-    eOldRule = 1,
-    eNewRule = 2,
-    ePay = 3,
-    eRound = 4,
-    ePlayNum = 5,
-    eGameId = 6,
-    eOldInput = 7,
-    eNewInput = 8,
-}
---规则按钮类型
-local RuleBtnType = {
-    eOneOption = 1,--必选单选项
-    eMulOption = 2,--必选多选项
-    eDisOneMenus = 3,--可选菜单
-    eDisOneOption = 4,--可选单选项
-    eDisMulOption = 5,--可选多选项
-    eDisInput = 6, --插入数值
-    eSuppressOneOption = 7, --可隐藏单选项
-}
+
+-- --规则按钮类型
+-- local RuleBtnType = {
+--     eOneOption = 1,--必选单选项
+--     eMulOption = 2,--必选多选项
+--     eDisOneMenus = 3,--可选菜单
+--     eDisOneOption = 4,--可选单选项
+--     eDisMulOption = 5,--可选多选项
+--     eDisInput = 6, --插入数值
+--     eSuppressOneOption = 7, --可隐藏单选项
+-- }
 
 local GameConf = require("app.common.GameConf")
 
@@ -59,6 +49,13 @@ function CreateRoomLayer:ctor()
     -- 红中规则界面
     self.m_hzmjRule = self.ruleSv:getChildByName("HZMJ_Rule")
     self.m_hzmjRule:setVisible(false)
+
+
+    self.m_ddzRule = self.ruleSv:getChildByName("DDZ_Rule")
+    self.m_ddzRule:setVisible(false)
+
+
+
 
     self.moreGameSv = self.gamePanelBg:getChildByName("ScrollView_MoreGame")--更多游戏列表
     self.moreGameSv:setSwallowTouches(false)--更多游戏列表
@@ -185,19 +182,22 @@ function CreateRoomLayer:createGameList(iGameId, index, iGameIds)
         local btnItem, selectItem = self:createGameMenuItem(v)
         btnTab:setPosition(70, intPosY)
         btnTab:setAnchorPoint(cc.p(0,0))
-        btnTab.gameIds = btnItem.gameIds
-        btnTab.index = 0
-		btnTab.gameDefaultRule = 0
-		btnTab.sale = 0
-		btnItem.index = 0
-		btnItem.gameDefaultRule = 0
-		selectItem.index = 0
-		selectItem.gameDefaultRule = 0
+        -- btnTab.gameIds = btnItem.gameIds
+        -- btnTab.index = 0
+		-- btnTab.gameDefaultRule = 0
+		-- btnTab.sale = 0
+		-- btnItem.index = 0
+		-- btnItem.gameDefaultRule = 0
+		-- selectItem.index = 0
+		-- selectItem.gameDefaultRule = 0
 
         btnItem:setAnchorPoint(cc.p(0,0))
         selectItem:setAnchorPoint(cc.p(0,0))
         selectItem:setPosition(0, -5)
         btnItem:setPosition(0, -5)
+
+        btnTab.btnItem = btnItem
+        btnTab.selectItem = selectItem
 
         btnTab:addChild(btnItem)
         btnTab:addChild(selectItem)
@@ -205,12 +205,25 @@ function CreateRoomLayer:createGameList(iGameId, index, iGameIds)
         -- self:addGameBtnClickedListener(btnTab, false, self.buttonClicked)
         -- lt.CommonUtil:addNodeClickEvent(btnTab, handler(self, self.gameBtnOnTap))
         lt.CommonUtil:addNodeClickEvent(btnTab, function( )
-
             if btnTab == selectBtn then
                 return
             end
             selectBtn = btnTab
         	self:gameBtnOnTap(i)
+
+            -- dump(btnTab, "btnTab")
+            -- dump(self.gameBtnList, "self.gameBtnList")
+
+            for i, vBtn in pairs(self.gameBtnList) do 
+                if btnTab == vBtn then
+                    vBtn.selectItem:setVisible(true)
+                    vBtn.btnItem:setVisible(false)
+                else
+                    vBtn.selectItem:setVisible(false)
+                    vBtn.btnItem:setVisible(true)
+                end
+            end
+
         end, false)
 
         table.insert(self.gameBtnList, btnTab)
@@ -223,15 +236,21 @@ end
 
 function CreateRoomLayer:onjoinRoomResponse( tObj )
 	dump(tObj, "创建房间返回")
-
     if tObj.result == "success" then
-        self:onClose()
+        dump(self.selectTable, "self.selectTable")
+        local gameInfo = self.selectTable
 
-        local gameScene = lt.GameScene.new()
-        lt.SceneManager:replaceScene(gameScene)
-        
+        -- 斗地主
+        if gameInfo.game_type == 2 then
+            local gameScene = lt.DDZGameScene.new()
+            lt.SceneManager:replaceScene(gameScene)
+        elseif gameInfo.game_type == 1 then-- 红中麻将
+            local gameScene = lt.GameScene.new()
+            lt.SceneManager:replaceScene(gameScene)
+        end
+        self:onClose()
     else
-        print("创建房间失败", tObj.result)
+        print("创建房间失败", tObj)
     end
 end
 
@@ -257,9 +276,197 @@ function CreateRoomLayer:gameBtnOnTap(gameId, index, gameIds)
 	-- 红中麻将
 	if gameId == "HZMJ" then
 		self.m_hzmjRule:setVisible(true)
+        self.m_ddzRule:setVisible(false)
 		-- 设置一下数据
 		self:initHZMJRule()
-	end
+	elseif gameId == "DDZ" then
+        self.m_hzmjRule:setVisible(false)
+        self.m_ddzRule:setVisible(true)
+        self:initDDZRule()
+    end
+
+
+end
+
+function CreateRoomLayer:initDDZRule( ... )
+
+    self.selectTable = {}
+    self.selectTable.other_setting = {1, 0, 0, 0, 0}
+    if not self.tGamesRuleConfig then
+        dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+        return
+    end
+
+    self.selectTable.game_type = 2
+    self.selectTable.playNum = self.tGamesRuleConfig.intGamePlayer
+    -- 游戏设置项[数组]
+    -- [1] 底分
+    -- [2] 奖码的个数
+    -- [3] 七对胡牌
+    -- [4] 喜分
+    -- [5] 一码不中当全中
+
+    local payTable = {}
+    local roundTable = {}
+    local jiangNum = {}
+    local playRule = {}
+    local payType = {1, 2, 3}
+
+    dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+
+    local roundType = {self.tGamesRuleConfig.tGamesRule.round[1][3], self.tGamesRuleConfig.tGamesRule.round[2][3], self.tGamesRuleConfig.tGamesRule.round[3][3]}
+    -- local playNumType = {4, 3, 2}
+    local jiangType = {3, 4, 5}
+    local ruleType = {0, 0, 0}
+
+    -- 房主出资， 对应局数多少
+    local allPay = {self.tGamesRuleConfig.tGamesRule.round[1][2], self.tGamesRuleConfig.tGamesRule.round[2][2], self.tGamesRuleConfig.tGamesRule.round[3][2]}
+    local everyPay = {self.tGamesRuleConfig.tGamesRule.round[1][4], self.tGamesRuleConfig.tGamesRule.round[2][4], self.tGamesRuleConfig.tGamesRule.round[3][4]}
+
+    -- 玩家平分， 对应多少
+    for i = 1, 3 do 
+        -- 支付方式，
+        local payPanel = self.m_ddzRule:getChildByName("Panel_Pay".. i)    
+        payPanel.selectNode = payPanel:getChildByName("Image_Select")
+        payPanel._textNode = payPanel:getChildByName("Text_Pay")
+
+        payTable[i] = payPanel
+        lt.CommonUtil:addNodeClickEvent(payPanel, function( ... )
+            for i, v in pairs(payTable) do 
+                if v == payPanel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.pay = payType[i]
+                    --  
+                    if i == 1 or i == 3 then
+                        for j = 1, 3 do 
+                            roundTable[j]._textNode2:setString("(".. allPay[j] .. "金币)")
+                        end
+                    else
+                        for j = 1, 3 do 
+                            roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
+                        end
+                    end
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+    
+        -- 圈数
+        local roundPalel =  self.m_ddzRule:getChildByName("Panel_Round".. i)
+        roundPalel.selectNode = roundPalel:getChildByName("Image_Select")   
+        roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
+        roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundTable[i] = roundPalel
+
+        lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
+            for i, v in pairs(roundTable) do 
+                if v == roundPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    v._textNode2:setColor(SelectColor)
+                    self.selectTable.round = roundType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode2:setColor(NormalColor)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        -- 封顶
+        local jiangPalel = self.m_ddzRule:getChildByName("Panel_Jiang".. i)
+        jiangPalel.selectNode = jiangPalel:getChildByName("Image_Select")
+        jiangPalel.selectNode:setVisible(false) 
+        jiangPalel._textNode = jiangPalel:getChildByName("Text_Pay")
+        jiangNum[i] = jiangPalel
+
+        lt.CommonUtil:addNodeClickEvent(jiangPalel, function( ... )
+            for i, v in pairs(jiangNum) do 
+                if v == jiangPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    -- 这个是几炸封顶
+                    self.selectTable.other_setting[3] = jiangType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+        -- 玩法只有斗地主和欢乐斗地主
+        if i < 3 then
+            local rulePalel = self.m_ddzRule:getChildByName("Panel_Play".. i)
+            rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
+            rulePalel.selectNode:setVisible(fa)
+            rulePalel._textNode = rulePalel:getChildByName("Text_Pay")  
+            playRule[i] = rulePalel
+            rulePalel.iGameType = i
+            lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
+                for i, value in pairs(playRule) do
+                    if value == rulePalel then
+                        self.selectTable.other_setting[2] = rulePalel.iGameType
+                        value.selectNode:setVisible(true)
+                    else
+                        value.selectNode:setVisible(false)
+                    end
+                end
+            end, false)
+        end
+    end
+
+
+    local delBtn = self.m_ddzRule:getChildByName("Image_Del")
+    local addBtn = self.m_ddzRule:getChildByName("Image_Add")
+    local baseScore = self.m_ddzRule:getChildByName("Image_TimeCell"):getChildByName("baseText")
+
+    local baseIndex = 1;
+
+    baseScore:setString(1)
+    baseScore.baseNums = 1
+
+
+    self.selectTable.other_setting[1] = 1
+
+
+    -- 上面配置
+    local iTableBase = self.tGamesRuleConfig.tGamesRule.baseScore
+
+    lt.CommonUtil:addNodeClickEvent(addBtn, function( ... )
+        if baseIndex == #iTableBase then
+            return
+        end
+        baseIndex = baseIndex + 1
+
+        if baseIndex > #iTableBase then
+            baseIndex = #iTableBase
+        end
+        self.selectTable.other_setting[1] = iTableBase[baseIndex]
+        baseScore:setString(self.selectTable.other_setting[1])
+    end)
+
+    lt.CommonUtil:addNodeClickEvent(delBtn, function( ... )
+        if baseIndex == 1 then
+            return
+        end
+        baseIndex = baseIndex - 1
+
+        if baseIndex < 1 then
+            baseIndex = 1
+        end
+        -- baseScore.baseNums = iTableBase[baseIndex]
+        self.selectTable.other_setting[1] = iTableBase[baseIndex]
+
+        baseScore:setString(self.selectTable.other_setting[1])
+    end)
+
+    payTable[1]:onClick()
+    roundTable[1]:onClick()
+    jiangNum[1]:onClick()
+    playRule[1]:onClick()
+    
 end
 
 
@@ -273,6 +480,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 		return
 	end
 
+    self.selectTable.game_type = 1
 	-- 游戏设置项[数组]
     -- [1] 底分
 	-- [2] 奖码的个数
@@ -631,7 +839,7 @@ function CreateRoomLayer:sendCreateRoom( ... )
 
 	local tempTable  = {}
 
-    tempTable.game_type = 1
+    tempTable.game_type = self.selectTable.game_type
 	tempTable.pay_type =  self.selectTable.pay
 	tempTable.round = self.selectTable.round
 	tempTable.seat_num = self.selectTable.playNum
