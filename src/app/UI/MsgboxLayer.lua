@@ -1,24 +1,39 @@
-local MsgboxLayer = class("MsgboxLayer", function( ... )
-	return display.newLayer()
-end)
+local MsgboxLayer = class("MsgboxLayer")
 
 -- @param dataTable
 -- @param dataTable.txtCoutent
-function MsgboxLayer:ctor(  )
+function MsgboxLayer:ctor()
 
-	local layer = cc.CSLoader:createNode("game/common/MsgBoxLayer.csb")
+end
 
-	dump(layer, "layer")
-	dump(self, "self")
-	self:addChild(layer)
+-- @param txtContent 	显示内容
+-- @param isOneBtn		是否只有一个btn
+-- @param sureFunc		确定按钮的回调
+-- @param cancelFunc	取消按钮的回调
+-- @param isCloseBox	回调完之后是否自动关闭弹窗
+-- @param iClockTime	闹钟时间
+function MsgboxLayer:showMsgBox(txtContent, isOneBtn, sureFunc, cancelFunc, isCloseBox, iClockTime)
+	if not self.layer then
+		print("++++++++++")
+		local layer = cc.CSLoader:createNode("game/common/MsgBoxLayer.csb")
+		layer:retain()
+		self.layer = layer
+	end
+	local parent = self.layer:getParent()
+	print("PARENT = ",parent)
+	if not self.layer:getParent() then
+		local scene = cc.Director:getInstance():getRunningScene()
+		scene:addChild(self.layer)
+	end
 
-
-	local blackBg = layer:getChildByName("Ie_Mark")
+	
+	local blackBg = self.layer:getChildByName("Ie_Mark")
 	-- 设置屏蔽下面所有事件
 	-- blackBg:setTouchSwallowEnabled(true)
 	blackBg:setSwallowTouches(true)
 
-	local boxBg = layer:getChildByName("Ie_Bg")
+	local boxBg = self.layer:getChildByName("Ie_Bg")
+
 	-- 显示的文字
 	local txtCoutent = boxBg:getChildByName("Tt_Countent")
 	-- 确定按钮
@@ -37,21 +52,13 @@ function MsgboxLayer:ctor(  )
 	self.txtCoutent = txtCoutent
 	self.btnSure = btnSure
 	self.btnCancel = btnCancel
-end
 
--- @param txtContent 	显示内容
--- @param isOneBtn		是否只有一个btn
--- @param sureFunc		确定按钮的回调
--- @param cancelFunc	取消按钮的回调
--- @param isCloseBox	回调完之后是否自动关闭弹窗
--- @param iClockTime	闹钟时间
-function MsgboxLayer:showMsgBox(txtContent, isOneBtn, sureFunc, cancelFunc, isCloseBox, iClockTime)
 
 	txtContent = txtContent or "当前传的显示内容为空, 请检查"
 	isOneBtn = isOneBtn == true and 1 or 2
 	sureFunc = sureFunc or nil
 	cancelFunc = cancelFunc or nil
-	isCloseBox = isCloseBox == nil and true or false
+	isCloseBox = isCloseBox == nil and true or isCloseBox
 
 	iClockTime = iClockTime or 0
 
@@ -95,13 +102,14 @@ end
 -- @param isScale
 function MsgboxLayer:setSureClick( func, isClose, isScale )
 	lt.CommonUtil:addNodeClickEvent(self.btnSure, function( ... )
+		if isClose then
+			self:onClose()
+		end
 		if func then
 			func()
 		end
 
-		if isClose then
-			self:onClose()
-		end
+
 
 	end, isScale)
 end
@@ -112,12 +120,13 @@ end
 -- @param isScale
 function MsgboxLayer:setCancelClick( func, isClose, isScale )
 	lt.CommonUtil:addNodeClickEvent(self.btnCancel, function( ... )
-		if func then
-			func()
-		end
 		if isClose then
 			self:onClose()
 		end
+		if func then
+			func()
+		end
+
 	end, isScale)
 end
 
@@ -153,10 +162,12 @@ function MsgboxLayer:onClose( ... )
 	print("MsgBox Close")
 	self.txtClock:stopAllActions()
 	
-	if tolua.isnull(self) == true then
+	if tolua.isnull(self.layer) == true then
 		print("MsgBox 已经被销毁，不能再次释放")
 	else
-		self:removeSelf()
+		self.layer:removeSelf()
+		local parent = self.layer:getParent()
+		print("FYD====>>>>>>PARENT IS =>",parent)
 	end
 end
 

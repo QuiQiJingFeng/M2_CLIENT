@@ -45,6 +45,9 @@ ltMetaTable["Protobuf"] = "app.Net.Protobuf"
 ltMetaTable["NetWork"] = "app.Net.NetWork"
 ltMetaTable["SocketConstants"] = "app.Net.SocketConstants"
 
+--msgbox
+ltMetaTable["MsgboxLayer"] = "app.UI.MsgboxLayer"
+
 --Scene
 ltMetaTable["InitLayer"] = "app.Scene.InitScene.InitLayer"
 ltMetaTable["InitScene"] = "app.Scene.InitScene.InitScene"
@@ -70,9 +73,6 @@ ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.Setting.SetLayer"
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
 ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
-
-
-ltMetaTable["MsgboxLayer"]			= "app.Scene.WorldScene.common.MsgboxLayer"
 
 
 -- ddz

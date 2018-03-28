@@ -35,6 +35,7 @@ function DataManager:init()
 end
 
 function DataManager:reConnectSuccess(recv_msg)
+    print("------------重连成功-----------")
     --更新玩家的token
     self:saveToken(recv_msg.reconnect_token)
     --重新连接成功 则重置连接次数
@@ -44,17 +45,26 @@ end
 function DataManager:listenNetDisconnect()
     --断线重连
     local times = self:updateDisconnectTimes()
+    print("FYD+++++>>>>TIMES = ",times)
     if times <= 3 then
         lt.NetWork:reconnect("127.0.0.1", 8888, function() 
             local reconnect_token = self:getReconnectToken()
             local user_id = self:getPlayerUid()
-            if not user_id or reconnect_token then
+            if not user_id or not reconnect_token then
                 error("not user_id or reconnect_token")
             end
-            lt.NetWork:sendTo({[lt.GameEventManager.EVENT.RECONNECT] = {token = msg.reconnect_token}})
+            lt.NetWork:send({[lt.GameEventManager.EVENT.RECONNECT] = {token = reconnect_token}})
         end)
     else
-        print("弹框: 网络断开")
+        local sureFunc = function()
+             self:updateDisconnectTimes(true)
+             self:listenNetDisconnect()
+        end
+        local cancelFunc = function()
+        end
+
+        local isOneBtn = false
+        lt.MsgboxLayer:showMsgBox("网络连接断开,是否重新连接", isOneBtn, sureFunc, cancelFunc, true)
     end
 end
 
