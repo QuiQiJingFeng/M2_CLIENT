@@ -32,6 +32,10 @@ function WorldMenuLayer:ctor()
     local createRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_CreateRoom")
     local joinRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_JoinRoom")
     
+    self.Se_Create = createRoomBtn:getChildByName("Se_Create")
+    self.Se_Return = createRoomBtn:getChildByName("Se_Return")
+
+
     lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
     lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickCreateRoomBtn))
     lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickJoinRoomBtn))
@@ -1151,6 +1155,16 @@ end
 -- ##### 打开次级UI界面 隐藏当前界面 #####
 function WorldMenuLayer:showWorldMenuLayer()
     self:setVisible(true)
+
+
+    local info = lt.DataManager:getPlayerInfo()
+    if info.room_id then
+        lt.CommonUtil:show(self.Se_Return)
+        lt.CommonUtil:hide(self.Se_Create)
+    else
+        lt.CommonUtil:hide(self.Se_Return)
+        lt.CommonUtil:show(self.Se_Create)     
+    end
 end
 
 function WorldMenuLayer:hideWorldMenuLayer()
