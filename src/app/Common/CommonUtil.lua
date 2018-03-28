@@ -1161,4 +1161,31 @@ function CommonUtil:removeEventListenerTouchOneByOne(node, listener)
     eventDispatcher:removeEventListener(listener)
 end
 
+
+function CommonUtil:getChildByNames(root,...)
+    local args = {...}
+    local temp_node = root
+    for _,name in ipairs(args) do
+        temp_node = temp_node:getChildByName(name)
+        assert(temp_node,"path not exist")
+    end
+    return temp_node
+end
+
+function CommonUtil:hide(...)
+    local args = {...}
+    for i,node in ipairs(args) do
+        node:setVisible(false)
+    end
+end
+
+function CommonUtil:show(...)
+    local args = {...}
+    for i,node in ipairs(args) do
+        node:setVisible(true)
+    end
+end
+
+
+
 return CommonUtil
