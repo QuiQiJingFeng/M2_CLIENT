@@ -29,7 +29,53 @@ function DataManager:init()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_ROOM_INFO, handler(self, self.onRefreshRoomInfo), "DataManager.onRefreshRoomInfo")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_USER_INFO, handler(self, self.onPushUserInfo), "DataManager.onPushUserInfo")
 
-end                                                                      
+     --监听客户端断开连接事件
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.WAIT_RECONNECT,handler(self, self.listenNetDisconnect),"DataManager.listenNetDisconnect")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.RECONNECT,handler(self, self.reConnectSuccess),"DataManager.reConnectSuccess")
+end
+
+function DataManager:reConnectSuccess(recv_msg)
+    --更新玩家的token
+    self:saveToken(recv_msg.reconnect_token)
+    --重新连接成功 则重置连接次数
+    self:updateDisconnectTimes(true)
+end
+
+function DataManager:listenNetDisconnect()
+    --断线重连
+    local times = self:updateDisconnectTimes()
+    if times <= 3 then
+        lt.NetWork:reconnect("127.0.0.1", 8888, function() 
+            local reconnect_token = self:getReconnectToken()
+            local user_id = self:getPlayerUid()
+            if not user_id or reconnect_token then
+                error("not user_id or reconnect_token")
+            end
+            lt.NetWork:sendTo({[lt.GameEventManager.EVENT.RECONNECT] = {token = msg.reconnect_token}})
+        end)
+    else
+        print("弹框: 网络断开")
+    end
+end
+
+--FYD 记录下玩家的重连token
+function DataManager:saveToken(token)
+    self._reconnect_token = token 
+end
+
+--FYD 获取玩家的重连token
+function DataManager:getReconnectToken()
+    return self._reconnect_token
+end
+
+--FYD 更新重连的次数
+function DataManager:updateDisconnectTimes(is_reset)
+    if not self._reconnect_times or is_reset then
+        self._reconnect_times = 0
+    end
+    self._reconnect_times = self._reconnect_times + 1
+    return self._reconnect_times
+end                                                                    
 
 function DataManager:reset()
     lt.CommonUtil.print("DataManager:reset")
@@ -66,12 +112,8 @@ function DataManager:getPlayerName()
 end
 
 function DataManager:onPushUserInfo(msg)
-    dump(msg)
     local palyerInfo = self:getPlayerInfo()
-    palyerInfo.user_id = msg.user_id
-    palyerInfo.user_name = msg.user_name
-    palyerInfo.user_pic = msg.user_pic
-    palyerInfo.gold_num = msg.gold_num
+    table.merge(palyerInfo,msg)
 end
 
 function DataManager:getGameRoomInfo(flag)

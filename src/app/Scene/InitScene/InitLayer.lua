@@ -28,26 +28,27 @@ function InitLayer:onLogin()--登录微信
     -- 正常游戏
 
     if not self._connectSuccess then
-        lt.NetWork:connect("47.52.99.120", 8888, handler(self, self.onConnectResponse))
+        lt.NetWork:connect("127.0.0.1", 8888, handler(self, self.onConnectResponse))
     end
 
     if self._connectSuccess then
-        local account = "AAAAA"..tostring(math.random(1111,9999))
+        local account = "FYD3"..math.random(1,10000)
         print("FYD+++++>account",account)
-        local arg = {account=account,token="lalal",login_type="weixin",user_name = "lalalal", user_pic = "www"}--weixin
+        local arg = {account=account,token="lalal",login_type="weixin",user_name = "FYD3", user_pic = "www"}--weixin
         lt.NetWork:sendTo(lt.GameEventManager.EVENT.LOGIN, arg)
     end
+
 
     -- local worldScene = lt.WorldScene.new()
     -- lt.SceneManager:replaceScene(worldScene)
 end
 
+
 function InitLayer:onLoginResponse(msg)--登录回调
     print("++++++++++++++++++++++++++++++++++++++++++++++++++++++111111111111111111111111111")
     if msg.result == "success" then
-        local reconnect_token = msg.reconnect_token
-        --user:init(user_id,reconnect_token)
-        print( "reconnect_token=",msg.reconnect_token)
+        --记录下来玩家的重连token 重连的时候会用到
+        lt.DataManager:saveToken(msg.reconnect_token)
 
         local worldScene = lt.WorldScene.new()
         lt.SceneManager:replaceScene(worldScene)
@@ -64,28 +65,7 @@ function InitLayer:onEnter()
     print("InitLayer:onEnter")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.LOGIN, handler(self, self.onLoginResponse), "InitLayer:onLoginResponse")
 
-    lt.NetWork:connect("47.52.99.120", 8888, handler(self, self.onConnectResponse))
-
-
-    -- local times = 0
-    -- lt.GameEventManager:addListener("wait_reconnect",function() 
-    --         print("断线重连-------")
-    --         times = times + 1
-    --         if times <= 3 then
-    --             lt.NetWork:connect("127.0.0.1", 8888, function() 
-    --                     print("connect success")
-    --                     lt.NetWork:send({["reconnect"] = {token = msg.reconnect_token}},function(recv_msg)
-    --                         print("-----------------reconnect----------")
-    --                         print("因为客户端并没有退出,所以不需要重新拉取数据")
-    --                         times = 0
-    --                      end)
-    --                 end)
-    --         else
-    --             print("弹框: 网络断开")
-    --         end
-    --     end,1)
-
-
+    lt.NetWork:connect("127.0.0.1", 8888, handler(self, self.onConnectResponse))
 end
 
 function InitLayer:onExit()

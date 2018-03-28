@@ -827,6 +827,10 @@ function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
 	dump(msg)
 end
 
+function GameRoomLayer:onPushAllRoomResponse(msg)
+	dump(msg,"push_all_room_info",11)
+end
+
 function GameRoomLayer:onEnter()   
     print("GameRoomLayer:onEnter")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.SIT_DOWN, handler(self, self.onSitDownResponse), "GameRoomLayer:onSitDownResponse")
@@ -845,6 +849,7 @@ function GameRoomLayer:onEnter()
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.GAME_CMD, handler(self, self.onGameCMDResponse), "GameRoomLayer.onGameCMDResponse")
 
+    lt.GameEventManager:addListener("push_all_room_info", handler(self, self.onPushAllRoomResponse), "GameRoomLayer.onPushAllRoomResponse")
 
 end
 

@@ -31,7 +31,12 @@ GUO     过]]--
 
     PUSH_PLAYER_OPERATOR_STATE = "push_player_operator_state",--通知客户端当前 碰/杠 状态
 
-    NOTICE_GAME_OVER = "notice_game_over"--通知客户端 本局结束 带结算
+    NOTICE_GAME_OVER = "notice_game_over",--通知客户端 本局结束 带结算
+
+    RECONNECT = "reconnect", --重新连接
+    
+    WAIT_RECONNECT = "wait_reconnect",  --监听客户端连接断开
+    
 }
 
 local handler_id = 0

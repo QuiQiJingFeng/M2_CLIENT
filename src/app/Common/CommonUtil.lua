@@ -1213,7 +1213,7 @@ function CommonUtil:getChildByNames(root,...)
     local temp_node = root
     for _,name in ipairs(args) do
         temp_node = temp_node:getChildByName(name)
-        assert(temp_node,"path not exist")
+        assert(temp_node,"path not exist->"..name)
     end
     return temp_node
 end
