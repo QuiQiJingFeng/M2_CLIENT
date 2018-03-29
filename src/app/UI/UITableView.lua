@@ -125,7 +125,7 @@ function UITableView:setData(data,x_space,y_space,unit)
 			y = self.inner_size.height - ((size.height + self.unit) * (idx-1) + self.y_space + (1-anchor.y)*size.height) * 1
 			x = self.x_space + anchor.x * size.width
 		else
-			y = self.y_space
+			y = self.y_space + anchor.y * size.height
 			x = (size.width + self.unit) * (idx-1) + self.x_space + size.width/2
 		end
 		local pos = cc.p(x,y)
@@ -182,7 +182,7 @@ function UITableView:update()
 			y = self.inner_size.height -  ((size.height + self.unit) * (idx) + self.y_space + (1-anchor.y)*size.height) 
 			x = self.x_space + anchor.x * size.width
 		else
-			y = self.y_space
+			y = self.y_space + anchor.y * size.height
 			x = (size.width + self.unit) * (idx) + self.x_space + size.width/2
 		end
 
@@ -213,7 +213,7 @@ function UITableView:update()
 			y = self.inner_size.height -  ((size.height + self.unit) * (idx-2) + self.y_space + (1-anchor.y)*size.height) 
 			x = self.x_space + anchor.x * size.width
 		else
-			y = self.y_space
+			y = self.y_space + anchor.y * size.height
 			x = (size.width + self.unit) * (idx-2) + self.x_space + size.width/2
 		end
 
