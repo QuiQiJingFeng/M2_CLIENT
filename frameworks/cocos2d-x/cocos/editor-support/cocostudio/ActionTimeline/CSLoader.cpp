@@ -893,7 +893,7 @@ Node * CSLoader::createNode(const Data& data, const ccNodeLoadCallback &callback
         // decode plist
         auto textures = csparsebinary->textures();
         int textureSize = csparsebinary->textures()->size();
-        CCLOG("textureSize = %d", textureSize);
+        //CCLOG("textureSize = %d", textureSize);
         for (int i = 0; i < textureSize; ++i)
         {
             SpriteFrameCache::getInstance()->addSpriteFramesWithFile(textures->Get(i)->c_str());
