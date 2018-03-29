@@ -15,7 +15,7 @@ function UITableViewItem:ctor()
     self.roomNameLabel:setAlignment(cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER)
     self.roomNameLabel:setPosition(cc.p(50, 40))
     self:addChild(self.roomNameLabel)
-    self.roomNameLabel:setString("红中麻将")
+    
    
     self.roomNumberLabel = cc.Label:createWithSystemFont("", "Helvetica", 20.0)
     self.roomNumberLabel:setColor(txtColor)
@@ -24,12 +24,15 @@ function UITableViewItem:ctor()
     self.roomNumberLabel:setPosition(cc.p(135, 40))
     self.roomNumberLabel:setAlignment(cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER)
     self:addChild(self.roomNumberLabel)
-    self.roomNumberLabel:setString("747088\n(房主)")
+    
 
     local btnPath = "hallcomm/lobby/img/myRoom_btn2.png"                              
     self.btn = ccui.Button:create(btnPath, btnPath, btnPath, 1)
     self.btn:setPosition(350, 40)           
     self:addChild(self.btn)
+
+
+    lt.CommonUtil:addNodeClickEvent(self.btn, handler(self,self.onJoinRoom), true)
 
  
     self.stateLabel = cc.Label:createWithSystemFont("", "Helvetica", 20.0)
@@ -38,7 +41,8 @@ function UITableViewItem:ctor()
     self.stateLabel:setOpacity(txtOpacity)
     self.stateLabel:setAlignment(cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER)
     self:addChild(self.stateLabel)
-    self.stateLabel:setString("未开始\n(剩余27分钟)")
+    self.stateLabel:setColor(cc.c3b(255,100,100))
+    
 
     self.arrowSpr = display.newSprite()
     local selectPath = "hallcomm/lobby/img/img_ArrowToZhanji.png"
@@ -56,9 +60,51 @@ function UITableViewItem:ctor()
     self:addChild(self.arrowSpr) 
 end
 
+function UITableViewItem:onJoinRoom()
+	local room_id = self.data.room_id
+	local arg = {room_id = room_id}
+	lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+end
+
 --return cell size
 function UITableViewItem:refreshData(data)
+    self.data = data
+	self.roomNameLabel:setString(lt.Constants.GAME_TYPE[data.game_type])
+
+	local str = data.room_id
+	if lt.DataManager:getPlayerUid() == data.owner_id then
+		str = str .. lt.Constants.TEXTS[1]
+	end
+	self.roomNumberLabel:setString(str)
+	if data.state == lt.Constants.ROOM_STATE.GAME_PREPARE then
+		local minites = math.floor((data.expire_time - os.time()) / 60)
+		if minites > 0 then
+			self.stateLabel:setString(string.format(lt.Constants.TEXTS[2],minites))
+		else
+			self.stateLabel:setString(lt.Constants.TEXTS[4])
+			lt.CommonUtil:hide(self.btn)
+		end
+		local room_id = lt.DataManager:getPlayerInfo().room_id
+		if room_id then
+			if room_id == data.room_id then
+				lt.CommonUtil:show(self.btn)
+			else
+				lt.CommonUtil:hide(self.btn)
+			end
+		else
+			lt.CommonUtil:show(self.btn)
+		end
+	elseif data.state == lt.Constants.ROOM_STATE.GAME_PLAYING then
+		self.stateLabel:setString(lt.Constants.TEXTS[3])
+		lt.CommonUtil:hide(self.btn)
+	elseif data.state == lt.Constants.ROOM_STATE.GAME_OVER then
+		self.stateLabel:setString(lt.Constants.TEXTS[4])
+		lt.CommonUtil:hide(self.btn)
+	end
+
 	
+
+
 end
 
 

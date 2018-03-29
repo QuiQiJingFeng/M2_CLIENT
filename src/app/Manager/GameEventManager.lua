@@ -37,6 +37,8 @@ GUO     过]]--
 
     NOTICE_GAME_OVER = "notice_game_over",--通知客户端 本局结束 带结算
 
+    PUSH_ALL_ROOM_INFO = "push_all_room_info",  --获取全部的房间信息
+
 
     
 }

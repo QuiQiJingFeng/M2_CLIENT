@@ -1468,4 +1468,21 @@ Constants.CG_ON = false
 
 Constants.GUIDE_AUTO_BATTLE_LEVEL = 2
 
+Constants.GAME_TYPE = {
+    [1] = "红中麻将"
+}
+
+Constants.TEXTS = {
+    [1] = "\n(房主)",
+    [2] = "未开始\n(剩余%d分钟)",
+    [3] = "游戏中",
+    [4] = "游戏结束"
+}
+
+Constants.ROOM_STATE = {
+    GAME_PREPARE = 1,   --游戏准备阶段
+    GAME_PLAYING = 2,   --游戏中
+    GAME_OVER = 3,      --游戏结束
+}
+
 return Constants

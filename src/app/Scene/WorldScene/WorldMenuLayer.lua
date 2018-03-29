@@ -71,8 +71,7 @@ function WorldMenuLayer:listenRoomListUpdate()
 
     if info.room_list and #info.room_list > 0 then
         lt.CommonUtil:hide(self.bg_NoData)
-        dump(info.room_list,"room_list")
-        self.tb_room_info:setData(info.room_list)
+        self.tb_room_info:setData(info.room_list,0,10)
     end 
 end
 
@@ -82,8 +81,12 @@ function WorldMenuLayer:onClickSetBtn(event)
 end
 
 function WorldMenuLayer:onClickCreateRoomBtn(event)
-    local setLayer = lt.CreateRoomLayer.new()
-    lt.UILayerManager:addLayer(setLayer, true)
+    if self.Se_Return:isVisible() then
+
+    else
+        local setLayer = lt.CreateRoomLayer.new()
+        lt.UILayerManager:addLayer(setLayer, true)
+    end
 end
 
 function WorldMenuLayer:onClickJoinRoomBtn(event)

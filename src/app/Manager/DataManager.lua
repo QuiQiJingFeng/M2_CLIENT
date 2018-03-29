@@ -32,6 +32,43 @@ function DataManager:init()
      --监听客户端断开连接事件
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.WAIT_RECONNECT,handler(self, self.listenNetDisconnect),"DataManager.listenNetDisconnect")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.RECONNECT,handler(self, self.reConnectSuccess),"DataManager.reConnectSuccess")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.JOIN_ROOM, handler(self, self.onjoinRoomResponse), "DataManager:onjoinRoomResponse")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_ALL_ROOM_INFO, handler(self, self.onPushAllRoomInfo), "DataManager:onjoinRoomResponse")
+
+end
+
+function DataManager:onPushAllRoomInfo(msg)
+    dump(msg,"ON PUSH ALL ROOM INFO",11)
+end
+
+function DataManager:onjoinRoomResponse(msg)
+    
+    print("__________________________", msg.result)
+    dump(msg, "msg")
+    if msg.result == "success" then
+        print("加入房间")
+
+        local gameInfo = lt.DataManager:getGameRoomInfo()
+
+        dump(gameInfo, "gameInfo")
+        local gameid = 1
+
+        if gameInfo and gameInfo.room_setting and gameInfo.room_setting.game_type then
+            gameid = gameInfo.room_setting.game_type
+        end
+
+        if gameid == 1 then --红中麻将
+            print("FYD+++++++++切换游戏场景")
+            local gameScene = lt.GameScene.new()
+            lt.SceneManager:replaceScene(gameScene)
+        elseif gameid == 2 then --斗地主
+            local gameScene = lt.DDZGameScene.new()
+            lt.SceneManager:replaceScene(gameScene)
+        end     
+
+    else
+        print("加入房间失败")
+    end
 end
 
 function DataManager:reConnectSuccess(recv_msg)
@@ -136,7 +173,7 @@ function DataManager:getGameRoomInfo(flag)
 end
 
 function DataManager:onRefreshRoomInfo(msg)
-    dump(msg)
+    dump(msg,"FYD===onRefreshRoomInfo",11)
     self._gameRoomInfo = msg
 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)
