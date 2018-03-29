@@ -4,6 +4,10 @@ local GameEventManager = {}
 GameEventManager.EVENT = {
     --客户端自己用的
     REFRESH_POSITION_INFO = "refresh_position_info",
+    RECONNECT = "reconnect", --重新连接
+    
+    WAIT_RECONNECT = "wait_reconnect",  --监听客户端连接断开
+    ROOM_LIST_UPDATE =  "room_list_update", --房间列表有更新
 
     --请求
 	LOGIN = "login",
@@ -33,9 +37,7 @@ GUO     过]]--
 
     NOTICE_GAME_OVER = "notice_game_over",--通知客户端 本局结束 带结算
 
-    RECONNECT = "reconnect", --重新连接
-    
-    WAIT_RECONNECT = "wait_reconnect",  --监听客户端连接断开
+
     
 }
 

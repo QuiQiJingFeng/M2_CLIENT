@@ -124,6 +124,8 @@ end
 function DataManager:onPushUserInfo(msg)
     local palyerInfo = self:getPlayerInfo()
     table.merge(palyerInfo,msg)
+    -->通知大厅更新显示数据
+    lt.GameEventManager:post(lt.GameEventManager.EVENT.ROOM_LIST_UPDATE)
 end
 
 function DataManager:getGameRoomInfo(flag)

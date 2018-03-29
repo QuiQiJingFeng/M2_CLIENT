@@ -58,9 +58,9 @@
                 <Size X="1334.0000" Y="200.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_1" ActionTag="1956176821" Tag="506" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="TopEdge" LeftMargin="1.0004" RightMargin="-1.0005" BottomMargin="101.0000" StretchWidthEnable="True" Scale9Enable="True" LeftEage="574" RightEage="440" TopEage="14" BottomEage="14" Scale9OriginX="574" Scale9OriginY="14" Scale9Width="320" Scale9Height="71" ctype="ImageViewObjectData">
-                    <Size X="1334.0001" Y="99.0000" />
+                    <Size X="1334.0000" Y="99.0000" />
                     <Children>
-                      <AbstractNodeData Name="BG53_8" ActionTag="-1356600427" VisibleForFrame="False" Tag="507" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="451.3120" RightMargin="452.6881" BottomMargin="3.0000" ctype="SpriteObjectData">
+                      <AbstractNodeData Name="BG53_8" ActionTag="-1356600427" VisibleForFrame="False" Tag="507" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="451.3120" RightMargin="452.6880" BottomMargin="3.0000" ctype="SpriteObjectData">
                         <Size X="430.0000" Y="96.0000" />
                         <Children>
                           <AbstractNodeData Name="BG55_15" ActionTag="-1964609639" Tag="519" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="178.5000" RightMargin="178.5000" TopMargin="24.4952" BottomMargin="30.5048" ctype="SpriteObjectData">
@@ -76,7 +76,7 @@
                           </AbstractNodeData>
                         </Children>
                         <AnchorPoint ScaleX="0.5016" ScaleY="1.0000" />
-                        <Position X="667.0000" Y="99.0000" />
+                        <Position X="667.0001" Y="99.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5000" Y="1.0000" />
@@ -86,10 +86,10 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-                    <Position X="668.0005" Y="200.0000" />
+                    <Position X="668.0004" Y="200.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5008" Y="1.0000" />
+                    <PrePosition X="0.5007" Y="1.0000" />
                     <PreSize X="1.0000" Y="0.4950" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/bgLobbyTop.png" Plist="hallcomm/lobby/LobbyPlist0.plist" />
                   </AbstractNodeData>
@@ -316,7 +316,7 @@
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Bn_Set" ActionTag="-1943013790" Tag="229" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1248.5011" RightMargin="16.4989" TopMargin="21.7639" BottomMargin="108.2361" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Bn_Set" ActionTag="-1943013790" Tag="229" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1248.5012" RightMargin="16.4988" TopMargin="21.7639" BottomMargin="108.2361" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="ButtonSetText_4" ActionTag="824198630" Tag="140" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="50.9999" BottomMargin="-4.9999" ctype="SpriteObjectData">
@@ -342,14 +342,14 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1283.0011" Y="143.2361" />
+                    <Position X="1283.0012" Y="143.2361" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.9618" Y="0.7162" />
                     <PreSize X="0.0517" Y="0.3500" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/ButtonSet.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Bn_Email" ActionTag="1960636530" VisibleForFrame="False" Tag="231" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="974.5006" RightMargin="290.4994" TopMargin="21.7100" BottomMargin="108.2900" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Bn_Email" ActionTag="1960636530" VisibleForFrame="False" Tag="231" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="974.5007" RightMargin="290.4993" TopMargin="21.7100" BottomMargin="108.2900" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="ButtonEmailText_1" ActionTag="-823908915" Tag="137" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="48.0000" BottomMargin="-2.0000" ctype="SpriteObjectData">
@@ -375,14 +375,14 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1009.0006" Y="143.2900" />
+                    <Position X="1009.0007" Y="143.2900" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.7564" Y="0.7165" />
                     <PreSize X="0.0517" Y="0.3500" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/ButtonEmail.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_VIP" ActionTag="723942431" Tag="224" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1157.5011" RightMargin="107.4989" TopMargin="21.7655" BottomMargin="108.2345" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_VIP" ActionTag="723942431" Tag="224" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1157.5012" RightMargin="107.4988" TopMargin="21.7655" BottomMargin="108.2345" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="img_LVvip_1" ActionTag="2053340390" Tag="210" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="51.0000" BottomMargin="-5.0000" ctype="SpriteObjectData">
@@ -408,7 +408,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1192.0011" Y="143.2345" />
+                    <Position X="1192.0012" Y="143.2345" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8936" Y="0.7162" />
@@ -420,7 +420,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_OfNotice" ActionTag="1966736704" Tag="647" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="974.5011" RightMargin="290.4989" TopMargin="21.7100" BottomMargin="108.2900" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Button_OfNotice" ActionTag="1966736704" Tag="647" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="974.5012" RightMargin="290.4988" TopMargin="21.7100" BottomMargin="108.2900" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_SnowButton" ActionTag="-1071135364" Tag="753" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
@@ -469,14 +469,14 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1009.0011" Y="143.2900" />
+                    <Position X="1009.0012" Y="143.2900" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.7564" Y="0.7165" />
                     <PreSize X="0.0517" Y="0.3500" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btn_Notice.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Smz" ActionTag="1371181278" Tag="440" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="793.5011" RightMargin="471.4989" TopMargin="21.7136" BottomMargin="108.2864" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Smz" ActionTag="1371181278" Tag="440" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="793.5012" RightMargin="471.4988" TopMargin="21.7136" BottomMargin="108.2864" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_SnowButton" ActionTag="1921458284" Tag="752" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
@@ -525,7 +525,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="828.0011" Y="143.2864" />
+                    <Position X="828.0012" Y="143.2864" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.6207" Y="0.7164" />
@@ -537,7 +537,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Bn_InviteCode" ActionTag="482536817" Tag="13891" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="883.5011" RightMargin="381.4989" TopMargin="21.7136" BottomMargin="108.2864" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Bn_InviteCode" ActionTag="482536817" Tag="13891" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="883.5012" RightMargin="381.4988" TopMargin="21.7136" BottomMargin="108.2864" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_SnowButton" ActionTag="-639767847" Tag="751" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
@@ -586,7 +586,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="918.0011" Y="143.2864" />
+                    <Position X="918.0012" Y="143.2864" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.6882" Y="0.7164" />
@@ -598,7 +598,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Expand" ActionTag="-358615357" Tag="530" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1066.5968" RightMargin="198.4032" TopMargin="21.7611" BottomMargin="108.2389" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Expand" ActionTag="-358615357" Tag="530" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1066.5969" RightMargin="198.4031" TopMargin="21.7611" BottomMargin="108.2389" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_SnowButton" ActionTag="-1007901590" Tag="750" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
@@ -682,7 +682,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1101.0968" Y="143.2389" />
+                    <Position X="1101.0969" Y="143.2389" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8254" Y="0.7162" />
@@ -694,7 +694,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Activity" ActionTag="-1736351504" VisibleForFrame="False" Tag="532" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="482.0007" RightMargin="775.9993" TopMargin="13.9500" BottomMargin="99.9500" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="1" RightEage="1" TopEage="1" BottomEage="1" Scale9OriginX="1" Scale9OriginY="1" Scale9Width="2" Scale9Height="2" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Activity" ActionTag="-1736351504" VisibleForFrame="False" Tag="532" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="482.0008" RightMargin="775.9992" TopMargin="13.9500" BottomMargin="99.9500" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="1" RightEage="1" TopEage="1" BottomEage="1" Scale9OriginX="1" Scale9OriginY="1" Scale9Width="2" Scale9Height="2" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="76.0000" Y="86.1000" />
                     <Children>
                       <AbstractNodeData Name="img_Activity" CanEdit="False" ActionTag="-1651137625" Tag="533" IconVisible="False" LeftMargin="-14.9398" RightMargin="-21.0602" TopMargin="-18.2401" BottomMargin="-17.6599" ctype="SpriteObjectData">
@@ -721,7 +721,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="520.0007" Y="143.0000" />
+                    <Position X="520.0008" Y="143.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.3898" Y="0.7150" />
@@ -733,7 +733,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Hlby" ActionTag="-1916725203" Tag="435" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="685.0931" RightMargin="563.9069" TopMargin="16.2136" BottomMargin="100.7864" TouchEnable="True" FontSize="14" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="55" Scale9Height="61" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Hlby" ActionTag="-1916725203" Tag="435" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="685.0932" RightMargin="563.9068" TopMargin="16.2136" BottomMargin="100.7864" TouchEnable="True" FontSize="14" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="55" Scale9Height="61" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="85.0000" Y="83.0000" />
                     <Children>
                       <AbstractNodeData Name="Image_Guang" ActionTag="2075206508" VisibleForFrame="False" Tag="1481" IconVisible="False" LeftMargin="51.0000" RightMargin="-6.0000" TopMargin="-3.5462" BottomMargin="46.5462" LeftEage="13" RightEage="13" TopEage="13" BottomEage="13" Scale9OriginX="13" Scale9OriginY="13" Scale9Width="148" Scale9Height="52" ctype="ImageViewObjectData">
@@ -760,7 +760,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Btn_rotaryTable" ActionTag="1401488817" Tag="268" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="589.9971" RightMargin="670.0029" TopMargin="19.0000" BottomMargin="105.0000" LeftEage="31" RightEage="31" TopEage="32" BottomEage="32" Scale9OriginX="31" Scale9OriginY="32" Scale9Width="12" Scale9Height="12" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Btn_rotaryTable" ActionTag="1401488817" Tag="268" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="589.9972" RightMargin="670.0028" TopMargin="19.0000" BottomMargin="105.0000" LeftEage="31" RightEage="31" TopEage="32" BottomEage="32" Scale9OriginX="31" Scale9OriginY="32" Scale9Width="12" Scale9Height="12" ctype="ImageViewObjectData">
                     <Size X="74.0000" Y="76.0000" />
                     <Children>
                       <AbstractNodeData Name="img_rotaryTable1" ActionTag="1293395180" VisibleForFrame="False" Tag="269" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TopMargin="-1.5400" BottomMargin="4.5400" ctype="SpriteObjectData">
@@ -807,7 +807,7 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="626.9971" Y="143.0000" />
+                    <Position X="626.9972" Y="143.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4700" Y="0.7150" />
@@ -1051,13 +1051,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Pl_InfoBg" ActionTag="336648524" Tag="1539" IconVisible="False" LeftMargin="10.0000" RightMargin="16.0000" TopMargin="97.0000" BottomMargin="72.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+                  <AbstractNodeData Name="Pl_InfoBg" ActionTag="336648524" Tag="1539" IconVisible="False" LeftMargin="10.0000" RightMargin="16.0000" TopMargin="97.0000" BottomMargin="72.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                     <Size X="400.0000" Y="310.0000" />
-                    <AnchorPoint ScaleY="1.0000" />
-                    <Position X="10.0000" Y="382.0000" />
+                    <AnchorPoint />
+                    <Position X="10.0000" Y="72.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0235" Y="0.7975" />
+                    <PrePosition X="0.0235" Y="0.1503" />
                     <PreSize X="0.9390" Y="0.6472" />
                     <SingleColor A="255" R="255" G="150" B="100" />
                     <FirstColor A="255" R="255" G="150" B="100" />

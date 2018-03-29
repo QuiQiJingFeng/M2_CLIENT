@@ -42,6 +42,38 @@ function WorldMenuLayer:ctor()
     -- self:checkRightBtnNode()
     -- self:updateNewFlagInfo()
     --lt.UILayerManager:addLayer(commonAlertLayer, true)
+
+
+    self.bg_NoData = lt.CommonUtil:getChildByNames(self,"Ie_Bg","Ie_Bg","Ie_MyRoom","Pl_NoData")
+
+    local tb_room_info = lt.CommonUtil:getChildByNames(self,"Ie_Bg","Ie_Bg","Ie_MyRoom","Pl_InfoBg")
+
+    local UITableView = require("app.UI.UITableView")
+    self.tb_room_info = UITableView:bindNode(tb_room_info,"app.Scene.WorldScene.WorldMenuLayerRoomItem")
+
+    self:listenRoomListUpdate()
+
+end
+
+function WorldMenuLayer:onEnter()
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.ROOM_LIST_UPDATE, handler(self, self.listenRoomListUpdate), "WorldMenuLayer.listenRoomListUpdate")
+end
+
+function WorldMenuLayer:listenRoomListUpdate()
+    local info = lt.DataManager:getPlayerInfo()
+    if info.room_id then
+        lt.CommonUtil:show(self.Se_Return)
+        lt.CommonUtil:hide(self.Se_Create)
+    else
+        lt.CommonUtil:hide(self.Se_Return)
+        lt.CommonUtil:show(self.Se_Create)     
+    end
+
+    if info.room_list and #info.room_list > 0 then
+        lt.CommonUtil:hide(self.bg_NoData)
+        dump(info.room_list,"room_list")
+        self.tb_room_info:setData(info.room_list)
+    end 
 end
 
 function WorldMenuLayer:onClickSetBtn(event)
@@ -1155,16 +1187,6 @@ end
 -- ##### 打开次级UI界面 隐藏当前界面 #####
 function WorldMenuLayer:showWorldMenuLayer()
     self:setVisible(true)
-
-
-    local info = lt.DataManager:getPlayerInfo()
-    if info.room_id then
-        lt.CommonUtil:show(self.Se_Return)
-        lt.CommonUtil:hide(self.Se_Create)
-    else
-        lt.CommonUtil:hide(self.Se_Return)
-        lt.CommonUtil:show(self.Se_Create)     
-    end
 end
 
 function WorldMenuLayer:hideWorldMenuLayer()
