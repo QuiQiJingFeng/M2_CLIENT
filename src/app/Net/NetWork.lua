@@ -14,7 +14,7 @@ local NETSTATE = {
 }
 
 --心跳间隔
-local HEART_BEAT_DT = 60
+local HEART_BEAT_DT = 10
 
 -- 数据包头长度
 local HEADER_SIZE = 2
@@ -35,7 +35,7 @@ end
 
 function network:onHeartbeatResponse(event)
     --如果收到心跳包返回
-    self._waite_heartbeat = nil
+    self._waite_heartbeat_dt = nil
 end
 
 function network:isIPV6(host)
@@ -197,6 +197,26 @@ function network:update(dt)
             self:caculateConnectTime(dt)
         end
     elseif self._net_state == NETSTATE.CONNECTED then
+        --心跳相关处理
+        if self._heart_dt > HEART_BEAT_DT then
+            print("FYD  发送心跳包")
+            self._heart_dt = 0
+            --发送心跳包
+            self:send({["heartbeat"] = {}},nil,true)
+            self._waite_heartbeat_dt = 1
+        else
+            if self._waite_heartbeat_dt then
+                self._waite_heartbeat_dt = self._waite_heartbeat_dt - dt
+                print("FYD====>>>self._waite_heartbeat_dt = ",self._waite_heartbeat_dt)
+                if self._waite_heartbeat_dt < 0 then
+                    self:updateState(NETSTATE.WAIT_RECONNECTED)
+                end
+            end
+            --累计心跳间隔时间
+            self._heart_dt = self._heart_dt + dt
+        end
+
+
     	--收包
     	self:receive()
     	--TODO
@@ -231,21 +251,6 @@ function network:update(dt)
             --如果是推送 走这里
             lt.GameEventManager:post(rsp_name, rsp_msg)
         end
-
-    	--心跳相关处理
-    	if self._heart_dt > HEART_BEAT_DT then
-    		self._heart_dt = 0
-    		--发送心跳包
-    		self:send({["heartbeat"] = {}},nil,true)
-    		self._waite_heartbeat = true
-    	else
-    		--累计心跳间隔时间
-    		self._heart_dt = self._heart_dt + dt
-    		if self._waite_heartbeat then
-    			--如果100ms内都没有收到心跳回包 则按断开处理
-    			self:updateState(NETSTATE.WAIT_RECONNECTED)
-    		end
-    	end
 	end
 end
 
