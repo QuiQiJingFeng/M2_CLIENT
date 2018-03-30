@@ -197,30 +197,40 @@ function network:update(dt)
             self:caculateConnectTime(dt)
         end
     elseif self._net_state == NETSTATE.CONNECTED then
-        --心跳相关处理
-        if self._heart_dt > HEART_BEAT_DT then
-            print("FYD  发送心跳包")
-            self._heart_dt = 0
-            --发送心跳包
-            self:send({["heartbeat"] = {}},nil,true)
-            self._waite_heartbeat_dt = 1
-        else
-            if self._waite_heartbeat_dt then
-                self._waite_heartbeat_dt = self._waite_heartbeat_dt - dt
-                print("FYD====>>>self._waite_heartbeat_dt = ",self._waite_heartbeat_dt)
-                if self._waite_heartbeat_dt < 0 then
-                    self:updateState(NETSTATE.WAIT_RECONNECTED)
-                end
-            end
-            --累计心跳间隔时间
-            self._heart_dt = self._heart_dt + dt
-        end
 
+        if self.can_heart then
+            --心跳相关处理
+            if self._heart_dt > HEART_BEAT_DT then
+                print("FYD  发送心跳包")
+                self._heart_dt = 0
+                --发送心跳包
+                self:send({["heartbeat"] = {}},nil,true)
+                self._waite_heartbeat_dt = 1
+            else
+                if self._waite_heartbeat_dt then
+                    self._waite_heartbeat_dt = self._waite_heartbeat_dt - dt
+                    print("FYD====>>>self._waite_heartbeat_dt = ",self._waite_heartbeat_dt)
+                    if self._waite_heartbeat_dt < 0 then
+                        self:updateState(NETSTATE.WAIT_RECONNECTED)
+                    end
+                end
+                --累计心跳间隔时间
+                self._heart_dt = self._heart_dt + dt
+            end
+        end
 
     	--收包
     	self:receive()
     	--TODO
     	local data_content = self:unpackData()
+
+        if data_content then
+            if data_content["login"] and data_content["login"].result == "success" then
+                self.can_heart = true
+            end
+        end
+
+
     	if not data_content then
     		return
     	end

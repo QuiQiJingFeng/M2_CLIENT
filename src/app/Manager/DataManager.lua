@@ -86,9 +86,13 @@ function DataManager:listenNetDisconnect()
     if times <= 3 then
         lt.NetWork:reconnect("47.52.99.120", 3000, function() 
             local reconnect_token = self:getReconnectToken()
+            if not reconnect_token then
+                return
+            end
             local user_id = self:getPlayerUid()
             if not user_id or not reconnect_token then
-                error("not user_id or reconnect_token")
+                print("not user_id or reconnect_token")
+                return
             end
             lt.NetWork:send({[lt.GameEventManager.EVENT.RECONNECT] = {token = reconnect_token}})
         end)
