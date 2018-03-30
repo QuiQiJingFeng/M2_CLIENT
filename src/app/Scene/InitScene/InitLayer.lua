@@ -28,7 +28,7 @@ function InitLayer:onLogin()--登录微信
     -- 正常游戏
 
     if not self._connectSuccess then
-        lt.NetWork:connect("127.0.0.1", 8888, handler(self, self.onConnectResponse))
+        lt.NetWork:connect("47.52.99.120", 3000, handler(self, self.onConnectResponse))
     end
 
     if self._connectSuccess then
@@ -65,7 +65,7 @@ function InitLayer:onEnter()
     print("InitLayer:onEnter")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.LOGIN, handler(self, self.onLoginResponse), "InitLayer:onLoginResponse")
 
-    lt.NetWork:connect("127.0.0.1", 8888, handler(self, self.onConnectResponse))
+    lt.NetWork:connect("47.52.99.120", 3000, handler(self, self.onConnectResponse))
 end
 
 function InitLayer:onExit()

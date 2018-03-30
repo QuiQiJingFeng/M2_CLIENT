@@ -84,7 +84,7 @@ function DataManager:listenNetDisconnect()
     local times = self:updateDisconnectTimes()
     print("FYD+++++>>>>TIMES = ",times)
     if times <= 3 then
-        lt.NetWork:reconnect("127.0.0.1", 8888, function() 
+        lt.NetWork:reconnect("47.52.99.120", 3000, function() 
             local reconnect_token = self:getReconnectToken()
             local user_id = self:getPlayerUid()
             if not user_id or not reconnect_token then
