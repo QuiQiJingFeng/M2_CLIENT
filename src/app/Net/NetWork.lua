@@ -14,7 +14,7 @@ local NETSTATE = {
 }
 
 --心跳间隔
-local HEART_BEAT_DT = 10
+local HEART_BEAT_DT = 2
 
 -- 数据包头长度
 local HEADER_SIZE = 2
