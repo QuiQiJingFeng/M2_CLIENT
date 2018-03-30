@@ -39,8 +39,12 @@ GUO     过]]--
 
     PUSH_ALL_ROOM_INFO = "push_all_room_info",  --获取全部的房间信息
 
+    REFRESH_PLAYER_CUR_SCORE = "refresh_player_cur_score",--牌局中积分发生变化
 
+    RECONNECT = "reconnect", --重新连接
     
+    WAIT_RECONNECT = "wait_reconnect",  --监听客户端连接断开
+ 
 }
 
 local handler_id = 0

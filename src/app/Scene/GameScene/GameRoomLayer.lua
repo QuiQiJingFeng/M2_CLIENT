@@ -200,8 +200,8 @@ function GameRoomLayer:ctor()
 	self._allPlayerOutInitCards = {}--所有方位的已经出过的  初始化过的牌
 
 	self._allPlayerCpgCards = {}--所有方位的吃椪杠
-	self._allPlayerCpgInitCards = {}--所有方位的吃椪杠  初始化过的牌
-
+	--self._allPlayerCpgInitCards = {}--所有方位的吃椪杠  初始化过的牌
+	--self:viewMenuBase()
 end
 
 function GameRoomLayer:hzmj2p()  
@@ -644,6 +644,8 @@ function GameRoomLayer:configAllPlayerCards(direction)--吃椪杠 手牌
 			local from = cardInfo.from
 			local type = cardInfo.type--1 碰 2 杠 3 吃
 
+			local formDirection = self:getPlayerDirectionByPos(cardInfo.from) 
+
 			local cardType = math.floor(value / 10) + 1
 			local cardValue = value % 10
 
@@ -666,30 +668,41 @@ function GameRoomLayer:configAllPlayerCards(direction)--吃椪杠 手牌
 			for i=1,5 do
 				CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
 				CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_MaskRed"):setVisible(false)
-				
+
+				local arrow = CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Arrow")
+				arrow:setVisible(false)
+				local du = (self.POSITION_TYPE.NAN - formDirection) * 90
+				arrow:setRotation(du)
+
 				local face = CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Face")
 				face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+				
+				local initIndex = nil
+
 				if visibleType == 1 then
-					if i <= 3 then
-						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
-					else
-						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
-					end
+					initIndex = 3
 				elseif visibleType == 2 or visibleType == 3 then
-					if i <= 4 then
-						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
-					else
-						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
-					end
+					initIndex = 4
 				elseif visibleType == 4 then
+					initIndex = 4
 					if i <= 4 then
-						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
 						CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(true)
+						if i == 4 and direction == self.POSITION_TYPE.NAN then
+							CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
+						end
+					end
+				end
+				if initIndex then
+
+					if i <= initIndex then
+						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
+						if i == initIndex and visibleType ~= 4 then
+							arrow:setVisible(true)
+						end
 					else
 						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
 					end
 				end
-
 			end 
 		else
 			CpgNode:setVisible(false)
@@ -744,7 +757,51 @@ function GameRoomLayer:configAllPlayerCards(direction)--吃椪杠 手牌
 	end
 end
 
+function GameRoomLayer:checkMyHandStatu() 
+    local tObjCpghObj = {
+        tObjChi = nil,
+        tObjPeng = nil,
+        tObjGang = nil,
+        tObjHu = nil--抢杠胡  自摸
+    }
+    --检测杠
+	local tempHandCards = {}
 
+	for k,v in pairs(self._allPlayerHandCards[self.POSITION_TYPE.NAN]) do
+		table.insert(tempHandCards, v)
+	end
+
+	local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
+	dump(anGangCards)
+
+	local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCards[self.POSITION_TYPE.NAN], tempHandCards)
+	dump(pengGang)
+
+	if #anGangCards > 0 or #pengGang > 0 then
+		tObjCpghObj.tObjGang = {}
+	end
+
+	for i,v in ipairs(anGangCards) do
+		table.insert(tObjCpghObj.tObjGang, v)
+	end
+
+	for i,v in ipairs(pengGang) do
+		table.insert(tObjCpghObj.tObjGang, v)
+	end
+
+	--检测胡
+	print("______fsdfsdf胡牌——————————————————————————", tostring(tempHandCards))
+	if lt.CommonUtil:checkIsHu(tempHandCards, true) then
+		print("自摸了###########################################")
+		tObjCpghObj.tObjHu = {}
+	else
+		print("没有自摸###########################################")
+	end
+
+    --显示吃碰杠胡控件
+    self:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
+	self:viewActionButtons(tObjCpghObj, false)
+end
 
 function GameRoomLayer:onClickCard(event) 
 
@@ -757,12 +814,6 @@ function GameRoomLayer:onClickCard(event)
 
 
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", event:getTag(), event.CardIndex)
-
-
-
-
-
-
 
 	--[[
 	出牌处理
@@ -971,7 +1022,9 @@ function GameRoomLayer:onDealDown(msg)   --发牌13张手牌
 end
 
 function GameRoomLayer:onClickSelectCard(event) --多 选择
-
+	print("__________________________多选择")
+	
+	dump(event.selectCardData)
 	if event.selectCardData then
 		if event.selectCardData.card and event.selectCardData.type then
 			if event.selectCardData.type == 1 then--吃碰杠胡
@@ -980,8 +1033,11 @@ function GameRoomLayer:onClickSelectCard(event) --多 选择
 				local arg = {command = "PENG"}
 				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 			elseif event.selectCardData.type == 3 then
-				local arg = {command = "GANG", card = event.selectCardData.card }
-				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+				-- local arg = {command = "GANG", card = event.selectCardData.card }
+				-- lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+
+				self:onGangAction(event.selectCardData.card, 1)
+
 			elseif event.selectCardData.type == 4 then
 				local arg = {command = "HU"}
 				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
@@ -1025,50 +1081,9 @@ function GameRoomLayer:onPushDrawCard(msg)   --通知其他人有人摸牌
 
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
 
-	    local tObjCpghObj = {
-	        tObjChi = nil,
-	        tObjPeng = nil,
-	        tObjGang = nil,
-	        tObjHu = nil--抢杠胡  自摸
-	    }
-	    --检测杠
-		local tempHandCards = {}
-
-		for k,v in pairs(self._allPlayerHandCards[self.POSITION_TYPE.NAN]) do
-			table.insert(tempHandCards, v)
-		end
-
-		table.insert(tempHandCards, msg.card)
-		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
-		dump(anGangCards)
-
-		local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgInitCards[self.POSITION_TYPE.NAN], tempHandCards)
-		dump(pengGang)
-
-		if #anGangCards > 0 or #pengGang > 0 then
-			tObjCpghObj.tObjGang = {}
-		end
-
-		for i,v in ipairs(anGangCards) do
-			table.insert(tObjCpghObj.tObjGang, v)
-		end
-
-		for i,v in ipairs(pengGang) do
-			table.insert(tObjCpghObj.tObjGang, v)
-		end
-
-		--检测胡
-		print("______fsdfsdf胡牌——————————————————————————", tostring(tempHandCards))
-		if lt.CommonUtil:checkIsHu(tempHandCards, true) then
-			print("自摸了###########################################")
-			tObjCpghObj.tObjHu = {}
-		else
-			print("自摸了###########################################")
-		end
-
-        --显示吃碰杠胡控件
-        self:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
-		self:viewActionButtons(tObjCpghObj, false)
+		--检测自己的手牌情况  --吃椪杠胡
+		self:checkMyHandStatu()
+		self._ischeckMyHandStatu = true
 	end
 
 	-- local value = msg.card
@@ -1138,6 +1153,11 @@ function GameRoomLayer:onPushPlayCard(msg)   --通知玩家该出牌了
 		end
 		print("________________________________________")
 		self:configAllPlayerCards(self.POSITION_TYPE.NAN)
+
+		if self._ischeckMyHandStatu then
+			self:checkMyHandStatu()
+			self._ischeckMyHandStatu = false
+		end
 
 	else--不是本人
 		if msg.operator == 1 then--     还有没有摸牌不能胡牌
@@ -1252,7 +1272,7 @@ function GameRoomLayer:onNoticeGangCard(msg)   --通知其他人有人杠牌
 		for k,v in pairs(self._allPlayerCpgCards[direction]) do
 			if v.value == info.value then--之前是碰  变成了回头杠
 				change = true
-				v = info
+				self._allPlayerCpgCards[direction][k] = info
 				break
 			end
 		end
@@ -1435,8 +1455,8 @@ function GameRoomLayer:onClickCpghEvent(pSender)
 
         if #pSender.tObjData > 1 then
             self:viewGangMenu(pSender.tObjData)
-        else
-            self:onGangAction(pSender.tObjData, 1)
+        elseif pSender.tObjData[1] then
+            self:onGangAction(pSender.tObjData[1], 1)
             self:viewHideActPanelAndMenu()
         end
 
@@ -1497,7 +1517,8 @@ end
 function GameRoomLayer:viewMenuBase(tObj, iType)
     self:viewHideActPanelAndMenu()
     
-    --tObj = {5, 16}
+    -- tObj = {5, 16}
+    -- iType = 3
     --显示二级菜单  getTouchEndPosition  getTouchBeganPosition
     local panelMenu = self.m_objCommonUi.m_panelMenuItems
     local iStartX = 0
@@ -1585,7 +1606,7 @@ function GameRoomLayer:createMenuItem()
 
     return mj
 end
-
+	
 --发送碰按钮的请求
 function GameRoomLayer:onPengAction(tObj, index)
 	local arg = {command = "PENG"}
@@ -1594,7 +1615,8 @@ end
 
 --发送杠按钮的请求
 function GameRoomLayer:onGangAction(tObj, index)
-	local arg = {command = "GANG"}
+	print("杠的牌@@@@@@@@@@@@@", tObj)
+	local arg = {command = "GANG", card = tObj}
 	lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 end
 
@@ -1618,6 +1640,9 @@ function GameRoomLayer:onNoticeGameOver(msg)   --通知客户端 本局结束 �
 	dump(msg)
 end
 
+function GameRoomLayer:onRefreshScoreResponse(msg)   --通知客户端 本局结束 带结算
+	dump(msg)
+end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
 	dump(msg)
@@ -1641,6 +1666,7 @@ function GameRoomLayer:onEnter()
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.GAME_CMD, handler(self, self.onGameCMDResponse), "GameRoomLayer.onGameCMDResponse")
 
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, handler(self, self.onRefreshScoreResponse), "GameRoomLayer.onRefreshScoreResponse")
 end
 
 function GameRoomLayer:onExit()
@@ -1659,6 +1685,7 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "GameRoomLayer:configPlayer")
 
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.GAME_CMD, "GameRoomLayer:onGameCMDResponse")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, "GameRoomLayer:onRefreshScoreResponse")
 end
 
 

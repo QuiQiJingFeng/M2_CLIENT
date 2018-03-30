@@ -1329,7 +1329,8 @@ function CommonUtil:getCanAnGangCards(handCards)--检测card 暗杠
     for type, cards in ipairs(handCardsDada) do--cards 1->9
         for card,num in ipairs(cards) do
             if num >= 4 and card ~= 10 and type ~= 4 then
-                table.insert(canAnGangCards, card)
+                local value = (type - 1) * 10 + card
+                table.insert(canAnGangCards, value)
             end
         end
     end
@@ -1341,6 +1342,10 @@ function CommonUtil:getCanPengGangCards(CpgCards, handCards)--检测回头杠 Cp
     local canPengCards = {}
     CpgCards = CpgCards or {}
     handCards = handCards or {}
+    
+    print("%%%%%%%%%%%%%%%%%%%%%%%%%", tostring(CpgCards))
+
+    print("%%%%%%%%%%%%%%%%%%%%%%%%%!!!!!!", tostring(handCards))
     for k,cardInfo in ipairs(CpgCards) do
         local value = cardInfo.value
         local gang_type = cardInfo.gang_type--1 暗杠 2 明杠 3 碰杠
@@ -1350,9 +1355,9 @@ function CommonUtil:getCanPengGangCards(CpgCards, handCards)--检测回头杠 Cp
         if type == 1 then--CPG里面的碰
             for i,handCard in ipairs(handCards) do
                 if value == handCard then
-                    table.insert(canPengCards, card)
+                    table.insert(canPengCards, handCard)
+                    break
                 end
-                break
             end
         end
     end
