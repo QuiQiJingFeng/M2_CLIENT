@@ -44,15 +44,12 @@ Utils.encryptorDecryptFile(True,'res','package',XXTEA_KEY,XXTEA_SINGIN,FILETERS_
 ASSETS_CONFIG = {
     'src.zip':{'dir':'src'},
     'Default.zip':{'dir':'res/Default'},
-    'fonts.zip':{'dir':'res/fonts'},
-    'magician.zip':{'dir':'res/magician'},
-    'man_1.zip':{'dir':'res/man_1'},
-    'man_2.zip':{'dir':'res/man_2'},
-    'man3.zip':{'dir':'res/man3'},
-    'pic.zip':{'dir':'res/pic'},
+    'card.zip':{'dir':'res/card'},
+    'game.zip':{'dir':'res/game'},
+    'games.zip':{'dir':'res/games'},
+    'hallcomm.zip':{'dir':'res/hallcomm'},
     'proto.zip':{'dir':'res/proto'},
-    'role.zip':{'dir':'res/role'},
-    'shooter.zip':{'dir':'res/shooter'}
+    'string.zip':{'dir':'res/string'}
 }
 
 # 切换目录

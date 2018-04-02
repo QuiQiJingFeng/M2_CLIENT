@@ -29,7 +29,7 @@ local eWidgetTag = {
 --     eSuppressOneOption = 7, --可隐藏单选项
 -- }
 
-local GameConf = require("app.common.GameConf")
+local GameConf = require("app.Common.GameConf")
 
 function CreateRoomLayer:ctor()
 
