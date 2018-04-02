@@ -16,7 +16,6 @@ hellolua/main.cpp \
 ../../../Classes/md5/md5lib.c \
 ../../../Classes/pbc/pbc-lua.c \
 ../../../Classes/common/JSONManager.cpp \
-../../../Classes/common/lua_CUtils.cpp \
 ../../../Classes/common/Utils.cpp
 
 LOCAL_C_INCLUDES := \
