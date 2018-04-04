@@ -14,7 +14,7 @@ local NETSTATE = {
 }
 
 --心跳间隔
-local HEART_BEAT_DT = 2
+local HEART_BEAT_DT = 10
 
 -- 数据包头长度
 local HEADER_SIZE = 2
@@ -201,7 +201,6 @@ function network:update(dt)
         if self.can_heart then
             --心跳相关处理
             if self._heart_dt > HEART_BEAT_DT then
-                print("FYD  发送心跳包")
                 self._heart_dt = 0
                 --发送心跳包
                 self:send({["heartbeat"] = {}},nil,true)
@@ -209,7 +208,6 @@ function network:update(dt)
             else
                 if self._waite_heartbeat_dt then
                     self._waite_heartbeat_dt = self._waite_heartbeat_dt - dt
-                    print("FYD====>>>self._waite_heartbeat_dt = ",self._waite_heartbeat_dt)
                     if self._waite_heartbeat_dt < 0 then
                         self:updateState(NETSTATE.WAIT_RECONNECTED)
                     end
