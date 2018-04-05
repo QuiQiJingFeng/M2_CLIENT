@@ -133,7 +133,7 @@ end
 function AppGame:loadSpriteFrames()
     lt.ResourceManager:addSpriteFrames("game/mjcomm/mjTingAni.plist", "game/mjcomm/mjTingAni.png")
     lt.ResourceManager:addSpriteFrames("game/mjcomm/mjActionAni.plist", "game/mjcomm/mjActionAni.png")
-    
+    lt.ResourceManager:addSpriteFrames("game/mjcomm/mjPartUi.plist", "game/mjcomm/mjPartUi.png")
 end
 
 -- display.removeSpriteFrames("games/comm/launch/LaunchPlist0.plist", "games/comm/launch/LaunchPlist0.png")

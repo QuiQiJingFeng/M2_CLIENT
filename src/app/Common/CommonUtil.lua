@@ -1113,6 +1113,7 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale)
     if callBack then
         if node.onClick then
             print("Warning:: node.onClick is exist, Duplicate assignment onClick\n")
+            return
         end
         node.onClick  = callBack
     end
@@ -1235,35 +1236,7 @@ end
 --###########################################处理手牌###################################
 
 ---特殊处理  检测是否4个红中，以及处理7对 红中不能作为万能牌使用的问题
-CommonUtil.TempResult = {
-        iChiNum = 0;    
-        iPengNum = 0;       
-        iHuiNum = 0;        
-        bJiangOK = false;
-        iHuiType = 0;   
-        chiType = {
-            [1] = {iType = 0,iFirstValue = 0,iFromPost = 0},
-            [2] = {iType = 0,iFirstValue = 0,iFromPost = 0},
-            [3] = {iType = 0,iFirstValue = 0,iFromPost = 0},
-            [4] = {iType = 0,iFirstValue = 0,iFromPost = 0},
 
-        };
-        pengType = {
-            [1] = {iType = 0,iValue = 0,iFromPost = 0},
-            [2] = {iType = 0,iValue = 0,iFromPost = 0},
-            [3] = {iType = 0,iValue = 0,iFromPost = 0},
-            [4] = {iType = 0,iValue = 0,iFromPost = 0},
-
-        };
-        jiangType = {
-            [1] = {iType = 0,iValue = 0},
-            [2] = {iType = 0,iValue = 0},
-            [3] = {iType = 0,iValue = 0},
-            [4] = {iType = 0,iValue = 0},
-
-        }
-    }
-    CommonUtil.TempResult.iHuiCard = 35
 
 function CommonUtil:changehandCardsData(allPai)--整理下手牌的数据结构 allPai 不缺牌情况下的所有手牌 
 
@@ -1308,7 +1281,7 @@ function CommonUtil:getAllCanHuCards(handCards, bQiDuiHu)--目前在缺一张牌
         table.insert(temp, 1, v)--将检测的牌加入手牌  
 
         local handCardsDada = self:changehandCardsData(temp)
-        if self:JudgeIfHu2(handCardsDada, self.TempResult, bQiDuiHu) then
+        if self:JudgeIfHu2(handCardsDada, bQiDuiHu) then
             table.insert(canHuCards, v)
         end
         table.remove(temp, 1)
@@ -1369,7 +1342,7 @@ end
 function CommonUtil:checkIsHu(allPai, bQiDuiHu)
 
     local tempStandCards = self:changehandCardsData(allPai)
-    local hu = self:JudgeIfHu2(tempStandCards, self.TempResult, bQiDuiHu)
+    local hu = self:JudgeIfHu2(tempStandCards, bQiDuiHu)
     return hu
 end
 
@@ -1400,7 +1373,37 @@ function CommonUtil:JudgeSpecialHu(allPai,resultType,bQiDuiHu)
     return false
 end
 
-function CommonUtil:JudgeIfHu2(allPai,resultType,bQiDuiHu)
+function CommonUtil:JudgeIfHu2(allPai,bQiDuiHu)
+
+    local resultType = {
+        iChiNum = 0;    
+        iPengNum = 0;       
+        iHuiNum = 0;        
+        bJiangOK = false;
+        iHuiType = 0;   
+        chiType = {
+            [1] = {iType = 0,iFirstValue = 0,iFromPost = 0},
+            [2] = {iType = 0,iFirstValue = 0,iFromPost = 0},
+            [3] = {iType = 0,iFirstValue = 0,iFromPost = 0},
+            [4] = {iType = 0,iFirstValue = 0,iFromPost = 0},
+
+        };
+        pengType = {
+            [1] = {iType = 0,iValue = 0,iFromPost = 0},
+            [2] = {iType = 0,iValue = 0,iFromPost = 0},
+            [3] = {iType = 0,iValue = 0,iFromPost = 0},
+            [4] = {iType = 0,iValue = 0,iFromPost = 0},
+
+        };
+        jiangType = {
+            [1] = {iType = 0,iValue = 0},
+            [2] = {iType = 0,iValue = 0},
+            [3] = {iType = 0,iValue = 0},
+            [4] = {iType = 0,iValue = 0},
+
+        }
+    }
+    resultType.iHuiCard = 35
 
     local iTotalCardNum = 0
 

@@ -201,6 +201,8 @@ function network:update(dt)
         if self.can_heart then
             --心跳相关处理
             if self._heart_dt > HEART_BEAT_DT then
+
+                --print("FYD  发送心跳包")
                 self._heart_dt = 0
                 --发送心跳包
                 self:send({["heartbeat"] = {}},nil,true)
@@ -208,6 +210,7 @@ function network:update(dt)
             else
                 if self._waite_heartbeat_dt then
                     self._waite_heartbeat_dt = self._waite_heartbeat_dt - dt
+                    --print("FYD====>>>self._waite_heartbeat_dt = ",self._waite_heartbeat_dt)
                     if self._waite_heartbeat_dt < 0 then
                         self:updateState(NETSTATE.WAIT_RECONNECTED)
                     end
@@ -243,21 +246,31 @@ function network:update(dt)
     			rsp_msg = v
     		end
     	end
-
-        print("rsp_name ==>",rsp_name,new_session_id)
+        if rsp_name ~= "heartbeat" then
+            print("rsp_name ==>",rsp_name,new_session_id)
+        end
+        
     	local item = self._send_map[new_session_id]
     	if item then
     		--如果是请求返回
             if item.callback then
                 item.callback(rsp_msg)
             else
-                print("FYD++++++>>>>>>>>>111111111",rsp_name)
+                --print("FYD++++++>>>>>>>>>111111111",rsp_name)
                 lt.GameEventManager:post(rsp_name, rsp_msg)
+
+                if rsp_name ~= "heartbeat" then
+                    dump(rsp_msg,rsp_name.."masg = ", 10)
+                end
             end
     	else
-            print("FYD++++++>>>>>>>>>22222222",rsp_name)
+            --print("FYD++++++>>>>>>>>>22222222",rsp_name)
             --如果是推送 走这里
             lt.GameEventManager:post(rsp_name, rsp_msg)
+
+            if rsp_name ~= "heartbeat" then
+                dump(rsp_msg,rsp_name.."masg = ", 10)
+            end
         end
 	end
 end
@@ -265,6 +278,7 @@ end
 function network:sendTo(key,data_content,callback,ignore_session)
     data_content = data_content or {}
     local arg = {[key] = data_content}
+    print("C2S ===>>> sendTo", key)
     self:send(arg, callback, ignore_session)
 end
 

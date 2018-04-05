@@ -41,6 +41,8 @@ GUO     过]]--
 
     REFRESH_PLAYER_CUR_SCORE = "refresh_player_cur_score",--牌局中积分发生变化
 
+    NOTICE_PLAYER_CONNECT_STATE = "notice_player_connect_state",--牌局中积分发生变化
+
     RECONNECT = "reconnect", --重新连接
     
     WAIT_RECONNECT = "wait_reconnect",  --监听客户端连接断开
