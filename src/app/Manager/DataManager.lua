@@ -27,7 +27,6 @@ function DataManager:init()
     -- 登陆
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_ROOM_INFO, handler(self, self.onRefreshRoomInfo), "DataManager.onRefreshRoomInfo")
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_USER_INFO, handler(self, self.onPushUserInfo), "DataManager.onPushUserInfo")
 
      --监听客户端断开连接事件
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.WAIT_RECONNECT,handler(self, self.listenNetDisconnect),"DataManager.listenNetDisconnect")
@@ -160,6 +159,11 @@ end
 
 function DataManager:getPlayerName()
     return self._playerInfo.user_name
+end
+
+-- 记录下登陆 房间服务器的令牌
+function DataManager:recordToken(token)
+    self._token = token
 end
 
 function DataManager:onPushUserInfo(msg)
