@@ -63,10 +63,6 @@ ltMetaTable["WorldResultLayer"] = "app.Scene.WorldScene.WorldResultLayer"
 ltMetaTable["WorldUILayer"] = "app.Scene.WorldScene.WorldUILayer"
 ltMetaTable["WorldScene"] = "app.Scene.WorldScene.WorldScene"
 
-ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
-ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.GameRoomLayer"
-ltMetaTable["SettingLayer"] = "app.Scene.GameScene.SettingLayer"
-
 --layer
 ltMetaTable["BaseLayer"]			    = "app.Scene.WorldScene.Common.BaseLayer"
 ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.Setting.SetLayer"
@@ -75,9 +71,29 @@ ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
 ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
 
 
+--游戏场景
+
+ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
+
+--麻将
+ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.mj.GameRoomLayer"
+ltMetaTable["GameBgPanel"] = "app.Scene.GameScene.mj.GameBgPanel"
+ltMetaTable["GamePlayCardsPanel"] = "app.Scene.GameScene.mj.GamePlayCardsPanel"
+ltMetaTable["GameSelectPosPanel"] = "app.Scene.GameScene.mj.GameSelectPosPanel"
+ltMetaTable["GameSetPanel"] = "app.Scene.GameScene.mj.GameSetPanel"
+ltMetaTable["GameRoomInfoPanel"] = "app.Scene.GameScene.mj.GameRoomInfoPanel"
+ltMetaTable["GameActionBtnsPanel"] = "app.Scene.GameScene.mj.GameActionBtnsPanel"
+ltMetaTable["GameResultPanel"] = "app.Scene.GameScene.mj.GameResultPanel"
+
+
+ltMetaTable["SettingLayer"] = "app.Scene.GameScene.mj.SettingLayer"
+
 -- ddz
 ltMetaTable["DDZGameLayer"]			= "app.Scene.GameScene.ddz.DDZGameLayer"
 ltMetaTable["DDZGameScene"]			= "app.Scene.GameScene.ddz.DDZGameScene"
+
+
+
 
 
 

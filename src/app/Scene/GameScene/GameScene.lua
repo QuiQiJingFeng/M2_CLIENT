@@ -8,8 +8,21 @@ GameScene._gameUILayer 	= nil -- 游戏UI界面  由 gamePlayLayer 层触发显�
 GameScene._gameNoticeLayer = nil--提示层
 
 function GameScene:ctor()
-    self._gameRoomLayer = lt.GameRoomLayer.new()
-    self:addChild(self._gameRoomLayer)
+    local gameInfo = lt.DataManager:getGameRoomInfo()
+
+    local gameid = 1
+
+    if gameInfo and gameInfo.room_setting and gameInfo.room_setting.game_type then
+        gameid = gameInfo.room_setting.game_type
+    end
+
+    if gameid == 1 then --红中麻将
+        self._gameRoomLayer = lt.GameRoomLayer.new()
+        self:addChild(self._gameRoomLayer)
+    elseif gameid == 2 then --斗地主
+        self._gameRoomLayer = lt.DDZGameLayer.new()
+        self:addChild(self._gameRoomLayer)
+    end 
 
     self._gameUILayer = lt.WorldUILayer.new(self)
     self._gameUILayer:setVisible(false)

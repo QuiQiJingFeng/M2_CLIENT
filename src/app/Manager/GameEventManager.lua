@@ -20,6 +20,8 @@ PLAY_CARD  出牌
 PENG    碰
 GANG    杠
 GUO     过]]--
+    GAME_CMD = "game_cmd",  --
+    Game_OVER_REFRESH = "game_over_refresh",
 
     --推送
     PUSH_USER_INFO = "push_user_info",

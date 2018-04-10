@@ -35,6 +35,11 @@ function DataManager:init()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.JOIN_ROOM, handler(self, self.onjoinRoomResponse), "DataManager:onjoinRoomResponse")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_ALL_ROOM_INFO, handler(self, self.onPushAllRoomInfo), "DataManager:onjoinRoomResponse")
 
+
+    --牌局信息
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_GAME_OVER, handler(self, self.onNoticeGameOver), "DataManager.onNoticeGameOver")
+
+
 end
 
 function DataManager:onPushAllRoomInfo(msg)
@@ -47,24 +52,32 @@ function DataManager:onjoinRoomResponse(msg)
     dump(msg, "msg")
     if msg.result == "success" then
         print("加入房间")
-
         local gameInfo = lt.DataManager:getGameRoomInfo()
+        if not gameInfo or not gameInfo.room_setting or not gameInfo.room_setting.game_type then
+            return
+        end    
 
-        dump(gameInfo, "gameInfo")
-        local gameid = 1
+        local gameScene = lt.GameScene.new()
+        lt.SceneManager:replaceScene(gameScene)
 
-        if gameInfo and gameInfo.room_setting and gameInfo.room_setting.game_type then
-            gameid = gameInfo.room_setting.game_type
-        end
 
-        if gameid == 1 then --红中麻将
-            print("FYD+++++++++切换游戏场景")
-            local gameScene = lt.GameScene.new()
-            lt.SceneManager:replaceScene(gameScene)
-        elseif gameid == 2 then --斗地主
-            local gameScene = lt.DDZGameScene.new()
-            lt.SceneManager:replaceScene(gameScene)
-        end     
+        -- local gameInfo = lt.DataManager:getGameRoomInfo()
+
+        -- dump(gameInfo, "gameInfo")
+        -- local gameid = 1
+
+        -- if gameInfo and gameInfo.room_setting and gameInfo.room_setting.game_type then
+        --     gameid = gameInfo.room_setting.game_type
+        -- end
+
+        -- if gameid == 1 then --红中麻将
+        --     print("FYD+++++++++切换游戏场景")
+        --     local gameScene = lt.GameScene.new()
+        --     lt.SceneManager:replaceScene(gameScene)
+        -- elseif gameid == 2 then --斗地主
+        --     local gameScene = lt.DDZGameScene.new()
+        --     lt.SceneManager:replaceScene(gameScene)
+        -- end     
 
     else
         print("加入房间失败")
@@ -169,6 +182,7 @@ function DataManager:onPushUserInfo(msg)
     lt.GameEventManager:post(lt.GameEventManager.EVENT.ROOM_LIST_UPDATE)
 end
 
+--[[################################牌局游戏信息################################]]
 function DataManager:getGameRoomInfo(flag)
     if not self._gameRoomInfo or flag then
         self._gameRoomInfo = {}
@@ -201,6 +215,33 @@ function DataManager:getPlayerInfoByPos(pos)
     end
     return nil
 end
+
+function DataManager:getGameOverInfo(flag)
+    if not self._gameOverInfo or flag then
+        self._gameOverInfo = {}
+    end
+    return self._gameOverInfo
+end
+
+function DataManager:onNoticeGameOver(msg)   --通知客户端 本局结束 带结算
+
+    self._gameOverInfo = {}
+    if msg.players then
+        for k,v in ipairs(msg.players) do
+            if v.card_list then
+                table.sort(v.card_list, function(a, b)
+                    return a < b
+                end)
+            end 
+        end
+    end
+    self._gameOverInfo["winner_pos"] = msg.winner_pos
+    self._gameOverInfo["winner_type"] = msg.winner_type or 1 --自摸 1 抢杠 2
+    self._gameOverInfo["last_round"] = msg.last_round
+    self._gameOverInfo["players"] = msg.players
+    lt.GameEventManager:post(lt.GameEventManager.EVENT.Game_OVER_REFRESH)
+end
+
 
 return DataManager
 
