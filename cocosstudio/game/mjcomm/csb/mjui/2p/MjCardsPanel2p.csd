@@ -487,7 +487,7 @@
             <PrePosition X="0.4149" Y="0.5792" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_OutCard" CanEdit="False" ActionTag="398417103" Tag="6854" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="667.0000" RightMargin="667.0000" TopMargin="350.3250" BottomMargin="399.6750" ctype="SingleNodeObjectData">
+          <AbstractNodeData Name="Panel_OutCard" ActionTag="398417103" Tag="6854" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="667.0000" RightMargin="667.0000" TopMargin="350.3250" BottomMargin="399.6750" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
               <AbstractNodeData Name="Node_OutCards_2" CanEdit="False" ActionTag="-1151117452" Tag="4466" IconVisible="True" TopMargin="140.2098" BottomMargin="-140.2098" ctype="SingleNodeObjectData">
@@ -1700,7 +1700,7 @@
             <PrePosition X="0.5000" Y="0.5329" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_OutCardTips" CanEdit="False" ActionTag="-853121706" Tag="4528" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="607.4438" RightMargin="565.5562" TopMargin="512.9686" BottomMargin="186.0314" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_OutCardTips" ActionTag="-853121706" Tag="4528" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="607.4438" RightMargin="565.5562" TopMargin="512.9686" BottomMargin="186.0314" ctype="SpriteObjectData">
             <Size X="161.0000" Y="51.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="687.9438" Y="211.5314" />
@@ -1711,10 +1711,10 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordPleaseOutCard.png" Plist="game/mjcomm/mjPartUi.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_Vertical" CanEdit="False" ActionTag="-1721603921" Tag="1064" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="0.0001" TopMargin="0.5688" BottomMargin="-0.5688" StretchWidthEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_Vertical" ActionTag="-1721603921" Tag="1064" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="0.0001" TopMargin="0.5688" BottomMargin="-0.5688" StretchWidthEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1333.9999" Y="750.0000" />
             <Children>
-              <AbstractNodeData Name="Node_CpgCards_1" CanEdit="False" ActionTag="319516358" Tag="4155" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="744.5053" RightMargin="589.4946" TopMargin="52.4485" BottomMargin="697.5515" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_CpgCards_1" ActionTag="319516358" Tag="4155" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="744.5053" RightMargin="589.4946" TopMargin="52.4485" BottomMargin="697.5515" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="Layer_Cpg_5" ActionTag="-2077379478" Tag="36118" IconVisible="True" LeftMargin="-332.5842" RightMargin="203.5842" TopMargin="-39.1119" BottomMargin="-38.8881" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
@@ -1775,53 +1775,53 @@
                 <PrePosition X="0.5581" Y="0.9301" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Node_CpgCards_2" ActionTag="-2002008543" Tag="2585" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="666.9999" RightMargin="666.9999" TopMargin="657.0841" BottomMargin="92.9159" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_CpgCards_2" ActionTag="-2002008543" Tag="2585" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="666.9999" RightMargin="666.9999" TopMargin="672.0800" BottomMargin="77.9200" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="Layer_Cpg_1" ActionTag="-766522876" Tag="35842" IconVisible="True" LeftMargin="-325.0643" RightMargin="199.0643" TopMargin="-38.8623" BottomMargin="-39.1377" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="Layer_Cpg_1" ActionTag="-766522876" Tag="35842" IconVisible="True" LeftMargin="-384.0600" RightMargin="258.0600" TopMargin="-38.8623" BottomMargin="-39.1377" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="126.0000" Y="78.0000" />
                     <AnchorPoint />
-                    <Position X="-325.0643" Y="-39.1377" />
+                    <Position X="-384.0600" Y="-39.1377" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjLieDownCpgItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Layer_Cpg_2" ActionTag="-653813201" Tag="35864" IconVisible="True" LeftMargin="-193.9812" RightMargin="67.9812" TopMargin="-38.8642" BottomMargin="-39.1358" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="Layer_Cpg_2" ActionTag="-653813201" Tag="35864" IconVisible="True" LeftMargin="-222.9800" RightMargin="96.9800" TopMargin="-38.8642" BottomMargin="-39.1358" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="126.0000" Y="78.0000" />
                     <AnchorPoint />
-                    <Position X="-193.9812" Y="-39.1358" />
+                    <Position X="-222.9800" Y="-39.1358" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjLieDownCpgItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Layer_Cpg_3" CanEdit="False" ActionTag="-319720563" Tag="35886" IconVisible="True" LeftMargin="-63.8864" RightMargin="-62.1136" TopMargin="-38.8656" BottomMargin="-39.1344" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="Layer_Cpg_3" ActionTag="-319720563" Tag="35886" IconVisible="True" LeftMargin="-64.8900" RightMargin="-61.1100" TopMargin="-38.8656" BottomMargin="-39.1344" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="126.0000" Y="78.0000" />
                     <AnchorPoint />
-                    <Position X="-63.8864" Y="-39.1344" />
+                    <Position X="-64.8900" Y="-39.1344" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjLieDownCpgItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Layer_Cpg_4" ActionTag="592567065" Tag="35908" IconVisible="True" LeftMargin="67.9519" RightMargin="-193.9519" TopMargin="-38.8680" BottomMargin="-39.1320" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="Layer_Cpg_4" ActionTag="592567065" Tag="35908" IconVisible="True" LeftMargin="95.9500" RightMargin="-221.9500" TopMargin="-38.8680" BottomMargin="-39.1320" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="126.0000" Y="78.0000" />
                     <AnchorPoint />
-                    <Position X="67.9519" Y="-39.1320" />
+                    <Position X="95.9500" Y="-39.1320" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjLieDownCpgItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Layer_Cpg_5" ActionTag="-592908521" Tag="35930" IconVisible="True" LeftMargin="199.2567" RightMargin="-325.2567" TopMargin="-38.8623" BottomMargin="-39.1377" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="Layer_Cpg_5" ActionTag="-592908521" Tag="35930" IconVisible="True" LeftMargin="257.2600" RightMargin="-383.2600" TopMargin="-38.8623" BottomMargin="-39.1377" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="126.0000" Y="78.0000" />
                     <AnchorPoint />
-                    <Position X="199.2567" Y="-39.1377" />
+                    <Position X="257.2600" Y="-39.1377" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -1830,13 +1830,13 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position X="666.9999" Y="92.9159" />
+                <Position X="666.9999" Y="77.9200" />
                 <Scale ScaleX="1.6500" ScaleY="1.6500" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.1239" />
+                <PrePosition X="0.5000" Y="0.1039" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Node_HandCards_1" CanEdit="False" ActionTag="1081643548" Tag="4261" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="748.1072" RightMargin="585.8927" TopMargin="59.5013" BottomMargin="690.4987" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_HandCards_1" ActionTag="1081643548" Tag="4261" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="748.1072" RightMargin="585.8927" TopMargin="59.5013" BottomMargin="690.4987" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="MJ_Stand_14" ActionTag="-1102389930" Tag="4272" IconVisible="True" LeftMargin="-332.0017" RightMargin="285.0017" TopMargin="-33.3938" BottomMargin="-36.6062" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
@@ -1987,143 +1987,143 @@
                 <PrePosition X="0.5608" Y="0.9207" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Node_HandCards_2" Visible="False" ActionTag="-1643272809" Tag="2586" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="666.9999" RightMargin="666.9999" TopMargin="667.0841" BottomMargin="82.9159" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_HandCards_2" ActionTag="-1643272809" Tag="2586" IconVisible="True" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="666.9999" RightMargin="666.9999" TopMargin="667.0841" BottomMargin="82.9159" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="MJ_Stand_1" ActionTag="879315407" Tag="2599" IconVisible="True" LeftMargin="-620.6652" RightMargin="528.6652" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_1" Visible="False" ActionTag="879315407" Tag="2599" IconVisible="True" LeftMargin="-632.4500" RightMargin="540.4500" TopMargin="-67.8300" BottomMargin="-69.1700" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="-620.6652" Y="-69.1696" />
+                    <Position X="-632.4500" Y="-69.1700" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_2" ActionTag="-1760047711" Tag="2603" IconVisible="True" LeftMargin="-532.3310" RightMargin="440.3310" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_2" Visible="False" ActionTag="-1760047711" Tag="2603" IconVisible="True" LeftMargin="-544.1118" RightMargin="452.1118" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="-532.3310" Y="-69.1696" />
+                    <Position X="-544.1118" Y="-69.1696" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_3" ActionTag="-989197745" Tag="2607" IconVisible="True" LeftMargin="-442.9968" RightMargin="350.9968" TopMargin="-67.8303" BottomMargin="-69.1697" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_3" Visible="False" ActionTag="-989197745" Tag="2607" IconVisible="True" LeftMargin="-454.7774" RightMargin="362.7774" TopMargin="-67.8302" BottomMargin="-69.1698" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="-442.9968" Y="-69.1697" />
+                    <Position X="-454.7774" Y="-69.1698" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_4" ActionTag="429609477" Tag="2611" IconVisible="True" LeftMargin="-354.6632" RightMargin="262.6632" TopMargin="-67.8303" BottomMargin="-69.1697" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_4" ActionTag="429609477" Tag="2611" IconVisible="True" LeftMargin="-366.4400" RightMargin="274.4400" TopMargin="-67.8302" BottomMargin="-69.1698" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="-354.6632" Y="-69.1697" />
+                    <Position X="-366.4400" Y="-69.1698" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_5" ActionTag="621661021" Tag="2615" IconVisible="True" LeftMargin="-267.3295" RightMargin="175.3295" TopMargin="-67.8303" BottomMargin="-69.1697" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_5" ActionTag="621661021" Tag="2615" IconVisible="True" LeftMargin="-279.1104" RightMargin="187.1104" TopMargin="-67.8302" BottomMargin="-69.1698" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="-267.3295" Y="-69.1697" />
+                    <Position X="-279.1104" Y="-69.1698" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_6" ActionTag="-1924060804" Tag="2619" IconVisible="True" LeftMargin="-179.9949" RightMargin="87.9949" TopMargin="-67.8303" BottomMargin="-69.1697" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_6" ActionTag="-1924060804" Tag="2619" IconVisible="True" LeftMargin="-191.7762" RightMargin="99.7762" TopMargin="-67.8302" BottomMargin="-69.1698" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="-179.9949" Y="-69.1697" />
+                    <Position X="-191.7762" Y="-69.1698" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_7" ActionTag="-419847815" Tag="2623" IconVisible="True" LeftMargin="-92.6597" RightMargin="0.6597" TopMargin="-67.8303" BottomMargin="-69.1697" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_7" ActionTag="-419847815" Tag="2623" IconVisible="True" LeftMargin="-104.4400" RightMargin="12.4400" TopMargin="-67.8302" BottomMargin="-69.1698" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="-92.6597" Y="-69.1697" />
+                    <Position X="-104.4400" Y="-69.1698" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_8" CanEdit="False" ActionTag="-677918099" Tag="2627" IconVisible="True" LeftMargin="-4.3234" RightMargin="-87.6766" TopMargin="-67.8303" BottomMargin="-69.1697" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_8" ActionTag="-677918099" Tag="2627" IconVisible="True" LeftMargin="-16.1038" RightMargin="-75.8962" TopMargin="-67.8302" BottomMargin="-69.1698" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="-4.3234" Y="-69.1697" />
+                    <Position X="-16.1038" Y="-69.1698" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_9" ActionTag="1182083585" Tag="2631" IconVisible="True" LeftMargin="84.0107" RightMargin="-176.0107" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_9" ActionTag="1182083585" Tag="2631" IconVisible="True" LeftMargin="72.2301" RightMargin="-164.2301" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="84.0107" Y="-69.1696" />
+                    <Position X="72.2301" Y="-69.1696" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_10" ActionTag="1228824401" Tag="2635" IconVisible="True" LeftMargin="172.3448" RightMargin="-264.3448" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_10" ActionTag="1228824401" Tag="2635" IconVisible="True" LeftMargin="160.5600" RightMargin="-252.5600" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="172.3448" Y="-69.1696" />
+                    <Position X="160.5600" Y="-69.1696" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_11" ActionTag="-652241133" Tag="2639" IconVisible="True" LeftMargin="261.6788" RightMargin="-353.6788" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_11" ActionTag="-652241133" Tag="2639" IconVisible="True" LeftMargin="249.8986" RightMargin="-341.8986" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="261.6788" Y="-69.1696" />
+                    <Position X="249.8986" Y="-69.1696" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_12" ActionTag="1240453507" Tag="2643" IconVisible="True" LeftMargin="350.0141" RightMargin="-442.0141" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_12" ActionTag="1240453507" Tag="2643" IconVisible="True" LeftMargin="338.2300" RightMargin="-430.2300" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="350.0141" Y="-69.1696" />
+                    <Position X="338.2300" Y="-69.1696" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_13" ActionTag="-164285422" Tag="2647" IconVisible="True" LeftMargin="439.0207" RightMargin="-531.0207" TopMargin="-67.8303" BottomMargin="-69.1697" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_13" ActionTag="-164285422" Tag="2647" IconVisible="True" LeftMargin="427.2400" RightMargin="-519.2400" TopMargin="-67.8302" BottomMargin="-69.1698" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="439.0207" Y="-69.1697" />
+                    <Position X="427.2400" Y="-69.1698" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/csb/mjui/green/MjStandFaceItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="MJ_Stand_14" ActionTag="-1065218076" Tag="2651" RotationSkewX="0.0192" RotationSkewY="0.0190" IconVisible="True" LeftMargin="527.3549" RightMargin="-619.3549" TopMargin="-67.8304" BottomMargin="-69.1696" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="MJ_Stand_14" ActionTag="-1065218076" Tag="2651" RotationSkewX="0.0192" RotationSkewY="0.0190" IconVisible="True" LeftMargin="539.3500" RightMargin="-631.3500" TopMargin="-67.8300" BottomMargin="-69.1700" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="92.0000" Y="137.0000" />
                     <AnchorPoint />
-                    <Position X="527.3549" Y="-69.1696" />
+                    <Position X="539.3500" Y="-69.1700" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
