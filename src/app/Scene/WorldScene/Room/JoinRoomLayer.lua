@@ -47,10 +47,16 @@ function JoinRoomLayer:onClickNumKey(event)
 		for i,v in ipairs(self._numberArray) do
 			roomNum = roomNum..v
 		end
-		local arg = {room_id = roomNum}--weixin
-		lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+		lt.CommonUtil:sepecailServerLogin(roomNum,function(result) 
+           if result ~= "success" then
+                print("connect failed")
+                return
+            end
+            local arg = {room_id = roomNum}--weixin
+			lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
 
-		print("%%%%%%%%%%%%%%%%%%%%%%%%%%", tonumber(roomNum))
+			print("%%%%%%%%%%%%%%%%%%%%%%%%%%", tonumber(roomNum))
+		end)
 	end
 end
 

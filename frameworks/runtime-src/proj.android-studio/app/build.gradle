@@ -7,7 +7,7 @@ android {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-        applicationId "com.mu77.aam2"
+        applicationId "com.my.sqmj"
         minSdkVersion 10
         targetSdkVersion PROP_TARGET_SDK_VERSION
         versionCode 1
@@ -152,6 +152,10 @@ android.applicationVariants.all { variant ->
         copy {
            from "${buildDir}/../../../../../package"
            into "${buildDir}/intermediates/assets/${variant.dirName}/package"
+        }
+        copy {
+           from "${buildDir}/../../../../../temp"
+           into "${buildDir}/intermediates/assets/${variant.dirName}/src"
         }
 
         // copy {

@@ -1682,4 +1682,82 @@ function CommonUtil:Analyze(allPai,iType,resultType)
     return false;
 end
 
+function CommonUtil:sendXMLHTTPrequrest(method,url,body,callBack)
+      local xhr = cc.XMLHttpRequest:new()
+      xhr.responseType = cc.XMLHTTPREQUEST_RESPONSE_STRING
+      xhr:open(method, url) -- 打开链接
+
+      -- 状态改变时调用
+      local function onReadyStateChange()
+        if xhr.readyState == 4 and (xhr.status >= 200 and xhr.status < 207) then
+                  local receive = xhr.response 
+                  callBack(receive)  
+                  xhr:unregisterScriptHandler()        
+        else
+            print("xhr.readyState is:", xhr.readyState, "xhr.status is: ",xhr.status)
+            xhr:unregisterScriptHandler()
+            callBack()
+        end
+      end
+      local content
+      if method == "POST" then
+        local params = {}
+        for key,value in pairs(body) do
+            table.insert(params,key.."="..value)
+        end
+        content = table.concat(params,"&")
+      end
+      xhr:registerScriptHandler(onReadyStateChange)
+      xhr:send(content)
+end
+
+function CommonUtil:selectServerLogin(game_type,callBack)
+    self.selecting = nil
+    local body = lt.DataManager:getAuthData()
+    body.game_type = game_type
+    
+    local url = string.format("http://%s:%d/operator/get_server_list_by_type",lt.Constants.HOST,lt.Constants.PORT)
+    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
+            if recv_msg then
+                recv_msg = json.decode(recv_msg)
+                if recv_msg.result == "success" then
+                    local server_list = recv_msg.server_list
+                    local idx = math.random(1,#server_list)
+                    local server_info = server_list[idx]
+                    lt.NetWork:reconnect(server_info.server_host,server_info.server_port,function() 
+                            local data = lt.DataManager:getAuthData()
+                            lt.NetWork:send({login=data},function(recv_msg)
+                                    self.selecting = nil
+                                    callBack(recv_msg.result)
+                                end)
+                        end)
+                    
+                end
+            end
+        end)
+end
+
+function CommonUtil:sepecailServerLogin(room_id,callBack)
+    self.selecting = nil
+    local body = lt.DataManager:getAuthData()
+    body.room_id = room_id
+    local url = string.format("http://%s:%d/operator/get_server_by_id",lt.Constants.HOST,lt.Constants.PORT)
+    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg)
+            if recv_msg then
+                recv_msg = json.decode(recv_msg)
+                if recv_msg.result == "success" then
+                    local server_info = recv_msg
+                    lt.NetWork:reconnect(server_info.server_host,server_info.server_port,function() 
+                            local data = lt.DataManager:getAuthData()
+                            lt.NetWork:send({login=data},function(recv_msg)
+                                    self.selecting = nil
+                                    callBack(recv_msg.result)
+                                end)
+                        end)
+                    
+                end
+            end
+        end)
+end
+
 return CommonUtil

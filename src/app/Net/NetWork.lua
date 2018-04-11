@@ -103,7 +103,9 @@ function network:disconnect( ... )
 end
 
 function network:reconnect(host,port,callback)
-    self._socket:close()
+    if self._socket then
+        self._socket:close()
+    end
     self:connect(host,port,callback)
 end
 
@@ -256,7 +258,6 @@ function network:update(dt)
             if item.callback then
                 item.callback(rsp_msg)
             else
-                --print("FYD++++++>>>>>>>>>111111111",rsp_name)
                 lt.GameEventManager:post(rsp_name, rsp_msg)
 
                 if rsp_name ~= "heartbeat" then
@@ -264,7 +265,6 @@ function network:update(dt)
                 end
             end
     	else
-            --print("FYD++++++>>>>>>>>>22222222",rsp_name)
             --如果是推送 走这里
             lt.GameEventManager:post(rsp_name, rsp_msg)
 

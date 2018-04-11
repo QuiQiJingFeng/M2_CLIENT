@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":aam2_client" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":mygame" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":aam2_client" />
+        <option name="GRADLE_PROJECT_PATH" value=":mygame" />
       </configuration>
     </facet>
     <facet type="native-android-gradle" name="Native-Android-Gradle">
