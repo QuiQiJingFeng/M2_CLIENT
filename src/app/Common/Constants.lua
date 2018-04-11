@@ -1486,6 +1486,6 @@ Constants.ROOM_STATE = {
 }
 
 Constants.HOST = "47.52.99.120"
-Constants.PORT = 8888
+Constants.PORT = 3000
 
 return Constants

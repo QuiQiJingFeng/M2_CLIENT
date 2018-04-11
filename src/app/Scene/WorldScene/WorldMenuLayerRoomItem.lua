@@ -63,7 +63,15 @@ end
 function UITableViewItem:onJoinRoom()
 	local room_id = self.data.room_id
 	local arg = {room_id = room_id}
-	lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+    lt.CommonUtil:sepecailServerLogin(room_id,function(result) 
+           if result ~= "success" then
+                print("connect failed")
+                return
+            end
+            lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+        end)
+
+	
 end
 
 --return cell size
