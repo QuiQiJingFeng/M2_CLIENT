@@ -103,7 +103,9 @@ function network:disconnect( ... )
 end
 
 function network:reconnect(host,port,callback)
-    self._socket:close()
+    if self._socket then
+        self._socket:close()
+    end
     self:connect(host,port,callback)
 end
 
@@ -244,18 +246,15 @@ function network:update(dt)
     		end
     	end
 
-        print("rsp_name ==>",rsp_name,new_session_id)
     	local item = self._send_map[new_session_id]
     	if item then
     		--如果是请求返回
             if item.callback then
                 item.callback(rsp_msg)
             else
-                print("FYD++++++>>>>>>>>>111111111",rsp_name)
                 lt.GameEventManager:post(rsp_name, rsp_msg)
             end
     	else
-            print("FYD++++++>>>>>>>>>22222222",rsp_name)
             --如果是推送 走这里
             lt.GameEventManager:post(rsp_name, rsp_msg)
         end

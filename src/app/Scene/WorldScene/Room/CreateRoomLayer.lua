@@ -836,28 +836,33 @@ end
 -- end
 
 function CreateRoomLayer:sendCreateRoom( ... )
+    lt.CommonUtil:selectServerLogin(self.selectTable.game_type,function(result)
+            if result ~= "success" then
+                print("connect failed")
+                return
+            end 
+            local tempTable  = {}
+            tempTable.game_type = self.selectTable.game_type
+            tempTable.pay_type =  self.selectTable.pay
+            tempTable.round = self.selectTable.round
+            tempTable.seat_num = self.selectTable.playNum
 
-	local tempTable  = {}
+            tempTable.other_setting = {}
+            for i = 0, #self.selectTable.other_setting do
+                tempTable.other_setting[i] = self.selectTable.other_setting[i]
+            end
 
-    tempTable.game_type = self.selectTable.game_type
-	tempTable.pay_type =  self.selectTable.pay
-	tempTable.round = self.selectTable.round
-	tempTable.seat_num = self.selectTable.playNum
+            tempTable.is_friend_room = false
+            tempTable.is_open_voice = false
+            tempTable.is_open_gps = false
 
-	tempTable.other_setting = {}
-	for i = 0, #self.selectTable.other_setting do
-		tempTable.other_setting[i] = self.selectTable.other_setting[i]
-	end
+            dump(tempTable, "tempTable")
 
-    tempTable.is_friend_room = false
-    tempTable.is_open_voice = false
-    tempTable.is_open_gps = false
-
-    dump(tempTable, "tempTable")
-
-    local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = { room_setting = tempTable}}
-	-- 发送消息
-	lt.NetWork:send(msg)
+            local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = { room_setting = tempTable}}
+            -- 发送消息
+            lt.NetWork:send(msg)
+        end)
+ 
 end
 
 function CreateRoomLayer:buttonClicked(pSender)

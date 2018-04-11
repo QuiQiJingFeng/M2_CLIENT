@@ -162,8 +162,12 @@ function DataManager:getPlayerName()
 end
 
 -- 记录下登陆 房间服务器的令牌
-function DataManager:recordToken(token)
-    self._token = token
+function DataManager:recordAuthData(data)
+    self._auth_data = data
+end
+
+function DataManager:getAuthData()
+    return {user_id = self._auth_data.user_id,token=self._auth_data.token}
 end
 
 function DataManager:onPushUserInfo(msg)

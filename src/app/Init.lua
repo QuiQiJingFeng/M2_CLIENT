@@ -3,7 +3,6 @@ ltMetaTable = {}
 setmetatable(lt, ltMetaTable)
 
 ltMetaTable.__index = function(table, name)
-	print("FYD+++++NAME = ",name,ltMetaTable[name] )
     table[name] = require(ltMetaTable[name])
     return table[name]
 end

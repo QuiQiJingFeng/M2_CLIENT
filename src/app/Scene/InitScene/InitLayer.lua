@@ -16,28 +16,30 @@ function InitLayer:ctor()
 end
 
 function InitLayer:onLogin()
+    local account="FHQYDIDXIL"..math.random(1,99999)
+    account = account
     local body = {  
-                    account="FHQYDIDXIL1",password="123456",user_name="惊风",user_pic="http://xxxx.png",
+                    account = account,password="123456",user_name="惊风",user_pic="http://xxxx.png",
                     login_type="release",device_id="DDGEXXIKIGGESAE",device_type="MI274",platform="weixin"
                 }
-    lt.CommonUtil:sendXMLHTTPrequrest("POST","http://127.0.0.1:3000/login",body,function(recv_msg) 
-
+    local url = string.format("http://%s:%d/login",lt.Constants.HOST,lt.Constants.PORT)
+    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
             if recv_msg then
                 recv_msg = json.decode(recv_msg)
                 if recv_msg.result == "success" then
                     local user_id = recv_msg.user_id
                     local token = recv_msg.token
-                    lt.DataManager:recordToken(token)
                     body = {user_id=user_id,token=token}
+                    lt.DataManager:recordAuthData(body)
                     self:onGetUserInfo(body)
                 end
             end
         end)
-
 end
 
 function InitLayer:onGetUserInfo(body)
-    lt.CommonUtil:sendXMLHTTPrequrest("POST","http://127.0.0.1:3000/operator/get_user_info",body,function(recv_msg) 
+    local url = string.format("http://%s:%d/operator/get_user_info",lt.Constants.HOST,lt.Constants.PORT)
+    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
             if recv_msg then
                 recv_msg = json.decode(recv_msg)
                 local worldScene = lt.WorldScene.new()

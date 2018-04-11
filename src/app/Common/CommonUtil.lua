@@ -1708,5 +1708,53 @@ function CommonUtil:sendXMLHTTPrequrest(method,url,body,callBack)
       xhr:send(content)
 end
 
+function CommonUtil:selectServerLogin(game_type,callBack)
+    self.selecting = nil
+    local body = lt.DataManager:getAuthData()
+    body.game_type = game_type
+    
+    local url = string.format("http://%s:%d/operator/get_server_list_by_type",lt.Constants.HOST,lt.Constants.PORT)
+    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
+            if recv_msg then
+                recv_msg = json.decode(recv_msg)
+                if recv_msg.result == "success" then
+                    local server_list = recv_msg.server_list
+                    local idx = math.random(1,#server_list)
+                    local server_info = server_list[idx]
+                    lt.NetWork:reconnect(server_info.server_host,server_info.server_port,function() 
+                            local data = lt.DataManager:getAuthData()
+                            lt.NetWork:send({login=data},function(recv_msg)
+                                    self.selecting = nil
+                                    callBack(recv_msg.result)
+                                end)
+                        end)
+                    
+                end
+            end
+        end)
+end
+
+function CommonUtil:sepecailServerLogin(room_id,callBack)
+    self.selecting = nil
+    local body = lt.DataManager:getAuthData()
+    body.room_id = room_id
+    local url = string.format("http://%s:%d/operator/get_server_by_id",lt.Constants.HOST,lt.Constants.PORT)
+    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg)
+            if recv_msg then
+                recv_msg = json.decode(recv_msg)
+                if recv_msg.result == "success" then
+                    local server_info = recv_msg
+                    lt.NetWork:reconnect(server_info.server_host,server_info.server_port,function() 
+                            local data = lt.DataManager:getAuthData()
+                            lt.NetWork:send({login=data},function(recv_msg)
+                                    self.selecting = nil
+                                    callBack(recv_msg.result)
+                                end)
+                        end)
+                    
+                end
+            end
+        end)
+end
 
 return CommonUtil

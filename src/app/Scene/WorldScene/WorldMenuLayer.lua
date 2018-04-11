@@ -60,19 +60,24 @@ function WorldMenuLayer:onEnter()
 end
 
 function WorldMenuLayer:listenRoomListUpdate()
-    local info = lt.DataManager:getPlayerInfo()
-    if info.room_id then
-        lt.CommonUtil:show(self.Se_Return)
-        lt.CommonUtil:hide(self.Se_Create)
-    else
-        lt.CommonUtil:hide(self.Se_Return)
-        lt.CommonUtil:show(self.Se_Create)     
-    end
 
-    if info.room_list and #info.room_list > 0 then
-        lt.CommonUtil:hide(self.bg_NoData)
-        self.tb_room_info:setData(info.room_list,0,10)
-    end 
+    local body = lt.DataManager:getAuthData()
+    local url = string.format("http://%s:%d/operator/get_room_list",lt.Constants.HOST,lt.Constants.PORT)
+    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
+            local info = json.decode(recv_msg)
+            if info.room_id then
+                lt.CommonUtil:show(self.Se_Return)
+                lt.CommonUtil:hide(self.Se_Create)
+            else
+                lt.CommonUtil:hide(self.Se_Return)
+                lt.CommonUtil:show(self.Se_Create)     
+            end
+
+            if info.room_list and #info.room_list > 0 then
+                lt.CommonUtil:hide(self.bg_NoData)
+                self.tb_room_info:setData(info.room_list,0,10)
+            end
+        end)
 end
 
 function WorldMenuLayer:onClickSetBtn(event)
@@ -81,12 +86,8 @@ function WorldMenuLayer:onClickSetBtn(event)
 end
 
 function WorldMenuLayer:onClickCreateRoomBtn(event)
-    if self.Se_Return:isVisible() then
-
-    else
-        local setLayer = lt.CreateRoomLayer.new()
-        lt.UILayerManager:addLayer(setLayer, true)
-    end
+    local setLayer = lt.CreateRoomLayer.new()
+    lt.UILayerManager:addLayer(setLayer, true)
 end
 
 function WorldMenuLayer:onClickJoinRoomBtn(event)

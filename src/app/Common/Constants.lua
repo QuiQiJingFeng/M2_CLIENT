@@ -1485,4 +1485,7 @@ Constants.ROOM_STATE = {
     GAME_OVER = 3,      --游戏结束
 }
 
+Constants.HOST = "47.52.99.120"
+Constants.PORT = 8888
+
 return Constants
