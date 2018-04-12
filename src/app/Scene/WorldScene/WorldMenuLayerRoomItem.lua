@@ -77,6 +77,7 @@ end
 --return cell size
 function UITableViewItem:refreshData(data)
     self.data = data
+
 	self.roomNameLabel:setString(lt.Constants.GAME_TYPE[data.game_type])
 
 	local str = data.room_id
@@ -85,6 +86,16 @@ function UITableViewItem:refreshData(data)
 	end
 	self.roomNumberLabel:setString(str)
 	if data.state == lt.Constants.ROOM_STATE.GAME_PREPARE then
+        local room_id = lt.DataManager:getPlayerInfo().room_id
+        if room_id then
+            if room_id == data.room_id then
+                lt.CommonUtil:show(self.btn)
+            else
+                lt.CommonUtil:hide(self.btn)
+            end
+        else
+            lt.CommonUtil:show(self.btn)
+        end
 		local minites = math.floor((data.expire_time - os.time()) / 60)
 		if minites > 0 then
 			self.stateLabel:setString(string.format(lt.Constants.TEXTS[2],minites))
@@ -92,16 +103,7 @@ function UITableViewItem:refreshData(data)
 			self.stateLabel:setString(lt.Constants.TEXTS[4])
 			lt.CommonUtil:hide(self.btn)
 		end
-		local room_id = lt.DataManager:getPlayerInfo().room_id
-		if room_id then
-			if room_id == data.room_id then
-				lt.CommonUtil:show(self.btn)
-			else
-				lt.CommonUtil:hide(self.btn)
-			end
-		else
-			lt.CommonUtil:show(self.btn)
-		end
+		
 	elseif data.state == lt.Constants.ROOM_STATE.GAME_PLAYING then
 		self.stateLabel:setString(lt.Constants.TEXTS[3])
 		lt.CommonUtil:hide(self.btn)
