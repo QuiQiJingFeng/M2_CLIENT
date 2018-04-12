@@ -39,6 +39,7 @@ function SettingLayer:onBackLobbyResponse(msg)
     if msg.result == "success" then
     	local worldScene = lt.WorldScene.new()
         lt.SceneManager:replaceScene(worldScene)
+        lt.NetWork:disconnect()
     end
 end
 
