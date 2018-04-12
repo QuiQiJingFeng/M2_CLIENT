@@ -30,7 +30,6 @@ function DataManager:init()
 
      --监听客户端断开连接事件
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.WAIT_RECONNECT,handler(self, self.listenNetDisconnect),"DataManager.listenNetDisconnect")
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.RECONNECT,handler(self, self.reConnectSuccess),"DataManager.reConnectSuccess")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.JOIN_ROOM, handler(self, self.onjoinRoomResponse), "DataManager:onjoinRoomResponse")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_ALL_ROOM_INFO, handler(self, self.onPushAllRoomInfo), "DataManager:onjoinRoomResponse")
 
@@ -83,42 +82,28 @@ function DataManager:onjoinRoomResponse(msg)
     end
 end
 
-function DataManager:reConnectSuccess(recv_msg)
-    print("------------重连成功-----------")
-    -- --更新玩家的token
-    -- self:saveToken(recv_msg.reconnect_token)
-    -- --重新连接成功 则重置连接次数
-    -- self:updateDisconnectTimes(true)
-end
-
+--断线重连
 function DataManager:listenNetDisconnect()
-    --断线重连
-    local times = self:updateDisconnectTimes()
-    print("FYD+++++>>>>TIMES = ",times)
-    -- if times <= 3 then
-    --     lt.NetWork:reconnect("47.52.99.120", 3000, function() 
-    --         local reconnect_token = self:getReconnectToken()
-    --         if not reconnect_token then
-    --             return
-    --         end
-    --         local user_id = self:getPlayerUid()
-    --         if not user_id or not reconnect_token then
-    --             print("not user_id or reconnect_token")
-    --             return
-    --         end
-    --         lt.NetWork:send({[lt.GameEventManager.EVENT.RECONNECT] = {token = reconnect_token}})
-    --     end)
-    -- else
-    --     local sureFunc = function()
-    --          self:updateDisconnectTimes(true)
-    --          self:listenNetDisconnect()
-    --     end
-    --     local cancelFunc = function()
-    --     end
-
-    --     local isOneBtn = false
-    --     lt.MsgboxLayer:showMsgBox("网络连接断开,是否重新连接", isOneBtn, sureFunc, cancelFunc, true)
-    -- end
+    print("连接断开事件触发")
+    local scene = cc.Director:getInstance():getRunningScene()
+    if scene.__cname == "GameScene" then
+        --断线重连  只能发生在gamescene的时候
+        local room_id = self._gameRoomInfo.room_id
+        if room_id then
+            lt.CommonUtil:sepecailServerLogin(room_id,function() 
+                if result ~= "success" then
+                    print("connect failed")
+                    lt.MsgboxLayer:showMsgBox("网络连接断开,是否重新连接", false, function()
+                        self:listenNetDisconnect()
+                    end, function() end, true)
+                    return
+                else
+                    local arg = {room_id = room_id}
+                    lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+                end
+            end)
+        end
+    end
 end
                                                                  
 

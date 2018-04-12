@@ -35,7 +35,7 @@ end
 
 function network:onHeartbeatResponse(event)
     --如果收到心跳包返回
-    self._waite_heartbeat_dt = nil
+    self.waiting_heart_beat_response = false
 end
 
 function network:isIPV6(host)
@@ -100,6 +100,7 @@ end
 
 function network:disconnect( ... )
     self._socket:close()
+    self:clear()
 end
 
 function network:reconnect(host,port,callback)
@@ -154,6 +155,47 @@ function network:unpackData()
     end
 end
 
+function network:clear()
+   self.waiting_heart_beat_response = nil
+   self.can_heart = nil
+end
+
+function network:heartbeat(dt)
+    if not (self._socket and (self._net_state == NETSTATE.CONNECTING or self._net_state == NETSTATE.CONNECTED)) then
+        self:clear()
+        return
+    end
+    if self.can_heart then
+        local now = os.time()
+        if self.waiting_heart_beat_response then
+            if now > (self.heart_beat_time + HEART_BEAT_DT) then
+                self:updateState(NETSTATE.WAIT_RECONNECTED)
+                self.waiting_heart_beat_response = false
+            end
+        end
+
+        local is_heart = false
+        
+        if not self.next_heart_time then
+            is_heart = true
+        else
+            if now > self.next_heart_time then
+                is_heart = true
+            else
+                return
+            end
+        end
+        if is_heart then
+            --发送心跳包
+            self:send({["heartbeat"] = {}},nil,true)
+            self.next_heart_time = now + HEART_BEAT_DT
+            self.heart_beat_time = now
+            self.waiting_heart_beat_response = true
+        end
+    end
+end
+
+
 --计算连接时间,如果超时需要重新连接
 function network:caculateConnectTime(dt)
 	if self._connect_dt > CONNECT_TIMEOUT then
@@ -199,29 +241,6 @@ function network:update(dt)
             self:caculateConnectTime(dt)
         end
     elseif self._net_state == NETSTATE.CONNECTED then
-
-        if self.can_heart then
-            --心跳相关处理
-            if self._heart_dt > HEART_BEAT_DT then
-
-                --print("FYD  发送心跳包")
-                self._heart_dt = 0
-                --发送心跳包
-                self:send({["heartbeat"] = {}},nil,true)
-                self._waite_heartbeat_dt = 1
-            else
-                if self._waite_heartbeat_dt then
-                    self._waite_heartbeat_dt = self._waite_heartbeat_dt - dt
-                    --print("FYD====>>>self._waite_heartbeat_dt = ",self._waite_heartbeat_dt)
-                    if self._waite_heartbeat_dt < 0 then
-                        self:updateState(NETSTATE.WAIT_RECONNECTED)
-                    end
-                end
-                --累计心跳间隔时间
-                self._heart_dt = self._heart_dt + dt
-            end
-        end
-
     	--收包
     	self:receive()
     	--TODO
@@ -286,6 +305,7 @@ function network:send(data_content,callback,ignore_session)
 
 	if not (self._socket and (self._net_state == NETSTATE.CONNECTING or self._net_state == NETSTATE.CONNECTED)) then
 		print("networkerror!!!!!!!!!!!!!!!!!!!!!!!")
+        self:clear()
         return false
 	end
 
@@ -328,5 +348,10 @@ local scheduler = cc.Director:getInstance():getScheduler()
 network.schedule_id = scheduler:scheduleScriptFunc(function(dt)
     network:update(dt)
 end, 0.1, false)
+
+local scheduler2 = cc.Director:getInstance():getScheduler()
+network.schedule_id2 = scheduler2:scheduleScriptFunc(function(dt)
+    network:heartbeat(dt)
+end, 0, false)
 
 return network
