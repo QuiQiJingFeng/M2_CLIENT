@@ -878,7 +878,7 @@ function GamePlayCardsPanel:onRefreshGameOver()   --通知客户端 本局结束
 				local index = 1
 				for i,node in ipairs(self._allPlayerHandCardsNode[direction]) do
 					if node:isVisible() then
-						local posRightNode = node:getChildByName("Node_PosRight")
+
 						local lieFaceNode = self:createLieFaceItemByDirection(direction)
 						if lieFaceNode then 
 							local face = lieFaceNode:getChildByName("Sprite_Face")
@@ -892,12 +892,21 @@ function GamePlayCardsPanel:onRefreshGameOver()   --通知客户端 本局结束
 								local cardValue = value % 10
 								face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
 
-								posRightNode:setVisible(true)
-								posRightNode:addChild(lieFaceNode)
+								local tempNode = node:getChildByName("Node_PosRight")
+								if direction == self.POSITION_TYPE.XI then
+									tempNode = node:getChildByName("Node_PosLeftGap")
+
+								elseif direction == self.POSITION_TYPE.DONG then
+									tempNode = node:getChildByName("Node_PosRightGap")
+								end
+								--local root = node:getParent()
+
+								tempNode:addChild(lieFaceNode)
 								table.insert(self._allLieFaceCardNode, lieFaceNode)
 								index = index + 1
 							end
 						end
+						--node:setVisible(false)
 					end
 				end
 			end

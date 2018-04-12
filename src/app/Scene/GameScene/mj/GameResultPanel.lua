@@ -54,7 +54,7 @@ function GameResultPanel:ctor(deleget)
 		currentDiretions = {2, 4}
 	elseif self._playerNum == 3 then
 		currentDiretions = {1, 2, 3}
-	elseif self._playerNum == 3 then
+	elseif self._playerNum == 4 then
 		currentDiretions = {1, 2, 3, 4}
 	end
 
