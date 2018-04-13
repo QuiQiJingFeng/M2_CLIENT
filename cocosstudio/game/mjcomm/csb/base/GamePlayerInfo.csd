@@ -805,14 +805,14 @@
                 <Size X="106.0000" Y="109.0000" />
                 <Children>
                   <AbstractNodeData Name="Sprite_Word" ActionTag="-658084989" Tag="4357" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="36.5000" RightMargin="36.5000" TopMargin="60.0002" BottomMargin="16.9998" ctype="SpriteObjectData">
-                    <Size X="33.0000" Y="32.0000" />
+                    <Size X="33.0000" Y="34.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="53.0000" Y="32.9998" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.3028" />
                     <PreSize X="0.3113" Y="0.2936" />
-                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordBigXi.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordBigDong.png" Plist="game/mjcomm/mjPartUi.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>

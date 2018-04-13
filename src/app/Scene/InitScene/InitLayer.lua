@@ -16,10 +16,12 @@ function InitLayer:ctor()
 end
 
 function InitLayer:onLogin()
-    local account="FHQYDIDXIL"..math.random(1,99999)
+    local index = math.random(1,99999)
+    local account="FHQYDIDXIL"..index
+
     account = account
     local body = {  
-                    account = account,password="123456",user_name="惊风",user_pic="http://xxxx.png",
+                    account = account,password="123456",user_name="雀起"..index,user_pic="http://xxxx.png",
                     login_type="release",device_id="DDGEXXIKIGGESAE",device_type="MI274",platform="weixin"
                 }
     local url = string.format("http://%s:%d/login",lt.Constants.HOST,lt.Constants.PORT)

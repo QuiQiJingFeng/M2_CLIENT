@@ -37,6 +37,9 @@ function GameResultPanel:ctor(deleget)
 	local Button_SurplusCard = self:getChildByName("Button_SurplusCard")
 	Button_SurplusCard:setVisible(false)
 
+	local rewardCodeBtn = self:getChildByName("Reward_Code_Btn")
+	lt.CommonUtil:addNodeClickEvent(rewardCodeBtn, handler(self, self.onRewardCodeClick))
+
     --结算界面
     self:setVisible(false)
 
@@ -70,11 +73,28 @@ end
 function GameResultPanel:onStartAgainClick(event) --继续游戏
 	--重新整理界面
 	self:setVisible(false)
-
+	self:closeWinAwardCodeLayer()
 	self._deleget:initGame()
 
 	local arg = {pos = lt.DataManager:getMyselfPositionInfo().user_pos}--weixin
     lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
+end
+
+function GameResultPanel:onRewardCodeClick(event) --奖码
+ 
+	if not self._winAwardCodeLayer then
+		self._winAwardCodeLayer = lt.WinAwardCodeLayer.new(self)
+	    lt.UILayerManager:addLayer(self._winAwardCodeLayer, true)
+	else
+		self._winAwardCodeLayer:setVisible(true)
+	end
+end
+
+function GameResultPanel:closeWinAwardCodeLayer(event) --奖码
+	if self._winAwardCodeLayer then
+		lt.UILayerManager:removeLayer(self._winAwardCodeLayer)
+		self._winAwardCodeLayer = nil
+	end
 end
 
 function GameResultPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（杠）
@@ -86,10 +106,12 @@ function GameResultPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（�
 			local scrollNumber = node:getChildByTag(100)
 			if not scrollNumber then
 				scrollNumber = lt.ScrollNumber:create(12, "games/bj/game/part/numWin.png", "games/bj/game/part/numLost.png")
+				scrollNumber:setTag(100)
+				node:addChild(scrollNumber)
 			end
 			scrollNumber:setVisible(true)
 			scrollNumber:setNumber(v.delt_score)
-			node:addChild(scrollNumber)
+
 
 			local func = function( )
 				--scrollNumber:removeFromParent()
@@ -108,8 +130,12 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	-- msg.over_type-- 1 正常结束 2 流局 3 房间解散会发送一个结算
 	
 	-- msg.award_list
-	local gameOverInfo = lt.DataManager:getGameOverInfo()
+	if not self._winAwardCodeLayer then
+		self._winAwardCodeLayer = lt.WinAwardCodeLayer.new(self)
+	    lt.UILayerManager:addLayer(self._winAwardCodeLayer, true)
+	end
 
+	local gameOverInfo = lt.DataManager:getGameOverInfo()
 	self:setVisible(true)
 	local winner_pos = gameOverInfo.winner_pos
 	local winner_type = gameOverInfo.winner_type or 1 --自摸 1 抢杠 2
@@ -143,8 +169,11 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 				local imageBg = resultInfoItem:getChildByName("Image_Bg")
 				local scrollView = resultInfoItem:getChildByName("ScrollView")
 				scrollView:setVisible(false)
-
+				imageBg:setVisible(true)
 				local desText = imageBg:getChildByName("Text_Info1")
+
+				desText:setVisible(true)
+
 				desText:setString("")
 				if winner_type == 1 then--自摸
 					desText:setString("[自摸]")

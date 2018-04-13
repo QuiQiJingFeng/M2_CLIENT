@@ -134,6 +134,17 @@ function AppGame:loadSpriteFrames()
     lt.ResourceManager:addSpriteFrames("game/mjcomm/mjTingAni.plist", "game/mjcomm/mjTingAni.png")
     lt.ResourceManager:addSpriteFrames("game/mjcomm/mjActionAni.plist", "game/mjcomm/mjActionAni.png")
     lt.ResourceManager:addSpriteFrames("game/mjcomm/mjPartUi.plist", "game/mjcomm/mjPartUi.png")
+
+    lt.ResourceManager:addSpriteFrames("hallcomm/preserve/comm/CommPlist.plist", "hallcomm/preserve/comm/CommPlist.png")
+
+    lt.ResourceManager:addSpriteFrames("hallcomm/lobby/LobbyPlist1.plist", "hallcomm/lobby/LobbyPlist1.png")
+    lt.ResourceManager:addSpriteFrames("hallcomm/lobby/LobbyPlist2.plist", "hallcomm/lobby/LobbyPlist2.png")
+
+    lt.ResourceManager:addSpriteFrames("hallcomm/common/CommonPlist0.plist", "hallcomm/common/CommonPlist0.png")
+    lt.ResourceManager:addSpriteFrames("hallcomm/common/CommonPlist1.plist", "hallcomm/common/CommonPlist1.png")
+
+    lt.ResourceManager:addSpriteFrames("games/hzmj/game_1.plist", "games/hzmj/game_1.png")
+    
 end
 
 -- display.removeSpriteFrames("games/comm/launch/LaunchPlist0.plist", "games/comm/launch/LaunchPlist0.png")

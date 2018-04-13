@@ -171,7 +171,15 @@ function DataManager:onRefreshRoomInfo(msg)
 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)
 
-    --other_setting
+    --room_setting  other_setting
+    -- 游戏设置项[数组]
+    -- [1] 底分
+    -- [2] 奖码的个数
+    -- [3] 七对胡牌
+    -- [4] 喜分
+    -- [5] 一码不中当全中
+
+
 end
 
 function DataManager:getMyselfPositionInfo()
@@ -210,11 +218,26 @@ function DataManager:onNoticeGameOver(msg)   --通知客户端 本局结束 带�
             end 
         end
     end
-    self._gameOverInfo["winner_pos"] = msg.winner_pos
-    self._gameOverInfo["winner_type"] = msg.winner_type or 1 --自摸 1 抢杠 2
-    self._gameOverInfo["last_round"] = msg.last_round
-    self._gameOverInfo["players"] = msg.players
+    self._gameOverInfo = msg
+    -- self._gameOverInfo["winner_pos"] = msg.winner_pos
+    -- self._gameOverInfo["winner_type"] = msg.winner_type or 1 --自摸 1 抢杠 2
+    -- self._gameOverInfo["last_round"] = msg.last_round
+    -- self._gameOverInfo["players"] = msg.players
+
     lt.GameEventManager:post(lt.GameEventManager.EVENT.Game_OVER_REFRESH)
+
+-- players
+-- over_type
+-- award_list
+-- winner_type
+-- last_round
+-- winner_pos
+
+
+
+
+
+
 end
 
 

@@ -31,7 +31,6 @@ function GameSetPanel:ctor()
 end
 
 function GameSetPanel:onSetClick(event) 
-
 	local setLayer = lt.SettingLayer.new()
     lt.UILayerManager:addLayer(setLayer, true)
 end

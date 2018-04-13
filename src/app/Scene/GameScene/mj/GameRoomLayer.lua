@@ -66,26 +66,12 @@ function GameRoomLayer:onEnter()
     print("GameRoomLayer:onEnter")
     
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.GAME_CMD, handler(self, self.onGameCMDResponse), "GameRoomLayer.onGameCMDResponse")
-
-    
-    
 end
 
 function GameRoomLayer:onExit()
     print("GameRoomLayer:onExit")
-    
-    
-    
-    
-    
-
-    
-    
    
-
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.GAME_CMD, "GameRoomLayer:onGameCMDResponse")
-    
- 	
 end
 
 
