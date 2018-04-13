@@ -37,8 +37,8 @@ function GameResultPanel:ctor(deleget)
 	local Button_SurplusCard = self:getChildByName("Button_SurplusCard")
 	Button_SurplusCard:setVisible(false)
 
-	local rewardCodeBtn = self:getChildByName("Reward_Code_Btn")
-	lt.CommonUtil:addNodeClickEvent(rewardCodeBtn, handler(self, self.onRewardCodeClick))
+	self._rewardCodeBtn = self:getChildByName("Reward_Code_Btn")
+	lt.CommonUtil:addNodeClickEvent(self._rewardCodeBtn, handler(self, self.onRewardCodeClick))
 
     --结算界面
     self:setVisible(false)
@@ -98,6 +98,17 @@ function GameResultPanel:closeWinAwardCodeLayer(event) --奖码
 end
 
 function GameResultPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（杠）
+	self:setVisible(true)
+	self._resultPanelMask:setVisible(false)
+	self._resultStartAgainBtn:setVisible(false)
+	self._resultTotalEndBtn:setVisible(false)
+	self._resultWeChatShareBtn:setVisible(false)
+	self._resultLeaveRoomBtn:setVisible(false)
+	self._rewardCodeBtn:setVisible(false)
+
+	for k,v in pairs(self._currentPlayerResultNode) do
+		v:getChildByName("Node_ResultInfoItem"):setVisible(false)
+	end
 
 	for k,v in pairs(msg.cur_score_list) do
 		local direction = self._deleget:getPlayerDirectionByPos(v.user_pos)
@@ -137,6 +148,9 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 
 	local gameOverInfo = lt.DataManager:getGameOverInfo()
 	self:setVisible(true)
+	self._resultPanelMask:setVisible(true)
+	self._rewardCodeBtn:setVisible(true)
+
 	local winner_pos = gameOverInfo.winner_pos
 	local winner_type = gameOverInfo.winner_type or 1 --自摸 1 抢杠 2
 	local last_round = gameOverInfo.last_round

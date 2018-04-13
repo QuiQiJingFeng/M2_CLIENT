@@ -405,30 +405,27 @@ function GamePlayCardsPanel:configAllPlayerCards(direction)--吃椪杠 手牌
 		dump(tostring(cardInfo))
 		if cardInfo then
 			local value = cardInfo.value
-			local gang_type = cardInfo.gang_type--1 暗杠 2 明杠 3 碰杠
+			--local gang_type = cardInfo.gang_type--1 暗杠 2 明杠 3 碰杠
 			local from = cardInfo.from
-			local type = cardInfo.type--1 碰 2 杠 3 吃
+			local type = cardInfo.type--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
 
 			local formDirection = self._deleget:getPlayerDirectionByPos(cardInfo.from) 
 
 			local cardType = math.floor(value / 10) + 1
 			local cardValue = value % 10
 
-			local visibleType = 1 --1 碰 2 碰杠 3 明杠 4 暗杠 5 吃
-
-			if type == 2 then
-				gangCount = gangCount + 1
-				if gang_type == 1 then--暗杠
-					visibleType = 4
-				elseif gang_type == 2 then--明杠
-					visibleType = 3
-				elseif gang_type == 3 then--碰杠
-					visibleType = 2
-				end
-			else
-				visibleType = 1
+			if type == 1 then--吃
 				chiPengCount = chiPengCount + 1
+			elseif type == 2 then--碰
+				chiPengCount = chiPengCount + 1
+			elseif type == 3 then--碰杠
+				gangCount = gangCount + 1
+			elseif type == 4 then--明杠
+				gangCount = gangCount + 1
+			elseif type == 5 then--暗杠
+				gangCount = gangCount + 1
 			end
+
 			CpgNode:setVisible(true)
 			for i=1,5 do
 				CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
@@ -444,11 +441,11 @@ function GamePlayCardsPanel:configAllPlayerCards(direction)--吃椪杠 手牌
 				
 				local initIndex = nil
 
-				if visibleType == 1 then
+				if type == 1 or type == 2 then
 					initIndex = 3
-				elseif visibleType == 2 or visibleType == 3 then
+				elseif type == 3 or type == 4 then
 					initIndex = 4
-				elseif visibleType == 4 then
+				elseif type == 5 then
 					initIndex = 4
 					if i <= 4 then
 						CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(true)
@@ -461,7 +458,7 @@ function GamePlayCardsPanel:configAllPlayerCards(direction)--吃椪杠 手牌
 
 					if i <= initIndex then
 						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
-						if i == initIndex and visibleType ~= 4 then
+						if i == initIndex and type ~= 5 then
 							arrow:setVisible(true)
 						end
 					else
@@ -753,8 +750,8 @@ function GamePlayCardsPanel:onNoticePlayCard(msg)   --通知其他人有人出�
 
 end
 
-function GamePlayCardsPanel:onNoticePengCard(msg)   --通知其他人有人碰牌 
 
+function GamePlayCardsPanel:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。。。
 	local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
 	if not direction then
 		return
@@ -764,57 +761,36 @@ function GamePlayCardsPanel:onNoticePengCard(msg)   --通知其他人有人碰�
 	if msg.item then
 		info = {}
 		info["value"] = msg.item["value"]
-		info["gang_type"] = msg.item["gang_type"]
 		info["from"] = msg.item["from"]
-		info["type"] = msg.item["type"]
+		info["type"] = msg.item["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
 
 	end
 
-	if not self._allPlayerCpgCards[direction] then
-		self._allPlayerCpgCards[direction] = {}
-	end
-	if info then
-		table.insert(self._allPlayerCpgCards[direction], info)
-
-		self:configAllPlayerCards(direction)
-	end
-end
-
-function GamePlayCardsPanel:onNoticeGangCard(msg)   --通知其他人有人杠牌 
-	local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
-	if not direction then
+	if not msg.item["type"] then
 		return
 	end
 
-	local info = nil
-	if msg.item then
-		info = {}
-		info["value"] = msg.item["value"]
-		info["gang_type"] = msg.item["gang_type"]
-		info["from"] = msg.item["from"]
-		info["type"] = msg.item["type"]
+	if msg.item["type"] ~= 6 then
+		if not self._allPlayerCpgCards[direction] then
+			self._allPlayerCpgCards[direction] = {}
+		end
 
-	end
-
-	if not self._allPlayerCpgCards[direction] then
-		self._allPlayerCpgCards[direction] = {}
-	end
-
-	if info then
-		local change = false
-		for k,v in pairs(self._allPlayerCpgCards[direction]) do
-			if v.value == info.value then--之前是碰  变成了回头杠
-				change = true
-				self._allPlayerCpgCards[direction][k] = info
-				break
+		if info then
+			if msg.item["type"] == 3 then
+				local change = false
+				for k,v in pairs(self._allPlayerCpgCards[direction]) do
+					if v.value == info.value then--之前是碰  变成了回头杠
+						change = true
+						self._allPlayerCpgCards[direction][k] = info
+						break
+					end
+				end
+			else
+				table.insert(self._allPlayerCpgCards[direction], info)
 			end
-		end
 
-		if not change then
-			table.insert(self._allPlayerCpgCards[direction], info)
+			self:configAllPlayerCards(direction)
 		end
-
-		self:configAllPlayerCards(direction)
 	end
 end
 
@@ -919,14 +895,11 @@ function GamePlayCardsPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_DRAW_CARD, handler(self, self.onPushDrawCard), "GamePlayCardsPanel.onPushDrawCard")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_PLAY_CARD, handler(self, self.onPushPlayCard), "GamePlayCardsPanel.onPushPlayCard")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAY_CARD, handler(self, self.onNoticePlayCard), "GamePlayCardsPanel.onNoticePlayCard")
-
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PENG_CARD, handler(self, self.onNoticePengCard), "GamePlayCardsPanel.onNoticePengCard")
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_GANG_CARD, handler(self, self.onNoticeGangCard), "GamePlayCardsPanel.onNoticeGangCard")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, handler(self, self.onPushPlayerOperatorState), "GamePlayCardsPanel.onPushPlayerOperatorState")
-
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GamePlayCardsPanel.onRefreshGameOver")
 
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GamePlayCardsPanel.onNoticeSpecialEvent")
 end
 
 function GamePlayCardsPanel:onExit()
@@ -934,10 +907,10 @@ function GamePlayCardsPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_DRAW_CARD, "GamePlayCardsPanel:onPushDrawCard")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAY_CARD, "GamePlayCardsPanel:onPushPlayCard")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PLAY_CARD, "GamePlayCardsPanel:onNoticePlayCard")
-	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PENG_CARD, "GamePlayCardsPanel:onNoticePengCard")
-    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_GANG_CARD, "GamePlayCardsPanel:onNoticeGangCard")
+
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, "GamePlayCardsPanel:onPushPlayerOperatorState")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GamePlayCardsPanel:onRefreshGameOver")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GamePlayCardsPanel:onNoticeSpecialEvent")
 end
 
 return GamePlayCardsPanel

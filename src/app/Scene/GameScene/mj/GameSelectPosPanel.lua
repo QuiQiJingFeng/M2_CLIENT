@@ -483,6 +483,31 @@ function GameSelectPosPanel:onNoticePlayerConnectState(msg)   --玩家在线情�
 
 end
 
+function GameSelectPosPanel:onRefreshGameOver()   --结算
+	if lt.DataManager:getGameOverInfo().players then
+		self._allPlayerGameOverData = {}
+		for i,v in ipairs(lt.DataManager:getGameOverInfo().players) do
+			local direction = self:getPlayerDirectionByPos(v.user_pos)
+			self._allPlayerGameOverData[direction] = v
+		end
+	end
+
+	self._allPlayerGameOverData = self._allPlayerGameOverData or {}
+
+	for i,v in ipairs(self._allPlayerGameOverData) do
+		local direction = self:getPlayerDirectionByPos(v.user_pos)
+		local logoNode = self._currentPlayerLogArray[direction]
+		if logoNode then
+			local scoreText = logoNode:getChildByName("Text_Amount")--99999
+
+			if not self._allPlayerGameOverData[direction].score then
+				self._allPlayerGameOverData[direction].score = 0
+			end
+			scoreText:setString(self._allPlayerGameOverData[direction].score)
+		end
+	end
+end
+
 function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（杠）
 
 	if lt.DataManager:getGameOverInfo().players then
@@ -522,6 +547,7 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.configPlayer), "GameSelectPosPanel:configPlayer")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, handler(self, self.onNoticePlayerConnectState), "GameSelectPosPanel:onNoticePlayerConnectState")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, handler(self, self.onRefreshScoreResponse), "GameSelectPosPanel:onRefreshScoreResponse")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameSelectPosPanel:onRefreshGameOver")
 end
 
 function GameSelectPosPanel:onExit()
@@ -531,6 +557,7 @@ function GameSelectPosPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "GameSelectPosPanel:configPlayer")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, "GameSelectPosPanel:onNoticePlayerConnectState")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, "GameSelectPosPanel:onRefreshScoreResponse")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameSelectPosPanel:onRefreshGameOver")
 end
 
 return GameSelectPosPanel

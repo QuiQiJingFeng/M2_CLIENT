@@ -144,7 +144,6 @@ function AppGame:loadSpriteFrames()
     lt.ResourceManager:addSpriteFrames("hallcomm/common/CommonPlist1.plist", "hallcomm/common/CommonPlist1.png")
 
     lt.ResourceManager:addSpriteFrames("games/hzmj/game_1.plist", "games/hzmj/game_1.png")
-    
 end
 
 -- display.removeSpriteFrames("games/comm/launch/LaunchPlist0.plist", "games/comm/launch/LaunchPlist0.png")

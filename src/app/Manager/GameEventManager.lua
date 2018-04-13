@@ -31,10 +31,8 @@ GUO     过]]--
     PUSH_DRAW_CARD = "push_draw_card",--通知其他人有人摸牌 
     PUSH_PLAY_CARD = "push_play_card",--通知玩家该出牌了 
     NOTICE_PLAY_CARD = "notice_play_card",--通知其他人有人出牌 
-    NOTICE_PENG_CARD = "notice_peng_card",--通知其他人有人碰牌 
 
-    NOTICE_GANG_CARD = "notice_gang_card",--通知其他人有人杠牌 
-
+    NOTICE_SPECIAL_EVENT = "notice_special_event",  --通知有人吃椪杠胡
     PUSH_PLAYER_OPERATOR_STATE = "push_player_operator_state",--通知客户端当前 碰/杠 状态
 
     NOTICE_GAME_OVER = "notice_game_over",--通知客户端 本局结束 带结算

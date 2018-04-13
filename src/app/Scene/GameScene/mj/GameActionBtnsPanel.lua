@@ -5,10 +5,17 @@ local GameActionBtnsPanel = class("GameActionBtnsPanel", lt.BaseLayer, function(
     return cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjActionBtnsPanel.csb")
 end)
 
+GameActionBtnsPanel.POSITION_TYPE = {
+    XI = 1, 
+    NAN = 2,
+    DONG = 3,
+    BEI = 4,
+}
 
-function GameActionBtnsPanel:ctor()
+
+function GameActionBtnsPanel:ctor(deleget)
 	GameActionBtnsPanel.super.ctor(self)
-
+    self._deleget = deleget
 	self.m_objCommonUi = {}
 
     self.m_objCommonUi.m_nodeActionBtns = self:getChildByName("Node_ActionBtns") --吃碰杠胡按钮
@@ -53,6 +60,23 @@ function GameActionBtnsPanel:ctor()
     self.m_objCommonUi.m_panelMenuItems:removeAllChildren()
 
     self.m_objCommonUi.m_panelCurOutCard = self:getChildByName("Panel_CurOutCard")
+
+
+    self._specialEventNode = {}
+    if self.m_objCommonUi.m_panelCurOutCard then
+
+        for i=1,4 do
+            self.m_objCommonUi.m_panelCurOutCard:getChildByName("Node_CurrentOutCard_"..i):setVisible(false)
+
+            local node = self.m_objCommonUi.m_panelCurOutCard:getChildByName("Node_Ani_"..i)
+        
+            if node then
+                node:setVisible(false)
+                table.insert(self._specialEventNode, node)
+            end
+        end
+    end
+
     local shaizi1 = self:getChildByName("Sprite_DicePoint_1")
     local shaizi2 = self:getChildByName("Sprite_DicePoint_2")
 
@@ -75,7 +99,6 @@ function GameActionBtnsPanel:ctor()
 
     self.m_objCommonUi.m_nodeCardsMenu:setVisible(false)
     self.m_objCommonUi.m_nodeActionBtns:setVisible(false)
-    self.m_objCommonUi.m_panelCurOutCard:setVisible(false)
     self.m_objCommonUi.m_nodeHuCardTips:setVisible(false)
 
 end
@@ -411,12 +434,60 @@ function GameActionBtnsPanel:createMenuItem()
     return mj
 end
 
-function GameActionBtnsPanel:onEnter()   
+function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
+    if not msg then
+        return
+    end
+    local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
+    if not direction or not self._specialEventNode[direction] then
+        return
+    end
 
+    if not msg.item["type"] then
+        return
+    end
+    self._specialEventNode[direction]:setVisible(true)
+    local light = self._specialEventNode[direction]:getChildByName("Sprite_Light")
+    local word = self._specialEventNode[direction]:getChildByName("Sprite_Word")
+
+    local path = "game/mjcomm/animation/aniWord/wordChi.png"
+    if msg.item["type"] == 1 then --<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
+        path = "game/mjcomm/animation/aniWord/wordChi.png"
+    elseif msg.item["type"] == 2 then
+        path = "game/mjcomm/animation/aniWord/wordPeng.png"
+    elseif msg.item["type"] == 3 then
+        path = "game/mjcomm/animation/aniWord/wordGang.png"
+    elseif msg.item["type"] == 4 then
+        path = "game/mjcomm/animation/aniWord/wordGang.png"
+    elseif msg.item["type"] == 5 then
+        path = "game/mjcomm/animation/aniWord/wordGang.png"
+    elseif msg.item["type"] == 6 then
+        path = "game/mjcomm/animation/aniWord/wordHu.png"--wordZm
+    end
+    word:setSpriteFrame(path)
+    
+    for i=1,12 do
+
+        local delay = cc.DelayTime:create(0.1 * i)
+
+        local func1 = cc.CallFunc:create(function()
+            local framePath = "game/mjcomm/animation/aniActionLight/aniAction_"..i..".png"
+            light:setSpriteFrame(framePath)
+            if i == 12 then
+                self._specialEventNode[direction]:setVisible(false)
+            end
+        end)
+        local sequence = cc.Sequence:create(delay, func1)
+        light:runAction(sequence)
+    end
+end
+
+function GameActionBtnsPanel:onEnter()   
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GameActionBtnsPanel.onNoticeSpecialEvent")
 end
 
 function GameActionBtnsPanel:onExit()
-
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameActionBtnsPanel:onNoticeSpecialEvent")
 end
 
 return GameActionBtnsPanel
