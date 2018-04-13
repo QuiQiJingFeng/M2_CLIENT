@@ -82,22 +82,25 @@ function DataManager:onjoinRoomResponse(msg)
     end
 end
 
+local times = 3
 --断线重连
 function DataManager:listenNetDisconnect()
     print("连接断开事件触发")
+    times = times - 1
+    if times < 0 then
+        lt.MsgboxLayer:showMsgBox("网络连接断开,是否重新连接", false, function()
+            times = 3
+            self:listenNetDisconnect()
+        end, function() end, true)
+        return
+    end
     local scene = cc.Director:getInstance():getRunningScene()
     if scene.__cname == "GameScene" then
         --断线重连  只能发生在gamescene的时候
         local room_id = self._gameRoomInfo.room_id
         if room_id then
-            lt.CommonUtil:sepecailServerLogin(room_id,function() 
-                if result ~= "success" then
-                    print("connect failed")
-                    lt.MsgboxLayer:showMsgBox("网络连接断开,是否重新连接", false, function()
-                        self:listenNetDisconnect()
-                    end, function() end, true)
-                    return
-                else
+            lt.CommonUtil:sepecailServerLogin(room_id,function(result) 
+                if result == "success" then
                     local arg = {room_id = room_id}
                     lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
                 end
