@@ -189,10 +189,11 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 					local scrollNumber = node:getChildByTag(100)
 					if not scrollNumber then
 						scrollNumber = lt.ScrollNumber:create(12, "games/bj/game/part/numWin.png", "games/bj/game/part/numLost.png")
+						node:addChild(scrollNumber)
+						scrollNumber:setTag(100)
 					end
 					scrollNumber:setVisible(true)
 					scrollNumber:setNumber(v.cur_score)
-					node:addChild(scrollNumber)
 
 					if winner_pos == v.user_pos then--是自己赢了
 						resultInfoItem:setVisible(true)

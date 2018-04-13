@@ -244,15 +244,20 @@ function GameSelectPosPanel:configRotation(isClick)
 	    	end
 	    end
 
-		local action = cc.RotateBy:create(0.5, du)
+	    local time = 0.5
+	    if du == 0 then
+	    	time = 0
+	    end
+
+		local action = cc.RotateBy:create(time, du)
 
 		local action2 = function ( )
-			local action3 = cc.RotateBy:create(0.5, -du)
+			local action3 = cc.RotateBy:create(time, -du)
 			self._selectPositionNode:runAction(action3)
 		end
 
 		local action1 = function ( )
-			local action4 = cc.RotateBy:create(0.5, du)
+			local action4 = cc.RotateBy:create(time, du)
 			self._cardsPanel._spriteDnxb:runAction(action4)
 		end
 
@@ -503,7 +508,8 @@ function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分�
 			if not self._allPlayerGameOverData[direction].score then
 				self._allPlayerGameOverData[direction].score = 0
 			end
-			scoreText:setString(self._allPlayerGameOverData[direction].score + v.delt_score)
+			self._allPlayerGameOverData[direction].score = self._allPlayerGameOverData[direction].score + v.delt_score
+			scoreText:setString(self._allPlayerGameOverData[direction].score)
 		end
 	end
 end
