@@ -191,6 +191,8 @@ function DataManager:getMyselfPositionInfo()
             return player
         end
     end
+    print("房间数据出错！！！！！！！！")
+    return nil
 end
 
 function DataManager:getPlayerInfoByPos(pos)

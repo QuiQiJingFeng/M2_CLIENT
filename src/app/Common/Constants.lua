@@ -1485,7 +1485,7 @@ Constants.ROOM_STATE = {
     GAME_OVER = 3,      --游戏结束
 }
 
-Constants.HOST = "47.52.99.120"
+Constants.HOST = "192.168.0.100"--"47.52.99.120"
 Constants.PORT = 3000
 
 return Constants

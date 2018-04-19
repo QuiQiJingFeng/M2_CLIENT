@@ -82,6 +82,15 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 
 	for pos,v in ipairs(self._allPlayerPosArray) do--西南
 
+		local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(v:getPosition()))
+
+		if not v["originPosX"] then
+			v["originPosX"] = worldPos.x
+		end
+		if not v["originPosY"] then
+			v["originPosY"] = worldPos.y
+		end
+
 		local direction = self.POSITION_TYPE.NAN
 		if self._playerNum == 2 then
 			if pos == self.POSITION_TYPE.XI then--北方
@@ -97,6 +106,7 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 		if not v["atDirection"] then
 			v["atDirection"] = direction
 		end
+
 
 		if pos <= self._playerNum then
 			v:setVisible(true)
@@ -210,7 +220,7 @@ function GameSelectPosPanel:configPlayer() --头像
 				end
     		end
     	else
-    		print("没人", pos, lt.DataManager:getMyselfPositionInfo().is_sit)
+    		print("没人", pos, sitNode.atDirection, lt.DataManager:getMyselfPositionInfo().is_sit)
     		self._currentPlayerLogArray[sitNode.atDirection]:setVisible(false)
 			if not lt.DataManager:getMyselfPositionInfo().is_sit then
 				sitNode:setVisible(true)
@@ -228,8 +238,8 @@ function GameSelectPosPanel:configRotation(isClick)
 	end
 
 	if isClick and self._selectPositionNode then
-
-		local du = (self._selectPositionNode.atDirection - self.POSITION_TYPE.NAN) * 90
+		local temp = self._selectPositionNode.atDirection - self.POSITION_TYPE.NAN
+		local du = temp * 90
 
 	    for i,v in pairs(self._currentSitPosArray) do
 	    	local player = lt.DataManager:getPlayerInfoByPos(v:getTag())
@@ -249,19 +259,7 @@ function GameSelectPosPanel:configRotation(isClick)
 	    	time = 0
 	    end
 
-		local action = cc.RotateBy:create(time, du)
-
-		local action2 = function ( )
-			local action3 = cc.RotateBy:create(time, -du)
-			self._selectPositionNode:runAction(action3)
-		end
-
-		local action1 = function ( )
-			local action4 = cc.RotateBy:create(time, du)
-			self._cardsPanel._spriteDnxb:runAction(action4)
-		end
-
-		local headVisible = function ( )
+    	local headVisible = function ( )
 			self._selectPositionNode:setVisible(false)
 
 			self:configPlayer()
@@ -274,41 +272,119 @@ function GameSelectPosPanel:configRotation(isClick)
 			-- self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setPosition(worldPos.x, worldPos.y)
 		end
 
-		local spawn = cc.Spawn:create(cc.CallFunc:create(action1), action, cc.CallFunc:create(action2))
-		
-  		local sequence = cc.Sequence:create(spawn, cc.CallFunc:create(headVisible))
+  		--三人
+  		if self._playerNum == 3 then
+  			local action = cc.RotateBy:create(time, du)
+			local action1 = function ( )
+				local action3 = cc.RotateBy:create(time, -du)
+				self._selectPositionNode:runAction(action3)
+			end
 
+  			local action2 = function ()
+  				--3 2   2 1  1 3       1 2  2 3  3 1 
 
-  		--二 四人
-		local temp = self._selectPositionNode.atDirection - self.POSITION_TYPE.NAN
-		for pos,v in ipairs(self._currentSitPosArray) do
+  				for pos,v in ipairs(self._currentSitPosArray) do
+  					if self._selectPositionNode.atDirection == self.POSITION_TYPE.XI then
+  						
+  						if v.atDirection == self.POSITION_TYPE.NAN then
+  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosX , self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosY))
+							v:setPosition(worldPos)
+							
+							v.atDirection = self.POSITION_TYPE.DONG
+						elseif v.atDirection == self.POSITION_TYPE.DONG then
 
-			--4 3  3 2 2 1 1 4     4 2 3 1  2 4 1 3   4 1 1 2 2 3 3 4
-			if temp > 0 then --顺时针
-				if temp == 1 then  --90度旋转 
-					v["atDirection"] = v["atDirection"] - temp
-					if v["atDirection"] == 0 then
-						v["atDirection"] = self.POSITION_TYPE.BEI
-					end
-				elseif temp == 2 then--180 
-					if v["atDirection"] > self.POSITION_TYPE.NAN then
-						v["atDirection"] = v["atDirection"] - temp
-					else
-						v["atDirection"] = v["atDirection"] + temp
-					end
+  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY))
+							v:setPosition(worldPos)
+							print("防腐剂的空间发的开发阶段", self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY)	
+							v.atDirection = self.POSITION_TYPE.XI
+  						end
+
+  					elseif self._selectPositionNode.atDirection == self.POSITION_TYPE.DONG then
+
+  						if v.atDirection == self.POSITION_TYPE.NAN then
+							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY))
+							v:setPosition(worldPos)
+							v.atDirection = self.POSITION_TYPE.XI
+						elseif v.atDirection == self.POSITION_TYPE.XI then
+  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosX , self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosY))
+							v:setPosition(worldPos)
+
+							v.atDirection = self.POSITION_TYPE.DONG
+  						end
+  					end
+  				end
+  				self._selectPositionNode.atDirection = self.POSITION_TYPE.NAN
+				local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.NAN].originPosX, self._currentSitPosArray[self.POSITION_TYPE.NAN].originPosY))
+				self._selectPositionNode:setPosition(worldPos)
+
+				for pos,v in ipairs(self._currentSitPosArray) do
+					if pos == self.POSITION_TYPE.XI then
+  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayXi.png")
+  					elseif pos == self.POSITION_TYPE.NAN then
+  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayNan.png")
+  					elseif pos == self.POSITION_TYPE.DONG then
+  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayDong.png")
+  					end
 				end
-			else--逆时针
-				if temp == -1 then--90度
-					v["atDirection"] = v["atDirection"] - temp
-					if v["atDirection"] == 5 then
-						v["atDirection"] = self.POSITION_TYPE.XI
+
+  			end
+  			
+			local spawn = cc.Spawn:create(cc.CallFunc:create(action1), action)
+			
+	  		local sequence = cc.Sequence:create(spawn, cc.CallFunc:create(action2),  cc.CallFunc:create(headVisible))
+
+  			self._nodeNoPlayer:runAction(sequence)
+			--_nodeLightDXNB
+		else 
+	  		--二 四人
+			local action = cc.RotateBy:create(time, du)
+
+			local action2 = function ( )
+				local action3 = cc.RotateBy:create(time, -du)--父节点也进行了旋转所以为负
+				self._selectPositionNode:runAction(action3)
+			end
+
+			local action1 = function ( )
+				local action4 = cc.RotateBy:create(time, du)
+				self._cardsPanel._spriteDnxb:runAction(action4)
+			end
+
+			local spawn = cc.Spawn:create(cc.CallFunc:create(action1), action, cc.CallFunc:create(action2))
+			
+	  		local sequence = cc.Sequence:create(spawn, cc.CallFunc:create(headVisible))
+
+			for pos,v in ipairs(self._currentSitPosArray) do
+
+				--4 3  3 2 2 1 1 4     4 2 3 1  2 4 1 3   4 1 1 2 2 3 3 4
+				if temp > 0 then --顺时针
+					if temp == 1 then  --90度旋转 
+						v["atDirection"] = v["atDirection"] - temp
+						if v["atDirection"] == 0 then
+							v["atDirection"] = self.POSITION_TYPE.BEI
+						end
+					elseif temp == 2 then--180 
+						if v["atDirection"] > self.POSITION_TYPE.NAN then
+							v["atDirection"] = v["atDirection"] - temp
+						else
+							v["atDirection"] = v["atDirection"] + temp
+						end
+					end
+				else--逆时针
+					if temp == -1 then--90度
+						v["atDirection"] = v["atDirection"] - temp
+						if v["atDirection"] == 5 then
+							v["atDirection"] = self.POSITION_TYPE.XI
+						end
 					end
 				end
 			end
-		end
 
-  		self._nodeNoPlayer:runAction(sequence)
+	  		self._nodeNoPlayer:runAction(sequence)
+
+  		end
+
 	else
+
 		local mySelfPosition = lt.DataManager:getMyselfPositionInfo().user_pos
 
 		local du = 0
@@ -319,42 +395,93 @@ function GameSelectPosPanel:configRotation(isClick)
 			du = (mySelfPositionNode.atDirection - self.POSITION_TYPE.NAN) * 90
 		end
 
-		for i,v in pairs(self._allPlayerPosArray) do
-			v:setRotation(-du)
-		end
-
-		self._nodeNoPlayer:setRotation(du)
-		
-		self._cardsPanel._spriteDnxb:setRotation(du)
-
-
 		local temp = mySelfPositionNode.atDirection - self.POSITION_TYPE.NAN
-		for pos,v in ipairs(self._currentSitPosArray) do
 
-			--4 3  3 2 2 1 1 4     4 2 3 1  2 4 1 3   4 1 1 2 2 3 3 4
-			if temp > 0 then --顺时针
-				if temp == 1 then  --90度旋转 
-					v["atDirection"] = v["atDirection"] - temp
-					if v["atDirection"] == 0 then
-						v["atDirection"] = self.POSITION_TYPE.BEI
-					end
-				elseif temp == 2 then--180 
-					if v["atDirection"] > self.POSITION_TYPE.NAN then
-						v["atDirection"] = v["atDirection"] - temp
-					else
-						v["atDirection"] = v["atDirection"] + temp
-					end
+  		--三人
+  		if self._playerNum == 3 then
+  			--3 2   2 1  1 3       1 2  2 3  3 1 
+  				for pos,v in ipairs(self._currentSitPosArray) do
+  					if mySelfPositionNode.atDirection == self.POSITION_TYPE.XI then
+  						
+  						if v.atDirection == self.POSITION_TYPE.NAN then
+  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosX , self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosY))
+							v:setPosition(worldPos)
+							
+							v.atDirection = self.POSITION_TYPE.DONG
+						elseif v.atDirection == self.POSITION_TYPE.DONG then
+
+  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY))
+							v:setPosition(worldPos)
+							print("防腐剂的空间发的开发阶段", self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY)	
+							v.atDirection = self.POSITION_TYPE.XI
+  						end
+
+  					elseif mySelfPositionNode.atDirection == self.POSITION_TYPE.DONG then
+
+  						if v.atDirection == self.POSITION_TYPE.NAN then
+							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY))
+							v:setPosition(worldPos)
+							v.atDirection = self.POSITION_TYPE.XI
+						elseif v.atDirection == self.POSITION_TYPE.XI then
+  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosX , self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosY))
+							v:setPosition(worldPos)
+
+							v.atDirection = self.POSITION_TYPE.DONG
+  						end
+  					end
+
+
+  				end
+		  		local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.NAN].originPosX, self._currentSitPosArray[self.POSITION_TYPE.NAN].originPosY))
+  				mySelfPositionNode.atDirection = self.POSITION_TYPE.NAN
+				mySelfPositionNode:setPosition(worldPos)
+			
+				for pos,v in ipairs(self._currentSitPosArray) do
+  					if pos == self.POSITION_TYPE.XI then
+  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayXi.png")
+  					elseif pos == self.POSITION_TYPE.NAN then
+  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayNan.png")
+  					elseif pos == self.POSITION_TYPE.DONG then
+  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayDong.png")
+  					end
 				end
-			else--逆时针
-				if temp == -1 then--90度
-					v["atDirection"] = v["atDirection"] - temp
-					if v["atDirection"] == 5 then
-						v["atDirection"] = self.POSITION_TYPE.XI
+
+			--_nodeLightDXNB
+		else 
+			for i,v in pairs(self._allPlayerPosArray) do
+				v:setRotation(-du)
+			end
+
+			self._nodeNoPlayer:setRotation(du)
+
+			self._cardsPanel._spriteDnxb:setRotation(du)
+			for pos,v in ipairs(self._currentSitPosArray) do
+
+				--4 3  3 2 2 1 1 4     4 2 3 1  2 4 1 3   4 1 1 2 2 3 3 4
+				if temp > 0 then --顺时针
+					if temp == 1 then  --90度旋转 
+						v["atDirection"] = v["atDirection"] - temp
+						if v["atDirection"] == 0 then
+							v["atDirection"] = self.POSITION_TYPE.BEI
+						end
+					elseif temp == 2 then--180 
+						if v["atDirection"] > self.POSITION_TYPE.NAN then
+							v["atDirection"] = v["atDirection"] - temp
+						else
+							v["atDirection"] = v["atDirection"] + temp
+						end
+					end
+				else--逆时针
+					if temp == -1 then--90度
+						v["atDirection"] = v["atDirection"] - temp
+						if v["atDirection"] == 5 then
+							v["atDirection"] = self.POSITION_TYPE.XI
+						end
 					end
 				end
 			end
-		end
 
+		end
 	end
 end
 

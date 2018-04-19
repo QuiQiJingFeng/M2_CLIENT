@@ -63,10 +63,24 @@ function GamePlayCardsPanel:updateMjInfo()
 	
 	self._spriteDnxb = nodeClock:getChildByName("Sprite_Dnxb")--方向旋转
 
+	self._nodeGrayDXNB = {}--东南西北的节点
+
 	self._nodeLight = {}--红绿状态的节点
 
-	self._nodeDXNB = {}--东西南北的节点  
+	self._nodeLightDXNB = {}--出牌时亮态东西南北的节点  
 
+	for i=1, self._playerNum do
+		local node = self._spriteDnxb:getChildByName("Sprite_Gray_"..i)
+		if not node["originPosX"] then
+			node["originPosX"] = node:getPositionX()
+		end
+
+		if not node["originPosY"] then
+			node["originPosY"] = node:getPositionY()
+		end
+		
+		table.insert(self._nodeGrayDXNB, node)
+	end
 
 	for i=1,4 do
 		nodeClock:getChildByName("Node_Light_"..i):setVisible(false)
@@ -77,12 +91,12 @@ function GamePlayCardsPanel:updateMjInfo()
 		nodeClock:getChildByName("Node_Light_"..i):setVisible(false)
 		nodeClock:getChildByName("Node_DNXB_"..i):setVisible(true)
 		self._nodeLight[i] = nodeClock:getChildByName("Node_Light_"..i)--:getChildByName("Sprite_Light") getChildByName("Sprite_LightRed")
-		self._nodeDXNB[i] = nodeClock:getChildByName("Node_DNXB_"..i)--   
+		self._nodeLightDXNB[i] = nodeClock:getChildByName("Node_DNXB_"..i)--   
 
-		self._nodeDXNB[i]:getChildByName("Sprite_Dong"):setVisible(false)
-		self._nodeDXNB[i]:getChildByName("Sprite_Nan"):setVisible(false)
-		self._nodeDXNB[i]:getChildByName("Sprite_Xi"):setVisible(false)
-		self._nodeDXNB[i]:getChildByName("Sprite_Bei"):setVisible(false)
+		self._nodeLightDXNB[i]:getChildByName("Sprite_Dong"):setVisible(false)
+		self._nodeLightDXNB[i]:getChildByName("Sprite_Nan"):setVisible(false)
+		self._nodeLightDXNB[i]:getChildByName("Sprite_Xi"):setVisible(false)
+		self._nodeLightDXNB[i]:getChildByName("Sprite_Bei"):setVisible(false)
 
 	end
 
