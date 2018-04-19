@@ -16,6 +16,12 @@ function InitLayer:ctor()
 end
 
 function InitLayer:onLogin()
+
+    if self._logining then
+        return
+    end
+    self._logining = true
+    
     local index = math.random(1,99999)
     local account="FHQYDIDXIL"..index
 
