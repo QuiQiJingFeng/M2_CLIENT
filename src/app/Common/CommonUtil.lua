@@ -1732,6 +1732,8 @@ function CommonUtil:selectServerLogin(game_type,callBack)
                         end)
                     
                 end
+            else
+                lt.DataManager:listenNetDisconnect()
             end
         end)
 end
@@ -1753,9 +1755,9 @@ function CommonUtil:sepecailServerLogin(room_id,callBack)
                                     callBack(recv_msg.result)
                                 end)
                         end)
-                else
-                    lt.DataManager:listenNetDisconnect()
                 end
+            else
+                lt.DataManager:listenNetDisconnect()
             end
         end)
 end
