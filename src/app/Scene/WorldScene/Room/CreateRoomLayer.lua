@@ -50,11 +50,10 @@ function CreateRoomLayer:ctor()
     self.m_hzmjRule = self.ruleSv:getChildByName("HZMJ_Rule")
     self.m_hzmjRule:setVisible(false)
 
-
     self.m_ddzRule = self.ruleSv:getChildByName("DDZ_Rule")
     self.m_ddzRule:setVisible(false)
 
-
+    self:initDDZRule()
 
 
     self.moreGameSv = self.gamePanelBg:getChildByName("ScrollView_MoreGame")--更多游戏列表
@@ -239,15 +238,14 @@ function CreateRoomLayer:onjoinRoomResponse( tObj )
     if tObj.result == "success" then
         dump(self.selectTable, "self.selectTable")
         local gameInfo = self.selectTable
-
         -- 斗地主
-        if gameInfo.game_type == 2 then
-            local gameScene = lt.DDZGameScene.new()
-            lt.SceneManager:replaceScene(gameScene)
-        elseif gameInfo.game_type == 1 then-- 红中麻将
-            local gameScene = lt.GameScene.new()
-            lt.SceneManager:replaceScene(gameScene)
-        end
+        -- if gameInfo.game_type == 2 then
+            -- local gameScene = lt.DDZGameScene.new()
+            -- lt.SceneManager:replaceScene(gameScene)
+        -- elseif gameInfo.game_type == 1 then-- 红中麻将
+        local gameScene = lt.GameScene.new()
+        lt.SceneManager:replaceScene(gameScene)
+        -- end
         self:onClose()
     else
         print("创建房间失败", tObj)
@@ -270,7 +268,6 @@ end
 
 --游戏列表被点击
 function CreateRoomLayer:gameBtnOnTap(gameId, index, gameIds)
-
 	local gameList = self:getGameList()
 	self.tGamesRuleConfig = gameList[gameId][6]
 	-- 红中麻将
@@ -284,9 +281,24 @@ function CreateRoomLayer:gameBtnOnTap(gameId, index, gameIds)
         self.m_ddzRule:setVisible(true)
         self:initDDZRule()
     end
-
-
 end
+
+
+
+-- function CreateRoomLayer:showCreateLayerWithID( gameId )
+        
+--     for i, v in pairs(self.gameLayer) then
+--         if i == gameId then
+--             self.gameLayer[i]:setVisible(true)
+--         else
+--             self.gameLayer[i]:setVisible(false)
+--         end
+--     end
+
+--     self:initSelectTbWithID(gameId)
+-- end
+
+
 
 function CreateRoomLayer:initDDZRule( ... )
 
@@ -836,33 +848,32 @@ end
 -- end
 
 function CreateRoomLayer:sendCreateRoom( ... )
-    lt.CommonUtil:selectServerLogin(self.selectTable.game_type,function(result)
-            if result ~= "success" then
-                print("connect failed")
-                return
-            end 
-            local tempTable  = {}
-            tempTable.game_type = self.selectTable.game_type
-            tempTable.pay_type =  self.selectTable.pay
-            tempTable.round = self.selectTable.round
-            tempTable.seat_num = self.selectTable.playNum
+    lt.CommonUtil:selectServerLogin(self.selectTable.game_type, function(result)
+        if result ~= "success" then
+            print("connect failed")
+            return
+        end 
+        local tempTable  = {}
+        tempTable.game_type = self.selectTable.game_type
+        tempTable.pay_type =  self.selectTable.pay
+        tempTable.round = self.selectTable.round
+        tempTable.seat_num = self.selectTable.playNum
 
-            tempTable.other_setting = {}
-            for i = 0, #self.selectTable.other_setting do
-                tempTable.other_setting[i] = self.selectTable.other_setting[i]
-            end
+        tempTable.other_setting = {}
+        for i = 1, #self.selectTable.other_setting do
+            tempTable.other_setting[i] = self.selectTable.other_setting[i]
+        end
 
-            tempTable.is_friend_room = false
-            tempTable.is_open_voice = false
-            tempTable.is_open_gps = false
+        tempTable.is_friend_room = false
+        tempTable.is_open_voice = false
+        tempTable.is_open_gps = false
 
-            dump(tempTable, "tempTable")
+        dump(tempTable, "创建房间")
 
-            local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = { room_setting = tempTable}}
-            -- 发送消息
-            lt.NetWork:send(msg)
-        end)
- 
+        local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = { room_setting = tempTable}}
+        -- 发送消息
+        lt.NetWork:send(msg)
+    end)
 end
 
 function CreateRoomLayer:buttonClicked(pSender)
