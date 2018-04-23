@@ -1753,7 +1753,8 @@ function CommonUtil:sepecailServerLogin(room_id,callBack)
                                     callBack(recv_msg.result)
                                 end)
                         end)
-                    
+                else
+                    lt.DataManager:listenNetDisconnect()
                 end
             end
         end)
