@@ -16,6 +16,12 @@ function InitLayer:ctor()
 end
 
 function InitLayer:onLogin()
+
+    if self._logining then
+        return
+    end
+    self._logining = true
+    
     local index = math.random(1,99999)
     local account="FHQYDIDXIL"..index
 
@@ -26,6 +32,7 @@ function InitLayer:onLogin()
                 }
     local url = string.format("http://%s:%d/login",lt.Constants.HOST,lt.Constants.PORT)
     lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
+        print("玩家信息", recv_msg)
             if recv_msg then
                 recv_msg = json.decode(recv_msg)
                 if recv_msg.result == "success" then
@@ -44,9 +51,10 @@ function InitLayer:onGetUserInfo(body)
     lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
             if recv_msg then
                 recv_msg = json.decode(recv_msg)
+                lt.DataManager:onPushUserInfo(recv_msg)
                 local worldScene = lt.WorldScene.new()
                 lt.SceneManager:replaceScene(worldScene)
-                lt.DataManager:onPushUserInfo(recv_msg)
+                
             end
         end)
 end

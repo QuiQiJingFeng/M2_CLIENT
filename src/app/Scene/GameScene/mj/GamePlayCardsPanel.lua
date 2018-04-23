@@ -63,10 +63,28 @@ function GamePlayCardsPanel:updateMjInfo()
 	
 	self._spriteDnxb = nodeClock:getChildByName("Sprite_Dnxb")--方向旋转
 
+	self._nodeGrayDXNB = {}--东南西北的节点
+
 	self._nodeLight = {}--红绿状态的节点
 
-	self._nodeDXNB = {}--东西南北的节点  
+	self._nodeLightDXNB = {}--出牌时亮态东西南北的节点  
 
+	for i=1, self._playerNum do
+		local node = self._spriteDnxb:getChildByName("Sprite_Gray_"..i)
+		if not node["originPosX"] then
+			node["originPosX"] = node:getPositionX()
+		end
+
+		if not node["originPosY"] then
+			node["originPosY"] = node:getPositionY()
+		end
+
+		if not node["posValue"] then
+			node["posValue"] = i
+		end
+
+		table.insert(self._nodeGrayDXNB, node)
+	end
 
 	for i=1,4 do
 		nodeClock:getChildByName("Node_Light_"..i):setVisible(false)
@@ -77,12 +95,12 @@ function GamePlayCardsPanel:updateMjInfo()
 		nodeClock:getChildByName("Node_Light_"..i):setVisible(false)
 		nodeClock:getChildByName("Node_DNXB_"..i):setVisible(true)
 		self._nodeLight[i] = nodeClock:getChildByName("Node_Light_"..i)--:getChildByName("Sprite_Light") getChildByName("Sprite_LightRed")
-		self._nodeDXNB[i] = nodeClock:getChildByName("Node_DNXB_"..i)--   
+		self._nodeLightDXNB[i] = nodeClock:getChildByName("Node_DNXB_"..i)--   
 
-		self._nodeDXNB[i]:getChildByName("Sprite_Dong"):setVisible(false)
-		self._nodeDXNB[i]:getChildByName("Sprite_Nan"):setVisible(false)
-		self._nodeDXNB[i]:getChildByName("Sprite_Xi"):setVisible(false)
-		self._nodeDXNB[i]:getChildByName("Sprite_Bei"):setVisible(false)
+		self._nodeLightDXNB[i]:getChildByName("Sprite_Dong"):setVisible(false)
+		self._nodeLightDXNB[i]:getChildByName("Sprite_Nan"):setVisible(false)
+		self._nodeLightDXNB[i]:getChildByName("Sprite_Xi"):setVisible(false)
+		self._nodeLightDXNB[i]:getChildByName("Sprite_Bei"):setVisible(false)
 
 	end
 
@@ -458,8 +476,15 @@ function GamePlayCardsPanel:configAllPlayerCards(direction)--吃椪杠 手牌
 
 					if i <= initIndex then
 						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
-						if i == initIndex and type ~= 5 then
-							arrow:setVisible(true)
+
+						if type == 2 then
+							if i == 2 then
+								arrow:setVisible(true)
+							end
+						else
+							if i == initIndex and type ~= 5 then
+								arrow:setVisible(true)
+							end
 						end
 					else
 						CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
@@ -611,6 +636,12 @@ function GamePlayCardsPanel:onPushDrawCard(msg)   --通知其他人有人摸牌
 
 	--检测是否胡牌
 
+	-- for i,v in ipairs(self._nodeLight) do
+		
+	-- end
+	
+--_nodeLightDXNB
+
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
 
 		--检测自己的手牌情况  --吃椪杠胡
@@ -632,6 +663,39 @@ function GamePlayCardsPanel:onPushDrawCard(msg)   --通知其他人有人摸牌
 end
 
 function GamePlayCardsPanel:onPushPlayCard(msg)   --通知玩家该出牌了 
+
+
+	local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos)
+
+	for dire,v in ipairs(self._nodeGrayDXNB) do
+
+		if v.posValue then
+			local path = "game/mjcomm/words/"--wordGrayBei
+			if v.posValue == msg.user_pos then
+				if v.posValue == self.POSITION_TYPE.DONG then
+					path = path.."wordDong.png"
+				elseif v.posValue == self.POSITION_TYPE.NAN then
+					path = path.."wordNan.png"
+				elseif v.posValue == self.POSITION_TYPE.XI then
+					path = path.."wordXi.png"
+				elseif v.posValue == self.POSITION_TYPE.BEI then	
+					path = path.."wordBei.png"
+				end
+			else
+				if v.posValue == self.POSITION_TYPE.DONG then
+					path = path.."wordGrayDong.png"
+				elseif v.posValue == self.POSITION_TYPE.NAN then
+					path = path.."wordGrayNan.png"
+				elseif v.posValue == self.POSITION_TYPE.XI then
+					path = path.."wordGrayXi.png"
+				elseif v.posValue == self.POSITION_TYPE.BEI then	
+					path = path.."wordGrayBei.png"
+				end
+			end
+			v:setSpriteFrame(path)
+		end
+	end
+
 	self._currentOutPutPlayerPos = msg.user_pos
 
 	msg.card_list = msg.card_list or {}
@@ -703,6 +767,23 @@ function GamePlayCardsPanel:onPushPlayCard(msg)   --通知玩家该出牌了
 end
 
 function GamePlayCardsPanel:onNoticePlayCard(msg)   --通知其他人有人出牌 
+
+	for dire,v in ipairs(self._nodeGrayDXNB) do
+
+		if v.posValue then
+			local path = "game/mjcomm/words/"--wordGrayBei
+			if v.posValue == self.POSITION_TYPE.DONG then
+				path = path.."wordGrayDong.png"
+			elseif v.posValue == self.POSITION_TYPE.NAN then
+				path = path.."wordGrayNan.png"
+			elseif v.posValue == self.POSITION_TYPE.XI then
+				path = path.."wordGrayXi.png"
+			elseif v.posValue == self.POSITION_TYPE.BEI then	
+				path = path.."wordGrayBei.png"
+			end
+			v:setSpriteFrame(path)
+		end
+	end
 
 	local value = msg.card
 	local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
