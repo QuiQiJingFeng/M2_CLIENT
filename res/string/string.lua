@@ -8,10 +8,5 @@ ltMetaTable.__index = function(table, name)
     return table[name]
 end
 
-stringTable["STRING_INIT_GAME"] 				= "技术的开发建设的开发都是"
-stringTable["STRING_CHECK_GAME"]			= "技术的开发建设的开发都是"
-stringTable["STRING_INIT_DATA"]			= "技术的开发建设的开发都是"
-
-stringTable["STRING_INIT_RESOURCE"]  			= "技术的开发建设的开发都是"
-stringTable["STRING_INIT_OTHER"]   			= "技术的开发建设的开发都是"
-stringTable["STRING_INIT_END"]   			= "技术的开发建设的开发都是"
+stringTable["STRING_GAME_NAME_1"] 				= "红中麻将"
+stringTable["STRING_GAME_NAME_2"]			= "斗地主"

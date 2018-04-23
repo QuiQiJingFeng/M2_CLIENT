@@ -1321,11 +1321,10 @@ function CommonUtil:getCanPengGangCards(CpgCards, handCards)--检测回头杠 Cp
     print("%%%%%%%%%%%%%%%%%%%%%%%%%!!!!!!", tostring(handCards))
     for k,cardInfo in ipairs(CpgCards) do
         local value = cardInfo.value
-        local gang_type = cardInfo.gang_type--1 暗杠 2 明杠 3 碰杠
         local from = cardInfo.from
-        local type = cardInfo.type--1 碰 2 杠 3 吃
+        local type = cardInfo.type--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
 
-        if type == 1 then--CPG里面的碰
+        if type == 2 then--CPG里面的碰
             for i,handCard in ipairs(handCards) do
                 if value == handCard then
                     table.insert(canPengCards, handCard)

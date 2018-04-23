@@ -40,10 +40,6 @@ function DataManager:init()
 
 end
 
-function DataManager:onPushAllRoomInfo(msg)
-    dump(msg,"ON PUSH ALL ROOM INFO",11)
-end
-
 function DataManager:onjoinRoomResponse(msg)
     
     print("__________________________", msg.result)
@@ -57,7 +53,6 @@ function DataManager:onjoinRoomResponse(msg)
 
         local gameScene = lt.GameScene.new()
         lt.SceneManager:replaceScene(gameScene)
-
 
         -- local gameInfo = lt.DataManager:getGameRoomInfo()
 
@@ -80,6 +75,16 @@ function DataManager:onjoinRoomResponse(msg)
     else
         print("加入房间失败")
     end
+end
+
+--################################断线重连  加宕机 ##################################
+
+--宕机的时候 需要重开局 refreshroominfo 第一个玩家dealCards发牌  其他玩家 onPushAllRoomInfo
+
+--断线重连   入座界面 refreshroominfo    打牌界面   onPushAllRoomInfo
+
+function DataManager:onPushAllRoomInfo(msg)
+    dump(msg,"ON PUSH ALL ROOM INFO",11)
 end
 
 local times = 3
@@ -183,6 +188,13 @@ function DataManager:onRefreshRoomInfo(msg)
     -- [5] 一码不中当全中
 
 
+end
+
+function DataManager:getGameRoomSetInfo()
+    if self._gameRoomInfo then
+        return self._gameRoomInfo.room_setting
+    end
+    return nil    
 end
 
 function DataManager:getMyselfPositionInfo()

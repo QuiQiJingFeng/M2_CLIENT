@@ -9,6 +9,10 @@ GameEventManager.EVENT = {
     WAIT_RECONNECT = "wait_reconnect",  --监听客户端连接断开
     ROOM_LIST_UPDATE =  "room_list_update", --房间列表有更新
 
+    CLIENT_DEAL_DOWN =  "client_deal_down", --发牌
+
+    CLIENT_CONNECT_AGAIN =  "client_connect_again", --重连
+
     --请求
 	LOGIN = "login",
     JOIN_ROOM = "join_room",

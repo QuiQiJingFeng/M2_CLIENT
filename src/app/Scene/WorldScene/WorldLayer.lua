@@ -120,9 +120,6 @@ end
 
 function WorldLayer:onExit()
 	-- 卸载特效
-    lt.ResourceManager:removeArmature("uieffect_city_auto_way", "effect/ui/uieffect_city_auto_way.ExportJson")
-    lt.ResourceManager:removeArmature("uieffect_city_follow_leader", "effect/ui/uieffect_city_follow_leader.ExportJson")
-
 	lt.GameEventManager:removeListener("WorldLayer:onChatMessage")
 	lt.GameEventManager:removeListener("WorldLayer:onOwnChatMessage")
 	-- 注销 世界实例

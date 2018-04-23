@@ -81,7 +81,11 @@ function GameResultPanel:onStartAgainClick(event) --继续游戏
 end
 
 function GameResultPanel:onRewardCodeClick(event) --奖码
- 
+ 	local awardCards = lt.DataManager:getGameOverInfo().award_list
+	if not awardCards then
+		return
+	end
+
 	if not self._winAwardCodeLayer then
 		self._winAwardCodeLayer = lt.WinAwardCodeLayer.new(self)
 	    lt.UILayerManager:addLayer(self._winAwardCodeLayer, true)
@@ -141,9 +145,13 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	-- msg.over_type-- 1 正常结束 2 流局 3 房间解散会发送一个结算
 	
 	-- msg.award_list
-	if not self._winAwardCodeLayer then
-		self._winAwardCodeLayer = lt.WinAwardCodeLayer.new(self)
-	    lt.UILayerManager:addLayer(self._winAwardCodeLayer, true)
+
+ 	local awardCards = lt.DataManager:getGameOverInfo().award_list
+	if awardCards then
+		if not self._winAwardCodeLayer then
+			self._winAwardCodeLayer = lt.WinAwardCodeLayer.new(self)
+		    lt.UILayerManager:addLayer(self._winAwardCodeLayer, true)
+		end
 	end
 
 	local gameOverInfo = lt.DataManager:getGameOverInfo()

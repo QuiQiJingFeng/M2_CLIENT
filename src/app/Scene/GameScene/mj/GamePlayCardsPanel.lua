@@ -9,6 +9,8 @@ GamePlayCardsPanel.POSITION_TYPE = {
 	BEI = 4,
 }
 
+GamePlayCardsPanel.UPDATETIME = 15
+
 function GamePlayCardsPanel:ctor(deleget)
 	GamePlayCardsPanel.super.ctor(self)
 	self._deleget = deleget
@@ -31,6 +33,9 @@ function GamePlayCardsPanel:ctor(deleget)
 
 	self._curOutCardArrow = self._rootNode:getChildByName("Node_CurOutCardArrow")--
 
+	self._nodeCardNum = self._rootNode:getChildByName("Node_CardNum")
+	self._nodeOtherNum = self._rootNode:getChildByName("Node_OtherNum")
+
 	self._surCardsNum = lt.CommonUtil:getChildByNames(self._rootNode, "Node_CardNum", "Text_Num")--剩余牌数
 
 	self._surRoomCount = lt.CommonUtil:getChildByNames(self._rootNode, "Node_OtherNum", "Text_Num")--剩余局数
@@ -41,6 +46,9 @@ function GamePlayCardsPanel:ctor(deleget)
 end
 
 function GamePlayCardsPanel:updateMjInfo()   
+
+	self._nodeCardNum:setVisible(false)
+	self._nodeOtherNum:setVisible(false)
 
 	local currentGameDirections = nil
 
@@ -61,6 +69,8 @@ function GamePlayCardsPanel:updateMjInfo()
 
 	local nodeClock = lt.CommonUtil:getChildByNames(self._rootNode, "Node_Clock")--中间方向盘
 	
+	self._timeClock = nodeClock:getChildByName("AtlasLabel_ClockNum")
+
 	self._spriteDnxb = nodeClock:getChildByName("Sprite_Dnxb")--方向旋转
 
 	self._nodeGrayDXNB = {}--东南西北的节点
@@ -92,15 +102,15 @@ function GamePlayCardsPanel:updateMjInfo()
 	end
 
 	for i,direction in ipairs(currentGameDirections) do
-		nodeClock:getChildByName("Node_Light_"..i):setVisible(false)
-		nodeClock:getChildByName("Node_DNXB_"..i):setVisible(true)
-		self._nodeLight[i] = nodeClock:getChildByName("Node_Light_"..i)--:getChildByName("Sprite_Light") getChildByName("Sprite_LightRed")
-		self._nodeLightDXNB[i] = nodeClock:getChildByName("Node_DNXB_"..i)--   
+		nodeClock:getChildByName("Node_Light_"..direction):setVisible(false)
+		nodeClock:getChildByName("Node_DNXB_"..direction):setVisible(true)
+		self._nodeLight[direction] = nodeClock:getChildByName("Node_Light_"..direction)--:getChildByName("Sprite_Light") getChildByName("Sprite_LightRed")
+		self._nodeLightDXNB[direction] = nodeClock:getChildByName("Node_DNXB_"..direction)--   
 
-		self._nodeLightDXNB[i]:getChildByName("Sprite_Dong"):setVisible(false)
-		self._nodeLightDXNB[i]:getChildByName("Sprite_Nan"):setVisible(false)
-		self._nodeLightDXNB[i]:getChildByName("Sprite_Xi"):setVisible(false)
-		self._nodeLightDXNB[i]:getChildByName("Sprite_Bei"):setVisible(false)
+		self._nodeLightDXNB[direction]:getChildByName("Sprite_Dong"):setVisible(false)
+		self._nodeLightDXNB[direction]:getChildByName("Sprite_Nan"):setVisible(false)
+		self._nodeLightDXNB[direction]:getChildByName("Sprite_Xi"):setVisible(false)
+		self._nodeLightDXNB[direction]:getChildByName("Sprite_Bei"):setVisible(false)
 
 	end
 
@@ -236,6 +246,9 @@ function GamePlayCardsPanel:configSendCards() --游戏刚开始的发牌
 					cards[i]:setVisible(true)
 
 					if i == 13 and not sendDealFinish then
+						self._nodeCardNum:setVisible(true)
+						self._nodeOtherNum:setVisible(true)
+
 						sendDealFinish = true
 						local arg = {command = "DEAL_FINISH"}
 						lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
@@ -254,11 +267,20 @@ end
 
 function GamePlayCardsPanel:onClickCard(event) 
 
+	if not event:getTag() then
+		return
+	end
+
 	if self._deleget._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:isVisible() then
 		print("碰杠胡了不能点牌了")
 		return
 	end
-
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+		if event:getTag() == lt.Constants.HONG_ZHONG_VALUE then
+			return
+		end
+	end
+	
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", event:getTag(), event.CardIndex)
 
 	--[[
@@ -288,7 +310,7 @@ function GamePlayCardsPanel:onClickCard(event)
 		return
 	end
 	local value = event:getTag()
-	if self._currentOutPutPlayerPos == lt.DataManager:getMyselfPositionInfo().user_pos then
+	if self._currentOutPutPlayerPos and self._currentOutPutPlayerPos == lt.DataManager:getMyselfPositionInfo().user_pos then
 		print("出牌", value)
 
 		-- local node =  self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]
@@ -445,6 +467,7 @@ function GamePlayCardsPanel:configAllPlayerCards(direction)--吃椪杠 手牌
 			end
 
 			CpgNode:setVisible(true)
+			CpgNode["SpecialType"] = type
 			for i=1,5 do
 				CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
 				CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_MaskRed"):setVisible(false)
@@ -564,6 +587,17 @@ end
 
 function GamePlayCardsPanel:onDealDown(msg)   --发牌13张手牌
 
+	local roomSetting = lt.DataManager:getGameRoomSetInfo()
+	if roomSetting then
+		if roomSetting.game_type == lt.Constants.GAME_TYPE.HZMJ then
+			local allCardsNum = 112
+			self._surCardsNum:setString(allCardsNum - 13 * roomSetting.seat_num)
+		end
+	end
+
+	local curRound = msg.cur_round or 0	
+	self._surRoomCount:setString(curRound)
+
 	self._allPlayerHandCards[self.POSITION_TYPE.NAN] = {}
 
 	self._zhuangPos = msg.zpos
@@ -595,8 +629,8 @@ function GamePlayCardsPanel:onDealDown(msg)   --发牌13张手牌
 	local func = function ( frame )
 		local event = frame:getEvent()
 		if event == "END" then
-			local random1 = math.random(1,6)
-			local random2 = math.random(1,6)
+			local random1 = msg.random_nums[1]
+			local random2 = msg.random_nums[2]
 
 			local num1 = "game/mjcomm/animation/aniShaiZi/aniShaiZi_"..random1..".png"
 			local num2 = "game/mjcomm/animation/aniShaiZi/aniShaiZi_"..random2..".png"
@@ -634,13 +668,11 @@ end
 
 function GamePlayCardsPanel:onPushDrawCard(msg)   --通知其他人有人摸牌 
 
-	--检测是否胡牌
-
-	-- for i,v in ipairs(self._nodeLight) do
-		
-	-- end
-	
---_nodeLightDXNB
+	local surCardsNum = tonumber(self._surCardsNum:getString())
+	print("剩余牌水电费就是砥砺奋进 ", surCardsNum)
+	if surCardsNum and surCardsNum > 0 then
+		self._surCardsNum:setString(surCardsNum - 1)
+	end
 
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
 
@@ -664,6 +696,7 @@ end
 
 function GamePlayCardsPanel:onPushPlayCard(msg)   --通知玩家该出牌了 
 
+	self:resetTimeUpdate(true)--重记倒计时
 
 	local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos)
 
@@ -732,7 +765,6 @@ function GamePlayCardsPanel:onPushPlayCard(msg)   --通知玩家该出牌了
 
 				local info = {}
 				info["value"] = cardInfo.value
-				info["gang_type"] = cardInfo.gang_type
 				info["from"] = cardInfo.from
 				info["type"] = cardInfo.type
 
@@ -748,7 +780,7 @@ function GamePlayCardsPanel:onPushPlayCard(msg)   --通知玩家该出牌了
 		if newCard then
 			table.insert(self._allPlayerHandCards[self.POSITION_TYPE.NAN], newCard)--将新摸得牌放到最后14号位
 		end
-		print("________________________________________")
+
 		self:configAllPlayerCards(self.POSITION_TYPE.NAN)
 
 		if self._ischeckMyHandStatu then--杠地开花
@@ -768,7 +800,7 @@ end
 
 function GamePlayCardsPanel:onNoticePlayCard(msg)   --通知其他人有人出牌 
 
-	for dire,v in ipairs(self._nodeGrayDXNB) do
+	for dire,v in ipairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
 
 		if v.posValue then
 			local path = "game/mjcomm/words/"--wordGrayBei
@@ -784,6 +816,11 @@ function GamePlayCardsPanel:onNoticePlayCard(msg)   --通知其他人有人出�
 			v:setSpriteFrame(path)
 		end
 	end
+
+	self._currentOutPutPlayerPos = nil--重置绿红状态
+	self:resetLightUpdate()
+
+	self:resetTimeUpdate(true)--重置倒计时
 
 	local value = msg.card
 	local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
@@ -920,6 +957,39 @@ function GamePlayCardsPanel:onRefreshGameOver()   --通知客户端 本局结束
 	-- msg.over_type-- 1 正常结束 2 流局 3 房间解散会发送一个结算
 	
 	-- msg.award_list
+
+	for dire,v in ipairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
+
+		if v.posValue then
+			local path = "game/mjcomm/words/"--wordGrayBei
+			if v.posValue == self.POSITION_TYPE.DONG then
+				path = path.."wordGrayDong.png"
+			elseif v.posValue == self.POSITION_TYPE.NAN then
+				path = path.."wordGrayNan.png"
+			elseif v.posValue == self.POSITION_TYPE.XI then
+				path = path.."wordGrayXi.png"
+			elseif v.posValue == self.POSITION_TYPE.BEI then	
+				path = path.."wordGrayBei.png"
+			end
+			v:setSpriteFrame(path)
+		end
+	end
+
+	self._currentOutPutPlayerPos = nil--重置绿红状态
+	self:resetLightUpdate()
+
+	self:resetTimeUpdate(false)--重置倒计时
+
+	for dire,CPGNodes in ipairs(self._allPlayerCpgCardsNode) do
+		for index,node in ipairs(CPGNodes) do
+			if node.SpecialType and node.SpecialType == 5 then
+				for i=1,4 do
+					node:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
+				end
+			end
+		end
+	end
+
 	local gameOverInfo = lt.DataManager:getGameOverInfo()
 
 	local winner_pos = gameOverInfo.winner_pos
@@ -971,6 +1041,52 @@ function GamePlayCardsPanel:onRefreshGameOver()   --通知客户端 本局结束
 	end
 end
 
+function GamePlayCardsPanel:resetTimeUpdate(flag) 
+	self._refreshTimeUpdate = flag
+	if flag then
+		self._time = 0
+	end
+end
+
+function GamePlayCardsPanel:resetLightUpdate() 
+	for dire,v in pairs(self._nodeLight) do
+		v:setVisible(false)
+	end
+end
+
+function GamePlayCardsPanel:onUpdate(delt) 
+	if not self._refreshTimeUpdate then
+		return
+	end
+
+	if self._currentOutPutPlayerPos then
+		local direction = self._deleget:getPlayerDirectionByPos(self._currentOutPutPlayerPos)
+		for dire,v in pairs(self._nodeLight) do
+
+			if dire == direction then
+				v:setVisible(true)
+				if self.UPDATETIME - self._time <= 5 then
+					v:getChildByName("Sprite_LightRed"):setVisible(true)
+					v:getChildByName("Sprite_Light"):setVisible(false)
+				else
+					v:getChildByName("Sprite_LightRed"):setVisible(false)
+					v:getChildByName("Sprite_Light"):setVisible(true)
+				end
+			else
+				v:setVisible(false)
+			end
+		end
+
+	end	
+
+	self._timeClock:setString(self.UPDATETIME - self._time)
+	self._time = self._time + delt
+
+	if self._time >= self.UPDATETIME then
+		self._time = 0
+	end
+end
+
 function GamePlayCardsPanel:onEnter()   
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DEAL_DOWN, handler(self, self.onDealDown), "GamePlayCardsPanel.onDealDown")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_DRAW_CARD, handler(self, self.onPushDrawCard), "GamePlayCardsPanel.onPushDrawCard")
@@ -981,6 +1097,13 @@ function GamePlayCardsPanel:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GamePlayCardsPanel.onRefreshGameOver")
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GamePlayCardsPanel.onNoticeSpecialEvent")
+
+
+	local scheduler = cc.Director:getInstance():getScheduler()
+	self.schedule_id = scheduler:scheduleScriptFunc(function(dt)
+	    self:onUpdate(dt)
+	end, 1, false)
+	self._time = 0
 end
 
 function GamePlayCardsPanel:onExit()
@@ -992,6 +1115,11 @@ function GamePlayCardsPanel:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, "GamePlayCardsPanel:onPushPlayerOperatorState")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GamePlayCardsPanel:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GamePlayCardsPanel:onNoticeSpecialEvent")
+
+    if self.schedule_id then
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.schedule_id)
+        self.schedule_id = nil
+    end
 end
 
 return GamePlayCardsPanel

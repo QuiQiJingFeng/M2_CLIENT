@@ -26,8 +26,6 @@ function NoticeManager:init(displayDelegate)
 
 	self._addRunindHorseArray = {}
 
-	lt.ResourceManager:addArmature("ui_effect_drop_item_0", "effect/ui/ui_effect_drop_item_0.ExportJson")
-	lt.ResourceManager:addArmature("ui_effect_drop_item_1", "effect/ui/ui_effect_drop_item_1.ExportJson")
 end
 
 function NoticeManager:clearAll()
@@ -61,9 +59,6 @@ function NoticeManager:clear()
 	self._updateNoticeItemArray = nil
 
 	self._addRunindHorseArray = nil
-
-	lt.ResourceManager:removeArmature("ui_effect_drop_item_0", "effect/ui/ui_effect_drop_item_0.ExportJson")
-	lt.ResourceManager:removeArmature("ui_effect_drop_item_1", "effect/ui/ui_effect_drop_item_1.ExportJson")
 end
 
 function NoticeManager:addNotice(noticeInfo)

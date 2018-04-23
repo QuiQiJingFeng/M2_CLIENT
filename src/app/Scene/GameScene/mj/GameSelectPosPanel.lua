@@ -505,10 +505,8 @@ function GameSelectPosPanel:configPlayerScore()
 end
 
 function GameSelectPosPanel:getPlayerDirectionByPos(playerPos) 
-	print("玩家所在pos", playerPos)
 	for pos,sitNode in ipairs(self._currentSitPosArray) do
 		if pos == playerPos then
-			print("获得玩家所在方位", sitNode.atDirection)
 			return sitNode.atDirection
 		end
 	end

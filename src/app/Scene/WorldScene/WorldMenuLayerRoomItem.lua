@@ -78,7 +78,7 @@ end
 function UITableViewItem:refreshData(data)
     self.data = data
 
-	self.roomNameLabel:setString(lt.Constants.GAME_TYPE[data.game_type])
+	self.roomNameLabel:setString(lt.LanguageString:getString("STRING_GAME_NAME_"..data.game_type))
 
 	local str = data.room_id
 	if lt.DataManager:getPlayerUid() == data.owner_id then

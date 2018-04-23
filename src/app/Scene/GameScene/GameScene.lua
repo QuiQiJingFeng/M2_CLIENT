@@ -16,10 +16,10 @@ function GameScene:ctor()
         gameid = gameInfo.room_setting.game_type
     end
 
-    if gameid == 1 then --红中麻将
+    if gameid == lt.Constants.GAME_TYPE.HZMJ then --红中麻将
         self._gameRoomLayer = lt.GameRoomLayer.new()
         self:addChild(self._gameRoomLayer)
-    elseif gameid == 2 then --斗地主
+    elseif gameid == lt.Constants.GAME_TYPE.DDZ then --斗地主
         self._gameRoomLayer = lt.DDZGameLayer.new()
         self:addChild(self._gameRoomLayer)
     end 

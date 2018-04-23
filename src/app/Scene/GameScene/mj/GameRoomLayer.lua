@@ -39,7 +39,7 @@ function GameRoomLayer:ctor()
     --结算界面
     self._gameResultPanel:setVisible(false)
 
-	self:initGame()
+	--self:initGame()
 end
 
 function GameRoomLayer:initGame()  
@@ -62,16 +62,25 @@ function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
 
 end
 
+function GameRoomLayer:onGameConnectAgain()
+	self._gamePlayCardsPanel:initGame()
+	self._gameSelectPosPanel:initGame()
+end
+
 function GameRoomLayer:onEnter()   
     print("GameRoomLayer:onEnter")
     
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.GAME_CMD, handler(self, self.onGameCMDResponse), "GameRoomLayer.onGameCMDResponse")
+
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGameConnectAgain")
+
 end
 
 function GameRoomLayer:onExit()
     print("GameRoomLayer:onExit")
    
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.GAME_CMD, "GameRoomLayer:onGameCMDResponse")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GameRoomLayer:onGameConnectAgain")
 end
 
 

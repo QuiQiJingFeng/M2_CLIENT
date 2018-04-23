@@ -35,6 +35,7 @@ function WinAwardCodeLayer:ctor(deleget)
     self.gap = 20
 
     local awardCards = lt.DataManager:getGameOverInfo().award_list
+
     self.nodeCards = {}
     self.cardNum = 0
     for i = 1,#awardCards do
