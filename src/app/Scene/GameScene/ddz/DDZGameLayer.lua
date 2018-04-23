@@ -267,25 +267,27 @@ end
 -- sendReadyReq
 -- @param pos in index
 function DDZGameRoomLayer:sendReadyReq( pos )
-	
 
-	local msgBoxLayer = lt.MsgboxLayer.new()
+	-- dump(lt.MsgboxLayer, "lt.MsgboxLayer")
 
+	-- print(lt.MsgboxLayer, "lt.MsgboxLayer")
+	-- dump(lt)
 
-	self:addChild(msgBoxLayer, 100)
+	-- local msgBoxLayer = lt.MsgboxLayer:showMsgBox()
+	-- self:addChild(msgBoxLayer, 100)
 
-	local sureFunc = function()
-		print("这个是确定按钮")
-	end
-	local cancelFunc = function()
-		print("这个是取消按钮")
-		self:onBackLobby()
-	end
+	-- local sureFunc = function()
+	-- 	print("这个是确定按钮")
+	-- end
+	-- local cancelFunc = function()
+	-- 	print("这个是取消按钮")
+	-- 	self:onBackLobby()
+	-- end
 
-	local isOneBtn = false
-	local isCloselayer = false
-	local iClockTime = 10
-	msgBoxLayer:showMsgBox("这个是显示信息", isOneBtn, sureFunc, cancelFunc, isCloselayer, iClockTime)
+	-- local isOneBtn = false
+	-- local isCloselayer = false
+	-- local iClockTime = 10
+	-- msgBoxLayer:showMsgBox("这个是显示信息", isOneBtn, sureFunc, cancelFunc, isCloselayer, iClockTime)
 
 	-- msgBoxLayer:showMsgBox()
 
@@ -315,7 +317,7 @@ function DDZGameRoomLayer:onBackLobby()
 end
 
 function DDZGameRoomLayer:getPlayerInfo( ... )
-	return lt.DataManager:getPlayerInfo()
+	return lt.DataManager:getGameRoomInfo()
 end
 
 
@@ -355,18 +357,19 @@ end
 function DDZGameRoomLayer:initUIview( )
 
 	-- 设置玩家人数(取座位号用)
-	self:setPlayNum(self.roomInfo.seat_num)
-
+	self:setPlayNum(3)
 	self:setGameInfo(self.roomInfo)
 	self.bGameStart = false
 
+	dump(self.roomInfo, "self.roomInfo")
 	-- 是否显示准备按钮
 	-- 开始游戏之后就统一是申请解散和设置界面
-	local loginData = self:getPlayerInfo()
+	-- local loginData = self:getPlayerInfo()
+	local loginData = lt.DataManager:getPlayerInfo()
 	dump(loginData, "loginData")
 
 	local bIfReady = false
-	local iUserPos = 0
+	local iUserPost = 0
 
 	dump(self.roomInfo.players)
 
@@ -383,20 +386,13 @@ function DDZGameRoomLayer:initUIview( )
 
 	for i, v in pairs(self.roomInfo.players) do
 		local pos = self:s2cPlayerPos(v.user_pos)
-			
 		self.playerNodeInfo[pos]:setVisible(true)
 	
 		if v.is_sit then
 			self.playerNodeInfo[pos].ready:setVisible(true)
-			self.imgNongMin[pos]:setVisible(true)
 		end
+		self.imgNongMin[pos]:setVisible(true)
 	end
-
-	local node1 = self.playerNodeInfo[1]:isVisible()
-	local node2 = self.playerNodeInfo[2]:isVisible()
-	local node3 = self.playerNodeInfo[3]:isVisible()
-
-
 
 	self.btnReady:setVisible(bIfReady == false)
 end
@@ -404,21 +400,21 @@ end
 -- 设置一下自己的座位号(根据id 得出 座位号中的人在自己的方位)
 function DDZGameRoomLayer:setMyExtraNum( iPost )
 	self.meExtraNum = iPost
-
 	print("self.meExtraNum  = ", self.meExtraNum)
 end
 
 function DDZGameRoomLayer:getMyExtraNum( ... )
 	print("getMyExtraNum  = ", self.meExtraNum)
-	return self.meExtraNum or 0 
+	return self.meExtraNum or 1 
 end
 
 function DDZGameRoomLayer:setPlayNum( num )
 	self.iMaxPlayerNum = num
 end
 
+-- 斗地主是3
 function DDZGameRoomLayer:getPlayNum( ... )
-	return self.iMaxPlayerNum or 4   
+	return 3   
 end
 
 -- 转换成是谁在操作，可根据服务器获取
@@ -436,7 +432,6 @@ function DDZGameRoomLayer:s2cPlayerPos(iPost)
 	if diff > iPlayerNum then
 		diff = 1
 	end
-
 
 
 	return diff
@@ -480,7 +475,6 @@ end
 
 
 function DDZGameRoomLayer:onBackLobbyResponse( msg )
-
 	-- 离开房间，看当前人是不是房主， 房主的话就要求一个弹窗， 返回大厅， 房间依然保留
 	if msg.result == "success" then
     	local worldScene = lt.WorldScene.new()
@@ -488,10 +482,54 @@ function DDZGameRoomLayer:onBackLobbyResponse( msg )
     end
 end
 
-function DDZGameRoomLayer:onSitDownResponse( ... )
+function DDZGameRoomLayer:onPushSitDown( msgData )
+	dump(msgData, "onPushSitDown")
+	-- get下是谁坐下了
+	for i = 1, 3 do 
+		self.playerNodeInfo[i].ready:setVisible(false)
+	end
+	for i , v in pairs(msgData.sit_list) do 
+		local pos = self:s2cPlayerPos(v.user_pos)
+		self.playerNodeInfo[pos].ready:setVisible(true)
+	end
+end
+
+function DDZGameRoomLayer:onSitDownResponse( msgData )
+
+	dump(msgData,"onSitDownResponse")
+
 	self.btnReady:setVisible(false)
 	self.playerNodeInfo[2].ready:setVisible(true)
 end
+
+function DDZGameRoomLayer:refreshPlayerConfig( msgData )
+
+	self.roomInfo = self:getPlayerInfo()
+	local loginData = lt.DataManager:getPlayerInfo()
+
+	for i, v in pairs(self.roomInfo.players) do 
+		if loginData.user_id == v.user_id then -- 不是自己， 就看下是否准备了
+			bIfReady = v.is_sit
+			iUserPost = v.user_pos
+			break
+		end
+	end
+
+	for i = 1, 3 do 
+		local pos = self:s2cPlayerPos(i)
+		self.playerNodeInfo[pos]:setVisible(false)
+		self.imgNongMin[pos]:setVisible(false)
+	end
+
+	for i, v in pairs(self.roomInfo.players) do
+		local pos = self:s2cPlayerPos(v.user_pos)
+		self.playerNodeInfo[pos]:setVisible(true)
+		self.playerNodeInfo[pos].ready:setVisible(v.is_sit)
+		self.imgNongMin[pos]:setVisible(true)
+	end
+	self.btnReady:setVisible(bIfReady == false)
+end
+
 
 
 function DDZGameRoomLayer:onEnter() 
@@ -500,6 +538,10 @@ function DDZGameRoomLayer:onEnter()
     -- 坐下按钮
    	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.SIT_DOWN, handler(self, self.onSitDownResponse), "DDZGameRoomLayer:onSitDownResponse")
 
+   	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_SIT_DOWN, handler(self, self.onPushSitDown), "DDZGameRoomLayer:onPushSitDown")
+
+   	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.refreshPlayerConfig), "DDZGameRoomLayer:refreshPlayerConfig")
+
 end
 
 
@@ -507,6 +549,8 @@ function DDZGameRoomLayer:onExit()
 	print("DDZGameRoomLayer:onExit")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.LEAVE_ROOM, "DDZGameRoomLayer:onBackLobbyResponse")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.SIT_DOWN, "DDZGameRoomLayer:onBackDownResponse")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_SIT_DOWN, "DDZGameRoomLayer:onPushSitDown")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "DDZGameRoomLayer:refreshPlayerConfig")
 
 end
 
