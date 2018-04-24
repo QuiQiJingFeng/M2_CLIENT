@@ -188,7 +188,7 @@ function DataManager:getGameRoomInfo(flag)
 end
 
 function DataManager:onRefreshRoomInfo(msg)
-    dump(msg,"FYD===onRefreshRoomInfo",11)
+    --dump(msg,"FYD===onRefreshRoomInfo",11)
     self._gameRoomInfo = msg
 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)

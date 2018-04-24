@@ -156,7 +156,7 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 			end
 		end
 	end
-	self:initGame()
+	--self:initGame()
 end
 
 function GameSelectPosPanel:initGame()
@@ -167,7 +167,8 @@ end
 
 function GameSelectPosPanel:configPlayer() --头像 
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
-
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	
     print("+++++++++++++++++", #self._currentSitPosArray, #gameRoomInfo.players)
     for k,playerLogo in pairs(self._currentPlayerLogArray) do
     	playerLogo:setVisible(false)
@@ -198,22 +199,32 @@ function GameSelectPosPanel:configPlayer() --头像
 		        		print("_______11111_________________________", player.user_pos, sitNode.atDirection)
 	        			
 	        			self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(true)
-	        			local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
-	        			self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
-					
+	        			
+	        			if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+		        			local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
+		        			self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
+	        			end
 	        		else
 	        			print("_______2222_________________________", player.user_pos, sitNode.atDirection)
 		        		self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(false)
-	        			local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
-	        			self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
+	        			
+		        		if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+	        				local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
+	        				self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
+		        		end	
 					end
 				else
 					print("_______33333_________________________")
 					if mySelfNode and player.is_sit then
 						print("%%%%%%%%%", player.user_pos, mySelfNode.atDirection)
-						local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(mySelfNode:getPosition()))
-						--self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
-						self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setPosition(worldPos.x, worldPos.y)
+
+						if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+
+							local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(mySelfNode:getPosition()))
+						--座位--self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
+							self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setPosition(worldPos.x, worldPos.y)
+						end
+
 						self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:getChildByName("Sprite_Ready"):setVisible(true)
 					
 						self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)

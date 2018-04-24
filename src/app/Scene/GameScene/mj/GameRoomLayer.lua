@@ -39,10 +39,11 @@ function GameRoomLayer:ctor()
     --结算界面
     self._gameResultPanel:setVisible(false)
 
-	--self:initGame()
+	self:initGame()
 end
 
 function GameRoomLayer:initGame()  
+	self._gameSelectPosPanel:initGame()
 	self._gamePlayCardsPanel:initGame()
 end
 

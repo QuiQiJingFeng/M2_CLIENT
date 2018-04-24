@@ -22,7 +22,8 @@ function InitLayer:onLogin()
     end
     self._logining = true
     
-    local index = math.random(1,99999)
+    --local index = math.random(1,99999)
+    local index = 10
     local account="FHQYDIDXIL"..index
 
     account = account

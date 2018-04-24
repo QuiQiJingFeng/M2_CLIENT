@@ -40,9 +40,16 @@ function GamePlayCardsPanel:ctor(deleget)
 
 	self._surRoomCount = lt.CommonUtil:getChildByNames(self._rootNode, "Node_OtherNum", "Text_Num")--剩余局数
 
+
+	local nodeClock = lt.CommonUtil:getChildByNames(self._rootNode, "Node_Clock")--中间方向盘
+	
+	self._timeClock = nodeClock:getChildByName("AtlasLabel_ClockNum")
+
+	self._spriteDnxb = nodeClock:getChildByName("Sprite_Dnxb")--方向旋转
+
 	self:addChild(self._rootNode)
 
-	self:initGame()
+	--self:initGame()
 end
 
 function GamePlayCardsPanel:updateMjInfo()   
@@ -69,10 +76,6 @@ function GamePlayCardsPanel:updateMjInfo()
 
 	local nodeClock = lt.CommonUtil:getChildByNames(self._rootNode, "Node_Clock")--中间方向盘
 	
-	self._timeClock = nodeClock:getChildByName("AtlasLabel_ClockNum")
-
-	self._spriteDnxb = nodeClock:getChildByName("Sprite_Dnxb")--方向旋转
-
 	self._nodeGrayDXNB = {}--东南西北的节点
 
 	self._nodeLight = {}--红绿状态的节点
@@ -1008,6 +1011,17 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 
 	--handle_nums
 	--自己的手牌
+    			 --当前事件  
+    local putOutType = 0 --  1摸牌出牌  2 碰牌出牌 
+
+	if allRoomInfo.cur_play_operator then
+		if allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD" then	
+			putOutType = 1
+		elseif allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD_FROM_PENG" then
+			putOutType = 2
+		end
+	end	
+
 	if allRoomInfo.card_list then
 
 		for i,card in ipairs(allRoomInfo.card_list) do
@@ -1031,7 +1045,9 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 			if allRoomInfo.cur_play_pos then
 				if allRoomInfo.cur_play_pos == info.user_pos then
 					startIndex = 14 - info.handle_num + 1
-					visibleLastCard = true --并且是摸牌出牌不是碰牌出牌
+					if putOutType == 1 then
+						visibleLastCard = true --并且是摸牌出牌不是碰牌出牌
+					end
 				else
 					startIndex = 14 - info.handle_num
 				end
@@ -1072,6 +1088,14 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 								card:setVisible(face)
 							end
 						end
+					end
+				end
+
+				if i == 14 then
+					if visibleLastCard then
+						self._allPlayerHandCardsNode[direction][i]:setVisible(true)
+					else
+						self._allPlayerHandCardsNode[direction][i]:setVisible(false)
 					end
 				end
 			end
@@ -1171,39 +1195,41 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 	end
 
 	--所有出的牌  
-	for i,info in ipairs(allRoomInfo.put_cards) do
-		if info.user_pos then
-			local direction = self._deleget:getPlayerDirectionByPos(info.user_pos)
-			
-			if self._allPlayerOutCardsNode[direction] then
-				for k,value in ipairs(info.cards) do
-					local node =  self._allPlayerOutCardsNode[direction][1]
-					local face = node:getChildByName("Sprite_Face")
+	if allRoomInfo.put_cards then
+		for i,info in ipairs(allRoomInfo.put_cards) do
+			if info.user_pos then
+				local direction = self._deleget:getPlayerDirectionByPos(info.user_pos)
+				
+				if self._allPlayerOutCardsNode[direction] then
+					for k,value in ipairs(info.cards) do
+						local node =  self._allPlayerOutCardsNode[direction][1]
+						local face = node:getChildByName("Sprite_Face")
 
-					local cardType = math.floor(value / 10) + 1
-					local cardValue = value % 10
-					face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
-					node:setVisible(true)
-					node:setTag(value)
-					table.remove(self._allPlayerOutCardsNode[direction], 1)
+						local cardType = math.floor(value / 10) + 1
+						local cardValue = value % 10
+						face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+						node:setVisible(true)
+						node:setTag(value)
+						table.remove(self._allPlayerOutCardsNode[direction], 1)
 
-					if not self._allPlayerOutInitCardsNode[direction] then
-						self._allPlayerOutInitCardsNode[direction] = {}
+						if not self._allPlayerOutInitCardsNode[direction] then
+							self._allPlayerOutInitCardsNode[direction] = {}
+						end
+
+						table.insert(self._allPlayerOutInitCardsNode[direction], node)
 					end
-
-					table.insert(self._allPlayerOutInitCardsNode[direction], node)
 				end
-			end
-		end		
+			end		
+		end
 	end
 
     --当前事件  
 	if allRoomInfo.operator then
 		local operatorList = {}
 		if allRoomInfo.operator == "WAIT_DEAL_FINISH" then
-		
+			local arg = {command = "DEAL_FINISH"}
+			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 		elseif allRoomInfo.operator == "WAIT_PLAY_CARD" then	
-			
 		elseif allRoomInfo.operator == "WAIT_PENG" then
 			operatorList = {"PENG"}	
 		elseif allRoomInfo.operator == "WAIT_GANG_WAIT_PENG" then
@@ -1212,6 +1238,8 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 			operatorList = {"GANG"}		
 		elseif allRoomInfo.operator == "WAIT_HU" then
 			operatorList = {"HU"}	
+		elseif allRoomInfo.operator == "WAIT_PLAY_CARD_FROM_PENG" then
+
 		end
 
 		--我的吃碰杠通知
