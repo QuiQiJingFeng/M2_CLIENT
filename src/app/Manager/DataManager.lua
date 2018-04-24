@@ -50,9 +50,11 @@ function DataManager:onjoinRoomResponse(msg)
         if not gameInfo or not gameInfo.room_setting or not gameInfo.room_setting.game_type then
             return
         end    
-
-        local gameScene = lt.GameScene.new()
-        lt.SceneManager:replaceScene(gameScene)
+        local scene = cc.Director:getInstance():getRunningScene()
+        if scene.__cname ~= "GameScene" then
+            local gameScene = lt.GameScene.new()
+            lt.SceneManager:replaceScene(gameScene)
+        end
 
         -- local gameInfo = lt.DataManager:getGameRoomInfo()
 
@@ -79,12 +81,23 @@ end
 
 --################################断线重连  加宕机 ##################################
 
---宕机的时候 需要重开局 refreshroominfo 第一个玩家dealCards发牌  其他玩家 onPushAllRoomInfo
-
---断线重连   入座界面 refreshroominfo    打牌界面   onPushAllRoomInfo
+--断线重连   放回房间   onPushAllRoomInfo
+function DataManager:getPushAllRoomInfo()
+    if not self._pushAllRoomInfo then
+        self._pushAllRoomInfo = {}
+    end
+    return self._pushAllRoomInfo
+end
 
 function DataManager:onPushAllRoomInfo(msg)
     dump(msg,"ON PUSH ALL ROOM INFO",11)
+
+    if msg.refresh_room_info then
+        self._gameRoomInfo = msg.refresh_room_info
+    end
+
+    self._pushAllRoomInfo = msg
+    lt.GameEventManager:post(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN)
 end
 
 local times = 3
@@ -106,6 +119,7 @@ function DataManager:listenNetDisconnect()
         if room_id then
             lt.CommonUtil:sepecailServerLogin(room_id,function(result) 
                 if result == "success" then
+                    self._pushAllRoomInfo = {}
                     local arg = {room_id = room_id}
                     lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
                 end

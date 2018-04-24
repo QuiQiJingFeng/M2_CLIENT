@@ -118,7 +118,7 @@ function GamePlayCardsPanel:updateMjInfo()
 
 	local panelVertical = self._rootNode:getChildByName("Panel_Vertical")--手牌
 
-	self._allPlayerOutCards = {}
+	self._allPlayerOutCardsNode = {}
 	self._allPlayerHandCardsNode = {}
 	self._allPlayerCpgCardsNode = {}
 
@@ -137,11 +137,11 @@ function GamePlayCardsPanel:updateMjInfo()
 			direction = index
 		end
 
-		self._allPlayerOutCards[direction] = {}
+		self._allPlayerOutCardsNode[direction] = {}
 		local node = panelOutCard:getChildByName("Node_OutCards_"..index)
 		if node then
 			for i=1,59 do
-				table.insert(self._allPlayerOutCards[direction], node:getChildByName("MJ_Out_"..i))
+				table.insert(self._allPlayerOutCardsNode[direction], node:getChildByName("MJ_Out_"..i))
 			end
 		end
 
@@ -167,7 +167,7 @@ function GamePlayCardsPanel:updateMjInfo()
 end
 
 function GamePlayCardsPanel:configCards()
-	for k,cards in pairs(self._allPlayerOutCards) do
+	for k,cards in pairs(self._allPlayerOutCardsNode) do
 		for i,v in ipairs(cards) do
 			v:setVisible(false)
 		end
@@ -212,9 +212,13 @@ function GamePlayCardsPanel:initGame() --每局结束牌桌清桌
 	
 	self._allPlayerHandCards = {}--所有方位的手牌
 
-	self._allPlayerOutInitCards = {}--所有方位的已经出过的  初始化过的牌
+	self._allPlayerOutInitCardsNode = {}--所有方位的已经出过的  初始化过的牌
 
 	self._allPlayerCpgCards = {}--所有方位的吃椪杠
+
+	if next(lt.DataManager:getPushAllRoomInfo()) then
+		self:onClientConnectAgain()
+	end
 end
 
 function GamePlayCardsPanel:configSendCards() --游戏刚开始的发牌
@@ -313,7 +317,7 @@ function GamePlayCardsPanel:onClickCard(event)
 	if self._currentOutPutPlayerPos and self._currentOutPutPlayerPos == lt.DataManager:getMyselfPositionInfo().user_pos then
 		print("出牌", value)
 
-		-- local node =  self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]
+		-- local node =  self._allPlayerOutCardsNode[self.POSITION_TYPE.NAN][1]
 		-- local face = node:getChildByName("Sprite_Face")
 
 		-- local cardType = math.floor(event:getTag() / 10) + 1
@@ -321,8 +325,8 @@ function GamePlayCardsPanel:onClickCard(event)
 		-- face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
 		-- node:setVisible(true)
 		-- node:setTag(event:getTag())
-		-- table.remove(self._allPlayerOutCards[self.POSITION_TYPE.NAN], 1)
-		-- table.insert(self._allPlayerOutInitCards[self.POSITION_TYPE.NAN], node)
+		-- table.remove(self._allPlayerOutCardsNode[self.POSITION_TYPE.NAN], 1)
+		-- table.insert(self._allPlayerOutInitCardsNode[self.POSITION_TYPE.NAN], node)
 
 		-- for k,card in pairs(self._mySelfHandCards) do  self._allPlayerHandCards[direction]
 		-- 	if card == value then
@@ -354,7 +358,7 @@ function GamePlayCardsPanel:onClickCard(event)
 	-- 	local moveBack = cc.MoveBy:create(0.5, cc.p(0, -event:getContentSize().height / 4))
 
 
-	-- 	local move = cc.MoveTo:create(0.5, ccp(self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]:getPositionX(), self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]:getPositionY()))
+	-- 	local move = cc.MoveTo:create(0.5, ccp(self._allPlayerOutCardsNode[self.POSITION_TYPE.NAN][1]:getPositionX(), self._allPlayerOutCardsNode[self.POSITION_TYPE.NAN][1]:getPositionY()))
 	-- 	local scale = cc.ScaleTo:create(0.5, 0.52, 0.52)
 	-- 	local spawn = cc.Spawn:create(move, scale)
 
@@ -362,7 +366,7 @@ function GamePlayCardsPanel:onClickCard(event)
 	-- 		function ( )
 	-- 			self._currentMoveCard = nil
 
-	-- 			local node =  self._allPlayerOutCards[self.POSITION_TYPE.NAN][1]
+	-- 			local node =  self._allPlayerOutCardsNode[self.POSITION_TYPE.NAN][1]
 	-- 			local face = node:getChildByName("Sprite_Face")
 
 	-- 			local cardType = math.floor(event:getTag() / 10) + 1
@@ -370,12 +374,12 @@ function GamePlayCardsPanel:onClickCard(event)
 	-- 			face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
 	-- 			node:setVisible(true)
 	-- 			node:setTag(event:getTag())
-	-- 			table.remove(self._allPlayerOutCards[self.POSITION_TYPE.NAN], 1)
-	-- 			if not self._allPlayerOutInitCards[self.POSITION_TYPE.NAN] then
-	-- 				self._allPlayerOutInitCards[self.POSITION_TYPE.NAN] = {}
+	-- 			table.remove(self._allPlayerOutCardsNode[self.POSITION_TYPE.NAN], 1)
+	-- 			if not self._allPlayerOutInitCardsNode[self.POSITION_TYPE.NAN] then
+	-- 				self._allPlayerOutInitCardsNode[self.POSITION_TYPE.NAN] = {}
 	-- 			end
 
-	-- 			table.insert(self._allPlayerOutInitCards[self.POSITION_TYPE.NAN], node)
+	-- 			table.insert(self._allPlayerOutInitCardsNode[self.POSITION_TYPE.NAN], node)
 	-- 		end
 	-- 		)
 
@@ -700,36 +704,9 @@ function GamePlayCardsPanel:onPushPlayCard(msg)   --通知玩家该出牌了
 
 	local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos)
 
-	for dire,v in ipairs(self._nodeGrayDXNB) do
-
-		if v.posValue then
-			local path = "game/mjcomm/words/"--wordGrayBei
-			if v.posValue == msg.user_pos then
-				if v.posValue == self.POSITION_TYPE.DONG then
-					path = path.."wordDong.png"
-				elseif v.posValue == self.POSITION_TYPE.NAN then
-					path = path.."wordNan.png"
-				elseif v.posValue == self.POSITION_TYPE.XI then
-					path = path.."wordXi.png"
-				elseif v.posValue == self.POSITION_TYPE.BEI then	
-					path = path.."wordBei.png"
-				end
-			else
-				if v.posValue == self.POSITION_TYPE.DONG then
-					path = path.."wordGrayDong.png"
-				elseif v.posValue == self.POSITION_TYPE.NAN then
-					path = path.."wordGrayNan.png"
-				elseif v.posValue == self.POSITION_TYPE.XI then
-					path = path.."wordGrayXi.png"
-				elseif v.posValue == self.POSITION_TYPE.BEI then	
-					path = path.."wordGrayBei.png"
-				end
-			end
-			v:setSpriteFrame(path)
-		end
-	end
-
 	self._currentOutPutPlayerPos = msg.user_pos
+
+	self:configCurDNXB()
 
 	msg.card_list = msg.card_list or {}
 	msg.peng_list = msg.peng_list or {}
@@ -800,23 +777,6 @@ end
 
 function GamePlayCardsPanel:onNoticePlayCard(msg)   --通知其他人有人出牌 
 
-	for dire,v in ipairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
-
-		if v.posValue then
-			local path = "game/mjcomm/words/"--wordGrayBei
-			if v.posValue == self.POSITION_TYPE.DONG then
-				path = path.."wordGrayDong.png"
-			elseif v.posValue == self.POSITION_TYPE.NAN then
-				path = path.."wordGrayNan.png"
-			elseif v.posValue == self.POSITION_TYPE.XI then
-				path = path.."wordGrayXi.png"
-			elseif v.posValue == self.POSITION_TYPE.BEI then	
-				path = path.."wordGrayBei.png"
-			end
-			v:setSpriteFrame(path)
-		end
-	end
-
 	self._currentOutPutPlayerPos = nil--重置绿红状态
 	self:resetLightUpdate()
 
@@ -848,8 +808,8 @@ function GamePlayCardsPanel:onNoticePlayCard(msg)   --通知其他人有人出�
 		
 	end
 	
-	if self._allPlayerOutCards[direction] then
-		local node =  self._allPlayerOutCards[direction][1]
+	if self._allPlayerOutCardsNode[direction] then
+		local node =  self._allPlayerOutCardsNode[direction][1]
 		local face = node:getChildByName("Sprite_Face")
 
 		local cardType = math.floor(value / 10) + 1
@@ -857,13 +817,13 @@ function GamePlayCardsPanel:onNoticePlayCard(msg)   --通知其他人有人出�
 		face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
 		node:setVisible(true)
 		node:setTag(value)
-		table.remove(self._allPlayerOutCards[direction], 1)
+		table.remove(self._allPlayerOutCardsNode[direction], 1)
 
-		if not self._allPlayerOutInitCards[direction] then
-			self._allPlayerOutInitCards[direction] = {}
+		if not self._allPlayerOutInitCardsNode[direction] then
+			self._allPlayer_allPlayerOutInitCardsNodeOutInitCards[direction] = {}
 		end
 
-		table.insert(self._allPlayerOutInitCards[direction], node)
+		table.insert(self._allPlayerOutInitCardsNode[direction], node)
 	end
 
 end
@@ -958,23 +918,6 @@ function GamePlayCardsPanel:onRefreshGameOver()   --通知客户端 本局结束
 	
 	-- msg.award_list
 
-	for dire,v in ipairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
-
-		if v.posValue then
-			local path = "game/mjcomm/words/"--wordGrayBei
-			if v.posValue == self.POSITION_TYPE.DONG then
-				path = path.."wordGrayDong.png"
-			elseif v.posValue == self.POSITION_TYPE.NAN then
-				path = path.."wordGrayNan.png"
-			elseif v.posValue == self.POSITION_TYPE.XI then
-				path = path.."wordGrayXi.png"
-			elseif v.posValue == self.POSITION_TYPE.BEI then	
-				path = path.."wordGrayBei.png"
-			end
-			v:setSpriteFrame(path)
-		end
-	end
-
 	self._currentOutPutPlayerPos = nil--重置绿红状态
 	self:resetLightUpdate()
 
@@ -1041,6 +984,298 @@ function GamePlayCardsPanel:onRefreshGameOver()   --通知客户端 本局结束
 	end
 end
 
+function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+
+	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
+	local curRound = gameRoomInfo.cur_round or 0	
+	self._surRoomCount:setString(curRound)
+
+	self._allPlayerHandCards[self.POSITION_TYPE.NAN] = {}
+
+	local reduceNum = allRoomInfo.reduce_num or 0
+	self._surCardsNum:setString(reduceNum)
+
+	--当前出牌人  指向
+	if allRoomInfo.cur_play_pos then
+		self:resetTimeUpdate(true)
+		self._currentOutPutPlayerPos = allRoomInfo.cur_play_pos
+		self:configCurDNXB()
+	else
+		self._currentOutPutPlayerPos = nil--重置绿红状态
+		self:resetLightUpdate()
+	end
+
+	--handle_nums
+	--自己的手牌
+	if allRoomInfo.card_list then
+
+		for i,card in ipairs(allRoomInfo.card_list) do
+			table.insert(self._allPlayerHandCards[self.POSITION_TYPE.NAN], card)
+
+		end
+		local sortFun = function(a, b)
+			return a < b
+		end
+
+		table.sort(self._allPlayerHandCards[self.POSITION_TYPE.NAN], sortFun)
+	end
+
+	if allRoomInfo.handle_nums then--handle_num
+
+		for i,info in ipairs(allRoomInfo.handle_nums) do
+			local startIndex = 14 - info.handle_num + 1
+			local direction = self._deleget:getPlayerDirectionByPos(info.user_pos)
+
+			local visibleLastCard = false -- 显示最后一张牌 
+			if allRoomInfo.cur_play_pos then
+				if allRoomInfo.cur_play_pos == info.user_pos then
+					startIndex = 14 - info.handle_num + 1
+					visibleLastCard = true --并且是摸牌出牌不是碰牌出牌
+				else
+					startIndex = 14 - info.handle_num
+				end
+			else
+				startIndex = 14 - info.handle_num
+			end
+
+			local initIndex = 1
+			for i=1,14 do
+				if direction ~= self.POSITION_TYPE.NAN then--不是自己
+					if i < startIndex then
+						self._allPlayerHandCardsNode[direction][i]:setVisible(false)
+					else
+						self._allPlayerHandCardsNode[direction][i]:setVisible(true)
+					end
+				else
+					if i < startIndex then
+						self._allPlayerHandCardsNode[direction][i]:setVisible(false)
+					else
+						local card = self._allPlayerHandCardsNode[direction][i]
+						
+						if self._allPlayerHandCards[direction][initIndex] and card then
+							card:setVisible(true)
+							local value = self._allPlayerHandCards[direction][initIndex]--手牌值
+							local node = card:getChildByName("Node_Mj")
+							local face = node:getChildByName("Sprite_Face")
+
+							if node and face then
+								local cardType = math.floor(value / 10) + 1
+								local cardValue = value % 10
+								face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+								node:getChildByName("Image_Bg"):setTag(value)
+								node:getChildByName("Image_Bg")["CardIndex"] = i
+							end
+							initIndex = initIndex + 1
+						else
+							if card then
+								card:setVisible(face)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	--所有玩家吃椪杠的牌  
+	if allRoomInfo.refresh_room_info and allRoomInfo.refresh_room_info.players then
+		local players = allRoomInfo.refresh_room_info.players
+		for i,playerInfo in ipairs(players) do
+			local direction = self._deleget:getPlayerDirectionByPos(playerInfo.user_pos) 
+
+			self._allPlayerCpgCards[direction] = {}
+			if playerInfo.card_stack then
+
+				for i,stack in ipairs(playerInfo.card_stack) do
+					local info = {}
+					info["value"] = stack["value"]
+					info["from"] = stack["from"]
+					info["type"] = stack["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
+					table.insert(self._allPlayerCpgCards[direction], info)
+				end
+
+
+				for index,CpgNode in ipairs(self._allPlayerCpgCardsNode[direction]) do
+					local cardInfo = self._allPlayerCpgCards[direction][index]
+					if cardInfo then
+						local value = cardInfo.value
+						--local gang_type = cardInfo.gang_type--1 暗杠 2 明杠 3 碰杠
+						local from = cardInfo.from
+						local type = cardInfo.type--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
+
+						local formDirection = self._deleget:getPlayerDirectionByPos(cardInfo.from) 
+
+						local cardType = math.floor(value / 10) + 1
+						local cardValue = value % 10
+
+						CpgNode:setVisible(true)
+						CpgNode["SpecialType"] = type
+						for i=1,5 do
+							CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
+							CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_MaskRed"):setVisible(false)
+
+							local arrow = CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Arrow")
+							arrow:setVisible(false)
+							local du = (self.POSITION_TYPE.NAN - formDirection) * 90
+							arrow:setRotation(du)
+
+							local face = CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Face")
+							face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+							
+							local initIndex = nil
+
+							if type == 1 or type == 2 then
+								initIndex = 3
+							elseif type == 3 or type == 4 then
+								initIndex = 4
+							elseif type == 5 then
+								initIndex = 4
+								if i <= 4 then
+									CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(true)
+									if i == 4 and direction == self.POSITION_TYPE.NAN then
+										CpgNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
+									end
+								end
+							end
+							if initIndex then
+
+								if i <= initIndex then
+									CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(true)
+
+									if type == 2 then
+										if i == 2 then
+											arrow:setVisible(true)
+										end
+									else
+										if i == initIndex and type ~= 5 then
+											arrow:setVisible(true)
+										end
+									end
+								else
+									CpgNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
+								end
+							end
+						end 
+					else
+						CpgNode:setVisible(false)
+					end
+				end
+
+
+
+			end
+		end
+
+
+	end
+
+	--所有出的牌  
+	for i,info in ipairs(allRoomInfo.put_cards) do
+		if info.user_pos then
+			local direction = self._deleget:getPlayerDirectionByPos(info.user_pos)
+			
+			if self._allPlayerOutCardsNode[direction] then
+				for k,value in ipairs(info.cards) do
+					local node =  self._allPlayerOutCardsNode[direction][1]
+					local face = node:getChildByName("Sprite_Face")
+
+					local cardType = math.floor(value / 10) + 1
+					local cardValue = value % 10
+					face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+					node:setVisible(true)
+					node:setTag(value)
+					table.remove(self._allPlayerOutCardsNode[direction], 1)
+
+					if not self._allPlayerOutInitCardsNode[direction] then
+						self._allPlayerOutInitCardsNode[direction] = {}
+					end
+
+					table.insert(self._allPlayerOutInitCardsNode[direction], node)
+				end
+			end
+		end		
+	end
+
+    --当前事件  
+	if allRoomInfo.operator then
+		local operatorList = {}
+		if allRoomInfo.operator == "WAIT_DEAL_FINISH" then
+		
+		elseif allRoomInfo.operator == "WAIT_PLAY_CARD" then	
+			
+		elseif allRoomInfo.operator == "WAIT_PENG" then
+			operatorList = {"PENG"}	
+		elseif allRoomInfo.operator == "WAIT_GANG_WAIT_PENG" then
+			operatorList = {"PENG", "GANG"}				
+		elseif allRoomInfo.operator == "WAIT_GANG" then
+			operatorList = {"GANG"}		
+		elseif allRoomInfo.operator == "WAIT_HU" then
+			operatorList = {"HU"}	
+		end
+
+		--我的吃碰杠通知
+        local tObjCpghObj = {
+            tObjChi = nil,
+            tObjPeng = nil,
+            tObjGang = nil,
+            tObjHu = nil--抢杠胡
+        }
+
+        for k,state in pairs(operatorList) do
+
+        	if state == "PENG" then
+        		tObjCpghObj.tObjPeng = {}
+
+        		--table.insert(tObjCpghObj.tObjPeng, msg.card)
+        	elseif state == "GANG" then
+        		if allRoomInfo.put_card then
+        			tObjCpghObj.tObjGang = {}
+        			table.insert(tObjCpghObj.tObjGang, allRoomInfo.put_card)
+        		end
+        	elseif state == "HU" then--抢杠胡
+        		tObjCpghObj.tObjHu = {}
+
+        	end
+        end
+
+	    --检测杠
+		local tempHandCards = {}
+
+		for k,v in pairs(self._allPlayerHandCards[self.POSITION_TYPE.NAN]) do
+			table.insert(tempHandCards, v)
+		end
+
+		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
+
+		local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCards[self.POSITION_TYPE.NAN], tempHandCards)
+
+		if #anGangCards > 0 or #pengGang > 0 then
+			tObjCpghObj.tObjGang = {}
+		end
+
+		for i,v in ipairs(anGangCards) do
+			table.insert(tObjCpghObj.tObjGang, v)
+		end
+
+		for i,v in ipairs(pengGang) do
+			table.insert(tObjCpghObj.tObjGang, v)
+		end
+
+		--检测胡
+		if lt.CommonUtil:checkIsHu(tempHandCards, true) then
+			tObjCpghObj.tObjHu = {}
+		else
+			print("没有自摸###########################################")
+		end
+
+        --显示吃碰杠胡控件
+        self._deleget:viewHideActPanelAndMenu()
+        self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
+        self._deleget:viewActionButtons(tObjCpghObj, true)
+	end
+end
+
 function GamePlayCardsPanel:resetTimeUpdate(flag) 
 	self._refreshTimeUpdate = flag
 	if flag then
@@ -1051,6 +1286,53 @@ end
 function GamePlayCardsPanel:resetLightUpdate() 
 	for dire,v in pairs(self._nodeLight) do
 		v:setVisible(false)
+	end
+
+	for dire,v in ipairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
+
+		if v.posValue then
+			local path = "game/mjcomm/words/"--wordGrayBei
+			if v.posValue == self.POSITION_TYPE.DONG then
+				path = path.."wordGrayDong.png"
+			elseif v.posValue == self.POSITION_TYPE.NAN then
+				path = path.."wordGrayNan.png"
+			elseif v.posValue == self.POSITION_TYPE.XI then
+				path = path.."wordGrayXi.png"
+			elseif v.posValue == self.POSITION_TYPE.BEI then	
+				path = path.."wordGrayBei.png"
+			end
+			v:setSpriteFrame(path)
+		end
+	end
+end
+
+function GamePlayCardsPanel:configCurDNXB() 
+	for dire,v in ipairs(self._nodeGrayDXNB) do
+		if v.posValue then
+			local path = "game/mjcomm/words/"--wordGrayBei
+			if v.posValue == self._currentOutPutPlayerPos then
+				if v.posValue == self.POSITION_TYPE.DONG then
+					path = path.."wordDong.png"
+				elseif v.posValue == self.POSITION_TYPE.NAN then
+					path = path.."wordNan.png"
+				elseif v.posValue == self.POSITION_TYPE.XI then
+					path = path.."wordXi.png"
+				elseif v.posValue == self.POSITION_TYPE.BEI then	
+					path = path.."wordBei.png"
+				end
+			else
+				if v.posValue == self.POSITION_TYPE.DONG then
+					path = path.."wordGrayDong.png"
+				elseif v.posValue == self.POSITION_TYPE.NAN then
+					path = path.."wordGrayNan.png"
+				elseif v.posValue == self.POSITION_TYPE.XI then
+					path = path.."wordGrayXi.png"
+				elseif v.posValue == self.POSITION_TYPE.BEI then	
+					path = path.."wordGrayBei.png"
+				end
+			end
+			v:setSpriteFrame(path)
+		end
 	end
 end
 
@@ -1098,7 +1380,7 @@ function GamePlayCardsPanel:onEnter()
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GamePlayCardsPanel.onNoticeSpecialEvent")
 
-
+    --lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GamePlayCardsPanel.onClientConnectAgain")
 	local scheduler = cc.Director:getInstance():getScheduler()
 	self.schedule_id = scheduler:scheduleScriptFunc(function(dt)
 	    self:onUpdate(dt)
@@ -1115,6 +1397,7 @@ function GamePlayCardsPanel:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, "GamePlayCardsPanel:onPushPlayerOperatorState")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GamePlayCardsPanel:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GamePlayCardsPanel:onNoticeSpecialEvent")
+    --lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GamePlayCardsPanel:onClientConnectAgain")
 
     if self.schedule_id then
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.schedule_id)

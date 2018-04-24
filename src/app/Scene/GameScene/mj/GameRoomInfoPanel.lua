@@ -8,14 +8,15 @@ end)
 
 function GameRoomInfoPanel:ctor()
 	GameRoomInfoPanel.super.ctor(self)
+	local roomInfo = lt.DataManager:getGameRoomInfo()
+	local roomSetting = roomInfo.room_setting
 
-	local roomSetting = lt.DataManager:getGameRoomInfo().room_setting
 	if roomSetting then
 		if roomSetting.game_type == lt.Constants.GAME_TYPE.HZMJ then
 			local name = lt.LanguageString:getString("STRING_GAME_NAME_"..roomSetting.game_type)
 			lt.CommonUtil:getChildByNames(self, "Node_TableInfo", "Text_GameName"):setString(name)
 		end
-		lt.CommonUtil:getChildByNames(self, "Node_TableInfo", "Text_JuShu"):setString(roomSetting.cur_round.."/"..roomSetting.round)
+		lt.CommonUtil:getChildByNames(self, "Node_TableInfo", "Text_JuShu"):setString(roomInfo.cur_round.."/"..roomSetting.round)
 	end
 
 	lt.CommonUtil:getChildByNames(self, "Node_TableInfo", "Text_RoomNo"):setString(lt.DataManager:getGameRoomInfo().room_id)

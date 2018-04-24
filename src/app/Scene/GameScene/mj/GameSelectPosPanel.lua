@@ -156,7 +156,10 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 			end
 		end
 	end
+	self:initGame()
+end
 
+function GameSelectPosPanel:initGame()
 	self:configRotation()--初始化座位方位
 	self:configPlayer()--初始化玩家头像
 	self:configPlayerScore()
@@ -667,6 +670,21 @@ function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分�
 	end
 end
 
+function GameSelectPosPanel:onClientConnectAgain() 
+	self:configPlayerScore()
+
+	-- local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+
+	-- self._zhuangPos = allRoomInfo.zpos
+
+	-- --显示庄家
+	-- self._zhuangDirection = self._deleget:getPlayerDirectionByPos(self._zhuangPos)
+
+	-- if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
+	-- 	self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
+	-- end
+end
+
 
 function GameSelectPosPanel:onEnter()   
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DEAL_DOWN, handler(self, self.onDealDown), "GameSelectPosPanel:onDealDown")
@@ -676,6 +694,7 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, handler(self, self.onNoticePlayerConnectState), "GameSelectPosPanel:onNoticePlayerConnectState")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, handler(self, self.onRefreshScoreResponse), "GameSelectPosPanel:onRefreshScoreResponse")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameSelectPosPanel:onRefreshGameOver")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSelectPosPanel.onClientConnectAgain")
 end
 
 function GameSelectPosPanel:onExit()
@@ -686,6 +705,8 @@ function GameSelectPosPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, "GameSelectPosPanel:onNoticePlayerConnectState")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, "GameSelectPosPanel:onRefreshScoreResponse")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameSelectPosPanel:onRefreshGameOver")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GameSelectPosPanel:onClientConnectAgain")
+
 end
 
 return GameSelectPosPanel

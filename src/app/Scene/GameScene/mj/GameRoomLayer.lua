@@ -58,13 +58,20 @@ function GameRoomLayer:viewActionButtons(tObjCpghObj, isPassSendMsg)
 	self._gameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
 end
 
+function GameRoomLayer:viewHideActPanelAndMenu(tObjCpghObj, isPassSendMsg)
+	self._gameActionBtnsPanel:viewHideActPanelAndMenu()
+end
+
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
 
 end
 
 function GameRoomLayer:onGameConnectAgain()
 	self._gamePlayCardsPanel:initGame()
-	self._gameSelectPosPanel:initGame()
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+		self._gameSelectPosPanel:initGame()
+	end	
 end
 
 function GameRoomLayer:onEnter()   
