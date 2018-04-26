@@ -1762,4 +1762,18 @@ function CommonUtil:sepecailServerLogin(room_id,callBack)
         end)
 end
 
+
+function CommonUtil:searchReplays(callBack)
+    self.selecting = nil
+    local body = lt.DataManager:getAuthData()
+    
+    local url = string.format("http://%s:%d/operator/get_replays",lt.Constants.HOST,lt.Constants.PORT)
+    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
+            if recv_msg then
+                recv_msg = json.decode(recv_msg)
+            else
+                print("ERROR,获取失败")
+            end
+        end)
+end
 return CommonUtil
