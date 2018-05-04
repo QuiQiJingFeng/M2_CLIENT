@@ -71,7 +71,7 @@ cCardValue"
 Result
 success
 	auth_fail
-’-
+“/
 msg/user.protomsg.user"F
 GPItem
 value (Rvalue
@@ -118,7 +118,7 @@ SitDownReq
 pos (Rpos"6
 
 SitDownRsp(
-result (2.msg.user.ResultRresult" 
+result (2.msg.user.ResultRresult"„
 
 GameCmdReq
 command (	Rcommand
@@ -127,7 +127,9 @@ GameCmdReq
 nowType (RnowType
 nowValue (RnowValue
 cardList (RcardList
-cardNums	 (RcardNums"6
+cardNums	 (RcardNums
+pao_num
+ (RpaoNum"6
 
 GameCmdRsp(
 result (2.msg.user.ResultRresult"©
@@ -166,14 +168,18 @@ expireTime
 user_pos (RuserPos"T
 PushSitDown
 room_id (RroomId,
-sit_list (2.msg.user.SitItemRsitList"ç
+sit_list (2.msg.user.SitItemRsitList"?
+FourCardItem
+user_pos (RuserPos
+cards (Rcards"À
 DealCard
 zpos (Rzpos
 user_pos (RuserPos
 cards (Rcards
 random_nums (R
 randomNums
-	cur_round (RcurRound"V
+	cur_round (RcurRound<
+four_card_list (2.msg.user.FourCardItemRfourCardList"V
 PushDrawCard
 user_id (RuserId
 card (Rcard
@@ -216,7 +222,7 @@ card_stack (2.msg.user.GPItemR	cardStack"X
 	over_type (RoverType(
 players (2.msg.user.ItemRplayers
 
-award_list (R	awardList
+award_list (R	awardList
 winner_type (R
 winnerType
 
@@ -234,7 +240,7 @@ is_connect (R	isConnect":
 	HandleNum
 user_pos (RuserPos
 
-handle_num (R	handleNum"ì
+handle_num (R	handleNum"¯
 PushAllRoomInfoE
 refresh_room_info (2.msg.user.RefreshRoomInfoRrefreshRoomInfo
 	card_list (RcardList
@@ -249,7 +255,10 @@ reduce_num (R	reduceNum4
 handleNums
 put_card	 (RputCard*
 cur_play_operator
- (	RcurPlayOperator"Y
+ (	RcurPlayOperator
+put_pos (RputPos
+	operators (	R	operators,
+cur_play_operators (	RcurPlayOperators"Y
 GoldItem
 user_id (RuserId
 user_pos (RuserPos
