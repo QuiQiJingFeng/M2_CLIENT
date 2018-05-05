@@ -89,6 +89,10 @@ function DataManager:getPushAllRoomInfo()
     return self._pushAllRoomInfo
 end
 
+function DataManager:clearPushAllRoomInfo()
+    self._pushAllRoomInfo = {}
+end
+
 function DataManager:onPushAllRoomInfo(msg)
     dump(msg,"ON PUSH ALL ROOM INFO",11)
 

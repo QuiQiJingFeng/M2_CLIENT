@@ -115,6 +115,7 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 		else
 			v:setVisible(false)
 		end
+		v:setVisible(false)
 		v:setTag(pos)
 	end
 
@@ -156,10 +157,22 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 			end
 		end
 	end
-	--self:initGame()
 end
 
-function GameSelectPosPanel:initGame()
+function GameSelectPosPanel:againConfigUI()
+	for i,v in ipairs(self._currentSitPosArray) do
+		v:setVisible(true)
+	end
+
+	self:configPlayer()--初始化玩家头像
+	self:configPlayerScore()
+end
+
+function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果在选座位阶段 会走 initGame
+	for i,v in ipairs(self._currentSitPosArray) do
+		v:setVisible(true)
+	end
+
 	self:configRotation()--初始化座位方位
 	self:configPlayer()--初始化玩家头像
 	self:configPlayerScore()
@@ -169,6 +182,12 @@ function GameSelectPosPanel:configPlayer() --头像
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	
+	if allRoomInfo.card_list and next(allRoomInfo.card_list) then--断线重连 牌局中
+		for i,v in ipairs(self._currentSitPosArray) do
+			v:setVisible(false)
+		end
+	end
+
     print("+++++++++++++++++", #self._currentSitPosArray, #gameRoomInfo.players)
     for k,playerLogo in pairs(self._currentPlayerLogArray) do
     	playerLogo:setVisible(false)
@@ -218,6 +237,7 @@ function GameSelectPosPanel:configPlayer() --头像
 					if mySelfNode and player.is_sit then
 						print("%%%%%%%%%", player.user_pos, mySelfNode.atDirection)
 
+						mySelfNode:setVisible(false)
 						if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
 
 							local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(mySelfNode:getPosition()))

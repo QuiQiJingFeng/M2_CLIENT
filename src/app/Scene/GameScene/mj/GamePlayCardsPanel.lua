@@ -30,8 +30,10 @@ function GamePlayCardsPanel:ctor(deleget)
 	end
 	
 	self._pleaseOutCardTips = self._rootNode:getChildByName("Sprite_OutCardTips")--请出牌
+	self._pleaseOutCardTips:setVisible(false)
 
 	self._curOutCardArrow = self._rootNode:getChildByName("Node_CurOutCardArrow")--
+	self._curOutCardArrow:setVisible(false)
 
 	self._nodeCardNum = self._rootNode:getChildByName("Node_CardNum")
 	self._nodeOtherNum = self._rootNode:getChildByName("Node_OtherNum")
@@ -39,7 +41,6 @@ function GamePlayCardsPanel:ctor(deleget)
 	self._surCardsNum = lt.CommonUtil:getChildByNames(self._rootNode, "Node_CardNum", "Text_Num")--剩余牌数
 
 	self._surRoomCount = lt.CommonUtil:getChildByNames(self._rootNode, "Node_OtherNum", "Text_Num")--剩余局数
-
 
 	local nodeClock = lt.CommonUtil:getChildByNames(self._rootNode, "Node_Clock")--中间方向盘
 	
@@ -50,13 +51,11 @@ function GamePlayCardsPanel:ctor(deleget)
 	self:addChild(self._rootNode)
 
 	--self:initGame()
+
+	self:configUI()
 end
 
-function GamePlayCardsPanel:updateMjInfo()   
-
-	self._nodeCardNum:setVisible(false)
-	self._nodeOtherNum:setVisible(false)
-
+function GamePlayCardsPanel:configUI() 
 	local currentGameDirections = nil
 
 	if self._playerNum == 2 then--二人麻将
@@ -70,9 +69,6 @@ function GamePlayCardsPanel:updateMjInfo()
 	if not currentGameDirections then
 		return
 	end
-
-	--self._rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/2p/MjCardsPanel2p.csb")
-	
 
 	local nodeClock = lt.CommonUtil:getChildByNames(self._rootNode, "Node_Clock")--中间方向盘
 	
@@ -118,7 +114,6 @@ function GamePlayCardsPanel:updateMjInfo()
 	end
 
 	local panelOutCard = self._rootNode:getChildByName("Panel_OutCard")--出牌
-
 	local panelVertical = self._rootNode:getChildByName("Panel_Vertical")--手牌
 
 	self._allPlayerOutCardsNode = {}
@@ -166,6 +161,42 @@ function GamePlayCardsPanel:updateMjInfo()
 			end
 		end
 	end
+end
+
+function GamePlayCardsPanel:updateMjInfo()   
+
+	self._nodeCardNum:setVisible(false)
+	self._nodeOtherNum:setVisible(false)
+
+	local panelOutCard = self._rootNode:getChildByName("Panel_OutCard")--出牌
+	self._allPlayerOutCardsNode = {}
+
+	for index=1, self._playerNum do
+
+		--出的牌
+		local direction = self.POSITION_TYPE.NAN
+
+		if self._playerNum == 2 then
+			if index == 1 then--北方
+				direction = self.POSITION_TYPE.BEI
+			else
+				direction = self.POSITION_TYPE.NAN
+			end
+		else
+			direction = index
+		end
+
+		self._allPlayerOutCardsNode[direction] = {}
+		local node = panelOutCard:getChildByName("Node_OutCards_"..index)
+		if node then
+			for i=1,59 do
+				table.insert(self._allPlayerOutCardsNode[direction], node:getChildByName("MJ_Out_"..i))
+			end
+		end
+	end
+
+
+
 
 end
 
@@ -446,7 +477,7 @@ function GamePlayCardsPanel:configAllPlayerCards(direction)--吃椪杠 手牌
 	local chiPengCount = 0
 	local gangCount = 0
 	self._allPlayerCpgCards[direction] = self._allPlayerCpgCards[direction] or {}
-	for index,CpgNode in ipairs(self._allPlayerCpgCardsNode[direction]) do
+	for index,CpgNode in pairs(self._allPlayerCpgCardsNode[direction]) do
 		local cardInfo = self._allPlayerCpgCards[direction][index]
 		print("666666666666666666666666666666666666")
 		dump(tostring(cardInfo))
@@ -603,7 +634,15 @@ function GamePlayCardsPanel:onDealDown(msg)   --发牌13张手牌
 	end
 
 	local curRound = msg.cur_round or 0	
-	self._surRoomCount:setString(curRound)
+	
+	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
+	local surRoomCountStr = ""
+
+	surRoomCountStr = surRoomCountStr..curRound
+	if gameRoomInfo.room_setting and gameRoomInfo.room_setting.round then
+		surRoomCountStr = surRoomCountStr.."/"..gameRoomInfo.room_setting.round
+	end
+	self._surRoomCount:setString(surRoomCountStr)
 
 	self._allPlayerHandCards[self.POSITION_TYPE.NAN] = {}
 
@@ -926,7 +965,7 @@ function GamePlayCardsPanel:onRefreshGameOver()   --通知客户端 本局结束
 
 	self:resetTimeUpdate(false)--重置倒计时
 
-	for dire,CPGNodes in ipairs(self._allPlayerCpgCardsNode) do
+	for dire,CPGNodes in pairs(self._allPlayerCpgCardsNode) do
 		for index,node in ipairs(CPGNodes) do
 			if node.SpecialType and node.SpecialType == 5 then
 				for i=1,4 do
@@ -991,13 +1030,22 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
-	local curRound = gameRoomInfo.cur_round or 0	
-	self._surRoomCount:setString(curRound)
+	local surRoomCountStr = ""
+
+	local curRound = gameRoomInfo.cur_round or 0
+	surRoomCountStr = surRoomCountStr..curRound
+	if gameRoomInfo.room_setting and gameRoomInfo.room_setting.round then
+		surRoomCountStr = surRoomCountStr.."/"..gameRoomInfo.room_setting.round
+	end
+	self._surRoomCount:setVisible(true)
+	self._surRoomCount:setString(surRoomCountStr)
 
 	self._allPlayerHandCards[self.POSITION_TYPE.NAN] = {}
 
 	local reduceNum = allRoomInfo.reduce_num or 0
 	self._surCardsNum:setString(reduceNum)
+	self._nodeCardNum:setVisible(true)
+	self._nodeOtherNum:setVisible(true)
 
 	--当前出牌人  指向
 	if allRoomInfo.cur_play_pos then
@@ -1011,16 +1059,6 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 
 	--handle_nums
 	--自己的手牌
-    			 --当前事件  
-    local putOutType = 0 --  1摸牌出牌  2 碰牌出牌 
-
-	if allRoomInfo.cur_play_operator then
-		if allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD" then	
-			putOutType = 1
-		elseif allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD_FROM_PENG" then
-			putOutType = 2
-		end
-	end	
 
 	if allRoomInfo.card_list then
 
@@ -1038,21 +1076,14 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 	if allRoomInfo.handle_nums then--handle_num
 
 		for i,info in ipairs(allRoomInfo.handle_nums) do
-			local startIndex = 14 - info.handle_num + 1
+			local startIndex = 14 - info.handle_num
 			local direction = self._deleget:getPlayerDirectionByPos(info.user_pos)
 
-			local visibleLastCard = false -- 显示最后一张牌 
+			--local visibleLastCard = false -- 显示最后一张牌 
 			if allRoomInfo.cur_play_pos then
 				if allRoomInfo.cur_play_pos == info.user_pos then
 					startIndex = 14 - info.handle_num + 1
-					if putOutType == 1 then
-						visibleLastCard = true --并且是摸牌出牌不是碰牌出牌
-					end
-				else
-					startIndex = 14 - info.handle_num
 				end
-			else
-				startIndex = 14 - info.handle_num
 			end
 
 			local initIndex = 1
@@ -1091,13 +1122,13 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 					end
 				end
 
-				if i == 14 then
-					if visibleLastCard then
-						self._allPlayerHandCardsNode[direction][i]:setVisible(true)
-					else
-						self._allPlayerHandCardsNode[direction][i]:setVisible(false)
-					end
-				end
+				-- if i == 14 then
+				-- 	if visibleLastCard then
+				-- 		self._allPlayerHandCardsNode[direction][i]:setVisible(true)
+				-- 	else
+				-- 		self._allPlayerHandCardsNode[direction][i]:setVisible(false)
+				-- 	end
+				-- end
 			end
 		end
 	end
@@ -1120,7 +1151,7 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 				end
 
 
-				for index,CpgNode in ipairs(self._allPlayerCpgCardsNode[direction]) do
+				for index,CpgNode in pairs(self._allPlayerCpgCardsNode[direction]) do
 					local cardInfo = self._allPlayerCpgCards[direction][index]
 					if cardInfo then
 						local value = cardInfo.value
@@ -1267,34 +1298,46 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
         	end
         end
 
-	    --检测杠
-		local tempHandCards = {}
+	    --当前事件  
+	    local putOutType = 0 --  1摸牌出牌  2 碰牌出牌 
 
-		for k,v in pairs(self._allPlayerHandCards[self.POSITION_TYPE.NAN]) do
-			table.insert(tempHandCards, v)
-		end
+		if allRoomInfo.cur_play_operator then
+			if allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD" then	
+				putOutType = 1
+			elseif allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD_FROM_PENG" then
+				putOutType = 2
+			end
+		end	
+		if putOutType == 1 then
+		    --检测杠
+			local tempHandCards = {}
 
-		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
+			for k,v in pairs(self._allPlayerHandCards[self.POSITION_TYPE.NAN]) do
+				table.insert(tempHandCards, v)
+			end
 
-		local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCards[self.POSITION_TYPE.NAN], tempHandCards)
+			local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
 
-		if #anGangCards > 0 or #pengGang > 0 then
-			tObjCpghObj.tObjGang = {}
-		end
+			local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCards[self.POSITION_TYPE.NAN], tempHandCards)
 
-		for i,v in ipairs(anGangCards) do
-			table.insert(tObjCpghObj.tObjGang, v)
-		end
+			if #anGangCards > 0 or #pengGang > 0 then
+				tObjCpghObj.tObjGang = {}
+			end
 
-		for i,v in ipairs(pengGang) do
-			table.insert(tObjCpghObj.tObjGang, v)
-		end
+			for i,v in ipairs(anGangCards) do
+				table.insert(tObjCpghObj.tObjGang, v)
+			end
 
-		--检测胡
-		if lt.CommonUtil:checkIsHu(tempHandCards, true) then
-			tObjCpghObj.tObjHu = {}
-		else
-			print("没有自摸###########################################")
+			for i,v in ipairs(pengGang) do
+				table.insert(tObjCpghObj.tObjGang, v)
+			end
+
+			--检测胡
+			if lt.CommonUtil:checkIsHu(tempHandCards, true) then
+				tObjCpghObj.tObjHu = {}
+			else
+				print("没有自摸###########################################")
+			end			
 		end
 
         --显示吃碰杠胡控件
@@ -1302,6 +1345,8 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
         self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
         self._deleget:viewActionButtons(tObjCpghObj, true)
 	end
+
+	lt.DataManager:clearPushAllRoomInfo()
 end
 
 function GamePlayCardsPanel:resetTimeUpdate(flag) 

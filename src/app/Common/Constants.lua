@@ -26,7 +26,7 @@ Constants.ROOM_STATE = {
     GAME_OVER = 3,      --游戏结束
 }
 
-Constants.HOST = "47.52.99.120"  --"192.168.0.100"
-Constants.PORT = 3000
+Constants.HOST = "mengyagame.com"  --"192.168.0.100"
+Constants.PORT = 80
 
 return Constants

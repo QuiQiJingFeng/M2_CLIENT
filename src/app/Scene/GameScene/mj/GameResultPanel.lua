@@ -74,7 +74,7 @@ function GameResultPanel:onStartAgainClick(event) --继续游戏
 	--重新整理界面
 	self:setVisible(false)
 	self:closeWinAwardCodeLayer()
-	self._deleget:initGame()
+	self._deleget:againConfigUI()
 
 	local arg = {pos = lt.DataManager:getMyselfPositionInfo().user_pos}--weixin
     lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)

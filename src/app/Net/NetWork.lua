@@ -305,7 +305,6 @@ function network:send(data_content,callback,ignore_session)
 
 	if not (self._socket and (self._net_state == NETSTATE.CONNECTING or self._net_state == NETSTATE.CONNECTED)) then
 		print("networkerror!!!!!!!!!!!!!!!!!!!!!!!")
-        self:clear()
         return false
 	end
 

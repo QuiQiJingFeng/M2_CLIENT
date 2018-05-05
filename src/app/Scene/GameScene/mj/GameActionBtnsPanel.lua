@@ -25,6 +25,14 @@ function GameActionBtnsPanel:ctor(deleget)
     self.m_objCommonUi.m_btnHu = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Hu")
     self.m_objCommonUi.m_btnPass = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Pass")
     self.m_objCommonUi.m_btnTing = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Ting")
+    
+    self.m_objCommonUi.m_nodeCardsMenu = self:getChildByName("Node_CardsMenu") --吃碰杠胡二级菜单
+    self.m_objCommonUi.m_btnMenuPass = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Button_Pass")
+    self.m_objCommonUi.m_imgCardsMenuBg = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Image_Bg")
+    self.m_objCommonUi.m_panelMenuItems = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Panel_MenuItems")
+    self.m_objCommonUi.m_panelMenuItems:removeAllChildren()
+
+
     self.m_objCommonUi.m_tArrActionBtn = {}
     if self.m_objCommonUi.m_btnChi then
         table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnChi)
@@ -44,20 +52,20 @@ function GameActionBtnsPanel:ctor(deleget)
     if self.m_objCommonUi.m_btnPass then
         table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnPass)
     end
+
+    if self.m_objCommonUi.m_btnMenuPass then
+        table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnMenuPass)
+    end
+
     local tArrNodeActionBtnsChildren = self.m_objCommonUi.m_nodeActionBtns:getChildren()
     for i = 1, #tArrNodeActionBtnsChildren do
         tArrNodeActionBtnsChildren[i].orgPos = cc.p(tArrNodeActionBtnsChildren[i]:getPosition())
     end
 
     for k,node in pairs(self.m_objCommonUi.m_tArrActionBtn) do
-    	lt.CommonUtil:addNodeClickEvent(node, handler(self, self.onClickCpghEvent))
+        lt.CommonUtil:addNodeClickEvent(node, handler(self, self.onClickCpghEvent))
     end
 
-    self.m_objCommonUi.m_nodeCardsMenu = self:getChildByName("Node_CardsMenu") --吃碰杠胡二级菜单
-    self.m_objCommonUi.m_btnMenuPass = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Button_Pass")
-    self.m_objCommonUi.m_imgCardsMenuBg = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Image_Bg")
-    self.m_objCommonUi.m_panelMenuItems = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Panel_MenuItems")
-    self.m_objCommonUi.m_panelMenuItems:removeAllChildren()
 
     self.m_objCommonUi.m_panelCurOutCard = self:getChildByName("Panel_CurOutCard")
 

@@ -65,6 +65,7 @@ function WorldMenuLayer:listenRoomListUpdate()
     local url = string.format("http://%s:%d/operator/get_room_list",lt.Constants.HOST,lt.Constants.PORT)
     lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
             local info = json.decode(recv_msg)
+            print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", recv_msg)
             if info.room_id and info.state <= 2 then
                 lt.CommonUtil:show(self.Se_Return)
                 lt.CommonUtil:hide(self.Se_Create)

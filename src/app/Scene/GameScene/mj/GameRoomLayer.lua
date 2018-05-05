@@ -47,6 +47,11 @@ function GameRoomLayer:initGame()
 	self._gamePlayCardsPanel:initGame()
 end
 
+function GameRoomLayer:againConfigUI()  
+	self._gameSelectPosPanel:againConfigUI()
+	self._gamePlayCardsPanel:initGame()
+end
+
 function GameRoomLayer:getPlayerDirectionByPos(playerPos) 
 	return self._gameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 end
@@ -68,11 +73,12 @@ function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
 end
 
 function GameRoomLayer:onGameConnectAgain()
-	self._gamePlayCardsPanel:initGame()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
 		self._gameSelectPosPanel:initGame()
 	end	
+
+	self._gamePlayCardsPanel:initGame()
 end
 
 function GameRoomLayer:onEnter()   
