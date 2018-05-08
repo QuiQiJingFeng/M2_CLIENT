@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.my.sqmj" 
+    package="com.mengya.game" 
     android:installLocation="auto">
 
     <uses-feature android:glEsVersion="0x00020000" />
@@ -15,7 +15,7 @@
 				   android:value="cocos2dlua" />
 		
         <activity
-            android:name="org.cocos2dx.lua.AppActivity"
+            android:name="com.mengya.game.AppActivity"
             android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
@@ -26,15 +26,49 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--微信登陆-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:label="@string/app_name"
+            android:exported="true"/>
+
+
+        <receiver
+            android:name="com.mengya.wechat.WechatDelegate">
+            <intent-filter>
+                <action android:name="com.mengya.game.Intent.WECHAT_AUTH" />
+                <category android:name="wechat_auth"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.mengya.game.Intent.WECHAT_SHARE" />
+                <category android:name="wechat_share"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.mengya.game.Intent.WECHAT_PAY" />
+                <category android:name="wechat_pay"/>
+            </intent-filter>
+
+        </receiver>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>  
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>  
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>  
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>  
-    
-  	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 获取mac地址作为用户的备用唯一标识 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
  	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+
 
 </manifest>

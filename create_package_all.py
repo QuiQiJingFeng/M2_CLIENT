@@ -5,7 +5,7 @@ import json
 import sys
 from Utils import Utils
 
-VERSION = "1.0.0"
+VERSION = "1.1.2"
 
 URL = "192.168.1.100:3000"
 
@@ -36,11 +36,12 @@ FILETERS_LIST = ['*.png','*.csb','*.plist','*.json','*.pb','*.atlas','*.lua','*.
 RB_MODE_LIST = ['.png','.csb','.pb','.mp3','.ogg']
 
 os.system('rm -r package;mkdir package;')
+print("加密开始")
 # 加密lua文件 并将加密后的文件写入package目录
 Utils.encryptorDecryptFile(True,'src','package',XXTEA_KEY,XXTEA_SINGIN,FILETERS_LIST)
 # 加密资源文件 并将加密后的文件写入package目录
 Utils.encryptorDecryptFile(True,'res','package',XXTEA_KEY,XXTEA_SINGIN,FILETERS_LIST,[],RB_MODE_LIST)
-
+print("加密完毕")
 ASSETS_CONFIG = {
     'src.zip':{'dir':'src'},
     'Default.zip':{'dir':'res/Default'},
