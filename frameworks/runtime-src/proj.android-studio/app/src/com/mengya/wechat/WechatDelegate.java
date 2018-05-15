@@ -4,10 +4,16 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 import com.mengya.common.CustomRunable;
@@ -20,8 +26,8 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendAuth;
 import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.tencent.mm.sdk.openapi.WXImageObject;
 import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.openapi.WXWebpageObject;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -418,10 +424,17 @@ public class WechatDelegate extends BroadcastReceiver {
             }
             return;
         }
-
     }
 
+
     public static void wxshareURL(int plat, String titleStr, String desStr, String urlStr, String imgStr)
+    {
+        Message message = new Message();
+        message.what = 1;
+        message.obj = plat+"|"+titleStr+"|"+desStr+"|"+urlStr+"|"+imgStr;
+        handler.sendMessage(message);
+    }
+    public static void shareURL(int plat, String titleStr, String desStr, String urlStr, String imgStr)
     {
         // Log.e("wxshareURL", "wxshareURL");
         // Log.d("wxshareURL", "wxshareURL" + platform + titleStr + desStr + urlStr+ "图片路径：" + imgStr);
@@ -438,10 +451,18 @@ public class WechatDelegate extends BroadcastReceiver {
         }
 
         platform = plat;
-        Bitmap  bmp = BitmapFactory.decodeFile(imgStr);
-        WXImageObject imgObj = new WXImageObject(bmp);
-        WXMediaMessage msg = new WXMediaMessage();
-        msg.mediaObject = imgObj;
+
+
+
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = urlStr;
+
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title = titleStr;
+        msg.description = desStr;
+
+        Bitmap bmp = getBitmap(mActivity);
+
         //设置缩略图
         Bitmap thumpBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
         bmp.recycle();
@@ -468,6 +489,25 @@ public class WechatDelegate extends BroadcastReceiver {
 
     }
 
+    public static synchronized Bitmap getBitmap(Context context) {
+        PackageManager packageManager = null;
+        ApplicationInfo applicationInfo = null;
+        try {
+            packageManager = context.getApplicationContext()
+                    .getPackageManager();
+            applicationInfo = packageManager.getApplicationInfo(
+                    context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            applicationInfo = null;
+        }
+        Drawable d = packageManager.getApplicationIcon(applicationInfo); //xxx根据自己的情况获取drawable
+        BitmapDrawable bd = (BitmapDrawable) d;
+        Bitmap bm = bd.getBitmap();
+        return bm;
+    }
+
+
+
     public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         bmp.compress(CompressFormat.JPEG, 100, output);
@@ -484,6 +524,29 @@ public class WechatDelegate extends BroadcastReceiver {
 
         return result;
     }
+
+    private static Handler handler = new Handler(Looper.getMainLooper()){
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                {
+                    String appid = msg.obj.toString();
+                    String[] arrays = appid.split("\\|");
+                    int plat = Integer.parseInt(arrays[0]);
+                    String titleStr = arrays[1];
+                    String desStr = arrays[2];
+                    String urlStr = arrays[3];
+                    String imgStr = arrays[4];
+                    shareURL(plat, titleStr, desStr, urlStr, imgStr);
+                }
+                break;
+                default:
+                    break;
+            }
+        }
+    };
 
 }
 
