@@ -48,6 +48,11 @@ ltMetaTable["SocketConstants"] = "app.Net.SocketConstants"
 --msgbox
 ltMetaTable["MsgboxLayer"] = "app.UI.MsgboxLayer"
 
+--luaj
+ltMetaTable["Luaj"] = "cocos/cocos2d/luaj"
+--luaoc
+ltMetaTable["Luaoc"] = "cocos/cocos2d/luaoc"
+
 --Scene
 ltMetaTable["InitLayer"] = "app.Scene.InitScene.InitLayer"
 ltMetaTable["InitScene"] = "app.Scene.InitScene.InitScene"
