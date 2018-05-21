@@ -82,8 +82,18 @@ function WorldMenuLayer:listenRoomListUpdate()
 end
 
 function WorldMenuLayer:onClickSetBtn(event)
-    local setLayer = lt.SetLayer.new()
-    lt.UILayerManager:addLayer(setLayer, true)
+    -- local setLayer = lt.SetLayer.new()
+    -- lt.UILayerManager:addLayer(setLayer, true)
+    local callBack = function(str) 
+        print("FYD===>>",str)
+    end
+    lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
+    local path = cc.FileUtils:getInstance():getWritablePath() .. "/res/games/bj/game_1.png"
+    local data = {0,"萌芽娱乐","畅玩麻将体验","https://mengyagame.com",path}
+    local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
+    if not ok then
+        print("FYD ERROR: SIGNIN FAILED ",ret)
+    end
 end
 
 function WorldMenuLayer:onClickCreateRoomBtn(event)

@@ -26,6 +26,7 @@ Constants.ROOM_STATE = {
     GAME_OVER = 3,      --游戏结束
 }
 
+-- if debug 47.52.99.120
 Constants.HOST = "mengyagame.com"  --"192.168.0.100"
 Constants.PORT = 80
 

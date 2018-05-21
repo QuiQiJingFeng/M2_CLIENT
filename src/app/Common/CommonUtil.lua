@@ -1593,6 +1593,7 @@ function CommonUtil:Analyze(allPai,iType,resultType)
 
                     return result;
                 end
+                resultType.iHuiNum = resultType.iHuiNum + 1
             end
             resultType.iHuiNum = resultType.iHuiNum + 1
         end
