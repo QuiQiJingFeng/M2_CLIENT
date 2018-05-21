@@ -130,3 +130,13 @@ aam2_client.ilk
 aam2_client.exe
 OpenAL32.dll
 .DS_Store
+.xcuserstate
+project.xcworkspace
+xcuserdata
+UserInterfaceState.xcuserstate
+project.xcworkspace/
+xcuserdata/
+UserInterface.xcuserstate
+Utils.pyc
+package/
+runtime/
