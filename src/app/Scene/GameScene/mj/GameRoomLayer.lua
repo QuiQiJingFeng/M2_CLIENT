@@ -75,7 +75,7 @@ end
 function GameRoomLayer:onGameConnectAgain()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
-		self._gameSelectPosPanel:initGame()
+		self._gameSelectPosPanel:againConfigUI()
 	end	
 
 	self._gamePlayCardsPanel:initGame()

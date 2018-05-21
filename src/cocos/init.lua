@@ -101,3 +101,6 @@ require "cocos.physics3d.physics3d-constants"
 if CC_USE_FRAMEWORK then
     require "cocos.framework.init"
 end
+
+local breakInfoFun,xpCallFun = require("LuaDebugjit")("localhost",7003)
+cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.3, false)

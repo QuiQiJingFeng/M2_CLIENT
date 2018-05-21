@@ -1053,6 +1053,8 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 		self._currentOutPutPlayerPos = allRoomInfo.cur_play_pos
 		self:configCurDNXB()
 	else
+		self:resetTimeUpdate(true) 
+
 		self._currentOutPutPlayerPos = nil--重置绿红状态
 		self:resetLightUpdate()
 	end
@@ -1080,24 +1082,34 @@ function GamePlayCardsPanel:onClientConnectAgain()--  断线重连
 			local direction = self._deleget:getPlayerDirectionByPos(info.user_pos)
 
 			--local visibleLastCard = false -- 显示最后一张牌 
-			if allRoomInfo.cur_play_pos then
-				if allRoomInfo.cur_play_pos == info.user_pos then
-					startIndex = 14 - info.handle_num + 1
-				end
+			-- if allRoomInfo.cur_play_pos then
+			-- 	if allRoomInfo.cur_play_pos ~= info.user_pos then
+			-- 		startIndex = 14 - info.handle_num - 1
+			-- 	end
+			-- end
+
+			if info.handle_num % 3 ~= 2 then-- == 2时 该出牌了 有第14张牌
+				startIndex = 14 - info.handle_num - 1 --11
 			end
 
 			local initIndex = 1
 			for i=1,14 do
 				if direction ~= self.POSITION_TYPE.NAN then--不是自己
-					if i < startIndex then
+					if i <= startIndex then
 						self._allPlayerHandCardsNode[direction][i]:setVisible(false)
+					elseif i == 14 then
+						self._allPlayerHandCardsNode[direction][i]:setVisible(info.handle_num % 3 == 2)
 					else
 						self._allPlayerHandCardsNode[direction][i]:setVisible(true)
 					end
 				else
-					if i < startIndex then
+					if i <= startIndex then
 						self._allPlayerHandCardsNode[direction][i]:setVisible(false)
 					else
+						if i == 14 then 
+							self._allPlayerHandCardsNode[direction][i]:setVisible(info.handle_num % 3 == 2)
+						end
+
 						local card = self._allPlayerHandCardsNode[direction][i]
 						
 						if self._allPlayerHandCards[direction][initIndex] and card then
