@@ -30,6 +30,49 @@ function WorldMenuLayer:ctor()
     local setBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Bn_Set")
     --个人信息
     local infoBtn= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Ie_HeadBg"):getChildByName("Ie_Shade")
+    local Tt_NickName= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickName")
+    local Tt_UserId= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_UserId")
+    local Tt_NickNameDDD= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickNameDDD")
+    local loginData = lt.DataManager:getPlayerInfo()
+
+    local count = 0 
+    if not loginData.user_name then
+        loginData.user_name = " "
+    else
+        for uchar in string.gfind(loginData.user_name, "([%z\1-\127\194-\244][\128-\191]*)") do   
+            if #uchar ~= 1 then  
+                count = count +2  
+            else  
+                count = count +1  
+            end  
+        end
+        print("========1",count)
+    end
+    if not loginData.user_id then
+        loginData.user_id = " "
+    end
+    
+    Tt_UserId:setString("ID："..loginData.user_id)
+
+    print("========2",count)
+
+    if count <= 8 then --只显示最多8位  
+       Tt_NickName:setString(loginData.user_name)
+       Tt_NickNameDDD:setVisible(false)
+    else
+        local nameText = loginData.user_name
+
+        local substring = lt.CommonUtil:GetMaxLenString(nameText,8)
+        Tt_NickName:setString(substring)
+        Tt_NickNameDDD:setVisible(true)
+        --[[
+
+       local tt = string.sub(aa,1,8)
+       print("===------")
+       print(tt)
+       Tt_NickName:setString(tt)
+       Tt_NickNameDDD:setVisible(true)--]]
+    end    
 
     local createRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_CreateRoom")
     local joinRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_JoinRoom")
