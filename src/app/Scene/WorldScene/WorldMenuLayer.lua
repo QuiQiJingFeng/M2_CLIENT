@@ -28,6 +28,8 @@ function WorldMenuLayer:ctor()
 
     --设置按钮
     local setBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Bn_Set")
+    --个人信息
+    local infoBtn= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Ie_HeadBg"):getChildByName("Ie_Shade")
 
     local createRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_CreateRoom")
     local joinRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_JoinRoom")
@@ -37,6 +39,7 @@ function WorldMenuLayer:ctor()
 
 
     lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
+    lt.CommonUtil:addNodeClickEvent(infoBtn, handler(self, self.onClickinfoBtn))
     lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickCreateRoomBtn))
     lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickJoinRoomBtn))
     -- self:checkRightBtnNode()
@@ -94,6 +97,12 @@ function WorldMenuLayer:onClickSetBtn(event)
     if not ok then
         print("FYD ERROR: SIGNIN FAILED ",ret)
     end
+end
+
+function WorldMenuLayer:onClickinfoBtn(event)
+    print("------------gerenxinxi")
+     local lobbyInfoLayer = lt.lobbyInfoLayer.new()
+     lt.UILayerManager:addLayer(lobbyInfoLayer, true)
 end
 
 function WorldMenuLayer:onClickCreateRoomBtn(event)

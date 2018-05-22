@@ -70,7 +70,8 @@ ltMetaTable["WorldScene"] = "app.Scene.WorldScene.WorldScene"
 
 --layer
 ltMetaTable["BaseLayer"]			    = "app.Scene.WorldScene.Common.BaseLayer"
-ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.Setting.SetLayer"
+ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.LobbyBtn.SetLayer"
+ltMetaTable["lobbyInfoLayer"]			= "app.Scene.WorldScene.LobbyBtn.infoLayer"
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
 ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
