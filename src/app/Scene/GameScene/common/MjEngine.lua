@@ -673,9 +673,11 @@ function MjEngine:onClientConnectAgain()--  断线重连
 
 	--handle_nums
 	--自己的手牌
+	self._allPlayerHandCardsValue = {}
 
 	if allRoomInfo.card_list then
 		self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN] = {}
+
 		for i,card in ipairs(allRoomInfo.card_list) do
 			table.insert(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], card)
 
@@ -702,26 +704,24 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	end
 
 	--所有玩家吃椪杠的牌  
-	if allRoomInfo.refresh_room_info and allRoomInfo.refresh_room_info.players then
-		local players = allRoomInfo.refresh_room_info.players
-		for i,playerInfo in ipairs(players) do
-			local direction = lt.DataManager:getPlayerDirectionByPos(playerInfo.user_pos) 
-
-			self._allPlayerCpgCardsValue[direction] = {}
-			if playerInfo.card_stack then
-
-				for i,stack in ipairs(playerInfo.card_stack) do
-					local info = {}
-					info["value"] = stack["value"]
-					info["from"] = stack["from"]
-					info["type"] = stack["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
-					table.insert(self._allPlayerCpgCardsValue[direction], info)
-				end
+	self._allPlayerCpgCardsValue = {}
+	if allRoomInfo.card_stack then
+		for i,v in ipairs(allRoomInfo.card_stack) do
+			local direction = lt.DataManager:getPlayerDirectionByPos(info.user_pos)
+			self._allPlayerCpgCardsValue[direction]	= {}
+			for k,stack in ipairs(info.item) do
+				local info = {}
+				info["value"] = stack["value"]
+				info["from"] = stack["from"]
+				info["type"] = stack["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
+				table.insert(self._allPlayerCpgCardsValue[direction], info)
 			end
 		end
 	end
 
 	--所有出的牌  
+	self._allPlayerOutCardsValue = {}
+	
 	if allRoomInfo.put_cards then
 		for i,info in ipairs(allRoomInfo.put_cards) do
 			if info.user_pos then
