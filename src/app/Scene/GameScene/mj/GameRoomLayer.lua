@@ -82,7 +82,22 @@ function GameRoomLayer:onGameConnectAgain()
 end
 
 function GameRoomLayer:onGamenoticeOtherDistroyRoom(msg)--通知有人解散房间
+	print("========================1111111111111111")
 	dump("+++++++++++++++++++++++++++++++onGamenoticeOtherDistroyRoom11111", msg)
+	local aa = os.date("%Y.%m.%d.%H:%M:%S",msg.distroy_time)
+	print("==========111222---",aa)
+	local timeer = os.time()
+	print("==========222",timeer)
+	local cc = msg.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
+	print("==========333",cc)
+	local ApplyGameOverPanel = lt.ApplyGameOverPanel.new()
+	print("=======s=s=s=s==s=s=s=s=1")
+	print(type(msg.confirm_map))
+	print("=======s=s=s=s==s=s=s=s=2")
+	ApplyGameOverPanel:show(cc,msg.confirm_map)
+    self:addChild(ApplyGameOverPanel,10)
+	
+	
 
 end
 
@@ -93,7 +108,9 @@ end
 
 function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--如果房间被销毁
 	dump("+++++++++++++++++++++++++++++++onGamenoticePlayerDistroyRoom33333", msg)
-
+	local worldScene = lt.WorldScene.new()
+    lt.SceneManager:replaceScene(worldScene)
+    lt.NetWork:disconnect()
 end
 
 function GameRoomLayer:onEnter()   
@@ -104,11 +121,11 @@ function GameRoomLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGameConnectAgain")
 
     --通知有人解散房间
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_OTHER_DISTROY_ROOM, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGamenoticeOtherDistroyRoom")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_OTHER_DISTROY_ROOM, handler(self, self.onGamenoticeOtherDistroyRoom), "GameRoomLayer.onGamenoticeOtherDistroyRoom")
     --如果有人拒绝解散
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_OTHER_REFUSE, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGamenoticeOtherRefuse")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_OTHER_REFUSE, handler(self, self.onGamenoticeOtherRefuse), "GameRoomLayer.onGamenoticeOtherRefuse")
     --如果房间被销毁
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_DISTROY_ROOM, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGamenoticePlayerDistroyRoom")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_DISTROY_ROOM, handler(self, self.onGamenoticePlayerDistroyRoom), "GameRoomLayer.onGamenoticePlayerDistroyRoom")
 
 end
 
