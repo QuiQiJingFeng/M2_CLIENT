@@ -15,38 +15,48 @@ function ApplyGameOverPanel:ctor()
 	local clockIcon = root:getChildByName("Clock_icon")
 
 	local TtContent = root:getChildByName("Tt_Content")
+	TtContent:setString("玩家【".."缺氧123".."】申请解散房间，请等待其他玩家选择（超过2分钟未做选择，则默认同意)")
+
+	local times = root:getChildByName("Se_CutTime"):getChildByName("Al_CutTime")--倒计时
+	times:setString("2".."/".."00")
+	local a = "30"
+	local function update(dt)
+		print("=============6666")
+		a = tonumber(a)-1
+        times:setString(tostring(a))
+        if a == 0 then
+        	cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.schedule_id)
+        	lt.UILayerManager:removeLayer(self)
+        end
+	end
+	local scheduler = cc.Director:getInstance():getScheduler()
+	self.schedule_id = scheduler:scheduleScriptFunc(function(dt)
+    	update(dt)
+    	--cc.Director:getInstance():getScheduler():unscheduleScriptEntry(scheduler)
+    	--if self.schedule_id then
+        --cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.schedule_id)
+        --self.schedule_id = nil
+        --lt.UILayerManager:removeLayer(self)
+        
+
+    --end
+	end,1,false)
 
 
+	local Bn_Cancel = root:getChildByName("Bn_Cancel")--拒绝
+	local Bn_Sure = self:getChildByName("Bn_Sure")--同意
 
-	local  = lt.CommonUtil:getChildByNames(root, "Se_CutTime", "")
-
-
-
-	self:getChildByName("Bg_Help_NoStart"):setVisible(false)
-	self:getChildByName("Bg_MaskLead"):setVisible(false)
-	self:getChildByName("Bg_MaskGiftLead"):setVisible(false)
-	self:getChildByName("Bg_MaskChatLead"):setVisible(false)
-	self:getChildByName("Btn_ChatLead"):setVisible(false)
-	self:getChildByName("Btn_LeadBg"):setVisible(false)
-	self:getChildByName("Panel_RecordCtrl"):setVisible(false)
-	self:getChildByName("Node_InviteView"):setVisible(false)
-	self:getChildByName("Bg_ShareLayer"):setVisible(false)
-	self:getChildByName("Button_Invite"):setVisible(false)
-
-	local ruleBtn = self:getChildByName("Button_GameRule")
-	local setBtn = self:getChildByName("Button_More")
-
-	lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onSetClick))
-	lt.CommonUtil:addNodeClickEvent(ruleBtn, handler(self, self.onRuleClick))
+	lt.CommonUtil:addNodeClickEvent(Bn_Cancel, handler(self, self.onCancelClick))
+	lt.CommonUtil:addNodeClickEvent(Bn_Sure, handler(self, self.onSureClick))
 
 end
 
-function ApplyGameOverPanel:onSetClick(event) 
+function ApplyGameOverPanel:onCancelClick(event) 
 	local setLayer = lt.SettingLayer.new()
     lt.UILayerManager:addLayer(setLayer, true)
 end
 
-function ApplyGameOverPanel:onRuleClick(event) 
+function ApplyGameOverPanel:onSureClick(event) 
 
 end
 

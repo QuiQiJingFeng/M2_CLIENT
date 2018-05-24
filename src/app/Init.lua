@@ -82,6 +82,7 @@ ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
 ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
 
 --麻将
+ltMetaTable["ApplyGameOverPanel"] = "app.Scene.GameScene.mj.ApplyGameOverPanel"
 ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.mj.GameRoomLayer"
 ltMetaTable["GameBgPanel"] = "app.Scene.GameScene.mj.GameBgPanel"
 ltMetaTable["GamePlayCardsPanel"] = "app.Scene.GameScene.mj.GamePlayCardsPanel"

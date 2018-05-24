@@ -20,7 +20,6 @@ function SettingLayer:ctor()
 	lt.CommonUtil:addNodeClickEvent(backLobby, handler(self, self.onBackLobby))
     lt.CommonUtil:addNodeClickEvent(btnClose, handler(self, self.onClose))
     self:setshow()
-
 end
 
 function SettingLayer:setshow() 
@@ -250,14 +249,36 @@ function SettingLayer:setshow()
 end
 
 
-function SettingLayer:onDissolveRoom()
+function SettingLayer:onDissolveRoom()--申请解散房间
+    --local ApplyGameOverPanel = lt.ApplyGameOverPanel.new()
+    --self:addChild(ApplyGameOverPanel,10)
     
+    ---[[
+    local roomInfo = lt.DataManager:getGameRoomInfo()
+    local loginData = lt.DataManager:getPlayerInfo()
+    print("===d=d-d-ddd")
+    dump(roomInfo)
+    dump(loginData)
+    local playertype = nil
+    if loginData.user_id == lt.DataManager:getPlayerUid() then
+        playertype = 15200--2 --本人是房主
+    else
+        playertype = 1
+    end
+    local arg = {room_id = roomInfo.room_id} --1.room_id //解散类型  1 玩家申请解散  2、房主解散
+    print("pppddddddddd",roomInfo.room_id,playertype)
+    lt.NetWork:sendTo(lt.GameEventManager.EVENT.DISTROY_ROOM,arg)--]]
 end
 
 function SettingLayer:onClose()
     lt.UILayerManager:removeLayer(self)
 end
 
+function SettingLayer:aa()
+end
+
+function SettingLayer:bb()
+end
 
 function SettingLayer:onBackLobby()
     lt.NetWork:sendTo(lt.GameEventManager.EVENT.LEAVE_ROOM)
@@ -272,9 +293,24 @@ function SettingLayer:onBackLobbyResponse(msg)
     end
 end
 
+function SettingLayer:onDistroyroomResponse(msg)
+    print("+++++++++++++++++++++++++++++++onDistroyroomResponse+++++++pppp-------", msg.result)
+    
+    if msg.result ~= "success" then
+        --local worldScene = lt.WorldScene.new()
+        --lt.SceneManager:replaceScene(worldScene)
+        --lt.NetWork:disconnect()
+        ---[[
+    --else
+        local text = lt.LanguageString:getString("DISTROY_ROOM_"..msg.result)
+        lt.MsgboxLayer:showMsgBox(text, false,function()  print("===1===")  end, function()  print("===2===") end, true, 15)--]]
+    end
+end
+
 function SettingLayer:onEnter()   
     print("SettingLayer:onEnter")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.LEAVE_ROOM, handler(self, self.onBackLobbyResponse), "SettingLayer:onBackLobbyResponse")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DISTROY_ROOM, handler(self, self.onDistroyroomResponse), "SettingLayer:onDistroyroomResponse")
 
 
     local function onTouchBegan(touch,event)

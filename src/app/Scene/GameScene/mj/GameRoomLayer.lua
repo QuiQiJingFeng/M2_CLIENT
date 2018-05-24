@@ -81,12 +81,34 @@ function GameRoomLayer:onGameConnectAgain()
 	self._gamePlayCardsPanel:initGame()
 end
 
+function GameRoomLayer:onGamenoticeOtherDistroyRoom(msg)--通知有人解散房间
+	dump("+++++++++++++++++++++++++++++++onGamenoticeOtherDistroyRoom11111", msg)
+
+end
+
+function GameRoomLayer:onGamenoticeOtherRefuse(msg)--如果有人拒绝解散
+	dump("+++++++++++++++++++++++++++++++onGamenoticeOtherRefuse22222", msg)
+
+end
+
+function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--如果房间被销毁
+	dump("+++++++++++++++++++++++++++++++onGamenoticePlayerDistroyRoom33333", msg)
+
+end
+
 function GameRoomLayer:onEnter()   
     print("GameRoomLayer:onEnter")
     
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.GAME_CMD, handler(self, self.onGameCMDResponse), "GameRoomLayer.onGameCMDResponse")
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGameConnectAgain")
+
+    --通知有人解散房间
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_OTHER_DISTROY_ROOM, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGamenoticeOtherDistroyRoom")
+    --如果有人拒绝解散
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_OTHER_REFUSE, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGamenoticeOtherRefuse")
+    --如果房间被销毁
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_DISTROY_ROOM, handler(self, self.onGameConnectAgain), "GameRoomLayer.onGamenoticePlayerDistroyRoom")
 
 end
 
@@ -95,6 +117,9 @@ function GameRoomLayer:onExit()
    
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.GAME_CMD, "GameRoomLayer:onGameCMDResponse")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GameRoomLayer:onGameConnectAgain")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_OTHER_DISTROY_ROOM, "GameRoomLayer:onGamenoticeOtherDistroyRoom")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_OTHER_REFUSE, "GameRoomLayer:onGamenoticeOtherRefuse")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_DISTROY_ROOM, "GameRoomLayer:onGamenoticePlayerDistroyRoom")
 end
 
 
