@@ -675,16 +675,16 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	--自己的手牌
 
 	if allRoomInfo.card_list then
-		self._allPlayerHandCardsValue[self.POSITION_TYPE.NAN] = {}
+		self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN] = {}
 		for i,card in ipairs(allRoomInfo.card_list) do
-			table.insert(self._allPlayerHandCardsValue[self.POSITION_TYPE.NAN], card)
+			table.insert(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], card)
 
 		end
 		local sortFun = function(a, b)
 			return a < b
 		end
 
-		table.sort(self._allPlayerHandCardsValue[self.POSITION_TYPE.NAN], sortFun)
+		table.sort(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], sortFun)
 	end
 
 	if allRoomInfo.handle_nums then--handle_num
@@ -692,7 +692,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		for i,info in ipairs(allRoomInfo.handle_nums) do
 
 			local direction = lt.DataManager:getPlayerDirectionByPos(info.user_pos)
-			if direction ~= self.POSITION_TYPE.NAN then--不是自己
+			if direction ~= lt.Constants.DIRECTION.NAN then--不是自己
 				self._allPlayerHandCardsValue[direction] = {}
 				for i=1,info.handle_num do
 					table.insert(self._allPlayerHandCardsValue[direction], 99)
@@ -794,13 +794,13 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		    --检测杠
 			local tempHandCards = {}
 
-			for k,v in pairs(self._allPlayerHandCardsValue[self.POSITION_TYPE.NAN]) do
+			for k,v in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
 				table.insert(tempHandCards, v)
 			end
 
 			local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
 
-			local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[self.POSITION_TYPE.NAN], tempHandCards)
+			local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[lt.Constants.DIRECTION.NAN], tempHandCards)
 
 			if #anGangCards > 0 or #pengGang > 0 then
 				tObjCpghObj.tObjGang = {}
