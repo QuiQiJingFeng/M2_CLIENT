@@ -280,7 +280,7 @@ function network:update(dt)
                 lt.GameEventManager:post(rsp_name, rsp_msg)
 
                 if rsp_name ~= "heartbeat" then
-                    dump(rsp_msg,rsp_name.."masg = ", 10)
+                    dump(rsp_msg,rsp_name.."masg = ", 100)
                 end
             end
     	else
@@ -288,7 +288,7 @@ function network:update(dt)
             lt.GameEventManager:post(rsp_name, rsp_msg)
 
             if rsp_name ~= "heartbeat" then
-                dump(rsp_msg,rsp_name.."masg = ", 10)
+                dump(rsp_msg,rsp_name.."masg = ", 100)
             end
         end
 	end
@@ -304,7 +304,7 @@ end
 function network:send(data_content,callback,ignore_session)
 
 	if not (self._socket and (self._net_state == NETSTATE.CONNECTING or self._net_state == NETSTATE.CONNECTED)) then
-		print("networkerror!!!!!!!!!!!!!!!!!!!!!!!")
+		print("networkerror!!!!!!!!!!!!!!!!!!!!!!!",self._net_state)
         return false
 	end
 

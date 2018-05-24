@@ -520,6 +520,13 @@ function GameSelectPosPanel:configRotation(isClick)
 
 		end
 	end
+
+	local directionData = {}
+	for pos,sitNode in ipairs(self._currentSitPosArray) do
+		directionData[pos] = sitNode.atDirection
+	end
+	--全局记录一下位置对应的方位
+	lt.DataManager:setPlayerDirectionTable(directionData)
 end
 
 function GameSelectPosPanel:configPlayerScore() 

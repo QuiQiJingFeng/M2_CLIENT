@@ -81,10 +81,20 @@ ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
 
 ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
 
+--麻将引擎
+ltMetaTable["MjEngine"] = "app.Scene.GameScene.common.MjEngine"
+
 --麻将
 ltMetaTable["ApplyGameOverPanel"] = "app.Scene.GameScene.mj.ApplyGameOverPanel"
+
+ltMetaTable["MjStandFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjStandFaceItem"
+ltMetaTable["MjLieCpgItem"] = "app.Scene.GameScene.mj.cardItem.MjLieCpgItem"
+ltMetaTable["MjLieOutFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjLieOutFaceItem"
+
 ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.mj.GameRoomLayer"
 ltMetaTable["GameBgPanel"] = "app.Scene.GameScene.mj.GameBgPanel"
+ltMetaTable["GameCompassPanel"] = "app.Scene.GameScene.mj.GameCompassPanel"
+
 ltMetaTable["GamePlayCardsPanel"] = "app.Scene.GameScene.mj.GamePlayCardsPanel"
 ltMetaTable["GameSelectPosPanel"] = "app.Scene.GameScene.mj.GameSelectPosPanel"
 ltMetaTable["GameSetPanel"] = "app.Scene.GameScene.mj.GameSetPanel"
