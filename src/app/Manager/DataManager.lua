@@ -234,6 +234,15 @@ function DataManager:getPlayerInfoByPos(pos)
     return nil
 end
 
+function DataManager:setPlayerDirectionTable(directions)
+    self._playerDirectionTable = directions
+end
+
+function DataManager:getPlayerDirectionByPos(pos)
+    self._playerDirectionTable = self._playerDirectionTable or {}
+    return self._playerDirectionTable[pos]
+end
+
 function DataManager:getGameOverInfo(flag)
     if not self._gameOverInfo or flag then
         self._gameOverInfo = {}
@@ -267,11 +276,6 @@ function DataManager:onNoticeGameOver(msg)   --通知客户端 本局结束 带�
 -- winner_type
 -- last_round
 -- winner_pos
-
-
-
-
-
 
 end
 
