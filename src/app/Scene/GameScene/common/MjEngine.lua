@@ -706,10 +706,12 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	--所有玩家吃椪杠的牌  
 	self._allPlayerCpgCardsValue = {}
 	if allRoomInfo.card_stack then
-		for i,v in ipairs(allRoomInfo.card_stack) do
-			local direction = lt.DataManager:getPlayerDirectionByPos(info.user_pos)
+		for i,cardStack in ipairs(allRoomInfo.card_stack) do
+			local direction = lt.DataManager:getPlayerDirectionByPos(cardStack.user_pos)
 			self._allPlayerCpgCardsValue[direction]	= {}
-			for k,stack in ipairs(info.item) do
+
+			cardStack.item = cardStack.item or {}
+			for k,stack in ipairs(cardStack.item) do
 				local info = {}
 				info["value"] = stack["value"]
 				info["from"] = stack["from"]

@@ -165,7 +165,7 @@ function GameSelectPosPanel:againConfigUI()
 	end
 
 	self:configPlayer()--初始化玩家头像
-	self:configPlayerScore()
+	--self:configPlayerScore()
 end
 
 function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果在选座位阶段 会走 initGame
@@ -529,18 +529,14 @@ function GameSelectPosPanel:configRotation(isClick)
 	lt.DataManager:setPlayerDirectionTable(directionData)
 end
 
-function GameSelectPosPanel:configPlayerScore() 
-
-	for direction=1,4 do
-		local logoNode = self._currentPlayerLogArray[direction]
-		local score = 0
-		if self._allPlayerGameOverData then
-			if self._allPlayerGameOverData[direction] then
-				score = self._allPlayerGameOverData[direction].score
+function GameSelectPosPanel:configPlayerScore() --初始化和断线重连
+	if lt.DataManager:getGameRoomInfo().players then
+		for i,v in ipairs(lt.DataManager:getGameRoomInfo().players) do
+			local direction = self:getPlayerDirectionByPos(v.user_pos)
+			local logoNode = self._currentPlayerLogArray[direction]
+			if logoNode then
+				logoNode:getChildByName("Text_Amount"):setString(v.score) --99999
 			end
-		end
-		if logoNode then
-			logoNode:getChildByName("Text_Amount"):setString(score) --99999
 		end
 	end
 end
@@ -654,39 +650,20 @@ end
 
 function GameSelectPosPanel:onRefreshGameOver()   --结算
 	if lt.DataManager:getGameOverInfo().players then
-		self._allPlayerGameOverData = {}
 		for i,v in ipairs(lt.DataManager:getGameOverInfo().players) do
 			local direction = self:getPlayerDirectionByPos(v.user_pos)
-			self._allPlayerGameOverData[direction] = v
-		end
-	end
+			local logoNode = self._currentPlayerLogArray[direction]
+			if logoNode then
+				local scoreText = logoNode:getChildByName("Text_Amount")--99999
 
-	self._allPlayerGameOverData = self._allPlayerGameOverData or {}
-
-	for i,v in ipairs(self._allPlayerGameOverData) do
-		local direction = self:getPlayerDirectionByPos(v.user_pos)
-		local logoNode = self._currentPlayerLogArray[direction]
-		if logoNode then
-			local scoreText = logoNode:getChildByName("Text_Amount")--99999
-
-			if not self._allPlayerGameOverData[direction].score then
-				self._allPlayerGameOverData[direction].score = 0
+				scoreText:setString(v.score)
 			end
-			scoreText:setString(self._allPlayerGameOverData[direction].score)
 		end
 	end
+
 end
 
-function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（杠）
-
-	if lt.DataManager:getGameOverInfo().players then
-		self._allPlayerGameOverData = {}
-		for i,v in ipairs(lt.DataManager:getGameOverInfo().players) do
-			local direction = self:getPlayerDirectionByPos(v.user_pos)
-			self._allPlayerGameOverData[direction] = v
-		end
-	end
-	self._allPlayerGameOverData = self._allPlayerGameOverData or {}
+function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（杠,hu）
 
 	for k,v in pairs(msg.cur_score_list) do
 
@@ -694,16 +671,7 @@ function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分�
 		local logoNode = self._currentPlayerLogArray[direction]
 		if logoNode then
 			local scoreText = logoNode:getChildByName("Text_Amount")--99999
-
-			if not self._allPlayerGameOverData[direction] then
-				self._allPlayerGameOverData[direction] = {}
-			end
-
-			if not self._allPlayerGameOverData[direction].score then
-				self._allPlayerGameOverData[direction].score = 0
-			end
-			self._allPlayerGameOverData[direction].score = self._allPlayerGameOverData[direction].score + v.delt_score
-			scoreText:setString(self._allPlayerGameOverData[direction].score)
+			scoreText:setString(v.score)
 		end
 	end
 end
