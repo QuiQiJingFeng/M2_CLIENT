@@ -21,6 +21,7 @@ GameEventManager.EVENT = {
     LEAVE_ROOM = "leave_room",--回到大厅
     DISTROY_ROOM = "distroy_room",
     CONFIRM_DISTROY_ROOM = "confirm_distroy_room",
+    NOTICE_TOTAL_SATTLE  = "notice_total_sattle",--刷新总结算
     GAME_CMD = "game_cmd",  --[[游戏中的请求 DEAL_FINISH  发牌完毕
 PLAY_CARD  出牌
 PENG    碰

@@ -45,14 +45,14 @@
                   <AbstractNodeData Name="Image_Bg" ActionTag="-1567102404" Tag="26" IconVisible="False" LeftMargin="135.0405" RightMargin="-535.0405" TopMargin="-17.6658" BottomMargin="-62.3342" Scale9Enable="True" LeftEage="14" RightEage="13" TopEage="15" BottomEage="15" Scale9OriginX="14" Scale9OriginY="15" Scale9Width="10" Scale9Height="25" ctype="ImageViewObjectData">
                     <Size X="400.0000" Y="80.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Info1" ActionTag="-495530089" VisibleForFrame="False" Tag="261" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="4.9998" RightMargin="305.0002" TopMargin="5.5827" BottomMargin="44.4173" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="90.0000" Y="30.0000" />
+                      <AbstractNodeData Name="Text_Info1" ActionTag="-495530089" VisibleForFrame="False" Tag="261" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="4.9998" RightMargin="305.0002" TopMargin="5.5827" BottomMargin="40.4173" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="90.0000" Y="34.0000" />
                         <AnchorPoint ScaleY="1.0000" />
                         <Position X="4.9998" Y="74.4173" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="165" B="0" />
                         <PrePosition X="0.0125" Y="0.9302" />
-                        <PreSize X="0.2250" Y="0.3750" />
+                        <PreSize X="0.2250" Y="0.4250" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -68,14 +68,14 @@
                   <AbstractNodeData Name="ScrollView" ActionTag="2028096647" Tag="39" IconVisible="False" LeftMargin="135.0000" RightMargin="-535.0000" TopMargin="-17.0000" BottomMargin="-63.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
                     <Size X="400.0000" Y="80.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Info2" ActionTag="1904297754" VisibleForFrame="False" Tag="5767" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0000" RightMargin="345.0000" TopMargin="4.0000" BottomMargin="266.0000" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="90.0000" Y="30.0000" />
+                      <AbstractNodeData Name="Text_Info2" ActionTag="1904297754" VisibleForFrame="False" Tag="5767" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0000" RightMargin="345.0000" TopMargin="4.0000" BottomMargin="262.0000" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="90.0000" Y="34.0000" />
                         <AnchorPoint ScaleY="1.0000" />
                         <Position X="5.0000" Y="296.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="165" B="0" />
                         <PrePosition X="0.0114" Y="0.9867" />
-                        <PreSize X="0.2045" Y="0.1000" />
+                        <PreSize X="0.2045" Y="0.1133" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -128,14 +128,14 @@
                   <AbstractNodeData Name="Image_Bg" ActionTag="-1686646385" Tag="27" IconVisible="False" LeftMargin="-542.7076" RightMargin="142.7076" TopMargin="-20.0000" BottomMargin="-60.0000" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="17" Scale9Height="35" ctype="ImageViewObjectData">
                     <Size X="400.0000" Y="80.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Info1" ActionTag="882269047" VisibleForFrame="False" Tag="262" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="308.6636" RightMargin="1.3364" TopMargin="6.9766" BottomMargin="43.0234" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="90.0000" Y="30.0000" />
+                      <AbstractNodeData Name="Text_Info1" ActionTag="882269047" VisibleForFrame="False" Tag="262" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="308.6636" RightMargin="1.3364" TopMargin="6.9766" BottomMargin="39.0234" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="90.0000" Y="34.0000" />
                         <AnchorPoint ScaleX="1.0000" ScaleY="1.0000" />
                         <Position X="398.6636" Y="73.0234" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="165" B="0" />
                         <PrePosition X="0.9967" Y="0.9128" />
-                        <PreSize X="0.2250" Y="0.3750" />
+                        <PreSize X="0.2250" Y="0.4250" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -151,14 +151,14 @@
                   <AbstractNodeData Name="ScrollView" ActionTag="1937345552" Tag="38" IconVisible="False" LeftMargin="-540.0000" RightMargin="140.0000" TopMargin="-20.0000" BottomMargin="-60.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
                     <Size X="400.0000" Y="80.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Info2" ActionTag="1797239182" VisibleForFrame="False" Tag="28" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="305.2768" RightMargin="44.7232" TopMargin="6.9201" BottomMargin="263.0799" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="90.0000" Y="30.0000" />
+                      <AbstractNodeData Name="Text_Info2" ActionTag="1797239182" VisibleForFrame="False" Tag="28" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="305.2768" RightMargin="44.7232" TopMargin="6.9201" BottomMargin="259.0799" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="90.0000" Y="34.0000" />
                         <AnchorPoint ScaleX="1.0000" ScaleY="1.0000" />
                         <Position X="395.2768" Y="293.0799" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="165" B="0" />
                         <PrePosition X="0.8984" Y="0.9769" />
-                        <PreSize X="0.2045" Y="0.1000" />
+                        <PreSize X="0.2045" Y="0.1133" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -211,14 +211,14 @@
                   <AbstractNodeData Name="Image_Bg" ActionTag="-2032923267" Tag="29" IconVisible="False" LeftMargin="136.3799" RightMargin="-536.3799" TopMargin="-20.0000" BottomMargin="-60.0000" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="17" Scale9Height="35" ctype="ImageViewObjectData">
                     <Size X="400.0000" Y="80.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Info1" ActionTag="1172712769" VisibleForFrame="False" Tag="263" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="4.7288" RightMargin="305.2712" TopMargin="7.4637" BottomMargin="42.5363" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="90.0000" Y="30.0000" />
+                      <AbstractNodeData Name="Text_Info1" ActionTag="1172712769" VisibleForFrame="False" Tag="263" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="4.7288" RightMargin="305.2712" TopMargin="7.4637" BottomMargin="38.5363" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="90.0000" Y="34.0000" />
                         <AnchorPoint ScaleY="1.0000" />
                         <Position X="4.7288" Y="72.5363" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="165" B="0" />
                         <PrePosition X="0.0118" Y="0.9067" />
-                        <PreSize X="0.2250" Y="0.3750" />
+                        <PreSize X="0.2250" Y="0.4250" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -234,14 +234,14 @@
                   <AbstractNodeData Name="ScrollView" ActionTag="1219064512" Tag="37" IconVisible="False" LeftMargin="136.0000" RightMargin="-536.0000" TopMargin="-20.0000" BottomMargin="-60.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
                     <Size X="400.0000" Y="80.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Info2" ActionTag="182696201" VisibleForFrame="False" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0000" RightMargin="345.0000" TopMargin="4.0000" BottomMargin="266.0000" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="90.0000" Y="30.0000" />
+                      <AbstractNodeData Name="Text_Info2" ActionTag="182696201" VisibleForFrame="False" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0000" RightMargin="345.0000" TopMargin="4.0000" BottomMargin="262.0000" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="90.0000" Y="34.0000" />
                         <AnchorPoint ScaleY="1.0000" />
                         <Position X="5.0000" Y="296.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="165" B="0" />
                         <PrePosition X="0.0114" Y="0.9867" />
-                        <PreSize X="0.2045" Y="0.1000" />
+                        <PreSize X="0.2045" Y="0.1133" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -294,14 +294,14 @@
                   <AbstractNodeData Name="Image_Bg" ActionTag="692880397" Tag="31" IconVisible="False" LeftMargin="140.0002" RightMargin="-540.0002" TopMargin="-20.0000" BottomMargin="-60.0000" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="17" Scale9Height="35" ctype="ImageViewObjectData">
                     <Size X="400.0000" Y="80.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Info1" ActionTag="1358781855" VisibleForFrame="False" Tag="264" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.5496" RightMargin="304.4504" TopMargin="6.1181" BottomMargin="43.8819" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="90.0000" Y="30.0000" />
+                      <AbstractNodeData Name="Text_Info1" ActionTag="1358781855" VisibleForFrame="False" Tag="264" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.5496" RightMargin="304.4504" TopMargin="6.1181" BottomMargin="39.8819" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="90.0000" Y="34.0000" />
                         <AnchorPoint ScaleY="1.0000" />
                         <Position X="5.5496" Y="73.8819" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="165" B="0" />
                         <PrePosition X="0.0139" Y="0.9235" />
-                        <PreSize X="0.2250" Y="0.3750" />
+                        <PreSize X="0.2250" Y="0.4250" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -317,14 +317,14 @@
                   <AbstractNodeData Name="ScrollView" ActionTag="-1906086560" Tag="40" IconVisible="False" LeftMargin="140.0000" RightMargin="-540.0000" TopMargin="-20.0000" BottomMargin="-60.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
                     <Size X="400.0000" Y="80.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Info2" ActionTag="-389324075" VisibleForFrame="False" Tag="32" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0002" RightMargin="344.9998" TopMargin="4.0000" BottomMargin="266.0000" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="90.0000" Y="30.0000" />
+                      <AbstractNodeData Name="Text_Info2" ActionTag="-389324075" VisibleForFrame="False" Tag="32" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0002" RightMargin="344.9998" TopMargin="4.0000" BottomMargin="262.0000" FontSize="30" LabelText="七小对" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="90.0000" Y="34.0000" />
                         <AnchorPoint ScaleY="1.0000" />
                         <Position X="5.0002" Y="296.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="165" B="0" />
                         <PrePosition X="0.0114" Y="0.9867" />
-                        <PreSize X="0.2045" Y="0.1000" />
+                        <PreSize X="0.2045" Y="0.1133" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -360,7 +360,7 @@
           <AbstractNodeData Name="Node_WinOrLost" ActionTag="2010264139" Tag="48071" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="667.0000" RightMargin="667.0000" TopMargin="350.3250" BottomMargin="399.6750" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="Button_StartAgain" ActionTag="1800020519" Tag="15303" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-136.5000" RightMargin="-136.5000" TopMargin="-45.9062" BottomMargin="-49.0938" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="64" RightEage="69" TopEage="11" BottomEage="11" Scale9OriginX="64" Scale9OriginY="11" Scale9Width="35" Scale9Height="73" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_StartAgain" ActionTag="1800020519" Tag="15303" IconVisible="False" LeftMargin="-136.5000" RightMargin="-136.5000" TopMargin="-47.5000" BottomMargin="-47.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="64" RightEage="69" TopEage="11" BottomEage="11" Scale9OriginX="64" Scale9OriginY="11" Scale9Width="35" Scale9Height="73" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="273.0000" Y="95.0000" />
                 <Children>
                   <AbstractNodeData Name="Sprite_Word" ActionTag="-367049701" Tag="15304" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="46.5000" RightMargin="46.5000" TopMargin="23.0000" BottomMargin="23.0000" ctype="SpriteObjectData">
@@ -376,7 +376,7 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="-1.5938" />
+                <Position />
                 <Scale ScaleX="1.3000" ScaleY="1.3000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
@@ -388,7 +388,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_TotalResult" ActionTag="-1440161301" VisibleForFrame="False" Tag="30" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-136.9300" RightMargin="-136.9300" TopMargin="-47.5000" BottomMargin="-47.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="71" RightEage="54" TopEage="13" BottomEage="19" Scale9OriginX="71" Scale9OriginY="13" Scale9Width="43" Scale9Height="63" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_TotalResult" ActionTag="-1440161301" VisibleForFrame="False" Tag="30" IconVisible="False" LeftMargin="-136.9300" RightMargin="-136.9300" TopMargin="-47.5000" BottomMargin="-47.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="71" RightEage="54" TopEage="13" BottomEage="19" Scale9OriginX="71" Scale9OriginY="13" Scale9Width="43" Scale9Height="63" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="273.8600" Y="95.0000" />
                 <Children>
                   <AbstractNodeData Name="Sprite_Word" ActionTag="346975336" Tag="31" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="64.4300" RightMargin="64.4300" TopMargin="25.5000" BottomMargin="25.5000" ctype="SpriteObjectData">
