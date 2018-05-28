@@ -23,6 +23,8 @@ LanguageString["DISTROY_ROOM_no_permission_distroy"]	= "没有权限解散房间
 LanguageString["DISTROY_ROOM_current_in_room"]			= "当前在房间当中"
 LanguageString["DISTROY_ROOM_no_position"]			    = "没有位置了"
 
+LanguageString["PLAYER_NOT_GREEN_OVER"] = "玩家【%s】不同意解散房间,请继续游戏"
+
 
 function LanguageString:getString(key)
 	return LanguageString[key] or nil

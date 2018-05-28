@@ -19,13 +19,13 @@ function MsgboxLayer:showMsgBox(txtContent, isOneBtn, sureFunc, cancelFunc, isCl
 		layer:retain()
 		self.layer = layer
 	end
-	local parent = self.layer:getParent()
-	print("PARENT = ",parent)
-	if not self.layer:getParent() then
-		local scene = cc.Director:getInstance():getRunningScene()
-		scene:addChild(self.layer)
-	end
-
+	-- local parent = self.layer:getParent()
+	-- print("PARENT = ",parent)
+	-- if not self.layer:getParent() then
+	-- 	local scene = cc.Director:getInstance():getRunningScene()
+	-- 	scene:addChild(self.layer)
+	-- end
+	lt.UILayerManager:addLayer(self.layer,true)	
 	
 	local blackBg = self.layer:getChildByName("Ie_Mark")
 	-- 设置屏蔽下面所有事件
@@ -158,17 +158,17 @@ end
 
 
 function MsgboxLayer:onClose( ... )
-
-	print("MsgBox Close")
-	self.txtClock:stopAllActions()
+	lt.UILayerManager:removeLayer(self.layer)
+	-- print("MsgBox Close")
+	-- self.txtClock:stopAllActions()
 	
-	if tolua.isnull(self.layer) == true then
-		print("MsgBox 已经被销毁，不能再次释放")
-	else
-		self.layer:removeSelf()
-		local parent = self.layer:getParent()
-		print("FYD====>>>>>>PARENT IS =>",parent)
-	end
+	-- if tolua.isnull(self.layer) == true then
+	-- 	print("MsgBox 已经被销毁，不能再次释放")
+	-- else
+	-- 	self.layer:removeSelf()
+	-- 	local parent = self.layer:getParent()
+	-- 	print("FYD====>>>>>>PARENT IS =>",parent)
+	-- end
 end
 
 
