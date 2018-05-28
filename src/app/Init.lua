@@ -102,6 +102,8 @@ ltMetaTable["GameRoomInfoPanel"] = "app.Scene.GameScene.mj.GameRoomInfoPanel"
 ltMetaTable["GameActionBtnsPanel"] = "app.Scene.GameScene.mj.GameActionBtnsPanel"
 ltMetaTable["GameResultPanel"] = "app.Scene.GameScene.mj.GameResultPanel"
 ltMetaTable["WinAwardCodeLayer"] = "app.Scene.GameScene.mj.WinAwardCodeLayer"
+ltMetaTable["ResultTotalEnditems"] = "app.Scene.GameScene.mj.ResultTotalEnditems"
+ltMetaTable["GmaeResultTotalEndLayer"] = "app.Scene.GameScene.mj.GmaeResultTotalEndLayer"
 
 ltMetaTable["SettingLayer"] = "app.Scene.GameScene.mj.SettingLayer"
 

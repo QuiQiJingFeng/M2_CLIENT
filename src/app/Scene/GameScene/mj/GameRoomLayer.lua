@@ -1,6 +1,6 @@
 
 local GameRoomLayer = class("GameRoomLayer", lt.BaseLayer)
-
+ENDRONDBS = 1
 function GameRoomLayer:ctor()
 	GameRoomLayer.super.ctor(self)
 
@@ -422,10 +422,18 @@ function GameRoomLayer:onGamenoticeOtherRefuse(msg)--如果有人拒绝解散
 	--end
 end
 
-function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--如果房间被销毁
+function GameRoomLayer:CloseRoom()
 	local worldScene = lt.WorldScene.new()
     lt.SceneManager:replaceScene(worldScene)
     lt.NetWork:disconnect()
+end
+
+function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--
+	if ENDRONDBS ~= 2 then
+		print("=======111ssss",ENDRONDBS)
+		local text = "房间已被解散"
+		lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.CloseRoom),nil, true)
+	end
 end
 
 function GameRoomLayer:onEnter()   
