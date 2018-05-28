@@ -713,8 +713,7 @@ function GameSelectPosPanel:onClientConnectAgain()
 
 	-- local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 
-	-- self._zhuangPos = allRoomInfo.zpos
-
+	-- self._zhuangPos = allRoomInfo.zpos:
 	-- --显示庄家
 	-- self._zhuangDirection = self._deleget:getPlayerDirectionByPos(self._zhuangPos)
 
@@ -732,7 +731,7 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, handler(self, self.onNoticePlayerConnectState), "GameSelectPosPanel:onNoticePlayerConnectState")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, handler(self, self.onRefreshScoreResponse), "GameSelectPosPanel:onRefreshScoreResponse")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameSelectPosPanel:onRefreshGameOver")
-	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSelectPosPanel.onClientConnectAgain")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSelectPosPanel:onClientConnectAgain")
 end
 
 function GameSelectPosPanel:onExit()

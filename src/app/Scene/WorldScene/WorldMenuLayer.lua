@@ -46,15 +46,12 @@ function WorldMenuLayer:ctor()
                 count = count +1  
             end  
         end
-        print("========1",count)
     end
     if not loginData.user_id then
         loginData.user_id = " "
     end
     
     Tt_UserId:setString("ID："..loginData.user_id)
-
-    print("========2",count)
 
     if count <= 8 then --只显示最多8位  
        Tt_NickName:setString(loginData.user_name)

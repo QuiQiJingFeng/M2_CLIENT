@@ -51,6 +51,7 @@ function GameRoomLayer:ctor()
     self._gameResultPanel:setVisible(false)
 
 	self:initGame()
+	self.ApplyGameOverPanel = nil
 end
 
 function GameRoomLayer:initGame()  
@@ -387,32 +388,41 @@ function GameRoomLayer:onGameConnectAgain()
 end
 
 function GameRoomLayer:onGamenoticeOtherDistroyRoom(msg)--通知有人解散房间
-	print("========================1111111111111111")
-	dump("+++++++++++++++++++++++++++++++onGamenoticeOtherDistroyRoom11111", msg)
+	local loginData = lt.DataManager:getPlayerInfo()
 	local aa = os.date("%Y.%m.%d.%H:%M:%S",msg.distroy_time)
-	print("==========111222---",aa)
 	local timeer = os.time()
-	print("==========222",timeer)
 	local cc = msg.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
-	print("==========333",cc)
-	local ApplyGameOverPanel = lt.ApplyGameOverPanel.new()
-	print("=======s=s=s=s==s=s=s=s=1")
-	print(type(msg.confirm_map))
-	print("=======s=s=s=s==s=s=s=s=2")
-	ApplyGameOverPanel:show(cc,msg.confirm_map)
-    self:addChild(ApplyGameOverPanel,10)
-	
-	
-
+	if not self.ApplyGameOverPanel then
+		self.ApplyGameOverPanel = lt.ApplyGameOverPanel.new(self)
+		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
+		dump(msg.confirm_map[1])
+		if loginData.user_id ==  msg.confirm_map[1] then --代表是申请人，直接置灰
+			self.ApplyGameOverPanel:buttonNotChick()
+		end
+		lt.UILayerManager:addLayer(self.ApplyGameOverPanel,false)
+	else
+		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
+	end	
 end
-
+function GameRoomLayer:onCloseApplyGameOverPanel()
+	lt.UILayerManager:removeLayer(self.ApplyGameOverPanel)
+	self.ApplyGameOverPanel = nil
+end
 function GameRoomLayer:onGamenoticeOtherRefuse(msg)--如果有人拒绝解散
-	dump("+++++++++++++++++++++++++++++++onGamenoticeOtherRefuse22222", msg)
+	local canclePlayer = lt.DataManager:getPlayerInfoByPos(msg.user_pos)
+	local loginData = lt.DataManager:getPlayerInfo()
+	--if loginData.user_id ~=  msg.user_id then  --让所有人都知道所以注释掉这句
+		local name = ""
+		if canclePlayer then
+			name = canclePlayer.user_name
+		end
 
+		local text = string.format(lt.LanguageString:getString("PLAYER_NOT_GREEN_OVER"), name)
+	    lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.onCloseApplyGameOverPanel),nil, true)
+	--end
 end
 
 function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--如果房间被销毁
-	dump("+++++++++++++++++++++++++++++++onGamenoticePlayerDistroyRoom33333", msg)
 	local worldScene = lt.WorldScene.new()
     lt.SceneManager:replaceScene(worldScene)
     lt.NetWork:disconnect()
