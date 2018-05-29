@@ -130,13 +130,27 @@ function WorldMenuLayer:onClickSetBtn(event)
     local callBack = function(str) 
         print("FYD===>>",str)
     end
-    lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
-    local path = cc.FileUtils:getInstance():getWritablePath() .. "/res/games/bj/game_1.png"
-    local data = {0,"萌芽娱乐","畅玩麻将体验","https://mengyagame.com",path}
-    local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
-    if not ok then
-        print("FYD ERROR: SIGNIN FAILED ",ret)
-    end
+    -- lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
+    -- local data = {0,"萌芽娱乐","畅玩麻将体验","https://mengyagame.com",""}
+    -- local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
+    -- if not ok then
+    --     print("FYD ERROR: SIGNIN FAILED ",ret)
+    -- end
+
+    local path = cc.FileUtils:getInstance():getWritablePath()
+    local img_path = path.."share.png"
+    cc.utils:captureScreen(function(succeed, outputFile) 
+            print("FYD====>>>succeed=== ",succeed)
+            print("FYD----->outputFile ===  ",outputFile)
+            lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
+            local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareImg",{outputFile},"(Ljava/lang/String;)V")
+            if not ok then
+                print("FYD ERROR: SHARE IMAGE ",ret)
+            end
+        end,"share.png")
+
+
+    
 end
 
 function WorldMenuLayer:onClickinfoBtn(event)
