@@ -5,7 +5,7 @@ local GmaeResultTotalEndLayer = class("GmaeResultTotalEndLayer", lt.BaseLayer, f
 end)
 local posY = 80
 -- 1334  
-function GmaeResultTotalEndLayer:ctor()
+function GmaeResultTotalEndLayer:ctor(info)
 	GmaeResultTotalEndLayer.super.ctor(self)
 
 	self._Ie_Bg = self:getChildByName("Ie_Bg")
@@ -18,6 +18,38 @@ function GmaeResultTotalEndLayer:ctor()
     lt.CommonUtil:addNodeClickEvent(self._bn_Close, handler(self, self.onClose))
     lt.CommonUtil:addNodeClickEvent(self._bn_Leave, handler(self, self.onLeave))
     lt.CommonUtil:addNodeClickEvent(self._bn_Share, handler(self, self.onShare))
+
+    ---拼接分享的数据结构
+    local roomInfo = lt.DataManager:getGameRoomInfo()
+    
+    local roomTable = {}
+    local pxTable = {}
+    local infoTable = {}
+    self.shareTable = {}
+    roomTable = clone(roomInfo)
+    pxTable = clone(info.sattle_list)
+    table.sort(pxTable, function(a, b) return a.score > b.score end)
+    infoTable = clone(pxTable)
+    dump(infoTable)
+    table.insert( self.shareTable, infoTable )--1
+    --开始时间
+    local discore = roomTable.room_setting.other_setting[1]
+    local pay_type = roomTable.room_setting.pay_type
+    local round = roomTable.room_setting.round
+    local owner_id = lt.DataManager:getPlayerUid()
+    local room_id = info.room_id
+    local begin_time = info.begin_time
+
+    table.insert(self.shareTable, discore)--底分 2
+    table.insert(self.shareTable, pay_type)--支付类型 3
+    table.insert(self.shareTable, round)--局数 4
+    table.insert(self.shareTable, owner_id)--房主 5
+    table.insert(self.shareTable, room_id)--房间号 6
+    table.insert(self.shareTable, begin_time)--开始时间 7
+
+    dump(self.shareTable)
+
+
 end
 function GmaeResultTotalEndLayer:show(array)
     --[[
@@ -58,8 +90,6 @@ array = {room_id = 10086,sattle_list = {[1] = {user_id = 10086,user_pos = 1,hu_n
     local info = clone(array.sattle_list)
     for i=1,#array.sattle_list do
         local items = lt.ResultTotalEnditems.new(info[i],hunumTable[1])
-        print(posTableX[i])
-        print(posY)
         items:setPosition(posTableX[i],posY)
         self._Ie_Bg:addChild(items)
     end
@@ -80,7 +110,10 @@ function GmaeResultTotalEndLayer:onLeave()
 end
 
 function GmaeResultTotalEndLayer:onShare()
-
+    local shareLayer = lt.GameEndExploitsLayer.new()
+    shareLayer:show(self.shareTable)
+    shareLayer:setVisible(false)
+    lt.UILayerManager:addLayer(shareLayer,true)
 end
 
 function GmaeResultTotalEndLayer:onEnter()

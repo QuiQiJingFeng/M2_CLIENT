@@ -81,10 +81,6 @@ function GameResultPanel:onStartAgainClick(event) --继续游戏
     lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
 end
 
-function GameResultPanel:onTotalEndClick(event) --继续游戏
-
-end
-
 function GameResultPanel:onRewardCodeClick(event) --奖码
  	local awardCards = lt.DataManager:getGameOverInfo().award_list
 	if not awardCards then
@@ -253,7 +249,7 @@ end
 
 function GameResultPanel:onTotalEndClick(event)
 	if self._resultInfo then
-		local resultLayer = lt.GmaeResultTotalEndLayer.new()
+		local resultLayer = lt.GmaeResultTotalEndLayer.new(self._resultInfo)
 		resultLayer:show(self._resultInfo)
 		lt.UILayerManager:addLayer(resultLayer,true)
 	end

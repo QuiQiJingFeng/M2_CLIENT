@@ -256,7 +256,6 @@ function SettingLayer:onDissolveRoom()--申请解散房间
     ---[[
     local roomInfo = lt.DataManager:getGameRoomInfo()
     local loginData = lt.DataManager:getPlayerInfo()
-    print("===d=d-d-ddd")
     dump(roomInfo)
     dump(loginData)
     local playertype = nil
@@ -266,7 +265,6 @@ function SettingLayer:onDissolveRoom()--申请解散房间
         playertype = 1
     end
     local arg = {room_id = roomInfo.room_id} --1.room_id //解散类型  1 玩家申请解散  2、房主解散
-    print("pppddddddddd",roomInfo.room_id,playertype)
     lt.NetWork:sendTo(lt.GameEventManager.EVENT.DISTROY_ROOM,arg)--]]
 end
 

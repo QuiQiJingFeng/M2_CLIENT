@@ -104,6 +104,7 @@ ltMetaTable["GameResultPanel"] = "app.Scene.GameScene.mj.GameResultPanel"
 ltMetaTable["WinAwardCodeLayer"] = "app.Scene.GameScene.mj.WinAwardCodeLayer"
 ltMetaTable["ResultTotalEnditems"] = "app.Scene.GameScene.mj.ResultTotalEnditems"
 ltMetaTable["GmaeResultTotalEndLayer"] = "app.Scene.GameScene.mj.GmaeResultTotalEndLayer"
+ltMetaTable["GameEndExploitsLayer"] = "app.Scene.GameScene.mj.GameEndExploitsLayer"
 
 ltMetaTable["SettingLayer"] = "app.Scene.GameScene.mj.SettingLayer"
 
