@@ -222,12 +222,8 @@ function MjEngine:sendCardsEffect()
 					cards[i]:setVisible(true)
 
 					if i == 13 and not sendDealFinish then
-						-- self._nodeCardNum:setVisible(true)
-						-- self._nodeOtherNum:setVisible(true)
-
+						self._deleget:sendDealFinish()
 						sendDealFinish = true
-						local arg = {command = "DEAL_FINISH"}
-						lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 					end
 				end
 				local delay = cc.DelayTime:create(time)
@@ -618,6 +614,16 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
 		info["from"] = msg.item["from"]
 		info["type"] = msg.item["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
 
+		local formDirection = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
+		local outValue = self._allPlayerOutCardsValue[formDirection][#self._allPlayerOutCardsValue[formDirection]]
+
+		if outValue and outValue == msg.item["value"] then
+ 			table.remove(self._allPlayerOutCardsValue[formDirection], #self._allPlayerOutCardsValue[formDirection])
+
+ 			--self._allPlayerOutCardsNode[formDirection][#self._allPlayerOutCardsNode]:removeFromParent()
+			--table.remove(self._allPlayerOutCardsNode[formDirection], #self._allPlayerOutCardsNode)
+			self:configAllPlayerCards(formDirection, false, false, true)
+		end
 	end
 
 	if not msg.item["type"] then
@@ -666,6 +672,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
 		end
 	end	
 	self:configAllPlayerCards(direction, true, true, false)
+
 end
 
 function MjEngine:onClientConnectAgain()--  断线重连
@@ -721,7 +728,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		end
 	end
 
-	--所有出的牌  
+	--所有出的牌
 	self._allPlayerOutCardsValue = {}
 	
 	if allRoomInfo.put_cards then
@@ -729,45 +736,43 @@ function MjEngine:onClientConnectAgain()--  断线重连
 			if info.user_pos then
 				local direction = lt.DataManager:getPlayerDirectionByPos(info.user_pos)
 				self._allPlayerOutCardsValue[direction]	= {}
-
-				for k,value in ipairs(info.cards) do
-					table.insert(self._allPlayerOutCardsValue[direction], value)
+				if info.cards then
+					for k,value in ipairs(info.cards) do
+						table.insert(self._allPlayerOutCardsValue[direction], value)
+					end
 				end
-
 			end		
 		end
 	end
 
     --当前事件  
-	if allRoomInfo.operator then
+
+	--我的吃碰杠通知
+    local tObjCpghObj = {
+        tObjChi = nil,
+        tObjPeng = nil,
+        tObjGang = nil,
+        tObjHu = nil--抢杠胡
+    }
+
+	if allRoomInfo.operators then
 		local operatorList = {}
-		if allRoomInfo.operator == "WAIT_DEAL_FINISH" then
-			local arg = {command = "DEAL_FINISH"}
-			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
-		elseif allRoomInfo.operator == "WAIT_PLAY_CARD" then	
-		elseif allRoomInfo.operator == "WAIT_PENG" then
-			operatorList = {"PENG"}	
-		elseif allRoomInfo.operator == "WAIT_GANG_WAIT_PENG" then
-			operatorList = {"PENG", "GANG"}				
-		elseif allRoomInfo.operator == "WAIT_GANG" then
-			operatorList = {"GANG"}		
-		elseif allRoomInfo.operator == "WAIT_HU" then
-			operatorList = {"HU"}	
-		elseif allRoomInfo.operator == "WAIT_PLAY_CARD_FROM_PENG" then
+		for i,operator in ipairs(allRoomInfo.operators) do
+			if operator == "CHI" or  operator == "PENG" or operator == "GANG" or operator == "HU" then
+				table.insert(operatorList, operator)
+			elseif operator == "DEAL_FINISH" then
+				local arg = {command = "DEAL_FINISH"}
+				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 
+			elseif operator == "PLAY_CARD" then
+
+			end
 		end
-
-		--我的吃碰杠通知
-        local tObjCpghObj = {
-            tObjChi = nil,
-            tObjPeng = nil,
-            tObjGang = nil,
-            tObjHu = nil--抢杠胡
-        }
-
         for k,state in pairs(operatorList) do
-
-        	if state == "PENG" then
+        	if state == "CHI" then
+        		tObjCpghObj.tObjChi = {}
+        		table.insert(tObjCpghObj.tObjChi, allRoomInfo.put_card)
+        	elseif state == "PENG" then
         		tObjCpghObj.tObjPeng = {}
 
         		--table.insert(tObjCpghObj.tObjPeng, msg.card)
@@ -778,63 +783,71 @@ function MjEngine:onClientConnectAgain()--  断线重连
         		end
         	elseif state == "HU" then--抢杠胡
         		tObjCpghObj.tObjHu = {}
-
         	end
         end
+	end
 
-	    --当前事件  
-	    local putOutType = 0 --  1摸牌出牌  2 碰牌出牌 
+    --当前事件  
+ --    local putOutType = 0 --  1摸牌出牌  2 碰牌出牌 
 
-		if allRoomInfo.cur_play_operator then
-			if allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD" then	
-				putOutType = 1
-			elseif allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD_FROM_PENG" then
-				putOutType = 2
-			end
-		end	
-		if putOutType == 1 then
-		    --检测杠
-			local tempHandCards = {}
+	-- if allRoomInfo.cur_play_operator then
+	-- 	if allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD" then	
+	-- 		putOutType = 1
+	-- 	elseif allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD_FROM_PENG" then
+	-- 		putOutType = 2
+	-- 	end
+	-- end	
 
-			for k,v in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
-				table.insert(tempHandCards, v)
-			end
+	local putOutType = 0 --  1摸牌出牌  2 碰牌出牌 
 
-			local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
+	if allRoomInfo.cur_play_pos and allRoomInfo.cur_play_pos == lt.DataManager:getMyselfPositionInfo().user_pos  then
+		if allRoomInfo.card then--如果有card则说明是摸牌出牌,否则是碰牌出牌
+			putOutType = 1
+		else
+			putOutType = 2
+		end
+	end
 
-			local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[lt.Constants.DIRECTION.NAN], tempHandCards)
+	if putOutType == 1 then
+	    --检测杠
+		local tempHandCards = {}
 
-			if #anGangCards > 0 or #pengGang > 0 then
-				tObjCpghObj.tObjGang = {}
-			end
-
-			for i,v in ipairs(anGangCards) do
-				table.insert(tObjCpghObj.tObjGang, v)
-			end
-
-			for i,v in ipairs(pengGang) do
-				table.insert(tObjCpghObj.tObjGang, v)
-			end
-
-			--检测胡
-			if lt.CommonUtil:checkIsHu(tempHandCards, true) then
-				tObjCpghObj.tObjHu = {}
-			else
-				print("没有自摸###########################################")
-			end			
+		for k,v in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
+			table.insert(tempHandCards, v)
 		end
 
-        --显示吃碰杠胡控件
-        self._deleget:viewHideActPanelAndMenu()
-        self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
-        self._deleget:viewActionButtons(tObjCpghObj, true)
+		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
+
+		local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[lt.Constants.DIRECTION.NAN], tempHandCards)
+
+		if #anGangCards > 0 or #pengGang > 0 then
+			tObjCpghObj.tObjGang =  tObjCpghObj.tObjGang or {}
+		end
+
+		for i,v in ipairs(anGangCards) do
+			table.insert(tObjCpghObj.tObjGang, v)
+		end
+
+		for i,v in ipairs(pengGang) do
+			table.insert(tObjCpghObj.tObjGang, v)
+		end
+
+		--检测胡
+		if lt.CommonUtil:checkIsHu(tempHandCards, true) then
+			tObjCpghObj.tObjHu = {}
+		else
+			print("没有自摸###########################################")
+		end			
 	end
+
+    --显示吃碰杠胡控件
+    self._deleget:viewHideActPanelAndMenu()
+    self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
+    self._deleget:viewActionButtons(tObjCpghObj, true)
 
 	for i,direction in ipairs(self._currentGameDirections) do
 		self:configAllPlayerCards(direction, true, true, true)
 	end
-
-	lt.DataManager:clearPushAllRoomInfo()
 end
 
 return MjEngine

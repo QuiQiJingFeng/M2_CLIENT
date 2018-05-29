@@ -55,9 +55,14 @@ function GameRoomLayer:ctor()
 end
 
 function GameRoomLayer:initGame()  
-	self._gameSelectPosPanel:initGame()
-	--self._gamePlayCardsPanel:initGame()
-	self._gameCompassPanel:initGame()
+
+	if lt.DataManager:isClientConnectAgain() then
+		self:onGameConnectAgain()
+	else
+		self._gameSelectPosPanel:initGame()
+		--self._gamePlayCardsPanel:initGame()
+		self._gameCompassPanel:initGame()
+	end
 end
 
 function GameRoomLayer:againConfigUI()  
@@ -66,6 +71,18 @@ function GameRoomLayer:againConfigUI()
 	self._gameCompassPanel:initGame()
 
 	self._engine:angainConfigUi()
+end
+
+function GameRoomLayer:onGameConnectAgain()
+	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
+		self._gameSelectPosPanel:againConfigUI()
+	end	
+
+	--self._gamePlayCardsPanel:initGame()
+	self._gameCompassPanel:initGame()
+	self._engine:onClientConnectAgain()
+
+	lt.DataManager:clearPushAllRoomInfo()
 end
 
 function GameRoomLayer:getPlayerDirectionByPos(playerPos) 
@@ -118,50 +135,10 @@ function GameRoomLayer:onClickCard(value)
 	end
 end
 
-function GameRoomLayer:configSendCards() --游戏刚开始的发牌
-
-	--_allPlayerCpgCardsNode
-	local sendDealFinish = false
-	for direction,cards in pairs(self._allPlayerHandCardsNode) do--发牌发13张
-		local time = 0.1
-		for i=1,13 do
-			time = time + 0.1
-			if cards[i] then
-
-				if direction == self.POSITION_TYPE.NAN then
-
-					local value = self._allPlayerHandCards[direction][i]--手牌值
-					local node = cards[i]:getChildByName("Node_Mj")
-					local face = node:getChildByName("Sprite_Face")
-
-					if node and face then
-						local cardType = math.floor(value / 10) + 1
-						local cardValue = value % 10
-						face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
-						node:getChildByName("Image_Bg"):setTag(value)
-						node:getChildByName("Image_Bg")["CardIndex"] = i
-					end
-				end
-
-				local func = function( )
-					cards[i]:setVisible(true)
-
-					if i == 13 and not sendDealFinish then
-						self:showCardsNum()
-						sendDealFinish = true
-						local arg = {command = "DEAL_FINISH"}
-						lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
-					end
-				end
-				local delay = cc.DelayTime:create(time)
-
-				local func1 = cc.CallFunc:create(func)
-				local sequence = cc.Sequence:create(delay, func1)
-				cards[i]:runAction(sequence)
-			end
-		end
-	end
-
+function GameRoomLayer:sendDealFinish()--发牌动画执行完成
+	local arg = {command = "DEAL_FINISH"}
+	lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+	self:showCardsNum()
 end
 
 function GameRoomLayer:onDealDown(msg)--发牌
@@ -374,17 +351,6 @@ end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
 
-end
-
-function GameRoomLayer:onGameConnectAgain()
-	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
-	if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
-		self._gameSelectPosPanel:againConfigUI()
-	end	
-
-	--self._gamePlayCardsPanel:initGame()
-	self._gameCompassPanel:initGame()
-	self._engine:onClientConnectAgain()
 end
 
 function GameRoomLayer:onGamenoticeOtherDistroyRoom(msg)--通知有人解散房间

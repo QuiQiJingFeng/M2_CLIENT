@@ -168,6 +168,8 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	local winner_type = gameOverInfo.winner_type or 1 --自摸 1 抢杠 2
 	local last_round = gameOverInfo.last_round
 
+	local over_type = gameOverInfo.over_type
+
 	if last_round then
 		ENDRONDBS = 2
 		self._resultStartAgainBtn:setVisible(false)
@@ -205,24 +207,20 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 				desText:setString("")
 				if winner_type == 1 then--自摸
 					desText:setString("[自摸]")
+
 				elseif winner_type == 2 then
 					desText:setString("[抢杠胡]")
+				elseif winner_type == 3 then
+					desText:setString("点炮")
 				end
 
-				if not winner_pos then--流局
+				if over_type == 2 then--流局
 					winOrLostIcon:setSpriteFrame("game/mjcomm/words/wordResultLiuJu.png")
 					resultInfoItem:setVisible(true)
-				else
+					scrollView:setVisible(false)
+					imageBg:setVisible(false)
 
-					local scrollNumber = node:getChildByTag(100)
-					if not scrollNumber then
-						scrollNumber = lt.ScrollNumber:create(12, "games/bj/game/part/numWin.png", "games/bj/game/part/numLost.png")
-						node:addChild(scrollNumber)
-						scrollNumber:setTag(100)
-					end
-					scrollNumber:setVisible(true)
-					scrollNumber:setNumber(v.cur_score)
-
+				elseif over_type == 1 then
 					if winner_pos == v.user_pos then--是自己赢了
 						resultInfoItem:setVisible(true)
 						winOrLostIcon:setSpriteFrame("game/mjcomm/words/wordResultHuPai.png")
@@ -231,6 +229,14 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 					end
 				end
 
+				local scrollNumber = node:getChildByTag(100)
+				if not scrollNumber then
+					scrollNumber = lt.ScrollNumber:create(12, "games/bj/game/part/numWin.png", "games/bj/game/part/numLost.png")
+					node:addChild(scrollNumber)
+					scrollNumber:setTag(100)
+				end
+				scrollNumber:setVisible(true)
+				scrollNumber:setNumber(v.cur_score)
 			end
 		end
 	end

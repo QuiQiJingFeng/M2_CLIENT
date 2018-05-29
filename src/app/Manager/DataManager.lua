@@ -94,7 +94,7 @@ function DataManager:clearPushAllRoomInfo()
 end
 
 function DataManager:onPushAllRoomInfo(msg)
-    dump(msg,"ON PUSH ALL ROOM INFO",11)
+    dump(msg,"ON PUSH ALL ROOM INFO",100)
 
     if msg.refresh_room_info then
         self._gameRoomInfo = msg.refresh_room_info
@@ -102,6 +102,24 @@ function DataManager:onPushAllRoomInfo(msg)
 
     self._pushAllRoomInfo = msg
     lt.GameEventManager:post(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN)
+end
+
+function DataManager:isClientConnectAgain()
+    if next(lt.DataManager:getPushAllRoomInfo()) then
+        return true
+    end
+    return false
+end
+
+function DataManager:isClientConnectAgainPlaying()
+    local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+
+    if next(allRoomInfo) then
+        if allRoomInfo.card_list and next(allRoomInfo.card_list) then
+           return true 
+        end
+    end
+    return false
 end
 
 local times = 3

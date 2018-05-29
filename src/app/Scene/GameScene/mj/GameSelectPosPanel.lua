@@ -179,10 +179,11 @@ function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果
 end
 
 function GameSelectPosPanel:configPlayer() --头像 
+
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	
-	if allRoomInfo.card_list and next(allRoomInfo.card_list) then--断线重连 牌局中
+	if lt.DataManager:isClientConnectAgainPlaying() then--断线重连 牌局中
 		for i,v in ipairs(self._currentSitPosArray) do
 			v:setVisible(false)
 		end
@@ -203,13 +204,22 @@ function GameSelectPosPanel:configPlayer() --头像
 
     	if player then--这个位置有人
     		print("000000000000000000_______________", pos, sitNode.atDirection)
-    		if self._currentPlayerLogArray[sitNode.atDirection] then
-				local name = self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Text_Name")
+    		local playerLog = self._currentPlayerLogArray[sitNode.atDirection]
+    		if playerLog then
+				local name = playerLog:getChildByName("Text_Name")
 				if name then
 					name:setString(player.user_name)
 				end
 
-				--self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Zhuang"):setVisible(false)
+				--playerLog:getChildByName("Sprite_Zhuang"):setVisible(false)
+				playerLog:getChildByName("Sprite_Disconnect"):setVisible(false)
+				if player.is_sit then
+					if player.disconnect then
+						playerLog:getChildByName("Sprite_Disconnect"):setVisible(true) --断线标识
+					else
+						playerLog:getChildByName("Sprite_Disconnect"):setVisible(false) --断线标识
+					end
+				end
 
 				if player.user_id ~= lt.DataManager:getPlayerInfo().user_id then--别的玩家的头像
 					sitNode:setVisible(false)
@@ -219,7 +229,7 @@ function GameSelectPosPanel:configPlayer() --头像
 	        			
 	        			self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(true)
 	        			
-	        			if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+	        			if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		        			local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
 		        			self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
 	        			end
@@ -227,7 +237,7 @@ function GameSelectPosPanel:configPlayer() --头像
 	        			print("_______2222_________________________", player.user_pos, sitNode.atDirection)
 		        		self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(false)
 	        			
-		        		if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+		        		if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 	        				local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
 	        				self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
 		        		end	
@@ -238,7 +248,7 @@ function GameSelectPosPanel:configPlayer() --头像
 						print("%%%%%%%%%", player.user_pos, mySelfNode.atDirection)
 
 						mySelfNode:setVisible(false)
-						if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+						if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 
 							local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(mySelfNode:getPosition()))
 						--座位--self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
@@ -250,7 +260,11 @@ function GameSelectPosPanel:configPlayer() --头像
 						self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
 					end
 
-					
+					if lt.DataManager:isClientConnectAgain() and not player.is_sit then--入座界面
+
+						local arg = {pos = player.user_pos}
+					    lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
+					end
 				end
     		end
     	else

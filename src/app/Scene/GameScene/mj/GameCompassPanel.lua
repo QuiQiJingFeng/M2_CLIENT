@@ -47,7 +47,7 @@ function GameCompassPanel:ctor(deleget)
 	self:addChild(self._rootNode)
 
 	--self:initGame()
-
+	--self:setSurRoomRound()
 	self:configUI()
 end
 
@@ -74,8 +74,21 @@ function GameCompassPanel:configUI()
 
 	self._nodeLightDXNB = {}--出牌时亮态东西南北的节点  
 
-	for i=1, self._playerNum do
+	for i=1,4 do
+		nodeClock:getChildByName("Node_Light_"..i):setVisible(false)
+		nodeClock:getChildByName("Node_DNXB_"..i):setVisible(false)
+
 		local node = self._spriteDnxb:getChildByName("Sprite_Gray_"..i)
+		node:setVisible(false)
+	end
+
+	for i,direction in ipairs(currentGameDirections) do
+		nodeClock:getChildByName("Node_Light_"..direction):setVisible(false)
+		nodeClock:getChildByName("Node_DNXB_"..direction):setVisible(true)
+
+		local node = self._spriteDnxb:getChildByName("Sprite_Gray_"..direction)
+		node:setVisible(true)
+
 		if not node["originPosX"] then
 			node["originPosX"] = node:getPositionX()
 		end
@@ -84,21 +97,20 @@ function GameCompassPanel:configUI()
 			node["originPosY"] = node:getPositionY()
 		end
 
-		if not node["posValue"] then
-			node["posValue"] = i
+		local posValue = i
+		if self._playerNum == 2 then
+			if direction == 2 then
+				posValue = lt.Constants.DIRECTION.NAN
+			else
+				posValue = lt.Constants.DIRECTION.XI
+			end
 		end
 
-		table.insert(self._nodeGrayDXNB, node)
-	end
+		if not node["posValue"] then
+			node["posValue"] = posValue
+		end
+		self._nodeGrayDXNB[direction] = node
 
-	for i=1,4 do
-		nodeClock:getChildByName("Node_Light_"..i):setVisible(false)
-		nodeClock:getChildByName("Node_DNXB_"..i):setVisible(false)
-	end
-
-	for i,direction in ipairs(currentGameDirections) do
-		nodeClock:getChildByName("Node_Light_"..direction):setVisible(false)
-		nodeClock:getChildByName("Node_DNXB_"..direction):setVisible(true)
 		self._nodeLight[direction] = nodeClock:getChildByName("Node_Light_"..direction)--:getChildByName("Sprite_Light") getChildByName("Sprite_LightRed")
 		self._nodeLightDXNB[direction] = nodeClock:getChildByName("Node_DNXB_"..direction)--   
 
@@ -107,14 +119,23 @@ function GameCompassPanel:configUI()
 		self._nodeLightDXNB[direction]:getChildByName("Sprite_Xi"):setVisible(false)
 		self._nodeLightDXNB[direction]:getChildByName("Sprite_Bei"):setVisible(false)
 	end
+
+	self:resetLightUpdate()
 end
 
 function GameCompassPanel:initGame() --每局结束牌桌清桌 
-	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
-	if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面	
+	if lt.DataManager:isClientConnectAgain() then	
+		self:onClientConnectAgain()
+		self._nodeCardNum:setVisible(false)
+		self._nodeOtherNum:setVisible(true)
+
+		if lt.DataManager:isClientConnectAgainPlaying() then
+			self._nodeCardNum:setVisible(true)
+			self._nodeOtherNum:setVisible(true)
+		end
+	else
 		self._nodeCardNum:setVisible(false)
 		self._nodeOtherNum:setVisible(false)
-		self:onClientConnectAgain()
 	end
 end
 
@@ -133,19 +154,22 @@ function GameCompassPanel:onDealDown(msg)   --发牌13张手牌
 		end
 	end
 
-	local curRound = msg.cur_round or 0	
-	
-	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
-	local surRoomCountStr = ""
-
-	surRoomCountStr = surRoomCountStr..curRound
-	if gameRoomInfo.room_setting and gameRoomInfo.room_setting.round then
-		surRoomCountStr = surRoomCountStr.."/"..gameRoomInfo.room_setting.round
-	end
-	self._surRoomCount:setString(surRoomCountStr)
-
+	self:setSurRoomRound(msg.cur_round)
 end
 
+function GameCompassPanel:setSurRoomRound(curRound)
+	local curRound = curRound or 0	
+	
+	local surRoomCountStr = ""
+	surRoomCountStr = surRoomCountStr..curRound
+
+	local roomSetting = lt.DataManager:getGameRoomSetInfo()
+	if roomSetting then
+		surRoomCountStr = surRoomCountStr.."/"..roomSetting.round
+	end
+
+	self._surRoomCount:setString(surRoomCountStr)
+end
 
 function GameCompassPanel:onPushDrawCard(msg)   --通知其他人有人摸牌 
 	local surCardsNum = tonumber(self._surCardsNum:getString())
@@ -173,20 +197,14 @@ function GameCompassPanel:onClientConnectAgain()--  断线重连
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
-	local surRoomCountStr = ""
-
-	local curRound = gameRoomInfo.cur_round or 0
-	surRoomCountStr = surRoomCountStr..curRound
-	if gameRoomInfo.room_setting and gameRoomInfo.room_setting.round then
-		surRoomCountStr = surRoomCountStr.."/"..gameRoomInfo.room_setting.round
-	end
+	local curRound = gameRoomInfo.cur_round
 	self._surRoomCount:setVisible(true)
-	self._surRoomCount:setString(surRoomCountStr)
+	self:setSurRoomRound(curRound)
 
 	local reduceNum = allRoomInfo.reduce_num or 0
 	self._surCardsNum:setString(reduceNum)
-	self._nodeCardNum:setVisible(true)
-	self._nodeOtherNum:setVisible(true)
+	-- self._nodeCardNum:setVisible(true)
+	-- self._nodeOtherNum:setVisible(true)
 
 	--当前出牌人  指向
 	if allRoomInfo.cur_play_pos then
@@ -213,7 +231,7 @@ function GameCompassPanel:resetLightUpdate()
 		v:setVisible(false)
 	end
 
-	for dire,v in ipairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
+	for dire,v in pairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
 
 		if v.posValue then
 			local path = "game/mjcomm/words/"--wordGrayBei
@@ -232,7 +250,7 @@ function GameCompassPanel:resetLightUpdate()
 end
 
 function GameCompassPanel:configCurDNXB() 
-	for dire,v in ipairs(self._nodeGrayDXNB) do
+	for dire,v in pairs(self._nodeGrayDXNB) do
 		if v.posValue then
 			local path = "game/mjcomm/words/"--wordGrayBei
 			if v.posValue == self._currentOutPutPlayerPos then
@@ -267,6 +285,8 @@ function GameCompassPanel:onUpdate(delt)
 	end
 
 	if self._currentOutPutPlayerPos then
+		self:configCurDNXB()
+
 		local direction = self._deleget:getPlayerDirectionByPos(self._currentOutPutPlayerPos)
 		for dire,v in pairs(self._nodeLight) do
 
@@ -283,7 +303,8 @@ function GameCompassPanel:onUpdate(delt)
 				v:setVisible(false)
 			end
 		end
-
+	else
+		self:resetLightUpdate()
 	end	
 
 	self._timeClock:setString(self.UPDATETIME - self._time)
@@ -300,7 +321,6 @@ function GameCompassPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DEAL_DOWN, handler(self, self.onDealDown), "GameCompassPanel.onDealDown")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_DRAW_CARD, handler(self, self.onPushDrawCard), "GameCompassPanel.onPushDrawCard")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_PLAY_CARD, handler(self, self.onPushPlayCard), "GameCompassPanel.onPushPlayCard")
-
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameCompassPanel.onRefreshGameOver")
 
