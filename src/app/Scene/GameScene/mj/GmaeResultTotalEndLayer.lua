@@ -9,10 +9,15 @@ function GmaeResultTotalEndLayer:ctor()
 	GmaeResultTotalEndLayer.super.ctor(self)
 
 	self._Ie_Bg = self:getChildByName("Ie_Bg")
-    self._Bn_Close = self._Ie_Bg:getChildByName("Bn_Close")
+    self._bn_Close = self._Ie_Bg:getChildByName("Bn_Close")
+    local Node_Status = self._Ie_Bg:getChildByName("Node_Status")
+    self._bn_Leave = Node_Status:getChildByName("Bn_Leave")
+    self._bn_Share = Node_Status:getChildByName("Bn_Share")
+    
 
-    lt.CommonUtil:addNodeClickEvent(self._Bn_Close, handler(self, self.onClose))
-    --self:show(info)
+    lt.CommonUtil:addNodeClickEvent(self._bn_Close, handler(self, self.onClose))
+    lt.CommonUtil:addNodeClickEvent(self._bn_Leave, handler(self, self.onLeave))
+    lt.CommonUtil:addNodeClickEvent(self._bn_Share, handler(self, self.onShare))
 end
 function GmaeResultTotalEndLayer:show(array)
     --[[
@@ -36,7 +41,7 @@ array = {room_id = 10086,sattle_list = {[1] = {user_id = 10086,user_pos = 1,hu_n
 [4] = {user_id = 10089,user_pos = 4,hu_num = 25,ming_gang_num = 0,an_gang_num=1,reward_num = 3}}}--]]
     local posTableX = {}
     if #array.sattle_list == 2 then
-        posTableX = {380,810}
+        posTableX = {260,710}
     elseif #array.sattle_list == 3 then
         posTableX = {230,596,960}
     elseif #array.sattle_list == 4 then
@@ -45,16 +50,12 @@ array = {room_id = 10086,sattle_list = {[1] = {user_id = 10086,user_pos = 1,hu_n
     local hunumTable = {}
     local sortTable= clone(array.sattle_list)
     for i=1,#sortTable do
-        if not sortTable[i].score then
-        end
         table.insert(hunumTable,sortTable[i].score)
     end
     table.sort(hunumTable, function(a, b) return a > b end)
-    dump(hunumTable)
 
 
     local info = clone(array.sattle_list)
-
     for i=1,#array.sattle_list do
         local items = lt.ResultTotalEnditems.new(info[i],hunumTable[1])
         print(posTableX[i])
@@ -70,6 +71,16 @@ end
 
 function GmaeResultTotalEndLayer:onClose()
     lt.UILayerManager:removeLayer(self)
+end
+
+function GmaeResultTotalEndLayer:onLeave()
+    local worldScene = lt.WorldScene.new()
+    lt.SceneManager:replaceScene(worldScene)
+    lt.NetWork:disconnect()
+end
+
+function GmaeResultTotalEndLayer:onShare()
+
 end
 
 function GmaeResultTotalEndLayer:onEnter()

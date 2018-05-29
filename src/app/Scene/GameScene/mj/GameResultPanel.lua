@@ -247,7 +247,7 @@ end
 
 function GameResultPanel:onTotalEndClick(event)
 	if self._resultInfo then
-		local resultLayer = lt.ResultTotalEnditems.new()
+		local resultLayer = lt.GmaeResultTotalEndLayer.new()
 		resultLayer:show(self._resultInfo)
 		lt.UILayerManager:addLayer(resultLayer,true)
 	end
