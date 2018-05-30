@@ -85,6 +85,12 @@ function GameRoomLayer:onGameConnectAgain()
 	lt.DataManager:clearPushAllRoomInfo()
 end
 
+function GameRoomLayer:sendAutoSitDown() 
+	if self._gameResultPanel:isVisible() then
+		self._gameResultPanel:onStartAgainClick()
+	end
+end
+
 function GameRoomLayer:getPlayerDirectionByPos(playerPos) 
 	return self._gameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 end

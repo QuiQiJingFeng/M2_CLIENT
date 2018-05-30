@@ -260,10 +260,8 @@ function GameSelectPosPanel:configPlayer() --头像
 						self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
 					end
 
-					if lt.DataManager:isClientConnectAgain() and not player.is_sit then--入座界面
-
-						local arg = {pos = player.user_pos}
-					    lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
+					if gameRoomInfo.cur_round > 0 and lt.DataManager:isClientConnectAgain() and not player.is_sit then--入座界面
+						self._deleget:sendAutoSitDown() 
 					end
 				end
     		end

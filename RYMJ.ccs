@@ -1036,8 +1036,8 @@
               <Project Name="ResultShareLayer.csd" Type="Layer" />
               <Project Name="TotalResult2pLayer.csd" Type="Layer" />
               <Project Name="TotalResult3pLayer.csd" Type="Layer" />
-              <Project Name="TotalResultLayer.csd" Type="Layer" />
               <Project Name="TotalResultitemLayer.csd" Type="Layer" />
+              <Project Name="TotalResultLayer.csd" Type="Layer" />
             </Folder>
             <Folder Name="part">
               <Image Name="arrow_down.png" />
