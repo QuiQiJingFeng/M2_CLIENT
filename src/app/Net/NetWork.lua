@@ -103,6 +103,7 @@ function network:disconnect( ... )
         self._socket:close()
         self:clear()
     end
+    self:updateState(NETSTATE.UN_CONNECTED)
 end
 
 function network:reconnect(callback)
