@@ -350,12 +350,8 @@ end
 -- 定时update
 local scheduler = cc.Director:getInstance():getScheduler()
 network.schedule_id = scheduler:scheduleScriptFunc(function(dt)
-    network:update(dt)
-end, 0, false)
-
-local scheduler2 = cc.Director:getInstance():getScheduler()
-network.schedule_id2 = scheduler2:scheduleScriptFunc(function(dt)
     network:heartbeat(dt)
+    network:update(dt)
 end, 0, false)
 
 return network
