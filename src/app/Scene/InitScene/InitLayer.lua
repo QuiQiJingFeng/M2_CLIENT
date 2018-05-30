@@ -10,6 +10,10 @@ function InitLayer:ctor()
     self._rootNode:addChild(self._loginLayer)
 
     local Pl_Bg = self._loginLayer:getChildByName("Pl_Bg")
+    self._bn_Rule = Pl_Bg:getChildByName("Bn_Rule")
+
+    lt.CommonUtil:addNodeClickEvent(self._bn_Rule, handler(self, self.onRule))
+
     self._loginBtn = Pl_Bg:getChildByName("Bn_Login")
 
     self:RegisterWidgetEvent()
@@ -100,6 +104,11 @@ function InitLayer:onLogin()
                     }
         self:requestLogin(body)
     end
+end
+
+function InitLayer:onRule()
+    local Initagreement = lt.Initagreement.new()
+    self:addChild(Initagreement)
 end
 
 function InitLayer:onGetUserInfo(body)
