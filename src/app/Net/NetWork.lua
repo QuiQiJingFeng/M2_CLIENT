@@ -99,15 +99,18 @@ function network:connect(host,port,callback)
 end
 
 function network:disconnect( ... )
-    self._socket:close()
-    self:clear()
+    if self._socket then
+        self._socket:close()
+        self:clear()
+    end
 end
 
-function network:reconnect(host,port,callback)
+function network:reconnect(callback)
     if self._socket then
         self._socket:close()
     end
-    self:connect(host,port,callback)
+
+    self:connect(self._host,self._port,callback)
 end
 
 -- 收包

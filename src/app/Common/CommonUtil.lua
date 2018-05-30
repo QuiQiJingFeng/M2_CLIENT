@@ -1799,7 +1799,8 @@ function CommonUtil:selectServerLogin(game_type,callBack)
                     local server_list = recv_msg.server_list
                     local idx = math.random(1,#server_list)
                     local server_info = server_list[idx]
-                    lt.NetWork:reconnect(server_info.server_host,server_info.server_port,function() 
+                    lt.NetWork:disconnect()
+                    lt.NetWork:connect(server_info.server_host,server_info.server_port,function() 
                             local data = lt.DataManager:getAuthData()
                             lt.NetWork:send({login=data},function(recv_msg)
                                     self.selecting = nil
@@ -1824,7 +1825,8 @@ function CommonUtil:sepecailServerLogin(room_id,callBack)
                 recv_msg = json.decode(recv_msg)
                 if recv_msg.result == "success" then
                     local server_info = recv_msg
-                    lt.NetWork:reconnect(server_info.server_host,server_info.server_port,function() 
+                    lt.NetWork:disconnect()
+                    lt.NetWork:connect(server_info.server_host,server_info.server_port,function() 
                             local data = lt.DataManager:getAuthData()
                             lt.NetWork:send({login=data},function(recv_msg)
                                     self.selecting = nil
