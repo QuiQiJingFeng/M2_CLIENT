@@ -173,7 +173,7 @@ function network:heartbeat(dt)
         local now = os.time()
         if self.waiting_heart_beat_response then
             local delay = 0.5
-            if now > (self.heart_beat_time + HEART_BEAT_DT + delay) then
+            if now > self.recv_heart_beat_time then
                 self:updateState(NETSTATE.WAIT_RECONNECTED)
                 self.waiting_heart_beat_response = false
             end
@@ -194,7 +194,7 @@ function network:heartbeat(dt)
             --发送心跳包
             self:send({["heartbeat"] = {}},nil,true)
             self.next_heart_time = now + HEART_BEAT_DT
-            self.heart_beat_time = now
+            self.recv_heart_beat_time = now + 1
             self.waiting_heart_beat_response = true
         end
     end
@@ -351,7 +351,7 @@ end
 local scheduler = cc.Director:getInstance():getScheduler()
 network.schedule_id = scheduler:scheduleScriptFunc(function(dt)
     network:update(dt)
-end, 0.1, false)
+end, 0, false)
 
 local scheduler2 = cc.Director:getInstance():getScheduler()
 network.schedule_id2 = scheduler2:scheduleScriptFunc(function(dt)
