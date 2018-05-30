@@ -22,6 +22,7 @@ ltMetaTable["CommonUtil"] = "app.Common.CommonUtil"
 
 ltMetaTable["Constants"] = "app.Common.Constants"
 ltMetaTable["LanguageString"] = "app.Common.LanguageString"
+ltMetaTable["HeadImage"] = "app.Common.HeadImage"
 
 --manager
 ltMetaTable["ActivityPushManager"] = "app.Manager.ActivityPushManager"
@@ -86,7 +87,6 @@ ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
 
 --麻将引擎
 ltMetaTable["MjEngine"] = "app.Scene.GameScene.common.MjEngine"
-ltMetaTable["HeadImage"] = "app.Scene.GameScene.common.HeadImage"
 
 --麻将
 ltMetaTable["ApplyGameOverPanel"] = "app.Scene.GameScene.mj.ApplyGameOverPanel"

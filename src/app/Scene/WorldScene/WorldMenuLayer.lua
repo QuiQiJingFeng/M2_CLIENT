@@ -158,18 +158,24 @@ end
 
 function WorldMenuLayer:onClickkefuBtn(event)
     local KefuLayer = lt.KefuLayer.new()
-     lt.UILayerManager:addLayer(KefuLayer, true)
+    lt.UILayerManager:addLayer(KefuLayer, true)
 end
 
 function WorldMenuLayer:onClickshareBtn(event)
     local WXShareLayer = lt.WXShareLayer.new()
-     lt.UILayerManager:addLayer(WXShareLayer, true)
+    lt.UILayerManager:addLayer(WXShareLayer, true)
 end
 
 function WorldMenuLayer:onClickinfoBtn(event)
+    --[[
+    local url = "http://neoimaging.beareyes.com.cn/png2/ni_png_2_1518.png"
+    local uid = "123456"
+    local HeadLayer = lt.HeadImage.new(url,uid,400,400,1)
+     lt.UILayerManager:addLayer(HeadLayer, true)--]]
+    ---[[
     print("------------gerenxinxi")
      local lobbyInfoLayer = lt.lobbyInfoLayer.new()
-     lt.UILayerManager:addLayer(lobbyInfoLayer, true)
+     lt.UILayerManager:addLayer(lobbyInfoLayer, true)--]]
 end
 
 function WorldMenuLayer:onClickCreateRoomBtn(event)
