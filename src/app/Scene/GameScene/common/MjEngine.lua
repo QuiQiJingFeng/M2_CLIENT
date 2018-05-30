@@ -44,15 +44,15 @@ function MjEngine:create(deleget)
 
 	self._allCpgNodePos = {--吃椪杠左边的起点位置 
 	ccp(-30, 172),
-	ccp(-632, -60),
-	ccp(-33, -290),
+	ccp(-627, -60),
+	ccp(-30, 172),
 	ccp(314, -39),
 	}
 
 	self._allHandNodePos = {--手牌左边的起点位置 
 	ccp(-16, 151),
 	ccp(-632, -60),
-	ccp(-15, -210),
+	ccp(-15, 150),
 	ccp(300, -37),
 	}
 
@@ -69,7 +69,7 @@ function MjEngine:create(deleget)
 		} ,
 		[4] = {
 			[1] = ccp(-253, -66),
-			[2] = ccp(113, 140),
+			[2] = ccp(113, -140),
 			[3] = ccp(267, 80),
 			[4] = ccp(-54, 173),
 		} ,
@@ -250,9 +250,9 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 	if direction == lt.Constants.DIRECTION.XI then
 		cpgOffY = -114
 	elseif direction == lt.Constants.DIRECTION.NAN then
-		cpgOffX = 160
+		cpgOffX = 264
 	elseif direction == lt.Constants.DIRECTION.DONG then
-		cpgOffY = 114
+		cpgOffY = -114
 	elseif direction == lt.Constants.DIRECTION.BEI then
 		cpgOffX = -135
 	end
@@ -264,7 +264,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 	elseif direction == lt.Constants.DIRECTION.NAN then
 		handOffX = 88
 	elseif direction == lt.Constants.DIRECTION.DONG then
-		handOffY = 27
+		handOffY = -27
 	elseif direction == lt.Constants.DIRECTION.BEI then
 		handOffX = -46
 	end
@@ -442,7 +442,6 @@ function MjEngine:createCardsNode(cardType, direction, info)
 		end
 	elseif cardType == self.CARD_TYPE.CPG then
 		node = lt.MjLieCpgItem.new(direction)
-
 	elseif cardType == self.CARD_TYPE.OUT then
 		node = lt.MjLieOutFaceItem.new(direction)
 	end
@@ -833,7 +832,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		end
 
 		--检测胡
-		if lt.CommonUtil:checkIsHu(tempHandCards, true) then
+		if lt.CommonUtil:checkIsHu(tempHandCards, true) then-- 是否七对胡
 			tObjCpghObj.tObjHu = {}
 		else
 			print("没有自摸###########################################")
@@ -847,6 +846,52 @@ function MjEngine:onClientConnectAgain()--  断线重连
 
 	for i,direction in ipairs(self._currentGameDirections) do
 		self:configAllPlayerCards(direction, true, true, true)
+	end
+end
+
+function MjEngine:setEngineConfig()
+
+	--在检测胡牌之前不同玩法的条件设置 当条件满足了在check是否可以胡牌
+
+	--红中玩法 +-可胡七对  +-喜分 +-一码不中当全中
+
+
+	--商丘麻将  +-带风牌 +-带跑 
+
+
+
+
+	-- 癞子牌
+	self.__config.huiCard = nil
+
+	-- 是否限制只能一个癞子胡牌 飘癞子
+	self.__config.isOnlyOneHuiCardHu = false
+
+	-- 明听还是暗听 默认是暗听
+	self.__config.isAnTing = true
+
+	-- 胡牌是否必须听牌
+	self.__config.isHuMustTing = true
+
+	-- 听牌时候是否可以杠
+	self.__config.isGangAfterTing = true
+
+
+	-- -- 是否可以七对胡
+	-- self.__config.isQiDui = false
+
+	-- -- 抢杠胡
+	-- self.__config.isQiangGangHu = true
+
+	-- -- 四癞子胡牌 喜分
+	-- self.__config.isHiPoint = nil
+end
+
+--设置列表
+function MjEngine:setConfig(config)
+	self.__config = {}
+	for k,v in pairs(config) do
+		self.__config[k] = v
 	end
 end
 
