@@ -8,6 +8,7 @@ function MjLieCpgItem:ctor(CpgDirection)
 		self._rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjLieLeftCpgItem.csb")
 	elseif CpgDirection == lt.Constants.DIRECTION.NAN then
 		self._rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjLieDownCpgItem.csb")
+		self._rootNode:setScale(1.65)
 	elseif CpgDirection == lt.Constants.DIRECTION.DONG then
 		self._rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjLieRightCpgItem.csb")
 	elseif CpgDirection == lt.Constants.DIRECTION.BEI then

@@ -3,7 +3,7 @@
        "isLandscape": true,
        "isWindowTop": false,
        "name": "aam2_client",
-       "width": 720,
+       "width": 750,
        "height": 420,
        "entry": "src/main.lua",
        "consolePort": 6050,

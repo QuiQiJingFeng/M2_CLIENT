@@ -330,58 +330,57 @@ function GameSelectPosPanel:configRotation(isClick)
 
   			local action2 = function ()
   				--3 2   2 1  1 3       1 2  2 3  3 1 
+				for pos,v in ipairs(self._currentSitPosArray) do
+					if self._selectPositionNode.atDirection == self.POSITION_TYPE.XI then
+						
+						if v.atDirection == self.POSITION_TYPE.NAN then
+							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosX , self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosY))
+						v:setPosition(worldPos)
+						
+						v.atDirection = self.POSITION_TYPE.DONG
+					elseif v.atDirection == self.POSITION_TYPE.DONG then
 
-  				for pos,v in ipairs(self._currentSitPosArray) do
-  					if self._selectPositionNode.atDirection == self.POSITION_TYPE.XI then
-  						
-  						if v.atDirection == self.POSITION_TYPE.NAN then
-  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosX , self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosY))
-							v:setPosition(worldPos)
-							
-							v.atDirection = self.POSITION_TYPE.DONG
-						elseif v.atDirection == self.POSITION_TYPE.DONG then
-
-  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY))
-							v:setPosition(worldPos)
-							print("防腐剂的空间发的开发阶段", self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY)	
-							v.atDirection = self.POSITION_TYPE.XI
-  						end
-
-  					elseif self._selectPositionNode.atDirection == self.POSITION_TYPE.DONG then
-
-  						if v.atDirection == self.POSITION_TYPE.NAN then
 							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY))
-							v:setPosition(worldPos)
-							v.atDirection = self.POSITION_TYPE.XI
-						elseif v.atDirection == self.POSITION_TYPE.XI then
-  							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosX , self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosY))
-							v:setPosition(worldPos)
+						v:setPosition(worldPos)
+						v.atDirection = self.POSITION_TYPE.XI
+						end
 
-							v.atDirection = self.POSITION_TYPE.DONG
-  						end
-  					end
-  				end
-  				self._selectPositionNode.atDirection = self.POSITION_TYPE.NAN
+					elseif self._selectPositionNode.atDirection == self.POSITION_TYPE.DONG then
+
+						if v.atDirection == self.POSITION_TYPE.NAN then
+						local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY))
+						v:setPosition(worldPos)
+						v.atDirection = self.POSITION_TYPE.XI
+					elseif v.atDirection == self.POSITION_TYPE.XI then
+							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosX , self._currentSitPosArray[self.POSITION_TYPE.DONG].originPosY))
+						v:setPosition(worldPos)
+
+						v.atDirection = self.POSITION_TYPE.DONG
+						end
+					end
+	  			end
+
+	 			self._selectPositionNode.atDirection = self.POSITION_TYPE.NAN
 				local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.NAN].originPosX, self._currentSitPosArray[self.POSITION_TYPE.NAN].originPosY))
 				self._selectPositionNode:setPosition(worldPos)
 
 				for pos,v in ipairs(self._currentSitPosArray) do
 					if pos == self.POSITION_TYPE.XI then
-  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayXi.png")
-  					elseif pos == self.POSITION_TYPE.NAN then
-  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayNan.png")
-  					
-  					elseif pos == self.POSITION_TYPE.DONG then
-  						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayDong.png")
-  					end
-  					self._cardsPanel._nodeGrayDXNB[v.atDirection].posValue = pos
+							self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayXi.png")
+						elseif pos == self.POSITION_TYPE.NAN then
+							self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayNan.png")
+						
+						elseif pos == self.POSITION_TYPE.DONG then
+							self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayDong.png")
+						end
+						self._cardsPanel._nodeGrayDXNB[v.atDirection].posValue = pos
 				end
-
+				self:setPlayerDirectionTable()
   			end
-  			
+
 			local spawn = cc.Spawn:create(cc.CallFunc:create(action1), action)
 			
-	  		local sequence = cc.Sequence:create(spawn, cc.CallFunc:create(action2),  cc.CallFunc:create(headVisible))
+	  		local sequence = cc.Sequence:create(spawn, cc.CallFunc:create(action2), cc.CallFunc:create(headVisible))
 
   			self._nodeNoPlayer:runAction(sequence)
 			--_nodeLightDXNB
@@ -428,7 +427,7 @@ function GameSelectPosPanel:configRotation(isClick)
 					end
 				end
 			end
-
+			self:setPlayerDirectionTable()
 	  		self._nodeNoPlayer:runAction(sequence)
 
   		end
@@ -462,7 +461,6 @@ function GameSelectPosPanel:configRotation(isClick)
 
   							local worldPos = self._nodeNoPlayer:convertToNodeSpace(cc.p(self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY))
 							v:setPosition(worldPos)
-							print("防腐剂的空间发的开发阶段", self._currentSitPosArray[self.POSITION_TYPE.XI].originPosX , self._currentSitPosArray[self.POSITION_TYPE.XI].originPosY)	
 							v.atDirection = self.POSITION_TYPE.XI
   						end
 
@@ -533,13 +531,20 @@ function GameSelectPosPanel:configRotation(isClick)
 			end
 
 		end
+		self:setPlayerDirectionTable()
 	end
 
+end
+
+function GameSelectPosPanel:setPlayerDirectionTable()
 	local directionData = {}
 	for pos,sitNode in ipairs(self._currentSitPosArray) do
-		directionData[pos] = sitNode.atDirection
+		directionData[sitNode:getTag()] = sitNode.atDirection
 	end
 	--全局记录一下位置对应的方位
+	print("两款手机放到了圣诞节福利圣诞节福利时间东方丽景")
+	dump(directionData)
+
 	lt.DataManager:setPlayerDirectionTable(directionData)
 end
 
@@ -557,7 +562,7 @@ end
 
 function GameSelectPosPanel:getPlayerDirectionByPos(playerPos) 
 	for pos,sitNode in ipairs(self._currentSitPosArray) do
-		if pos == playerPos then
+		if sitNode:getTag() == playerPos then
 			return sitNode.atDirection
 		end
 	end
