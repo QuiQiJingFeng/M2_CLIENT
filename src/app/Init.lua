@@ -54,6 +54,7 @@ ltMetaTable["Luaj"] = "cocos/cocos2d/luaj"
 ltMetaTable["Luaoc"] = "cocos/cocos2d/luaoc"
 
 --Scene
+ltMetaTable["Initagreement"] = "app.Scene.InitScene.Initagreement"
 ltMetaTable["InitLayer"] = "app.Scene.InitScene.InitLayer"
 ltMetaTable["InitScene"] = "app.Scene.InitScene.InitScene"
 
@@ -70,7 +71,9 @@ ltMetaTable["WorldScene"] = "app.Scene.WorldScene.WorldScene"
 
 --layer
 ltMetaTable["BaseLayer"]			    = "app.Scene.WorldScene.Common.BaseLayer"
+ltMetaTable["KefuLayer"]			    	= "app.Scene.WorldScene.LobbyBtn.KefuLayer"
 ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.LobbyBtn.SetLayer"
+ltMetaTable["WXShareLayer"]			= "app.Scene.WorldScene.LobbyBtn.WXShareLayer"
 ltMetaTable["lobbyInfoLayer"]			= "app.Scene.WorldScene.LobbyBtn.infoLayer"
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
@@ -83,6 +86,7 @@ ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
 
 --麻将引擎
 ltMetaTable["MjEngine"] = "app.Scene.GameScene.common.MjEngine"
+ltMetaTable["HeadImage"] = "app.Scene.GameScene.common.HeadImage"
 
 --麻将
 ltMetaTable["ApplyGameOverPanel"] = "app.Scene.GameScene.mj.ApplyGameOverPanel"
