@@ -1,3 +1,62 @@
+--[[
+local data = {}
+	for i=2,4 do
+		self:testConfigOutCardsNodePos(i)
+		data["player"..i] = clone(self._allOutCardsNodePos)
+	end
+    local file = io.open("res/alloutcardpos/positions.json","wb")
+
+    file:write(json.encode(data))
+    file:close()
+
+function MjEngine:testConfigOutCardsNodePos(num)
+	self._allOutCardsNodePos ={}
+	local rootNode = nil
+	if num == 2 then
+		rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/2p/MjCardsPanel2p.csb")
+
+	elseif num == 3 then
+		rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/3p/MjCardsPanel3p.csb")
+
+	elseif num == 4 then
+		rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjCardsPanel.csb")
+	end
+
+	if not rootNode then
+		return
+	end
+
+	for i=1,num do
+		local cardsNode = lt.CommonUtil:getChildByNames(rootNode, "Panel_OutCard", "Node_OutCards_"..i)
+		local posArray = {}
+		for index=1, 60 do
+			local cardNode = lt.CommonUtil:getChildByNames(cardsNode, "MJ_Out_"..index)
+			if not cardNode then
+				break
+			end
+
+			local x, y = cardNode:getPosition()
+
+			table.insert(posArray, ccp(x, y))
+		end
+		local direction = 1
+		if num == 2 then
+			if i == 1 then
+				direction = lt.Constants.DIRECTION.BEI
+			else
+				direction = lt.Constants.DIRECTION.NAN
+			end
+		else
+			direction = i
+		end
+		self._allOutCardsNodePos[tostring(direction)] = posArray
+	end
+end
+
+]]
+
+
+
 local MjEngine = {}
 MjEngine.CARD_TYPE = {
 	HAND = 1, 
@@ -45,14 +104,14 @@ function MjEngine:create(deleget)
 	self._allCpgNodePos = {--吃椪杠左边的起点位置 
 	ccp(-30, 172),
 	ccp(-627, -60),
-	ccp(-30, 172),
+	ccp(-30, -217),
 	ccp(314, -39),
 	}
 
 	self._allHandNodePos = {--手牌左边的起点位置 
 	ccp(-16, 151),
 	ccp(-632, -60),
-	ccp(-15, 150),
+	ccp(-15, -210),
 	ccp(300, -37),
 	}
 
@@ -76,6 +135,7 @@ function MjEngine:create(deleget)
 	}
 
 	self._allOutCardsNodePos = {}--所有方位出的牌的位置 按照ccb资源上的位置
+
 	self:configOutCardsNodePos()
 
 	self._currentGameDirections = nil
@@ -103,46 +163,10 @@ function MjEngine:create(deleget)
 end
 
 function MjEngine:configOutCardsNodePos()
-	local rootNode = nil
-	if self._playerNum == 2 then
-		rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/2p/MjCardsPanel2p.csb")
-
-	elseif self._playerNum == 3 then
-		rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/3p/MjCardsPanel3p.csb")
-
-	elseif self._playerNum == 4 then
-		rootNode = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjCardsPanel.csb")
-	end
-
-	if not rootNode then
-		return
-	end
-
-	for i=1,self._playerNum do
-		local cardsNode = lt.CommonUtil:getChildByNames(rootNode, "Panel_OutCard", "Node_OutCards_"..i)
-		local posArray = {}
-		for index=1, 60 do
-			local cardNode = lt.CommonUtil:getChildByNames(cardsNode, "MJ_Out_"..index)
-			if not cardNode then
-				break
-			end
-
-			local x, y = cardNode:getPosition()
-
-			table.insert(posArray, ccp(x, y))
-		end
-		local direction = 1
-		if self._playerNum == 2 then
-			if i == 1 then
-				direction = lt.Constants.DIRECTION.BEI
-			else
-				direction = lt.Constants.DIRECTION.NAN
-			end
-		else
-			direction = i
-		end
-		self._allOutCardsNodePos[direction] = posArray
-	end
+	local file = io.open("res/alloutcardpos/positions.json","rb")
+	local content = file:read("*a")
+	local allData = json.decode(content)
+	self._allOutCardsNodePos = allData
 end
 
 function MjEngine:clearData()
@@ -252,7 +276,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 	elseif direction == lt.Constants.DIRECTION.NAN then
 		cpgOffX = 264
 	elseif direction == lt.Constants.DIRECTION.DONG then
-		cpgOffY = -114
+		cpgOffY = 114
 	elseif direction == lt.Constants.DIRECTION.BEI then
 		cpgOffX = -135
 	end
@@ -264,7 +288,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 	elseif direction == lt.Constants.DIRECTION.NAN then
 		handOffX = 88
 	elseif direction == lt.Constants.DIRECTION.DONG then
-		handOffY = -27
+		handOffY = 27
 	elseif direction == lt.Constants.DIRECTION.BEI then
 		handOffX = -46
 	end
@@ -306,6 +330,8 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 
 	--手牌
 	if refreshHand then
+		local cardZorder = 0
+
 		if not self._allPlayerHandCardsNode[direction] then
 			self._allPlayerHandCardsNode[direction] = {}
 		end
@@ -323,9 +349,15 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			if node then
 				self:updateCardsNode(node, self.CARD_TYPE.HAND, direction, info)
 			else
+				if direction == lt.Constants.DIRECTION.DONG then
+					cardZorder = cardZorder - 1
+				else
+					cardZorder = cardZorder + 1
+				end
+
 				node = self:createCardsNode(self.CARD_TYPE.HAND, direction, info)
 				table.insert(self._allPlayerHandCardsNode[direction], node)
-				self._allPlayerHandCardsPanel[direction]:addChild(node:getRootNode())
+				self._allPlayerHandCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 			end
 
 			local x = self._allCpgNodePos[direction].x
@@ -333,7 +365,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 
 			if cpgNumber and cpgNumber > 0 then--有吃椪杠存在
 
-				if direction == lt.Constants.DIRECTION.NAN then--锚点和初始化方向导致不同情况
+				if direction == lt.Constants.DIRECTION.NAN or direction == lt.Constants.DIRECTION.DONG then--锚点和初始化方向导致不同情况
 					node:setPosition(x + cpgNumber*cpgOffX + (i-1)*handOffX, y + cpgNumber*cpgOffY+(i-1)*handOffY)
 				else
 					node:setPosition(x + (cpgNumber - 1)*cpgOffX + i*handOffX, y + (cpgNumber - 1)*cpgOffY + i*handOffY)
@@ -364,6 +396,8 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 	--出牌
 
 	if refreshOut then
+
+		local cardZorder = 0
 		if not self._allPlayerOutCardsNode[direction] then
 			self._allPlayerOutCardsNode[direction] = {}
 		end
@@ -378,15 +412,20 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			if node then
 				self:updateCardsNode(node, self.CARD_TYPE.OUT, direction, info)
 			else
+				if direction == lt.Constants.DIRECTION.DONG or direction == lt.Constants.DIRECTION.BEI then
+					cardZorder = cardZorder - 1
+				else
+					cardZorder = cardZorder + 1
+				end
+
 				node = self:createCardsNode(self.CARD_TYPE.OUT, direction, info)
 				table.insert(self._allPlayerOutCardsNode[direction], node)
-				self._allPlayerOutCardsPanel[direction]:addChild(node:getRootNode())
+				self._allPlayerOutCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 			end
 			node:setPosition(self._allOutCardsNodePos[direction][i])
 			node:setVisible(true)
 		end
 	end
-
 end
 
 --所有牌的变化

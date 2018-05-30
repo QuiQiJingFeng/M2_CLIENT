@@ -174,12 +174,16 @@ function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果
 	end
 
 	self:configRotation()--初始化座位方位
-	self:configPlayer()--初始化玩家头像
+	--self:configPlayer()--初始化玩家头像
 	self:configPlayerScore()
 end
 
-function GameSelectPosPanel:configPlayer() --头像 
+function GameSelectPosPanel:refreshPositionInfo()
+	self:configRotation()--初始化座位方位
+end
 
+function GameSelectPosPanel:configPlayer() --头像 
+	
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	
@@ -189,7 +193,6 @@ function GameSelectPosPanel:configPlayer() --头像
 		end
 	end
 
-    print("+++++++++++++++++", #self._currentSitPosArray, #gameRoomInfo.players)
     for k,playerLogo in pairs(self._currentPlayerLogArray) do
     	playerLogo:setVisible(false)
     end
@@ -277,6 +280,14 @@ function GameSelectPosPanel:configPlayer() --头像
 end
 
 function GameSelectPosPanel:configRotation(isClick) 
+
+	local action = self._nodeNoPlayer:getActionByTag(99)
+	if action and not action:isDone() then
+		print("111111111111111111111111111111111111111111111111111111111111111111111111111")
+		return
+	end
+
+	--self._nodeNoPlayer:stopAllActions() isRunning
 	self._handSelect:setVisible(false)
 
 	for i,v in ipairs(self._currentPlayerLogArray) do
@@ -296,7 +307,7 @@ function GameSelectPosPanel:configRotation(isClick)
 	    	end
 
 	    	if v:getTag() ~= self._selectPositionNode:getTag() and not is_sit then
-	    		v:setVisible(false)
+	    		--v:setVisible(false)
 	    	end
 	    end
 
@@ -322,8 +333,11 @@ function GameSelectPosPanel:configRotation(isClick)
   		if self._playerNum == 3 then
   			local action = cc.RotateBy:create(time, du)
 			local action1 = function ( )
-				local action3 = cc.RotateBy:create(time, -du)
-				self._selectPositionNode:runAction(action3)
+				--self._selectPositionNode:runAction(action3)
+				for i,v in pairs(self._currentSitPosArray) do
+					local action3 = cc.RotateBy:create(time, -du)
+					v:runAction(action3)
+				end
 			end
 
   			local action2 = function ()
@@ -379,7 +393,7 @@ function GameSelectPosPanel:configRotation(isClick)
 			local spawn = cc.Spawn:create(cc.CallFunc:create(action1), action)
 			
 	  		local sequence = cc.Sequence:create(spawn, cc.CallFunc:create(action2), cc.CallFunc:create(headVisible))
-
+	  		sequence:setTag(99)
   			self._nodeNoPlayer:runAction(sequence)
 			--_nodeLightDXNB
 		else 
@@ -387,8 +401,13 @@ function GameSelectPosPanel:configRotation(isClick)
 			local action = cc.RotateBy:create(time, du)
 
 			local action2 = function ( )
-				local action3 = cc.RotateBy:create(time, -du)--父节点也进行了旋转所以为负
-				self._selectPositionNode:runAction(action3)
+				
+				--self._selectPositionNode:runAction(action3)
+				for i,v in pairs(self._allPlayerPosArray) do
+					local action3 = cc.RotateBy:create(time, -du)--父节点也进行了旋转所以为负
+					v:runAction(action3)
+				end
+
 			end
 
 			local action1 = function ( )
@@ -426,12 +445,12 @@ function GameSelectPosPanel:configRotation(isClick)
 				end
 			end
 			self:setPlayerDirectionTable()
+			sequence:setTag(99)
 	  		self._nodeNoPlayer:runAction(sequence)
 
   		end
 
 	else
-
 		local mySelfPosition = lt.DataManager:getMyselfPositionInfo().user_pos
 
 		local du = 0
@@ -442,8 +461,15 @@ function GameSelectPosPanel:configRotation(isClick)
 			du = (mySelfPositionNode.atDirection - self.POSITION_TYPE.NAN) * 90
 		end
 
+		if du == 0 then
+
+			self:configPlayer()
+			return
+		end
+
 		local temp = mySelfPositionNode.atDirection - self.POSITION_TYPE.NAN
 
+		print("默认旋转角度+++++++++++++", du)
   		--三人
   		if self._playerNum == 3 then
   			--3 2   2 1  1 3       1 2  2 3  3 1 
@@ -495,11 +521,12 @@ function GameSelectPosPanel:configRotation(isClick)
 
 			--_nodeLightDXNB
 		else 
+
+			self._nodeNoPlayer:setRotation(du)
+
 			for i,v in pairs(self._allPlayerPosArray) do
 				v:setRotation(-du)
 			end
-
-			self._nodeNoPlayer:setRotation(du)
 
 			self._cardsPanel._spriteDnxb:setRotation(du)
 			for pos,v in ipairs(self._currentSitPosArray) do
@@ -530,8 +557,9 @@ function GameSelectPosPanel:configRotation(isClick)
 
 		end
 		self:setPlayerDirectionTable()
+	
+		self:configPlayer()
 	end
-
 end
 
 function GameSelectPosPanel:setPlayerDirectionTable()
@@ -540,9 +568,8 @@ function GameSelectPosPanel:setPlayerDirectionTable()
 		directionData[sitNode:getTag()] = sitNode.atDirection
 	end
 	--全局记录一下位置对应的方位
-	print("两款手机放到了圣诞节福利圣诞节福利时间东方丽景")
+	print("说服力圣诞节福利就是到了房间数量的就是")
 	dump(directionData)
-
 	lt.DataManager:setPlayerDirectionTable(directionData)
 end
 
@@ -568,8 +595,6 @@ function GameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 end
 
 function GameSelectPosPanel:onSitDownClick(event) 
-	print("**********************************", event:getTag())
-
 	self._selectPositionNode = event
 
 	local arg = {pos = event:getTag()}--weixin
@@ -712,7 +737,7 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DEAL_DOWN, handler(self, self.onDealDown), "GameSelectPosPanel:onDealDown")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.SIT_DOWN, handler(self, self.onSitDownResponse), "GameSelectPosPanel:onSitDownResponse")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_SIT_DOWN, handler(self, self.onPushSitDown), "GameSelectPosPanel:onPushSitDown")
-	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.configPlayer), "GameSelectPosPanel:configPlayer")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.refreshPositionInfo), "GameSelectPosPanel:refreshPositionInfo")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, handler(self, self.onNoticePlayerConnectState), "GameSelectPosPanel:onNoticePlayerConnectState")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, handler(self, self.onRefreshScoreResponse), "GameSelectPosPanel:onRefreshScoreResponse")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameSelectPosPanel:onRefreshGameOver")
@@ -723,7 +748,7 @@ function GameSelectPosPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.DEAL_DOWN, "GameSelectPosPanel:onDealDown")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_SIT_DOWN, "GameSelectPosPanel:onPushSitDown")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.SIT_DOWN, "GameSelectPosPanel:onSitDownResponse")
-	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "GameSelectPosPanel:configPlayer")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "GameSelectPosPanel:refreshPositionInfo")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, "GameSelectPosPanel:onNoticePlayerConnectState")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, "GameSelectPosPanel:onRefreshScoreResponse")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameSelectPosPanel:onRefreshGameOver")
