@@ -172,7 +172,8 @@ function network:heartbeat(dt)
     if self.can_heart then
         local now = os.time()
         if self.waiting_heart_beat_response then
-            if now > (self.heart_beat_time + HEART_BEAT_DT) then
+            local delay = 0.5
+            if now > (self.heart_beat_time + HEART_BEAT_DT + delay) then
                 self:updateState(NETSTATE.WAIT_RECONNECTED)
                 self.waiting_heart_beat_response = false
             end
