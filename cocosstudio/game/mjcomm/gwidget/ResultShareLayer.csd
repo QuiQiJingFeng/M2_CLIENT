@@ -88,7 +88,7 @@
               <AbstractNodeData Name="Node_ResultInfo" ActionTag="-310454213" Tag="9" IconVisible="True" RightMargin="676.0000" TopMargin="888.0000" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="FileNode_Item_1" ActionTag="1123033161" Tag="190" IconVisible="True" LeftMargin="22.5111" RightMargin="-656.5111" TopMargin="-793.3676" BottomMargin="663.3676" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="FileNode_Item_1" ActionTag="1123033161" VisibleForFrame="False" Tag="190" IconVisible="True" LeftMargin="22.5111" RightMargin="-656.5111" TopMargin="-793.3676" BottomMargin="663.3676" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="634.0000" Y="130.0000" />
                     <AnchorPoint />
                     <Position X="22.5111" Y="663.3676" />
@@ -98,7 +98,7 @@
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/gwidget/ResultShareItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="FileNode_Item_2" ActionTag="1497293242" Tag="205" IconVisible="True" LeftMargin="22.5111" RightMargin="-656.5111" TopMargin="-663.3672" BottomMargin="533.3672" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="FileNode_Item_2" ActionTag="1497293242" VisibleForFrame="False" Tag="205" IconVisible="True" LeftMargin="22.5111" RightMargin="-656.5111" TopMargin="-663.3672" BottomMargin="533.3672" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="634.0000" Y="130.0000" />
                     <AnchorPoint />
                     <Position X="22.5111" Y="533.3672" />
@@ -108,7 +108,7 @@
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/gwidget/ResultShareItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="FileNode_Item_3" ActionTag="1767410758" Tag="220" IconVisible="True" LeftMargin="22.5119" RightMargin="-656.5119" TopMargin="-534.3667" BottomMargin="404.3667" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="FileNode_Item_3" ActionTag="1767410758" VisibleForFrame="False" Tag="220" IconVisible="True" LeftMargin="22.5119" RightMargin="-656.5119" TopMargin="-534.3667" BottomMargin="404.3667" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="634.0000" Y="130.0000" />
                     <AnchorPoint />
                     <Position X="22.5119" Y="404.3667" />
@@ -118,7 +118,7 @@
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="game/mjcomm/gwidget/ResultShareItem.csd" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="FileNode_Item_4" ActionTag="-1680003662" Tag="235" IconVisible="True" LeftMargin="22.5111" RightMargin="-656.5111" TopMargin="-404.6340" BottomMargin="274.6340" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+                  <AbstractNodeData Name="FileNode_Item_4" ActionTag="-1680003662" VisibleForFrame="False" Tag="235" IconVisible="True" LeftMargin="22.5111" RightMargin="-656.5111" TopMargin="-404.6340" BottomMargin="274.6340" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                     <Size X="634.0000" Y="130.0000" />
                     <AnchorPoint />
                     <Position X="22.5111" Y="274.6340" />
@@ -150,8 +150,8 @@
                     <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/shareTrophy.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_Time" ActionTag="1138295734" Tag="309" IconVisible="False" LeftMargin="303.9973" RightMargin="-591.9973" TopMargin="-253.9997" BottomMargin="229.9997" FontSize="24" LabelText="2017-03-31 00:00:00 结束" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="288.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Text_Time" ActionTag="1138295734" Tag="309" IconVisible="False" LeftMargin="303.9973" RightMargin="-581.9973" TopMargin="-255.9997" BottomMargin="227.9997" FontSize="24" LabelText="2017-03-31 00:00:00 结束" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="278.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="303.9973" Y="241.9997" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -161,8 +161,8 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_RoomNum" ActionTag="-1303957168" Tag="311" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-216.8748" BottomMargin="192.8748" FontSize="24" LabelText="房号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="72.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Text_RoomNum" ActionTag="-1303957168" Tag="311" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-218.8748" BottomMargin="190.8748" FontSize="24" LabelText="房号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="72.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="303.9973" Y="204.8748" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -172,8 +172,8 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_BaseCode" ActionTag="-1007996770" Tag="312" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-179.7499" BottomMargin="155.7499" FontSize="24" LabelText="底分：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="72.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Text_BaseCode" ActionTag="-1007996770" Tag="312" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-181.7499" BottomMargin="153.7499" FontSize="24" LabelText="底分：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="72.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="303.9973" Y="167.7499" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -183,8 +183,8 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_ZiFei" ActionTag="-1149894376" Tag="1326" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-142.6250" BottomMargin="118.6250" FontSize="24" LabelText="资费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="72.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Text_ZiFei" ActionTag="-1149894376" Tag="1326" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-144.6250" BottomMargin="116.6250" FontSize="24" LabelText="资费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="72.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="303.9973" Y="130.6250" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -246,14 +246,14 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/shareQRcodeBg.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Tips" ActionTag="1086349437" Tag="316" IconVisible="False" LeftMargin="326.8990" RightMargin="103.1010" TopMargin="1180.0721" BottomMargin="54.9279" FontSize="32" LabelText="快来下载游戏&#xA;&#xA;与好友一起打麻将吧！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="320.0000" Y="99.0000" />
+          <AbstractNodeData Name="Text_Tips" ActionTag="1086349437" Tag="316" IconVisible="False" LeftMargin="326.8990" RightMargin="103.1010" TopMargin="1174.0721" BottomMargin="48.9279" FontSize="32" LabelText="快来下载游戏&#xA;&#xA;与好友一起打麻将吧！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="320.0000" Y="111.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="326.8990" Y="104.4279" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4359" Y="0.0783" />
-            <PreSize X="0.4267" Y="0.0742" />
+            <PreSize X="0.4267" Y="0.0832" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

@@ -10,7 +10,7 @@ msg.common"
 Result
 success
 fail
-¥
+—
 msg/ddz.protomsg.ddz"0
 ReqPointDemand
 
@@ -19,10 +19,11 @@ userDemand"_
 ReqSendCard
 nowType (RnowType
 nowValue (RnowValue
-cardList (RcardList"W
+cardList (RcardList"u
 ServerPointDemand
 	userExtra (R	userExtra$
-userNowDemand (RuserNowDemand"l
+userNowDemand (RuserNowDemand
+	userPoint (R	userPoint"l
 ServerSendCard
 	userExtra (R	userExtra
 userCard (RuserCard 
@@ -31,8 +32,8 @@ userDemand"_
 	userExtra (R	userExtra
 
 userDemand (R
-userDemand"M
-NoticeMainPaleyer
+userDemand"L
+NoticeMainPlayer
 	userExtra (R	userExtra
 baseCard (RbaseCard"ä
 Item
@@ -71,12 +72,12 @@ cCardValue"
 Result
 success
 	auth_fail
-Ê/
+à2
 msg/user.protomsg.user"F
 GPItem
 value (Rvalue
 from (Rfrom
-type (Rtype"≈
+type (Rtype"î
 UserInfo
 user_id (RuserId
 	user_name (	RuserName
@@ -90,9 +91,7 @@ cCardValue"
 
 disconnect
  (R
-disconnect/
-
-card_stack (2.msg.user.GPItemR	cardStack"Ö
+disconnect"Ö
 RoomSetting
 	game_type (RgameType
 round (Rround
@@ -211,7 +210,10 @@ card_stack (2.msg.user.GPItemR	cardStack"X
 operator_list (	RoperatorList
 user_pos (RuserPos
 user_id (RuserId
-card (Rcard"ä
+card (Rcard"?
+NoticeTingCard
+user_pos (RuserPos
+card (Rcard"ä
 Item
 user_id (RuserId
 user_pos (RuserPos
@@ -240,7 +242,10 @@ is_connect (R	isConnect":
 	HandleNum
 user_pos (RuserPos
 
-handle_num (R	handleNum"å
+handle_num (R	handleNum"L
+	ItemStack$
+item (2.msg.user.GPItemRitem
+user_pos (RuserPos"¿
 PushAllRoomInfoE
 refresh_room_info (2.msg.user.RefreshRoomInfoRrefreshRoomInfo
 	card_list (RcardList
@@ -259,18 +264,21 @@ handleNums
 put_pos (RputPos
 	operators (	R	operators,
 cur_play_operators (	RcurPlayOperators
-card (Rcard"Y
+card (Rcard2
+
+card_stack (2.msg.user.ItemStackR	cardStack"Y
 GoldItem
 user_id (RuserId
 user_pos (RuserPos
 gold_num (RgoldNum"A
 UpdateCostGold/
-	gold_list (2.msg.user.GoldItemRgoldList"^
+	gold_list (2.msg.user.GoldItemRgoldList"t
 	ScoreItem
 user_id (RuserId
 user_pos (RuserPos
 
-delt_score (R	deltScore"R
+delt_score (R	deltScore
+score (Rscore"R
 RefreshPlayerCurScore9
 cur_score_list (2.msg.user.ScoreItemRcurScoreList"%
 HandleError
@@ -281,8 +289,11 @@ delt_score (R	deltScore"R
 room_id (RroomId
 type (Rtype"(
 DistroyRoomRsp
-result (	Rresult"
-NoticeOtherDistoryRoom"1
+result (	Rresult"\
+NoticeOtherDistoryRoom!
+distroy_time (RdistroyTime
+confirm_map (R
+confirmMap"1
 ConfirmDistroyRoomReq
 confirm (Rconfirm"/
 ConfirmDistroyRoomRsp
@@ -293,7 +304,7 @@ delt_score (R	deltScore"R
 user_pos (RuserPos"F
 NoticePlayerDistroyRoom
 room_id (RroomId
-type (Rtype"∫
+type (Rtype"–
 
 SattleItem
 user_id (RuserId
@@ -302,11 +313,14 @@ SattleItem
 ming_gang_num (RmingGangNum
 an_gang_num (R	anGangNum
 
-reward_num (R	rewardNum"c
+reward_num (R	rewardNum
+score (Rscore"Ç
 NoticeTotalSattle
 room_id (RroomId5
 sattle_list (2.msg.user.SattleItemR
-sattleList*ã
+sattleList
+
+begin_time (	R	beginTime*ã
 Result
 success
 paramater_error
@@ -333,7 +347,7 @@ auth_faild
 AN_GANG
 	MING_GANG
 	PENG_GANG
-ò
+⁄
 protocol.protomsg/common.protomsg/login.protomsg/user.protomsg/ddz.proto"ù
 C2S
 
@@ -351,7 +365,7 @@ leave_roomìN (2.msg.user.LeaveRoomReqR	leaveRoom0
 game_cmdïN (2.msg.user.GameCmdReqRgameCmd<
 distroy_roomñN (2.msg.user.DistroyRoomReqRdistroyRoomR
 confirm_distroy_roomóN (2.msg.user.ConfirmDistroyRoomReqRconfirmDistroyRoomD
-get_my_room_listòN (2.msg.user.GetMyRoomListReqRgetMyRoomList"£
+get_my_room_listòN (2.msg.user.GetMyRoomListReqRgetMyRoomList"Â
 S2C
 
 session_id (R	sessionId
@@ -390,12 +404,13 @@ leave_roomìN (2.msg.user.LeaveRoomRspR	leaveRoom0
 refresh_player_cur_score‚ (2.msg.user.RefreshPlayerCurScoreRrefreshPlayerCurScoreL
 notice_total_sattle„ (2.msg.user.NoticeTotalSattleRnoticeTotalSattleO
 notice_special_event‰ (2.msg.user.NoticeSpecailEventRnoticeSpecialEventC
+notice_ting_cardÂ (2.msg.user.NoticeTingCardRnoticeTingCardC
 update_resource±Í (2.msg.user.UpdateResourceRupdateResourceG
 update_room_state≤Í (2.msg.user.UpdateRoomStateRupdateRoomState:
 handle_errorëø (2.msg.user.HandleErrorRhandleErrorA
 ServerSendCard≠ú (2.msg.ddz.ServerSendCardRServerSendCardJ
-NoticePointDemandÆú (2.msg.ddz.NoticePointDemandRNoticePointDemandJ
-NoticeMainPaleyerØú (2.msg.ddz.NoticeMainPaleyerRNoticeMainPaleyerA
-NoticeSendCard∞ú (2.msg.ddz.NoticeSendCardRNoticeSendCardJ
-ServerPointDemand±ú (2.msg.ddz.ServerPointDemandRServerPointDemandJ
-NoticeDDZGameOver≤ú (2.msg.ddz.NoticeDDZGameOverRNoticeDDZGameOver
+NoticePointDemandÆú (2.msg.ddz.NoticePointDemandRNoticePointDemandG
+NoticeMainPlayerØú (2.msg.ddz.NoticeMainPlayerRNoticeMainPlayerA
+NoticeSendCard±ú (2.msg.ddz.NoticeSendCardRNoticeSendCardJ
+ServerPointDemand≤ú (2.msg.ddz.ServerPointDemandRServerPointDemandJ
+NoticeDDZGameOver≥ú (2.msg.ddz.NoticeDDZGameOverRNoticeDDZGameOver

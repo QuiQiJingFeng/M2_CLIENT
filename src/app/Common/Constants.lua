@@ -6,12 +6,20 @@ Constants.CG_ON = false
 
 Constants.GUIDE_AUTO_BATTLE_LEVEL = 2
 
+--游戏类型
 Constants.GAME_TYPE = {
     HZMJ = 1,
     DDZ  = 2,
 }
 
 Constants.HONG_ZHONG_VALUE = 35
+
+Constants.DIRECTION = {
+	XI = 1,
+	NAN = 2,
+	DONG = 3,
+	BEI = 4,
+}
 
 Constants.TEXTS = {
     [1] = "\n(房主)",
@@ -26,7 +34,8 @@ Constants.ROOM_STATE = {
     GAME_OVER = 3,      --游戏结束
 }
 
-Constants.HOST = "mengyagame.com"  --"192.168.0.100"
+-- if debug 47.52.99.120
+Constants.HOST = "47.52.99.120"--"mengyagame.com"  --"192.168.0.100"
 Constants.PORT = 80
 
 return Constants

@@ -772,6 +772,7 @@
                   <Project Name="MjActionBtnsPanel.csd" Type="Layer" />
                   <Project Name="MjCardsMenuItem.csd" Type="Layer" />
                   <Project Name="MjCardsPanel.csd" Type="Layer" />
+                  <Project Name="MjDirectionPanel.csd" Type="Layer" />
                   <Project Name="MjHuCardsTipsItem.csd" Type="Layer" />
                   <Project Name="MJLeftCardsPanel.csd" Type="Layer" />
                   <Project Name="MjLieDownCpgItem.csd" Type="Layer" />
@@ -1036,6 +1037,7 @@
               <Project Name="TotalResult2pLayer.csd" Type="Layer" />
               <Project Name="TotalResult3pLayer.csd" Type="Layer" />
               <Project Name="TotalResultLayer.csd" Type="Layer" />
+              <Project Name="TotalResultitemLayer.csd" Type="Layer" />
             </Folder>
             <Folder Name="part">
               <Image Name="arrow_down.png" />

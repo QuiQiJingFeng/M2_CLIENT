@@ -76,18 +76,29 @@
                 <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/titleBg.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Tt_Content" ActionTag="901153878" Tag="123" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="45.8633" RightMargin="162.1367" TopMargin="51.2187" BottomMargin="351.8113" FontSize="30" LabelText="玩家【MM】申请解散房间，请等待其他玩家&#xA;选择（超过2分钟未做选择，则默认同意）" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="570.0000" Y="60.0000" />
+              <AbstractNodeData Name="Tt_Content" ActionTag="901153878" Tag="123" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="67.8600" RightMargin="74.1400" TopMargin="31.2155" BottomMargin="331.8145" IsCustomSize="True" FontSize="30" LabelText="玩家【MM】申请解散房间，请等待其他玩家选择（超过2分钟未做选择，则默认同意）" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="636.0000" Y="100.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="45.8633" Y="381.8113" />
+                <Position X="67.8600" Y="381.8145" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="116" G="61" B="0" />
-                <PrePosition X="0.0590" Y="0.8246" />
-                <PreSize X="0.7326" Y="0.1296" />
+                <PrePosition X="0.0872" Y="0.8246" />
+                <PreSize X="0.8175" Y="0.2160" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Se_CutTime" ActionTag="-877162392" Tag="1431" IconVisible="False" LeftMargin="283.3897" RightMargin="309.2903" TopMargin="265.0690" BottomMargin="142.9610" Scale9Enable="True" LeftEage="27" RightEage="27" TopEage="18" BottomEage="18" Scale9OriginX="27" Scale9OriginY="18" Scale9Width="29" Scale9Height="19" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Clock_icon" ActionTag="119758907" Tag="127" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="246.3000" RightMargin="479.7000" TopMargin="254.8180" BottomMargin="162.2120" ctype="SpriteObjectData">
+                <Size X="52.0000" Y="46.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="272.3000" Y="185.2120" />
+                <Scale ScaleX="1.0556" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.3500" Y="0.4000" />
+                <PreSize X="0.0668" Y="0.0993" />
+                <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/iconClock.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Se_CutTime" ActionTag="-877162392" Tag="1431" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="335.2400" RightMargin="257.4399" TopMargin="250.3180" BottomMargin="157.7120" Scale9Enable="True" LeftEage="27" RightEage="27" TopEage="18" BottomEage="18" Scale9OriginX="27" Scale9OriginY="18" Scale9Width="29" Scale9Height="19" ctype="ImageViewObjectData">
                 <Size X="185.3200" Y="55.0000" />
                 <Children>
                   <AbstractNodeData Name="Al_CutTime" ActionTag="-142793686" Tag="16" IconVisible="False" LeftMargin="30.0000" RightMargin="35.3200" TopMargin="8.5000" BottomMargin="3.5000" CharWidth="30" CharHeight="43" LabelText="2/00" StartChar="." ctype="TextAtlasObjectData">
@@ -100,23 +111,12 @@
                     <PreSize X="0.6475" Y="0.7818" />
                     <LabelAtlasFileImage_CNB Type="Normal" Path="game/mjcomm/gwidget/img/jieShanClickNum.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BG11_3" ActionTag="119758907" Tag="127" IconVisible="False" LeftMargin="-68.2534" RightMargin="201.5734" TopMargin="5.0242" BottomMargin="3.9758" ctype="SpriteObjectData">
-                    <Size X="52.0000" Y="46.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="-42.2534" Y="26.9758" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.2280" Y="0.4905" />
-                    <PreSize X="0.2806" Y="0.8364" />
-                    <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/iconClock.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
-                    <BlendFunc Src="1" Dst="771" />
-                  </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="376.0497" Y="170.4610" />
+                <Position X="427.9000" Y="185.2120" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4834" Y="0.3681" />
+                <PrePosition X="0.5500" Y="0.4000" />
                 <PreSize X="0.2382" Y="0.1188" />
                 <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/bgTime.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
               </AbstractNodeData>
@@ -166,10 +166,10 @@
                 <PreSize X="0.2699" Y="0.2073" />
                 <FileData Type="MarkedSubImage" Path="game/mjcomm/button/btnDisabled.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Bn_Sure" ActionTag="-1114907653" Tag="170" IconVisible="False" LeftMargin="101.0000" RightMargin="467.0000" TopMargin="340.5300" BottomMargin="27.5000" TouchEnable="True" Scale9Enable="True" LeftEage="39" RightEage="39" TopEage="27" BottomEage="27" Scale9OriginX="39" Scale9OriginY="27" Scale9Width="90" Scale9Height="41" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Bn_Sure" ActionTag="-2111843089" Tag="3674" IconVisible="False" LeftMargin="101.0000" RightMargin="467.0000" TopMargin="340.5300" BottomMargin="27.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="138" Scale9Height="73" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="210.0000" Y="95.0000" />
                 <Children>
-                  <AbstractNodeData Name="ImageText10" ActionTag="303720914" Tag="122" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="58.0080" RightMargin="55.9920" TopMargin="23.4955" BottomMargin="27.5045" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="ImageText10" ActionTag="-372481811" Tag="3675" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="58.0080" RightMargin="55.9920" TopMargin="23.4955" BottomMargin="27.5045" ctype="SpriteObjectData">
                     <Size X="96.0000" Y="44.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="106.0080" Y="49.5045" />
@@ -187,12 +187,15 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2648" Y="0.1620" />
                 <PreSize X="0.2699" Y="0.2052" />
-                <FileData Type="MarkedSubImage" Path="game/mjcomm/button/btnYellow.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+                <TextColor A="255" R="65" G="65" B="70" />
+                <NormalFileData Type="MarkedSubImage" Path="game/mjcomm/button/btnYellow.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Bn_Cancel" ActionTag="1179757273" Tag="121" IconVisible="False" LeftMargin="437.0000" RightMargin="131.0000" TopMargin="340.5300" BottomMargin="27.5000" TouchEnable="True" Scale9Enable="True" LeftEage="39" RightEage="39" TopEage="27" BottomEage="27" Scale9OriginX="39" Scale9OriginY="27" Scale9Width="90" Scale9Height="41" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Bn_Cancel" ActionTag="-994573470" Tag="3673" IconVisible="False" LeftMargin="437.0000" RightMargin="131.0000" TopMargin="340.5300" BottomMargin="27.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="138" Scale9Height="73" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="210.0000" Y="95.0000" />
                 <Children>
-                  <AbstractNodeData Name="ImageText11" ActionTag="-1091873018" Tag="121" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="55.5000" RightMargin="55.5000" TopMargin="23.4955" BottomMargin="27.5045" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="ImageText11_0" ActionTag="-309665628" Tag="3676" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="55.5000" RightMargin="55.5000" TopMargin="23.4955" BottomMargin="27.5045" ctype="SpriteObjectData">
                     <Size X="99.0000" Y="44.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="105.0000" Y="49.5045" />
@@ -210,7 +213,76 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6967" Y="0.1620" />
                 <PreSize X="0.2699" Y="0.2052" />
-                <FileData Type="MarkedSubImage" Path="game/mjcomm/button/btnGreen.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+                <TextColor A="255" R="65" G="65" B="70" />
+                <NormalFileData Type="MarkedSubImage" Path="game/mjcomm/button/btnGreen.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Name_1" ActionTag="-1526804087" Tag="3655" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="52.0000" RightMargin="616.0000" TopMargin="121.9090" BottomMargin="307.1210" FontSize="30" LabelText="【MM】" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="110.0000" Y="34.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="52.0000" Y="324.1210" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="116" G="61" B="0" />
+                <PrePosition X="0.0668" Y="0.7000" />
+                <PreSize X="0.1414" Y="0.0734" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Name_2" ActionTag="1346446317" Tag="3656" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="52.0000" RightMargin="616.0000" TopMargin="158.9514" BottomMargin="270.0786" FontSize="30" LabelText="【MM】" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="110.0000" Y="34.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="52.0000" Y="287.0786" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="116" G="61" B="0" />
+                <PrePosition X="0.0668" Y="0.6200" />
+                <PreSize X="0.1414" Y="0.0734" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Name_3" ActionTag="1769277270" Tag="3657" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="52.0000" RightMargin="616.0000" TopMargin="195.9938" BottomMargin="233.0362" FontSize="30" LabelText="【MM】" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="110.0000" Y="34.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="52.0000" Y="250.0362" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="116" G="61" B="0" />
+                <PrePosition X="0.0668" Y="0.5400" />
+                <PreSize X="0.1414" Y="0.0734" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="State_1" ActionTag="-1486257336" Tag="3661" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="152.0000" RightMargin="506.0000" TopMargin="121.9090" BottomMargin="307.1210" FontSize="30" LabelText="玩家等待" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="120.0000" Y="34.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="152.0000" Y="324.1210" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="116" G="61" B="0" />
+                <PrePosition X="0.1954" Y="0.7000" />
+                <PreSize X="0.1542" Y="0.0734" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="State_2" ActionTag="-2094896622" Tag="3662" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="152.0000" RightMargin="506.0000" TopMargin="158.9514" BottomMargin="270.0786" FontSize="30" LabelText="玩家等待" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="120.0000" Y="34.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="152.0000" Y="287.0786" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="116" G="61" B="0" />
+                <PrePosition X="0.1954" Y="0.6200" />
+                <PreSize X="0.1542" Y="0.0734" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="State_3" ActionTag="-886608680" Tag="3663" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="152.0000" RightMargin="506.0000" TopMargin="195.9938" BottomMargin="233.0362" FontSize="30" LabelText="玩家等待" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="120.0000" Y="34.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="152.0000" Y="250.0362" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="116" G="61" B="0" />
+                <PrePosition X="0.1954" Y="0.5400" />
+                <PreSize X="0.1542" Y="0.0734" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

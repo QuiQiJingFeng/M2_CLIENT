@@ -8,6 +8,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendAuth;
 import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.openapi.WXImageObject;
 import com.tencent.mm.sdk.openapi.WXMediaMessage;
 import com.tencent.mm.sdk.openapi.WXWebpageObject;
 
@@ -64,6 +66,9 @@ public class WechatDelegate extends BroadcastReceiver {
     private static WechatDelegate instance;
 
     private static int platform;
+
+    private final static int SHARE_IMAGE  = 0x001;
+
 
     public synchronized static WechatDelegate getInstance() {
         if (null == instance) {
@@ -427,13 +432,34 @@ public class WechatDelegate extends BroadcastReceiver {
     }
 
 
-    public static void wxshareURL(int plat, String titleStr, String desStr, String urlStr, String imgStr)
+    public static void wxshareImg(String imgStr)
     {
-        Message message = new Message();
-        message.what = 1;
-        message.obj = plat+"|"+titleStr+"|"+desStr+"|"+urlStr+"|"+imgStr;
-        handler.sendMessage(message);
+        if(!wxApi.isWXAppInstalled()){
+            try {
+                JSONObject jsonObject1 = new JSONObject();
+                jsonObject1.put("action", "SHARE");
+                jsonObject1.put("result", "un_install_wechat");
+                PlatformSDK.invokeCallBack(jsonObject1.toString());
+            }catch(Exception e) {
+                Log.e(TAG, "error json object generate");
+            }
+            return;
+        }
+
+        Bitmap  bmp = BitmapFactory.decodeFile(imgStr);
+        WXImageObject imgObj = new WXImageObject(bmp);
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.mediaObject = imgObj;
+
+        //设置缩略图
+        Bitmap thumpBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
+        bmp.recycle();
+        msg.thumbData = bmpToByteArray(thumpBmp, true);
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.message = msg;
+        wxApi.sendReq(req);
     }
+
     public static void shareURL(int plat, String titleStr, String desStr, String urlStr, String imgStr)
     {
         // Log.e("wxshareURL", "wxshareURL");
@@ -530,16 +556,9 @@ public class WechatDelegate extends BroadcastReceiver {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case 1:
+                case SHARE_IMAGE:
                 {
-                    String appid = msg.obj.toString();
-                    String[] arrays = appid.split("\\|");
-                    int plat = Integer.parseInt(arrays[0]);
-                    String titleStr = arrays[1];
-                    String desStr = arrays[2];
-                    String urlStr = arrays[3];
-                    String imgStr = arrays[4];
-                    shareURL(plat, titleStr, desStr, urlStr, imgStr);
+
                 }
                 break;
                 default:

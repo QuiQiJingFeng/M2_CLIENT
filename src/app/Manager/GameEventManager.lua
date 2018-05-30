@@ -19,12 +19,15 @@ GameEventManager.EVENT = {
 	CREATE_ROOM = "create_room",
     SIT_DOWN = "sit_down",
     LEAVE_ROOM = "leave_room",--回到大厅
+    DISTROY_ROOM = "distroy_room",
+    CONFIRM_DISTROY_ROOM = "confirm_distroy_room",
+    NOTICE_TOTAL_SATTLE  = "notice_total_sattle",--刷新总结算
     GAME_CMD = "game_cmd",  --[[游戏中的请求 DEAL_FINISH  发牌完毕
 PLAY_CARD  出牌
 PENG    碰
 GANG    杠
 GUO     过]]--
-    GAME_CMD = "game_cmd",  --
+    -- GAME_CMD = "game_cmd",  --
     Game_OVER_REFRESH = "game_over_refresh",
 
     --推送
@@ -33,6 +36,9 @@ GUO     过]]--
     DEAL_DOWN = "deal_card",--发牌
     PUSH_SIT_DOWN = "push_sit_down",--推送坐下的信息 
     PUSH_DRAW_CARD = "push_draw_card",--通知其他人有人摸牌 
+    NOTICE_OTHER_DISTROY_ROOM = "notice_other_distroy_room",--通知有人解散房间
+    NOTICE_OTHER_REFUSE = "notice_other_refuse",--如果有人拒绝解散
+    NOTICE_PLAYER_DISTROY_ROOM = "notice_player_distroy_room",--如果房间被销毁
     PUSH_PLAY_CARD = "push_play_card",--通知玩家该出牌了 
     NOTICE_PLAY_CARD = "notice_play_card",--通知其他人有人出牌 
 
@@ -50,7 +56,15 @@ GUO     过]]--
     RECONNECT = "reconnect", --重新连接
     
     WAIT_RECONNECT = "wait_reconnect",  --监听客户端连接断开
- 
+
+    -- ddz
+    SERVER_SEND_CARD = "ServerSendCard",
+    NOTICE_POINT_DEMAND = "NoticePointDemand",
+    NOTICE_MAIN_PLAYER = "NoticeMainPlayer",
+    SERVER_MAIN_PLAYER = "ServerMainPaleyer",
+    NOTICE_SEND_CARD = "NoticeSendCard",
+    SERVER_POINT_DEMAND = "ServerPointDemand",
+    NOTICE_DDZ_GAMEOVER = "NoticeDDZGameOver",
 }
 
 local handler_id = 0

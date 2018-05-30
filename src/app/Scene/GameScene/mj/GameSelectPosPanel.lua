@@ -165,7 +165,7 @@ function GameSelectPosPanel:againConfigUI()
 	end
 
 	self:configPlayer()--初始化玩家头像
-	self:configPlayerScore()
+	--self:configPlayerScore()
 end
 
 function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果在选座位阶段 会走 initGame
@@ -179,10 +179,11 @@ function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果
 end
 
 function GameSelectPosPanel:configPlayer() --头像 
+
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	
-	if allRoomInfo.card_list and next(allRoomInfo.card_list) then--断线重连 牌局中
+	if lt.DataManager:isClientConnectAgainPlaying() then--断线重连 牌局中
 		for i,v in ipairs(self._currentSitPosArray) do
 			v:setVisible(false)
 		end
@@ -203,13 +204,22 @@ function GameSelectPosPanel:configPlayer() --头像
 
     	if player then--这个位置有人
     		print("000000000000000000_______________", pos, sitNode.atDirection)
-    		if self._currentPlayerLogArray[sitNode.atDirection] then
-				local name = self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Text_Name")
+    		local playerLog = self._currentPlayerLogArray[sitNode.atDirection]
+    		if playerLog then
+				local name = playerLog:getChildByName("Text_Name")
 				if name then
 					name:setString(player.user_name)
 				end
 
-				--self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Zhuang"):setVisible(false)
+				--playerLog:getChildByName("Sprite_Zhuang"):setVisible(false)
+				playerLog:getChildByName("Sprite_Disconnect"):setVisible(false)
+				if player.is_sit then
+					if player.disconnect then
+						playerLog:getChildByName("Sprite_Disconnect"):setVisible(true) --断线标识
+					else
+						playerLog:getChildByName("Sprite_Disconnect"):setVisible(false) --断线标识
+					end
+				end
 
 				if player.user_id ~= lt.DataManager:getPlayerInfo().user_id then--别的玩家的头像
 					sitNode:setVisible(false)
@@ -219,7 +229,7 @@ function GameSelectPosPanel:configPlayer() --头像
 	        			
 	        			self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(true)
 	        			
-	        			if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+	        			if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		        			local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
 		        			self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
 	        			end
@@ -227,7 +237,7 @@ function GameSelectPosPanel:configPlayer() --头像
 	        			print("_______2222_________________________", player.user_pos, sitNode.atDirection)
 		        		self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(false)
 	        			
-		        		if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+		        		if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 	        				local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
 	        				self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
 		        		end	
@@ -238,7 +248,7 @@ function GameSelectPosPanel:configPlayer() --头像
 						print("%%%%%%%%%", player.user_pos, mySelfNode.atDirection)
 
 						mySelfNode:setVisible(false)
-						if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面
+						if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 
 							local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(mySelfNode:getPosition()))
 						--座位--self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
@@ -250,7 +260,11 @@ function GameSelectPosPanel:configPlayer() --头像
 						self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
 					end
 
-					
+					if lt.DataManager:isClientConnectAgain() and not player.is_sit then--入座界面
+
+						local arg = {pos = player.user_pos}
+					    lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
+					end
 				end
     		end
     	else
@@ -520,20 +534,23 @@ function GameSelectPosPanel:configRotation(isClick)
 
 		end
 	end
+
+	local directionData = {}
+	for pos,sitNode in ipairs(self._currentSitPosArray) do
+		directionData[pos] = sitNode.atDirection
+	end
+	--全局记录一下位置对应的方位
+	lt.DataManager:setPlayerDirectionTable(directionData)
 end
 
-function GameSelectPosPanel:configPlayerScore() 
-
-	for direction=1,4 do
-		local logoNode = self._currentPlayerLogArray[direction]
-		local score = 0
-		if self._allPlayerGameOverData then
-			if self._allPlayerGameOverData[direction] then
-				score = self._allPlayerGameOverData[direction].score
+function GameSelectPosPanel:configPlayerScore() --初始化和断线重连
+	if lt.DataManager:getGameRoomInfo().players then
+		for i,v in ipairs(lt.DataManager:getGameRoomInfo().players) do
+			local direction = self:getPlayerDirectionByPos(v.user_pos)
+			local logoNode = self._currentPlayerLogArray[direction]
+			if logoNode then
+				logoNode:getChildByName("Text_Amount"):setString(v.score) --99999
 			end
-		end
-		if logoNode then
-			logoNode:getChildByName("Text_Amount"):setString(score) --99999
 		end
 	end
 end
@@ -647,39 +664,20 @@ end
 
 function GameSelectPosPanel:onRefreshGameOver()   --结算
 	if lt.DataManager:getGameOverInfo().players then
-		self._allPlayerGameOverData = {}
 		for i,v in ipairs(lt.DataManager:getGameOverInfo().players) do
 			local direction = self:getPlayerDirectionByPos(v.user_pos)
-			self._allPlayerGameOverData[direction] = v
-		end
-	end
+			local logoNode = self._currentPlayerLogArray[direction]
+			if logoNode then
+				local scoreText = logoNode:getChildByName("Text_Amount")--99999
 
-	self._allPlayerGameOverData = self._allPlayerGameOverData or {}
-
-	for i,v in ipairs(self._allPlayerGameOverData) do
-		local direction = self:getPlayerDirectionByPos(v.user_pos)
-		local logoNode = self._currentPlayerLogArray[direction]
-		if logoNode then
-			local scoreText = logoNode:getChildByName("Text_Amount")--99999
-
-			if not self._allPlayerGameOverData[direction].score then
-				self._allPlayerGameOverData[direction].score = 0
+				scoreText:setString(v.score)
 			end
-			scoreText:setString(self._allPlayerGameOverData[direction].score)
 		end
 	end
+
 end
 
-function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（杠）
-
-	if lt.DataManager:getGameOverInfo().players then
-		self._allPlayerGameOverData = {}
-		for i,v in ipairs(lt.DataManager:getGameOverInfo().players) do
-			local direction = self:getPlayerDirectionByPos(v.user_pos)
-			self._allPlayerGameOverData[direction] = v
-		end
-	end
-	self._allPlayerGameOverData = self._allPlayerGameOverData or {}
+function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（杠,hu）
 
 	for k,v in pairs(msg.cur_score_list) do
 
@@ -687,16 +685,7 @@ function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分�
 		local logoNode = self._currentPlayerLogArray[direction]
 		if logoNode then
 			local scoreText = logoNode:getChildByName("Text_Amount")--99999
-
-			if not self._allPlayerGameOverData[direction] then
-				self._allPlayerGameOverData[direction] = {}
-			end
-
-			if not self._allPlayerGameOverData[direction].score then
-				self._allPlayerGameOverData[direction].score = 0
-			end
-			self._allPlayerGameOverData[direction].score = self._allPlayerGameOverData[direction].score + v.delt_score
-			scoreText:setString(self._allPlayerGameOverData[direction].score)
+			scoreText:setString(v.score)
 		end
 	end
 end
@@ -706,8 +695,7 @@ function GameSelectPosPanel:onClientConnectAgain()
 
 	-- local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 
-	-- self._zhuangPos = allRoomInfo.zpos
-
+	-- self._zhuangPos = allRoomInfo.zpos:
 	-- --显示庄家
 	-- self._zhuangDirection = self._deleget:getPlayerDirectionByPos(self._zhuangPos)
 
@@ -725,7 +713,7 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, handler(self, self.onNoticePlayerConnectState), "GameSelectPosPanel:onNoticePlayerConnectState")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, handler(self, self.onRefreshScoreResponse), "GameSelectPosPanel:onRefreshScoreResponse")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameSelectPosPanel:onRefreshGameOver")
-	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSelectPosPanel.onClientConnectAgain")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSelectPosPanel:onClientConnectAgain")
 end
 
 function GameSelectPosPanel:onExit()

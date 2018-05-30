@@ -144,4 +144,124 @@ function PreferenceManager:resetPlayerTitle(tempTitleTable)--重设
   	cc.UserDefault:getInstance():flush()
 end
 
+function PreferenceManager:setBgcolor(monsterId)--游戏背景颜色选择保存
+	local key = "SELECTBGCOLOR"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getBgcolor()
+	local key = "SELECTBGCOLOR"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setMJcolor(monsterId)--记录选中麻将颜色
+	local key = "SELECTMJCOLOR"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getMJcolor()
+	local key = "SELECTMJCOLOR"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setGemeyy(monsterId)--记录选中游戏音乐
+	local key = "SELECTGAMEYY"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getGemeyy()
+	local key = "SELECTGAMEYY"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setGemeyx(monsterId)--记录选中游戏音效
+	local key = "SELECTGAMEYX"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getGemeyx()
+	local key = "SELECTGAMEYX"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setGamelanguage(monsterId)--记录选中游戏语言
+	local key = "SELECTGAMELANGUAGE"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getGamelanguage()
+	local key = "SELECTGAMELANGUAGE"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setGameyuyin(monsterId)--记录game语音
+	local key = "SELECTGAMEYUYIN"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getGameyuyin()
+	local key = "SELECTGAMEYUYIN"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setGamevibrate(monsterId)--记录game震动提醒
+	local key = "SELECTGAMEVIBRATE"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getGamevibrate()
+	local key = "SELECTGAMEVIBRATE"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setGameshake(monsterId)--记录game抖动特效
+	local key = "SELECTGAMESHAKE"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getGameshake()
+	local key = "SELECTGAMESHAKE"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
 return PreferenceManager

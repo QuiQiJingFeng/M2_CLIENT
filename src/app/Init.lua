@@ -70,7 +70,8 @@ ltMetaTable["WorldScene"] = "app.Scene.WorldScene.WorldScene"
 
 --layer
 ltMetaTable["BaseLayer"]			    = "app.Scene.WorldScene.Common.BaseLayer"
-ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.Setting.SetLayer"
+ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.LobbyBtn.SetLayer"
+ltMetaTable["lobbyInfoLayer"]			= "app.Scene.WorldScene.LobbyBtn.infoLayer"
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
 ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
@@ -80,9 +81,20 @@ ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
 
 ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
 
+--麻将引擎
+ltMetaTable["MjEngine"] = "app.Scene.GameScene.common.MjEngine"
+
 --麻将
+ltMetaTable["ApplyGameOverPanel"] = "app.Scene.GameScene.mj.ApplyGameOverPanel"
+
+ltMetaTable["MjStandFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjStandFaceItem"
+ltMetaTable["MjLieCpgItem"] = "app.Scene.GameScene.mj.cardItem.MjLieCpgItem"
+ltMetaTable["MjLieOutFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjLieOutFaceItem"
+
 ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.mj.GameRoomLayer"
 ltMetaTable["GameBgPanel"] = "app.Scene.GameScene.mj.GameBgPanel"
+ltMetaTable["GameCompassPanel"] = "app.Scene.GameScene.mj.GameCompassPanel"
+
 ltMetaTable["GamePlayCardsPanel"] = "app.Scene.GameScene.mj.GamePlayCardsPanel"
 ltMetaTable["GameSelectPosPanel"] = "app.Scene.GameScene.mj.GameSelectPosPanel"
 ltMetaTable["GameSetPanel"] = "app.Scene.GameScene.mj.GameSetPanel"
@@ -90,6 +102,9 @@ ltMetaTable["GameRoomInfoPanel"] = "app.Scene.GameScene.mj.GameRoomInfoPanel"
 ltMetaTable["GameActionBtnsPanel"] = "app.Scene.GameScene.mj.GameActionBtnsPanel"
 ltMetaTable["GameResultPanel"] = "app.Scene.GameScene.mj.GameResultPanel"
 ltMetaTable["WinAwardCodeLayer"] = "app.Scene.GameScene.mj.WinAwardCodeLayer"
+ltMetaTable["ResultTotalEnditems"] = "app.Scene.GameScene.mj.ResultTotalEnditems"
+ltMetaTable["GmaeResultTotalEndLayer"] = "app.Scene.GameScene.mj.GmaeResultTotalEndLayer"
+ltMetaTable["GameEndExploitsLayer"] = "app.Scene.GameScene.mj.GameEndExploitsLayer"
 
 ltMetaTable["SettingLayer"] = "app.Scene.GameScene.mj.SettingLayer"
 

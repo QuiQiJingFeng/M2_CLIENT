@@ -69,6 +69,81 @@ function CommonUtil.printTable(t, indent)
     end
 end
 
+function CommonUtil:StringToTable(s)  
+    local tb = {}  
+      
+    --[[  
+    UTF8的编码规则：  
+    1. 字符的第一个字节范围： 0x00—0x7F(0-127),或者 0xC2—0xF4(194-244); UTF8 是兼容 ascii 的，所以 0~127 就和 ascii 完全一致  
+    2. 0xC0, 0xC1,0xF5—0xFF(192, 193 和 245-255)不会出现在UTF8编码中   
+    3. 0x80—0xBF(128-191)只会出现在第二个及随后的编码中(针对多字节编码，如汉字)   
+    ]]  
+    for utfChar in string.gmatch(s, "[%z\1-\127\194-\244][\128-\191]*") do  
+        table.insert(tb, utfChar)  
+    end  
+      
+    return tb  
+end 
+
+function CommonUtil:GetUTFLen(s)  
+    local sTable = self:StringToTable(s)  
+  
+    local len = 0  
+    local charLen = 0  
+  
+    for i=1,#sTable do  
+        local utfCharLen = string.len(sTable[i])  
+        if utfCharLen > 1 then -- 长度大于1的就认为是中文  
+            charLen = 2  
+        else  
+            charLen = 1  
+        end  
+  
+        len = len + charLen  
+    end  
+  
+    return len  
+end  
+
+function CommonUtil:GetUTFLenWithCount(s, count)  
+    local sTable = self:StringToTable(s)  
+  
+    local len = 0  
+    local charLen = 0  
+    local isLimited = (count >= 0)  
+  
+    for i=1,#sTable do  
+        local utfCharLen = string.len(sTable[i])  
+        if utfCharLen > 1 then -- 长度大于1的就认为是中文  
+            charLen = 2  
+        else  
+            charLen = 1  
+        end  
+  
+        len = len + utfCharLen  
+  
+        if isLimited then  
+            count = count - charLen  
+            if count <= 0 then  
+                break  
+            end  
+        end  
+    end  
+  
+    return len  
+end  
+
+function CommonUtil:GetMaxLenString(s, maxLen)  
+    local len = self:GetUTFLen(s)  
+      
+    local dstString = s  
+    if len > maxLen then  
+        dstString = string.sub(s, 1, self:GetUTFLenWithCount(s, maxLen))  
+    end  
+  
+    return dstString  
+end  
+
 function CommonUtil:composeMessageEventName(messageId)
     return "MESSAGE_" .. messageId
 end
@@ -1213,7 +1288,7 @@ function CommonUtil:getChildByNames(root,...)
     local temp_node = root
     for _,name in ipairs(args) do
         temp_node = temp_node:getChildByName(name)
-        assert(temp_node,"path not exist->"..name)
+        --assert(temp_node,"path not exist->"..name)
     end
     return temp_node
 end

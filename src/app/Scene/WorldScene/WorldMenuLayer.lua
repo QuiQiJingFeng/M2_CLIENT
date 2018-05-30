@@ -28,6 +28,48 @@ function WorldMenuLayer:ctor()
 
     --设置按钮
     local setBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Bn_Set")
+    --个人信息
+    local infoBtn= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Ie_HeadBg"):getChildByName("Ie_Shade")
+    local Tt_NickName= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickName")
+    local Tt_UserId= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_UserId")
+    local Tt_NickNameDDD= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickNameDDD")
+    local loginData = lt.DataManager:getPlayerInfo()
+
+    local count = 0 
+    if not loginData.user_name then
+        loginData.user_name = " "
+    else
+        for uchar in string.gfind(loginData.user_name, "([%z\1-\127\194-\244][\128-\191]*)") do   
+            if #uchar ~= 1 then  
+                count = count +2  
+            else  
+                count = count +1  
+            end  
+        end
+    end
+    if not loginData.user_id then
+        loginData.user_id = " "
+    end
+    
+    Tt_UserId:setString("ID："..loginData.user_id)
+
+    if count <= 8 then --只显示最多8位  
+       Tt_NickName:setString(loginData.user_name)
+       Tt_NickNameDDD:setVisible(false)
+    else
+        local nameText = loginData.user_name
+
+        local substring = lt.CommonUtil:GetMaxLenString(nameText,8)
+        Tt_NickName:setString(substring)
+        Tt_NickNameDDD:setVisible(true)
+        --[[
+
+       local tt = string.sub(aa,1,8)
+       print("===------")
+       print(tt)
+       Tt_NickName:setString(tt)
+       Tt_NickNameDDD:setVisible(true)--]]
+    end    
 
     local createRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_CreateRoom")
     local joinRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_JoinRoom")
@@ -37,6 +79,7 @@ function WorldMenuLayer:ctor()
 
 
     lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
+    lt.CommonUtil:addNodeClickEvent(infoBtn, handler(self, self.onClickinfoBtn))
     lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickCreateRoomBtn))
     lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickJoinRoomBtn))
     -- self:checkRightBtnNode()
@@ -87,13 +130,33 @@ function WorldMenuLayer:onClickSetBtn(event)
     local callBack = function(str) 
         print("FYD===>>",str)
     end
-    lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
-    local path = cc.FileUtils:getInstance():getWritablePath() .. "/res/games/bj/game_1.png"
-    local data = {0,"萌芽娱乐","畅玩麻将体验","https://mengyagame.com",path}
-    local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
-    if not ok then
-        print("FYD ERROR: SIGNIN FAILED ",ret)
-    end
+    -- lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
+    -- local data = {0,"萌芽娱乐","畅玩麻将体验","https://mengyagame.com",""}
+    -- local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
+    -- if not ok then
+    --     print("FYD ERROR: SIGNIN FAILED ",ret)
+    -- end
+
+    local path = cc.FileUtils:getInstance():getWritablePath()
+    local img_path = path.."share.png"
+    cc.utils:captureScreen(function(succeed, outputFile) 
+            print("FYD====>>>succeed=== ",succeed)
+            print("FYD----->outputFile ===  ",outputFile)
+            lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
+            local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareImg",{outputFile},"(Ljava/lang/String;)V")
+            if not ok then
+                print("FYD ERROR: SHARE IMAGE ",ret)
+            end
+        end,"share.png")
+
+
+    
+end
+
+function WorldMenuLayer:onClickinfoBtn(event)
+    print("------------gerenxinxi")
+     local lobbyInfoLayer = lt.lobbyInfoLayer.new()
+     lt.UILayerManager:addLayer(lobbyInfoLayer, true)
 end
 
 function WorldMenuLayer:onClickCreateRoomBtn(event)
