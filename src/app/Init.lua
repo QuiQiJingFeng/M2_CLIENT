@@ -76,6 +76,8 @@ ltMetaTable["KefuLayer"]			    	= "app.Scene.WorldScene.LobbyBtn.KefuLayer"
 ltMetaTable["SetLayer"]			    	= "app.Scene.WorldScene.LobbyBtn.SetLayer"
 ltMetaTable["WXShareLayer"]			= "app.Scene.WorldScene.LobbyBtn.WXShareLayer"
 ltMetaTable["lobbyInfoLayer"]			= "app.Scene.WorldScene.LobbyBtn.infoLayer"
+ltMetaTable["ShopLayer"]			= "app.Scene.WorldScene.LobbyBtn.ShopLayer"
+ltMetaTable["PaytypeLayer"]			= "app.Scene.WorldScene.LobbyBtn.PaytypeLayer"
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
 ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"

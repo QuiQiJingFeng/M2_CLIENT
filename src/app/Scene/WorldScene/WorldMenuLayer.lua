@@ -35,6 +35,8 @@ function WorldMenuLayer:ctor()
     local Tt_NickNameDDD= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickNameDDD")
     local shareBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Ie_Notice"):getChildByName("Button_OfShare")
     local kefuBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Ie_Notice"):getChildByName("Button_OfService")
+    local shopBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Bn_Recharge")
+    
     local loginData = lt.DataManager:getPlayerInfo()
 
     local count = 0 
@@ -79,6 +81,7 @@ function WorldMenuLayer:ctor()
     self.Se_Create = createRoomBtn:getChildByName("Se_Create")
     self.Se_Return = createRoomBtn:getChildByName("Se_Return")
 
+    lt.CommonUtil:addNodeClickEvent(shopBtn, handler(self, self.onClickshopBtn))
     lt.CommonUtil:addNodeClickEvent(kefuBtn, handler(self, self.onClickkefuBtn))
     lt.CommonUtil:addNodeClickEvent(shareBtn, handler(self, self.onClickshareBtn))
     lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
@@ -154,6 +157,11 @@ function WorldMenuLayer:onClickSetBtn(event)
 
 
     
+end
+
+function WorldMenuLayer:onClickshopBtn(event)
+    local ShopLayer = lt.ShopLayer.new()
+    lt.UILayerManager:addLayer(ShopLayer, true)
 end
 
 function WorldMenuLayer:onClickkefuBtn(event)
