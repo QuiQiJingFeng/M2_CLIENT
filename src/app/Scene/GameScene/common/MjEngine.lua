@@ -488,6 +488,13 @@ function MjEngine:createLieFaceItemByDirection(direction, info)
 		local face = lieFaceNode:getChildByName("Sprite_Face")
 		local Sprite_Back = lieFaceNode:getChildByName("Sprite_Back")
 		Sprite_Back:setVisible(false)
+
+		local Image_MaskRed = lieFaceNode:getChildByName("Image_MaskRed")
+		Image_MaskRed:setVisible(false)
+
+		local Sprite_Arrow = lieFaceNode:getChildByName("Sprite_Arrow")
+		Sprite_Arrow:setVisible(false)
+		
 		value = info
 		local cardType = math.floor(value / 10) + 1
 		local cardValue = value % 10
