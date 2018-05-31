@@ -36,6 +36,10 @@ function WorldMenuLayer:ctor()
     local shareBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Ie_Notice"):getChildByName("Button_OfShare")
     local kefuBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Ie_Notice"):getChildByName("Button_OfService")
     local shopBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Bn_Recharge")
+    local lobbyNoticeMsgBoxBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_OfNotice")
+    local mergeBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Others")
+    local recordBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Record")
+
     
     local loginData = lt.DataManager:getPlayerInfo()
 
@@ -81,6 +85,7 @@ function WorldMenuLayer:ctor()
     self.Se_Create = createRoomBtn:getChildByName("Se_Create")
     self.Se_Return = createRoomBtn:getChildByName("Se_Return")
 
+    lt.CommonUtil:addNodeClickEvent(lobbyNoticeMsgBoxBtn, handler(self, self.onClicklobbyNoticeMsgBoxBtn))
     lt.CommonUtil:addNodeClickEvent(shopBtn, handler(self, self.onClickshopBtn))
     lt.CommonUtil:addNodeClickEvent(kefuBtn, handler(self, self.onClickkefuBtn))
     lt.CommonUtil:addNodeClickEvent(shareBtn, handler(self, self.onClickshareBtn))
@@ -88,6 +93,8 @@ function WorldMenuLayer:ctor()
     lt.CommonUtil:addNodeClickEvent(infoBtn, handler(self, self.onClickinfoBtn))
     lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickCreateRoomBtn))
     lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickJoinRoomBtn))
+    lt.CommonUtil:addNodeClickEvent(mergeBtn, handler(self, self.onClickmergeBtn))
+    lt.CommonUtil:addNodeClickEvent(recordBtn, handler(self, self.onClickrecordBtn))
     -- self:checkRightBtnNode()
     -- self:updateNewFlagInfo()
     --lt.UILayerManager:addLayer(commonAlertLayer, true)
@@ -157,6 +164,21 @@ function WorldMenuLayer:onClickSetBtn(event)
 
 
     
+end
+
+function WorldMenuLayer:onClickrecordBtn(event)
+    local ReplayView = lt.ReplayView.new()
+    lt.UILayerManager:addLayer(ReplayView, true)
+end
+
+function WorldMenuLayer:onClickmergeBtn(event)
+    local MergeLayer = lt.MergeLayer.new()
+    lt.UILayerManager:addLayer(MergeLayer, true)
+end
+
+function WorldMenuLayer:onClicklobbyNoticeMsgBoxBtn(event)
+    local LobbyNoticeMsgBoxLayer = lt.LobbyNoticeMsgBoxLayer.new()
+    lt.UILayerManager:addLayer(LobbyNoticeMsgBoxLayer, true)
 end
 
 function WorldMenuLayer:onClickshopBtn(event)

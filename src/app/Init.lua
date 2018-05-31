@@ -78,6 +78,12 @@ ltMetaTable["WXShareLayer"]			= "app.Scene.WorldScene.LobbyBtn.WXShareLayer"
 ltMetaTable["lobbyInfoLayer"]			= "app.Scene.WorldScene.LobbyBtn.infoLayer"
 ltMetaTable["ShopLayer"]			= "app.Scene.WorldScene.LobbyBtn.ShopLayer"
 ltMetaTable["PaytypeLayer"]			= "app.Scene.WorldScene.LobbyBtn.PaytypeLayer"
+ltMetaTable["LobbyNoticeMsgBoxLayer"]			= "app.Scene.WorldScene.LobbyBtn.LobbyNoticeMsgBoxLayer"
+ltMetaTable["MergeLayer"]			= "app.Scene.WorldScene.LobbyBtn.MergeLayer"
+ltMetaTable["ReplayView"]			= "app.Scene.WorldScene.LobbyBtn.ReplayView"
+ltMetaTable["Replayitem"]			= "app.Scene.WorldScene.LobbyBtn.Replayitem"
+ltMetaTable["ReplaycodeLayer"]			= "app.Scene.WorldScene.LobbyBtn.ReplaycodeLayer"
+
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
 ltMetaTable["CreateRoomLayer"]			= "app.Scene.WorldScene.Room.CreateRoomLayer"
