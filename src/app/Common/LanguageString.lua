@@ -27,6 +27,9 @@ LanguageString["ROOM_COST_1"]			    			= "房主出资" --支付类型
 LanguageString["ROOM_COST_2"]			    			= "玩家平摊"
 LanguageString["ROOM_COST_3"]			    			= "赢家出资"
 
+LanguageString["REPLAYCODETEXT"]			    		= "请输入回放码"
+
+
 
 LanguageString["PLAYER_NOT_GREEN_OVER"] = "玩家【%s】不同意解散房间,请继续游戏"
 

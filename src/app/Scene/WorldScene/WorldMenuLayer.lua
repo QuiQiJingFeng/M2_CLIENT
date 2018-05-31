@@ -39,6 +39,7 @@ function WorldMenuLayer:ctor()
     local lobbyNoticeMsgBoxBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_OfNotice")
     local mergeBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Others")
     local recordBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Record")
+    local helpBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Help")
 
     
     local loginData = lt.DataManager:getPlayerInfo()
@@ -95,6 +96,7 @@ function WorldMenuLayer:ctor()
     lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickJoinRoomBtn))
     lt.CommonUtil:addNodeClickEvent(mergeBtn, handler(self, self.onClickmergeBtn))
     lt.CommonUtil:addNodeClickEvent(recordBtn, handler(self, self.onClickrecordBtn))
+    lt.CommonUtil:addNodeClickEvent(helpBtn, handler(self, self.onClickhelpBtn))
     -- self:checkRightBtnNode()
     -- self:updateNewFlagInfo()
     --lt.UILayerManager:addLayer(commonAlertLayer, true)
@@ -164,6 +166,11 @@ function WorldMenuLayer:onClickSetBtn(event)
 
 
     
+end
+
+function WorldMenuLayer:onClickhelpBtn(event)
+    local LobbyHelpLayer = lt.LobbyHelpLayer.new()
+    lt.UILayerManager:addLayer(LobbyHelpLayer, true)
 end
 
 function WorldMenuLayer:onClickrecordBtn(event)

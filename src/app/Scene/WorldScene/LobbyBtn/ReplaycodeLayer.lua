@@ -59,7 +59,8 @@ end
 function ReplaycodeLayer:onReset(event)
 	self._numberText = ""
 	self._text_Input:setText(self._numberText)
-	self._text_Place:setText("请输入回放码")
+	local text = lt.LanguageString:getString("REPLAYCODETEXT")
+	self._text_Place:setText(text)
 end
 
 function ReplaycodeLayer:onDele(event)
@@ -68,7 +69,8 @@ function ReplaycodeLayer:onDele(event)
 	print("====1=1=1=1=",self._numberText)
 	self._text_Input:setText(self._numberText)
 	if string.len(self._numberText) < 1 then
-		self._text_Place:setText("请输入回放码")
+		local text = lt.LanguageString:getString("REPLAYCODETEXT")
+		self._text_Place:setText(text)
 	end
 end
 

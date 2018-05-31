@@ -23,16 +23,16 @@ function ReplayView:ctor()
 	self._svButton:setInnerContainerSize(cc.size(200*10,size.height))
 	self._scrollView:setInnerContainerSize(cc.size(1000,580))--单个145 x cell数量 
 	--games/comm/lobbySpecial/
-	local a = 0
+	local TabPosX = 0
 	for i=1,10 do
 		if i > 1 then
-			a = a+200
+			TabPosX = TabPosX+200
 		end
-		print("=====1=1=1=1=1=",i,a)
+		print("=====1=1=1=1=1=",i,TabPosX)
 		local btnTab = ccui.Button:create("game/common/img/record_button_1.png", "game/common/img/record_button_1.png", "game/common/img/record_button_1.png", 1)
     	btnTab:setScale9Enabled(true)
     	btnTab:setAnchorPoint(0,0)
-    	btnTab:setPosition(a,0)--img_nn.png
+    	btnTab:setPosition(TabPosX,0)--img_nn.png
     	local function menuZhuCeCallback(sender,eventType)
 	        if eventType == ccui.TouchEventType.began then
             	--print("按下按钮")
