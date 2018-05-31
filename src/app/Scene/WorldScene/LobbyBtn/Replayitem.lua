@@ -20,7 +20,8 @@ function Replayitem:ctor()
 end
 
 function Replayitem:onDetail(event)
-
+	local ReplayWatchLayer = lt.ReplayWatchLayer.new()
+    lt.UILayerManager:addLayer(ReplayWatchLayer, true)
 end
 
 return Replayitem

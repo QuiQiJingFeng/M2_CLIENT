@@ -1,3 +1,4 @@
+
 local ReplayView = class("ReplayView", function()
     return cc.CSLoader:createNode("game/common/RecordLayer.csb")
 end)

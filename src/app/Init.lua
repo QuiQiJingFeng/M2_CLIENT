@@ -83,6 +83,8 @@ ltMetaTable["MergeLayer"]			= "app.Scene.WorldScene.LobbyBtn.MergeLayer"
 ltMetaTable["ReplayView"]			= "app.Scene.WorldScene.LobbyBtn.ReplayView"
 ltMetaTable["Replayitem"]			= "app.Scene.WorldScene.LobbyBtn.Replayitem"
 ltMetaTable["ReplaycodeLayer"]			= "app.Scene.WorldScene.LobbyBtn.ReplaycodeLayer"
+ltMetaTable["ReplayWatchLayer"]			= "app.Scene.WorldScene.LobbyBtn.ReplayWatchLayer"
+ltMetaTable["ReplayWatchitem"]			= "app.Scene.WorldScene.LobbyBtn.ReplayWatchitem"
 ltMetaTable["LobbyHelpLayer"]			= "app.Scene.WorldScene.LobbyBtn.LobbyHelpLayer"
 
 
