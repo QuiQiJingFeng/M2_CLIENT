@@ -43,16 +43,22 @@ function ReplayView:ctor()
             	print("===========",i)
 	        	if self._texure ~= nil then
 			        self._texure:removeFromParent() 
-			        print("=======111111111======")
-		        	self._texure = cc.Sprite:create("games/comm/lobbySpecial/img_nn.png")--名称
-	    			self._texure:setPosition(100,45)
-	    			btnTab:addChild(self._texure)
-	    		else
-	    			print("=======222222222======")
-	    			self._texure = cc.Sprite:create("games/comm/lobbySpecial/img_nn.png")--名称
-	    			self._texure:setPosition(100,45)
+			        print("=======选中状态======")
+	    			self._texure = ccui.Button:create("game/common/img/record_button_2.png", "game/common/img/record_button_2.png", "game/common/img/record_button_2.png", 1)
+	    			self._texure:setPosition(0,0)
+	    			self._texure:setScale9Enabled(true)
+    			    self._texure:setAnchorPoint(0,0)
+    			    self._texure:setScale(1.0)
 	    			btnTab:addChild(self._texure)
 
+	    		else
+	    			print("=======选中状态======")
+	    			self._texure = ccui.Button:create("game/common/img/record_button_2.png", "game/common/img/record_button_2.png", "game/common/img/record_button_2.png", 1)
+	    			self._texure:setPosition(0,0)
+	    			self._texure:setScale9Enabled(true)
+    			    self._texure:setAnchorPoint(0,0)
+    			    self._texure:setScale(1.0)
+	    			btnTab:addChild(self._texure)
     			end
 
 	    		local posY = 60-- 最后一个是60 每加一个+145
@@ -75,7 +81,7 @@ function ReplayView:ctor()
 
     	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--名称
     	textSpr:setPosition(100,45)
-    	btnTab:addChild(textSpr)
+    	btnTab:addChild(textSpr,1)
 
 	end
 	
