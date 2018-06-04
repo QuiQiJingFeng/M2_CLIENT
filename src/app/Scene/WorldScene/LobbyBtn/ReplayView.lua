@@ -26,7 +26,7 @@ function ReplayView:ctor()
 	local size = self._svButton:getContentSize()
 
 	self._svButton:setInnerContainerSize(cc.size(200*10,size.height))
-	self._scrollView:setInnerContainerSize(cc.size(1000,580))--单个145 x cell数量 
+	--self._scrollView:setInnerContainerSize(cc.size(1000,580))--单个145 x cell数量 
 	--games/comm/lobbySpecial/
 	local TabPosX = 0
 	for i=1,10 do
@@ -76,7 +76,7 @@ function ReplayView:ctor()
     			    self._texure:setScale(1.0)
 	    			btnTab:addChild(self._texure)
     			end
-
+    			--[[
 	    		local posY = 60-- 最后一个是60 每加一个+145
 	    		for i=1,4 do
 	    			if i ~= 1 then
@@ -86,7 +86,7 @@ function ReplayView:ctor()
 	    			Replayitem:setPosition(520,posY)
 	    			self._scrollView:addChild(Replayitem)
 	    		end
-	    		
+	    		--]]
     			
         	elseif eventType == ccui.TouchEventType.canceled then
             	--print("取消点击")
@@ -132,10 +132,9 @@ function ReplayView:listenRoomListUpdate()
 	print("=========发送成功==========")
 	lt.CommonUtil:searchReplays("2018-06-04","2018-06-30",nil,nil,function(result)
 		print("==========返回成功=============")
-		print("==================22222222")
 		if result then
-			print("=====33=3=3=3=3=")
 			dump(result)
+			self._zj_room_info:setData(result.replays,0,20,10)
 		end
 	end)
 end

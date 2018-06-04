@@ -1853,6 +1853,7 @@ function CommonUtil:searchReplays(pre_date,last_date,limit,game_type,callBack)
     lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
             if recv_msg then
                 recv_msg = json.decode(recv_msg)
+                callBack(recv_msg)
             else
                 print("ERROR,获取失败")
             end
