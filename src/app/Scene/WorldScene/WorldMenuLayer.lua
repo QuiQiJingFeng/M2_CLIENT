@@ -36,7 +36,7 @@ function WorldMenuLayer:ctor()
     local shareBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Ie_Notice"):getChildByName("Button_OfShare")
     local kefuBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Ie_Notice"):getChildByName("Button_OfService")
     local shopBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Bn_Recharge")
-    local lobbyNoticeMsgBoxBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_OfNotice")
+    --local lobbyNoticeMsgBoxBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_OfNotice")
     local mergeBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Others")
     local recordBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Record")
     local helpBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Help")
@@ -86,7 +86,7 @@ function WorldMenuLayer:ctor()
     self.Se_Create = createRoomBtn:getChildByName("Se_Create")
     self.Se_Return = createRoomBtn:getChildByName("Se_Return")
 
-    lt.CommonUtil:addNodeClickEvent(lobbyNoticeMsgBoxBtn, handler(self, self.onClicklobbyNoticeMsgBoxBtn))
+    --lt.CommonUtil:addNodeClickEvent(lobbyNoticeMsgBoxBtn, handler(self, self.onClicklobbyNoticeMsgBoxBtn))
     lt.CommonUtil:addNodeClickEvent(shopBtn, handler(self, self.onClickshopBtn))
     lt.CommonUtil:addNodeClickEvent(kefuBtn, handler(self, self.onClickkefuBtn))
     lt.CommonUtil:addNodeClickEvent(shareBtn, handler(self, self.onClickshareBtn))
@@ -183,7 +183,7 @@ function WorldMenuLayer:onClickmergeBtn(event)
     lt.UILayerManager:addLayer(MergeLayer, true)
 end
 
-function WorldMenuLayer:onClicklobbyNoticeMsgBoxBtn(event)
+function WorldMenuLayer:onClicklobbyNoticeMsgBoxBtn(event)--公告注销
     local LobbyNoticeMsgBoxLayer = lt.LobbyNoticeMsgBoxLayer.new()
     lt.UILayerManager:addLayer(LobbyNoticeMsgBoxLayer, true)
 end
@@ -204,12 +204,15 @@ function WorldMenuLayer:onClickshareBtn(event)
 end
 
 function WorldMenuLayer:onClickinfoBtn(event)
+    local MJplayBackLayer = lt.MJplayBackLayer.new()
+    self:addChild(MJplayBackLayer)
+        
     --[[
     local url = "http://neoimaging.beareyes.com.cn/png2/ni_png_2_1518.png"
     local uid = "123456"
     local HeadLayer = lt.HeadImage.new(url,uid,400,400,1)
      lt.UILayerManager:addLayer(HeadLayer, true)--]]
-    ---[[
+    --[[
     print("------------gerenxinxi")
      local lobbyInfoLayer = lt.lobbyInfoLayer.new()
      lt.UILayerManager:addLayer(lobbyInfoLayer, true)--]]

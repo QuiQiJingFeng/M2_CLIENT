@@ -86,6 +86,8 @@ ltMetaTable["ReplaycodeLayer"]			= "app.Scene.WorldScene.LobbyBtn.ReplaycodeLaye
 ltMetaTable["ReplayWatchLayer"]			= "app.Scene.WorldScene.LobbyBtn.ReplayWatchLayer"
 ltMetaTable["ReplayWatchitem"]			= "app.Scene.WorldScene.LobbyBtn.ReplayWatchitem"
 ltMetaTable["LobbyHelpLayer"]			= "app.Scene.WorldScene.LobbyBtn.LobbyHelpLayer"
+ltMetaTable["HelpData"]			= "app.Scene.WorldScene.LobbyBtn.HelpData"
+
 
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
@@ -107,6 +109,7 @@ ltMetaTable["MjLieCpgItem"] = "app.Scene.GameScene.mj.cardItem.MjLieCpgItem"
 ltMetaTable["MjLieOutFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjLieOutFaceItem"
 
 ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.mj.GameRoomLayer"
+ltMetaTable["MJplayBackLayer"] = "app.Scene.GameScene.mj.MJplayBackLayer"
 ltMetaTable["GameBgPanel"] = "app.Scene.GameScene.mj.GameBgPanel"
 ltMetaTable["GameCompassPanel"] = "app.Scene.GameScene.mj.GameCompassPanel"
 

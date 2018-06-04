@@ -57,7 +57,7 @@
               <AbstractNodeData Name="Image_RuleBg" ActionTag="-1607901711" Tag="63" IconVisible="False" LeftMargin="281.0019" RightMargin="38.9980" TopMargin="24.9998" BottomMargin="25.0002" Scale9Enable="True" LeftEage="37" RightEage="35" TopEage="29" BottomEage="36" Scale9OriginX="37" Scale9OriginY="29" Scale9Width="36" Scale9Height="47" ctype="ImageViewObjectData">
                 <Size X="940.0000" Y="620.0000" />
                 <Children>
-                  <AbstractNodeData Name="ScrollView_Info" CanEdit="False" ActionTag="-796278668" Tag="64" IconVisible="False" RightMargin="-27.0000" TopMargin="6.0000" BottomMargin="23.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+                  <AbstractNodeData Name="ScrollView_Info" ActionTag="-796278668" Tag="64" IconVisible="False" RightMargin="-27.0000" TopMargin="6.0000" BottomMargin="23.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                     <Size X="967.0000" Y="591.0000" />
                     <AnchorPoint />
                     <Position Y="23.0000" />
@@ -104,10 +104,10 @@
                 <ColorVector ScaleY="1.0000" />
                 <InnerNodeSize Width="237" Height="500" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Bn_Close" ActionTag="1090055782" Tag="477" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="1202.3999" RightMargin="-32.3999" TopMargin="-45.0000" BottomMargin="625.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="60" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Bn_Close" ActionTag="1090055782" Tag="477" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="1202.4000" RightMargin="-32.4000" TopMargin="-45.0000" BottomMargin="625.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="60" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="90.0000" Y="90.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="1247.3999" Y="670.0000" />
+                <Position X="1247.4000" Y="670.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.9900" Y="1.0000" />

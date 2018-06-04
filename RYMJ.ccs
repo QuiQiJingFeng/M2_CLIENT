@@ -2161,6 +2161,8 @@
                 <PlistImageFile Name="games_comm_launch_BG5.png" Key="games/comm/launch/BG5.png" />
                 <PlistImageFile Name="games_comm_launch_BG9.png" Key="games/comm/launch/BG9.png" />
                 <PlistImageFile Name="games_comm_launch_ButtonSure.png" Key="games/comm/launch/ButtonSure.png" />
+                <PlistImageFile Name="games_comm_launch_Check0.png" Key="games/comm/launch/Check0.png" />
+                <PlistImageFile Name="games_comm_launch_Check1.png" Key="games/comm/launch/Check1.png" />
                 <PlistImageFile Name="games_comm_launch_ImageText1.png" Key="games/comm/launch/ImageText1.png" />
                 <PlistImageFile Name="games_comm_launch_ImageText2.png" Key="games/comm/launch/ImageText2.png" />
                 <PlistImageFile Name="games_comm_launch_ImageText3.png" Key="games/comm/launch/ImageText3.png" />
@@ -2172,8 +2174,6 @@
                 <PlistImageFile Name="games_comm_launch_UpdateProgress0.png" Key="games/comm/launch/UpdateProgress0.png" />
                 <PlistImageFile Name="games_comm_launch_UpdateProgress1.png" Key="games/comm/launch/UpdateProgress1.png" />
                 <PlistImageFile Name="games_comm_launch_UpdateProgress2.png" Key="games/comm/launch/UpdateProgress2.png" />
-                <PlistImageFile Name="games_comm_launch_Check0.png" Key="games/comm/launch/Check0.png" />
-                <PlistImageFile Name="games_comm_launch_Check1.png" Key="games/comm/launch/Check1.png" />
               </PlistImageFolder>
               <Image Name="bg_down.png" />
               <Image Name="BG0.png" />
@@ -5338,6 +5338,9 @@
               <Image Name="snow1.png" />
             </Folder>
             <Project Name="AddFriendLayer.csd" Type="Layer" />
+            <Image Name="bg.png" />
+            <Image Name="bgbg.png" />
+            <Image Name="buttonbg.png" />
             <Project Name="CreateGuideLayer.csd" Type="Layer" />
             <Project Name="ExpandShareFriendsLayer1.csd" Type="Layer" />
             <Project Name="ExpandShareFriendsLayer2.csd" Type="Layer" />
@@ -5350,6 +5353,7 @@
             <Project Name="FriendPlayerInfoItem.csd" Type="Layer" />
             <PlistInfo Name="FriendPlist.csi" Type="Plist" />
             <Project Name="LobbyGuideLayer.csd" Type="Layer" />
+            <Project Name="LobbyKefu.csd" Type="Layer" />
             <Project Name="LobbyLayer1.csd" Type="Layer" />
             <Project Name="LobbyLayer2.csd" Type="Layer" />
             <Project Name="LobbyLayerBase.csd" Type="Layer" />
@@ -5370,7 +5374,6 @@
             <Project Name="WebViewLayer.csd" Type="Layer" />
             <Project Name="WechatInviteLayer.csd" Type="Layer" />
             <Project Name="WechatShareLayer.csd" Type="Layer" />
-            <Project Name="LobbyKefu.csd" Type="Layer" />
           </Folder>
           <Folder Name="preserve">
             <Folder Name="comm">
@@ -5562,7 +5565,12 @@
             </Folder>
             <Audio Name="btn.mp3" />
           </Folder>
+          <Project Name="Help_1.csd" Type="Layer" />
+          <Project Name="Help_2.csd" Type="Layer" />
+          <Project Name="Help_4.csd" Type="Layer" />
+          <Project Name="Help_3.csd" Type="Layer" />
         </Folder>
+        <Image Name="bg.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>
