@@ -124,22 +124,6 @@ function LobbyHelpLayer:ctor()
 	
 end
 
-function LobbyHelpLayer:onSure(event)
-	--接口
-end
-function LobbyHelpLayer:onClickNumKey(event)
-	
-	
-end
-
-function LobbyHelpLayer:onReset(event)
-	
-end
-
-function LobbyHelpLayer:onDele(event)
-	
-end
-
 function LobbyHelpLayer:onclose(event)
 	lt.UILayerManager:removeLayer(self)
 end

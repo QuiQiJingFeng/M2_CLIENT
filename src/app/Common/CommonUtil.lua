@@ -1841,9 +1841,13 @@ function CommonUtil:sepecailServerLogin(room_id,callBack)
 end
 
 
-function CommonUtil:searchReplays(callBack)
+function CommonUtil:searchReplays(pre_date,last_date,limit,game_type,callBack)
     self.selecting = nil
     local body = lt.DataManager:getAuthData()
+    body.pre_date = pre_date
+    body.last_date = last_date
+    body.limit = limit
+    body.game_type = game_type
     
     local url = string.format("http://%s:%d/operator/get_replays",lt.Constants.HOST,lt.Constants.PORT)
     lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 

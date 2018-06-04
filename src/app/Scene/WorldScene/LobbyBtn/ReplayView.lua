@@ -17,8 +17,12 @@ function ReplayView:ctor()
 	self._bn_WatchOthers = mainLayer:getChildByName("Bn_WatchOthers")--观看他人回放
 	self._bn_PageUp = mainLayer:getChildByName("Bn_PageUp")--前一天
 	self._bn_PageDown = mainLayer:getChildByName("Bn_PageDown")--后一天
+
+	local UITableView = require("app.UI.UITableView")
+	self._zj_room_info = UITableView:bindNode(self._scrollView,"app.Scene.WorldScene.LobbyBtn.Replayitem")
+    self:listenRoomListUpdate()
 	
-	
+	---[[
 	local size = self._svButton:getContentSize()
 
 	self._svButton:setInnerContainerSize(cc.size(200*10,size.height))
@@ -34,6 +38,17 @@ function ReplayView:ctor()
     	btnTab:setScale9Enabled(true)
     	btnTab:setAnchorPoint(0,0)
     	btnTab:setPosition(TabPosX,0)--img_nn.png
+
+    	if i == 1 then--最近游戏
+			self._texure = ccui.Button:create("game/common/img/record_button_2.png", "game/common/img/record_button_2.png", "game/common/img/record_button_2.png", 1)
+	    	self._texure:setPosition(0,0)
+	    	self._texure:setScale9Enabled(true)
+    		self._texure:setAnchorPoint(0,0)
+    		self._texure:setScale(1.0)
+	    	btnTab:addChild(self._texure)
+
+		end
+
     	local function menuZhuCeCallback(sender,eventType)
 	        if eventType == ccui.TouchEventType.began then
             	--print("按下按钮")
@@ -86,7 +101,7 @@ function ReplayView:ctor()
 
 	end
 	
-
+--]]
 
 	
 
@@ -111,6 +126,25 @@ end
 
 function ReplayView:onBack(event)
 	lt.UILayerManager:removeLayer(self)
+end
+
+function ReplayView:listenRoomListUpdate()
+	print("=========发送成功==========")
+	lt.CommonUtil:searchReplays("2018-06-04","2018-06-30",nil,nil,function(result)
+		print("==========返回成功=============")
+		print("==================22222222")
+		if result then
+			print("=====33=3=3=3=3=")
+			dump(result)
+		end
+	end)
+end
+
+function ReplayView:onEnter()   
+end
+
+function ReplayView:onExit()
+
 end
 
 return ReplayView

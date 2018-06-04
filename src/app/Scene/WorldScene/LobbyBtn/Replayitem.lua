@@ -2,6 +2,7 @@ local Replayitem = class("Replayitem", function()
     return cc.CSLoader:createNode("game/common/Node_RecordItem.csb")
 end)
 
+---[[
 function Replayitem:ctor()
 	local mainLayer = self:getChildByName("Ie_Record")
 	local Tt_RoomNo  = mainLayer:getChildByName("Tt_RoomNo")--房号
@@ -24,4 +25,4 @@ function Replayitem:onDetail(event)
     lt.UILayerManager:addLayer(ReplayWatchLayer, true)
 end
 
-return Replayitem
+return Replayitem--]]
