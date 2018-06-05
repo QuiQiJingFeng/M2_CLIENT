@@ -1,7 +1,7 @@
 local MJplayBackLayer = class("MJplayBackLayer", lt.BaseLayer)
 
 
-function MJplayBackLayer:ctor()
+function MJplayBackLayer:ctor(info)
 	self._gameBgPanel = lt.GameBgPanel.new()--背景层
 	self:addChild(self._gameBgPanel)
 
@@ -20,6 +20,8 @@ function MJplayBackLayer:ctor()
 
 	self._gameSelectPosPanel = lt.GameSelectPosPanel.new(self, self._gameCompassPanel)--入座 玩家头像
 	self:addChild(self._gameSelectPosPanel)
+
+
 
 	self._gameRoomInfoPanel = lt.GameRoomInfoPanel.new(self)--房间信息
 	self:addChild(self._gameRoomInfoPanel)
@@ -54,6 +56,13 @@ function MJplayBackLayer:ctor()
 	self._settingLayer:setVisible(false)
 
 
+	--local configInfo = info[1]
+	self:SetRoomInfo(info[1])
+
+	
+
+	
+
 	
 
 	---------------------------------------------------------------------------
@@ -72,9 +81,57 @@ function MJplayBackLayer:ctor()
 
 end
 
-function MJplayBackLayer:SetPlayersLogo(pos)--设置玩家
-	local a = self._gameSelectPosPanel:getChildByName("Node_Player1")
-	a:setVisible(true)
+function MJplayBackLayer:SetRoomInfo(result)--设置房间玩家信息
+	--local a = self._gameSelectPosPanel:getChildByName("Node_Player1")
+	--a:setVisible(true)
+	--房间信息
+	local name = lt.LanguageString:getString("STRING_GAME_NAME_"..result.room_setting.game_type)
+
+	local Node_TableInfo  = self._gameRoomInfoPanel:getChildByName("Node_TableInfo")
+	local Text_GameName = Node_TableInfo:getChildByName("Text_GameName")
+	Text_GameName:setString(name)
+
+	local Text_JuShu = Node_TableInfo:getChildByName("Text_JuShu")
+	Text_JuShu:setString(result.cur_round.."/"..result.room_setting.round)
+
+	local Text_RoomNo = Node_TableInfo:getChildByName("Text_RoomNo")
+	Text_RoomNo:setString(result.room_id)
+
+	dump(result.players)
+	--玩家信息
+	for i=1,#result.players do
+		local players = self._gameSelectPosPanel:getChildByName("Node_Player"..result.players[i].user_pos)
+		players:setVisible(true)
+		local Text_Name = players:getChildByName("Text_Name")
+		local Text_Amount = players:getChildByName("Text_Amount")
+		Text_Name:setString(result.players[i].user_name)
+		Text_Amount:setString(result.players[i].user_id)
+
+		local Sprite_Ready = players:getChildByName("Sprite_Ready")--准备完毕的手势
+		Sprite_Ready:setVisible(true)
+
+		local Sprite_Ready = players:getChildByName("Sprite_Ready")--庄家的标志
+		
+
+		
+	end
+
+
+--[[
+         "cur_score"  = 0
+         "disconnect" = false
+         "gold_num"   = -20
+         "is_sit"     = true
+         "score"      = 0
+         "user_id"    = 10134
+         "user_ip"    = "::ffff:1.198.29.91"
+         "user_name"  = "雀起19736"
+         "user_pic"   = "http://xxxx.png"
+         "user_pos"   = 1
+--]]
+
+	
+
 end
 
 function MJplayBackLayer:onEnter()

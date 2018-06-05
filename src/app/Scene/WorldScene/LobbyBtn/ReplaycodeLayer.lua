@@ -38,6 +38,15 @@ end
 
 function ReplaycodeLayer:onSure(event)
 	--接口
+	local body = lt.DataManager:getAuthData()
+	body.replay_id = self._numberText
+	local user_url = "https://replaycord.oss-cn-hongkong.aliyuncs.com/".."all".."/"..self._replay_id..".txt"
+
+	lt.CommonUtil:sendXMLHTTPrequrest("GET",user_url,body,function(recv_msg)
+		local receive = string.split(recv_msg, "\n")
+		dump(receive)
+		--回放的接口
+	end)
 end
 function ReplaycodeLayer:onClickNumKey(event)
 	if string.len(self._numberText) >= 8 then--最多输入的个数	
