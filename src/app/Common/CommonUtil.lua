@@ -1172,7 +1172,7 @@ function CommonUtil:copyToClipboard(message)
     end
 end
 
-function CommonUtil:addNodeClickEvent(node, callBack, isScale)
+function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFunc)
     -- local oldScale = 1
     -- local newScale = oldScale
 
@@ -1202,6 +1202,9 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale)
             if isScale then
                 node:setScale(oldScaleX-0.1, oldScaleY-0.1)
             end
+            if beganFunc then
+                beganFunc()
+            end
         elseif event_type == ccui.TouchEventType.ended then
            
             if isScale then
@@ -1212,6 +1215,9 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale)
             end
         elseif event_type == ccui.TouchEventType.canceled then   
             node:setScale(oldScaleX, oldScaleY)
+            if cancelFunc then
+                cancelFunc()
+            end
         end
     end)
 end
@@ -1859,4 +1865,45 @@ function CommonUtil:searchReplays(pre_date,last_date,limit,game_type,callBack)
             end
         end)
 end
+
+--FYD 开始录音
+function CommonUtil:recordAudio()
+    if device.platform == "ios" then
+        local writePath = cc.FileUtils:getInstance():getWritablePath()
+        local savePath = writePath.."mengya.wav"
+        local ok,ret = lt.Luaoc.callStaticMethod("Audio", "startRecordWithPath", {cpath=savePath})
+        if not ok then
+            print("录音错误:",ret)
+        end
+    elseif device.platform == "android" then
+
+    end
+end
+
+--FYD 结束录音并将录音转换成mp3格式
+function CommonUtil:convertToMp3()
+    local writePath = cc.FileUtils:getInstance():getWritablePath()
+    if device.platform == "ios" then
+        local ok,ret = lt.Luaoc.callStaticMethod("Audio", "stopRecord")
+        if not ok then
+            print("停止录音错误:",ret)
+        else
+            local success = PlatformSDK.excute("Utils","convertWavToMp3",writePath.."mengya.wav",writePath.."mengya.mp3")
+            if success then
+                print("MP3格式转换成功,存储路径为:",writePath.."mengya.mp3")
+            else
+                print("MP3格式转换失败")
+            end
+        end
+    elseif device.platform == "android" then
+
+    end
+end
+
+
+
+
+
+
+
 return CommonUtil

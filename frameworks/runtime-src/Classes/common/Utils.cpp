@@ -10,7 +10,18 @@
 #include "cocos2d.h"
 #include "unzip/unzip.h"
 #include "xxtea/xxtea.h"
+
 USING_NS_CC;
+
+Utils* Utils::__instance = nullptr;
+
+Utils* Utils::getInstance()
+{
+    if(__instance == nullptr){
+        __instance = new Utils();
+    }
+    return __instance;
+}
 
 static std::string basename(const std::string& path)
 {
@@ -214,4 +225,68 @@ long Utils::xxteaDecrypt(unsigned char* bytes,long size,char* xxteaSigin,char* x
                            &len);
     return len;
 }
+
+/*
+   //wav格式音频转换成mp3格式的音频
+ 
+    lame_set_quality(lame_global_flags *, int); 设置压缩品质，quality=0..9. 0=best (very slow). 9=worst. 品质越好转码速度越慢
+ */
+//const char* wav_path,const char* mp3_path
+Value Utils::convertWavToMp3(ValueVector vector)
+{
+    string wav = vector[0].asString();
+    string mp3 = vector[1].asString();
+    const char* wav_path = wav.c_str();
+    const char* mp3_path = mp3.c_str();
+    
+    FILE *fwav = fopen(wav_path, "rb");
+    fseek(fwav, 1024*4, SEEK_CUR); //跳过源文件的信息头，不然在开头会有爆破音
+    FILE *fmp3 = fopen(mp3_path, "wb");
+    
+    lame_global_flags * lame = lame_init(); //初始化
+    lame_set_in_samplerate(lame, 8000.0); //设置wav的采样率
+    lame_set_num_channels(lame, 2); //声道，不设置默认为双声道
+    lame_set_quality(lame, 9);      //品质设置
+    
+    
+    lame_init_params(lame);
+    
+    const int PCM_SIZE = 640 * 2; //双声道*2 单声道640即可
+    const int MP3_SIZE = 8800; //计算公式pcm_size * 1.25 + 7200
+    short int pcm_buffer[PCM_SIZE];
+    unsigned char mp3_buffer[MP3_SIZE];
+    
+    int read, size;
+    
+    do {
+        //将文件读进内存
+        read = fread(pcm_buffer, sizeof(short int), PCM_SIZE, fwav);
+        if (read == 0) {
+            //当read为0，说明pcm文件已经全部读取完毕，调用lame_encode_flush即可。
+            size = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+        } else { //当read不为0，调用lame_encode_buffer_xxx进行转码
+            //双声道千万要使用lame_encode_buffer_interleaved这个函数
+            //32位、单声道需要调用其他函数，具体看代码后面的说明
+            size = lame_encode_buffer_interleaved(lame, pcm_buffer, read/2, mp3_buffer, MP3_SIZE);
+        }
+        //保存mp3文件
+        fwrite(mp3_buffer, size, 1, fmp3);
+    } while (read != 0);
+    //记得各种关闭
+    lame_close(lame);
+    fclose(fmp3);
+    fclose(fwav);
+    return Value(true);
+}
+
+
+
+
+
+
+
+
+
+
+
 

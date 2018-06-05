@@ -21,6 +21,7 @@ using namespace CocosDenshion;
 
 #include "common/JSONManager.h"
 #include "common/Utils.h"
+#include "common/PlatformSDK.h"
 
 USING_NS_CC;
 using namespace std;
@@ -71,14 +72,13 @@ bool AppDelegate::applicationDidFinishLaunching()
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
-
+    luaopen_PlatformSDK(L);
     register_all_packages();
     LuaStack* stack = engine->getLuaStack();
     stack->setXXTEAKeyAndSign("10cc4fdee2fcd047", strlen("10cc4fdee2fcd047"), "gclR3cu9", strlen("gclR3cu9"));
     
     //register custom function
     register_custom_function(L);
-    
     
     //如果是IOS/ANDROID 第一次启动 需要解压缩文件
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS
@@ -102,7 +102,7 @@ bool AppDelegate::applicationDidFinishLaunching()
         json.parseValueMapFromJSON(content);
         data = json.getDataMap();
         string version1 = data["version"].asString();
-        bool greater = Utils::versionGreater(version1,version2);
+        bool greater = Utils::getInstance()->versionGreater(version1,version2);
         //(在不删除app的情况下,从商店更新会出现这种情况)
         if(greater){
             decompress = true;
@@ -120,7 +120,7 @@ bool AppDelegate::applicationDidFinishLaunching()
         auto assets = data["assets"].asValueMap();
         //解压ZIP包到沙盒目录
         for(auto iter = assets.begin();iter != assets.end();++iter){
-            Utils::unzipFile("package/"+ iter->first, path);
+            Utils::getInstance()->unzipFile("package/"+ iter->first, path);
         }
         
         FILE * p_fd = fopen((path + "project.manifest").c_str(), "wb");
@@ -141,7 +141,14 @@ bool AppDelegate::applicationDidFinishLaunching()
 #endif
     FileUtils::getInstance()->addSearchPath("src");
     FileUtils::getInstance()->addSearchPath("res");
-
+    
+//    string writePath = FileUtils::getInstance()->getWritablePath();
+//    writePath += "test.mp3";
+//    Utils::getInstance()->convertToFile("/Users/jingfeng/M2/M2_CLIENT/res/audio/test.wav",writePath.c_str());
+    
+    
+    
+    
     engine->executeString("print = release_print");
     if (engine->executeScriptFile("main.lua"))
     {
