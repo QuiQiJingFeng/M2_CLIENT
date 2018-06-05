@@ -90,7 +90,7 @@
                 <Size X="1044.0000" Y="500.0000" />
                 <AnchorPoint />
                 <Position X="23.1900" Y="98.1700" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <Scale ScaleX="1.0000" ScaleY="0.9480" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0213" Y="0.1457" />
                 <PreSize X="0.9578" Y="0.7418" />
@@ -103,36 +103,36 @@
               <AbstractNodeData Name="Ie_Record1" ActionTag="-1897555531" VisibleForFrame="False" Tag="158" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="45.0000" RightMargin="45.0000" TopMargin="130.0000" BottomMargin="404.0000" TouchEnable="True" Scale9Enable="True" LeftEage="16" RightEage="16" TopEage="15" BottomEage="15" Scale9OriginX="16" Scale9OriginY="15" Scale9Width="15" Scale9Height="307" ctype="ImageViewObjectData">
                 <Size X="1000.0000" Y="140.0000" />
                 <Children>
-                  <AbstractNodeData Name="Tt_RoomNo" ActionTag="2055297015" Tag="159" IconVisible="False" LeftMargin="26.3910" RightMargin="793.6090" TopMargin="15.0093" BottomMargin="94.9907" FontSize="30" LabelText="房号：255555" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="180.0000" Y="30.0000" />
+                  <AbstractNodeData Name="Tt_RoomNo" ActionTag="2055297015" Tag="159" IconVisible="False" LeftMargin="26.3910" RightMargin="782.6090" TopMargin="13.0093" BottomMargin="92.9907" FontSize="30" LabelText="房号：255555" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="191.0000" Y="34.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="26.3910" Y="109.9907" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="116" G="61" B="0" />
                     <PrePosition X="0.0264" Y="0.7856" />
-                    <PreSize X="0.1800" Y="0.2143" />
+                    <PreSize X="0.1910" Y="0.2429" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BG4_2" ActionTag="-1008637991" Tag="160" IconVisible="False" LeftMargin="343.0191" RightMargin="610.9809" TopMargin="27.7055" BottomMargin="66.2945" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="BG4_2" ActionTag="-1008637991" Tag="160" IconVisible="False" LeftMargin="365.0191" RightMargin="632.9809" TopMargin="49.7055" BottomMargin="88.2945" ctype="SpriteObjectData">
                     <Size X="2.0000" Y="2.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="366.0191" Y="89.2945" />
                     <Scale ScaleX="340.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.3660" Y="0.6378" />
-                    <PreSize X="0.0460" Y="0.3286" />
+                    <PreSize X="0.0020" Y="0.0143" />
                     <FileData Type="MarkedSubImage" Path="game/common/img/record_line.png" Plist="game/common/CreateRoomPlist0.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Time" ActionTag="-1903705445" Tag="163" IconVisible="False" LeftMargin="261.9119" RightMargin="513.0881" TopMargin="15.0101" BottomMargin="94.9899" FontSize="30" LabelText="对战时间：18:50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="225.0000" Y="30.0000" />
+                  <AbstractNodeData Name="Tt_Time" ActionTag="-1903705445" Tag="163" IconVisible="False" LeftMargin="261.9119" RightMargin="512.0881" TopMargin="13.0101" BottomMargin="92.9899" FontSize="30" LabelText="对战时间：18:50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="226.0000" Y="34.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="261.9119" Y="109.9899" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="116" G="61" B="0" />
                     <PrePosition X="0.2619" Y="0.7856" />
-                    <PreSize X="0.2250" Y="0.2143" />
+                    <PreSize X="0.2260" Y="0.2429" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -159,14 +159,14 @@
                     <PreSize X="0.1500" Y="0.5714" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/common/img/ButtonCanel.png" Plist="hallcomm/common/CommonPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score1" ActionTag="-1279191378" Tag="161" IconVisible="False" LeftMargin="177.9324" RightMargin="798.0676" TopMargin="65.0012" BottomMargin="50.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score1" ActionTag="-1279191378" Tag="161" IconVisible="False" LeftMargin="177.9324" RightMargin="795.0676" TopMargin="63.0012" BottomMargin="48.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="177.9324" Y="62.9988" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.1779" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -181,14 +181,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score3" ActionTag="171537600" Tag="168" IconVisible="False" LeftMargin="434.1769" RightMargin="541.8231" TopMargin="65.0012" BottomMargin="50.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score3" ActionTag="171537600" Tag="168" IconVisible="False" LeftMargin="434.1769" RightMargin="538.8231" TopMargin="63.0012" BottomMargin="48.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="434.1769" Y="62.9988" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.4342" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -203,14 +203,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score2" ActionTag="236723900" Tag="166" IconVisible="False" LeftMargin="177.9324" RightMargin="798.0676" TopMargin="98.0039" BottomMargin="17.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score2" ActionTag="236723900" Tag="166" IconVisible="False" LeftMargin="177.9324" RightMargin="795.0676" TopMargin="96.0039" BottomMargin="15.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="177.9324" Y="29.9961" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.1779" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -225,14 +225,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score4" ActionTag="-998644838" Tag="170" IconVisible="False" LeftMargin="434.1769" RightMargin="541.8231" TopMargin="98.0039" BottomMargin="17.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score4" ActionTag="-998644838" Tag="170" IconVisible="False" LeftMargin="434.1769" RightMargin="538.8231" TopMargin="96.0039" BottomMargin="15.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="434.1769" Y="29.9961" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.4342" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -247,14 +247,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score5" ActionTag="-1055192226" Tag="2117" IconVisible="False" LeftMargin="677.0151" RightMargin="298.9849" TopMargin="65.0002" BottomMargin="50.9998" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score5" ActionTag="-1055192226" Tag="2117" IconVisible="False" LeftMargin="677.0151" RightMargin="295.9849" TopMargin="63.0002" BottomMargin="48.9998" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="677.0151" Y="62.9998" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.6770" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -269,14 +269,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score6" ActionTag="-278203051" Tag="853" IconVisible="False" LeftMargin="677.0000" RightMargin="299.0000" TopMargin="98.0000" BottomMargin="18.0000" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score6" ActionTag="-278203051" Tag="853" IconVisible="False" LeftMargin="677.0000" RightMargin="296.0000" TopMargin="96.0000" BottomMargin="16.0000" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="677.0000" Y="30.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.6770" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -303,36 +303,36 @@
               <AbstractNodeData Name="Ie_Record2" ActionTag="1798265739" VisibleForFrame="False" Tag="2119" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="45.0000" RightMargin="45.0000" TopMargin="281.0000" BottomMargin="253.0000" TouchEnable="True" Scale9Enable="True" LeftEage="16" RightEage="16" TopEage="15" BottomEage="15" Scale9OriginX="16" Scale9OriginY="15" Scale9Width="15" Scale9Height="307" ctype="ImageViewObjectData">
                 <Size X="1000.0000" Y="140.0000" />
                 <Children>
-                  <AbstractNodeData Name="Tt_RoomNo" ActionTag="927903224" Tag="2120" IconVisible="False" LeftMargin="26.3910" RightMargin="793.6090" TopMargin="15.0093" BottomMargin="94.9907" FontSize="30" LabelText="房号：255555" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="180.0000" Y="30.0000" />
+                  <AbstractNodeData Name="Tt_RoomNo" ActionTag="927903224" Tag="2120" IconVisible="False" LeftMargin="26.3910" RightMargin="782.6090" TopMargin="13.0093" BottomMargin="92.9907" FontSize="30" LabelText="房号：255555" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="191.0000" Y="34.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="26.3910" Y="109.9907" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="116" G="61" B="0" />
                     <PrePosition X="0.0264" Y="0.7856" />
-                    <PreSize X="0.1800" Y="0.2143" />
+                    <PreSize X="0.1910" Y="0.2429" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BG4_2" ActionTag="-2144115882" Tag="2121" IconVisible="False" LeftMargin="343.0191" RightMargin="610.9809" TopMargin="27.7055" BottomMargin="66.2945" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="BG4_2" ActionTag="-2144115882" Tag="2121" IconVisible="False" LeftMargin="365.0191" RightMargin="632.9809" TopMargin="49.7055" BottomMargin="88.2945" ctype="SpriteObjectData">
                     <Size X="2.0000" Y="2.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="366.0191" Y="89.2945" />
                     <Scale ScaleX="340.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.3660" Y="0.6378" />
-                    <PreSize X="0.0460" Y="0.3286" />
+                    <PreSize X="0.0020" Y="0.0143" />
                     <FileData Type="MarkedSubImage" Path="game/common/img/record_line.png" Plist="game/common/CreateRoomPlist0.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Time" ActionTag="-713713312" Tag="2122" IconVisible="False" LeftMargin="261.9119" RightMargin="513.0881" TopMargin="15.0101" BottomMargin="94.9899" FontSize="30" LabelText="对战时间：18:50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="225.0000" Y="30.0000" />
+                  <AbstractNodeData Name="Tt_Time" ActionTag="-713713312" Tag="2122" IconVisible="False" LeftMargin="261.9119" RightMargin="512.0881" TopMargin="13.0101" BottomMargin="92.9899" FontSize="30" LabelText="对战时间：18:50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="226.0000" Y="34.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="261.9119" Y="109.9899" />
                     <Scale ScaleX="1.0000" ScaleY="0.8932" />
                     <CColor A="255" R="116" G="61" B="0" />
                     <PrePosition X="0.2619" Y="0.7856" />
-                    <PreSize X="0.2250" Y="0.2143" />
+                    <PreSize X="0.2260" Y="0.2429" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -359,14 +359,14 @@
                     <PreSize X="0.1500" Y="0.5714" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/common/img/ButtonCanel.png" Plist="hallcomm/common/CommonPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score1" ActionTag="-627250224" Tag="2125" IconVisible="False" LeftMargin="176.5649" RightMargin="799.4351" TopMargin="65.0012" BottomMargin="50.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score1" ActionTag="-627250224" Tag="2125" IconVisible="False" LeftMargin="176.5649" RightMargin="796.4351" TopMargin="63.0012" BottomMargin="48.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="176.5649" Y="62.9988" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.1766" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -381,14 +381,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score3" ActionTag="1207526828" Tag="2127" IconVisible="False" LeftMargin="434.1769" RightMargin="541.8231" TopMargin="65.0012" BottomMargin="50.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score3" ActionTag="1207526828" Tag="2127" IconVisible="False" LeftMargin="434.1769" RightMargin="538.8231" TopMargin="63.0012" BottomMargin="48.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="434.1769" Y="62.9988" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.4342" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -403,14 +403,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score2" ActionTag="-1826080069" Tag="2129" IconVisible="False" LeftMargin="177.9324" RightMargin="798.0676" TopMargin="98.0039" BottomMargin="17.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score2" ActionTag="-1826080069" Tag="2129" IconVisible="False" LeftMargin="177.9324" RightMargin="795.0676" TopMargin="96.0039" BottomMargin="15.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="177.9324" Y="29.9961" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.1779" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -425,14 +425,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score4" ActionTag="1579423998" Tag="2131" IconVisible="False" LeftMargin="434.1769" RightMargin="541.8231" TopMargin="98.0039" BottomMargin="17.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score4" ActionTag="1579423998" Tag="2131" IconVisible="False" LeftMargin="434.1769" RightMargin="538.8231" TopMargin="96.0039" BottomMargin="15.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="434.1769" Y="29.9961" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.4342" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -447,14 +447,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score5" ActionTag="-791707096" Tag="2133" IconVisible="False" LeftMargin="677.0151" RightMargin="298.9849" TopMargin="65.0000" BottomMargin="51.0000" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score5" ActionTag="-791707096" Tag="2133" IconVisible="False" LeftMargin="677.0151" RightMargin="295.9849" TopMargin="63.0000" BottomMargin="49.0000" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="677.0151" Y="63.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.6770" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -469,14 +469,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score6" ActionTag="-860490838" Tag="855" IconVisible="False" LeftMargin="677.0000" RightMargin="299.0000" TopMargin="98.0000" BottomMargin="18.0000" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score6" ActionTag="-860490838" Tag="855" IconVisible="False" LeftMargin="677.0000" RightMargin="296.0000" TopMargin="96.0000" BottomMargin="16.0000" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="677.0000" Y="30.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.6770" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -503,14 +503,14 @@
               <AbstractNodeData Name="Ie_Record3" ActionTag="740296343" VisibleForFrame="False" Tag="2135" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="45.0000" RightMargin="45.0000" TopMargin="432.0000" BottomMargin="102.0000" TouchEnable="True" Scale9Enable="True" LeftEage="16" RightEage="16" TopEage="15" BottomEage="15" Scale9OriginX="16" Scale9OriginY="15" Scale9Width="15" Scale9Height="307" ctype="ImageViewObjectData">
                 <Size X="1000.0000" Y="140.0000" />
                 <Children>
-                  <AbstractNodeData Name="Tt_RoomNo" ActionTag="2042671347" Tag="2136" IconVisible="False" LeftMargin="26.3910" RightMargin="793.6090" TopMargin="15.0093" BottomMargin="94.9907" FontSize="30" LabelText="房号：255555" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="180.0000" Y="30.0000" />
+                  <AbstractNodeData Name="Tt_RoomNo" ActionTag="2042671347" Tag="2136" IconVisible="False" LeftMargin="26.3910" RightMargin="782.6090" TopMargin="13.0093" BottomMargin="92.9907" FontSize="30" LabelText="房号：255555" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="191.0000" Y="34.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="26.3910" Y="109.9907" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="116" G="61" B="0" />
                     <PrePosition X="0.0264" Y="0.7856" />
-                    <PreSize X="0.1800" Y="0.2143" />
+                    <PreSize X="0.1910" Y="0.2429" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -525,14 +525,14 @@
                     <FileData Type="MarkedSubImage" Path="game/common/img/record_line.png" Plist="game/common/CreateRoomPlist0.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Time" ActionTag="-864507007" Tag="2138" IconVisible="False" LeftMargin="261.9119" RightMargin="513.0881" TopMargin="15.0101" BottomMargin="94.9899" FontSize="30" LabelText="对战时间：18:50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="225.0000" Y="30.0000" />
+                  <AbstractNodeData Name="Tt_Time" ActionTag="-864507007" Tag="2138" IconVisible="False" LeftMargin="261.9119" RightMargin="512.0881" TopMargin="13.0101" BottomMargin="92.9899" FontSize="30" LabelText="对战时间：18:50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="226.0000" Y="34.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="261.9119" Y="109.9899" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="116" G="61" B="0" />
                     <PrePosition X="0.2619" Y="0.7856" />
-                    <PreSize X="0.2250" Y="0.2143" />
+                    <PreSize X="0.2260" Y="0.2429" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -559,14 +559,14 @@
                     <PreSize X="0.1500" Y="0.5714" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/common/img/ButtonCanel.png" Plist="hallcomm/common/CommonPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score1" ActionTag="1433283643" Tag="2141" IconVisible="False" LeftMargin="177.9324" RightMargin="798.0676" TopMargin="65.0012" BottomMargin="50.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score1" ActionTag="1433283643" Tag="2141" IconVisible="False" LeftMargin="177.9324" RightMargin="795.0676" TopMargin="63.0012" BottomMargin="48.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="177.9324" Y="62.9988" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.1779" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -581,14 +581,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score3" ActionTag="470170706" Tag="2143" IconVisible="False" LeftMargin="434.1769" RightMargin="541.8231" TopMargin="65.0012" BottomMargin="50.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score3" ActionTag="470170706" Tag="2143" IconVisible="False" LeftMargin="434.1769" RightMargin="538.8231" TopMargin="63.0012" BottomMargin="48.9988" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="434.1769" Y="62.9988" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.4342" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -603,14 +603,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score2" ActionTag="1112982781" Tag="2145" IconVisible="False" LeftMargin="177.9324" RightMargin="798.0676" TopMargin="98.0039" BottomMargin="17.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score2" ActionTag="1112982781" Tag="2145" IconVisible="False" LeftMargin="177.9324" RightMargin="795.0676" TopMargin="96.0039" BottomMargin="15.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="177.9324" Y="29.9961" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.1779" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -625,14 +625,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score4" ActionTag="1804847975" Tag="2147" IconVisible="False" LeftMargin="434.1769" RightMargin="541.8231" TopMargin="98.0039" BottomMargin="17.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score4" ActionTag="1804847975" Tag="2147" IconVisible="False" LeftMargin="434.1769" RightMargin="538.8231" TopMargin="96.0039" BottomMargin="15.9961" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="434.1769" Y="29.9961" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.4342" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -647,14 +647,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score5" ActionTag="1633970889" Tag="2149" IconVisible="False" LeftMargin="677.0151" RightMargin="298.9849" TopMargin="65.0002" BottomMargin="50.9998" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score5" ActionTag="1633970889" Tag="2149" IconVisible="False" LeftMargin="677.0151" RightMargin="295.9849" TopMargin="63.0002" BottomMargin="48.9998" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="677.0151" Y="62.9998" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.6770" Y="0.4500" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -669,14 +669,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Score6" ActionTag="-1185829756" Tag="857" IconVisible="False" LeftMargin="677.1365" RightMargin="298.8635" TopMargin="98.0000" BottomMargin="18.0000" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="24.0000" Y="24.0000" />
+                  <AbstractNodeData Name="Tt_Score6" ActionTag="-1185829756" Tag="857" IconVisible="False" LeftMargin="677.1365" RightMargin="295.8635" TopMargin="96.0000" BottomMargin="16.0000" FontSize="24" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="27.0000" Y="28.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="677.1365" Y="30.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="136" B="0" />
                     <PrePosition X="0.6771" Y="0.2143" />
-                    <PreSize X="0.0240" Y="0.1714" />
+                    <PreSize X="0.0270" Y="0.2000" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -700,14 +700,14 @@
                 <PreSize X="0.9174" Y="0.2077" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/img/BG25.png" Plist="hallcomm/common/CommonPlist1.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Tt_Page" ActionTag="1458943731" VisibleForFrame="False" Tag="705" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="518.0000" RightMargin="518.0000" TopMargin="604.0000" BottomMargin="34.0000" FontSize="36" LabelText="0/0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="54.0000" Y="36.0000" />
+              <AbstractNodeData Name="Tt_Page" ActionTag="1458943731" VisibleForFrame="False" Tag="705" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="519.5000" RightMargin="519.5000" TopMargin="601.0000" BottomMargin="31.0000" FontSize="36" LabelText="0/0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="51.0000" Y="42.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="545.0000" Y="52.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="238" G="213" B="181" />
                 <PrePosition X="0.5000" Y="0.0772" />
-                <PreSize X="0.0495" Y="0.0534" />
+                <PreSize X="0.0468" Y="0.0623" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

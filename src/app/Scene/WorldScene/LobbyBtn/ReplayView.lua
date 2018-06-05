@@ -7,7 +7,18 @@ function ReplayView:ctor()
 	local mainLayer = self:getChildByName("Ie_Bg")
 	self._shuruLayer = self:getChildByName("recordCodeLayer")
 	self._shuruLayer:setVisible(false)--这个不使用;直接false掉
-	
+	local x = lt.Constants.GAME_TYPE
+	local gameNum = 1
+	for k,v in pairs(x) do
+		gameNum = gameNum+1
+	end
+	print(gameNum)
+	self._days = 86400 --一天的秒数
+
+	self._TabCell = 1 --当前cell所在的位置，初始是1
+
+	self.times = os.time()--当前时间
+	self.currentlyTime = self.times -- 目前时间是变化的
 	--返回按钮
 	local backBtn = mainLayer:getChildByName("Bn_Close")
 	self._svButton = mainLayer:getChildByName("SV_Button")
@@ -16,28 +27,29 @@ function ReplayView:ctor()
 
 	self._bn_WatchOthers = mainLayer:getChildByName("Bn_WatchOthers")--观看他人回放
 	self._bn_PageUp = mainLayer:getChildByName("Bn_PageUp")--前一天
+	self._bn_PageUp:setVisible(false)
 	self._bn_PageDown = mainLayer:getChildByName("Bn_PageDown")--后一天
+	self._bn_PageDown:setVisible(false)
 
 	local UITableView = require("app.UI.UITableView")
 	self._zj_room_info = UITableView:bindNode(self._scrollView,"app.Scene.WorldScene.LobbyBtn.Replayitem")
-    self:listenRoomListUpdate()
+    --self:listenRoomListUpdate()
 	
 	---[[
 	local size = self._svButton:getContentSize()
-
-	self._svButton:setInnerContainerSize(cc.size(200*10,size.height))
+	self._svButton:setInnerContainerSize(cc.size(200*gameNum,size.height))
 	--self._scrollView:setInnerContainerSize(cc.size(1000,580))--单个145 x cell数量 
 	--games/comm/lobbySpecial/
 	local TabPosX = 0
-	for i=1,10 do
+	for i=1,gameNum do
 		if i > 1 then
 			TabPosX = TabPosX+200
 		end
-		print("=====1=1=1=1=1=",i,TabPosX)
+		print("self._svButtoncellNum=",i,TabPosX)
 		local btnTab = ccui.Button:create("game/common/img/record_button_1.png", "game/common/img/record_button_1.png", "game/common/img/record_button_1.png", 1)
     	btnTab:setScale9Enabled(true)
     	btnTab:setAnchorPoint(0,0)
-    	btnTab:setPosition(TabPosX,0)--img_nn.png
+    	btnTab:setPosition(TabPosX,0)
 
     	if i == 1 then--最近游戏
 			self._texure = ccui.Button:create("game/common/img/record_button_2.png", "game/common/img/record_button_2.png", "game/common/img/record_button_2.png", 1)
@@ -46,7 +58,7 @@ function ReplayView:ctor()
     		self._texure:setAnchorPoint(0,0)
     		self._texure:setScale(1.0)
 	    	btnTab:addChild(self._texure)
-
+	    	self:listenRoomListUpdate()
 		end
 
     	local function menuZhuCeCallback(sender,eventType)
@@ -76,6 +88,17 @@ function ReplayView:ctor()
     			    self._texure:setScale(1.0)
 	    			btnTab:addChild(self._texure)
     			end
+    			self._TabCell = i --给当前cell赋值
+    			if i == 1 then
+    				self._bn_PageUp:setVisible(false)
+					self._bn_PageDown:setVisible(false)
+    				self:listenRoomListUpdate()
+    			else
+    				self._bn_PageUp:setVisible(true)
+					self._bn_PageDown:setVisible(true)
+    				self:listenRoomListUpdatetype(i-1,self.currentlyTime)
+    			end
+    			
     			--[[
 	    		local posY = 60-- 最后一个是60 每加一个+145
 	    		for i=1,4 do
@@ -116,25 +139,53 @@ function ReplayView:onWatchOthers(event)
 	lt.UILayerManager:addLayer(ReplaycodeLayer)
 end
 
-function ReplayView:onPageUp(event)
-
+function ReplayView:onPageUp(event)--前一天
+	self.currentlyTime = self.currentlyTime - self._days
+	self:listenRoomListUpdatetype(self._TabCell-1,self.currentlyTime)
 end
 
-function ReplayView:onPageDown(event)
-
+function ReplayView:onPageDown(event)--后一天
+	self.currentlyTime = self.currentlyTime + self._days
+	self:listenRoomListUpdatetype(self._TabCell-1,self.currentlyTime)
 end
 
 function ReplayView:onBack(event)
 	lt.UILayerManager:removeLayer(self)
 end
 
-function ReplayView:listenRoomListUpdate()
+function ReplayView:listenRoomListUpdatetype(type,times)--选择其他
+	print("=========发送成功type==========")
+	local oldtime = os.date("%Y-%m-%d",times)
+	local newtime = os.date("%Y-%m-%d %H:%M:%S",times)
+	print("单个游戏开始时间",oldtime)
+	print("单个游戏结束时间",newtime)
+	lt.CommonUtil:searchReplays(oldtime,newtime,nil,type,function(result)
+		print("==========返回成功type=============")
+		if result then
+			dump(result)
+			self._zj_room_info:setData(result.replays,15,15,10)
+		end
+	end)
+
+
+end
+
+
+
+function ReplayView:listenRoomListUpdate()--第一次进入
+	local times = os.time()
+	local zhous = 604800 --一周的秒数
+	local news = times-zhous
+	local timeold  = os.date("%Y-%m-%d",news)
+	local timenew  = os.date("%Y-%m-%d %H:%M:%S",times)
+	print("最近游戏开始时间",timeold)
+	print("最近游戏结束时间",timenew)
 	print("=========发送成功==========")
-	lt.CommonUtil:searchReplays("2018-06-04","2018-06-30",nil,nil,function(result)
+	lt.CommonUtil:searchReplays(timeold,timenew,nil,nil,function(result)
 		print("==========返回成功=============")
 		if result then
 			dump(result)
-			self._zj_room_info:setData(result.replays,0,20,10)
+			self._zj_room_info:setData(result.replays,15,15,10)
 		end
 	end)
 end
