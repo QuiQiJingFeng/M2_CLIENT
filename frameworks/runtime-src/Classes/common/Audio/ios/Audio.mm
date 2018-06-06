@@ -21,9 +21,9 @@ static Audio * __instance;
     }
     return __instance;
 }
+
 //开始录音
-+(void) startRecordWithPath:(NSDictionary *)dict{
-    NSString *path = [dict objectForKey:@"cpath"];
+-(NSNumber*) recordBegin:(NSString*)path{
     NSURL *urlpath = [NSURL fileURLWithPath:path];
     //设置参数
     NSDictionary *recordSetting = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -32,68 +32,55 @@ static Audio * __instance;
                                    // 音频格式
                                    [NSNumber numberWithInt: kAudioFormatLinearPCM],AVFormatIDKey,
                                    //采样位数  8、16、24、32 默认为16
-                                   [NSNumber numberWithInt:16],AVLinearPCMBitDepthKey,
-                                   // 音频通道数 1 或 2
-                                   [NSNumber numberWithInt: 2], AVNumberOfChannelsKey,
-                                   //录音质量
-                                   [NSNumber numberWithInt:AVAudioQualityHigh],AVEncoderAudioQualityKey,
+                                   [NSNumber numberWithInt:8],AVLinearPCMBitDepthKey,
+                                   // 音频通道数 1 或 2 iphone只有1个麦克风,选单声道就可以了
+                                   [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
+                                   //录音质量 暂时不需要特别高的品质 一般即可,这样可以节省传输的数据量
+                                   [NSNumber numberWithInt:AVAudioQualityLow],AVEncoderAudioQualityKey,
                                    nil];
-    [Audio getInstance];
-    __instance.__recorder = [[AVAudioRecorder alloc] initWithURL:urlpath settings:recordSetting error:nil];
-    if (__instance.__recorder) {
+    NSError* error;
+    self.__recorder = [[AVAudioRecorder alloc] initWithURL:urlpath settings:recordSetting error:&error];
+    if(error != nil){
+        NSLog(@"录音器初始化失败%@",error);
+        return [NSNumber numberWithBool:NO];
+    }
+    if (self.__recorder) {
         //启动这个设置,当录音的时候其他声音会禁止掉,比如正在进行的音乐
-        
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord error:nil];
-        __instance.__recorder.meteringEnabled = YES;
-
-        [__instance.__recorder prepareToRecord];
+        self.__recorder.meteringEnabled = YES;
+        
+        [self.__recorder prepareToRecord];
         //开始录音
-        [__instance.__recorder record];
-        //计时,当COUNTDOWN秒之后调用停止录音的方法
-        ;
- 
-        [__instance performSelector:@selector(stopRecordInner) withObject:__instance afterDelay:COUNTDOWN];
-        
-    }else{
-        NSLog(@"音频格式和文件存储格式不匹配,无法初始化Recorder");
-        
+        [self.__recorder record];
+        //计时,当COUNTDOWN秒之后调用停止录音的方法,设置最大为15s，其实游戏中是10s，避免游戏中出问题而录音无法关掉
+        [self performSelector:@selector(stopRecord) withObject:self afterDelay:COUNTDOWN];
     }
- 
+    return [NSNumber numberWithBool:YES];
 }
 
--(void) stopRecordInner{
-    [Audio stopRecord];
-}
-//停止录音
-+(void) stopRecord{
-    if ([__instance.__recorder isRecording]) {
-        [__instance.__recorder stop];
-    }else{
-        return;
+// 停止录音
+-(NSNumber*) stopRecord{
+    if ([self.__recorder isRecording]) {
+        [self.__recorder stop];
     }
+    return [NSNumber numberWithBool:YES];
 }
 
-//播放音频
-+(void) playAudioWithPath:(NSDictionary *)dict{
-    NSString *path = [dict objectForKey:@"cpath"];
-    if ([__instance.__player isPlaying])
-        return;
-    NSUInteger count = [__instance.__player retainCount];
+// 播放音频
+-(NSNumber*) playAudioWithPath:(NSString *)path{
+    if([self.__player isPlaying])
+        return [NSNumber numberWithBool:NO];
+    // 释放之前的播放器
+    int count = [self.__player retainCount];
     if(count > 0){
-        for (int i = 0; i < count; i++) {
-            [__instance.__player release];
-        }
+        [self.__player release];
     }
-    __instance.__player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:nil];
-     //播放的时候其他音乐会关闭(qq音乐)。同样当用户锁屏或者静音时也会随着静音。
+    //创建新的播放器
+    self.__player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:nil];
+    //播放的时候其他音乐会关闭(qq音乐)。同样当用户锁屏或者静音时也会随着静音。
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
-    [__instance.__player play];
+    [self.__player play];
+    return [NSNumber numberWithBool:YES];
 }
-
-// 检查当前音频是否播放完毕
-+(BOOL) isPlaying{
-   return [[__instance __player] isPlaying];
-}
-
 
 @end

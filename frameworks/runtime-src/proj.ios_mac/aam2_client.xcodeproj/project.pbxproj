@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		143D8CC220C5517F0056D908 /* PlatformSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143D8CC020C5517F0056D908 /* PlatformSDK.cpp */; };
-		143D8CC320C5517F0056D908 /* PlatformSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143D8CC020C5517F0056D908 /* PlatformSDK.cpp */; };
+		14314ED020C7BA9500BF3F38 /* PlatformSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */; };
+		14314ED320C7CC8C00BF3F38 /* PlatformSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143D8CC020C5517F0056D908 /* PlatformSDK.cpp */; };
 		1472BBB51F8223AC00FF0B1B /* JSONManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */; };
 		1472BBB61F8223AC00FF0B1B /* JSONManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */; };
 		1472BBB91F8223C400FF0B1B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB71F8223C400FF0B1B /* Utils.cpp */; };
@@ -285,6 +285,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlatformSDK.mm; path = ../Classes/common/PlatformSDK.mm; sourceTree = "<group>"; };
 		143D8CC020C5517F0056D908 /* PlatformSDK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlatformSDK.cpp; path = ../Classes/common/PlatformSDK.cpp; sourceTree = "<group>"; };
 		143D8CC120C5517F0056D908 /* PlatformSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformSDK.h; path = ../Classes/common/PlatformSDK.h; sourceTree = "<group>"; };
 		1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JSONManager.cpp; path = ../Classes/common/JSONManager.cpp; sourceTree = "<group>"; };
@@ -502,6 +503,7 @@
 				1472BBB81F8223C400FF0B1B /* Utils.h */,
 				143D8CC020C5517F0056D908 /* PlatformSDK.cpp */,
 				143D8CC120C5517F0056D908 /* PlatformSDK.h */,
+				14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -1043,7 +1045,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ${SRCROOT}/../../../";
+			shellScript = "cd ${SRCROOT}/../../../\npython create_package_all.py";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1073,7 +1075,7 @@
 				14DCF3A220BFA4D4007193A2 /* gain_analysis.c in Sources */,
 				14DCF3B220BFA4D4007193A2 /* quantize.c in Sources */,
 				14DCF31620BFA49F007193A2 /* decode_i386.c in Sources */,
-				143D8CC320C5517F0056D908 /* PlatformSDK.cpp in Sources */,
+				14314ED320C7CC8C00BF3F38 /* PlatformSDK.cpp in Sources */,
 				14DCF39C20BFA4D4007193A2 /* bitstream.c in Sources */,
 				1472BBBA1F8223C400FF0B1B /* Utils.cpp in Sources */,
 				14DCF31420BFA49F007193A2 /* dct64_i386.c in Sources */,
@@ -1108,7 +1110,6 @@
 				14DCF31B20BFA49F007193A2 /* layer2.c in Sources */,
 				14DCF39F20BFA4D4007193A2 /* fft.c in Sources */,
 				14DCF31720BFA49F007193A2 /* interface.c in Sources */,
-				143D8CC220C5517F0056D908 /* PlatformSDK.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				985358081F28958300B0250C /* md5lib.c in Sources */,
 				14DCF3B720BFA4D4007193A2 /* tables.c in Sources */,
@@ -1116,6 +1117,7 @@
 				14DCF3BF20BFA4D4007193A2 /* VbrTag.c in Sources */,
 				14DCF3C620BFA66F007193A2 /* xmm_quantize_sub.c in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
+				14314ED020C7BA9500BF3F38 /* PlatformSDK.mm in Sources */,
 				14DCF3BB20BFA4D4007193A2 /* util.c in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				14DCF3B920BFA4D4007193A2 /* takehiro.c in Sources */,

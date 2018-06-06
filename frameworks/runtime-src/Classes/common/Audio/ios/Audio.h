@@ -15,10 +15,24 @@
 @property (nonatomic, strong) AVAudioPlayer * __player; //播放器
 
 +(id)getInstance;
-+(void) startRecordWithPath:(NSDictionary *)dict;
-+(void) stopRecord;
--(void) stopRecordInner;
-+(void) playAudioWithPath:(NSDictionary *)dict;
-+(BOOL) isPlaying;
+
+/*
+ 开始录音
+ @path 录音的存储路径
+ @return BOOL
+ */
+-(NSNumber*) recordBegin:(NSString*)path;
+
+/*
+ 停止录音
+ @return BOOL
+ */
+-(NSNumber*) stopRecord;
+
+/*
+ 播放音频
+ */
+-(NSNumber*) playAudioWithPath:(NSString *)path;
+
 @end
 

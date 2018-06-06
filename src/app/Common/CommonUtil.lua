@@ -1866,37 +1866,23 @@ function CommonUtil:searchReplays(pre_date,last_date,limit,game_type,callBack)
         end)
 end
 
---FYD 开始录音
+--FYD 开始录音 注意:录音最好在10s内,太大了传输不方便
 function CommonUtil:recordAudio()
-    if device.platform == "ios" then
-        local writePath = cc.FileUtils:getInstance():getWritablePath()
-        local savePath = writePath.."mengya.wav"
-        local ok,ret = lt.Luaoc.callStaticMethod("Audio", "startRecordWithPath", {cpath=savePath})
-        if not ok then
-            print("录音错误:",ret)
-        end
-    elseif device.platform == "android" then
-
+    -- 点击开始 开始录音
+    local writePath = cc.FileUtils:getInstance():getWritablePath()
+    local record_path = writePath.."record.wav"
+    local ok = lt.PlatformSDK.recordBegin("Audio",record_path)
+    if not ok then
+        print("无法开始录音")
     end
+    return record_path
 end
 
 --FYD 结束录音并将录音转换成mp3格式
-function CommonUtil:convertToMp3()
-    local writePath = cc.FileUtils:getInstance():getWritablePath()
-    if device.platform == "ios" then
-        local ok,ret = lt.Luaoc.callStaticMethod("Audio", "stopRecord")
-        if not ok then
-            print("停止录音错误:",ret)
-        else
-            local success = lt.PlatformSDK.convertWavToMp3("Utils",writePath.."mengya.wav",writePath.."mengya.mp3")
-            if success then
-                print("MP3格式转换成功,存储路径为:",writePath.."mengya.mp3")
-            else
-                print("MP3格式转换失败")
-            end
-        end
-    elseif device.platform == "android" then
-
+function CommonUtil:stopRecord()
+    local ok = lt.PlatformSDK.stopRecord("Audio")
+    if not ok then
+        print("无法停止录音")
     end
 end
 
