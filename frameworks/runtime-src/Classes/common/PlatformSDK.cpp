@@ -38,8 +38,9 @@ void PlatformSDK::registerList()
 
 int excute(lua_State* L){
     
-    const char * className = luaL_checkstring(L, 1);
-    const char * funcName = luaL_checkstring(L, 2);
+    const char * funcName = luaL_checkstring(L, 1);
+    const char * className = luaL_checkstring(L, 2);
+    
     ValueVector values;
     for(int i = 0;i<10;i++){
         int idx = 3+i;
@@ -96,14 +97,17 @@ int excute(lua_State* L){
 
 int luaopen_PlatformSDK(lua_State* L)
 {
+    PlatformSDK::getInstance()->registerList();
+    
+    
     luaL_Reg reg[] = {
         { "excute", excute},
         
         { NULL, NULL },
     };
-    luaL_register(L, "PlatformSDK", reg);
+    luaL_register(L, "FYDSDK", reg);
     
-    PlatformSDK::getInstance()->registerList();
+    
     
     return 1;
 }

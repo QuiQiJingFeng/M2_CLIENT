@@ -1888,7 +1888,7 @@ function CommonUtil:convertToMp3()
         if not ok then
             print("停止录音错误:",ret)
         else
-            local success = PlatformSDK.excute("Utils","convertWavToMp3",writePath.."mengya.wav",writePath.."mengya.mp3")
+            local success = lt.PlatformSDK.convertWavToMp3("Utils",writePath.."mengya.wav",writePath.."mengya.mp3")
             if success then
                 print("MP3格式转换成功,存储路径为:",writePath.."mengya.mp3")
             else

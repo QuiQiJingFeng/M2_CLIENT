@@ -135,3 +135,7 @@ ltMetaTable["ScrollNumber"]				= "app.Widget.ScrollNumber"
 ltMetaTable["ScrollView"]               = "app.Widget.ScrollView"
 ltMetaTable["ScrollViewCell"]           = "app.Widget.ScrollViewCell"
 
+ltMetaTable["PlatformSDK"] = "app.Common.PlatformSDK"
+
+
+
