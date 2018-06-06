@@ -4,7 +4,7 @@ setmetatable(PlatformSDK,meta)
 
 meta.__index = function(tb,key)
 	return function(...)
-		FYDDSK.excute(key,...)
+		FYDSDK.excute(key,...)
 	end
 end
 
