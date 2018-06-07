@@ -64,13 +64,13 @@ MjEngine.CARD_TYPE = {
 	OUT = 3,
 }
 
-function MjEngine:create(deleget)
+function MjEngine:open(deleget)
 	self._deleget = deleget
 
-    local gameInfo = lt.DataManager:getGameRoomInfo()
+    self._gameRoomInfo = lt.DataManager:getGameRoomInfo()
     self._playerNum = 2
-    if gameInfo and gameInfo.room_setting and gameInfo.room_setting.seat_num then
-        self._playerNum = gameInfo.room_setting.seat_num
+    if self._gameRoomInfo and self._gameRoomInfo.room_setting and self._gameRoomInfo.room_setting.seat_num then
+        self._playerNum = self._gameRoomInfo.room_setting.seat_num
     end
 
 	self._allPlayerHandCardsNode = {}
@@ -162,6 +162,11 @@ function MjEngine:create(deleget)
 	return self
 end
 
+function MjEngine:close()
+	self:clearData()
+	self._showCardsLayer:removeFromParent()
+end
+
 function MjEngine:configOutCardsNodePos()
 	local file = io.open("res/alloutcardpos/positions.json","rb")
 	local content = file:read("*a")
@@ -189,11 +194,6 @@ end
 
 function MjEngine:getShowCardsLayer()
 	return self._showCardsLayer
-end
-
-function MjEngine:clearDesktop()--清理桌面
-	self:clearData()
-	self._showCardsLayer:removeAllChild()
 end
 
 function MjEngine:angainConfigUi()--继续游戏
@@ -554,11 +554,7 @@ function MjEngine:checkMyHandStatu()
         tObjHu = nil--抢杠胡  自摸
     }
     --检测杠
-	local tempHandCards = {}
-
-	for k,v in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
-		table.insert(tempHandCards, v)
-	end
+	local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 
 	local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
 	dump(anGangCards)
@@ -579,8 +575,7 @@ function MjEngine:checkMyHandStatu()
 	end
 
 	--检测胡
-	print("______fsdfsdf胡牌——————————————————————————", tostring(tempHandCards))
-	if lt.CommonUtil:checkIsHu(tempHandCards, true) then
+	if self:checkIsHu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) then
 		print("自摸了###########################################")
 		tObjCpghObj.tObjHu = {}
 	else
@@ -592,6 +587,36 @@ function MjEngine:checkMyHandStatu()
 	-- self:viewActionButtons(tObjCpghObj, false)
 
 	return tObjCpghObj
+end
+
+function MjEngine:checkIsHu(HandCards, card)
+	local tempHandCards = clone(HandCards)
+	local config = nil--config.isQiDui,config.huiCard,config.hiPoint
+	if self._gameRoomInfo and self._gameRoomInfo.room_setting then
+
+		local settingInfo = self._gameRoomInfo.room_setting
+		if settingInfo.game_type == lt.Constants.GAME_TYPE.HZMJ then
+			--room_setting  other_setting 
+		    -- 游戏设置项[数组]
+		    -- [1] 底分
+		    -- [2] 奖码的个数
+		    -- [3] 七对胡牌
+		    -- [4] 喜分
+		    -- [5] 一码不中当全中
+		    config = {}
+			config.isQiDui = (settingInfo.other_setting[3] == 1)  and true or false
+			config.huiCard = 35
+			config.hiPoint = (settingInfo.other_setting[4] == 1)  and true or false
+
+		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.SQMJ then
+
+		end
+	end
+	
+	if config then
+		return lt.CommonUtil:checkIsHu(tempHandCards, card, config)
+	end
+	return false
 end
 
 function MjEngine:setClickCardCallBack(callBack)
@@ -749,6 +774,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		for i,info in ipairs(allRoomInfo.handle_nums) do
 
 			local direction = lt.DataManager:getPlayerDirectionByPos(info.user_pos)
+			print("乐山大佛见识到了积分楼上的", direction, info.user_pos)
 			if direction ~= lt.Constants.DIRECTION.NAN then--不是自己
 				self._allPlayerHandCardsValue[direction] = {}
 				for i=1,info.handle_num do
@@ -858,11 +884,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 
 	if putOutType == 1 then
 	    --检测杠
-		local tempHandCards = {}
-
-		for k,v in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
-			table.insert(tempHandCards, v)
-		end
+		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 
 		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
 
@@ -881,7 +903,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		end
 
 		--检测胡
-		if lt.CommonUtil:checkIsHu(tempHandCards, true) then-- 是否七对胡
+		if self:checkIsHu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) then
 			tObjCpghObj.tObjHu = {}
 		else
 			print("没有自摸###########################################")
@@ -907,17 +929,14 @@ function MjEngine:setEngineConfig()
 
 	--商丘麻将  +-带风牌 +-带跑 
 
-
-
-
 	-- 癞子牌
 	self.__config.huiCard = nil
 
 	-- 是否限制只能一个癞子胡牌 飘癞子
 	self.__config.isOnlyOneHuiCardHu = false
 
-	-- 明听还是暗听 默认是暗听
-	self.__config.isAnTing = true
+	-- 明听还是暗听 默认是暗听  报停出的那张牌看不见
+	self.__config.isMingTing = false
 
 	-- 胡牌是否必须听牌
 	self.__config.isHuMustTing = true

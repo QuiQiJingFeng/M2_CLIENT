@@ -25,7 +25,7 @@ function GameRoomLayer:ctor()
 
 	self._gameCompassPanel = lt.GameCompassPanel.new(self)--罗盘层
 
-	self._engine = lt.MjEngine:create(self)
+	self._engine = lt.MjEngine:open(self)
 	self._showCardsPanel = self._engine:getShowCardsLayer()
 	self._gameCompassPanel:addChild(self._showCardsPanel)
 	self:setClickEvent()
@@ -55,13 +55,13 @@ function GameRoomLayer:ctor()
 end
 
 function GameRoomLayer:initGame()  
-
 	self._gameSelectPosPanel:initGame()
 	--self._gamePlayCardsPanel:initGame()
 	self._gameCompassPanel:initGame()
 
 	if lt.DataManager:isClientConnectAgain() then
-		self:onGameConnectAgain()
+		self._engine:onClientConnectAgain()
+		lt.DataManager:clearPushAllRoomInfo()
 	end
 end
 

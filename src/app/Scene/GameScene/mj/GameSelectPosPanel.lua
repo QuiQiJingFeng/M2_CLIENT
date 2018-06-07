@@ -462,14 +462,13 @@ function GameSelectPosPanel:configRotation(isClick)
 		end
 
 		if du == 0 then
-
+			self:setPlayerDirectionTable()
 			self:configPlayer()
 			return
 		end
 
 		local temp = mySelfPositionNode.atDirection - self.POSITION_TYPE.NAN
 
-		print("默认旋转角度+++++++++++++", du)
   		--三人
   		if self._playerNum == 3 then
   			--3 2   2 1  1 3       1 2  2 3  3 1 

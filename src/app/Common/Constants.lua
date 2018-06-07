@@ -8,8 +8,11 @@ Constants.GUIDE_AUTO_BATTLE_LEVEL = 2
 
 --游戏类型
 Constants.GAME_TYPE = {
-    HZMJ = 1,
-    DDZ  = 2,
+    HZMJ = 1,--红中
+    DDZ  = 2,--斗地主
+    SQMJ  = 3,--商丘麻将
+    TDH  = 4,--推倒胡
+    PLZ  = 5, --飘癞子
 }
 
 Constants.HONG_ZHONG_VALUE = 35

@@ -215,7 +215,7 @@ function DataManager:onRefreshRoomInfo(msg)
 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)
 
-    --room_setting  other_setting
+    --room_setting  other_setting 
     -- 游戏设置项[数组]
     -- [1] 底分
     -- [2] 奖码的个数

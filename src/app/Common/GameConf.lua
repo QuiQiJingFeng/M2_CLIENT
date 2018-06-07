@@ -23,6 +23,7 @@ local ddzConf = require("app.Scene.GameScene.ddz.ddzConf")
 GameConf.GameIDList = {
     HZMJ = {"HZMJ", "ImageText0", "ImageText2", false, false, hzmjConf},
 	DDZ = {"DDZ", "ImageText120", "ImageText119", false, false, ddzConf},
+    DDZ = {"HZMJ", "ImageText120", "ImageText119", false, false, hzmjConf},
 }
 
 return GameConf
