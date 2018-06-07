@@ -166,7 +166,7 @@ function MjEngine:configOutCardsNodePos()
 	local file = io.open("res/alloutcardpos/positions.json","rb")
 	local content = file:read("*a")
 	local allData = json.decode(content)
-	self._allOutCardsNodePos = allData
+	self._allOutCardsNodePos = allData["player"..self._playerNum]
 end
 
 function MjEngine:clearData()
@@ -346,15 +346,16 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 
 		for i,info in ipairs(self._allPlayerHandCardsValue[direction]) do
 			local node = self._allPlayerHandCardsNode[direction][i]
+
+			if direction == lt.Constants.DIRECTION.DONG then
+				cardZorder = cardZorder - 1
+			else
+				cardZorder = cardZorder + 1
+			end
+
 			if node then
 				self:updateCardsNode(node, self.CARD_TYPE.HAND, direction, info)
 			else
-				if direction == lt.Constants.DIRECTION.DONG then
-					cardZorder = cardZorder - 1
-				else
-					cardZorder = cardZorder + 1
-				end
-
 				node = self:createCardsNode(self.CARD_TYPE.HAND, direction, info)
 				table.insert(self._allPlayerHandCardsNode[direction], node)
 				self._allPlayerHandCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
@@ -409,20 +410,21 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 		self._allPlayerOutCardsValue[direction] = self._allPlayerOutCardsValue[direction] or {}
 		for i,info in ipairs(self._allPlayerOutCardsValue[direction]) do
 			local node = self._allPlayerOutCardsNode[direction][i]
+
+			if direction == lt.Constants.DIRECTION.DONG or direction == lt.Constants.DIRECTION.BEI then
+				cardZorder = cardZorder - 1
+			else
+				cardZorder = cardZorder + 1
+			end
+
 			if node then
 				self:updateCardsNode(node, self.CARD_TYPE.OUT, direction, info)
 			else
-				if direction == lt.Constants.DIRECTION.DONG or direction == lt.Constants.DIRECTION.BEI then
-					cardZorder = cardZorder - 1
-				else
-					cardZorder = cardZorder + 1
-				end
-
 				node = self:createCardsNode(self.CARD_TYPE.OUT, direction, info)
 				table.insert(self._allPlayerOutCardsNode[direction], node)
 				self._allPlayerOutCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 			end
-			node:setPosition(self._allOutCardsNodePos[direction][i])
+			node:setPosition(self._allOutCardsNodePos[tostring(direction)][i])
 			node:setVisible(true)
 		end
 	end
@@ -458,8 +460,9 @@ function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 	table.insert(self._allPlayerOutCardsValue[direction], value)
 end
 
-function MjEngine:getOneHandCardAtDirection(direction)--起了一张牌
-	table.insert(self._allPlayerHandCardsValue[direction], 99)
+function MjEngine:getOneHandCardAtDirection(direction, value)--起了一张牌
+	value = value or 99
+	table.insert(self._allPlayerHandCardsValue[direction], value)
 end
 
 function MjEngine:getOneCpgAtDirection(direction, info)
@@ -543,7 +546,7 @@ function MjEngine:createLieFaceItemByDirection(direction, info)
     return lieFaceNode
 end
 
-function MjEngine:checkMyHandStatu() --检测吃椪杠
+function MjEngine:checkMyHandStatu()
     local tObjCpghObj = {
         tObjChi = nil,
         tObjPeng = nil,

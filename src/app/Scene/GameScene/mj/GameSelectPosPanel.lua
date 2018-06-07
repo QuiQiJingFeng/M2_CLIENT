@@ -307,7 +307,7 @@ function GameSelectPosPanel:configRotation(isClick)
 	    	end
 
 	    	if v:getTag() ~= self._selectPositionNode:getTag() and not is_sit then
-	    		--v:setVisible(false)
+	    		v:setVisible(false)
 	    	end
 	    end
 

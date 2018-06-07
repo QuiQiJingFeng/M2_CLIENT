@@ -56,12 +56,12 @@ end
 
 function GameRoomLayer:initGame()  
 
+	self._gameSelectPosPanel:initGame()
+	--self._gamePlayCardsPanel:initGame()
+	self._gameCompassPanel:initGame()
+
 	if lt.DataManager:isClientConnectAgain() then
 		self:onGameConnectAgain()
-	else
-		self._gameSelectPosPanel:initGame()
-		--self._gamePlayCardsPanel:initGame()
-		self._gameCompassPanel:initGame()
 	end
 end
 
