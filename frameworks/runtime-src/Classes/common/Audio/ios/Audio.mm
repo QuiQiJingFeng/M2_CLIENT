@@ -66,7 +66,7 @@ static Audio * __instance;
     return [NSNumber numberWithBool:YES];
 }
 
-// 播放音频
+// 播放音频 一次只能播放一个
 -(NSNumber*) playAudioWithPath:(NSString *)path{
     if([self.__player isPlaying])
         return [NSNumber numberWithBool:NO];
@@ -81,6 +81,19 @@ static Audio * __instance;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
     [self.__player play];
     return [NSNumber numberWithBool:YES];
+}
+
+// 停止正在播放的 声音
+-(NSNumber*) stopAllAudio{
+    if([self.__player isPlaying])
+        [self.__player stop];
+    return [NSNumber numberWithBool:YES];
+}
+
+-(NSNumber*) isPlayingAudio{
+    if([self.__player isPlaying])
+        return [NSNumber numberWithBool:YES];
+   return [NSNumber numberWithBool:NO];
 }
 
 @end

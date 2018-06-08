@@ -1800,33 +1800,47 @@ function CommonUtil:recordBegin()
     else
         print("录音失败，无法开始录音")
     end
+    return ok
 end
 
---FYD 结束录音 并将录音转换成mp3格式 并将内容返回,该内容就是向服务端发送的内容
+--FYD 停止录音
 function CommonUtil:stopRecord()
     local writePath = cc.FileUtils:getInstance():getWritablePath()
     local record_path = writePath.."record.wav"
-    local ok = lt.PlatformSDK.stopRecord("Audio")
-    if ok then
-        -- 转码 将wav转换成mp3
-        local ret = lt.PlatformSDK.convertWavToMp3("Utils",record_path,writePath.."record.mp3")
-        if ret then
-            --转码成功,读取转码后的数据
-            local file = io.open(writePath.."record.mp3","rb")
-            local content = file:read("*a")
-            file:close()
-            return content
-        else
-            print("转换MP3失败")
-        end
-        lt.PlatformSDK.playAudioWithPath("Audio",writePath.."record.mp3")
+    return lt.PlatformSDK.stopRecord("Audio")
+end
+
+--FYD 转码
+function CommonUtil:convertWavToMp3()
+    local writePath = cc.FileUtils:getInstance():getWritablePath()
+    local record_path = writePath.."record.wav"
+    -- 转码 将wav转换成mp3
+    local ret = lt.PlatformSDK.convertWavToMp3("Utils",record_path,writePath.."record.mp3")
+    if ret then
+        --转码成功,读取转码后的数据
+        local file = io.open(writePath.."record.mp3","rb")
+        local content = file:read("*a")
+        file:close()
+        return content
     else
-        print("停止录音失败")
+        print("转换MP3失败")
     end
 end
 
+--播放声音
+function CommonUtil:playAudio(path,callBack)
+    return lt.PlatformSDK.playAudioWithPath("Audio",path,callBack)
+end
 
+--停止 正在播放的声音
+function CommonUtil:stopAllAudio()
+    return lt.PlatformSDK.stopAllAudio("Audio")
+end
 
+-- 当前是否正在播放声音
+function CommonUtil:isPlayingAudio()
+    return lt.PlatformSDK.isPlayingAudio("Audio")
+end
 
 
 

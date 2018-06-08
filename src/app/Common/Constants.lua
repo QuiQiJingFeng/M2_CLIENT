@@ -56,7 +56,7 @@ Constants.ROOM_STATE = {
 }
 
 -- if debug 47.52.99.120
-Constants.HOST = "47.52.99.120"--"mengyagame.com"  --"192.168.0.100"
-Constants.PORT = 80
+Constants.HOST = "127.0.0.1"--"mengyagame.com"  --"192.168.0.100"
+Constants.PORT = 3000
 
 return Constants

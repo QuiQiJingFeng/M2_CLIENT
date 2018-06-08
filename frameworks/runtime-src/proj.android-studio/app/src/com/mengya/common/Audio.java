@@ -7,6 +7,8 @@ import android.media.MediaRecorder;
 import android.os.SystemClock;
 import android.util.Log;
 
+import org.cocos2dx.lib.Cocos2dxLuaJavaBridge;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,6 +32,8 @@ public class Audio {
     private String __recordPath;
 
     private boolean __isRecording = false;
+
+    private MediaPlayer __mediaPlayer;
     /**
      * 开始录音
      * @param path 音频流的监听
@@ -165,40 +169,60 @@ public class Audio {
         }
     }
 
+    // 停止当前播放的声音
+    public boolean stopAllAudio(){
+        if(__mediaPlayer.isPlaying()){
+            __mediaPlayer.stop();
+        }
+        return true;
+    }
 
-    public boolean playAudioWithPath(String path) {
+    public boolean playAudioWithPath(String path,final int callBack) {
         try {
+            //如果之前有正在播放的声音,则返回false
+            if(__mediaPlayer.isPlaying()){
+                return false;
+            }
+
             //初始化播放器
-            MediaPlayer mediaPlayer = new MediaPlayer();
+            __mediaPlayer = new MediaPlayer();
             //设置播放音频数据文件
-            mediaPlayer.setDataSource(path);
+            __mediaPlayer.setDataSource(path);
             //设置播放监听事件
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            __mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
                     //播放完成
+                    Cocos2dxLuaJavaBridge.callLuaFunctionWithString(callBack,
+                            "success");
                 }
             });
             //播放发生错误监听事件
-            mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            __mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
                 @Override
                 public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
                     //播放出错
-                    return true;
+                    Cocos2dxLuaJavaBridge.callLuaFunctionWithString(callBack,
+                            "failed");
                 }
             });
             //播放器音量配置
-            mediaPlayer.setVolume(1, 1);
+            __mediaPlayer.setVolume(1, 1);
             //是否循环播放
-            mediaPlayer.setLooping(false);
+            __mediaPlayer.setLooping(false);
             //准备及播放
-            mediaPlayer.prepare();
-            mediaPlayer.start();
+            __mediaPlayer.prepare();
+            __mediaPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
             //播放失败正理
             return false;
         }
         return true;
+    }
+
+    //是否正在播放声音
+    public boolean isPlayingAudio(){
+        return __mediaPlayer.isPlaying();
     }
 }

@@ -34,5 +34,14 @@
  */
 -(NSNumber*) playAudioWithPath:(NSString *)path;
 
+/*
+ 停止正在播放的声音
+ */
+-(NSNumber*) stopAllAudio;
+
+/*
+ 当前是否正在播放声音
+ */
+-(NSNumber*) isPlayingAudio;
 @end
 

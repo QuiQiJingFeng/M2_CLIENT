@@ -13,6 +13,10 @@ GameEventManager.EVENT = {
 
     CLIENT_CONNECT_AGAIN =  "client_connect_again", --重连
 
+    --发送音频
+    SEND_AUDIO = "send_audio",
+    --接收音频
+    NOTICE_SEND_AUDIO = "notice_send_audio",
     --请求
 	LOGIN = "login",
     JOIN_ROOM = "join_room",
