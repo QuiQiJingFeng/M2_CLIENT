@@ -8,4 +8,13 @@ meta.__index = function(tb,key)
 	end
 end
 
+local ret = FYDSDK.setJavaSearchPath({
+				"com/mengya/common",
+				"com/mengya/game",
+				"com/mengya/wechat"
+			})
+if ret then
+	print("FYD ERROR-->",ret)
+end
+
 return PlatformSDK

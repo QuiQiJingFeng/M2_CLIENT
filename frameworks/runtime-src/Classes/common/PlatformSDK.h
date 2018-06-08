@@ -40,12 +40,18 @@ private:
 private:
     static PlatformSDK* __instance;
     std::map<std::string, FYD_FUNC> __platMap;
+    std::vector<std::string> __javaSearchPath;
 
 public:
     static void registerList();
     static PlatformSDK* getInstance();
     void pushKeyValue(std::string key,FYD_FUNC value);
     FYD_FUNC getValue(std::string key);
+
+    void pushSearchPath(string path){
+        __javaSearchPath.push_back(path);
+    }
+    std::vector<std::string>& getJavaSearchPath();
     
 };
 

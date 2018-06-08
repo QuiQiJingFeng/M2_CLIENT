@@ -10,7 +10,7 @@
 #include "cocos2d.h"
 #include "unzip/unzip.h"
 #include "xxtea/xxtea.h"
-
+#include "lame/lame.h"
 USING_NS_CC;
 
 Utils* Utils::__instance = nullptr;
@@ -238,26 +238,26 @@ Value Utils::convertWavToMp3(ValueVector vector)
     string mp3 = vector[1].asString();
     const char* wav_path = wav.c_str();
     const char* mp3_path = mp3.c_str();
-    
+
     FILE *fwav = fopen(wav_path, "rb");
     fseek(fwav, 1024*4, SEEK_CUR); //跳过源文件的信息头，不然在开头会有爆破音
     FILE *fmp3 = fopen(mp3_path, "wb");
-    
+
     lame_global_flags * lame = lame_init(); //初始化
     lame_set_in_samplerate(lame, 8000.0); //设置wav的采样率
-    lame_set_num_channels(lame, 2); //声道，不设置默认为双声道
+    lame_set_num_channels(lame, 1); //声道，不设置默认为双声道
     lame_set_quality(lame, 9);      //品质设置
-    
-    
+
+
     lame_init_params(lame);
-    
-    const int PCM_SIZE = 640 * 2; //双声道*2 单声道640即可
+
+    const int PCM_SIZE = 640 * 1; //双声道*2 单声道640即可
     const int MP3_SIZE = 8800; //计算公式pcm_size * 1.25 + 7200
     short int pcm_buffer[PCM_SIZE];
     unsigned char mp3_buffer[MP3_SIZE];
-    
+
     int read, size;
-    
+
     do {
         //将文件读进内存
         read = fread(pcm_buffer, sizeof(short int), PCM_SIZE, fwav);

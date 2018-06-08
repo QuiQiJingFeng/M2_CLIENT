@@ -10,6 +10,11 @@
 #include "scripting/lua-bindings/manual/tolua_fix.h"
 #include "Utils.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include <jni/JniHelper.h>
+#include <jni.h>
+#endif
+
 PlatformSDK* PlatformSDK::__instance = nullptr;
 
 PlatformSDK* PlatformSDK::getInstance()
@@ -35,6 +40,30 @@ void PlatformSDK::registerList()
     Utils::getInstance()->registerFunc();
 }
 
+std::vector<std::string>& PlatformSDK::getJavaSearchPath()
+{
+    return __javaSearchPath;
+}
+
+
+int setJavaSearchPath(lua_State* L){
+    auto instance = PlatformSDK::getInstance();
+    //循环遍历 读取表中的参数值
+    lua_pushnil(L);
+    while(lua_next(L,-2))
+    {
+        if(lua_isstring(L,-1)){
+            instance->pushSearchPath(lua_tostring(L,-1));
+        }else{
+            lua_pushstring(L,"ERROR:ONLY SUPPORT STRING TYPE");
+            return 1;
+        }
+        lua_pop(L,1);
+    }
+    lua_pop(L,1);
+    return 0;
+}
+
 // 默认情况下
 int excute(lua_State* L){
     
@@ -45,27 +74,32 @@ int excute(lua_State* L){
     Value ret;
     string funckey = string(className) + ":" + string(funcName);
     auto value = PlatformSDK::getInstance()->getValue(funckey);
+    ValueVector values;
+    string sig = "(";
+    for(int i = 0;i<10;i++){
+        int idx = 3+i;
+        if(lua_isnumber(L, idx)){
+            float v = luaL_checknumber(L, idx);
+            values.push_back(Value(v));
+            sig += "F";
+        }else if(lua_isstring(L, idx)){
+            const char* v = luaL_checkstring(L, idx);
+            values.push_back(Value(v));
+            sig += "Ljava/lang/String;";
+        }
+        else if(lua_isboolean(L, idx)){
+            bool v = lua_toboolean(L, idx);
+            values.push_back(Value(v));
+            sig += "Z";
+        }else if(lua_isfunction(L, idx)){
+            int funcId = toluafix_ref_function(L, idx, 0);
+            values.push_back(Value(funcId));
+            sig += "I";
+        }
+    }
+    sig += ")";
     // 如果找到了那么执行
     if(value){
-        ValueVector values;
-        for(int i = 0;i<10;i++){
-            int idx = 3+i;
-            if(lua_isnumber(L, idx)){
-                float v = luaL_checknumber(L, idx);
-                values.push_back(Value(v));
-            }else if(lua_isstring(L, idx)){
-                const char* v = luaL_checkstring(L, idx);
-                values.push_back(Value(v));
-            }
-            else if(lua_isboolean(L, idx)){
-                bool v = lua_toboolean(L, idx);
-                values.push_back(Value(v));
-            }else if(lua_isfunction(L, idx)){
-                int funcId = toluafix_ref_function(L, idx, 0);
-                values.push_back(Value(funcId));
-            }
-        }
-
         ret = value(values);
     }else{
         printf("没有找到对应的C++方法%s\n",funckey.c_str());
@@ -73,7 +107,83 @@ int excute(lua_State* L){
         #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
             //调JAVA
             printf("尝试调用JAVA方法\n");
-        #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+
+            bool isHave = false;
+            auto searchPath = PlatformSDK::getInstance()->getJavaSearchPath();
+            JniMethodInfo call;
+            int idx;
+            for(idx=0;idx<searchPath.size();idx++){
+                string classPath = searchPath[idx] + "/" + className;
+                isHave = JniHelper::getStaticMethodInfo(call, classPath.c_str(), "getInstance", "()Ljava/lang/Object;");
+                if(isHave)
+                    break;
+            }
+            if(!isHave) {
+                lua_pushboolean(L,false);
+                return 1;
+            }
+
+            jvalue *args = NULL;
+            int count = values.size();
+            if(count > 0){
+                args = new jvalue[count];
+                for(int i=0;i<count;i++){
+                    Value value = values[i];
+                    switch (value.getType()) {
+                        case Value::Type::BOOLEAN:
+                            args[i].z = value.asBool() ? JNI_TRUE :JNI_FALSE;;
+                            break;
+                        case Value::Type::DOUBLE:
+                            args[i].f = value.asDouble();
+                            break;
+                        case Value::Type::FLOAT:
+                            args[i].f = value.asDouble();
+                            break;
+                        case Value::Type::INTEGER:
+                            args[i].i = value.asInt();
+                            break;
+                        case Value::Type::STRING:
+                            args[i].l = call.env->NewStringUTF(value.asString().c_str());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            jobject instance = call.env->CallStaticObjectMethod(call.classID,call.methodID);
+            string classPath = searchPath[idx] + "/" + className;
+            string temp[] = {"V","I","Z","F","Ljava/lang/String;"};
+            for(idx=0;idx<5;idx++){
+                string tsig = sig + temp[idx];
+                isHave = JniHelper::getMethodInfo(call, classPath.c_str(), funcName, tsig.c_str());
+                if(isHave) break;
+            }
+
+            if(!isHave) {
+                lua_pushboolean(L,false);
+                return 1;
+            }
+            switch(idx) {
+                case 1:
+                    ret = call.env->CallIntMethodA(instance,call.methodID,args);
+                    break;
+                case 2:
+                    ret = call.env->CallBooleanMethodA(instance,call.methodID,args);
+                    break;
+                case 3:
+                    ret = call.env->CallFloatMethodA(instance,call.methodID,args);
+                    break;
+                case 4:
+                    jstring jstr;
+                    jstr = (jstring) call.env->CallObjectMethodA(instance,call.methodID,args);
+                    ret = call.env->GetStringUTFChars(jstr, NULL);
+                    call.env->DeleteLocalRef(jstr);
+                    break;
+                default:
+                    break;
+            }
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
             printf("错误:IOS 执行文件错误，请检查文件目标\n");
         #endif
     }
@@ -110,6 +220,7 @@ int luaopen_PlatformSDK(lua_State* L)
     
     luaL_Reg reg[] = {
         { "excute", excute},
+        { "setJavaSearchPath", setJavaSearchPath},
         
         { NULL, NULL },
     };

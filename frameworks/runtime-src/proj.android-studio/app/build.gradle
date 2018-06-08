@@ -3,12 +3,12 @@ import org.apache.tools.ant.taskdefs.condition.Os
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 25
     buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.mengya.game"
-        minSdkVersion 10
+        minSdkVersion 19
         targetSdkVersion PROP_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
@@ -147,8 +147,11 @@ def compileLua(srcDir, dstDir, doCompile, is64bit, doEncrypt) {
 android.applicationVariants.all { variant ->
     // delete previous files first
     delete "${buildDir}/intermediates/assets/${variant.dirName}"
-
     variant.mergeAssets.doLast {
+        exec {
+            workingDir "${buildDir}/../../../../../"
+            commandLine 'python',"create_package_all.py"
+        }
         copy {
            from "${buildDir}/../../../../../package"
            into "${buildDir}/intermediates/assets/${variant.dirName}/package"
@@ -157,17 +160,10 @@ android.applicationVariants.all { variant ->
            from "${buildDir}/../../../../../temp"
            into "${buildDir}/intermediates/assets/${variant.dirName}/src"
         }
-        // remove libs
-        delete "${buildDir}/../libs"
-        // copy wechat sdk lib to libs
-        copy {
-            from "${buildDir}/../../../../WechatSDK/android/WeChatSDK_Android(100)/libs"
-            into "${buildDir}/../libs"
-        }
-        // copy {
-        //     from "${buildDir}/../../../../cocos2d-x/cocos/scripting/lua-bindings/script"
-        //     into  "${buildDir}/intermediates/assets/${variant.dirName}/src/cocos"
-        // }
+//        copy {
+//            from "${buildDir}/../../../../cocos2d-x/cocos/scripting/lua-bindings/script"
+//            into  "${buildDir}/intermediates/assets/${variant.dirName}/src/cocos"
+//        }
 
         // compile & encrypt the scripts if necessary
         def compileScript = (variant.name.compareTo('release') == 0)

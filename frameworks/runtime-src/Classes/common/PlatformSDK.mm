@@ -180,7 +180,7 @@ static int excute(lua_State* L){
     if(!ret.isNull()){
         switch (ret.getType()) {
             case Value::Type::BOOLEAN:
-                lua_pushboolean(L, true);
+                lua_pushboolean(L, ret.asBool());
             break;
             case Value::Type::DOUBLE:
                 lua_pushnumber(L, ret.asDouble());

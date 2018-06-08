@@ -10,7 +10,6 @@
 #define Utils_h
 
 #include <string>
-#include "libmp3lame/lame.h"
 #include "cocos2d.h"
 #include "PlatformSDK.h"
 USING_NS_CC;
