@@ -50,7 +50,8 @@ ASSETS_CONFIG = {
     'games.zip':{'dir':'res/games'},
     'hallcomm.zip':{'dir':'res/hallcomm'},
     'proto.zip':{'dir':'res/proto'},
-    'string.zip':{'dir':'res/string'}
+    'string.zip':{'dir':'res/string'},
+    'alloutcardpos.zip':{'dir':'res/alloutcardpos'}
 }
 
 # 切换目录
