@@ -21,7 +21,6 @@ function GameRoomLayer:ctor()
 	-- required int32 cur_round = 9;     //当前游戏的局数
 
 	self._gameBgPanel = lt.GameBgPanel.new()--背景层
-	--self._gamePlayCardsPanel = lt.GamePlayCardsPanel.new(self)--牌面层
 
 	self._gameCompassPanel = lt.GameCompassPanel.new(self)--罗盘层
 
@@ -37,7 +36,6 @@ function GameRoomLayer:ctor()
 	self._gameResultPanel = lt.GameResultPanel.new(self, palyerNmu)--结算
 
 	self:addChild(self._gameBgPanel)
-	--self:addChild(self._gamePlayCardsPanel)
 
 	self:addChild(self._gameCompassPanel)
 
@@ -56,10 +54,11 @@ end
 
 function GameRoomLayer:initGame()  
 	self._gameSelectPosPanel:initGame()
-	--self._gamePlayCardsPanel:initGame()
 	self._gameCompassPanel:initGame()
-
+	
+	self:hideHuCardsTipsMj()
 	if lt.DataManager:isClientConnectAgain() then
+		self:resetCurrentOutPutPlayerPos()
 		self._engine:onClientConnectAgain()
 		lt.DataManager:clearPushAllRoomInfo()
 	end
@@ -67,21 +66,28 @@ end
 
 function GameRoomLayer:againConfigUI()  
 	self._gameSelectPosPanel:againConfigUI()
-	--self._gamePlayCardsPanel:initGame()
 	self._gameCompassPanel:initGame()
 
 	self._engine:angainConfigUi()
+end
+
+function GameRoomLayer:resetCurrentOutPutPlayerPos()
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	self._currentOutPutPlayerPos = allRoomInfo.cur_play_pos
+end
+
+function GameRoomLayer:getCurrentOutPutPlayerPos()
+	return self._currentOutPutPlayerPos
 end
 
 function GameRoomLayer:onGameConnectAgain()
 	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		self._gameSelectPosPanel:againConfigUI()
 	end	
-
-	--self._gamePlayCardsPanel:initGame()
+	self:resetCurrentOutPutPlayerPos()
 	self._gameCompassPanel:initGame()
 	self._engine:onClientConnectAgain()
-
+	self:hideHuCardsTipsMj()
 	lt.DataManager:clearPushAllRoomInfo()
 end
 
@@ -105,6 +111,19 @@ end
 
 function GameRoomLayer:viewHideActPanelAndMenu(tObjCpghObj, isPassSendMsg)
 	self._gameActionBtnsPanel:viewHideActPanelAndMenu()
+end
+
+--胡牌tips
+function GameRoomLayer:showHuCardsTipsMj()
+	self._gameActionBtnsPanel:showHuCardsTipsMj()
+end
+
+function GameRoomLayer:hideHuCardsTipsMj()
+	self._gameActionBtnsPanel:hideHuCardsTipsMj()
+end
+
+function GameRoomLayer:viewHuCardsTipsMenu(canHuCards)
+	self._gameActionBtnsPanel:viewHuCardsTipsMenu(canHuCards)
 end
 
 function GameRoomLayer:checkMyHandStatu() --检测吃椪杠
@@ -138,6 +157,8 @@ function GameRoomLayer:onClickCard(value)
 		print("出牌########################", value)
 		local arg = {command = "PLAY_CARD", card = value}
 		lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+	else
+		print("不该自己出牌！！！！！！！！！！")
 	end
 end
 

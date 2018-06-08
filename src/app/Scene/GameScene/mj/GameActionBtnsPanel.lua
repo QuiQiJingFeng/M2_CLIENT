@@ -62,13 +62,7 @@ function GameActionBtnsPanel:ctor(deleget)
         tArrNodeActionBtnsChildren[i].orgPos = cc.p(tArrNodeActionBtnsChildren[i]:getPosition())
     end
 
-    for k,node in pairs(self.m_objCommonUi.m_tArrActionBtn) do
-        lt.CommonUtil:addNodeClickEvent(node, handler(self, self.onClickCpghEvent))
-    end
-
-
     self.m_objCommonUi.m_panelCurOutCard = self:getChildByName("Panel_CurOutCard")
-
 
     self._specialEventNode = {}
     if self.m_objCommonUi.m_panelCurOutCard then
@@ -99,11 +93,24 @@ function GameActionBtnsPanel:ctor(deleget)
             self.m_objCommonUi.m_mjTips = nil
         end
         self.m_objCommonUi.m_btnToMin = self.m_objCommonUi.m_nodeHuCardTips:getChildByName("Button_ToMin")
+        self.m_objCommonUi.m_btnToMin:setVisible(false)
         self.m_objCommonUi.m_btnToMax = self.m_objCommonUi.m_nodeHuCardTips:getChildByName("Button_ToMax")
+
+        -- if self.m_objCommonUi.m_btnToMin then
+        --     table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnToMin)
+        -- end
+
+        if self.m_objCommonUi.m_btnToMax then
+            table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnToMax)
+        end
     end
 
     shaizi1:setVisible(false)
     shaizi2:setVisible(false)
+
+    for k,node in pairs(self.m_objCommonUi.m_tArrActionBtn) do
+        lt.CommonUtil:addNodeClickEvent(node, handler(self, self.onClickCpghEvent))
+    end
 
     self.m_objCommonUi.m_nodeCardsMenu:setVisible(false)
     self.m_objCommonUi.m_nodeActionBtns:setVisible(false)
@@ -175,18 +182,14 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
             self:onPassClick()
         end
         self:viewHideActPanelAndMenu()
-    -- elseif pSender == self.m_objCommonUi.m_btnToMin then
-    --     if #self.m_objModel.m_tArrTingCards > 0 then
-    --         self:showHuCardsTipsMj()
-    --     else
-    --         self:hideHuCardsTipsMj()
-    --     end
-    -- elseif pSender == self.m_objCommonUi.m_btnToMax then
-    --     if #self.m_objModel.m_tArrTingCards > 0 then
-    --         self:showHuCardsTipsMj(self.m_objModel.m_tArrTingCards, self.m_objModel.m_tArrTingCardsFan)
-    --     else
-    --         self:hideHuCardsTipsMj()
-    --     end
+    elseif pSender == self.m_objCommonUi.m_btnToMin then
+        -- if #self.m_objModel.m_tArrTingCards > 0 then
+        --     self:showHuCardsTipsMj()
+        -- else
+        --     self:hideHuCardsTipsMj()
+        -- end
+    elseif pSender == self.m_objCommonUi.m_btnToMax then
+        self:autoShowHuCardsContent()
     end
 end
 
@@ -362,6 +365,8 @@ function GameActionBtnsPanel:viewMenuBase(tObj, iType)
     -- iType = 3
     --显示二级菜单  getTouchEndPosition  getTouchBeganPosition
     local panelMenu = self.m_objCommonUi.m_panelMenuItems
+    panelMenu:removeAllChildren()
+
     local iStartX = 0
     local iGap = 10
     local iPanelMenuWidth = 0
@@ -440,6 +445,99 @@ function GameActionBtnsPanel:createMenuItem()
     local mj = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjStandFaceItem.csb")
 
     return mj
+end
+
+function GameActionBtnsPanel:showHuCardsTipsMj()
+    self.m_objCommonUi.m_nodeHuCardTips:setVisible(true)
+    self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(true)
+    self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(true)
+end
+
+function GameActionBtnsPanel:hideHuCardsTipsMj()
+    self.m_objCommonUi.m_nodeHuCardTips:setVisible(false)
+    self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(false)
+end
+
+function GameActionBtnsPanel:autoShowHuCardsContent()
+    if self.m_objCommonUi.m_panelHuCardTipsContent:isVisible() then
+        self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(false)
+        self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(false)
+    else
+        self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(true)
+        self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(true)
+    end
+end
+
+function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
+    
+    local panelMenu = self.m_objCommonUi.m_panelHuCardTipsContent
+
+    panelMenu:removeAllChildren()
+
+    local iStartX = 0
+    local iGap = 10
+    local iPanelMenuWidth = 0
+    for i = 1, #tObj do
+        local uiItem = self:createMenuItem()
+        uiItem:setScale(0.65)
+        local value = tObj[i]
+
+        local face = uiItem:getChildByName("Node_Mj"):getChildByName("Sprite_Face")
+        local imageBg = uiItem:getChildByName("Node_Mj"):getChildByName("Image_Bg")
+        imageBg.selectCardData = {card = value, type = iType}
+        imageBg:setSwallowTouches(false)
+        local cardType = math.floor(value / 10) + 1
+        local cardValue = value % 10
+        face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+
+        panelMenu:addChild(uiItem)
+
+        uiItem:setPosition(cc.p(iStartX, panelMenu:getContentSize().height/2 - uiItem:getBoundingBox().height/2))
+        iStartX = iStartX + uiItem:getBoundingBox().width + iGap
+        iPanelMenuWidth = iPanelMenuWidth + uiItem:getBoundingBox().width
+
+        --lt.CommonUtil:addNodeClickEvent(imageBg, handler(self, self.onClickSelectCard))
+    end
+
+    --添加
+
+    iPanelMenuWidth = iPanelMenuWidth + (#tObj - 1) * iGap
+
+    --胡牌提示滚动面板的实际尺寸
+    local panelSize = cc.size(iPanelMenuWidth, panelMenu:getContentSize().height)
+    --胡牌提示滚动面板的滚动尺寸
+    panelMenu:setInnerContainerSize(panelSize)
+    if panelSize.width > 300 then --长度超过了 x 就设置成x，同时允许滚动
+        panelSize.width = 300
+        self:setHuTipsScrollBarEnabled(panelMenu, true)
+    else --否则有足够的空间，不需要滚动
+        self:setHuTipsScrollBarEnabled(panelMenu, false)
+    end
+    panelMenu:setContentSize(panelSize)
+
+    --背景变化
+    local imgMenuBg = self.m_objCommonUi.m_imgHuCardTipsBg
+    imgMenuBg:setContentSize(cc.size(panelSize.width + 4 * iGap - 5, imgMenuBg:getContentSize().height))
+
+    self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(true)
+
+end
+
+--胡牌提示滚动条设置
+function GameActionBtnsPanel:setHuTipsScrollBarEnabled(uiScrollBar, isEnabled, iDisY)
+    uiScrollBar:setScrollBarEnabled(isEnabled)
+    if uiScrollBar:isScrollBarEnabled() then
+        uiScrollBar:setScrollBarAutoHideTime(1)
+        uiScrollBar:setScrollBarColor(cc.c3b(255, 255, 255))
+        local p = uiScrollBar:getScrollBarPositionFromCornerForHorizontal()
+        p.y = 0
+        if iDisY then
+            p.y = p.y + iDisY 
+        end
+        uiScrollBar:setScrollBarPositionFromCornerForHorizontal(p)
+        uiScrollBar:setScrollBarWidth(4)
+    end
+    uiScrollBar:setTouchEnabled(isEnabled)
 end
 
 function GameActionBtnsPanel:onNoticeSpecialEvent(msg)

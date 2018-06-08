@@ -1338,12 +1338,12 @@ function CommonUtil:changehandCardsData(allPai)--整理下手牌的数据结构 
     return handle_cards
 end
 
-function CommonUtil:getAllCanHuCards(handCards, bQiDuiHu)--目前在缺一张牌的情况下 找到能胡的牌
+function CommonUtil:getAllCanHuCards(handCards, gameTpe)--目前在缺一张牌的情况下 找到能胡的牌
     -- 1-》9
     -- 11-》19
     -- 21-》29
     -- 31-》36
-    local allCards = {
+    local baseCards = {
         1,2,3,4,5,6,7,8,9,
         11,12,13,14,15,16,17,18,19,
         21,22,23,24,25,26,27,28,29,
@@ -1353,20 +1353,14 @@ function CommonUtil:getAllCanHuCards(handCards, bQiDuiHu)--目前在缺一张牌
 
     local canHuCards = {}
 
-    local temp = {}
-    for k,v in ipairs(handCards) do
-        table.insert(temp, v)
-    end
-
-
     for i,v in ipairs(allCards) do
-        table.insert(temp, 1, v)--将检测的牌加入手牌  
+        table.insert(handCards, 1, v)--将检测的牌加入手牌  
 
         local handCardsDada = self:changehandCardsData(temp)
         if self:JudgeIfHu2(handCardsDada, bQiDuiHu) then
             table.insert(canHuCards, v)
         end
-        table.remove(temp, 1)
+        table.remove(handCards, 1)
     end
     return canHuCards
 end

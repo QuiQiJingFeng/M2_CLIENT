@@ -390,6 +390,9 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 					node:setPosition(x - 15, y)					
 				end
 			end
+			--设置手牌的初始状态
+			node:setOrginPosition(node:getPosition())
+			node:setSelectState(false)
 			node:setVisible(true)
 		end
 	end
@@ -479,8 +482,8 @@ function MjEngine:createCardsNode(cardType, direction, info)
 	local node = nil 
 	if cardType == self.CARD_TYPE.HAND then
 		node = lt.MjStandFaceItem.new(direction)
-		if self._clickCardCallback then
-			node:addNodeClickEvent(self._clickCardCallback)
+		if self._clickCardCallback and direction == lt.Constants.DIRECTION.NAN then
+			node:addNodeClickEvent(handler(self, self.onClickCard))
 		end
 	elseif cardType == self.CARD_TYPE.CPG then
 		node = lt.MjLieCpgItem.new(direction)
@@ -500,13 +503,16 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		local value = info--手牌值
 		node:setCardValue(value)
 		node:setTag(value)
+		node:showNormal()
 	elseif cardType == self.CARD_TYPE.CPG then
 		node:updateInfo(info)
 		node:setCpgInfo(info)
 
 	elseif cardType == self.CARD_TYPE.OUT then 
-		node:setCardValue(info)
+		local value = info--手牌值
+		node:setCardValue(value)
 		node:setValue(value)
+		node:showNormal()
 	end	
 
 end
@@ -589,6 +595,37 @@ function MjEngine:checkMyHandStatu()
 	return tObjCpghObj
 end
 
+function MjEngine:getGameAllCardsValue()
+	local allCardsValue = {}
+	if self._gameRoomInfo and self._gameRoomInfo.room_setting then
+		allCardsValue = clone(lt.Constants.BASE_CARD_VALUE_TABLE)
+
+		local settingInfo = self._gameRoomInfo.room_setting
+		if settingInfo.game_type == lt.Constants.GAME_TYPE.HZMJ then
+
+			for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE1) do
+				table.insert(allCardsValue, v)
+			end
+		else
+
+		end
+	end
+	return allCardsValue
+end
+
+function MjEngine:getAllCanHuCards(HandCards)
+	local canHuCards = {}
+	local allCardsValue = self:getGameAllCardsValue()
+
+	for i,card in ipairs(allCardsValue) do
+		if self:checkIsHu(HandCards, card) then
+			table.insert(canHuCards, card)
+		end
+	end
+
+	return canHuCards
+end
+
 function MjEngine:checkIsHu(HandCards, card)
 	local tempHandCards = clone(HandCards)
 	local config = nil--config.isQiDui,config.huiCard,config.hiPoint
@@ -621,6 +658,74 @@ end
 
 function MjEngine:setClickCardCallBack(callBack)
 	self._clickCardCallback = callBack
+end
+
+function MjEngine:onClickCard(cardNode, value)
+
+	if not self._deleget then
+		return
+	end
+
+	if not self._deleget:getCurrentOutPutPlayerPos() or self._deleget:getCurrentOutPutPlayerPos() ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+		self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false)--原来选中的牌回归原位
+		cardNode:showRedMask()
+		self:showRedMaskOutCards(value)
+		return
+	end
+
+	if not cardNode:getSelectState() then
+
+		self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false)--原来选中的牌回归原位
+		--从出的牌中筛选出将要出的牌
+		self:showRedMaskOutCards(value)
+
+		cardNode:setSelectState(true)
+		print("出列！！！！！！！！！！", value) 
+
+
+		--检测听牌列表
+		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
+
+		for i,v in ipairs(tempHandCards) do
+			if v == value then
+				table.remove(tempHandCards, i)
+				break
+			end
+		end
+		local canHuCards = self:getAllCanHuCards(tempHandCards)
+		print("胡牌tips", #canHuCards)
+		if #canHuCards > 0 then
+			self._deleget:showHuCardsTipsMj()
+			self._deleget:viewHuCardsTipsMenu(canHuCards)
+		else
+			self._deleget:hideHuCardsTipsMj()
+		end
+		
+	else
+		for k,outCardsNode in pairs(self._allPlayerOutCardsNode) do
+			for i,v in ipairs(outCardsNode) do
+				v:showNormal()
+			end	
+		end
+
+		self._deleget:hideHuCardsTipsMj()
+		
+		if self._clickCardCallback then
+			print("点击出牌", value)
+			self._clickCardCallback(value)
+		end
+	end
+end
+
+function MjEngine:showRedMaskOutCards(value)--
+	for k,outCardsNode in pairs(self._allPlayerOutCardsNode) do
+		for i,v in ipairs(outCardsNode) do
+			v:showNormal()
+			if v.getValue and v:getValue() == value then
+				v:showRedMask()
+			end
+		end	
+	end
 end
 
 function MjEngine:gameOverShow()--游戏结束 推到牌

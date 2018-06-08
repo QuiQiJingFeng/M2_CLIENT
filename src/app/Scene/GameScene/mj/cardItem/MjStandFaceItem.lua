@@ -36,6 +36,10 @@ function MjStandFaceItem:setPosition(x , y)
 	self._rootNode:setPosition(x , y)
 end
 
+function MjStandFaceItem:setOrginPosition(x , y)
+	self._orginPos = ccp(x, y)
+end
+
 function MjStandFaceItem:getPosition()
 	return self._rootNode:getPosition()
 end
@@ -60,14 +64,30 @@ function MjStandFaceItem:addNodeClickEvent(callBack)
 end
 
 function MjStandFaceItem:onClickCard(event) 
-	print("+++++++++++++++++++++++++++++++++++++++++++++++++++!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", self._imageBg:getTag())
 	if self._callBack then
-		self._callBack(self._imageBg:getTag())
+		self._callBack(self, self._imageBg:getTag())
 	end
 end
 
 function MjStandFaceItem:setTag(tag) 
-	self._imageBg:setTag(tag)
+	if self._imageBg then
+		self._imageBg:setTag(tag)
+	end
+end
+
+function MjStandFaceItem:setSelectState(bool) 
+	if self._imageBg then
+		self._imageBg["SelectState"] = bool
+		if bool == true then
+			self._rootNode:setPositionY(self._orginPos.y + 30)
+		end
+	end
+end
+
+function MjStandFaceItem:getSelectState() 
+	if self._imageBg then
+		return self._imageBg["SelectState"]
+	end
 end
 
 function MjStandFaceItem:setCardValue(value) 
