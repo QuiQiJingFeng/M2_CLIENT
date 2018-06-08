@@ -55,7 +55,7 @@ end
 function GameRoomLayer:initGame()  
 	self._gameSelectPosPanel:initGame()
 	self._gameCompassPanel:initGame()
-	
+
 	self:hideHuCardsTipsMj()
 	if lt.DataManager:isClientConnectAgain() then
 		self:resetCurrentOutPutPlayerPos()
@@ -139,6 +139,10 @@ end
 
 function GameRoomLayer:setClickEvent() 
 	self._engine:setClickCardCallBack(handler(self, self.onClickCard))
+end
+
+function GameRoomLayer:isVisibleGameActionBtnsPanel() 
+	return self._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:isVisible()
 end
 
 function GameRoomLayer:onClickCard(value) 

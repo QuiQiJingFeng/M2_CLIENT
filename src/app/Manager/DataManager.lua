@@ -233,6 +233,32 @@ function DataManager:getGameRoomSetInfo()
     return nil    
 end
 
+function DataManager:getGameAllCardsValue()
+    local allCardsValue = {}--单个
+    local cardsAllNum = 0
+
+    if self._gameRoomInfo and self._gameRoomInfo.room_setting then
+        allCardsValue = clone(lt.Constants.BASE_CARD_VALUE_TABLE)
+        cardsAllNum = cardsAllNum + #allCardsValue * 4
+
+        local settingInfo = self._gameRoomInfo.room_setting
+        if settingInfo.game_type == lt.Constants.GAME_TYPE.HZMJ then
+
+            for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE1) do
+                table.insert(allCardsValue, v)
+                if v < 41 then
+                    cardsAllNum = cardsAllNum + 4
+                else
+                    cardsAllNum = cardsAllNum + 1
+                end
+            end
+        else
+
+        end
+    end
+    return allCardsValue, cardsAllNum
+end
+
 function DataManager:getMyselfPositionInfo()
     for i,player in ipairs(self:getGameRoomInfo().players) do
         if player.user_id == self:getPlayerUid() then

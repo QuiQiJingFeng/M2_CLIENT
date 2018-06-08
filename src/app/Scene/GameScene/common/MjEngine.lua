@@ -459,6 +459,8 @@ function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 	 	table.remove(self._allPlayerHandCardsValue[direction], 1)
 	 end
 
+	 self:sortHandValue(direction)
+
 	self._allPlayerOutCardsValue[direction] = self._allPlayerOutCardsValue[direction] or {}
 	table.insert(self._allPlayerOutCardsValue[direction], value)
 end
@@ -470,6 +472,39 @@ end
 
 function MjEngine:getOneCpgAtDirection(direction, info)
 	 table.insert(self._allPlayerCpgCardsValue[direction], info)
+end
+
+function MjEngine:sortHandValue(direction)
+
+	if self._gameRoomInfo and self._gameRoomInfo.room_setting then
+
+		local settingInfo = self._gameRoomInfo.room_setting
+		if settingInfo.game_type == lt.Constants.GAME_TYPE.HZMJ then
+
+			local tempHandCards = clone(self._allPlayerHandCardsValue[direction])
+			local temp = {}
+
+			local i = 1
+			while i <= #tempHandCards do
+				if tempHandCards[i] == lt.Constants.HONG_ZHONG_VALUE then
+					table.insert(temp, tempHandCards[i])
+					table.remove(tempHandCards, i)
+				else
+					i = i + 1
+				end
+			end
+
+			table.sort( tempHandCards, function(a, b)
+				return a < b
+			end )
+
+			for i,v in ipairs(temp) do
+				table.insert(tempHandCards, v, 1)
+			end
+
+			self._allPlayerHandCardsValue[direction] = tempHandCards
+		end
+	end
 end
 
 --创建牌node
@@ -595,27 +630,9 @@ function MjEngine:checkMyHandStatu()
 	return tObjCpghObj
 end
 
-function MjEngine:getGameAllCardsValue()
-	local allCardsValue = {}
-	if self._gameRoomInfo and self._gameRoomInfo.room_setting then
-		allCardsValue = clone(lt.Constants.BASE_CARD_VALUE_TABLE)
-
-		local settingInfo = self._gameRoomInfo.room_setting
-		if settingInfo.game_type == lt.Constants.GAME_TYPE.HZMJ then
-
-			for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE1) do
-				table.insert(allCardsValue, v)
-			end
-		else
-
-		end
-	end
-	return allCardsValue
-end
-
 function MjEngine:getAllCanHuCards(HandCards)
 	local canHuCards = {}
-	local allCardsValue = self:getGameAllCardsValue()
+	local allCardsValue = lt.DataManager:getGameAllCardsValue()
 
 	for i,card in ipairs(allCardsValue) do
 		if self:checkIsHu(HandCards, card) then
@@ -661,6 +678,16 @@ function MjEngine:setClickCardCallBack(callBack)
 end
 
 function MjEngine:onClickCard(cardNode, value)
+
+	if self._deleget:isVisibleGameActionBtnsPanel() then
+		return
+	end
+
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+		if value == lt.Constants.HONG_ZHONG_VALUE then
+			return
+		end
+	end
 
 	if not self._deleget then
 		return
@@ -709,7 +736,7 @@ function MjEngine:onClickCard(cardNode, value)
 		end
 
 		self._deleget:hideHuCardsTipsMj()
-		
+
 		if self._clickCardCallback then
 			print("点击出牌", value)
 			self._clickCardCallback(value)

@@ -148,10 +148,10 @@ function GameCompassPanel:onDealDown(msg)   --发牌13张手牌
 
 	local roomSetting = lt.DataManager:getGameRoomSetInfo()
 	if roomSetting then
-		if roomSetting.game_type == lt.Constants.GAME_TYPE.HZMJ then
-			local allCardsNum = 112
-			self._surCardsNum:setString(allCardsNum - 13 * roomSetting.seat_num)
-		end
+
+		local allCards, cardsAllNum = lt.DataManager:getGameAllCardsValue()
+		local allCardsNum = cardsAllNum 
+		self._surCardsNum:setString(allCardsNum - 13 * roomSetting.seat_num)
 	end
 
 	self:setSurRoomRound(msg.cur_round)
