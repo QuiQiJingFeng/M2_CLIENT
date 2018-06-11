@@ -230,46 +230,6 @@ long Utils::xxteaDecrypt(unsigned char* bytes,long size,char* xxteaSigin,char* x
    //wav格式音频转换成mp3格式的音频
  */
 
-typedef struct WAV_RIFF {
-    /* chunk "riff" */
-    char ChunkID[4];   /* "RIFF" */
-    /* sub-chunk-size */
-    uint32_t ChunkSize; /* 36 + Subchunk2Size */
-    /* sub-chunk-data */
-    char Format[4];    /* "WAVE" */
-} RIFF_t;
-
-typedef struct WAV_FMT {
-    /* sub-chunk "fmt" */
-    char Subchunk1ID[4];   /* "fmt " */
-    /* sub-chunk-size */
-    uint32_t Subchunk1Size; /* 16 for PCM */
-    /* sub-chunk-data */
-    uint16_t AudioFormat;   /* PCM = 1*/
-    uint16_t NumChannels;   /* Mono = 1, Stereo = 2, etc. */
-    uint32_t SampleRate;    /* 8000, 44100, etc. */
-    uint32_t ByteRate;  /* = SampleRate * NumChannels * BitsPerSample/8 */
-    uint16_t BlockAlign;    /* = NumChannels * BitsPerSample/8 */
-    uint16_t BitsPerSample; /* 8bits, 16bits, etc. */
-} FMT_t;
-
-typedef struct WAV_data {
-    /* sub-chunk "data" */
-    char Subchunk2ID[4];   /* "data" */
-    /* sub-chunk-size */
-    uint32_t Subchunk2Size; /* data size */
-    /* sub-chunk-data */
-    //    Data_block_t block;
-} Data_t;
-
-//typedef struct WAV_data_block {
-//} Data_block_t;
-
-typedef struct WAV_fotmat {
-    RIFF_t riff;
-    FMT_t fmt;
-    Data_t data;
-} WavDef;
 //const char* wav_path,const char* mp3_path
 Value Utils::convertWavToMp3(ValueVector vector)
 {
@@ -284,11 +244,11 @@ Value Utils::convertWavToMp3(ValueVector vector)
         return Value(false);
     }
     
-    WavDef def;
-    fread(&def,1,sizeof(def),fwav);
-    int channel = def.fmt.NumChannels;
-    int sampleRate = def.fmt.SampleRate;
-    int bitsPerSample = def.fmt.BitsPerSample;
+    fseek(fwav, 44, SEEK_CUR);
+    
+    int channel = 1;
+    int sampleRate = 8000;
+    int bitsPerSample = 16;
  
     FILE* fmp3 = fopen(mp3_path,"wb");
     
