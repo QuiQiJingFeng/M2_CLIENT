@@ -7,8 +7,6 @@ import android.media.MediaRecorder;
 import android.os.SystemClock;
 import android.util.Log;
 
-import org.cocos2dx.lib.Cocos2dxLuaJavaBridge;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -39,6 +37,7 @@ public class Audio {
      * @param path 音频流的监听
      */
     public boolean recordBegin(String path) {
+        __isRecording = false;
         //麦克风输入源
         int AUDIO_INPUT = MediaRecorder.AudioSource.MIC;
         // 采样率
@@ -130,7 +129,7 @@ public class Audio {
                     size = inputStream.read(buf);
                 }
                 inputStream.close();
-                // 填入参数，比特率等。16位双声道，8000HZ
+                // 填入参数，比特率等。16位单声道，44100HZ
                 WaveHeader header = new WaveHeader();
                 // 长度字段 = 内容的大小（PCMSize) + 头部字段的大小
                 // (不包括前面4字节的标识符RIFF以及fileLength本身的4字节
@@ -139,7 +138,7 @@ public class Audio {
                 header.BitsPerSample = 16;
                 header.Channels = 1;
                 header.FormatTag = 0x0001;
-                header.SamplesPerSec = 8000;
+                header.SamplesPerSec = 44100;
                 header.BlockAlign = (short) (header.Channels
                         * header.BitsPerSample / 8);
                 header.AvgBytesPerSec = header.BlockAlign
@@ -171,16 +170,16 @@ public class Audio {
 
     // 停止当前播放的声音
     public boolean stopAllAudio(){
-        if(__mediaPlayer.isPlaying()){
+        if(__mediaPlayer!=null && __mediaPlayer.isPlaying()){
             __mediaPlayer.stop();
         }
         return true;
     }
 
-    public boolean playAudioWithPath(String path,final int callBack) {
+    public boolean playAudioWithPath(String path) {
         try {
             //如果之前有正在播放的声音,则返回false
-            if(__mediaPlayer.isPlaying()){
+            if(__mediaPlayer!= null && __mediaPlayer.isPlaying()){
                 return false;
             }
 
@@ -193,17 +192,13 @@ public class Audio {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
                     //播放完成
-                    Cocos2dxLuaJavaBridge.callLuaFunctionWithString(callBack,
-                            "success");
                 }
             });
             //播放发生错误监听事件
             __mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
                 @Override
                 public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-                    //播放出错
-                    Cocos2dxLuaJavaBridge.callLuaFunctionWithString(callBack,
-                            "failed");
+                    return false;
                 }
             });
             //播放器音量配置

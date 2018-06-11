@@ -168,8 +168,12 @@ function MjEngine:close()
 end
 
 function MjEngine:configOutCardsNodePos()
-	local file = io.open("res/alloutcardpos/positions.json","rb")
-	local content = file:read("*a")
+	local path = "res/alloutcardpos/positions.json"
+	if device.platform == "ios" or device.platform == "android" then
+		local writePath = cc.FileUtils:getInstance():getWritablePath()
+		path = writePath .. path
+	end
+	local content = cc.FileUtils:getInstance():getStringFromFile(path)
 	local allData = json.decode(content)
 	self._allOutCardsNodePos = allData["player"..self._playerNum]
 end

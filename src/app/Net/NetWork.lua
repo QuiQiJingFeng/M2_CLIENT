@@ -285,7 +285,9 @@ function network:update(dt)
                 lt.GameEventManager:post(rsp_name, rsp_msg)
 
                 if rsp_name ~= "heartbeat" then
-                    dump(rsp_msg,rsp_name.."masg = ", 100)
+                    if rsp_name ~= "notice_send_audio" then
+                        dump(rsp_msg,rsp_name.."masg = ", 100)
+                    end
                 end
             end
     	else

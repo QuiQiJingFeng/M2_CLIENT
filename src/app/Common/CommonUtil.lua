@@ -1829,7 +1829,7 @@ end
 
 --播放声音
 function CommonUtil:playAudio(path,callBack)
-    return lt.PlatformSDK.playAudioWithPath("Audio",path,callBack)
+    return lt.PlatformSDK.playAudioWithPath("Audio",path)
 end
 
 --停止 正在播放的声音

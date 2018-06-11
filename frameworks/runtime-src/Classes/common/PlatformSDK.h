@@ -53,6 +53,7 @@ public:
     }
     std::vector<std::string>& getJavaSearchPath();
     
+    void callBack(int funcId,std::string value);
 };
 
 

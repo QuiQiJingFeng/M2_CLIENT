@@ -8,8 +8,8 @@
 
 #include "PlatformSDK.h"
 #include "scripting/lua-bindings/manual/tolua_fix.h"
+#include "scripting/lua-bindings/manual/CCLuaEngine.h"
 #include "Utils.h"
-
 #import <Foundation/Foundation.h>
 
 PlatformSDK* PlatformSDK::__instance = nullptr;
@@ -35,6 +35,14 @@ FYD_FUNC PlatformSDK::getValue(std::string key)
 void PlatformSDK::registerList()
 {
     Utils::getInstance()->registerFunc();
+}
+
+void PlatformSDK::callBack(int funcId,std::string value)
+{
+    auto engine = LuaEngine::getInstance();
+    auto stack = engine->getLuaStack();
+    stack->pushString(value.c_str());
+    stack->executeFunctionByHandler(funcId, 1);
 }
 
 id performSelector(id instance,SEL aSelector,NSArray* array)
@@ -202,6 +210,10 @@ static int excute(lua_State* L){
     return 0;
 }
 
+
+int setJavaSearchPath(lua_State* L){
+    return 0;
+}
 int luaopen_PlatformSDK(lua_State* L)
 {
     PlatformSDK::getInstance()->registerList();
@@ -209,6 +221,7 @@ int luaopen_PlatformSDK(lua_State* L)
     
     luaL_Reg reg[] = {
         { "excute", excute},
+        { "setJavaSearchPath", setJavaSearchPath},
         
         { NULL, NULL },
     };

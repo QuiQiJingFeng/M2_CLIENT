@@ -29,26 +29,30 @@ function GameSetPanel:ctor()
 	lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onSetClick))
 	lt.CommonUtil:addNodeClickEvent(ruleBtn, handler(self, self.onRuleClick))
 
-	lt.CommonUtil:addNodeClickEvent(voiceBtn,handler(self, self.onTouchBeginVoice),true,handler(self, self.onTouchEndVoice),handler(self, self.onTouchEndVoice))
+	lt.CommonUtil:addNodeClickEvent(voiceBtn,handler(self, self.onTouchEndVoice),true,handler(self, self.onTouchBeginVoice),handler(self, self.onTouchCanceled))
 
-	self.__playAudioList = {}
+	self.__recording = false
 end
 
+--开始录音的时候,服务端发过来的声音全部丢弃 并且停止当前的声音
 function GameSetPanel:onTouchBeginVoice()
-	--开始录音之前 清空当前声音列表中的所有声音,并停止当前正在播放的声音
-	self.__playAudioList = {}
 	lt.CommonUtil:stopAllAudio()
-	
+	self.__recording = true
 	self.isStart = lt.CommonUtil:recordBegin()
 end
 
+function GameSetPanel:onTouchCanceled()
+	lt.CommonUtil:stopRecord()
+end
+
 function GameSetPanel:onTouchEndVoice()
+	self.__recording = false
 	if not self.isStart then
 		print("ERROR: 内部错误")
 		return
 	end
 	local ok = lt.CommonUtil:stopRecord()
-	if not data then
+	if not ok then
 		print("停止失败")
 		return
 	end
@@ -57,6 +61,7 @@ function GameSetPanel:onTouchEndVoice()
 		print("转码失败")
 		return
 	end
+
 	-- 向服务器发送音频
 	lt.NetWork:sendTo(lt.GameEventManager.EVENT.SEND_AUDIO, {data = content})
 end
@@ -70,31 +75,19 @@ function GameSetPanel:onRuleClick(event)
 
 end
 
-function GameSetPanel:processPlaying(data)
-	local writePath = cc.FileUtils:getInstance():getWritablePath()
-	local path = writePath + "audio.mp3"
-	local file = io.open(path,"wb")
-	file:write(data)
-	file:close()
-	lt.CommonUtil:playAudio(path,function(result) 
-			local temp = table.remove(self.__playAudioList,1)
-			if temp then
-				-- 一个播放完毕 继续播放另一个
-				self:processPlaying(temp)
-			end
-		end)
-end
-
 function GameSetPanel:onNoticeSendAudio(content)
 	local user_pos = content.user_pos
 	local data = content.data
-	
-	local playing = lt.CommonUtil:isPlayingAudio()
-	if playing then
-		table.insert(self.__playAudioList,data)
+	if self.__recording then 
 		return
 	end
-	self:processPlaying(data)
+	local writePath = cc.FileUtils:getInstance():getWritablePath()
+	local path = writePath .. "audio.mp3"
+	local file = io.open(path,"wb")
+	file:write(data)
+	file:close()
+
+	lt.CommonUtil:playAudio(path)
 end
 
 function GameSetPanel:onEnter()   

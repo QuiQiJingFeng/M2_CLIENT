@@ -45,6 +45,11 @@ std::vector<std::string>& PlatformSDK::getJavaSearchPath()
     return __javaSearchPath;
 }
 
+void PlatformSDK::callBack(int funcId,std::string value)
+{
+    
+}
+
 
 int setJavaSearchPath(lua_State* L){
     auto instance = PlatformSDK::getInstance();
