@@ -32,7 +32,7 @@ static Audio * __instance;
                                    // 音频格式
                                    [NSNumber numberWithInt: kAudioFormatLinearPCM],AVFormatIDKey,
                                    //采样位数  8、16、24、32 默认为16
-                                   [NSNumber numberWithInt:8],AVLinearPCMBitDepthKey,
+                                   [NSNumber numberWithInt:16],AVLinearPCMBitDepthKey,
                                    // 音频通道数 1 或 2 iphone只有1个麦克风,选单声道就可以了
                                    [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,
                                    //录音质量 暂时不需要特别高的品质 一般即可,这样可以节省传输的数据量

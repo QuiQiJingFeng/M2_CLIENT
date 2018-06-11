@@ -228,9 +228,48 @@ long Utils::xxteaDecrypt(unsigned char* bytes,long size,char* xxteaSigin,char* x
 
 /*
    //wav格式音频转换成mp3格式的音频
- 
-    lame_set_quality(lame_global_flags *, int); 设置压缩品质，quality=0..9. 0=best (very slow). 9=worst. 品质越好转码速度越慢
  */
+
+typedef struct WAV_RIFF {
+    /* chunk "riff" */
+    char ChunkID[4];   /* "RIFF" */
+    /* sub-chunk-size */
+    uint32_t ChunkSize; /* 36 + Subchunk2Size */
+    /* sub-chunk-data */
+    char Format[4];    /* "WAVE" */
+} RIFF_t;
+
+typedef struct WAV_FMT {
+    /* sub-chunk "fmt" */
+    char Subchunk1ID[4];   /* "fmt " */
+    /* sub-chunk-size */
+    uint32_t Subchunk1Size; /* 16 for PCM */
+    /* sub-chunk-data */
+    uint16_t AudioFormat;   /* PCM = 1*/
+    uint16_t NumChannels;   /* Mono = 1, Stereo = 2, etc. */
+    uint32_t SampleRate;    /* 8000, 44100, etc. */
+    uint32_t ByteRate;  /* = SampleRate * NumChannels * BitsPerSample/8 */
+    uint16_t BlockAlign;    /* = NumChannels * BitsPerSample/8 */
+    uint16_t BitsPerSample; /* 8bits, 16bits, etc. */
+} FMT_t;
+
+typedef struct WAV_data {
+    /* sub-chunk "data" */
+    char Subchunk2ID[4];   /* "data" */
+    /* sub-chunk-size */
+    uint32_t Subchunk2Size; /* data size */
+    /* sub-chunk-data */
+    //    Data_block_t block;
+} Data_t;
+
+//typedef struct WAV_data_block {
+//} Data_block_t;
+
+typedef struct WAV_fotmat {
+    RIFF_t riff;
+    FMT_t fmt;
+    Data_t data;
+} WavDef;
 //const char* wav_path,const char* mp3_path
 Value Utils::convertWavToMp3(ValueVector vector)
 {
@@ -239,53 +278,119 @@ Value Utils::convertWavToMp3(ValueVector vector)
     const char* wav_path = wav.c_str();
     const char* mp3_path = mp3.c_str();
  
-    //1.打开 wav,MP3文件
     FILE* fwav = fopen(wav_path,"rb");
-    fseek(fwav, 4*1024, SEEK_CUR);
+    if(!fwav){
+        printf("can't open audio file = %s\n",wav_path);
+        return Value(false);
+    }
+    
+    WavDef def;
+    fread(&def,1,sizeof(def),fwav);
+    int channel = def.fmt.NumChannels;
+    int sampleRate = def.fmt.SampleRate;
+    int bitsPerSample = def.fmt.BitsPerSample;
+ 
     FILE* fmp3 = fopen(mp3_path,"wb");
     
-    int channel = 1;//单声道
-    
-    short int wav_buffer[8192*channel];
-    unsigned char mp3_buffer[8192];
-    
-    //1.初始化lame的编码器
-    lame_t lame =  lame_init();
-    
-    //2. 设置lame mp3编码的采样率
-    lame_set_in_samplerate(lame , 8000);
-    lame_set_out_samplerate(lame, 8000);
-    lame_set_num_channels(lame,1);
-    lame_set_mode(lame, MONO);
+    lame_global_flags * lame = lame_init();
+    lame_set_in_samplerate(lame, sampleRate);
+    lame_set_num_channels(lame, channel);
+    if(channel == 1){
+        lame_set_mode(lame,MPEG_mode_e::MONO);
+    }
+    else if(channel == 2){
+        lame_set_mode(lame,MPEG_mode_e::STEREO);
+    }else{
+        printf("unspport channels %d\n",channel);
+    }
     lame_set_quality(lame, 9);      //品质设置
-    // 3. 设置MP3的编码方式
+    
+    
     lame_set_VBR(lame, vbr_default);
-    lame_set_brate(lame, 16);
+    lame_set_brate(lame, bitsPerSample);
+    
     lame_init_params(lame);
-    int read ; int write; //代表读了多少个次 和写了多少次
-    int total=0; // 当前读的wav文件的byte数目
-    do{
-        read = fread(wav_buffer,sizeof(short int)*channel, 8192,fwav);
-        total +=  read* sizeof(short int)*channel;
-        // 调用java代码 完成进度条的更新
-        if(read!=0){
-            write = lame_encode_buffer(lame, wav_buffer, NULL, read, mp3_buffer, 8192);
-            //write = lame_encode_buffer_interleaved(lame,wav_buffer,read,mp3_buffer,8192);
-            //把转化后的mp3数据写到文件里
-            fwrite(mp3_buffer,sizeof(unsigned char),write,fmp3);
-        }
-        if(read==0){
-            lame_encode_flush(lame,mp3_buffer,8192);
-        }
-    }while(read!=0);
     
+    const int PCM_SIZE = 640 * channel; //双声道*2 单声道640即可
+    const int MP3_SIZE = PCM_SIZE*1.25+7200; //计算公式pcm_size * 1.25 + 7200
+    short int pcm_buffer[PCM_SIZE];
+    unsigned char mp3_buffer[MP3_SIZE];
+    
+    int read, size;
+    do {
+        //将文件读进内存
+        read = fread(pcm_buffer, sizeof(short int), PCM_SIZE, fwav);
+        if (read == 0) {
+            //当read为0，说明pcm文件已经全部读取完毕，调用lame_encode_flush即可。
+            lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            
+        } else { //当read不为0，调用lame_encode_buffer_xxx进行转码
+            //双声道千万要使用lame_encode_buffer_interleaved这个函数
+            //32位、单声道需要调用其他函数，具体看代码后面的说明
+            if(channel == 1){
+                size = lame_encode_buffer(lame, pcm_buffer, NULL, read, mp3_buffer, MP3_SIZE);
+                fwrite(mp3_buffer,sizeof(unsigned char),size,fmp3);
+            }else if(channel == 2){
+                size = lame_encode_buffer_interleaved(lame, pcm_buffer, read/2, mp3_buffer, MP3_SIZE);
+                fwrite(mp3_buffer,sizeof(unsigned char),size,fmp3);
+            }
+        }
+    } while (read != 0);
+    lame_mp3_tags_fid(lame, fmp3);
+    //记得各种关闭
     lame_close(lame);
-    fclose(fwav);
     fclose(fmp3);
-    
+    fclose(fwav);
     return Value(true);
 }
 
+
+/*
+ //1.打开 wav,MP3文件
+ FILE* fwav = fopen(wav_path,"rb");
+ fseek(fwav, 44, SEEK_CUR);
+ FILE* fmp3 = fopen(mp3_path,"wb");
+ 
+ int channel = 1;//单声道
+ 
+ short int wav_buffer[8192*channel];
+ unsigned char mp3_buffer[8192];
+ 
+ //1.初始化lame的编码器
+ lame_t lame =  lame_init();
+ 
+ //2. 设置lame mp3编码的采样率
+ lame_set_in_samplerate(lame , 8000);
+ lame_set_out_samplerate(lame, 8000);
+ lame_set_num_channels(lame,1);
+ lame_set_mode(lame, MONO);
+ lame_set_quality(lame, 9);      //品质设置
+ // 3. 设置MP3的编码方式
+ //VBR(Variable Bitrate)动态比特率。也就是没有固定的比特率，压缩软件在压缩时根据音频数据即时确定使用什么比特率。
+ lame_set_VBR(lame, vbr_default);
+ lame_set_brate(lame, 16);
+ lame_init_params(lame);
+ int read ; int write; //代表读了多少次 和写了多少次
+ int total=0; // 当前读的wav文件的byte数目
+ do{
+ read = fread(wav_buffer,sizeof(short int)*channel, 8192,fwav);
+ total +=  read* sizeof(short int)*channel;
+ // 调用java代码 完成进度条的更新
+ if(read!=0){
+ write = lame_encode_buffer(lame, wav_buffer, NULL, read, mp3_buffer, 8192);
+ //write = lame_encode_buffer_interleaved(lame,wav_buffer,read,mp3_buffer,8192);
+ //把转化后的mp3数据写到文件里
+ fwrite(mp3_buffer,sizeof(unsigned char),write,fmp3);
+ }
+ if(read==0){
+ lame_encode_flush(lame,mp3_buffer,8192);
+ }
+ }while(read!=0);
+ 
+ lame_close(lame);
+ fclose(fwav);
+ fclose(fmp3);
+ */
 
 /*
  Value Utils::convertWavToMp3(ValueVector vector)
