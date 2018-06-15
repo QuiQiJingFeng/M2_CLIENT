@@ -51,6 +51,7 @@ function ReplayWatchLayer:listenRoomListUpdate(result)
 	for i=1,#reveice do
 		reveice[i].xuhao = i
 	end
+	dump(reveice,"FYD=============",11)
 	self._zj_ReplayWatchitem:setData(reveice,0,15,10)
 end
 

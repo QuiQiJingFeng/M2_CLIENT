@@ -57,7 +57,7 @@ function Replayitem:onDetail(event)
     lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
             if recv_msg then
                 recv_msg = json.decode(recv_msg)
-                print("====1=1=1=1==")
+                print("====2=2=2=2==")
                 dump(recv_msg)
                 local ReplayWatchLayer = lt.ReplayWatchLayer.new()
                 ReplayWatchLayer:listenRoomListUpdate(recv_msg)

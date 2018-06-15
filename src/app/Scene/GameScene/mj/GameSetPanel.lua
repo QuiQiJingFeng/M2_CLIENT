@@ -6,9 +6,9 @@ local GameSetPanel = class("GameSetPanel", lt.BaseLayer, function()
 end)
 
 
-function GameSetPanel:ctor()
+function GameSetPanel:ctor(deleget)
 	GameSetPanel.super.ctor(self)
-
+	self._deleget = deleget
 
 	self:getChildByName("Bg_Help_Start"):setVisible(false)
 	self:getChildByName("Bg_Help_NoStart"):setVisible(false)
@@ -26,10 +26,33 @@ function GameSetPanel:ctor()
 	local setBtn = self:getChildByName("Button_More")
 	local voiceBtn = self:getChildByName("Button_Voice")
 
+
+
+	local Button_Voice = self:getChildByName("Button_Voice")
+	local Button_Chat = self:getChildByName("Button_Chat")
+	Button_Voice:setVisible(false)--不需要false掉
+	Button_Chat:setVisible(false)
+
+	local Panel_RecordCtrl = self:getChildByName("Panel_RecordCtrl"):setVisible(true)
+
+	local Button_PausePlay = Panel_RecordCtrl:getChildByName("Button_PausePlay")
+	local Sprite_Pause = Button_PausePlay:getChildByName("Sprite_Pause")--暂停
+	local Sprite_Play = Button_PausePlay:getChildByName("Sprite_Play")--播放
+	Sprite_Play:setVisible(false)
+	--Sprite_Pause:setVisible(false)
+
+	
+	local Button_Fast = Panel_RecordCtrl:getChildByName("Button_Fast")
+	local Button_Slowe = Panel_RecordCtrl:getChildByName("Button_Slowe")
+	Button_PausePlay:setVisible(true)
+	Button_Fast:setVisible(true)
+	Button_Slowe:setVisible(true)
+
 	lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onSetClick))
 	lt.CommonUtil:addNodeClickEvent(ruleBtn, handler(self, self.onRuleClick))
 
 	lt.CommonUtil:addNodeClickEvent(voiceBtn,handler(self, self.onTouchEndVoice),true,handler(self, self.onTouchBeginVoice),handler(self, self.onTouchCanceled))
+
 
 	self.__recording = false
 end
