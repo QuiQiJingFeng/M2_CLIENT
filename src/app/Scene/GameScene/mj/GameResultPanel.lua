@@ -31,6 +31,7 @@ function GameResultPanel:ctor(deleget)
 
 	lt.CommonUtil:addNodeClickEvent(self._resultStartAgainBtn, handler(self, self.onStartAgainClick))
 	lt.CommonUtil:addNodeClickEvent(self._resultTotalEndBtn, handler(self, self.onTotalEndClick))
+	lt.CommonUtil:addNodeClickEvent(self._resultLeaveRoomBtn, handler(self, self.onLeaveClick))
 
 	local Image_SurplusBg = self:getChildByName("Image_SurplusBg")
 	Image_SurplusBg:setVisible(false)
@@ -179,6 +180,13 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 		self._resultLeaveRoomBtn:setVisible(false)
 	end
 
+	if lt.DataManager:getRePlayState() then
+		self._resultStartAgainBtn:setVisible(false)
+		self._resultTotalEndBtn:setVisible(false)
+		self._resultWeChatShareBtn:setVisible(false)
+		self._resultLeaveRoomBtn:setVisible(true)
+	end
+
 	if not winner_pos then
 		print("没有输赢!!!!!")
 	end
@@ -253,6 +261,12 @@ function GameResultPanel:onTotalEndClick(event)
 		resultLayer:show(self._resultInfo)
 		lt.UILayerManager:addLayer(resultLayer,true)
 	end
+end
+
+function GameResultPanel:onLeaveClick(event)
+	local worldScene = lt.WorldScene.new()
+    lt.SceneManager:replaceScene(worldScene)
+    lt.NetWork:disconnect()
 end
 
 function GameResultPanel:onEnter()   

@@ -100,6 +100,7 @@ ltMetaTable["GameScene"] = "app.Scene.GameScene.GameScene"
 
 --麻将引擎
 ltMetaTable["MjEngine"] = "app.Scene.GameScene.common.MjEngine"
+ltMetaTable["MJplayBackManager"] = "app.Scene.GameScene.common.MJplayBackManager"
 
 --麻将
 ltMetaTable["ApplyGameOverPanel"] = "app.Scene.GameScene.mj.ApplyGameOverPanel"
@@ -109,7 +110,7 @@ ltMetaTable["MjLieCpgItem"] = "app.Scene.GameScene.mj.cardItem.MjLieCpgItem"
 ltMetaTable["MjLieOutFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjLieOutFaceItem"
 
 ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.mj.GameRoomLayer"
-ltMetaTable["MJplayBackLayer"] = "app.Scene.GameScene.mj.MJplayBackLayer"
+
 ltMetaTable["GameBgPanel"] = "app.Scene.GameScene.mj.GameBgPanel"
 ltMetaTable["GameCompassPanel"] = "app.Scene.GameScene.mj.GameCompassPanel"
 

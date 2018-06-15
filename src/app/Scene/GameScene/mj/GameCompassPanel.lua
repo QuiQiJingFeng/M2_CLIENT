@@ -147,6 +147,7 @@ end
 function GameCompassPanel:onDealDown(msg)   --发牌13张手牌
 
 	local roomSetting = lt.DataManager:getGameRoomSetInfo()
+
 	if roomSetting then
 
 		local allCards, cardsAllNum = lt.DataManager:getGameAllCardsValue()
@@ -154,7 +155,18 @@ function GameCompassPanel:onDealDown(msg)   --发牌13张手牌
 		self._surCardsNum:setString(allCardsNum - 13 * roomSetting.seat_num)
 	end
 
-	self:setSurRoomRound(msg.cur_round)
+    if lt.DataManager:getRePlayState() then
+    	for i=1,#msg do
+
+    		for k,v in pairs(msg[i]) do
+				self:setSurRoomRound(v.cur_round)
+    			break
+    		end
+    		break
+    	end
+    else
+    	self:setSurRoomRound(msg.cur_round)
+    end
 end
 
 function GameCompassPanel:setSurRoomRound(curRound)
@@ -176,6 +188,7 @@ function GameCompassPanel:onPushDrawCard(msg)   --通知其他人有人摸牌
 	if surCardsNum and surCardsNum > 0 then
 		self._surCardsNum:setString(surCardsNum - 1)
 	end
+	self._currentOutPutPlayerPos = msg.user_pos
 end
 
 function GameCompassPanel:onPushPlayCard(msg)   --通知玩家该出牌了 
@@ -329,7 +342,8 @@ function GameCompassPanel:onEnter()
 	self.schedule_id = scheduler:scheduleScriptFunc(function(dt)
 	    self:onUpdate(dt)
 	end, 1, false)
-	self._time = 0
+
+	self:resetTimeUpdate(true)
 end
 
 function GameCompassPanel:onExit()

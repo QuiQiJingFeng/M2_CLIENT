@@ -210,7 +210,7 @@ function DataManager:getGameRoomInfo(flag)
 end
 
 function DataManager:onRefreshRoomInfo(msg)
-    --dump(msg,"FYD===onRefreshRoomInfo",11)
+    dump(msg,"FYD===onRefreshRoomInfo",11)
     self._gameRoomInfo = msg
 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)
@@ -259,14 +259,26 @@ function DataManager:getGameAllCardsValue()
     return allCardsValue, cardsAllNum
 end
 
+function DataManager:setMyselfPositionInfo(info)
+    self._getMyselfPositionInfo = info
+end
+
 function DataManager:getMyselfPositionInfo()
-    for i,player in ipairs(self:getGameRoomInfo().players) do
-        if player.user_id == self:getPlayerUid() then
-            return player
+
+    if not self._getMyselfPositionInfo then
+
+        print("jjjjjjjjjjjjjjjjjjjjj")
+        dump(self:getGameRoomInfo().players)
+        print("kkkkk",self:getPlayerUid())
+        for i,player in ipairs(self:getGameRoomInfo().players) do
+            if player.user_id == self:getPlayerUid() then
+                return player
+            end
         end
+        print("房间数据出错！！！！！！！！")
+        return nil
     end
-    print("房间数据出错！！！！！！！！")
-    return nil
+    return self._getMyselfPositionInfo 
 end
 
 function DataManager:getPlayerInfoByPos(pos)
@@ -285,6 +297,14 @@ end
 function DataManager:getPlayerDirectionByPos(pos)
     self._playerDirectionTable = self._playerDirectionTable or {}
     return self._playerDirectionTable[pos]
+end
+
+function DataManager:setRePlayState(bs)--布尔值
+    self._rePlayState = bs
+end
+
+function DataManager:getRePlayState()
+    return self._rePlayState
 end
 
 function DataManager:getGameOverInfo(flag)
@@ -323,6 +343,20 @@ function DataManager:onNoticeGameOver(msg)   --通知客户端 本局结束 带�
 
 end
 
+function DataManager:getReplayDataDispose()  
+    return self._replayDataDispose
+end
+
+function DataManager:setReplayDataDispose(info)   --回放数据
+    self._replayDataDispose = info
+end
+
+
+function DataManager:clearGameData()   --清除牌局数据
+    self:setReplayDataDispose(nil)
+    self:setRePlayState(false)
+    self:setMyselfPositionInfo(nil)
+end
 
 return DataManager
 

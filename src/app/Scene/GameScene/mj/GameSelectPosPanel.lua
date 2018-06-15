@@ -35,6 +35,8 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 
 	self._currentSitPosArray = {}--玩家入座时的位置
 	self._currentPlayerLogArray = {}--玩家打牌中头像
+	self._playerposTableX = {}--玩家头像xpos
+	self._playerposTableY = {}--玩家头像ypos
 
 
 	--[[ 玩家的logo 
@@ -64,6 +66,8 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 	for i=1,4 do 
 		table.insert(self._tingLogoArray, self:getChildByName("Image_Ting_"..i))
 		table.insert(self._playerLogoArray, self:getChildByName("Node_Player"..i))
+		table.insert(self._playerposTableX, self:getChildByName("Node_Player"..i):getPositionX())
+		table.insert(self._playerposTableY, self:getChildByName("Node_Player"..i):getPositionY())
 		table.insert(self._allPlayerPosArray, self._nodeNoPlayer:getChildByName("Button_NoPlayer_"..i))
 	end
 
@@ -111,10 +115,11 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 		if pos <= self._playerNum then
 			v:setVisible(true)
 			self._currentSitPosArray[pos] = v
-			lt.CommonUtil:addNodeClickEvent(v, handler(self, self.onSitDownClick))
+			--lt.CommonUtil:addNodeClickEvent(v, handler(self, self.onSitDownClick))
 		else
 			v:setVisible(false)
 		end
+		lt.CommonUtil:addNodeClickEvent(v, handler(self, self.onSitDownClick))
 		v:setVisible(false)
 		v:setTag(pos)
 	end
@@ -200,13 +205,11 @@ function GameSelectPosPanel:configPlayer() --头像
     local mySelfNode = nil
     for pos,sitNode in ipairs(self._currentSitPosArray) do
     	local player = lt.DataManager:getPlayerInfoByPos(pos)
-    	print("121212121_____________________________________________", pos, sitNode.atDirection)
     	if sitNode.atDirection == self.POSITION_TYPE.NAN then
     		mySelfNode = sitNode
     	end
 
     	if player then--这个位置有人
-    		print("000000000000000000_______________", pos, sitNode.atDirection)
     		local playerLog = self._currentPlayerLogArray[sitNode.atDirection]
     		if playerLog then
 				local name = playerLog:getChildByName("Text_Name")
@@ -225,38 +228,50 @@ function GameSelectPosPanel:configPlayer() --头像
 				end
 
 				if player.user_id ~= lt.DataManager:getPlayerInfo().user_id then--别的玩家的头像
-					sitNode:setVisible(false)
+					if not lt.DataManager:getRePlayState() then--回放
+						sitNode:setVisible(false)
+					else
+						sitNode:setVisible(true)
+					end
+
 					self._currentPlayerLogArray[sitNode.atDirection]:setVisible(true)
 					if player.is_sit then
-		        		print("_______11111_________________________", player.user_pos, sitNode.atDirection)
-	        			
+
 	        			self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(true)
 	        			
-	        			if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
-		        			local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
-		        			self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
+	        			if not lt.DataManager:getRePlayState() then--回放
+		        			if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
+		        				local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
+			        			self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
+		        			end
 	        			end
 	        		else
-	        			print("_______2222_________________________", player.user_pos, sitNode.atDirection)
 		        		self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(false)
 	        			
-		        		if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
-	        				local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
-	        				self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
-		        		end	
+		        		if not lt.DataManager:getRePlayState() then--回放
+		        			if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
+		        				local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
+		        				self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
+			        		end	
+		        		end
 					end
 				else
-					print("_______33333_________________________")
+
 					if mySelfNode and player.is_sit then
-						print("%%%%%%%%%", player.user_pos, mySelfNode.atDirection)
 
-						mySelfNode:setVisible(false)
-						if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
-
-							local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(mySelfNode:getPosition()))
-						--座位--self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
-							self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setPosition(worldPos.x, worldPos.y)
+						if not lt.DataManager:getRePlayState() then--回放
+							mySelfNode:setVisible(false)
+						else
+							mySelfNode:setVisible(true)
 						end
+
+						if not lt.DataManager:getRePlayState() then--回放
+							if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
+								local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(mySelfNode:getPosition()))
+								self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setPosition(worldPos.x, worldPos.y)
+							end
+						end
+
 
 						self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:getChildByName("Sprite_Ready"):setVisible(true)
 					
@@ -269,21 +284,18 @@ function GameSelectPosPanel:configPlayer() --头像
 				end
     		end
     	else
-    		print("没人", pos, sitNode.atDirection, lt.DataManager:getMyselfPositionInfo().is_sit)
     		self._currentPlayerLogArray[sitNode.atDirection]:setVisible(false)
 			if not lt.DataManager:getMyselfPositionInfo().is_sit then
 				sitNode:setVisible(true)
 			end
-    		--
     	end
     end	
 end
 
-function GameSelectPosPanel:configRotation(isClick) 
+function GameSelectPosPanel:configRotation(isClick, CallFunc) 
 
 	local action = self._nodeNoPlayer:getActionByTag(99)
 	if action and not action:isDone() then
-		print("111111111111111111111111111111111111111111111111111111111111111111111111111")
 		return
 	end
 
@@ -318,10 +330,11 @@ function GameSelectPosPanel:configRotation(isClick)
 
     	local headVisible = function ( )
 			self._selectPositionNode:setVisible(false)
-
 			self:configPlayer()
 
-
+			if CallFunc then
+				CallFunc()
+			end
 			--self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setVisible(true)
 			-- self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:getChildByName("Sprite_Ready"):setVisible(true)
 
@@ -411,11 +424,11 @@ function GameSelectPosPanel:configRotation(isClick)
 			end
 
 			local action1 = function ( )
-				local action4 = cc.RotateBy:create(time, du)
+				local action4 = cc.RotateBy:create(0.6, du)
 				self._cardsPanel._spriteDnxb:runAction(action4)
 			end
 
-			local spawn = cc.Spawn:create(cc.CallFunc:create(action1), action, cc.CallFunc:create(action2))
+			local spawn = cc.Sequence:create(cc.CallFunc:create(action1), cc.CallFunc:create(action2), action)
 			
 	  		local sequence = cc.Sequence:create(spawn, cc.CallFunc:create(headVisible))
 
@@ -567,8 +580,6 @@ function GameSelectPosPanel:setPlayerDirectionTable()
 		directionData[sitNode:getTag()] = sitNode.atDirection
 	end
 	--全局记录一下位置对应的方位
-	print("说服力圣诞节福利就是到了房间数量的就是")
-	dump(directionData)
 	lt.DataManager:setPlayerDirectionTable(directionData)
 end
 
@@ -594,20 +605,37 @@ function GameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 end
 
 function GameSelectPosPanel:onSitDownClick(event) 
-	self._selectPositionNode = event
+	if lt.DataManager:getRePlayState() then
+		self._selectPositionNode = event
 
-	local arg = {pos = event:getTag()}--weixin
-    lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
+		local info = lt.DataManager:getPlayerInfoByPos(event:getTag())
+
+		if info then
+			lt.DataManager:setMyselfPositionInfo(info)
+
+			local function func()
+				self._deleget:CreateReplay()
+				--lt.MJplayBackLayer:Start()--启动定时器
+			end
+			self:configRotation(true, func)
+		else
+
+		end
+
+	else
+		self._selectPositionNode = event
+
+		local arg = {pos = event:getTag()}--weixin
+	    lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
+	end
 end
 
 function GameSelectPosPanel:onSitDownResponse(msg) 
-	print("__________________________", msg.result)
 
     if msg.result == "success" then
-	    print("入座成功")
 	    self:configRotation(true)
     else
-        print("入座失败")
+
     end
 end
 

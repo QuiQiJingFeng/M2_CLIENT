@@ -32,6 +32,8 @@ function WorldScene:ctor()
 
     lt.UILayerManager:setWorldMenuLayer(self._worldMenuLayer)
     lt.UILayerManager:setWorldUILayer(self._worldUILayer)
+
+    lt.DataManager:clearGameData()
 end
 
 function WorldScene:getWorldLayer()

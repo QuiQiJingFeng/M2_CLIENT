@@ -173,68 +173,80 @@ function GameRoomLayer:sendDealFinish()--发牌动画执行完成
 end
 
 function GameRoomLayer:onDealDown(msg)--发牌
-
-	self._zhuangPos = msg.zpos
-
 	-- --显示庄家
 	-- self._zhuangDirection = self._deleget:getPlayerDirectionByPos(self._zhuangPos)
 
 	-- if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
 	-- 	self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	-- end
+    if lt.DataManager:getRePlayState() then
+    	for i=1,#msg do
 
-
-	--播放筛子动画
-	local action_node = cc.CSLoader:createNode("game/mjcomm/csb/base/ShaiZiAni.csb")
-	self:addChild(action_node)
-	local tlAct = cc.CSLoader:createTimeline("game/mjcomm/csb/base/ShaiZiAni.csb")
-	action_node:getChildByName("pointNum_1"):setVisible(false)
-	action_node:getChildByName("pointNum_2"):setVisible(false)
-
-	local func = function ( frame )
-		local event = frame:getEvent()
-		if event == "END" then
-			local random1 = msg.random_nums[1]
-			local random2 = msg.random_nums[2]
-
-			local num1 = "game/mjcomm/animation/aniShaiZi/aniShaiZi_"..random1..".png"
-			local num2 = "game/mjcomm/animation/aniShaiZi/aniShaiZi_"..random2..".png"
-			action_node:getChildByName("action_1"):setVisible(false)
-			action_node:getChildByName("action_2"):setVisible(false)
-			action_node:getChildByName("pointNum_1"):setVisible(true)
-			action_node:getChildByName("pointNum_2"):setVisible(true)
-			action_node:getChildByName("pointNum_1"):setSpriteFrame(num1)
-			action_node:getChildByName("pointNum_2"):setSpriteFrame(num2)
-
-
-    		local delay = cc.DelayTime:create(0.5)
-
-    		local removeShaiZi = function( )
-    			action_node:removeFromParent()
+    		for k,v in pairs(msg[i]) do
+    			local direction = self:getPlayerDirectionByPos(v.user_pos)
+    			self._engine:sendCards(v.cards,direction)
     		end
+    	end
+    else
+    	self._zhuangPos = msg.zpos
 
-    		local sendCards = function( )
-    			self._engine:sendCards(msg.cards)
-    		end
+		--播放筛子动画
+		local action_node = cc.CSLoader:createNode("game/mjcomm/csb/base/ShaiZiAni.csb")
+		self:addChild(action_node)
+		local tlAct = cc.CSLoader:createTimeline("game/mjcomm/csb/base/ShaiZiAni.csb")
+		action_node:getChildByName("pointNum_1"):setVisible(false)
+		action_node:getChildByName("pointNum_2"):setVisible(false)
 
-    		local func1 = cc.CallFunc:create(removeShaiZi)
+		local func = function ( frame )
+			local event = frame:getEvent()
+			if event == "END" then
+				local random1 = msg.random_nums[1]
+				local random2 = msg.random_nums[2]
 
-    		local func2 = cc.CallFunc:create(sendCards)--发牌
+				local num1 = "game/mjcomm/animation/aniShaiZi/aniShaiZi_"..random1..".png"
+				local num2 = "game/mjcomm/animation/aniShaiZi/aniShaiZi_"..random2..".png"
+				action_node:getChildByName("action_1"):setVisible(false)
+				action_node:getChildByName("action_2"):setVisible(false)
+				action_node:getChildByName("pointNum_1"):setVisible(true)
+				action_node:getChildByName("pointNum_2"):setVisible(true)
+				action_node:getChildByName("pointNum_1"):setSpriteFrame(num1)
+				action_node:getChildByName("pointNum_2"):setSpriteFrame(num2)
 
 
-      		local sequence = cc.Sequence:create(delay, func1, func2)
-      		self:runAction(sequence)
+	    		local delay = cc.DelayTime:create(1)
 
+	    		local removeShaiZi = function( )
+	    			action_node:removeFromParent()
+	    		end
+
+	    		local sendCards = function( )
+	    			self._engine:sendCards(msg.cards)
+	    		end
+
+	    		local func1 = cc.CallFunc:create(removeShaiZi)
+
+	    		local func2 = cc.CallFunc:create(sendCards)--发牌
+
+
+	      		local sequence = cc.Sequence:create(delay, func1, func2)
+	      		self:runAction(sequence)
+
+			end
 		end
+		
+	 	action_node:runAction(tlAct)
+		tlAct:gotoFrameAndPlay(0, false)
+	    tlAct:clearFrameEventCallFunc() 
+	    tlAct:setFrameEventCallFunc(func)
 	end
-	
- 	action_node:runAction(tlAct)
-	tlAct:gotoFrameAndPlay(0, false)
-    tlAct:clearFrameEventCallFunc() 
-    tlAct:setFrameEventCallFunc(func)
 end
 
 function GameRoomLayer:onPushDrawCard(msg)--通知有人摸牌
+
+	local direction = self:getPlayerDirectionByPos(msg.user_pos)
+	self._engine:getOneHandCardAtDirection(direction, msg.card)--起了一张牌
+	self._engine:configAllPlayerCards(direction, false, true, false)
+
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
 
 		--检测自己的手牌情况  --吃椪杠胡
@@ -301,13 +313,8 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 		end
 
 	else--不是本人
-
-		if msg.operator == 1 then--摸得 
-			local direction = self:getPlayerDirectionByPos(msg.user_pos)
-
-			self._engine:getOneHandCardAtDirection(direction)
-
-			self._engine:configAllPlayerCards(direction, false, true, false)
+		if msg.operator == 1 then--摸得 getOneHandCardAtDirection
+			--self._engine:configAllPlayerCards(direction, false, true, false)
 		end
 	end
 end
@@ -427,11 +434,16 @@ end
 
 function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--
 	if ENDRONDBS ~= 2 then
-		print("=======111ssss",ENDRONDBS)
 		local text = "房间已被解散"
 		lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.CloseRoom),nil, true)
 	end
 end
+
+--回放
+function GameRoomLayer:CreateReplay()--
+	self._rePlayManager = lt.MJplayBackManager:CreateReplay()
+end
+
 
 function GameRoomLayer:onEnter()   
     print("GameRoomLayer:onEnter")
