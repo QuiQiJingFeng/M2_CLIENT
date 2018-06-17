@@ -74,7 +74,7 @@ function MJplayBackManager:onUpdate(dt)
 			---dump(self._playDate, "对方电大幅度")
 			self._playDate = json.decode(self._playDate)
 			for eventName,msg in pairs(self._playDate) do
-				dump(msg, eventName)
+				dump(eventName)
 				lt.GameEventManager:post(eventName, msg)
 			end
 		end

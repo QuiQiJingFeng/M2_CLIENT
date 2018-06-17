@@ -61,7 +61,7 @@ function MjLieOutFaceItem:showRedMask()
 	self._redMask:setVisible(true)
 end
 
-function MjLieOutFaceItem:setCardValue(value)
+function MjLieOutFaceItem:setCardIcon(value)
 	local cardType = math.floor(value / 10) + 1
 	local cardValue = value % 10
 	self._faceValue:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")

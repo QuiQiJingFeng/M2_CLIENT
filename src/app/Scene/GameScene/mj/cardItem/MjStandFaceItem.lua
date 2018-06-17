@@ -75,6 +75,10 @@ function MjStandFaceItem:setTag(tag)
 	end
 end
 
+function MjStandFaceItem:getTag() 
+	return self._imageBg:getTag()
+end
+
 function MjStandFaceItem:setSelectState(bool) 
 	if self._imageBg then
 		self._imageBg["SelectState"] = bool
@@ -90,10 +94,18 @@ function MjStandFaceItem:getSelectState()
 	end
 end
 
-function MjStandFaceItem:setCardValue(value) 
+function MjStandFaceItem:setCardIcon(value) 
 	local cardType = math.floor(value / 10) + 1
 	local cardValue = value % 10
 	self._faceValue:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+end
+
+function MjStandFaceItem:setCardSpecial(specialClick) 
+	self._specialClick = specialClick
+end
+
+function MjStandFaceItem:getCardSpecial() 
+	return self._specialClick
 end
 
 function MjStandFaceItem:showNormal() 

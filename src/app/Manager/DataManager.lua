@@ -266,10 +266,6 @@ end
 function DataManager:getMyselfPositionInfo()
 
     if not self._getMyselfPositionInfo then
-
-        print("jjjjjjjjjjjjjjjjjjjjj")
-        dump(self:getGameRoomInfo().players)
-        print("kkkkk",self:getPlayerUid())
         for i,player in ipairs(self:getGameRoomInfo().players) do
             if player.user_id == self:getPlayerUid() then
                 return player

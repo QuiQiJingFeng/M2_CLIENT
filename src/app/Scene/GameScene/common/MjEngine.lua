@@ -64,6 +64,14 @@ MjEngine.CARD_TYPE = {
 	OUT = 3,
 }
 
+MjEngine.CARD_SPECIAL = {
+	NORMAL = 0,
+	NOT_CAN_CLICK = 1,--不可以点 
+	CAN_OUT = 2,--可以出
+	NOT_CAN_OUT = 3,--不可以出
+}
+
+
 function MjEngine:open(deleget)
 	self._deleget = deleget
 
@@ -74,6 +82,7 @@ function MjEngine:open(deleget)
     end
 
 	self._allPlayerHandCardsNode = {}
+	self._allPlayerLightHandCardsNode = {}
 	self._allPlayerCpgCardsNode = {}
 	self._allPlayerOutCardsNode = {}
 
@@ -81,12 +90,14 @@ function MjEngine:open(deleget)
 	self._allPlayerCpgCardsValue = {}
 	self._allPlayerOutCardsValue = {}
 
+	self._allPlayerLightHandCardsValue = {}--商丘麻将亮四打一
+
 	self._allPlayerCpgCardsPanel = {}
 	self._allPlayerHandCardsPanel = {}
 	self._allPlayerOutCardsPanel = {}
 
 
-	self._allLieFaceCardNode = {}
+	self._allLieFaceCardNode = {}--每局结束 推倒的牌
 
 	self._showCardsLayer = display.newLayer() --cc.Layer:create()
 	--self._showCardsLayer:setSwallowTouches(false)
@@ -159,6 +170,10 @@ function MjEngine:open(deleget)
 		self._showCardsLayer:addChild(self._allPlayerHandCardsPanel[direction])
 	end
 	
+	for i,direction in ipairs(self._currentGameDirections) do
+		self._allPlayerLightHandCardsValue[direction] = {}
+	end
+
 	return self
 end
 
@@ -205,33 +220,37 @@ function MjEngine:angainConfigUi()--继续游戏
 	self._showCardsLayer:setVisible(false)
 end
 
-function MjEngine:sendCards(cards,direction)--发牌 13张
+function MjEngine:sendCards(cards,direction, fourCardList)--发牌 13张
 	self._showCardsLayer:setVisible(true)
 	cards = cards or {}
-	if direction and lt.DataManager:getRePlayState() then
+	-- fourCardList = {
+	-- 	{user_pos = 1,cards = {8,8,8,8}},
+	-- 	{user_pos = 2,cards = {8,8,8,8}},
+	-- }
+
+	fourCardList = fourCardList or {}
+	if direction then--and lt.DataManager:getRePlayState()
 		self._allPlayerHandCardsValue[direction] = self._allPlayerHandCardsValue[direction] or {}
 		for i,card in ipairs(cards) do
 			table.insert(self._allPlayerHandCardsValue[direction], card)
-
+			
 		end
+
+		for i,cardItem in pairs(fourCardList) do
+			local dire = lt.DataManager:getPlayerDirectionByPos(cardItem.user_pos)
+			self._allPlayerLightHandCardsValue[dire] = cardItem.cards
+		end
+
 		local sortFun = function(a, b)
 			return a < b
 		end
 		table.sort(self._allPlayerHandCardsValue[direction], sortFun)
-	else
-		self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN] = self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN] or {}
-		for i,card in ipairs(cards) do
-			table.insert(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], card)
 
-		end
-		local sortFun = function(a, b)
-			return a < b
-		end
-
-		table.sort(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], sortFun)
-	end
+		table.sort(self._allPlayerLightHandCardsValue[direction], sortFun)
 
 		self:sendCardsEffect()
+	end
+
 end
 
 function MjEngine:sendCardsEffect()
@@ -249,27 +268,37 @@ function MjEngine:sendCardsEffect()
 		self:configAllPlayerCards(direction, true, true, true)
 	end
 
-	for k,cards in pairs(self._allPlayerHandCardsNode) do
+	local tempAllPlayerHandCardsNode = {}
+
+	for k,cards in pairs(self._allPlayerLightHandCardsNode) do
+		tempAllPlayerHandCardsNode[k] = tempAllPlayerHandCardsNode[k] or {}
 		for i,v in ipairs(cards) do
-			 v:setVisible(false)
+			table.insert(tempAllPlayerHandCardsNode[k], v)
+			v:setVisible(false)
+		end
+	end
+
+	for k,cards in pairs(self._allPlayerHandCardsNode) do
+		tempAllPlayerHandCardsNode[k] = tempAllPlayerHandCardsNode[k] or {}
+		for i,v in ipairs(cards) do
+			v:setVisible(false)
+			table.insert(tempAllPlayerHandCardsNode[k], v)
 		end
 	end
 
 	if lt.DataManager:getRePlayState() then --回放发牌走这里
-		for direction,cards in pairs(self._allPlayerHandCardsNode) do--发牌发13张
+		for direction,cards in pairs(tempAllPlayerHandCardsNode) do--发牌发13张
 			for i=1,13 do
 				if cards[i] then
 					cards[i]:setVisible(true)
-					if i == 13 and not sendDealFinish then
-						self._deleget:sendDealFinish()
-						sendDealFinish = true
-					end
-
 				end
 			end
 		end	
+		self._deleget:sendDealFinish()
+		sendDealFinish = true
+
 	else
-		for direction,cards in pairs(self._allPlayerHandCardsNode) do--发牌发13张
+		for direction,cards in pairs(tempAllPlayerHandCardsNode) do--发牌发13张
 			local time = 0.1
 			for i=1,13 do
 				time = time + 0.1
@@ -339,6 +368,9 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 	self._allPlayerHandCardsValue[direction] = self._allPlayerHandCardsValue[direction] or {}
 
 	local cpgNumber = #self._allPlayerCpgCardsValue[direction]
+
+	local lightHandNumber = #self._allPlayerLightHandCardsValue[direction]
+
 	local handNumber = #self._allPlayerHandCardsValue[direction]
 
 	--吃椪杠
@@ -378,15 +410,69 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			self._allPlayerHandCardsNode[direction] = {}
 		end
 
+		if not self._allPlayerLightHandCardsNode[direction] then
+			self._allPlayerLightHandCardsNode[direction] = {}
+		end
+
 		for i,v in ipairs(self._allPlayerHandCardsNode[direction]) do
 			v:setVisible(false)
 		end
+
+
+		for i,v in ipairs(self._allPlayerLightHandCardsNode[direction]) do
+			v:setVisible(false)
+		end
+
+
 		local isSpaceLastCard = false
-		if handNumber % 3 == 2 then-- == 2时 该出牌了 最后一张牌要间隔
+		if (handNumber + lightHandNumber) % 3 == 2 then-- == 2时 该出牌了 最后一张牌要间隔
 			isSpaceLastCard = true
 		end
 
+		--明着的手牌
+		for i,info in ipairs(self._allPlayerLightHandCardsValue[direction]) do
+
+			local node = self._allPlayerLightHandCardsNode[direction][i]
+
+			if direction == lt.Constants.DIRECTION.DONG then
+				cardZorder = cardZorder - 1
+			else
+				cardZorder = cardZorder + 1
+			end
+
+			if node then
+				self:updateLieHandCardsNode(node, direction, info)
+			else
+
+				node = self:createLieFaceItemByDirection(direction,info)
+				self._allPlayerHandCardsPanel[direction]:addChild(node, cardZorder)
+
+				table.insert(self._allPlayerLightHandCardsNode[direction], node)
+			end
+
+			node:setVisible(true)
+
+			local x = self._allCpgNodePos[direction].x
+			local y = self._allCpgNodePos[direction].y
+
+			if cpgNumber and cpgNumber > 0 then--有吃椪杠存在
+
+				if direction == lt.Constants.DIRECTION.NAN or direction == lt.Constants.DIRECTION.DONG then--锚点和初始化方向导致不同情况
+					node:setPosition(x + cpgNumber*cpgOffX + (i-1)*handOffX, y + cpgNumber*cpgOffY+(i-1)*handOffY)
+				else
+					node:setPosition(x + (cpgNumber - 1)*cpgOffX + i*handOffX, y + (cpgNumber - 1)*cpgOffY + i*handOffY)
+				end
+			else
+				x = self._allHandNodePos[direction].x
+				y = self._allHandNodePos[direction].y
+
+				node:setPosition(x + (i-1)*handOffX, y + (i-1)*handOffY)
+			end
+		end
+
+		--暗着的手牌
 		for i,info in ipairs(self._allPlayerHandCardsValue[direction]) do
+
 			local node = self._allPlayerHandCardsNode[direction][i]
 
 			if direction == lt.Constants.DIRECTION.DONG then
@@ -423,31 +509,26 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 					table.insert(self._allPlayerHandCardsNode[direction], node)
 					self._allPlayerHandCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 
-					--设置手牌的初始状态
-					node:setOrginPosition(node:getPosition())
-					node:setSelectState(false)
-					
 				end
 			end
-
-			node:setVisible(true)
-
+			
 			local x = self._allCpgNodePos[direction].x
 			local y = self._allCpgNodePos[direction].y
 
 			if cpgNumber and cpgNumber > 0 then--有吃椪杠存在
 
 				if direction == lt.Constants.DIRECTION.NAN or direction == lt.Constants.DIRECTION.DONG then--锚点和初始化方向导致不同情况
-					node:setPosition(x + cpgNumber*cpgOffX + (i-1)*handOffX, y + cpgNumber*cpgOffY+(i-1)*handOffY)
+					node:setPosition(x + cpgNumber*cpgOffX + (lightHandNumber - 1)*handOffX + i*handOffX, y + cpgNumber*cpgOffY+ (lightHandNumber - 1)*handOffY + i*handOffY)
 				else
-					node:setPosition(x + (cpgNumber - 1)*cpgOffX + i*handOffX, y + (cpgNumber - 1)*cpgOffY + i*handOffY)
+					node:setPosition(x + (cpgNumber - 1)*cpgOffX + lightHandNumber*handOffX + i*handOffX, y + (cpgNumber - 1)*cpgOffY + lightHandNumber*cpgOffY + i*handOffY)
 				end
 			else
 				x = self._allHandNodePos[direction].x
 				y = self._allHandNodePos[direction].y
 
-				node:setPosition(x + (i-1)*handOffX, y + (i-1)*handOffY)
+				node:setPosition(x + (lightHandNumber - 1)*handOffX + i*handOffX, y + (lightHandNumber - 1)*handOffY + i*handOffY)
 			end
+
 			if isSpaceLastCard and i == handNumber then
 				local x, y = node:getPosition()
 				if direction == lt.Constants.DIRECTION.XI then
@@ -462,6 +543,13 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				end
 			end
 
+			node:setVisible(true)
+			if not lt.DataManager:getRePlayState() and direction == lt.Constants.DIRECTION.NAN then
+				
+				--设置手牌的初始状态
+				node:setOrginPosition(node:getPosition())
+				node:setSelectState(false)
+			end
 		end
 	end
 
@@ -579,16 +667,19 @@ end
 --创建牌node
 function MjEngine:createCardsNode(cardType, direction, info)
 	--direction 上北下南左西右东  type==1 手牌 2 吃椪杠的牌 3 出的牌
-	
+
 	if not cardType or not direction then
 		return
 	end
+
 	local node = nil 
 	if cardType == self.CARD_TYPE.HAND then
 		node = lt.MjStandFaceItem.new(direction)
+
 		if self._clickCardCallback and direction == lt.Constants.DIRECTION.NAN then
-			node:addNodeClickEvent(handler(self, self.onClickCard))
+			node:addNodeClickEvent(handler(self, self.onClickHandCard))
 		end
+
 	elseif cardType == self.CARD_TYPE.CPG then
 		node = lt.MjLieCpgItem.new(direction)
 	elseif cardType == self.CARD_TYPE.OUT then
@@ -605,7 +696,7 @@ end
 function MjEngine:updateStandCardsNode(node, cardType, direction, info)
 	if cardType == self.CARD_TYPE.HAND and direction == lt.Constants.DIRECTION.NAN then
 		local value = info--手牌值
-		node:setCardValue(value)
+		node:setCardIcon(value)
 		node:setTag(value)
 		node:showNormal()
 	elseif cardType == self.CARD_TYPE.CPG then
@@ -614,7 +705,7 @@ function MjEngine:updateStandCardsNode(node, cardType, direction, info)
 
 	elseif cardType == self.CARD_TYPE.OUT then 
 		local value = info--手牌值
-		node:setCardValue(value)
+		node:setCardIcon(value)
 		node:setValue(value)
 		node:showNormal()
 	end	
@@ -639,6 +730,8 @@ function MjEngine:createLieFaceItemByDirection(direction, info)
 		path = "game/mjcomm/csb/mjui/green/MjLieLeftFaceItem.csb"
 	elseif direction == lt.Constants.DIRECTION.DONG then
 		path = "game/mjcomm/csb/mjui/green/MjLieRightFaceItem.csb"
+	elseif direction == lt.Constants.DIRECTION.NAN then
+		path = "game/mjcomm/csb/mjui/green/MjLieDownFaceItem.csb"
 	end
 	if path then
 		lieFaceNode = cc.CSLoader:createNode(path)
@@ -659,6 +752,10 @@ function MjEngine:createLieFaceItemByDirection(direction, info)
 		local cardType = math.floor(value / 10) + 1
 		local cardValue = value % 10
 		face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+	end
+
+	if direction == lt.Constants.DIRECTION.NAN then
+		lieFaceNode:setScale(2.0)
 	end
 
     return lieFaceNode
@@ -707,17 +804,45 @@ function MjEngine:checkMyHandStatu()
 	return tObjCpghObj
 end
 
-function MjEngine:getAllCanHuCards(HandCards)
+function MjEngine:getAllCanHuCards(tempHandCards, value)
+
+	for i,v in ipairs(tempHandCards) do
+		if v == value then
+			table.remove(tempHandCards, i)
+			break
+		end
+	end
+
 	local canHuCards = {}
 	local allCardsValue = lt.DataManager:getGameAllCardsValue()
 
 	for i,card in ipairs(allCardsValue) do
-		if self:checkIsHu(HandCards, card) then
+		if self:checkIsHu(tempHandCards, card) then
 			table.insert(canHuCards, card)
 		end
 	end
 
 	return canHuCards
+end
+
+function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否可以听
+
+	for i,v in ipairs(tempHandCards) do
+		if v == value then
+			table.remove(tempHandCards, i)
+			break
+		end
+	end
+
+	local allCardsValue = lt.DataManager:getGameAllCardsValue()
+
+	for i,card in ipairs(allCardsValue) do
+		if self:checkIsHu(tempHandCards, card) then
+			return true
+		end
+	end
+
+	return false
 end
 
 function MjEngine:checkIsHu(HandCards, card)
@@ -750,11 +875,36 @@ function MjEngine:checkIsHu(HandCards, card)
 	return false
 end
 
+function MjEngine:checkMyHandTingStatu()
+	local isCanTing = false 
+	self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] = self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] or {}
+
+	for i,handNode in ipairs(self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN]) do
+
+		if handNode:isVisible() then
+			
+			local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
+
+			local isTing = self:isCanTingByCard(tempHandCards, handNode:getTag())--出一张手牌是否可以听
+
+			if isTing then
+				handNode:showTing()
+				isCanTing = true
+			end
+		end
+	end
+	return isCanTing
+end
+
 function MjEngine:setClickCardCallBack(callBack)
 	self._clickCardCallback = callBack
 end
 
-function MjEngine:onClickCard(cardNode, value)
+function MjEngine:onClickHandCard(cardNode, value)
+
+	if lt.DataManager:getRePlayState()  then
+		return
+	end
 
 	if self._deleget:isVisibleGameActionBtnsPanel() then
 		return
@@ -790,13 +940,7 @@ function MjEngine:onClickCard(cardNode, value)
 		--检测听牌列表
 		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 
-		for i,v in ipairs(tempHandCards) do
-			if v == value then
-				table.remove(tempHandCards, i)
-				break
-			end
-		end
-		local canHuCards = self:getAllCanHuCards(tempHandCards)
+		local canHuCards = self:getAllCanHuCards(tempHandCards, value)
 		print("胡牌tips", #canHuCards)
 		if #canHuCards > 0 then
 			self._deleget:showHuCardsTipsMj()
@@ -858,9 +1002,8 @@ function MjEngine:gameOverShow()--游戏结束 推到牌
 			local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
 
 
-			if lt.DataManager:getRePlayState() then
+			if not lt.DataManager:getRePlayState() then
 
-			else
 				--推到手牌
 				if direction ~= lt.Constants.DIRECTION.NAN and self._allPlayerHandCardsNode[direction] then--手牌
 					local index = 1

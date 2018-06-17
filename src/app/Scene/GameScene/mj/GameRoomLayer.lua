@@ -147,7 +147,7 @@ end
 
 function GameRoomLayer:onClickCard(value) 
 
-	if self._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:isVisible() then
+	if self:isVisibleGameActionBtnsPanel() then
 		print("碰杠胡了不能点牌了")
 		return
 	end
@@ -184,7 +184,7 @@ function GameRoomLayer:onDealDown(msg)--发牌
 
     		for k,v in pairs(msg[i]) do
     			local direction = self:getPlayerDirectionByPos(v.user_pos)
-    			self._engine:sendCards(v.cards,direction)
+    			self._engine:sendCards(v.cards, direction, v.four_card_list)
     		end
     	end
     else
@@ -220,7 +220,7 @@ function GameRoomLayer:onDealDown(msg)--发牌
 	    		end
 
 	    		local sendCards = function( )
-	    			self._engine:sendCards(msg.cards)
+	    			self._engine:sendCards(msg.cards, lt.Constants.DIRECTION.NAN, msg.four_card_list)
 	    		end
 
 	    		local func1 = cc.CallFunc:create(removeShaiZi)
@@ -334,6 +334,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 end
 
 function GameRoomLayer:onPushPlayerOperatorState(msg)--通知客户端当前 碰/杠 状态
+
 	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
 
 
@@ -384,6 +385,11 @@ function GameRoomLayer:onRefreshGameOver(msg)--通知客户端 本局结束 带�
 end
 
 function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。。。
+
+	if self:isVisibleGameActionBtnsPanel() then
+		self._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:setVisible(false)
+	end
+
 	self._engine:noticeSpecialEvent(msg)
 end
 
