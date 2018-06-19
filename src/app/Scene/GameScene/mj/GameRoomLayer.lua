@@ -324,9 +324,24 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 
 	local value = msg.card
 	local direction = self:getPlayerDirectionByPos(msg.user_pos) 
-	if not direction then
+	if not direction or not value then
 		return 
 	end
+
+	if value then
+
+		for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
+			if value == v then--补花	
+				local msg = {
+					user_pos = msg.user_pos,
+					card = msg.card
+				}
+				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, msg)
+				break
+			end
+		end
+	end
+
 
 	self._engine:goOutOneHandCardAtDirection(direction, value)
 	self._engine:configAllPlayerCards(direction, false, true, true)
@@ -391,6 +406,15 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	end
 
 	self._engine:noticeSpecialEvent(msg)
+end
+
+function GameRoomLayer:onNoticeSpecialBuFlower(msg)--客户端自己通知有人补花
+
+	if self:isVisibleGameActionBtnsPanel() then
+		self._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:setVisible(false)
+	end
+	
+	self._engine:noticeSpecialBuFlower(msg)
 end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
@@ -493,6 +517,8 @@ function GameRoomLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameRoomLayer.onRefreshGameOver")
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GameRoomLayer.onNoticeSpecialEvent")
+
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, handler(self, self.onNoticeSpecialBuFlower), "GameRoomLayer.onNoticeSpecialBuFlower")
 end
 
 function GameRoomLayer:onExit()
@@ -513,6 +539,8 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, "GameRoomLayer:onPushPlayerOperatorState")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameRoomLayer:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameRoomLayer:onNoticeSpecialEvent")
+
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, "GameRoomLayer:onNoticeSpecialBuFlower")
 end
 
 

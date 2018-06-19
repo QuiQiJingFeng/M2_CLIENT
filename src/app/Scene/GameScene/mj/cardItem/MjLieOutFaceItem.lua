@@ -28,6 +28,10 @@ function MjLieOutFaceItem:getRootNode()
 	return self._rootNode
 end
 
+function MjLieOutFaceItem:setAnchorPoint(x, y)
+	self._rootNode:setAnchorPoint(x, y)
+end
+
 function MjLieOutFaceItem:setValue(value)
 	self._cardValue = value
 end

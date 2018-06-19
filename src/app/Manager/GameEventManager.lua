@@ -17,6 +17,10 @@ GameEventManager.EVENT = {
     SEND_AUDIO = "send_audio",
     --接收音频
     NOTICE_SEND_AUDIO = "notice_send_audio",
+
+    --出牌 补花
+    NOTICE_SPECIAL_BUFLOWER = "notice_special_buflower",
+
     --请求
 	LOGIN = "login",
     JOIN_ROOM = "join_room",
