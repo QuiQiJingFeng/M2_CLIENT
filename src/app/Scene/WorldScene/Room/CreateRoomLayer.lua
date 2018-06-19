@@ -53,6 +53,15 @@ function CreateRoomLayer:ctor()
     self.m_ddzRule = self.ruleSv:getChildByName("DDZ_Rule")
     self.m_ddzRule:setVisible(false)
 
+    self._sqmjRule = self.ruleSv:getChildByName("SQMJ_Rule")
+    self._sqmjRule:setVisible(false)
+
+    self._tdhRule = self.ruleSv:getChildByName("TDH_Rule")
+    self._tdhRule:setVisible(false)
+
+    self._plzRule = self.ruleSv:getChildByName("PLZ_Rule")
+    self._plzRule:setVisible(false)
+
     self:initDDZRule()
 
 
@@ -274,12 +283,39 @@ function CreateRoomLayer:gameBtnOnTap(gameId, index, gameIds)
 	if gameId == "HZMJ" then
 		self.m_hzmjRule:setVisible(true)
         self.m_ddzRule:setVisible(false)
+        self._sqmjRule:setVisible(false)
+        self._tdhRule:setVisible(false)
+        self._plzRule:setVisible(false)
 		-- 设置一下数据
 		self:initHZMJRule()
 	elseif gameId == "DDZ" then
         self.m_hzmjRule:setVisible(false)
         self.m_ddzRule:setVisible(true)
+        self._sqmjRule:setVisible(false)
+        self._tdhRule:setVisible(false)
+        self._plzRule:setVisible(false)
         self:initDDZRule()
+    elseif gameId == "SQMJ" then
+        self.m_hzmjRule:setVisible(false)
+        self.m_ddzRule:setVisible(false)
+        self._sqmjRule:setVisible(true)
+        self._tdhRule:setVisible(false)
+        self._plzRule:setVisible(false)
+        self:initSQMJRule()
+    elseif gameId == "TDH" then
+        self.m_hzmjRule:setVisible(false)
+        self.m_ddzRule:setVisible(false)
+        self._sqmjRule:setVisible(false)
+        self._tdhRule:setVisible(true)
+        self._plzRule:setVisible(false)
+        self:initTDHRule()
+    elseif gameId == "PLZ" then
+        self.m_hzmjRule:setVisible(false)
+        self.m_ddzRule:setVisible(false)
+        self._sqmjRule:setVisible(false)
+        self._tdhRule:setVisible(false)
+        self._plzRule:setVisible(true)
+        self:initPLZRule()
     end
 end
 
@@ -297,6 +333,401 @@ end
 
 --     self:initSelectTbWithID(gameId)
 -- end
+
+function CreateRoomLayer:initTDHRule( ... )
+
+    -- 当前选中的数据
+    self.selectTable = {}
+    self.selectTable.other_setting = {1, 0, 0, 0, 0}
+    if not self.tGamesRuleConfig then
+        dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+        return
+    end
+
+    self.selectTable.game_type = 1
+    -- 游戏设置项[数组]
+    -- [1] 底分
+    -- [2] 奖码的个数
+    -- [3] 七对胡牌
+    -- [4] 喜分
+    -- [5] 一码不中当全中
+
+    local payTable = {}
+    local roundTable = {}
+    local playNumTable = {}
+    local jiangNum = {}
+    local playRule = {}
+    local payType = {1, 2, 3}
+    local roundType = {4, 8, 16}
+    local playNumType = {4, 3, 2}
+    local jiangType = {1,2}--胡牌
+    local ruleType = {0, 0, 0}
+
+    -- 房主出资， 对应局数多少
+    local allPay = {20, 40, 80}
+    local everyPay = {5, 10, 20}
+
+
+    -- 玩家平分， 对应多少
+    for i = 1, 3 do 
+
+        -- 支付方式，
+        local payPanel = self._tdhRule:getChildByName("Panel_Pay".. i)    
+        payPanel.selectNode = payPanel:getChildByName("Image_Select")
+        payPanel._textNode = payPanel:getChildByName("Text_Pay")
+
+        payTable[i] = payPanel
+        lt.CommonUtil:addNodeClickEvent(payPanel, function( ... )
+            for i, v in pairs(payTable) do 
+                if v == payPanel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.pay = payType[i]
+                    --  
+                    if i == 1 or i == 3 then
+                        for j = 1, 3 do 
+                            roundTable[j]._textNode2:setString("(".. allPay[j] .. "金币)")
+                        end
+                    else
+                        for j = 1, 3 do 
+                            roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
+                        end
+                    end
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+    
+        -- 圈数
+        local roundPalel =  self._tdhRule:getChildByName("Panel_Round".. i)
+        roundPalel.selectNode = roundPalel:getChildByName("Image_Select")   
+        roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
+        roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundTable[i] = roundPalel
+
+        lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
+            for i, v in pairs(roundTable) do 
+                if v == roundPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    v._textNode2:setColor(SelectColor)
+                    self.selectTable.round = roundType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode2:setColor(NormalColor)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        -- 人数
+        local playNumPalel = self._tdhRule:getChildByName("Panel_PlayNum".. i)
+        playNumPalel.selectNode = playNumPalel:getChildByName("Image_Select")   
+        playNumPalel._textNode = playNumPalel:getChildByName("Text_Pay")
+        playNumTable[i] = playNumPalel
+
+        lt.CommonUtil:addNodeClickEvent(playNumPalel, function( ... )
+            for i, v in pairs(playNumTable) do 
+                if v == playNumPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.playNum = playNumType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        local rulePalel = self._tdhRule:getChildByName("Panel_Play".. i)
+        rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
+        rulePalel.selectNode:setVisible(false)
+        rulePalel._textNode = rulePalel:getChildByName("Text_Pay")  
+        playRule[i] = rulePalel
+        rulePalel.isSelect = false
+
+        lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
+            if playRule[i].isSelect == false then
+                playRule[i].isSelect = true
+                playRule[i].selectNode:setVisible(true) 
+                self.selectTable.other_setting[i+2] = 1
+                playRule[i]._textNode:setColor(SelectColor)
+            else
+                dump(self.selectTable)
+                self.selectTable.other_setting[i+2] = 0
+                playRule[i].isSelect = false
+                playRule[i].selectNode:setVisible(false)
+                playRule[i]._textNode:setColor(NormalColor) 
+            end
+        end, false)
+    end
+
+    for i=1,2 do
+        --胡牌
+        local jiangPalel = self._tdhRule:getChildByName("Panel_Jiang".. i)
+        jiangPalel.selectNode = jiangPalel:getChildByName("Image_Select")
+        jiangPalel.selectNode:setVisible(false) 
+        jiangPalel._textNode = jiangPalel:getChildByName("Text_Pay")
+        jiangNum[i] = jiangPalel
+
+        lt.CommonUtil:addNodeClickEvent(jiangPalel, function( ... )
+            for i, v in pairs(jiangNum) do 
+                if v == jiangPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.other_setting[2] = jiangType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+    end
+    dump(self.selectTable, "self.selectTable")
+
+
+
+    local delBtn = self._tdhRule:getChildByName("Image_Del")
+    local addBtn = self._tdhRule:getChildByName("Image_Add")
+    local baseScore = self._tdhRule:getChildByName("Image_TimeCell"):getChildByName("baseText")
+
+    local baseIndex = 1;
+
+    baseScore:setString(1)
+    baseScore.baseNums = 1
+
+
+    self.selectTable.other_setting[1] = 1
+
+
+    -- 上面配置
+    local iTableBase = self.iBaseScore
+
+    lt.CommonUtil:addNodeClickEvent(addBtn, function( ... )
+        if baseIndex == #iTableBase then
+            return
+        end
+        baseIndex = baseIndex + 1
+
+        if baseIndex > #iTableBase then
+            baseIndex = #iTableBase
+        end
+        self.selectTable.baseNums = iTableBase[baseIndex]
+        baseScore:setString(self.selectTable.other_setting[1])
+    end)
+
+    lt.CommonUtil:addNodeClickEvent(delBtn, function( ... )
+        if baseIndex == 1 then
+            return
+        end
+        baseIndex = baseIndex - 1
+
+        if baseIndex < 1 then
+            baseIndex = 1
+        end
+        -- baseScore.baseNums = iTableBase[baseIndex]
+        self.selectTable.baseNums = iTableBase[baseIndex]
+        baseScore:setString(self.selectTable.other_setting[1])
+    end)
+
+    payTable[1]:onClick()
+    roundTable[1]:onClick()
+    playNumTable[1]:onClick()
+    jiangNum[1]:onClick()
+
+    -- 全部选择
+    playRule[1]:onClick()
+    playRule[2]:onClick()
+    playRule[3]:onClick()
+end
+
+
+function CreateRoomLayer:initPLZRule( ... )
+
+    -- 当前选中的数据
+    self.selectTable = {}
+    self.selectTable.other_setting = {1, 0, 0, 0, 0}
+    if not self.tGamesRuleConfig then
+        dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+        return
+    end
+
+    self.selectTable.game_type = 1
+    -- 游戏设置项[数组]
+    -- [1] 底分
+    -- [2] 奖码的个数
+    -- [3] 七对胡牌
+    -- [4] 喜分
+    -- [5] 一码不中当全中
+
+    local payTable = {}
+    local roundTable = {}
+    local playNumTable = {}
+    local playRule = {}
+    local payType = {1, 2, 3}
+    local roundType = {4, 8, 16}
+    local playNumType = {4, 3, 2}
+    local ruleType = {0, 0, 0}
+
+    -- 房主出资， 对应局数多少
+    local allPay = {20, 40, 80}
+    local everyPay = {5, 10, 20}
+
+
+    -- 玩家平分， 对应多少
+    for i = 1, 3 do 
+
+        -- 支付方式，
+        local payPanel = self._plzRule:getChildByName("Panel_Pay".. i)    
+        payPanel.selectNode = payPanel:getChildByName("Image_Select")
+        payPanel._textNode = payPanel:getChildByName("Text_Pay")
+
+        payTable[i] = payPanel
+        lt.CommonUtil:addNodeClickEvent(payPanel, function( ... )
+            for i, v in pairs(payTable) do 
+                if v == payPanel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.pay = payType[i]
+                    --  
+                    if i == 1 or i == 3 then
+                        for j = 1, 3 do 
+                            roundTable[j]._textNode2:setString("(".. allPay[j] .. "金币)")
+                        end
+                    else
+                        for j = 1, 3 do 
+                            roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
+                        end
+                    end
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+    
+        -- 圈数
+        local roundPalel =  self._plzRule:getChildByName("Panel_Round".. i)
+        roundPalel.selectNode = roundPalel:getChildByName("Image_Select")   
+        roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
+        roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundTable[i] = roundPalel
+
+        lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
+            for i, v in pairs(roundTable) do 
+                if v == roundPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    v._textNode2:setColor(SelectColor)
+                    self.selectTable.round = roundType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode2:setColor(NormalColor)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        -- 人数
+        local playNumPalel = self._plzRule:getChildByName("Panel_PlayNum".. i)
+        playNumPalel.selectNode = playNumPalel:getChildByName("Image_Select")   
+        playNumPalel._textNode = playNumPalel:getChildByName("Text_Pay")
+        playNumTable[i] = playNumPalel
+
+        lt.CommonUtil:addNodeClickEvent(playNumPalel, function( ... )
+            for i, v in pairs(playNumTable) do 
+                if v == playNumPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.playNum = playNumType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        local rulePalel = self._plzRule:getChildByName("Panel_Play".. i)
+        rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
+        rulePalel.selectNode:setVisible(false)
+        rulePalel._textNode = rulePalel:getChildByName("Text_Pay")  
+        playRule[i] = rulePalel
+        rulePalel.isSelect = false
+
+        lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
+            if playRule[i].isSelect == false then
+                playRule[i].isSelect = true
+                playRule[i].selectNode:setVisible(true) 
+                self.selectTable.other_setting[i+2] = 1
+                playRule[i]._textNode:setColor(SelectColor)
+            else
+                dump(self.selectTable)
+                self.selectTable.other_setting[i+2] = 0
+                playRule[i].isSelect = false
+                playRule[i].selectNode:setVisible(false)
+                playRule[i]._textNode:setColor(NormalColor) 
+            end
+        end, false)
+    end
+    dump(self.selectTable, "self.selectTable")
+
+
+
+    local delBtn = self._plzRule:getChildByName("Image_Del")
+    local addBtn = self._plzRule:getChildByName("Image_Add")
+    local baseScore = self._plzRule:getChildByName("Image_TimeCell"):getChildByName("baseText")
+
+    local baseIndex = 1;
+
+    baseScore:setString(1)
+    baseScore.baseNums = 1
+
+
+    self.selectTable.other_setting[1] = 1
+
+
+    -- 上面配置
+    local iTableBase = self.iBaseScore
+
+    lt.CommonUtil:addNodeClickEvent(addBtn, function( ... )
+        if baseIndex == #iTableBase then
+            return
+        end
+        baseIndex = baseIndex + 1
+
+        if baseIndex > #iTableBase then
+            baseIndex = #iTableBase
+        end
+        self.selectTable.baseNums = iTableBase[baseIndex]
+        baseScore:setString(self.selectTable.other_setting[1])
+    end)
+
+    lt.CommonUtil:addNodeClickEvent(delBtn, function( ... )
+        if baseIndex == 1 then
+            return
+        end
+        baseIndex = baseIndex - 1
+
+        if baseIndex < 1 then
+            baseIndex = 1
+        end
+        -- baseScore.baseNums = iTableBase[baseIndex]
+        self.selectTable.baseNums = iTableBase[baseIndex]
+        baseScore:setString(self.selectTable.other_setting[1])
+    end)
+
+    payTable[1]:onClick()
+    roundTable[1]:onClick()
+    playNumTable[1]:onClick()
+    jiangNum[1]:onClick()
+
+    -- 全部选择
+    playRule[1]:onClick()
+    playRule[2]:onClick()
+    playRule[3]:onClick()
+end
 
 
 
@@ -688,6 +1119,275 @@ function CreateRoomLayer:initHZMJRule( ... )
 	playRule[1]:onClick()
 	playRule[2]:onClick()
 	playRule[3]:onClick()
+end
+
+function CreateRoomLayer:initSQMJRule( ... )
+
+    -- 当前选中的数据
+    self.selectTable = {}
+    self.selectTable.other_setting = {1, 0, 0, 0, 0}
+    if not self.tGamesRuleConfig then
+        dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+        return
+    end
+
+    self.selectTable.game_type = 1
+    -- 游戏设置项[数组]
+    -- [1] 底分
+    -- [2] 奖码的个数
+    -- [3] 七对胡牌
+    -- [4] 喜分
+    -- [5] 一码不中当全中
+
+    local payTable = {}
+    local roundTable = {}
+    local playNumTable = {}
+    local fengPaiNum = {}
+    local xiaPaoNum = {}
+    local playRule = {}
+    local qitaRule = {}
+    local payType = {1, 2, 3}--支付类型
+    local roundType = {4, 8}--局数
+    local playNumType = {4, 3}--人数
+    local fengPaiType = {1, 2}--风牌
+    local xiaPaoType = {1, 2}--下跑
+    local ruleType = {0, 0}--玩法
+    local qitaType = {0, 0, 0, 0, 0, 0, 0}--其他
+
+    -- 房主出资， 对应局数多少
+    local allPay = {20, 40, 80}
+    local everyPay = {5, 10, 20}
+
+
+    -- 玩家平分， 对应多少
+    for i = 1, 3 do 
+
+        -- 支付方式，
+        local payPanel = self._sqmjRule:getChildByName("Panel_Pay".. i)    
+        payPanel.selectNode = payPanel:getChildByName("Image_Select")
+        payPanel._textNode = payPanel:getChildByName("Text_Pay")
+
+        payTable[i] = payPanel
+        lt.CommonUtil:addNodeClickEvent(payPanel, function( ... )
+            for i, v in pairs(payTable) do 
+                if v == payPanel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.pay = payType[i]
+                    --  
+                    if i == 1 or i == 2 then
+                        for j = 1, 2 do 
+                            roundTable[j]._textNode2:setString("(".. allPay[j] .. "金币)")
+                        end
+                    else
+                        for j = 1, 2 do 
+                            roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
+                        end
+                    end
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+    end
+
+    for i=1,2 do
+        -- 圈数
+        local roundPalel =  self._sqmjRule:getChildByName("Panel_Round".. i)
+        roundPalel.selectNode = roundPalel:getChildByName("Image_Select")   
+        roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
+        roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundTable[i] = roundPalel
+
+        lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
+            for i, v in pairs(roundTable) do 
+                if v == roundPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    v._textNode2:setColor(SelectColor)
+                    self.selectTable.round = roundType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode2:setColor(NormalColor)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        -- 人数
+        local playNumPalel = self._sqmjRule:getChildByName("Panel_PlayNum".. i)
+        playNumPalel.selectNode = playNumPalel:getChildByName("Image_Select")   
+        playNumPalel._textNode = playNumPalel:getChildByName("Text_Pay")
+        playNumTable[i] = playNumPalel
+
+        lt.CommonUtil:addNodeClickEvent(playNumPalel, function( ... )
+            for i, v in pairs(playNumTable) do 
+                if v == playNumPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.playNum = playNumType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        --风牌
+        local jiangPalel = self._sqmjRule:getChildByName("Panel_Jiang".. i)
+        jiangPalel.selectNode = jiangPalel:getChildByName("Image_Select")
+        jiangPalel.selectNode:setVisible(false) 
+        jiangPalel._textNode = jiangPalel:getChildByName("Text_Pay")
+        fengPaiNum[i] = jiangPalel
+
+        lt.CommonUtil:addNodeClickEvent(jiangPalel, function( ... )
+            for i, v in pairs(fengPaiNum) do 
+                if v == jiangPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.other_setting[2] = fengPaiType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        --下跑
+        local xiaPaoPalel = self._sqmjRule:getChildByName("Panel_xiaPao".. i)
+        xiaPaoPalel.selectNode = xiaPaoPalel:getChildByName("Image_Select")
+        xiaPaoPalel.selectNode:setVisible(false) 
+        xiaPaoPalel._textNode = xiaPaoPalel:getChildByName("Text_Pay")
+        xiaPaoNum[i] = xiaPaoPalel
+
+        lt.CommonUtil:addNodeClickEvent(xiaPaoPalel, function( ... )
+            for i, v in pairs(xiaPaoNum) do 
+                if v == xiaPaoPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.other_setting[2] = xiaPaoType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        --玩法
+        local rulePalel = self._sqmjRule:getChildByName("Panel_Play".. i)
+        rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
+        rulePalel.selectNode:setVisible(false)
+        rulePalel._textNode = rulePalel:getChildByName("Text_Pay")  
+        playRule[i] = rulePalel
+        rulePalel.isSelect = false
+
+        lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
+            if playRule[i].isSelect == false then
+                playRule[i].isSelect = true
+                playRule[i].selectNode:setVisible(true) 
+                self.selectTable.other_setting[i+2] = 1
+                playRule[i]._textNode:setColor(SelectColor)
+            else
+                dump(self.selectTable)
+                self.selectTable.other_setting[i+2] = 0
+                playRule[i].isSelect = false
+                playRule[i].selectNode:setVisible(false)
+                playRule[i]._textNode:setColor(NormalColor) 
+            end
+        end, false)
+
+    end
+
+    for i=1,7 do
+        --其他
+        local qitaPalel = self._sqmjRule:getChildByName("Panel_qiTa".. i)
+        qitaPalel.selectNode = qitaPalel:getChildByName("Image_Select")
+        qitaPalel.selectNode:setVisible(false)
+        qitaPalel._textNode = qitaPalel:getChildByName("Text_Pay")  
+        qitaRule[i] = qitaPalel
+        qitaPalel.isSelect = false
+
+        lt.CommonUtil:addNodeClickEvent(qitaPalel, function( ... )
+            if qitaRule[i].isSelect == false then
+                qitaRule[i].isSelect = true
+                qitaRule[i].selectNode:setVisible(true) 
+                self.selectTable.other_setting[i+2] = 1
+                qitaRule[i]._textNode:setColor(SelectColor)
+            else
+                dump(self.selectTable)
+                self.selectTable.other_setting[i+2] = 0
+                qitaRule[i].isSelect = false
+                qitaRule[i].selectNode:setVisible(false)
+                qitaRule[i]._textNode:setColor(NormalColor) 
+            end
+        end, false)
+    end
+    print("====")
+    dump(self.selectTable, "self.selectTable")
+
+
+
+    local delBtn = self._sqmjRule:getChildByName("Image_Del")
+    local addBtn = self._sqmjRule:getChildByName("Image_Add")
+    local baseScore = self._sqmjRule:getChildByName("Image_TimeCell"):getChildByName("baseText")
+
+    local baseIndex = 1;
+
+    baseScore:setString(1)
+    baseScore.baseNums = 1
+
+
+    self.selectTable.other_setting[1] = 1
+
+
+    -- 上面配置
+    local iTableBase = self.iBaseScore
+
+    lt.CommonUtil:addNodeClickEvent(addBtn, function( ... )
+        if baseIndex == #iTableBase then
+            return
+        end
+        baseIndex = baseIndex + 1
+
+        if baseIndex > #iTableBase then
+            baseIndex = #iTableBase
+        end
+        self.selectTable.baseNums = iTableBase[baseIndex]
+        baseScore:setString(self.selectTable.other_setting[1])
+    end)
+
+    lt.CommonUtil:addNodeClickEvent(delBtn, function( ... )
+        if baseIndex == 1 then
+            return
+        end
+        baseIndex = baseIndex - 1
+
+        if baseIndex < 1 then
+            baseIndex = 1
+        end
+        -- baseScore.baseNums = iTableBase[baseIndex]
+        self.selectTable.baseNums = iTableBase[baseIndex]
+        baseScore:setString(self.selectTable.other_setting[1])
+    end)
+
+    payTable[1]:onClick()
+    roundTable[1]:onClick()
+    playNumTable[1]:onClick()
+    fengPaiNum[1]:onClick()
+    xiaPaoNum[1]:onClick()
+
+    -- 全部选择
+    playRule[1]:onClick()
+    playRule[2]:onClick()
+    --其他 全部选择
+    qitaRule[1]:onClick()
+    qitaRule[2]:onClick()
+    qitaRule[3]:onClick()
+    qitaRule[4]:onClick()
+    qitaRule[5]:onClick()
+    qitaRule[6]:onClick()
+    qitaRule[7]:onClick()
 end
 
 

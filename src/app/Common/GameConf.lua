@@ -2,7 +2,9 @@ local GameConf = {}
 -- 采用配置
 local hzmjConf = require("app.Scene.GameScene.HZMJconfig")
 local ddzConf = require("app.Scene.GameScene.ddz.ddzConf")
-
+local sqmjConf = require("app.Scene.GameScene.SQMJconfig")
+local tdhConf = require("app.Scene.GameScene.SQMJconfig")
+local plzConf = require("app.Scene.GameScene.SQMJconfig")
 
 
 --[[
@@ -23,7 +25,9 @@ local ddzConf = require("app.Scene.GameScene.ddz.ddzConf")
 GameConf.GameIDList = {
     HZMJ = {"HZMJ", "ImageText0", "ImageText2", false, false, hzmjConf},
 	DDZ = {"DDZ", "ImageText120", "ImageText119", false, false, ddzConf},
-    DDZ = {"HZMJ", "ImageText120", "ImageText119", false, false, hzmjConf},
+    SQMJ = {"SQMJ", "gdmj_tittle1", "gdmj_tittle2", false, false, sqmjConf},
+    TDH = {"TDH", "ImageText6", "ImageText7", false, false, tdhConf},
+    PLZ = {"PLZ", "pdk_title_2", "pdk_title_1", false, false, plzConf},
 }
 
 return GameConf
