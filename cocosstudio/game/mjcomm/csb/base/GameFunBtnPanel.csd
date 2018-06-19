@@ -404,9 +404,9 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/part/surplus_cardBg.png" Plist="game/mjcomm/mjPartUi.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="Bg_MaskGiftLead" ActionTag="1384333602" Tag="116" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="0.0009" RightMargin="-0.0010" TopMargin="-0.0001" BottomMargin="0.0001" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" Scale9Enable="True" LeftEage="17" RightEage="17" TopEage="17" BottomEage="17" Scale9OriginX="17" Scale9OriginY="17" Scale9Width="19" Scale9Height="14" ctype="ImageViewObjectData">
-            <Size X="1334.0000" Y="750.0000" />
+            <Size X="1334.0001" Y="750.0000" />
             <Children>
-              <AbstractNodeData Name="Node_Gift" ActionTag="710389613" Tag="292" IconVisible="True" LeftMargin="403.8504" RightMargin="930.1496" TopMargin="278.1082" BottomMargin="471.8918" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_Gift" ActionTag="710389613" Tag="292" IconVisible="True" LeftMargin="403.8504" RightMargin="930.1497" TopMargin="278.1082" BottomMargin="471.8918" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_gift" ActionTag="642988098" Tag="87" IconVisible="False" LeftMargin="-404.3038" RightMargin="54.3038" TopMargin="-231.3987" BottomMargin="50.3987" TouchEnable="True" LeftEage="115" RightEage="115" TopEage="59" BottomEage="59" Scale9OriginX="115" Scale9OriginY="59" Scale9Width="120" Scale9Height="63" ctype="ImageViewObjectData">
@@ -451,7 +451,7 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="667.0009" Y="375.0001" />
+            <Position X="667.0010" Y="375.0001" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
@@ -522,13 +522,13 @@
             <PreSize X="0.1649" Y="0.2147" />
             <FileData Type="MarkedSubImage" Path="game/mjcomm/part/Sp_TipYinDao.png" Plist="game/mjcomm/mjPartUi.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_RecordCtrl" Visible="False" ActionTag="-508810728" Tag="77" IconVisible="False" LeftMargin="487.0000" RightMargin="487.0000" TopMargin="444.4400" BottomMargin="194.5600" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Enable="True" LeftEage="56" RightEage="56" TopEage="44" BottomEage="44" Scale9OriginX="56" Scale9OriginY="44" Scale9Width="4" Scale9Height="23" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_RecordCtrl" ActionTag="-508810728" VisibleForFrame="False" Tag="77" IconVisible="False" LeftMargin="487.0000" RightMargin="487.0000" TopMargin="444.4400" BottomMargin="194.5600" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Enable="True" LeftEage="56" RightEage="56" TopEage="44" BottomEage="44" Scale9OriginX="56" Scale9OriginY="44" Scale9Width="4" Scale9Height="23" ctype="PanelObjectData">
             <Size X="360.0000" Y="111.0000" />
             <Children>
               <AbstractNodeData Name="Button_PausePlay" ActionTag="1276561714" Tag="2367" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="133.4473" RightMargin="133.5914" TopMargin="6.4886" BottomMargin="13.3040" FontSize="14" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="23" Scale9Height="30" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="92.9613" Y="91.2074" />
                 <Children>
-                  <AbstractNodeData Name="Sprite_Pause" CanEdit="False" ActionTag="1781515052" Tag="2448" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="25.9807" RightMargin="25.9807" TopMargin="21.3806" BottomMargin="18.8268" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="Sprite_Pause" ActionTag="-2069129746" Tag="94" IconVisible="False" LeftMargin="29.5000" RightMargin="22.4613" TopMargin="17.1074" BottomMargin="23.1000" LeftEage="13" RightEage="13" TopEage="16" BottomEage="16" Scale9OriginX="13" Scale9OriginY="16" Scale9Width="15" Scale9Height="19" ctype="ImageViewObjectData">
                     <Size X="41.0000" Y="51.0000" />
                     <Children>
                       <AbstractNodeData Name="Sprite_Word" ActionTag="-122176796" Tag="2459" IconVisible="False" LeftMargin="1.4998" RightMargin="0.5002" TopMargin="47.0012" BottomMargin="-18.0012" ctype="SpriteObjectData">
@@ -544,15 +544,14 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="46.4807" Y="44.3268" />
+                    <Position X="50.0000" Y="48.6000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5000" Y="0.4860" />
+                    <PrePosition X="0.5379" Y="0.5329" />
                     <PreSize X="0.4410" Y="0.5592" />
                     <FileData Type="MarkedSubImage" Path="game/mjcomm/part/iconRecordPause.png" Plist="game/mjcomm/mjPartUi.plist" />
-                    <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Sprite_Play" CanEdit="False" ActionTag="415599735" Tag="2449" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="28.9833" RightMargin="22.9780" TopMargin="21.3780" BottomMargin="14.8294" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="Sprite_Play" ActionTag="1051730040" Tag="95" IconVisible="False" LeftMargin="32.7300" RightMargin="19.2313" TopMargin="17.2974" BottomMargin="18.9100" LeftEage="13" RightEage="13" TopEage="18" BottomEage="18" Scale9OriginX="13" Scale9OriginY="18" Scale9Width="15" Scale9Height="19" ctype="ImageViewObjectData">
                     <Size X="41.0000" Y="55.0000" />
                     <Children>
                       <AbstractNodeData Name="Sprite_Word" ActionTag="-1076500045" Tag="2460" IconVisible="False" LeftMargin="-3.0003" RightMargin="2.0003" TopMargin="46.5012" BottomMargin="-16.5012" ctype="SpriteObjectData">
@@ -568,13 +567,12 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="49.4833" Y="42.3294" />
+                    <Position X="53.2300" Y="46.4100" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5323" Y="0.4641" />
+                    <PrePosition X="0.5726" Y="0.5088" />
                     <PreSize X="0.4410" Y="0.6030" />
                     <FileData Type="MarkedSubImage" Path="game/mjcomm/part/iconRecordPlay.png" Plist="game/mjcomm/mjPartUi.plist" />
-                    <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

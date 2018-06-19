@@ -14,9 +14,10 @@ function SettingLayer:ctor()
 	local backLobby = self._scrollView:getChildByName("Btn_BackLobby")
 
     local btnClose = self._scrollView:getChildByName("Btn_Close")
-
-
-	lt.CommonUtil:addNodeClickEvent(dissolveRoom, handler(self, self.onDissolveRoom))
+    if lt.DataManager:getRePlayState() then
+        dissolveRoom:setVisible(false)
+    end
+    lt.CommonUtil:addNodeClickEvent(dissolveRoom, handler(self, self.onDissolveRoom))
 	lt.CommonUtil:addNodeClickEvent(backLobby, handler(self, self.onBackLobby))
     lt.CommonUtil:addNodeClickEvent(btnClose, handler(self, self.onClose))
     self:setshow()
@@ -279,11 +280,17 @@ function SettingLayer:bb()
 end
 
 function SettingLayer:onBackLobby()
-    lt.NetWork:sendTo(lt.GameEventManager.EVENT.LEAVE_ROOM)
+    if lt.DataManager:getRePlayState() then
+        lt.MJplayBackManager:closeReplay()
+        local worldScene = lt.WorldScene.new()
+        lt.SceneManager:replaceScene(worldScene)
+        lt.NetWork:disconnect()
+    else
+        lt.NetWork:sendTo(lt.GameEventManager.EVENT.LEAVE_ROOM)
+    end
 end
 
 function SettingLayer:onBackLobbyResponse(msg)
-	print("+++++++++++++++++++++++++++++++", msg.result)
     if msg.result == "success" then
     	local worldScene = lt.WorldScene.new()
         lt.SceneManager:replaceScene(worldScene)
@@ -291,9 +298,7 @@ function SettingLayer:onBackLobbyResponse(msg)
     end
 end
 
-function SettingLayer:onDistroyroomResponse(msg)
-    print("+++++++++++++++++++++++++++++++onDistroyroomResponse+++++++pppp-------", msg.result)
-    
+function SettingLayer:onDistroyroomResponse(msg)    
     if msg.result ~= "success" then
         --local worldScene = lt.WorldScene.new()
         --lt.SceneManager:replaceScene(worldScene)

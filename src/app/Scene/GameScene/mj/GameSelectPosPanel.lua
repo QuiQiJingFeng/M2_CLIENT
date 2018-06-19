@@ -305,9 +305,6 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 	--self._nodeNoPlayer:stopAllActions() isRunning
 	self._handSelect:setVisible(false)
 
-	for i,v in ipairs(self._currentPlayerLogArray) do
-		v:setVisible(false)
-	end
 
 	if isClick and self._selectPositionNode then
 		local temp = self._selectPositionNode.atDirection - self.POSITION_TYPE.NAN
@@ -329,9 +326,17 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 	    local time = 0.5
 	    if du == 0 then
 	    	time = 0
+
+	    	if CallFunc then
+				CallFunc()
+			end
 	    	return
 	    end
 
+	    for i,v in ipairs(self._currentPlayerLogArray) do
+			v:setVisible(false)
+		end
+		
     	local headVisible = function ( )
 			self._selectPositionNode:setVisible(false)
 			self:configPlayer()
@@ -468,6 +473,10 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
   		end
 
 	else
+		for i,v in ipairs(self._currentPlayerLogArray) do
+			v:setVisible(false)
+		end
+
 		local mySelfPosition = lt.DataManager:getMyselfPositionInfo().user_pos
 
 		local du = 0
@@ -537,7 +546,6 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 
 			--_nodeLightDXNB
 		else 
-
 			self._nodeNoPlayer:setRotation(du)
 
 			for i,v in pairs(self._allPlayerPosArray) do
@@ -609,6 +617,7 @@ function GameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 end
 
 function GameSelectPosPanel:onSitDownClick(event) 
+	print("===========sssssssssssss",event:getTag())
 	if lt.DataManager:getRePlayState() then
 		self._selectPositionNode = event
 
@@ -619,6 +628,7 @@ function GameSelectPosPanel:onSitDownClick(event)
 
 			local function func()
 				self._deleget:CreateReplay()
+				self._deleget:ReplayUIshow()
 				--lt.MJplayBackLayer:Start()--启动定时器
 			end
 			self:configRotation(true, func)

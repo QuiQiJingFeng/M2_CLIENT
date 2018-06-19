@@ -450,6 +450,25 @@ function GameRoomLayer:CreateReplay()--
 	self._rePlayManager = lt.MJplayBackManager:CreateReplay()
 end
 
+function GameRoomLayer:ReplayUIshow()
+	self._gameSetPanel:onTouchReplayUIShow()
+end
+
+function GameRoomLayer:ReplayStopReplay()
+	self._rePlayManager:StopReplay()
+end
+
+function GameRoomLayer:ReplayStarReplay()
+	self._rePlayManager:StarReplay()
+end
+
+function GameRoomLayer:ReplayaddSpeed()
+	self._rePlayManager:addSpeed()
+end
+
+function GameRoomLayer:ReplaysurSpeed()
+	self._rePlayManager:surSpeed()
+end
 
 function GameRoomLayer:onEnter()   
     print("GameRoomLayer:onEnter")

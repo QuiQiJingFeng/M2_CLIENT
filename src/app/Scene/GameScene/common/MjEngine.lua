@@ -118,13 +118,21 @@ function MjEngine:open(deleget)
 	ccp(-30, -217),
 	ccp(314, -39),
 	}
-
-	self._allHandNodePos = {--手牌左边的起点位置 
-	ccp(-16, 151),
-	ccp(-632, -60),
-	ccp(-15, -210),
-	ccp(300, -37),
-	}
+	if lt.DataManager:getRePlayState() then
+		self._allHandNodePos = {--手牌左边的起点位置 
+		ccp(-16, 171),
+		ccp(-632, -60),
+		ccp(-15, -210),
+		ccp(300, -37),
+		}
+	else
+		self._allHandNodePos = {--手牌左边的起点位置 
+		ccp(-16, 151),
+		ccp(-632, -60),
+		ccp(-15, -210),
+		ccp(300, -37),
+		}
+	end
 
 	self._allOutCardsPanelPos = {--不同玩家人数 不同方位
 		[2] = {
@@ -361,7 +369,11 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			handOffY = 27
 		end
 	elseif direction == lt.Constants.DIRECTION.BEI then
-		handOffX = -46
+		if lt.DataManager:getRePlayState() then 
+			handOffX = -42
+		else
+			handOffX = -46
+		end
 	end
 
 	self._allPlayerCpgCardsValue[direction] = self._allPlayerCpgCardsValue[direction] or {}

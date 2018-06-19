@@ -27,35 +27,73 @@ function GameSetPanel:ctor(deleget)
 	local voiceBtn = self:getChildByName("Button_Voice")
 
 
+	self._panel_RecordCtrl = self:getChildByName("Panel_RecordCtrl")
 
-	local Button_Voice = self:getChildByName("Button_Voice")
-	local Button_Chat = self:getChildByName("Button_Chat")
-	Button_Voice:setVisible(false)--不需要false掉
-	Button_Chat:setVisible(false)
+	self._button_PausePlay = self._panel_RecordCtrl:getChildByName("Button_PausePlay")
+	self._sprite_Pause = self._button_PausePlay:getChildByName("Sprite_Pause")--暂停
+	self._sprite_Play = self._button_PausePlay:getChildByName("Sprite_Play")--播放
+	self._sprite_Play:setVisible(false)
 
-	local Panel_RecordCtrl = self:getChildByName("Panel_RecordCtrl"):setVisible(true)
+	local Button_Fast = self._panel_RecordCtrl:getChildByName("Button_Fast")--加速
+	local Button_Slowe = self._panel_RecordCtrl:getChildByName("Button_Slowe")--减速
 
-	local Button_PausePlay = Panel_RecordCtrl:getChildByName("Button_PausePlay")
-	local Sprite_Pause = Button_PausePlay:getChildByName("Sprite_Pause")--暂停
-	local Sprite_Play = Button_PausePlay:getChildByName("Sprite_Play")--播放
-	Sprite_Play:setVisible(false)
-	--Sprite_Pause:setVisible(false)
-
-	
-	local Button_Fast = Panel_RecordCtrl:getChildByName("Button_Fast")
-	local Button_Slowe = Panel_RecordCtrl:getChildByName("Button_Slowe")
-	Button_PausePlay:setVisible(true)
-	Button_Fast:setVisible(true)
-	Button_Slowe:setVisible(true)
 
 	lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onSetClick))
 	lt.CommonUtil:addNodeClickEvent(ruleBtn, handler(self, self.onRuleClick))
 
+	lt.CommonUtil:addNodeClickEvent(self._sprite_Play, handler(self, self.onPlay))--播放
+	lt.CommonUtil:addNodeClickEvent(self._sprite_Pause, handler(self, self.onPause))--暂停
+	lt.CommonUtil:addNodeClickEvent(Button_Fast, handler(self, self.onFast))--加速
+	lt.CommonUtil:addNodeClickEvent(Button_Slowe, handler(self, self.onSlowe))--减速
+	
 	lt.CommonUtil:addNodeClickEvent(voiceBtn,handler(self, self.onTouchEndVoice),true,handler(self, self.onTouchBeginVoice),handler(self, self.onTouchCanceled))
 
 
 	self.__recording = false
 end
+
+function GameSetPanel:onTouchReplayUIShow()--显示出来
+	self._panel_RecordCtrl:setVisible(true)
+	local Button_Voice = self:getChildByName("Button_Voice")
+	local Button_Chat = self:getChildByName("Button_Chat")
+	Button_Voice:setVisible(false)--不需要false掉
+	Button_Chat:setVisible(false)
+end
+function GameSetPanel:onTouchReplayUIPlay()--播放
+	self._sprite_Play:setVisible(true)
+	self._sprite_Pause:setVisible(false)
+end
+function GameSetPanel:onTouchReplayUIPause()--暂停
+	self._sprite_Pause:setVisible(true)
+	self._sprite_Play:setVisible(false)
+end
+
+function GameSetPanel:onPlay(event)--播放事件
+	self:onTouchReplayUIPause()
+	self._deleget:ReplayStarReplay()
+end
+
+function GameSetPanel:onPause(event)--暂停事件
+	self:onTouchReplayUIPlay()
+	self._deleget:ReplayStopReplay()
+end
+
+function GameSetPanel:onFast(event)--加速事件
+	self._deleget:ReplayaddSpeed()
+end
+
+function GameSetPanel:onSlowe(event)--减速事件
+	self._deleget:ReplaysurSpeed()
+end
+
+
+
+
+
+
+
+
+
 
 --开始录音的时候,服务端发过来的声音全部丢弃 并且停止当前的声音
 function GameSetPanel:onTouchBeginVoice()
