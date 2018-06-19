@@ -1543,7 +1543,7 @@
                         <EndColor A="255" R="255" G="255" B="255" />
                         <ColorVector ScaleY="1.0000" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="SQMJ_Rule" ActionTag="1206412906" VisibleForFrame="False" Tag="722" IconVisible="False" LeftMargin="20.4291" RightMargin="36.5709" TopMargin="0.8162" BottomMargin="10.1838" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                      <AbstractNodeData Name="SQMJ_Rule" ActionTag="1206412906" Tag="722" IconVisible="False" LeftMargin="20.4291" RightMargin="36.5709" TopMargin="0.8162" BottomMargin="10.1838" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                         <Size X="967.0000" Y="524.0000" />
                         <Children>
                           <AbstractNodeData Name="Text_Pay" ActionTag="268008018" Tag="723" IconVisible="False" LeftMargin="48.1920" RightMargin="798.8080" TopMargin="19.3300" BottomMargin="474.6700" FontSize="30" LabelText="资　费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -3432,7 +3432,7 @@
                         <EndColor A="255" R="255" G="255" B="255" />
                         <ColorVector ScaleY="1.0000" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="PLZ_Rule" ActionTag="908230617" Tag="2004" IconVisible="False" LeftMargin="10.0000" RightMargin="47.0000" TopMargin="-9.0000" BottomMargin="20.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                      <AbstractNodeData Name="PLZ_Rule" ActionTag="908230617" VisibleForFrame="False" Tag="2004" IconVisible="False" LeftMargin="10.0000" RightMargin="47.0000" TopMargin="-9.0000" BottomMargin="20.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                         <Size X="967.0000" Y="524.0000" />
                         <Children>
                           <AbstractNodeData Name="Text_Pay" ActionTag="1887810578" Tag="2005" IconVisible="False" LeftMargin="48.1920" RightMargin="798.8080" TopMargin="39.3294" BottomMargin="454.6706" FontSize="30" LabelText="资　费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

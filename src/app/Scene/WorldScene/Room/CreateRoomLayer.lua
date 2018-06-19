@@ -721,7 +721,6 @@ function CreateRoomLayer:initPLZRule( ... )
     payTable[1]:onClick()
     roundTable[1]:onClick()
     playNumTable[1]:onClick()
-    jiangNum[1]:onClick()
 
     -- 全部选择
     playRule[1]:onClick()

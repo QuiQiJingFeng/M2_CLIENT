@@ -102,36 +102,36 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Tt_No" ActionTag="2140261119" VisibleForFrame="False" Tag="924" IconVisible="False" LeftMargin="48.4817" RightMargin="1179.5183" TopMargin="31.5000" BottomMargin="527.5000" TouchEnable="True" FontSize="26" LabelText="序号" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="52.0000" Y="31.0000" />
+              <AbstractNodeData Name="Tt_No" ActionTag="2140261119" VisibleForFrame="False" Tag="924" IconVisible="False" LeftMargin="48.4817" RightMargin="1179.5183" TopMargin="34.0000" BottomMargin="530.0000" TouchEnable="True" FontSize="26" LabelText="序号" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="52.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="74.4817" Y="543.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="116" G="61" B="0" />
                 <PrePosition X="0.0582" Y="0.9203" />
-                <PreSize X="0.0406" Y="0.0525" />
+                <PreSize X="0.0406" Y="0.0441" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Tt_RoundID" ActionTag="-1868261172" VisibleForFrame="False" Tag="19" IconVisible="False" LeftMargin="135.4817" RightMargin="1066.5183" TopMargin="31.5000" BottomMargin="527.5000" TouchEnable="True" FontSize="26" LabelText="回放码" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="78.0000" Y="31.0000" />
+              <AbstractNodeData Name="Tt_RoundID" ActionTag="-1868261172" VisibleForFrame="False" Tag="19" IconVisible="False" LeftMargin="135.4817" RightMargin="1066.5183" TopMargin="34.0000" BottomMargin="530.0000" TouchEnable="True" FontSize="26" LabelText="回放码" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="78.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="174.4817" Y="543.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="116" G="61" B="0" />
                 <PrePosition X="0.1363" Y="0.9203" />
-                <PreSize X="0.0609" Y="0.0525" />
+                <PreSize X="0.0609" Y="0.0441" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Tt_Time" ActionTag="-85779103" VisibleForFrame="False" Tag="925" IconVisible="False" LeftMargin="247.0349" RightMargin="928.9651" TopMargin="31.5000" BottomMargin="527.5000" TouchEnable="True" FontSize="26" LabelText="对战时间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="104.0000" Y="31.0000" />
+              <AbstractNodeData Name="Tt_Time" ActionTag="-85779103" VisibleForFrame="False" Tag="925" IconVisible="False" LeftMargin="247.0349" RightMargin="928.9651" TopMargin="34.0000" BottomMargin="530.0000" TouchEnable="True" FontSize="26" LabelText="对战时间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="104.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="299.0349" Y="543.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="116" G="61" B="0" />
                 <PrePosition X="0.2336" Y="0.9203" />
-                <PreSize X="0.0812" Y="0.0525" />
+                <PreSize X="0.0812" Y="0.0441" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -229,6 +229,16 @@
                 <ColorVector ScaleY="1.0000" />
                 <InnerNodeSize Width="1250" Height="2500" />
               </AbstractNodeData>
+              <AbstractNodeData Name="Bn_Close" ActionTag="1521024470" Tag="311" IconVisible="False" LeftMargin="1230.1016" RightMargin="-28.1016" TopMargin="-27.4473" BottomMargin="538.4473" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="40" Scale9Height="38" ctype="ImageViewObjectData">
+                <Size X="78.0000" Y="79.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="1269.1016" Y="577.9473" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.9915" Y="0.9796" />
+                <PreSize X="0.0609" Y="0.1339" />
+                <FileData Type="MarkedSubImage" Path="hallcomm/common/img/ButtonClose1.png" Plist="hallcomm/common/CommonPlist0.plist" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="667.0000" Y="352.5000" />
@@ -248,7 +258,7 @@
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="MarkedSubImage" Path="hallcomm/common/img/BG6.png" Plist="hallcomm/common/CommonPlist0.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Ie_Share" ActionTag="1193270563" Tag="297" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="349.5000" RightMargin="349.5000" TopMargin="240.0000" BottomMargin="240.0000" TouchEnable="True" Scale9Enable="True" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="9" Scale9Height="15" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Ie_Share" Visible="False" ActionTag="1193270563" Tag="297" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="349.5000" RightMargin="349.5000" TopMargin="240.0000" BottomMargin="240.0000" TouchEnable="True" Scale9Enable="True" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="9" Scale9Height="15" ctype="ImageViewObjectData">
             <Size X="635.0000" Y="270.0000" />
             <Children>
               <AbstractNodeData Name="BG34_1" ActionTag="186192427" Tag="298" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="129.2658" RightMargin="131.7342" TopMargin="-64.0000" BottomMargin="264.0000" ctype="SpriteObjectData">
@@ -299,14 +309,14 @@
                     <PreSize X="0.4000" Y="0.5570" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/common/img/ButtonWX1.png" Plist="hallcomm/common/CommonPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_2_0" ActionTag="-685857903" Tag="305" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="8.5793" RightMargin="20.4207" TopMargin="107.2446" BottomMargin="8.7554" FontSize="36" LabelText="微信群/好友" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="191.0000" Y="42.0000" />
+                  <AbstractNodeData Name="Text_2_0" ActionTag="-685857903" Tag="305" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="8.5793" RightMargin="13.4207" TopMargin="110.2446" BottomMargin="11.7554" FontSize="36" LabelText="微信群/好友" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="198.0000" Y="36.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="104.0793" Y="29.7554" />
+                    <Position X="107.5793" Y="29.7554" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="116" G="61" B="0" />
-                    <PrePosition X="0.4731" Y="0.1883" />
-                    <PreSize X="0.8682" Y="0.2658" />
+                    <PrePosition X="0.4890" Y="0.1883" />
+                    <PreSize X="0.9000" Y="0.2278" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -322,14 +332,14 @@
               <AbstractNodeData Name="Image_489_0" ActionTag="-3676256" Tag="306" IconVisible="False" LeftMargin="355.2120" RightMargin="59.7880" TopMargin="55.8118" BottomMargin="56.1882" Scale9Enable="True" LeftEage="17" RightEage="17" TopEage="19" BottomEage="19" Scale9OriginX="17" Scale9OriginY="19" Scale9Width="20" Scale9Height="20" ctype="ImageViewObjectData">
                 <Size X="220.0000" Y="158.0000" />
                 <Children>
-                  <AbstractNodeData Name="Text_2" ActionTag="-2133737192" Tag="307" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="21.5750" RightMargin="18.4250" TopMargin="107.2445" BottomMargin="8.7555" FontSize="36" LabelText="微信朋友圈" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="180.0000" Y="42.0000" />
+                  <AbstractNodeData Name="Text_2" ActionTag="-2133737192" Tag="307" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="21.5750" RightMargin="18.4250" TopMargin="110.2445" BottomMargin="11.7555" FontSize="36" LabelText="微信朋友圈" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="180.0000" Y="36.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="111.5750" Y="29.7555" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="116" G="61" B="0" />
                     <PrePosition X="0.5072" Y="0.1883" />
-                    <PreSize X="0.8182" Y="0.2658" />
+                    <PreSize X="0.8182" Y="0.2278" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -346,14 +356,14 @@
                   <AbstractNodeData Name="Image_584" ActionTag="-1134036870" VisibleForFrame="False" Tag="309" IconVisible="False" LeftMargin="125.2240" RightMargin="0.0542" TopMargin="-1.0276" BottomMargin="118.0276" Scale9Enable="True" LeftEage="22" RightEage="22" TopEage="11" BottomEage="11" Scale9OriginX="22" Scale9OriginY="11" Scale9Width="29" Scale9Height="19" ctype="ImageViewObjectData">
                     <Size X="94.7217" Y="41.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_534" ActionTag="-441384808" Tag="310" IconVisible="False" LeftMargin="10.1830" RightMargin="10.5387" TopMargin="7.4628" BottomMargin="10.5372" FontSize="20" LabelText="+20金币" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ShadowEnabled="True" ctype="TextObjectData">
-                        <Size X="74.0000" Y="23.0000" />
+                      <AbstractNodeData Name="Text_534" ActionTag="-441384808" Tag="310" IconVisible="False" LeftMargin="12.1830" RightMargin="12.5387" TopMargin="8.9628" BottomMargin="12.0372" FontSize="20" LabelText="+20金币" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ShadowEnabled="True" ctype="TextObjectData">
+                        <Size X="70.0000" Y="20.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="47.1830" Y="22.0372" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.4981" Y="0.5375" />
-                        <PreSize X="0.7812" Y="0.5610" />
+                        <PreSize X="0.7390" Y="0.4878" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -393,16 +403,6 @@
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.4760" Y="0.3600" />
             <FileData Type="MarkedSubImage" Path="hallcomm/common/img/BG35.png" Plist="hallcomm/common/CommonPlist1.plist" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Bn_Close" ActionTag="1521024470" Tag="311" IconVisible="False" LeftMargin="1256.1300" RightMargin="-0.1300" TopMargin="74.7100" BottomMargin="596.2900" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="40" Scale9Height="38" ctype="ImageViewObjectData">
-            <Size X="78.0000" Y="79.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1295.1300" Y="635.7900" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.9709" Y="0.8477" />
-            <PreSize X="0.0585" Y="0.1053" />
-            <FileData Type="MarkedSubImage" Path="hallcomm/common/img/ButtonClose1.png" Plist="hallcomm/common/CommonPlist0.plist" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
