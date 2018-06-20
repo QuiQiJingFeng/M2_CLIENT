@@ -1361,6 +1361,26 @@ function CreateRoomLayer:initSQMJRule( ... )
                 end
             end
         end, false)
+
+        -- 人数  --这个以后要去掉，暂时不存起来，
+        local playNumPalel = self._sqmjRule:getChildByName("Panel_PlayNum".. i)
+        playNumPalel.selectNode = playNumPalel:getChildByName("Image_Select")   
+        playNumPalel._textNode = playNumPalel:getChildByName("Text_Pay")
+        playNumTable[i] = playNumPalel
+
+        lt.CommonUtil:addNodeClickEvent(playNumPalel, function( ... )
+            for i, v in pairs(playNumTable) do 
+                if v == playNumPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.playNum = playNumType[i]
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
     end
 
     for i=1,2 do
@@ -1386,7 +1406,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                 end
             end
         end, false)
-
+        --[[
         -- 人数
         local playNumPalel = self._sqmjRule:getChildByName("Panel_PlayNum".. i)
         playNumPalel.selectNode = playNumPalel:getChildByName("Image_Select")   
@@ -1404,7 +1424,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                     v._textNode:setColor(NormalColor)
                 end
             end
-        end, false)
+        end, false)--]]
 
         --风牌
         local jiangPalel = self._sqmjRule:getChildByName("Panel_Jiang".. i)
