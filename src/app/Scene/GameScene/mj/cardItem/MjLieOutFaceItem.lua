@@ -65,6 +65,11 @@ function MjLieOutFaceItem:showRedMask()
 	self._redMask:setVisible(true)
 end
 
+function MjLieOutFaceItem:showLightMask()
+	self:showNormal()
+	self._lightMask:setVisible(true)
+end
+
 function MjLieOutFaceItem:setCardIcon(value)
 	local cardType = math.floor(value / 10) + 1
 	local cardValue = value % 10

@@ -588,12 +588,50 @@ function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
     end
 end
 
+function GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent(msg)  
+    if not msg or not msg.user_pos or not msg.card then
+        return
+    end
+    local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
+    if not direction or not self._specialEventNode[direction] then
+        return
+    end
+--user_pos   card
+
+    self._specialEventNode[direction]:setVisible(true)
+    local light = self._specialEventNode[direction]:getChildByName("Sprite_Light")
+    local word = self._specialEventNode[direction]:getChildByName("Sprite_Word")
+
+    local path = "game/mjcomm/animation/aniWord/wordLai.png"
+
+    word:setSpriteFrame(path)
+    
+    for i=1,12 do
+
+        local delay = cc.DelayTime:create(0.1 * i)
+
+        local func1 = cc.CallFunc:create(function()
+            local framePath = "game/mjcomm/animation/aniActionLight/aniAction_"..i..".png"
+            light:setSpriteFrame(framePath)
+            if i == 12 then
+                self._specialEventNode[direction]:setVisible(false)
+            end
+        end)
+        local sequence = cc.Sequence:create(delay, func1)
+        light:runAction(sequence)
+    end    
+end
+
 function GameActionBtnsPanel:onEnter()   
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GameActionBtnsPanel.onNoticeSpecialEvent")
+
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, handler(self, self.onNoticeSpecialBuFlowerEvent), "GameActionBtnsPanel.onNoticeSpecialBuFlowerEvent")
 end
 
 function GameActionBtnsPanel:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameActionBtnsPanel:onNoticeSpecialEvent")
+
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, "GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent")
 end
 
 return GameActionBtnsPanel

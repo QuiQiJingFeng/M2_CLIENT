@@ -87,13 +87,7 @@ function MjEngine:open(deleget)
 	self._allPlayerOutCardsNode = {}
 	self._allPlayerSpecialOutCardsNode = {}
 
-	self._allPlayerHandCardsValue = {}
-	self._allPlayerCpgCardsValue = {}
-	self._allPlayerOutCardsValue = {}
-	self._allPlayerSpecialOutCardsValue = {}
-
-
-	self._allPlayerLightHandCardsValue = {}--商丘麻将亮四打一
+	self:initDataValue()
 
 	self._allPlayerCpgCardsPanel = {}
 	self._allPlayerHandCardsPanel = {}
@@ -105,37 +99,33 @@ function MjEngine:open(deleget)
 	self._showCardsLayer = display.newLayer() --cc.Layer:create()
 	--self._showCardsLayer:setSwallowTouches(false)
 
-	self._outCardsNode = cc.Node:create():setPosition(667, 400)--出牌的父node
-	self._showCardsLayer:addChild(self._outCardsNode)
+	self._outCardsRootNode = cc.Node:create():setPosition(667, 400)--出牌的父node
+
+	self._huiRootNode = cc.Node:create():setPosition(0, 600)--癞子牌父节点
+
+	self._showCardsLayer:addChild(self._huiRootNode)
+	self._showCardsLayer:addChild(self._outCardsRootNode)
 
 	self._allCpgHandPanelPos = {--吃椪杠的父节点的位置
-	ccp(205, 410),
-	ccp(667, 78),
-	ccp(1129, 410),
-	ccp(667, 697),
+		ccp(205, 410),
+		ccp(667, 78),
+		ccp(1129, 410),
+		ccp(667, 697),
 	}
 
 	self._allCpgNodePos = {--吃椪杠左边的起点位置 
-	ccp(-30, 172),
-	ccp(-627, -60),
-	ccp(-30, -217),
-	ccp(314, -39),
+		ccp(-30, 172),
+		ccp(-627, -60),
+		ccp(-30, -217),
+		ccp(280, -39),
 	}
-	if lt.DataManager:getRePlayState() then
-		self._allHandNodePos = {--手牌左边的起点位置 
-		ccp(-16, 171),
+
+	self._allHandNodePos = {--手牌左边的起点位置 
+		ccp(-30, 200),
 		ccp(-632, -60),
-		ccp(-15, -210),
-		ccp(300, -37),
-		}
-	else
-		self._allHandNodePos = {--手牌左边的起点位置 
-		ccp(-16, 151),
-		ccp(-632, -60),
-		ccp(-15, -210),
-		ccp(300, -37),
-		}
-	end
+		ccp(-30, -210),
+		ccp(300, -39),
+	}
 
 	self._allOutCardsPanelPos = {--不同玩家人数 不同方位
 		[2] = {
@@ -188,8 +178,8 @@ function MjEngine:open(deleget)
 		self._showCardsLayer:addChild(self._allPlayerCpgCardsPanel[direction])
 		self._showCardsLayer:addChild(self._allPlayerHandCardsPanel[direction])
 
-		self._outCardsNode:addChild(self._allPlayerOutCardsPanel[direction])
-		self._outCardsNode:addChild(self._allPlayerSpecialOutCardsPanel[direction])
+		self._outCardsRootNode:addChild(self._allPlayerOutCardsPanel[direction])
+		self._outCardsRootNode:addChild(self._allPlayerSpecialOutCardsPanel[direction])
 	end
 	
 	for i,direction in ipairs(self._currentGameDirections) do
@@ -199,12 +189,33 @@ function MjEngine:open(deleget)
 	return self
 end
 
+function MjEngine:initDataValue()
+	self._allPlayerHandCardsValue = {}
+	self._allPlayerCpgCardsValue = {}
+	self._allPlayerOutCardsValue = {}
+	self._allPlayerSpecialOutCardsValue = {}
+	self._allPlayerLightHandCardsValue = {}--商丘麻将亮四打一	
+
+	self._huiCardValue = nil
+end
+
 function MjEngine:close()
-	self:clearData()
+	self:clearUiData()
 	self._showCardsLayer:removeFromParent()
 end
 
-function MjEngine:configOutCardsNodePos()
+function MjEngine:clearUiData()
+	self:initDataValue()
+
+	for k,v in pairs(self._allLieFaceCardNode) do
+		v:removeFromParent()
+	end
+	self._allLieFaceCardNode = {}
+
+	self._huiRootNode:removeAllChildren()
+end
+
+function MjEngine:configOutCardsNodePos()--解析 储存 不同玩家人数 outcard 的位置
 	local path = "res/alloutcardpos/positions.json"
 	if device.platform == "ios" or device.platform == "android" then
 		local writePath = cc.FileUtils:getInstance():getWritablePath()
@@ -215,42 +226,24 @@ function MjEngine:configOutCardsNodePos()
 	self._allOutCardsNodePos = allData["player"..self._playerNum]
 end
 
-function MjEngine:clearData()
-
-	-- self._allPlayerOutCardsNode = {}
-	-- self._allPlayerHandCardsNode = {}
-	-- self._allPlayerCpgCardsNode = {}
-
-
-	self._allPlayerHandCardsValue = {}
-	self._allPlayerCpgCardsValue = {}
-	self._allPlayerOutCardsValue = {}
-
-	for k,v in pairs(self._allLieFaceCardNode) do
-		v:removeFromParent()
-	end
-
-	self._allLieFaceCardNode = {}
-end
-
 function MjEngine:getShowCardsLayer()
 	return self._showCardsLayer
 end
 
 function MjEngine:angainConfigUi()--继续游戏
-	self:clearData()
+	self:clearUiData()
 	self._showCardsLayer:setVisible(false)
 end
 
-function MjEngine:sendCards(cards,direction, fourCardList)--发牌 13张
+function MjEngine:sendCards(msg, direction)--发牌 13张
 	self._showCardsLayer:setVisible(true)
-	cards = cards or {}
-	-- fourCardList = {
-	-- 	{user_pos = 1,cards = {8,8,8,8}},
-	-- 	{user_pos = 2,cards = {8,8,8,8}},
-	-- }
+	local cards = msg.cards or {}
 
-	fourCardList = fourCardList or {}
+	local fourCardList = msg.fourCardList or {}
+
+	self._huiCardValue = msg.huicard
+	self:configHuiCard()
+
 	if direction then--and lt.DataManager:getRePlayState()
 		self._allPlayerHandCardsValue[direction] = self._allPlayerHandCardsValue[direction] or {}
 		for i,card in ipairs(cards) do
@@ -263,11 +256,11 @@ function MjEngine:sendCards(cards,direction, fourCardList)--发牌 13张
 			self._allPlayerLightHandCardsValue[dire] = cardItem.cards
 		end
 
+		self:sortHandValue(direction)
+
 		local sortFun = function(a, b)
 			return a < b
 		end
-		table.sort(self._allPlayerHandCardsValue[direction], sortFun)
-
 		table.sort(self._allPlayerLightHandCardsValue[direction], sortFun)
 
 		self:sendCardsEffect()
@@ -344,60 +337,97 @@ function MjEngine:sendCardsEffect()
 	end
 end
 
-function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refreshOut, refreshSpeicalOut)--吃椪杠 手牌 出的牌  用于刷牌
-	
-	-- if refreshCpg and refreshHand and refreshOut then
-	-- 	self:clearDesktop()
-	-- elseif then
+function MjEngine:configHuiCard()
+	self._huiRootNode:removeAllChildren()
 
-	-- end
+	if self._huiCardValue then
+		local huiNode = self:createCardsNode(self.CARD_TYPE.OUT, lt.Constants.DIRECTION.NAN, self._huiCardValue)
+		if huiNode then
+			huiNode:setAnchorPoint(0.5, 0.5)
+			huiNode:showLightMask()
+			self._huiRootNode:addChild(huiNode:getRootNode())
+		end
+		huiNode:setPosition(ccp(50, 0))
+
+		local badHuiValue = 0
+
+		if self._huiCardValue % 10 == 1 then
+			badHuiValue = math.floor(self._huiCardValue / 10) + 9
+		else
+			badHuiValue = self._huiCardValue  - 1
+		end
+
+		local badHuiNode = self:createCardsNode(self.CARD_TYPE.OUT, lt.Constants.DIRECTION.NAN, badHuiValue)
+		if badHuiNode then
+			badHuiNode:setAnchorPoint(0.5, 0.5)
+			badHuiNode:showRedMask()
+			self._huiRootNode:addChild(badHuiNode:getRootNode())
+		end
+		badHuiNode:setPosition(ccp(130, 0))
+	end
+end
+
+function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refreshOut, refreshSpeicalOut)--吃椪杠 手牌 出的牌  用于刷牌
 	
 	local cpgOffX = 0
 	local cpgOffY = 0
-	if direction == lt.Constants.DIRECTION.XI then
-		cpgOffY = -114
-	elseif direction == lt.Constants.DIRECTION.NAN then
-		cpgOffX = 264
-	elseif direction == lt.Constants.DIRECTION.DONG then
-		cpgOffY = 114
-	elseif direction == lt.Constants.DIRECTION.BEI then
-		cpgOffX = -135
-	end
 
 	local handOffX = 0
 	local handOffY = 0
+
+	local lieHandOffX = 0
+	local lieHandOffY = 0
+
+	local cpgHandSpaceX = 0
+	local cpgHandSpaceY = 0
+
 	if direction == lt.Constants.DIRECTION.XI then
+		cpgOffY = -114
+
+		lieHandOffY = -32
+
 		if lt.DataManager:getRePlayState() then 
 			handOffY = -32
 		else
 			handOffY = -27
 		end
-		
-	elseif direction == lt.Constants.DIRECTION.NAN then
-		handOffX = 88
-	elseif direction == lt.Constants.DIRECTION.DONG then
 
+		cpgHandSpaceY = -10
+
+	elseif direction == lt.Constants.DIRECTION.NAN then
+		cpgOffX = 264
+		lieHandOffX = 88
+		handOffX = 88
+		cpgHandSpaceX = 0
+	elseif direction == lt.Constants.DIRECTION.DONG then
+		cpgOffY = 114
+		lieHandOffY = 35
 		if lt.DataManager:getRePlayState() then 
-			handOffY = 32
+			handOffY = 35
 		else
 			handOffY = 27
 		end
+		cpgHandSpaceY = 0
+
 	elseif direction == lt.Constants.DIRECTION.BEI then
+		cpgOffX = -135
+		lieHandOffX = -42
 		if lt.DataManager:getRePlayState() then 
 			handOffX = -42
 		else
-			handOffX = -46
+			handOffX = -45
 		end
+		cpgHandSpaceX = -10
 	end
+
 
 	self._allPlayerCpgCardsValue[direction] = self._allPlayerCpgCardsValue[direction] or {}
 	self._allPlayerHandCardsValue[direction] = self._allPlayerHandCardsValue[direction] or {}
-
-	local cpgNumber = #self._allPlayerCpgCardsValue[direction]
-
-	local lightHandNumber = #self._allPlayerLightHandCardsValue[direction]
-
-	local handNumber = #self._allPlayerHandCardsValue[direction]
+	self._allPlayerLightHandCardsValue[direction] = self._allPlayerLightHandCardsValue[direction] or {}
+	
+	local cpgNumber = #self._allPlayerCpgCardsValue[direction] or 0
+	local lightHandNumber = #self._allPlayerLightHandCardsValue[direction] or 0
+	local handNumber = #self._allPlayerHandCardsValue[direction] or 0
 
 	--吃椪杠
 	if refreshCpg then
@@ -484,15 +514,15 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			if cpgNumber and cpgNumber > 0 then--有吃椪杠存在
 
 				if direction == lt.Constants.DIRECTION.NAN or direction == lt.Constants.DIRECTION.DONG then--锚点和初始化方向导致不同情况
-					node:setPosition(x + cpgNumber*cpgOffX + (i-1)*handOffX, y + cpgNumber*cpgOffY+(i-1)*handOffY)
+					node:setPosition(x + cpgNumber*cpgOffX + (i-1)*lieHandOffX, y + cpgNumber*cpgOffY+(i-1)*lieHandOffY)
 				else
-					node:setPosition(x + (cpgNumber - 1)*cpgOffX + i*handOffX, y + (cpgNumber - 1)*cpgOffY + i*handOffY)
+					node:setPosition(x + (cpgNumber - 1)*cpgOffX + cpgHandSpaceX + i*lieHandOffX, y + (cpgNumber - 1)*cpgOffY + cpgHandSpaceY + i*lieHandOffY)
 				end
 			else
 				x = self._allHandNodePos[direction].x
 				y = self._allHandNodePos[direction].y
 
-				node:setPosition(x + (i-1)*handOffX, y + (i-1)*handOffY)
+				node:setPosition(x + (i-1)*lieHandOffX, y + (i-1)*lieHandOffY)
 			end
 		end
 
@@ -544,15 +574,24 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			if cpgNumber and cpgNumber > 0 then--有吃椪杠存在
 
 				if direction == lt.Constants.DIRECTION.NAN or direction == lt.Constants.DIRECTION.DONG then--锚点和初始化方向导致不同情况
-					node:setPosition(x + cpgNumber*cpgOffX + (lightHandNumber - 1)*handOffX + i*handOffX, y + cpgNumber*cpgOffY+ (lightHandNumber - 1)*handOffY + i*handOffY)
+					
+					if lightHandNumber > 0 then
+						node:setPosition(x + cpgNumber*cpgOffX + (lightHandNumber - 1)*lieHandOffX + i*handOffX, y + cpgNumber*cpgOffY+ (lightHandNumber - 1)*lieHandOffY + i*handOffY)
+					else
+						node:setPosition(x + cpgNumber*cpgOffX + (i - 1)*handOffX, y + cpgNumber*cpgOffY+ (i - 1)*handOffY)
+					end
 				else
-					node:setPosition(x + (cpgNumber - 1)*cpgOffX + lightHandNumber*handOffX + i*handOffX, y + (cpgNumber - 1)*cpgOffY + lightHandNumber*cpgOffY + i*handOffY)
+					node:setPosition(x + (cpgNumber - 1)*cpgOffX + cpgHandSpaceX + lightHandNumber*lieHandOffX + i*handOffX, y + (cpgNumber - 1)*cpgOffY + cpgHandSpaceY + lightHandNumber*lieHandOffY + i*handOffY)
 				end
 			else
 				x = self._allHandNodePos[direction].x
 				y = self._allHandNodePos[direction].y
 
-				node:setPosition(x + (lightHandNumber - 1)*handOffX + i*handOffX, y + (lightHandNumber - 1)*handOffY + i*handOffY)
+				if lightHandNumber > 0 then
+					node:setPosition(x + (lightHandNumber - 1)*lieHandOffX + i*handOffX, y + (lightHandNumber - 1)*lieHandOffY + i*handOffY)
+				else
+					node:setPosition(x + (i - 1)*handOffX, y + (i - 1)*handOffY)
+				end
 			end
 
 			if isSpaceLastCard and i == handNumber then
@@ -695,7 +734,7 @@ end
 --单张牌的变化
 function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 	 
-	 if direction == lt.Constants.DIRECTION.NAN then
+	if lt.DataManager:getRePlayState() then
 		self._allPlayerHandCardsValue[direction] = self._allPlayerHandCardsValue[direction] or {}
 
 		for index,card in pairs(self._allPlayerHandCardsValue[direction]) do
@@ -704,24 +743,42 @@ function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 				break
 			end
 		end
+	else
+		if direction == lt.Constants.DIRECTION.NAN then
+			self._allPlayerHandCardsValue[direction] = self._allPlayerHandCardsValue[direction] or {}
 
-	 else
-	 	table.remove(self._allPlayerHandCardsValue[direction], 1)
-	 end
+			for index,card in pairs(self._allPlayerHandCardsValue[direction]) do
+				if card == value then
+					table.remove(self._allPlayerHandCardsValue[direction], index)
+					break
+				end
+			end
 
-	 self:sortHandValue(direction)
+		 else
+		 	table.remove(self._allPlayerHandCardsValue[direction], 1)
+		 end
+	end
+
+	self:sortHandValue(direction)
 
 	self._allPlayerOutCardsValue[direction] = self._allPlayerOutCardsValue[direction] or {}
 	table.insert(self._allPlayerOutCardsValue[direction], value)
 end
 
+function MjEngine:goOutOneHandSpecialCardAtDirection(direction, value)--出了一张特殊 补花 飘癞子
+	self._allPlayerSpecialOutCardsValue[direction] = self._allPlayerSpecialOutCardsValue[direction] or {}
+
+	table.insert(self._allPlayerSpecialOutCardsValue[direction], value)
+end
+
 function MjEngine:getOneHandCardAtDirection(direction, value)--起了一张牌
 	value = value or 99
-
+	self._allPlayerHandCardsValue[direction] = self._allPlayerHandCardsValue[direction] or {}
 	table.insert(self._allPlayerHandCardsValue[direction], value)
 end
 
 function MjEngine:getOneCpgAtDirection(direction, info)
+	self._allPlayerCpgCardsValue[direction] = self._allPlayerCpgCardsValue[direction] or {}
 	 table.insert(self._allPlayerCpgCardsValue[direction], info)
 end
 
@@ -738,7 +795,8 @@ function MjEngine:sortHandValue(direction)
 			local i = 1
 			while i <= #tempHandCards do
 				if tempHandCards[i] == lt.Constants.HONG_ZHONG_VALUE then
-					table.insert(temp, tempHandCards[i])
+					local tempCard = tempHandCards[i]
+					table.insert(temp, tempCard)
 					table.remove(tempHandCards, i)
 				else
 					i = i + 1
@@ -750,10 +808,15 @@ function MjEngine:sortHandValue(direction)
 			end )
 
 			for i,v in ipairs(temp) do
-				table.insert(tempHandCards, v, 1)
+				table.insert(tempHandCards, 1, v)
 			end
 
 			self._allPlayerHandCardsValue[direction] = tempHandCards
+		else
+			local sortFun = function(a, b)
+				return a < b
+			end
+			table.sort(self._allPlayerHandCardsValue[direction], sortFun)
 		end
 	end
 end
@@ -1015,7 +1078,7 @@ function MjEngine:onClickHandCard(cardNode, value)
 	end
 
 	if not self._deleget:getCurrentOutPutPlayerPos() or self._deleget:getCurrentOutPutPlayerPos() ~= lt.DataManager:getMyselfPositionInfo().user_pos then
-		self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false)--原来选中的牌回归原位
+		self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false, false)--原来选中的牌回归原位
 		cardNode:showRedMask()
 		self:showRedMaskOutCards(value)
 		return
@@ -1023,7 +1086,7 @@ function MjEngine:onClickHandCard(cardNode, value)
 
 	if not cardNode:getSelectState() then
 
-		self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false)--原来选中的牌回归原位
+		self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false, false)--原来选中的牌回归原位
 		--从出的牌中筛选出将要出的牌
 		self:showRedMaskOutCards(value)
 
@@ -1154,7 +1217,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
 
  			--self._allPlayerOutCardsNode[formDirection][#self._allPlayerOutCardsNode]:removeFromParent()
 			--table.remove(self._allPlayerOutCardsNode[formDirection], #self._allPlayerOutCardsNode)
-			self:configAllPlayerCards(formDirection, false, false, true)
+			self:configAllPlayerCards(formDirection, false, false, true, false)
 		end
 	end
 
@@ -1247,24 +1310,17 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
 			end
 		end
 	end	
-	self:configAllPlayerCards(direction, true, true, false)
-
-end
-
-function MjEngine:noticeSpecialBuFlower(msg)--  有人补花
-	local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
-	
-
+	self:configAllPlayerCards(direction, true, true, false, false)
 
 end
 
 function MjEngine:onClientConnectAgain()--  断线重连
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 
+	self:initDataValue()
+
 	--handle_nums
 	--自己的手牌
-	self._allPlayerHandCardsValue = {}
-
 	if allRoomInfo.card_list then
 		self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN] = {}
 
@@ -1272,11 +1328,8 @@ function MjEngine:onClientConnectAgain()--  断线重连
 			table.insert(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], card)
 
 		end
-		local sortFun = function(a, b)
-			return a < b
-		end
 
-		table.sort(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], sortFun)
+		self:sortHandValue(lt.Constants.DIRECTION.NAN)
 	end
 
 	if allRoomInfo.handle_nums then--handle_num
@@ -1293,8 +1346,15 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		end
 	end
 
+	--亮四打一
+	if allRoomInfo.four_card_list then
+		for i,fourCardItem in ipairs(allRoomInfo.four_card_list) do
+			local direction = lt.DataManager:getPlayerDirectionByPos(fourCardItem.user_pos)
+			self._allPlayerLightHandCardsValue[direction] = fourCardItem.cards
+		end
+	end
+
 	--所有玩家吃椪杠的牌  
-	self._allPlayerCpgCardsValue = {}
 	if allRoomInfo.card_stack then
 		for i,cardStack in ipairs(allRoomInfo.card_stack) do
 			local direction = lt.DataManager:getPlayerDirectionByPos(cardStack.user_pos)
@@ -1312,8 +1372,6 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	end
 
 	--所有出的牌
-	self._allPlayerOutCardsValue = {}
-	
 	if allRoomInfo.put_cards then
 		for i,info in ipairs(allRoomInfo.put_cards) do
 			if info.user_pos then
@@ -1327,6 +1385,19 @@ function MjEngine:onClientConnectAgain()--  断线重连
 			end		
 		end
 	end
+
+	--补的花 飘的癞子
+	if allRoomInfo.mark_list then
+		for i,cardItem in ipairs(allRoomInfo.mark_list) do
+			local direction = lt.DataManager:getPlayerDirectionByPos(cardItem.user_pos)
+			self._allPlayerSpecialOutCardsValue[direction] = cardItem.cards
+		end
+	end
+
+	--癞子
+	self._huiCardValue = allRoomInfo.huicard
+
+	self:configHuiCard()
 
     --当前事件  
 
@@ -1425,7 +1496,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
     self._deleget:viewActionButtons(tObjCpghObj, true)
 
 	for i,direction in ipairs(self._currentGameDirections) do
-		self:configAllPlayerCards(direction, true, true, true)
+		self:configAllPlayerCards(direction, true, true, true, true)
 	end
 end
 

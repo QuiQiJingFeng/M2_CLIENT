@@ -98,6 +98,9 @@ function GameRoomLayer:sendAutoSitDown()
 end
 
 function GameRoomLayer:getPlayerDirectionByPos(playerPos) 
+	if not playerPos then
+		return nil
+	end
 	return self._gameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 end
 
@@ -184,7 +187,8 @@ function GameRoomLayer:onDealDown(msg)--发牌
 
     		for k,v in pairs(msg[i]) do
     			local direction = self:getPlayerDirectionByPos(v.user_pos)
-    			self._engine:sendCards(v.cards, direction, v.four_card_list)
+    			--self._engine:sendCards(v.cards, direction, v.four_card_list) 
+    			self._engine:sendCards(v, direction)
     		end
     	end
     else
@@ -220,7 +224,8 @@ function GameRoomLayer:onDealDown(msg)--发牌
 	    		end
 
 	    		local sendCards = function( )
-	    			self._engine:sendCards(msg.cards, lt.Constants.DIRECTION.NAN, msg.four_card_list)
+	    			--self._engine:sendCards(msg.cards, lt.Constants.DIRECTION.NAN, msg.four_card_list)
+	    			self._engine:sendCards(msg, lt.Constants.DIRECTION.NAN)
 	    		end
 
 	    		local func1 = cc.CallFunc:create(removeShaiZi)
@@ -245,7 +250,7 @@ function GameRoomLayer:onPushDrawCard(msg)--通知有人摸牌
 
 	local direction = self:getPlayerDirectionByPos(msg.user_pos)
 	self._engine:getOneHandCardAtDirection(direction, msg.card)--起了一张牌
-	self._engine:configAllPlayerCards(direction, false, true, false)
+	self._engine:configAllPlayerCards(direction, false, true, false, false)
 
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
 
@@ -305,7 +310,7 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 
 		self._engine:updateNanHandCardValue(lt.Constants.DIRECTION.NAN, handList)
 		self._engine:updateNanCpgCardValue(lt.Constants.DIRECTION.NAN, cpgList)
-		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false)
+		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
 
 		if self._ischeckMyHandStatu then--杠地开花
 			self:checkMyHandStatu()
@@ -327,7 +332,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 	if not direction or not value then
 		return 
 	end
-
+	local specialRefresh = false
 	if value then
 
 		for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
@@ -336,15 +341,16 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 					user_pos = msg.user_pos,
 					card = msg.card
 				}
+				specialRefresh = true
+				self._engine:goOutOneHandSpecialCardAtDirection(direction, value)
 				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, msg)
 				break
 			end
 		end
 	end
 
-
 	self._engine:goOutOneHandCardAtDirection(direction, value)
-	self._engine:configAllPlayerCards(direction, false, true, true)
+	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
 
 end
 

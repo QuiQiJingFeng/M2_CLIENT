@@ -50,7 +50,6 @@ function MJplayBackManager:onUpdate(dt)
 	self._tempTime = self._tempTime + dt
 
 	if self._tempTime >= self._playTime then
-		print("==222lkkkkkkkkkkkkkkkkk")
 
 		self._tempTime = 0
 
@@ -71,7 +70,6 @@ function MJplayBackManager:onUpdate(dt)
 				--self:StopReplay()
 			end
 
-			---dump(self._playDate, "对方电大幅度")
 			self._playDate = json.decode(self._playDate)
 			for eventName,msg in pairs(self._playDate) do
 				dump(eventName)
