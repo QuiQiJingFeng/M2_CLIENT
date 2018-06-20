@@ -1124,7 +1124,7 @@ function CreateRoomLayer:initSQMJRule( ... )
 
     -- 当前选中的数据
     self.selectTable = {}
-    self.selectTable.other_setting = {1, 0, 0, 0, 0}
+    self.selectTable.other_setting = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     if not self.tGamesRuleConfig then
         dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
         return
@@ -1133,10 +1133,18 @@ function CreateRoomLayer:initSQMJRule( ... )
     self.selectTable.game_type = 1
     -- 游戏设置项[数组]
     -- [1] 底分
-    -- [2] 奖码的个数
-    -- [3] 七对胡牌
-    -- [4] 喜分
-    -- [5] 一码不中当全中
+    -- [2] 带风
+    -- [3] 下跑
+    -- [4] 暗杠锁死
+    -- [5] 亮四打一
+    -- [6] 掐张
+    -- [7] 偏次
+    -- [8] 缺门
+    -- [9] 门清
+    -- [10] 暗卡
+    -- [11] 自摸加嘴
+    -- [12] 对对胡
+
 
     local payTable = {}
     local roundTable = {}
@@ -1146,10 +1154,10 @@ function CreateRoomLayer:initSQMJRule( ... )
     local playRule = {}
     local qitaRule = {}
     local payType = {1, 2, 3}--支付类型
-    local roundType = {4, 8}--局数
-    local playNumType = {4, 3}--人数
-    local fengPaiType = {1, 2}--风牌
-    local xiaPaoType = {1, 2}--下跑
+    local roundType = {4,8}--局数
+    local playNumType = {4,3}--人数
+    local fengPaiType = {1,0}--风牌
+    local xiaPaoType = {1,0 }--下跑
     local ruleType = {0, 0}--玩法
     local qitaType = {0, 0, 0, 0, 0, 0, 0}--其他
 
@@ -1265,7 +1273,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                 if v == xiaPaoPalel then
                     v.selectNode:setVisible(true)
                     v._textNode:setColor(SelectColor)
-                    self.selectTable.other_setting[2] = xiaPaoType[i]
+                    self.selectTable.other_setting[3] = xiaPaoType[i]
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
@@ -1285,11 +1293,11 @@ function CreateRoomLayer:initSQMJRule( ... )
             if playRule[i].isSelect == false then
                 playRule[i].isSelect = true
                 playRule[i].selectNode:setVisible(true) 
-                self.selectTable.other_setting[i+2] = 1
+                self.selectTable.other_setting[i+3] = 1
                 playRule[i]._textNode:setColor(SelectColor)
             else
                 dump(self.selectTable)
-                self.selectTable.other_setting[i+2] = 0
+                self.selectTable.other_setting[i+3] = 0
                 playRule[i].isSelect = false
                 playRule[i].selectNode:setVisible(false)
                 playRule[i]._textNode:setColor(NormalColor) 
@@ -1311,18 +1319,18 @@ function CreateRoomLayer:initSQMJRule( ... )
             if qitaRule[i].isSelect == false then
                 qitaRule[i].isSelect = true
                 qitaRule[i].selectNode:setVisible(true) 
-                self.selectTable.other_setting[i+2] = 1
+                self.selectTable.other_setting[i+5] = 1
                 qitaRule[i]._textNode:setColor(SelectColor)
             else
                 dump(self.selectTable)
-                self.selectTable.other_setting[i+2] = 0
+                self.selectTable.other_setting[i+5] = 0
                 qitaRule[i].isSelect = false
                 qitaRule[i].selectNode:setVisible(false)
                 qitaRule[i]._textNode:setColor(NormalColor) 
             end
         end, false)
     end
-    print("====")
+    
     dump(self.selectTable, "self.selectTable")
 
 
