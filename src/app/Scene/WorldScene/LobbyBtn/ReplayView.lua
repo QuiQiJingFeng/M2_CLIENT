@@ -117,16 +117,35 @@ function ReplayView:ctor()
 		end 
 		btnTab:addTouchEventListener(menuZhuCeCallback)
     	self._svButton:addChild(btnTab,2)
-
-    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--名称
-    	textSpr:setPosition(100,45)
-    	btnTab:addChild(textSpr,1)
+    	if i == 1 then
+	    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText998.png")--最近战绩 
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+    	elseif i == 2 then
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--红中麻将  --按照游戏类型
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+    	elseif i == 3 then
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText120.png")--斗地主
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+    	elseif i == 4 then
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText112.png")--商丘麻将
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+    	elseif i == 5 then
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText6.png")--推倒胡
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+    	elseif i == 6 then
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText114.png")--飘癞子
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+    	end
 
 	end
 	
 --]]
-
-	
 
 	lt.CommonUtil:addNodeClickEvent(self._bn_WatchOthers, handler(self, self.onWatchOthers))
 	lt.CommonUtil:addNodeClickEvent(self._bn_PageUp, handler(self, self.onPageUp))

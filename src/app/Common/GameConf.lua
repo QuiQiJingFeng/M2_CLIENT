@@ -25,9 +25,9 @@ local plzConf = require("app.Scene.GameScene.SQMJconfig")
 GameConf.GameIDList = {
     HZMJ = {"HZMJ", "ImageText0", "ImageText2", false, false, hzmjConf},
 	DDZ = {"DDZ", "ImageText120", "ImageText119", false, false, ddzConf},
-    SQMJ = {"SQMJ", "gdmj_tittle1", "gdmj_tittle2", false, false, sqmjConf},
+    SQMJ = {"SQMJ", "ImageText112", "ImageText111", false, false, sqmjConf},
     TDH = {"TDH", "ImageText6", "ImageText7", false, false, tdhConf},
-    PLZ = {"PLZ", "pdk_title_2", "pdk_title_1", false, false, plzConf},
+    PLZ = {"PLZ", "ImageText114", "ImageText113", false, false, plzConf},
 }
 
 return GameConf

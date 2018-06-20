@@ -344,7 +344,7 @@ function CreateRoomLayer:initTDHRule( ... )
         return
     end
 
-    self.selectTable.game_type = 1
+    self.selectTable.game_type = 4
     -- 游戏设置项[数组]
     -- [1] 底分
     -- [2] 听牌
@@ -596,7 +596,7 @@ function CreateRoomLayer:initPLZRule( ... )
         return
     end
 
-    self.selectTable.game_type = 1
+    self.selectTable.game_type = 5
     -- 游戏设置项[数组]
     -- [1] 底分
     -- [2] 自摸还是可点炮
@@ -1293,7 +1293,7 @@ function CreateRoomLayer:initSQMJRule( ... )
         return
     end
 
-    self.selectTable.game_type = 1
+    self.selectTable.game_type = 3
     -- 游戏设置项[数组]
     -- [1] 底分
     -- [2] 带风
