@@ -338,7 +338,7 @@ function CreateRoomLayer:initTDHRule( ... )
 
     -- 当前选中的数据
     self.selectTable = {}
-    self.selectTable.other_setting = {1, 0, 0, 0, 0}
+    self.selectTable.other_setting = {1, 0, 0, 0}
     if not self.tGamesRuleConfig then
         dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
         return
@@ -347,10 +347,9 @@ function CreateRoomLayer:initTDHRule( ... )
     self.selectTable.game_type = 1
     -- 游戏设置项[数组]
     -- [1] 底分
-    -- [2] 奖码的个数
-    -- [3] 七对胡牌
-    -- [4] 喜分
-    -- [5] 一码不中当全中
+    -- [2] 听牌
+    -- [3] 只可自摸胡
+    -- [4] 大胡平胡
 
     local payTable = {}
     local roundTable = {}
@@ -359,9 +358,9 @@ function CreateRoomLayer:initTDHRule( ... )
     local playRule = {}
     local payType = {1, 2, 3}
     local roundType = {4, 8, 16}
-    local playNumType = {4, 3, 2}
-    local jiangType = {1,2}--胡牌
-    local ruleType = {0, 0, 0}
+    local playNumType = {4}
+    local jiangType = {1,0}--胡牌
+    local ruleType = {0, 0}
 
     -- 房主出资， 对应局数多少
     local allPay = {20, 40, 80}
@@ -393,6 +392,7 @@ function CreateRoomLayer:initTDHRule( ... )
                             roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
                         end
                     end
+                    lt.PreferenceManager:setCreateRoominfoA(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
@@ -414,6 +414,7 @@ function CreateRoomLayer:initTDHRule( ... )
                     v._textNode:setColor(SelectColor)
                     v._textNode2:setColor(SelectColor)
                     self.selectTable.round = roundType[i]
+                    lt.PreferenceManager:setCreateRoominfoB(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode2:setColor(NormalColor)
@@ -440,28 +441,6 @@ function CreateRoomLayer:initTDHRule( ... )
                 end
             end
         end, false)
-
-        local rulePalel = self._tdhRule:getChildByName("Panel_Play".. i)
-        rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
-        rulePalel.selectNode:setVisible(false)
-        rulePalel._textNode = rulePalel:getChildByName("Text_Pay")  
-        playRule[i] = rulePalel
-        rulePalel.isSelect = false
-
-        lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
-            if playRule[i].isSelect == false then
-                playRule[i].isSelect = true
-                playRule[i].selectNode:setVisible(true) 
-                self.selectTable.other_setting[i+2] = 1
-                playRule[i]._textNode:setColor(SelectColor)
-            else
-                dump(self.selectTable)
-                self.selectTable.other_setting[i+2] = 0
-                playRule[i].isSelect = false
-                playRule[i].selectNode:setVisible(false)
-                playRule[i]._textNode:setColor(NormalColor) 
-            end
-        end, false)
     end
 
     for i=1,2 do
@@ -477,10 +456,44 @@ function CreateRoomLayer:initTDHRule( ... )
                 if v == jiangPalel then
                     v.selectNode:setVisible(true)
                     v._textNode:setColor(SelectColor)
-                    self.selectTable.other_setting[2] = jiangType[i]
+                    self.selectTable.other_setting[4] = jiangType[i]
+                    lt.PreferenceManager:setCreateRoominfoC(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
+                end
+            end
+        end, false)
+
+        local rulePalel = self._tdhRule:getChildByName("Panel_Play".. i)
+        rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
+        rulePalel.selectNode:setVisible(false)
+        rulePalel._textNode = rulePalel:getChildByName("Text_Pay")  
+        playRule[i] = rulePalel
+        rulePalel.isSelect = false
+
+        lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
+            if playRule[i].isSelect == false then
+                playRule[i].isSelect = true
+                playRule[i].selectNode:setVisible(true) 
+                self.selectTable.other_setting[i+1] = 1
+                playRule[i]._textNode:setColor(SelectColor)
+                if i == 1 then
+                    lt.PreferenceManager:setCreateRoominfoD(1)
+                else
+                    lt.PreferenceManager:setCreateRoominfoE(1)
+                end
+            else
+                dump(self.selectTable)
+                self.selectTable.other_setting[i+1] = 0
+                playRule[i].isSelect = false
+                playRule[i].selectNode:setVisible(false)
+                playRule[i]._textNode:setColor(NormalColor) 
+
+                if i == 1 then
+                    lt.PreferenceManager:setCreateRoominfoD(0)
+                else
+                    lt.PreferenceManager:setCreateRoominfoE(0)
                 end
             end
         end, false)
@@ -532,15 +545,44 @@ function CreateRoomLayer:initTDHRule( ... )
         baseScore:setString(self.selectTable.other_setting[1])
     end)
 
-    payTable[1]:onClick()
-    roundTable[1]:onClick()
-    playNumTable[1]:onClick()
-    jiangNum[1]:onClick()
+    if lt.PreferenceManager:getCreateRoominfoA() then
+        payTable[lt.PreferenceManager:getCreateRoominfoA()]:onClick()
+    else
+        payTable[1]:onClick()
+    end
 
-    -- 全部选择
-    playRule[1]:onClick()
-    playRule[2]:onClick()
-    playRule[3]:onClick()
+    if lt.PreferenceManager:getCreateRoominfoB() then
+        roundTable[lt.PreferenceManager:getCreateRoominfoB()]:onClick()
+    else
+        roundTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoC() then
+        jiangNum[lt.PreferenceManager:getCreateRoominfoC()]:onClick()
+    else
+        jiangNum[1]:onClick()
+    end
+    
+    if lt.PreferenceManager:getCreateRoominfoD() and lt.PreferenceManager:getCreateRoominfoD()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoD())
+        playRule[1]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoD() == 0 then
+    elseif lt.PreferenceManager:getCreateRoominfoD() == -99 then
+        --第一次进入
+        playRule[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoE() and lt.PreferenceManager:getCreateRoominfoE()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoE())
+        playRule[2]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoE() == 0 then
+    elseif lt.PreferenceManager:getCreateRoominfoE() == -99 then
+        --第一次进入
+        playRule[2]:onClick()
+    end
+
+    playNumTable[1]:onClick()
+
 end
 
 
@@ -548,7 +590,7 @@ function CreateRoomLayer:initPLZRule( ... )
 
     -- 当前选中的数据
     self.selectTable = {}
-    self.selectTable.other_setting = {1, 0, 0, 0, 0}
+    self.selectTable.other_setting = {1, 0}
     if not self.tGamesRuleConfig then
         dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
         return
@@ -557,19 +599,17 @@ function CreateRoomLayer:initPLZRule( ... )
     self.selectTable.game_type = 1
     -- 游戏设置项[数组]
     -- [1] 底分
-    -- [2] 奖码的个数
-    -- [3] 七对胡牌
-    -- [4] 喜分
-    -- [5] 一码不中当全中
-
+    -- [2] 自摸还是可点炮
+    local jiangNum = {}
     local payTable = {}
     local roundTable = {}
     local playNumTable = {}
     local playRule = {}
     local payType = {1, 2, 3}
+    local jiangType = {1,0}
     local roundType = {4, 8, 16}
-    local playNumType = {4, 3, 2}
-    local ruleType = {0, 0, 0}
+    local playNumType = {4}
+    --local ruleType = {0, 0, 0}
 
     -- 房主出资， 对应局数多少
     local allPay = {20, 40, 80}
@@ -601,6 +641,7 @@ function CreateRoomLayer:initPLZRule( ... )
                             roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
                         end
                     end
+                    lt.PreferenceManager:setCreateRoominfoPLZA(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
@@ -622,6 +663,7 @@ function CreateRoomLayer:initPLZRule( ... )
                     v._textNode:setColor(SelectColor)
                     v._textNode2:setColor(SelectColor)
                     self.selectTable.round = roundType[i]
+                    lt.PreferenceManager:setCreateRoominfoPLZB(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode2:setColor(NormalColor)
@@ -648,7 +690,7 @@ function CreateRoomLayer:initPLZRule( ... )
                 end
             end
         end, false)
-
+        --[[
         local rulePalel = self._plzRule:getChildByName("Panel_Play".. i)
         rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
         rulePalel.selectNode:setVisible(false)
@@ -668,6 +710,29 @@ function CreateRoomLayer:initPLZRule( ... )
                 playRule[i].isSelect = false
                 playRule[i].selectNode:setVisible(false)
                 playRule[i]._textNode:setColor(NormalColor) 
+            end
+        end, false)--]]
+    end
+
+    for i=1,2 do
+        --胡牌
+        local jiangPalel = self._plzRule:getChildByName("Panel_Jiang".. i)
+        jiangPalel.selectNode = jiangPalel:getChildByName("Image_Select")
+        jiangPalel.selectNode:setVisible(false) 
+        jiangPalel._textNode = jiangPalel:getChildByName("Text_Pay")
+        jiangNum[i] = jiangPalel
+
+        lt.CommonUtil:addNodeClickEvent(jiangPalel, function( ... )
+            for i, v in pairs(jiangNum) do 
+                if v == jiangPalel then
+                    v.selectNode:setVisible(true)
+                    v._textNode:setColor(SelectColor)
+                    self.selectTable.other_setting[2] = jiangType[i]
+                    lt.PreferenceManager:setCreateRoominfoPLZC(i)
+                else
+                    v.selectNode:setVisible(false)
+                    v._textNode:setColor(NormalColor)
+                end
             end
         end, false)
     end
@@ -718,14 +783,26 @@ function CreateRoomLayer:initPLZRule( ... )
         baseScore:setString(self.selectTable.other_setting[1])
     end)
 
-    payTable[1]:onClick()
-    roundTable[1]:onClick()
+    if lt.PreferenceManager:getCreateRoominfoPLZA() then
+        payTable[lt.PreferenceManager:getCreateRoominfoPLZA()]:onClick()
+    else
+        payTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoPLZB() then
+        roundTable[lt.PreferenceManager:getCreateRoominfoPLZB()]:onClick()
+    else
+        roundTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoPLZC() then
+        jiangNum[lt.PreferenceManager:getCreateRoominfoPLZC()]:onClick()
+    else
+        jiangNum[1]:onClick()
+    end
+
     playNumTable[1]:onClick()
 
-    -- 全部选择
-    playRule[1]:onClick()
-    playRule[2]:onClick()
-    playRule[3]:onClick()
 end
 
 
@@ -789,6 +866,7 @@ function CreateRoomLayer:initDDZRule( ... )
                             roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
                         end
                     end
+                    lt.PreferenceManager:setCreateRoominfoDDZA(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
@@ -810,6 +888,7 @@ function CreateRoomLayer:initDDZRule( ... )
                     v._textNode:setColor(SelectColor)
                     v._textNode2:setColor(SelectColor)
                     self.selectTable.round = roundType[i]
+                    lt.PreferenceManager:setCreateRoominfoDDZB(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode2:setColor(NormalColor)
@@ -832,6 +911,7 @@ function CreateRoomLayer:initDDZRule( ... )
                     v._textNode:setColor(SelectColor)
                     -- 这个是几炸封顶
                     self.selectTable.other_setting[3] = jiangType[i]
+                    lt.PreferenceManager:setCreateRoominfoDDZD(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
@@ -851,6 +931,7 @@ function CreateRoomLayer:initDDZRule( ... )
                     if value == rulePalel then
                         self.selectTable.other_setting[2] = rulePalel.iGameType
                         value.selectNode:setVisible(true)
+                        lt.PreferenceManager:setCreateRoominfoDDZC(i)
                     else
                         value.selectNode:setVisible(false)
                     end
@@ -904,11 +985,29 @@ function CreateRoomLayer:initDDZRule( ... )
         baseScore:setString(self.selectTable.other_setting[1])
     end)
 
-    payTable[1]:onClick()
-    roundTable[1]:onClick()
-    jiangNum[1]:onClick()
-    playRule[1]:onClick()
-    
+    if lt.PreferenceManager:getCreateRoominfoDDZA() then
+        payTable[lt.PreferenceManager:getCreateRoominfoDDZA()]:onClick()
+    else
+        payTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoDDZB() then
+        roundTable[lt.PreferenceManager:getCreateRoominfoDDZB()]:onClick()
+    else
+        roundTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoDDZC() then
+        playRule[lt.PreferenceManager:getCreateRoominfoDDZC()]:onClick()
+    else
+        playRule[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoDDZD() then
+        jiangNum[lt.PreferenceManager:getCreateRoominfoDDZD()]:onClick()
+    else
+        jiangNum[1]:onClick()
+    end
 end
 
 
@@ -971,6 +1070,7 @@ function CreateRoomLayer:initHZMJRule( ... )
                             roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
                         end
                     end
+                    lt.PreferenceManager:setCreateRoominfoHZMJA(i)
 	    		else
 	    			v.selectNode:setVisible(false)
 	    			v._textNode:setColor(NormalColor)
@@ -992,6 +1092,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 	    			v._textNode:setColor(SelectColor)
                     v._textNode2:setColor(SelectColor)
 	    			self.selectTable.round = roundType[i]
+                    lt.PreferenceManager:setCreateRoominfoHZMJB(i)
 	    		else
 	    			v.selectNode:setVisible(false)
                     v._textNode2:setColor(NormalColor)
@@ -1012,6 +1113,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 	    			v.selectNode:setVisible(true)
 	    			v._textNode:setColor(SelectColor)
 	    			self.selectTable.playNum = playNumType[i]
+                    lt.PreferenceManager:setCreateRoominfoHZMJC(i)
 	    		else
 	    			v.selectNode:setVisible(false)
 	    			v._textNode:setColor(NormalColor)
@@ -1032,6 +1134,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 	    			v.selectNode:setVisible(true)
 	    			v._textNode:setColor(SelectColor)
 	    			self.selectTable.other_setting[2] = jiangType[i]
+                    lt.PreferenceManager:setCreateRoominfoHZMJD(i)
 	    		else
 	    			v.selectNode:setVisible(false)
 	    			v._textNode:setColor(NormalColor)
@@ -1053,12 +1156,28 @@ function CreateRoomLayer:initHZMJRule( ... )
 				playRule[i].selectNode:setVisible(true)	
 				self.selectTable.other_setting[i+2] = 1
 				playRule[i]._textNode:setColor(SelectColor)
+
+                if i == 1 then
+                    lt.PreferenceManager:setCreateRoominfoHZMJE(1)
+                elseif i == 2 then
+                    lt.PreferenceManager:setCreateRoominfoHZMJF(1)
+                elseif i == 3 then
+                    lt.PreferenceManager:setCreateRoominfoHZMJG(1)
+                end
 			else
                 dump(self.selectTable)
 				self.selectTable.other_setting[i+2] = 0
 				playRule[i].isSelect = false
 				playRule[i].selectNode:setVisible(false)
 				playRule[i]._textNode:setColor(NormalColor)	
+
+                if i == 1 then
+                    lt.PreferenceManager:setCreateRoominfoHZMJE(0)
+                elseif i == 2 then
+                    lt.PreferenceManager:setCreateRoominfoHZMJF(0)
+                elseif i == 3 then
+                    lt.PreferenceManager:setCreateRoominfoHZMJG(0)
+                end
 			end
 	    end, false)
 	end
@@ -1109,15 +1228,59 @@ function CreateRoomLayer:initHZMJRule( ... )
         baseScore:setString(self.selectTable.other_setting[1])
 	end)
 
-	payTable[1]:onClick()
-	roundTable[1]:onClick()
-	playNumTable[1]:onClick()
-	jiangNum[1]:onClick()
+    if lt.PreferenceManager:getCreateRoominfoHZMJA() then
+        payTable[lt.PreferenceManager:getCreateRoominfoHZMJA()]:onClick()
+    else
+        payTable[1]:onClick()
+    end
 
-	-- 全部选择
-	playRule[1]:onClick()
-	playRule[2]:onClick()
-	playRule[3]:onClick()
+    if lt.PreferenceManager:getCreateRoominfoHZMJB() then
+        roundTable[lt.PreferenceManager:getCreateRoominfoHZMJB()]:onClick()
+    else
+        roundTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoHZMJC() then
+        playNumTable[lt.PreferenceManager:getCreateRoominfoHZMJC()]:onClick()
+    else
+        playNumTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoHZMJD() then
+        jiangNum[lt.PreferenceManager:getCreateRoominfoHZMJD()]:onClick()
+    else
+        jiangNum[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoHZMJE() and lt.PreferenceManager:getCreateRoominfoHZMJE()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoHZMJE())
+        playRule[1]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoHZMJE() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoHZMJE() == -99 then
+        --第一次进入
+        playRule[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoHZMJF() and lt.PreferenceManager:getCreateRoominfoHZMJF()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoHZMJF())
+        playRule[2]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoHZMJF() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoHZMJF() == -99 then
+        --第一次进入
+        playRule[2]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoHZMJG() and lt.PreferenceManager:getCreateRoominfoHZMJG()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoHZMJG())
+        playRule[3]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoHZMJG() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoHZMJG() == -99 then
+        --第一次进入
+        playRule[3]:onClick()
+    end
 end
 
 function CreateRoomLayer:initSQMJRule( ... )
@@ -1191,6 +1354,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                             roundTable[j]._textNode2:setString("(".. everyPay[j] .. "金币/人)")
                         end
                     end
+                    lt.PreferenceManager:setCreateRoominfoSQMJA(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
@@ -1214,6 +1378,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                     v._textNode:setColor(SelectColor)
                     v._textNode2:setColor(SelectColor)
                     self.selectTable.round = roundType[i]
+                    lt.PreferenceManager:setCreateRoominfoSQMJB(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode2:setColor(NormalColor)
@@ -1254,6 +1419,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                     v.selectNode:setVisible(true)
                     v._textNode:setColor(SelectColor)
                     self.selectTable.other_setting[2] = fengPaiType[i]
+                    lt.PreferenceManager:setCreateRoominfoSQMJC(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
@@ -1274,6 +1440,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                     v.selectNode:setVisible(true)
                     v._textNode:setColor(SelectColor)
                     self.selectTable.other_setting[3] = xiaPaoType[i]
+                    lt.PreferenceManager:setCreateRoominfoSQMJD(i)
                 else
                     v.selectNode:setVisible(false)
                     v._textNode:setColor(NormalColor)
@@ -1295,12 +1462,24 @@ function CreateRoomLayer:initSQMJRule( ... )
                 playRule[i].selectNode:setVisible(true) 
                 self.selectTable.other_setting[i+3] = 1
                 playRule[i]._textNode:setColor(SelectColor)
+
+                if i == 1 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJE(1)
+                else
+                    lt.PreferenceManager:setCreateRoominfoSQMJF(1)
+                end
             else
                 dump(self.selectTable)
                 self.selectTable.other_setting[i+3] = 0
                 playRule[i].isSelect = false
                 playRule[i].selectNode:setVisible(false)
                 playRule[i]._textNode:setColor(NormalColor) 
+
+                if i == 1 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJE(0)
+                else
+                    lt.PreferenceManager:setCreateRoominfoSQMJF(0)
+                end
             end
         end, false)
 
@@ -1321,12 +1500,44 @@ function CreateRoomLayer:initSQMJRule( ... )
                 qitaRule[i].selectNode:setVisible(true) 
                 self.selectTable.other_setting[i+5] = 1
                 qitaRule[i]._textNode:setColor(SelectColor)
+
+                if i == 1 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJG(1)
+                elseif i == 2 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJH(1)
+                elseif i == 3 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJI(1)
+                elseif i == 4 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJJ(1)
+                elseif i == 5 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJK(1)
+                elseif i == 6 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJL(1)
+                elseif i == 7 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJM(1)
+                end
             else
                 dump(self.selectTable)
                 self.selectTable.other_setting[i+5] = 0
                 qitaRule[i].isSelect = false
                 qitaRule[i].selectNode:setVisible(false)
                 qitaRule[i]._textNode:setColor(NormalColor) 
+
+                if i == 1 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJG(0)
+                elseif i == 2 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJH(0)
+                elseif i == 3 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJI(0)
+                elseif i == 4 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJJ(0)
+                elseif i == 5 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJK(0)
+                elseif i == 6 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJL(0)
+                elseif i == 7 then
+                    lt.PreferenceManager:setCreateRoominfoSQMJM(0)
+                end
             end
         end, false)
     end
@@ -1378,23 +1589,153 @@ function CreateRoomLayer:initSQMJRule( ... )
         baseScore:setString(self.selectTable.other_setting[1])
     end)
 
-    payTable[1]:onClick()
-    roundTable[1]:onClick()
+    --[[
+    if lt.PreferenceManager:getCreateRoominfoC() then
+        jiangNum[lt.PreferenceManager:getCreateRoominfoC()]:onClick()
+    else
+        jiangNum[1]:onClick()
+    end
+    
+    if lt.PreferenceManager:getCreateRoominfoD() and lt.PreferenceManager:getCreateRoominfoD()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoD())
+        playRule[1]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoD() == 0 or not lt.PreferenceManager:getCreateRoominfoD() then
+        --第一次进入或者没选中走这里
+    end
+    --]]
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJA() then
+        payTable[lt.PreferenceManager:getCreateRoominfoSQMJA()]:onClick()
+    else
+        payTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJB() then
+        roundTable[lt.PreferenceManager:getCreateRoominfoSQMJB()]:onClick()
+    else
+        roundTable[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJC() then
+        fengPaiNum[lt.PreferenceManager:getCreateRoominfoSQMJC()]:onClick()
+    else
+        fengPaiNum[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJD() then
+        xiaPaoNum[lt.PreferenceManager:getCreateRoominfoSQMJD()]:onClick()
+    else
+        xiaPaoNum[1]:onClick()
+    end
+    --可选 玩法
+    if lt.PreferenceManager:getCreateRoominfoSQMJE() and lt.PreferenceManager:getCreateRoominfoSQMJE()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJE())
+        playRule[1]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJE() == 0 then
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJE() == -99 then
+        --第一次进入
+        playRule[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJF() and lt.PreferenceManager:getCreateRoominfoSQMJF()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJF())
+        playRule[2]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJF() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJF() == -99 then
+        --第一次进入
+        playRule[2]:onClick()
+    end
+    -- 其他
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJG() and lt.PreferenceManager:getCreateRoominfoSQMJG()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJG())
+        qitaRule[1]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJG() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJG() == -99 then
+        --第一次进入
+        qitaRule[1]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJH() and lt.PreferenceManager:getCreateRoominfoSQMJH()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJH())
+        qitaRule[2]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJH() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJH() == -99 then
+        --第一次进入
+        qitaRule[2]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJI() and lt.PreferenceManager:getCreateRoominfoSQMJI()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJI())
+        qitaRule[3]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJI() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJI() == -99 then
+        --第一次进入
+        qitaRule[3]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJJ() and lt.PreferenceManager:getCreateRoominfoSQMJJ()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJJ())
+        qitaRule[4]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJJ() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJJ() == -99 then
+        --第一次进入
+        qitaRule[4]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJK() and lt.PreferenceManager:getCreateRoominfoSQMJK()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJK())
+        qitaRule[5]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJK() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJK() == -99 then
+        --第一次进入
+        qitaRule[5]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJL() and lt.PreferenceManager:getCreateRoominfoSQMJL()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJL())
+        qitaRule[6]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJL() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJL() == -99 then
+        --第一次进入
+        qitaRule[6]:onClick()
+    end
+
+    if lt.PreferenceManager:getCreateRoominfoSQMJM() and lt.PreferenceManager:getCreateRoominfoSQMJM()== 1 then
+        print(lt.PreferenceManager:getCreateRoominfoSQMJM())
+        qitaRule[7]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJM() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoSQMJM() == -99 then
+        --第一次进入
+        qitaRule[7]:onClick()
+    end
+
+
+    --payTable[1]:onClick()
+    --roundTable[1]:onClick()
     playNumTable[1]:onClick()
-    fengPaiNum[1]:onClick()
-    xiaPaoNum[1]:onClick()
+    --fengPaiNum[1]:onClick()
+    --xiaPaoNum[1]:onClick()
 
     -- 全部选择
-    playRule[1]:onClick()
-    playRule[2]:onClick()
+    --playRule[1]:onClick()
+    --playRule[2]:onClick()
     --其他 全部选择
-    qitaRule[1]:onClick()
-    qitaRule[2]:onClick()
-    qitaRule[3]:onClick()
-    qitaRule[4]:onClick()
-    qitaRule[5]:onClick()
-    qitaRule[6]:onClick()
-    qitaRule[7]:onClick()
+    --qitaRule[1]:onClick()
+    --qitaRule[2]:onClick()
+    --qitaRule[3]:onClick()
+    --qitaRule[4]:onClick()
+    --qitaRule[5]:onClick()
+    --qitaRule[6]:onClick()
+    --qitaRule[7]:onClick()
 end
 
 

@@ -264,4 +264,485 @@ function PreferenceManager:getGameshake()
 	return monsterId
 end
 
+function PreferenceManager:setCreateRoominfoA(monsterId)--记录推到胡记录房间信息资费
+	local key = "CREATEROOMINFOTDHA"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoA()
+	local key = "CREATEROOMINFOTDHA"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoB(monsterId)--记录推到胡记录房间信息 圈数
+	local key = "CREATEROOMINFOTDHB"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoB()
+	local key = "CREATEROOMINFOTDHB"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoC(monsterId)--记录推到胡记录房间信息 胡牌
+	local key = "CREATEROOMINFOTDHC"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoC()
+	local key = "CREATEROOMINFOTDHC"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoD(monsterId)--记录推到胡记录房间信息 报听
+	local key = "CREATEROOMINFOTDHD"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoD()
+	local key = "CREATEROOMINFOTDHD"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoE(monsterId)--记录推到胡记录房间信息 只可自摸胡
+	local key = "CREATEROOMINFOTDHE"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoE()
+	local key = "CREATEROOMINFOTDHE"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJA(monsterId)--记录商丘麻将记录房间信息 资费
+	local key = "CREATEROOMINFOSQMJA"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJA()
+	local key = "CREATEROOMINFOSQMJA"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJB(monsterId)--记录商丘麻将记录房间信息 圈数
+	local key = "CREATEROOMINFOSQMJB"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJB()
+	local key = "CREATEROOMINFOSQMJB"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJC(monsterId)--记录商丘麻将记录房间信息 风牌
+	local key = "CREATEROOMINFOSQMJC"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJC()
+	local key = "CREATEROOMINFOSQMJC"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJD(monsterId)--记录商丘麻将记录房间信息 下跑
+	local key = "CREATEROOMINFOSQMJD"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJD()
+	local key = "CREATEROOMINFOSQMJD"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJE(monsterId)--记录商丘麻将记录房间信息 暗杠锁死
+	local key = "CREATEROOMINFOSQMJE"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJE()
+	local key = "CREATEROOMINFOSQMJE"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJF(monsterId)--记录商丘麻将记录房间信息 亮四打一
+	local key = "CREATEROOMINFOSQMJF"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJF()
+	local key = "CREATEROOMINFOSQMJF"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJG(monsterId)--记录商丘麻将记录房间信息 掐张
+	local key = "CREATEROOMINFOSQMJG"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJG()
+	local key = "CREATEROOMINFOSQMJG"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJH(monsterId)--记录商丘麻将记录房间信息 偏次
+	local key = "CREATEROOMINFOSQMJH"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJH()
+	local key = "CREATEROOMINFOSQMJH"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJI(monsterId)--记录商丘麻将记录房间信息 缺门
+	local key = "CREATEROOMINFOSQMJI"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJI()
+	local key = "CREATEROOMINFOSQMJI"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJJ(monsterId)--记录商丘麻将记录房间信息 门清
+	local key = "CREATEROOMINFOSQMJJ"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJJ()
+	local key = "CREATEROOMINFOSQMJJ"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJK(monsterId)--记录商丘麻将记录房间信息 暗卡
+	local key = "CREATEROOMINFOSQMJK"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJK()
+	local key = "CREATEROOMINFOSQMJK"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJL(monsterId)--记录商丘麻将记录房间信息 自摸加嘴
+	local key = "CREATEROOMINFOSQMJL"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJL()
+	local key = "CREATEROOMINFOSQMJL"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoSQMJM(monsterId)--记录商丘麻将记录房间信息 对对胡
+	local key = "CREATEROOMINFOSQMJM"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJM()
+	local key = "CREATEROOMINFOSQMJM"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoPLZA(monsterId)--记录飘癞子记录房间信息 资费
+	local key = "CREATEROOMINFOPLZA"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoPLZA()
+	local key = "CREATEROOMINFOPLZA"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoPLZB(monsterId)--记录飘癞子记录房间信息 圈数
+	local key = "CREATEROOMINFOPLZB"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoPLZB()
+	local key = "CREATEROOMINFOPLZB"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoPLZC(monsterId)--记录飘癞子记录房间信息 自摸
+	local key = "CREATEROOMINFOPLZC"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoPLZC()
+	local key = "CREATEROOMINFOPLZC"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoHZMJA(monsterId)--记录红中麻将记录房间信息 资费
+	local key = "CREATEROOMINFOHZMJA"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoHZMJA()
+	local key = "CREATEROOMINFOHZMJA"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoHZMJB(monsterId)--记录红中麻将记录房间信息 圈数
+	local key = "CREATEROOMINFOHZMJB"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoHZMJB()
+	local key = "CREATEROOMINFOHZMJB"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoHZMJC(monsterId)--记录红中麻将记录房间信息 人数
+	local key = "CREATEROOMINFOHZMJC"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoHZMJC()
+	local key = "CREATEROOMINFOHZMJC"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoHZMJD(monsterId)--记录红中麻将记录房间信息 奖码数
+	local key = "CREATEROOMINFOHZMJD"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoHZMJD()
+	local key = "CREATEROOMINFOHZMJD"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoHZMJE(monsterId)--记录红中麻将记录房间信息 可胡七对
+	local key = "CREATEROOMINFOHZMJE"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoHZMJE()
+	local key = "CREATEROOMINFOHZMJE"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoHZMJF(monsterId)--记录红中麻将记录房间信息 喜分
+	local key = "CREATEROOMINFOHZMJF"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoHZMJF()
+	local key = "CREATEROOMINFOHZMJF"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoHZMJG(monsterId)--记录红中麻将记录房间信息 一码不中当全中
+	local key = "CREATEROOMINFOHZMJG"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoHZMJG()
+	local key = "CREATEROOMINFOHZMJG"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoDDZA(monsterId)--记录斗地主记录房间信息 资费
+	local key = "CREATEROOMINFODDZA"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoDDZA()
+	local key = "CREATEROOMINFODDZA"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoDDZB(monsterId)--记录斗地主记录房间信息 圈数
+	local key = "CREATEROOMINFODDZB"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoDDZB()
+	local key = "CREATEROOMINFODDZB"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoDDZC(monsterId)--记录斗地主记录房间信息 玩法
+	local key = "CREATEROOMINFODDZC"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoDDZC()
+	local key = "CREATEROOMINFODDZC"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoDDZD(monsterId)--记录斗地主记录房间信息 封顶
+	local key = "CREATEROOMINFODDZD"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoDDZD()
+	local key = "CREATEROOMINFODDZD"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
+	if monsterId == 0 then
+		monsterId = 1
+	end
+	return monsterId
+end
+
+
 return PreferenceManager
