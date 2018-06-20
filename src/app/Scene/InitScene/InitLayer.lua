@@ -95,7 +95,7 @@ function InitLayer:onLogin()
     elseif device.platform == "ios" then
 
     else
-        local index = math.random(1,99999)
+        local index = 1995--math.random(1,99999)
         local account="FHQYDIDXIL"..index
         account = account
         local body = {  
