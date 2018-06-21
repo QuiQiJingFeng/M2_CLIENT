@@ -1744,7 +1744,7 @@ function CommonUtil:selectServerLogin(game_type,callBack)
         end)
 end
 
-function CommonUtil:sepecailServerLogin(room_id,callBack)
+function CommonUtil:sepecailServerLogin(room_id,callBack, errCallBack)
     self.selecting = nil
     local body = lt.DataManager:getAuthData()
     body.room_id = room_id
@@ -1752,6 +1752,7 @@ function CommonUtil:sepecailServerLogin(room_id,callBack)
     lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg)
             if recv_msg then
                 recv_msg = json.decode(recv_msg)
+                dump(recv_msg, "recv_msg")
                 if recv_msg.result == "success" then
                     local server_info = recv_msg
                     lt.NetWork:disconnect()
@@ -1762,6 +1763,8 @@ function CommonUtil:sepecailServerLogin(room_id,callBack)
                                     callBack(recv_msg.result)
                                 end)
                         end)
+                else
+                    errCallBack(recv_msg.result)
                 end
             else
                 lt.DataManager:listenNetDisconnect()

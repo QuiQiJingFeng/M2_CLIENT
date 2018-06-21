@@ -271,6 +271,7 @@ function _writer:message(k, v , message_type)
 end
 
 function _writer:int_repeated(k,v)
+	print("FYD--->>>>",k,v)
 	for _,v in ipairs(v) do
 		c._wmessage_integer(self,k,v)
 	end

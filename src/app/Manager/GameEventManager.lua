@@ -73,6 +73,8 @@ GUO     过]]--
     NOTICE_SEND_CARD = "NoticeSendCard",
     SERVER_POINT_DEMAND = "ServerPointDemand",
     NOTICE_DDZ_GAMEOVER = "NoticeDDZGameOver",
+    -- 快捷发言
+    NOTICE_FAST_SPAKE = "notice_fast_spake",
 }
 
 local handler_id = 0

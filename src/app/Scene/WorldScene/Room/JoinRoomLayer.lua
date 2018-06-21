@@ -47,15 +47,43 @@ function JoinRoomLayer:onClickNumKey(event)
 		for i,v in ipairs(self._numberArray) do
 			roomNum = roomNum..v
 		end
+		dump(roomNum, "roomNum")
+
 		lt.CommonUtil:sepecailServerLogin(roomNum,function(result) 
-           if result ~= "success" then
+
+			dump(result, "result")
+            if result ~= "success" then
                 print("connect failed")
+
+                
+
+
                 return
             end
             local arg = {room_id = roomNum}--weixin
 			lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
 
 			print("%%%%%%%%%%%%%%%%%%%%%%%%%%", tonumber(roomNum))
+		end, function( result )
+			dump(result, "ERRresult")
+			local this = self
+			this._numberArray = {}
+			this:configRoomNum()				
+
+			-- 没有此房间
+			if result == "no_server_info" then
+				lt.MsgboxLayer:showMsgBox(string.format("加入失败, 房间%d不存在", roomNum), true, function()
+					-- this._numberArray = {}
+					-- this:configRoomNum()				
+		        end, function() end, true)
+
+			-- 人数已满
+			elseif result == "no_position" then
+				lt.MsgboxLayer:showMsgBox(string.format("加入失败, 房间%d人数已满", roomNum), true, function()
+		        end, function() end, true)
+		    elseif result == "no_position" then
+						    	
+			end
 		end)
 	end
 end

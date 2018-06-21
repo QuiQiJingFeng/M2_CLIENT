@@ -783,9 +783,12 @@ ldhsecret(lua_State *L) {
     read64(L, x, y);
     uint64_t xx = (uint64_t)x[0] | (uint64_t)x[1]<<32;
     uint64_t yy = (uint64_t)y[0] | (uint64_t)y[1]<<32;
+	uint64_t r = powmodp(xx, yy);
+
+
     if (xx == 0 || yy == 0)
         return luaL_error(L, "Can't be 0");
-    uint64_t r = powmodp(xx, yy);
+    
     
     push64(L, r);
     
@@ -806,10 +809,11 @@ ldhexchange(lua_State *L) {
     xx[1] = x[4] | x[5]<<8 | x[6]<<16 | x[7]<<24;
     
     uint64_t x64 = (uint64_t)xx[0] | (uint64_t)xx[1]<<32;
+	uint64_t r = powmodp(G, x64);
     if (x64 == 0)
         return luaL_error(L, "Can't be 0");
     
-    uint64_t r = powmodp(G,	x64);
+   
     push64(L, r);
     return 1;
 }

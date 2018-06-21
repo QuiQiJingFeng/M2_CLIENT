@@ -117,6 +117,7 @@ function CreateRoomLayer:ctor()
 
     lt.CommonUtil:addNodeClickEvent(self.bnCreateSure, function( ... )
     	-- 创建房间
+        print("创建房间按钮")
     	self:sendCreateRoom()
     end)
 
@@ -1916,9 +1917,10 @@ end
 -- end
 
 function CreateRoomLayer:sendCreateRoom( ... )
+    
+
     lt.CommonUtil:selectServerLogin(self.selectTable.game_type, function(result)
         if result ~= "success" then
-            print("connect failed")
             return
         end 
         local tempTable  = {}

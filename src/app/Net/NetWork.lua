@@ -304,7 +304,7 @@ end
 function network:sendTo(key,data_content,callback,ignore_session)
     data_content = data_content or {}
     local arg = {[key] = data_content}
-    print("C2S ===>>> sendTo", key)
+    print("C2S ===>>> sendTo", key, json.encode(data_content))
     self:send(arg, callback, ignore_session)
 end
 

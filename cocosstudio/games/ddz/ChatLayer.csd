@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="1910" ctype="GameLayerObjectData">
         <Size X="1334.0000" Y="750.0000" />
         <Children>
-          <AbstractNodeData Name="Ie_Mark" ActionTag="-821777084" Tag="1417" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" LeftEage="17" RightEage="17" TopEage="15" BottomEage="15" Scale9OriginX="17" Scale9OriginY="15" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Ie_Mark" ActionTag="-821777084" Alpha="0" Tag="1417" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" LeftEage="17" RightEage="17" TopEage="15" BottomEage="15" Scale9OriginX="17" Scale9OriginY="15" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
             <Size X="1334.0000" Y="750.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="667.0000" Y="375.0000" />

@@ -7,6 +7,8 @@ GameScene._gameRoomLayer 	= nil -- 游戏背景层、牌面层、入座头像层
 GameScene._gameUILayer 	= nil -- 游戏UI界面  由 gamePlayLayer 层触发显示层
 GameScene._gameNoticeLayer = nil--提示层
 
+local ChatLayer = require("app.Scene.GameScene.ChatLayer")
+
 function GameScene:ctor()
     local gameInfo = lt.DataManager:getGameRoomInfo()
 
@@ -26,9 +28,12 @@ function GameScene:ctor()
         self:addChild(self._gameRoomLayer)
     end 
 
+
+
     self._gameUILayer = lt.WorldUILayer.new(self)
     self._gameUILayer:setVisible(false)
     self:addChild(self._gameUILayer)
+
 
     --self:loadingOn()
     self._gameNoticeLayer = lt.WorldNoticeLayer.new()
@@ -36,6 +41,11 @@ function GameScene:ctor()
 
     lt.UILayerManager:setWorldMenuLayer(self._gameRoomLayer)
     lt.UILayerManager:setWorldUILayer(self._gameUILayer)
+
+    -- self.__ChatLayer = ChatLayer:new()
+    -- self._gameUILayer:addChild(self.__ChatLayer)
+    -- self.__ChatLayer:setVisible(false)
+    
 end
 
 function GameScene:getGameRoomUILayer()
