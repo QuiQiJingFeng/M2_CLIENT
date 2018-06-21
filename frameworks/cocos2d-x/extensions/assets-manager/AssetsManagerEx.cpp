@@ -247,8 +247,6 @@ void AssetsManagerEx::loadLocalManifest(const std::string& /*manifestUrl*/)
             if (localNewer)
             {
                 // Recreate storage, to empty the content
-                _fileUtils->removeDirectory(_storagePath);
-                _fileUtils->createDirectory(_storagePath);
                 CC_SAFE_RELEASE(cachedManifest);
             }
             else
