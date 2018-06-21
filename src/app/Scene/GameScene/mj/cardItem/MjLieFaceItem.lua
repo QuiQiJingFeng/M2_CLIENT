@@ -114,6 +114,7 @@ function MjLieFaceItem:showNormal()
 	self._spriteBack:setVisible(false)
 	self._imageMaskRed:setVisible(false)
 	self._spriteArrow:setVisible(false)
+	self._blackMask:setVisible(false)
 end
 
 function MjLieFaceItem:showRedMask()
@@ -123,7 +124,7 @@ end
 
 function MjLieFaceItem:showBlackMask() 
 	self:showNormal()
-	self._imageMaskRed:setVisible(true)
+	self._blackMask:setVisible(true)
 end
 
 return MjLieFaceItem

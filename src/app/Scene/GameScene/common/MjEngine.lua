@@ -87,8 +87,6 @@ function MjEngine:open(deleget)
 	self._allPlayerOutCardsNode = {}
 	self._allPlayerSpecialOutCardsNode = {}
 
-	self:initDataValue()
-
 	self._allPlayerCpgCardsPanel = {}
 	self._allPlayerHandCardsPanel = {}
 	self._allPlayerOutCardsPanel = {}
@@ -182,9 +180,7 @@ function MjEngine:open(deleget)
 		self._outCardsRootNode:addChild(self._allPlayerSpecialOutCardsPanel[direction])
 	end
 	
-	for i,direction in ipairs(self._currentGameDirections) do
-		self._allPlayerLightHandCardsValue[direction] = {}
-	end
+	self:initDataValue()
 
 	return self
 end
@@ -197,6 +193,10 @@ function MjEngine:initDataValue()
 	self._allPlayerSpecialOutCardsValue = {}
 	self._allPlayerLightHandCardsValue = {}--商丘麻将亮四打一	
 	self._allPlayerStandHandCardsValue = {}	
+
+	for i,direction in ipairs(self._currentGameDirections) do
+		self._allPlayerLightHandCardsValue[direction] = {}
+	end
 
 	self._huiCardValue = nil
 end
@@ -748,7 +748,7 @@ end
 function MjEngine:updateNanHandCardValue(direction, handList)--通知自己出牌的时候会把手牌和吃椪杠的牌发过来
 	
 	local tempFourCardList = clone(self._allPlayerLightHandCardsValue[direction])
-
+	self._allPlayerStandHandCardsValue[direction] = {}
 	for i,card in ipairs(handList) do
 		local isHandCard = true
 		for k,v in ipairs(tempFourCardList) do
