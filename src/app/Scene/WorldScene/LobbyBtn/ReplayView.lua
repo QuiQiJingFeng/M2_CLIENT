@@ -134,11 +134,11 @@ function ReplayView:ctor()
 	    	textSpr:setPosition(100,45)
 	    	btnTab:addChild(textSpr,1)
     	elseif i == 5 then
-    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText6.png")--推倒胡
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText114.png")--飘癞子
 	    	textSpr:setPosition(100,45)
 	    	btnTab:addChild(textSpr,1)
     	elseif i == 6 then
-    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText114.png")--飘癞子
+	    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText6.png")--推倒胡
 	    	textSpr:setPosition(100,45)
 	    	btnTab:addChild(textSpr,1)
     	end

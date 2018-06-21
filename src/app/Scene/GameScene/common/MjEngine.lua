@@ -1049,7 +1049,8 @@ function MjEngine:getAllCanHuCards(tempHandCards, value)
 end
 
 function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否可以听
-
+    print("++++++++++++++检测听牌的牌++++++++++++",value)
+    dump(tempHandCards)
 	for i,v in ipairs(tempHandCards) do
 		if v == value then
 			table.remove(tempHandCards, i)
@@ -1070,7 +1071,7 @@ end
 
 function MjEngine:checkIsHu(HandCards, card)
 	local tempHandCards = clone(HandCards)
-	local config = {}--config.isQiDui,config.huiCard,config.hiPoint
+	local config = {}--config.isQiDui,config.huiCard,config.hiPoint,config.hiPoint.shiShanYao
 	if self._gameRoomInfo and self._gameRoomInfo.room_setting then
 
 		local settingInfo = self._gameRoomInfo.room_setting
@@ -1088,7 +1089,15 @@ function MjEngine:checkIsHu(HandCards, card)
 			config.hiPoint = (settingInfo.other_setting[4] == 1)  and true or false
 
 		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.SQMJ then
-
+		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.TDH then
+			-- 游戏设置项[数组]
+		    -- [1] 底分
+		    -- [2] 听牌
+		    -- [3] 只可自摸胡
+		    -- [4] 大胡平胡
+		    config = {}
+		    config.isQiDui = true
+			config.shiShanYao = (settingInfo.other_setting[4] == 1)  and true or false
 		end
 	end
 
@@ -1098,7 +1107,7 @@ end
 function MjEngine:checkMyHandTingStatu()
 	local isCanTing = false 
 	self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] = self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] or {}
-
+	print("===============检测是否听牌================")
 	for i,handNode in ipairs(self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN]) do
 
 		if handNode:isVisible() then
@@ -1108,8 +1117,17 @@ function MjEngine:checkMyHandTingStatu()
 			local isTing = self:isCanTingByCard(tempHandCards, handNode:getTag())--出一张手牌是否可以听
 
 			if isTing then
-				handNode:showTing()
+				handNode:showTing()--显示按钮
 				isCanTing = true
+				local tObjCpghObj = {
+			        tObjTing = nil,
+			    }
+				 tObjCpghObj.tObjTing = {}
+				 table.insert(tObjCpghObj.tObjTing, handNode:getTag())
+	            --显示吃碰杠胡控件
+		    	self._deleget:viewHideActPanelAndMenu()
+		    	self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
+		    	self._deleget:viewActionButtons(tObjCpghObj, true)
 			end
 		end
 	end
