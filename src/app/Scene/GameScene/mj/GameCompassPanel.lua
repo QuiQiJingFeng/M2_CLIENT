@@ -116,6 +116,13 @@ function GameCompassPanel:initGame() --每局结束牌桌清桌
 		self._nodeOtherNum:setVisible(false)
 		self:onClientConnectAgain()
 	end
+
+	if lt.DataManager:isClientConnectAgainPlaying() then
+
+		self._nodeCardNum:setVisible(true)
+		self._nodeOtherNum:setVisible(true)		
+		self:onClientConnectAgain()
+	end
 end
 
 function GameCompassPanel:showCardsNum()
@@ -190,13 +197,13 @@ function GameCompassPanel:onClientConnectAgain()--  断线重连
 
 	--当前出牌人  指向
 	if allRoomInfo.cur_play_pos then
-		self:resetTimeUpdate(true)
 		self._currentOutPutPlayerPos = allRoomInfo.cur_play_pos
+		self:resetTimeUpdate(true)
 		self:configCurDNXB()
 	else
-		self:resetTimeUpdate(true) 
-
 		self._currentOutPutPlayerPos = nil--重置绿红状态
+		self:resetTimeUpdate(true) 
+		
 		self:resetLightUpdate()
 	end
 end
