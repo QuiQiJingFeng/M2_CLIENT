@@ -3,7 +3,8 @@ cc.FileUtils:getInstance():setPopupNotify(false)
 if CC_SHOW_FPS then
     cc.Director:getInstance():setDisplayStats(true)
 end
-
+require("config")
+require("cocos.init")
 local function main()
 	--TODO
     -- display.runScene(require("scene.battle"):create(require("tmp"):doBattle()))

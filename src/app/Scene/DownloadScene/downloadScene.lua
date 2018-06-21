@@ -1,5 +1,3 @@
-require("config")
-require("cocos.init")
 local scene = class("downloadScene",function() 
 		return cc.Scene:create()
 	end)
