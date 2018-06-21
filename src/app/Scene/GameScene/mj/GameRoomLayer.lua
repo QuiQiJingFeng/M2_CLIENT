@@ -271,6 +271,8 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 		--摸牌 ->出牌
 		local newCard = nil
 
+		self:checkMyHandTingStatu()--检测听牌
+		
 		if msg.operator == 2 then--     还有没有摸牌不能胡牌
 			print("碰出牌")
 			self._ischeckMyHandStatu = false
@@ -332,6 +334,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 	if not direction or not value then
 		return 
 	end
+
 	local specialRefresh = false
 	if value then
 

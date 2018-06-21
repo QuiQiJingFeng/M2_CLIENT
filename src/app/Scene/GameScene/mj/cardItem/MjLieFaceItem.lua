@@ -18,7 +18,9 @@ function MjLieFaceItem:ctor(handDirection)
 	self._spriteBack = self._rootNode:getChildByName("Sprite_Back")
 
 	self._imageMaskRed = self._rootNode:getChildByName("Image_MaskRed")
-	
+	self._imageBg = self._rootNode:getChildByName("Image_Bg")
+	self._blackMask = self._rootNode:getChildByName("Image_Mask")
+
 	self._spriteArrow = self._rootNode:getChildByName("Sprite_Arrow")
 
 	self:showNormal()

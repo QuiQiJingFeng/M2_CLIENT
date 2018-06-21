@@ -11,8 +11,8 @@ Constants.GAME_TYPE = {
     HZMJ = 1,--红中
     DDZ  = 2,--斗地主
     SQMJ  = 3,--商丘麻将
-    TDH  = 4,--推倒胡
-    PLZ  = 5, --飘癞子
+    PLZ  = 4, --飘癞子
+    TDH  = 5,--推倒胡
 }
 
 Constants.BASE_CARD_VALUE_TABLE = {

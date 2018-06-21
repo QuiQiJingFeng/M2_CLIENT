@@ -17,6 +17,27 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/cardBgGreen/mjLieVerticalFace.png" Plist="game/mjcomm/mjTingAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
+          <AbstractNodeData Name="Sprite_TingArrow" ActionTag="1002208246" Tag="90" IconVisible="False" LeftMargin="-2.5000" RightMargin="-0.5000" TopMargin="-37.0000" BottomMargin="43.0000" ctype="SpriteObjectData">
+            <Size X="47.0000" Y="60.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="21.0000" Y="73.0000" />
+            <Scale ScaleX="0.4500" ScaleY="0.4500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4773" Y="1.1061" />
+            <PreSize X="1.0682" Y="0.9091" />
+            <FileData Type="MarkedSubImage" Path="game/mjcomm/part/iconTingArrow.png" Plist="game/mjcomm/mjPartUi.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Image_Bg" ActionTag="2000358794" Tag="34" IconVisible="False" TopMargin="3.0000" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="214" Scale9Height="56" ctype="ImageViewObjectData">
+            <Size X="44.0000" Y="63.0000" />
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="1.0000" Y="0.9545" />
+            <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_btn.png" Plist="game/common/CreateRoomPlist0.plist" />
+          </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Face" ActionTag="1885944005" Tag="273" IconVisible="False" LeftMargin="-17.9995" RightMargin="-18.0005" TopMargin="-19.0000" BottomMargin="-11.0000" ctype="SpriteObjectData">
             <Size X="80.0000" Y="96.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -28,8 +49,18 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/cards/card_1_5.png" Plist="game/mjcomm/mjTingAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_MaskRed" Visible="False" ActionTag="-824914099" Tag="7744" IconVisible="False" LeftMargin="1.0000" RightMargin="1.1201" TopMargin="3.0000" BottomMargin="-0.3086" Scale9Enable="True" LeftEage="6" RightEage="6" TopEage="6" BottomEage="6" Scale9OriginX="6" Scale9OriginY="6" Scale9Width="8" Scale9Height="8" ctype="ImageViewObjectData">
-            <Size X="41.8799" Y="63.3086" />
+          <AbstractNodeData Name="Image_Mask" ActionTag="-812663289" Tag="35" IconVisible="False" RightMargin="2.0000" TopMargin="3.0000" Scale9Enable="True" LeftEage="26" RightEage="26" TopEage="39" BottomEage="39" Scale9OriginX="26" Scale9OriginY="39" Scale9Width="29" Scale9Height="41" ctype="ImageViewObjectData">
+            <Size X="42.0000" Y="63.0000" />
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.9545" Y="0.9545" />
+            <FileData Type="MarkedSubImage" Path="game/mjcomm/cards/cardShadow.png" Plist="game/mjcomm/mjTingAni.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Image_MaskRed" Visible="False" ActionTag="-824914099" Tag="7744" IconVisible="False" LeftMargin="1.0000" RightMargin="1.1201" TopMargin="3.0000" BottomMargin="-0.3100" Scale9Enable="True" LeftEage="6" RightEage="6" TopEage="6" BottomEage="6" Scale9OriginX="6" Scale9OriginY="6" Scale9Width="8" Scale9Height="8" ctype="ImageViewObjectData">
+            <Size X="41.8799" Y="63.3100" />
             <AnchorPoint ScaleY="1.0000" />
             <Position X="1.0000" Y="63.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
