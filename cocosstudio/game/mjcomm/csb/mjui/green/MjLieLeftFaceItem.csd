@@ -17,6 +17,26 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/cardBgGreen/mjLieHorizontalFace.png" Plist="game/mjcomm/mjTingAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
+          <AbstractNodeData Name="Image_Mask" ActionTag="1283780599" Tag="71" IconVisible="False" RightMargin="2.0000" TopMargin="2.0000" Scale9Enable="True" LeftEage="26" RightEage="26" TopEage="39" BottomEage="39" Scale9OriginX="26" Scale9OriginY="39" Scale9Width="29" Scale9Height="41" ctype="ImageViewObjectData">
+            <Size X="58.0000" Y="47.0000" />
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.9667" Y="0.9592" />
+            <FileData Type="MarkedSubImage" Path="game/mjcomm/cards/cardShadow.png" Plist="game/mjcomm/mjTingAni.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Image_Bg" ActionTag="-398061304" Tag="72" IconVisible="False" RightMargin="2.0000" TopMargin="2.0000" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="214" Scale9Height="56" ctype="ImageViewObjectData">
+            <Size X="58.0000" Y="47.0000" />
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.9667" Y="0.9592" />
+            <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_btn.png" Plist="game/common/CreateRoomPlist0.plist" />
+          </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Face" ActionTag="1885944005" Tag="273" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" LeftMargin="-9.8755" RightMargin="-10.1245" TopMargin="-30.0000" BottomMargin="-17.0000" ctype="SpriteObjectData">
             <Size X="80.0000" Y="96.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
