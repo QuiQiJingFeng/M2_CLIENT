@@ -72,7 +72,7 @@ cCardValue"
 Result
 success
 	auth_fail
-‘6
+ß9
 msg/user.protomsg.user"H
 FastSpakeReq
 user_pos (RuserPos
@@ -178,7 +178,7 @@ expireTime
 sit_list (2.msg.user.SitItemRsitList"?
 FourCardItem
 user_pos (RuserPos
-cards (Rcards"À
+cards (Rcards"Â
 DealCard
 zpos (Rzpos
 user_pos (RuserPos
@@ -186,11 +186,12 @@ expireTime
 random_nums (R
 randomNums
 	cur_round (RcurRound<
-four_card_list (2.msg.user.FourCardItemRfourCardList"V
+four_card_list (2.msg.user.FourCardItemRfourCardList
+huicard (Rhuicard"V
 PushDrawCard
 user_id (RuserId
 card (Rcard
-user_pos (RuserPos"Œ
+user_pos (RuserPos"å
 PushPlayCard
 user_id (RuserId
 user_pos (RuserPos
@@ -198,7 +199,8 @@ randomNums
 	card_list (RcardList/
 
 card_stack (2.msg.user.GPItemR	cardStack 
-userCardNum (RuserCardNum"X
+userCardNum (RuserCardNum<
+four_card_list (2.msg.user.FourCardItemRfourCardList"X
 NoticePlayCard
 user_id (RuserId
 card (Rcard
@@ -254,7 +256,10 @@ is_connect (R	isConnect":
 handle_num (R	handleNum"L
 	ItemStack$
 item (2.msg.user.GPItemRitem
-user_pos (RuserPos"∞
+user_pos (RuserPos";
+MarkItem
+user_pos (RuserPos
+cards (Rcards"π
 PushAllRoomInfoE
 refresh_room_info (2.msg.user.RefreshRoomInfoRrefreshRoomInfo
 	card_list (RcardList
@@ -283,7 +288,10 @@ card_stack (2.msg.user.ItemStackR	cardStack&
 cur_last_CardNums (RcurLastCardNums
 
 cBaseCards (R
-cBaseCards"Y
+cBaseCards
+huicard (Rhuicard<
+four_card_list (2.msg.user.FourCardItemRfourCardList/
+	mark_list (2.msg.user.MarkItemRmarkList"Y
 GoldItem
 user_id (RuserId
 user_pos (RuserPos
@@ -339,13 +347,16 @@ sattleList
 
 begin_time (	R	beginTime"
 	SendAudio
-data (Rdata"@
+data (Rdata"&
+SendAudioRsp
+result (	Rresult"@
 NoticeSendAudio
 data (Rdata
 user_pos (RuserPos">
 NoticeYingKou
 user_pos (RuserPos
-card (Rcard*ã
+card (Rcard"
+	NoticePao*ã
 Result
 success
 paramater_error
@@ -372,7 +383,7 @@ auth_faild
 AN_GANG
 	MING_GANG
 	PENG_GANG
-†
+ç 
 protocol.protomsg/common.protomsg/login.protomsg/user.protomsg/ddz.proto"ë
 C2S
 
@@ -393,7 +404,7 @@ leave_roomìN (2.msg.user.LeaveRoomReqR	leaveRoom0
 get_my_room_listòN (2.msg.user.GetMyRoomListReqRgetMyRoomList3
 
 send_audioôN (2.msg.user.SendAudioR	sendAudio=
-fast_spake_reqöN (2.msg.user.FastSpakeReqRfastSpakeReq"∑
+fast_spake_reqöN (2.msg.user.FastSpakeReqRfastSpakeReq"§
 S2C
 
 session_id (R	sessionId
@@ -435,7 +446,11 @@ leave_roomìN (2.msg.user.LeaveRoomRspR	leaveRoom0
 notice_ting_cardÂ (2.msg.user.NoticeTingCardRnoticeTingCard@
 notice_ying_kouÊ (2.msg.user.NoticeYingKouRnoticeYingKouF
 notice_send_audioÁ (2.msg.user.NoticeSendAudioRnoticeSendAudioF
-notice_fast_spakeË (2.msg.user.NoticeFastSpakeRnoticeFastSpakeC
+notice_fast_spakeË (2.msg.user.NoticeFastSpakeRnoticeFastSpake6
+
+send_audioÈ (2.msg.user.SendAudioRspR	sendAudio3
+
+notice_paoÍ (2.msg.user.NoticePaoR	noticePaoC
 update_resource±Í (2.msg.user.UpdateResourceRupdateResourceG
 update_room_state≤Í (2.msg.user.UpdateRoomStateRupdateRoomState:
 handle_errorëø (2.msg.user.HandleErrorRhandleErrorA
