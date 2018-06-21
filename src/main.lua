@@ -9,27 +9,16 @@ local function main()
     -- display.runScene(require("scene.battle"):create(require("tmp"):doBattle()))
     -- display.runScene(require("scene.game_scene"):create())
 
-    -- App.SceneManager:runScene("login_scene")
-    require("app.AppGame").new():run()
+    --App.SceneManager:runScene("login_scene")
+    -- require("app.AppGame").new():run()
 
- --    require("app.Net.Protobuf")
- -- -- 注册protobuf协议
- --    protobuf.register(cc.FileUtils:getInstance():getStringFromFile("proto/protocol.pb"))
- --    local data_content = {
- --                game_cmd = {
- --                            command="PLAY_CARD",
- --                            nowType=101,
- --                            nowValue=3,
- --                            cardNums={1},
- --                            cardList={403}
- --                        }
- --                    }
- --    local success, data, err = pcall(protobuf.encode, "C2S", data_content)
- --    if not success or err then
- --        print("encode protobuf error:", success, data, err)
- --    else
- --        print("success")
- --    end
+    if not _G["ARRADY_TO_TOP"] and (device.platform == "ios" or device.platform == "android") then
+        local scene = require("app.Scene.DownloadScene.downloadScene").new()
+        local director = cc.Director:getInstance()
+        director:replaceScene(scene)
+    else
+        require("app.AppGame").new():run()
+    end
 
 
 end

@@ -5,28 +5,28 @@ import json
 import sys
 from Utils import Utils
 
-VERSION = "1.1.2"
+VERSION = "1.0.0"
 
-URL = "192.168.1.100:3000"
+URL = "http://lsjgame.oss-cn-hongkong.aliyuncs.com/HotUpdate/"
 
 VERSION_INFO = {
-    "packageUrl": "http://"+URL+"/package",
+    "packageUrl": URL,
     "version": VERSION,
-    "remoteVersionUrl": "http://192.168.1.100:3000/package/version.manifest",
-    "remoteManifestUrl": "http://192.168.1.100:3000/package/project.manifest",
+    "remoteVersionUrl": URL+"version.manifest",
+    "remoteManifestUrl": URL+"project.manifest",
     "engineVersion": "3.15.1"
 }
 
 ASSETS_INFO = {
     "searchPath": [], 
-    "packageUrl": "http://192.168.1.100:3000/package/{0}/".format(VERSION), 
+    "packageUrl": URL+"{0}/".format(VERSION), 
     "version": VERSION, 
     "assets": {
     }, 
-    "remoteVersionUrl": "http://192.168.1.100:3000/package/version.manifest", 
+    "remoteVersionUrl": URL+"version.manifest", 
     "operator": "android", 
-    "remoteManifestUrl": "http://192.168.1.100:3000/package/project.manifest", 
-    "engineVersion": "3.1.5"
+    "remoteManifestUrl": URL+"project.manifest", 
+    "engineVersion": "3.15.1"
 }
 
 XXTEA_KEY = '10cc4fdee2fcd047'
