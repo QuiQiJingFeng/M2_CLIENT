@@ -345,7 +345,7 @@ function CreateRoomLayer:initTDHRule( ... )
         return
     end
 
-    self.selectTable.game_type = 4
+    self.selectTable.game_type = lt.Constants.GAME_TYPE.TDH
     -- 游戏设置项[数组]
     -- [1] 底分
     -- [2] 听牌
@@ -597,7 +597,7 @@ function CreateRoomLayer:initPLZRule( ... )
         return
     end
 
-    self.selectTable.game_type = 5
+    self.selectTable.game_type = lt.Constants.GAME_TYPE.PLZ
     -- 游戏设置项[数组]
     -- [1] 底分
     -- [2] 自摸还是可点炮
@@ -1319,7 +1319,7 @@ function CreateRoomLayer:initSQMJRule( ... )
     local qitaRule = {}
     local payType = {1, 2, 3}--支付类型
     local roundType = {4,8}--局数
-    local playNumType = {4,3}--人数
+    local playNumType = {4,3,2}--人数
     local fengPaiType = {1,0}--风牌
     local xiaPaoType = {1,0 }--下跑
     local ruleType = {0, 0}--玩法

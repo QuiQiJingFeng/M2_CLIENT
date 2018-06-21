@@ -280,6 +280,11 @@ function SettingLayer:bb()
 end
 
 function SettingLayer:onBackLobby()
+    local tObjCpghObj = {}
+    self._deleget:viewHideActPanelAndMenu()
+    self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
+    self._deleget:viewActionButtons(tObjCpghObj, true)
+    --[[
     if lt.DataManager:getRePlayState() then
         lt.MJplayBackManager:closeReplay()
         local worldScene = lt.WorldScene.new()
@@ -287,7 +292,7 @@ function SettingLayer:onBackLobby()
         lt.NetWork:disconnect()
     else
         lt.NetWork:sendTo(lt.GameEventManager.EVENT.LEAVE_ROOM)
-    end
+    end--]]
 end
 
 function SettingLayer:onBackLobbyResponse(msg)

@@ -7,7 +7,7 @@ GameScene._gameRoomLayer 	= nil -- 游戏背景层、牌面层、入座头像层
 GameScene._gameUILayer 	= nil -- 游戏UI界面  由 gamePlayLayer 层触发显示层
 GameScene._gameNoticeLayer = nil--提示层
 
-local ChatLayer = require("app.Scene.GameScene.ChatLayer")
+--local ChatLayer = require("app.Scene.GameScene.ChatLayer")
 
 function GameScene:ctor()
     local gameInfo = lt.DataManager:getGameRoomInfo()
