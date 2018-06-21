@@ -129,8 +129,8 @@ function GameRoomLayer:viewHuCardsTipsMenu(canHuCards)
 	self._gameActionBtnsPanel:viewHuCardsTipsMenu(canHuCards)
 end
 
-function GameRoomLayer:checkMyHandStatu() --检测吃椪杠
-	local tObjCpghObj = self._engine:checkMyHandStatu() 
+function GameRoomLayer:checkMyHandStatu(handList) --检测吃椪杠
+	local tObjCpghObj = self._engine:checkMyHandStatu(handList) 
     --显示吃碰杠胡控件
     self:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
 	self:viewActionButtons(tObjCpghObj, false)
@@ -313,7 +313,7 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
 
 		if self._ischeckMyHandStatu then--杠地开花
-			self:checkMyHandStatu()
+			self:checkMyHandStatu(handList)
 			self._ischeckMyHandStatu = false
 		end
 
