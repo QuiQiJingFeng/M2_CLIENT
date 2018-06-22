@@ -13,16 +13,18 @@ local WHITE_LIST = {
 
 local PlatformSDK = require("app.Common.PlatformSDK")
 local function main()
-    local device_id = PlatformSDK.getDeviceId("Utils")
-    if device_id and WHITE_LIST[tostring(device_id)] then
-        local writePath = cc.FileUtils:getInstance():getWritablePath()
-        local rfile = io.open(writePath .. "project.manifest","rb")
-        local content = rfile:read("*a")
-        rfile:close()
-        content = string.gsub(content, "HotUpdate", "InternalHotUpdate")
-        local wfile = io.open(writePath .. "project.manifest","wb")
-        wfile:write(content)
-        wfile:close() 
+    if device.platform == "ios" or device.platform == "android" then
+        local device_id = PlatformSDK.getDeviceId("Utils")
+        if device_id and WHITE_LIST[tostring(device_id)] then
+            local writePath = cc.FileUtils:getInstance():getWritablePath()
+            local rfile = io.open(writePath .. "project.manifest","rb")
+            local content = rfile:read("*a")
+            rfile:close()
+            content = string.gsub(content, "HotUpdate", "InternalHotUpdate")
+            local wfile = io.open(writePath .. "project.manifest","wb")
+            wfile:write(content)
+            wfile:close() 
+        end
     end
 
     if not _G["ARRADY_TO_TOP"] and (device.platform == "ios" or device.platform == "android") then
