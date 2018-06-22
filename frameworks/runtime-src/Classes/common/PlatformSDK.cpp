@@ -8,13 +8,13 @@
 
 #include "PlatformSDK.h"
 #include "scripting/lua-bindings/manual/tolua_fix.h"
-#include "Utils.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include <jni/JniHelper.h>
 #include <jni.h>
 #endif
-
+#include "Utils.h"
+#include "Email.h"
 PlatformSDK* PlatformSDK::__instance = nullptr;
 
 PlatformSDK* PlatformSDK::getInstance()
@@ -38,6 +38,7 @@ FYD_FUNC PlatformSDK::getValue(std::string key)
 void PlatformSDK::registerList()
 {
     Utils::getInstance()->registerFunc();
+    Email::getInstance()->registerFunc();
 }
 
 std::vector<std::string>& PlatformSDK::getJavaSearchPath()

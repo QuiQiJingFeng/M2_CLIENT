@@ -24,12 +24,14 @@ extern "C" {
 USING_NS_CC;
 
 #include <functional>
+
 using namespace std;
 using namespace std::placeholders;
 
 typedef std::function<Value(ValueVector&)> FYD_FUNC;
-#define REGISTER_PLATFORM(selector,target,key) PlatformSDK::getInstance()->pushKeyValue(key,std::bind(&selector,target,placeholders::_1));
+#define REGISTER_PLATFORM(selector,target,cptype,key) PlatformSDK::getInstance()->pushKeyValue(key,std::bind((Value(cptype*)(ValueVector))(&selector),target,placeholders::_1));
 
+ 
 int luaopen_PlatformSDK(lua_State* L);
 
 

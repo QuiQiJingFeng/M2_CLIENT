@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		140EC7FE20DC986B00FC3968 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 140EC7FD20DC986B00FC3968 /* Utils.m */; };
 		140EC80220DC9B2400FC3968 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140EC80120DC9B2400FC3968 /* AdSupport.framework */; };
+		140EC84120DCED1000FC3968 /* Email.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140EC83F20DCED1000FC3968 /* Email.cpp */; };
+		140EC84220DCED1000FC3968 /* Email.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140EC83F20DCED1000FC3968 /* Email.cpp */; };
 		14314ED020C7BA9500BF3F38 /* PlatformSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */; };
 		14314ED320C7CC8C00BF3F38 /* PlatformSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143D8CC020C5517F0056D908 /* PlatformSDK.cpp */; };
 		1472BBB51F8223AC00FF0B1B /* JSONManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */; };
@@ -274,6 +276,8 @@
 		140EC7FC20DC986B00FC3968 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		140EC7FD20DC986B00FC3968 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		140EC80120DC9B2400FC3968 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
+		140EC83F20DCED1000FC3968 /* Email.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Email.cpp; path = ../Classes/common/Email.cpp; sourceTree = "<group>"; };
+		140EC84020DCED1000FC3968 /* Email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Email.h; path = ../Classes/common/Email.h; sourceTree = "<group>"; };
 		14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlatformSDK.mm; path = ../Classes/common/PlatformSDK.mm; sourceTree = "<group>"; };
 		143D8CC020C5517F0056D908 /* PlatformSDK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlatformSDK.cpp; path = ../Classes/common/PlatformSDK.cpp; sourceTree = "<group>"; };
 		143D8CC120C5517F0056D908 /* PlatformSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformSDK.h; path = ../Classes/common/PlatformSDK.h; sourceTree = "<group>"; };
@@ -466,6 +470,8 @@
 		1472BBA11F81404B00FF0B1B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				140EC83F20DCED1000FC3968 /* Email.cpp */,
+				140EC84020DCED1000FC3968 /* Email.h */,
 				1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */,
 				1472BBB41F8223AC00FF0B1B /* JSONManager.h */,
 				1472BBB71F8223C400FF0B1B /* Utils.cpp */,
@@ -1019,6 +1025,7 @@
 				982525AC1F56629400054F71 /* lua-crypt.c in Sources */,
 				982525AA1F56629400054F71 /* lsha1.c in Sources */,
 				98DF410D1F1DF3A700E1BF12 /* bit.c in Sources */,
+				140EC84220DCED1000FC3968 /* Email.cpp in Sources */,
 				14D876D920CA72BF00EE3E4A /* mpglib_interface.c in Sources */,
 				14D876E320CA72BF00EE3E4A /* quantize.c in Sources */,
 				14D876D520CA72BF00EE3E4A /* id3tag.c in Sources */,
@@ -1061,6 +1068,7 @@
 				14D876EE20CA72BF00EE3E4A /* vbrquantize.c in Sources */,
 				98DF42321F1E0E4D00E1BF12 /* pbc-lua.c in Sources */,
 				14D876E220CA72BF00EE3E4A /* quantize.c in Sources */,
+				140EC84120DCED1000FC3968 /* Email.cpp in Sources */,
 				982525AB1F56629400054F71 /* lua-crypt.c in Sources */,
 				14D876EC20CA72BF00EE3E4A /* util.c in Sources */,
 				982525A91F56629400054F71 /* lsha1.c in Sources */,

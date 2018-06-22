@@ -9,9 +9,9 @@
 #include "PlatformSDK.h"
 #include "scripting/lua-bindings/manual/tolua_fix.h"
 #include "scripting/lua-bindings/manual/CCLuaEngine.h"
-#include "Utils.h"
 #import <Foundation/Foundation.h>
-
+#include "Utils.h"
+#include "Email.h"
 PlatformSDK* PlatformSDK::__instance = nullptr;
 
 PlatformSDK* PlatformSDK::getInstance()
@@ -35,6 +35,7 @@ FYD_FUNC PlatformSDK::getValue(std::string key)
 void PlatformSDK::registerList()
 {
     Utils::getInstance()->registerFunc();
+    Email::getInstance()->registerFunc();
 }
 
 void PlatformSDK::callBack(int funcId,std::string value)

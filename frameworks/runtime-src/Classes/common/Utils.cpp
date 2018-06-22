@@ -226,22 +226,15 @@ long Utils::xxteaDecrypt(unsigned char* bytes,long size,char* xxteaSigin,char* x
     return len;
 }
 
-/*
-   //wav格式音频转换成mp3格式的音频
- */
-
-//const char* wav_path,const char* mp3_path
-Value Utils::convertWavToMp3(ValueVector vector)
+bool Utils::convertWavToMp3(string wavPath,string mp3Path)
 {
-    string wav = vector[0].asString();
-    string mp3 = vector[1].asString();
-    const char* wav_path = wav.c_str();
-    const char* mp3_path = mp3.c_str();
- 
+    const char* wav_path = wavPath.c_str();
+    const char* mp3_path = mp3Path.c_str();
+    
     FILE* fwav = fopen(wav_path,"rb");
     if(!fwav){
         printf("can't open audio file = %s\n",wav_path);
-        return Value(false);
+        return false;
     }
     
     fseek(fwav, 44, SEEK_CUR);
@@ -249,7 +242,7 @@ Value Utils::convertWavToMp3(ValueVector vector)
     int channel = 1;
     int sampleRate = 8000;
     int bitsPerSample = 16;
- 
+    
     FILE* fmp3 = fopen(mp3_path,"wb");
     
     lame_global_flags * lame = lame_init();
@@ -301,7 +294,21 @@ Value Utils::convertWavToMp3(ValueVector vector)
     lame_close(lame);
     fclose(fmp3);
     fclose(fwav);
-    return Value(true);
+    return true;
+}
+
+/*
+ //wav格式音频转换成mp3格式的音频
+ */
+
+//const char* wav_path,const char* mp3_path
+Value Utils::convertWavToMp3(ValueVector vector)
+{
+    string wav = vector[0].asString();
+    string mp3 = vector[1].asString();
+    bool success = convertWavToMp3(wav,mp3);
+    
+    return Value(success);
 }
 
 
