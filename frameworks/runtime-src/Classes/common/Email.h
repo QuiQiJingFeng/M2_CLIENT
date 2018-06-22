@@ -36,9 +36,11 @@ public:
     static Email* getInstance();
     /*
      string smtpServer = "smtp.163.com";
-     string account = "gejinnian224@163.com";
-     string password = "fhqydidxil1zql";
-     string targetEmail = "gejinnian212@163.com";
+     int smptPort = 25;
+     string username = "gejinnian224@163.com";//网易邮箱(如果是新注册的邮箱不能填写@163.com,老邮箱必须填写)
+     string pw = "fhqydidxil1zql";      //网易老邮箱直接用邮箱密码即可,新邮箱必须设置客户端授权码
+     string to = "gejinnian212@163.com";
+     string title = "邮件标题";
      string content = "HELLO 这是一封测试邮件";
      */
     
