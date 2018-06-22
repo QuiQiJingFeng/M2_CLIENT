@@ -400,14 +400,14 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 
 				for pos,v in ipairs(self._currentSitPosArray) do
 					if pos == self.POSITION_TYPE.XI then
-							self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayXi.png")
-						elseif pos == self.POSITION_TYPE.NAN then
-							self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayNan.png")
-						
-						elseif pos == self.POSITION_TYPE.DONG then
-							self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayDong.png")
-						end
-						self._cardsPanel._nodeGrayDXNB[v.atDirection].posValue = pos
+						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayXi.png")
+					elseif pos == self.POSITION_TYPE.NAN then
+						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayNan.png")
+					
+					elseif pos == self.POSITION_TYPE.DONG then
+						self._cardsPanel._nodeGrayDXNB[v.atDirection]:setSpriteFrame("game/mjcomm/words/wordGrayDong.png")
+					end
+					self._cardsPanel._nodeGrayDXNB[v.atDirection].posValue = pos
 				end
 				self:setPlayerDirectionTable()
   			end

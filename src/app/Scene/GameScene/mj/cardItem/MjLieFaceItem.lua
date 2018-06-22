@@ -34,6 +34,10 @@ function MjLieFaceItem:setScale(scale)
 	self._rootNode:setScale(scale)
 end
 
+function MjLieFaceItem:removeFromParent() 
+	self._rootNode:removeFromParent()
+end
+
 function MjLieFaceItem:setPosition(x , y)
 	self._rootNode:setPosition(x , y)
 end

@@ -298,7 +298,7 @@ function MjEngine:sendCardsEffect()
 				end
 			end
 		end
-		self:configAllPlayerCards(direction, true, true, true, false)
+		self:configAllPlayerCards(direction, true, true, true, true)
 	end
 
 	local tempAllPlayerHandCardsNode = {}
@@ -952,10 +952,11 @@ end
 function MjEngine:updateLieHandCardsNode(node, direction, info)
 	if node then
 		node:setCardIcon(info)
+		node:setTag(info)
 		if #self._allPlayerLightHandCardsValue[direction] >= 4 then
 			node:showNormal()
 		else
-			node:showRedMask()
+			node:showBlackMask()
 		end
 	end
 end
@@ -1500,6 +1501,8 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		end
 
 		self:sortHandValue(lt.Constants.DIRECTION.NAN)
+
+		self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN] = allRoomInfo.card_list
 	end
 
 	if allRoomInfo.handle_nums then--handle_num
@@ -1628,7 +1631,10 @@ function MjEngine:onClientConnectAgain()--  断线重连
 
 	if putOutType == 1 then
 	    --检测杠
-		local tempHandCards = clone(self._allPlayerStandHandCardsValue[lt.Constants.DIRECTION.NAN])
+		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
+
+
+		dump(tempHandCards)
 
 		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
 
