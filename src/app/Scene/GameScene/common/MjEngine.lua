@@ -953,10 +953,15 @@ function MjEngine:updateLieHandCardsNode(node, direction, info)
 	if node then
 		node:setCardIcon(info)
 		node:setTag(info)
-		if #self._allPlayerLightHandCardsValue[direction] >= 4 then
-			node:showNormal()
+
+		if #self._allPlayerLightHandCardsValue[direction] < 4 then
+			if self:isFlower(info) then
+				node:showNormal()
+			else
+				node:showBlackMask() 
+			end
 		else
-			node:showBlackMask()
+			node:showNormal()
 		end
 	end
 end
@@ -1229,7 +1234,7 @@ function MjEngine:onClickLightHandCard(cardNode, value)
 		return
 	end
 
-	if #self._allPlayerLightHandCardsValue[lt.Constants.DIRECTION.NAN] < 4 then
+	if #self._allPlayerLightHandCardsValue[lt.Constants.DIRECTION.NAN] < 4 and not self:isFlower(value) then
 		return
 	end
 

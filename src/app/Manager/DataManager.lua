@@ -252,6 +252,17 @@ function DataManager:getGameAllCardsValue()
                     cardsAllNum = cardsAllNum + 1
                 end
             end
+        elseif settingInfo.game_type == lt.Constants.GAME_TYPE.SQMJ then
+
+            for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
+                table.insert(allCardsValue, v)
+                if v < 41 then
+                    cardsAllNum = cardsAllNum + 4
+                else
+                    cardsAllNum = cardsAllNum + 1
+                end
+            end
+
         elseif settingInfo.game_type == lt.Constants.GAME_TYPE.TDH then
             for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE2) do--东西南北中发白
                 table.insert(allCardsValue, v)

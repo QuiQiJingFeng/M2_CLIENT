@@ -61,7 +61,8 @@ function MjLieCpgItem:updateInfo(info)
 	for i=1,5 do
 		self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
 		self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_MaskRed"):setVisible(false)
-
+		--self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_Mask"):setVisible(false)
+		
 		local arrow = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Arrow")
 		arrow:setVisible(false)
 		if formDirection then

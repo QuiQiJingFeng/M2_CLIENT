@@ -351,10 +351,11 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 			end
 		end
 	end
-
-	self._engine:goOutOneHandCardAtDirection(direction, value)
+	if not specialRefresh then
+		self._engine:goOutOneHandCardAtDirection(direction, value)
+	end
+	
 	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
-
 end
 
 function GameRoomLayer:onPushPlayerOperatorState(msg)--通知客户端当前 碰/杠 状态
