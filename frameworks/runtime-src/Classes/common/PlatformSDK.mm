@@ -118,8 +118,17 @@ static int excute(lua_State* L){
         NSString* classStr = [NSString stringWithUTF8String:className];
         NSString* methodStr = [NSString stringWithUTF8String:funcName];
         Class classID = NSClassFromString(classStr);//转化函数
+        if(!classID){
+            return 0;
+        }
         SEL sel = NSSelectorFromString(@"getInstance");
+        if(!sel){
+            return 0;
+        }
         id instance = [classID performSelector:sel];
+        if(!instance){
+            return 0;
+        }
         
         
         NSMutableArray* array = [NSMutableArray arrayWithCapacity:3];

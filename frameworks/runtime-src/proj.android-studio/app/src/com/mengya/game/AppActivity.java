@@ -27,7 +27,7 @@ package com.mengya.game;
 
 import android.os.Bundle;
 import android.view.WindowManager;
-
+import com.mengya.common.Utils;
 import com.mengya.common.PlatformSDK;
 import com.mengya.wechat.WechatDelegate;
 
@@ -39,5 +39,6 @@ public class AppActivity extends Cocos2dxActivity{
         super.onCreate(savedInstanceState);
         WechatDelegate.getInstance().init(this);
         PlatformSDK.init(this);
+        ((Utils)Utils.getInstance()).init(this);
     }
 }

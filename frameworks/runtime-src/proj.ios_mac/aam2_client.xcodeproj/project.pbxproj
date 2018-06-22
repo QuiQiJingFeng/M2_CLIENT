@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140EC7FE20DC986B00FC3968 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 140EC7FD20DC986B00FC3968 /* Utils.m */; };
+		140EC80220DC9B2400FC3968 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140EC80120DC9B2400FC3968 /* AdSupport.framework */; };
 		14314ED020C7BA9500BF3F38 /* PlatformSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */; };
 		14314ED320C7CC8C00BF3F38 /* PlatformSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143D8CC020C5517F0056D908 /* PlatformSDK.cpp */; };
 		1472BBB51F8223AC00FF0B1B /* JSONManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */; };
@@ -55,7 +57,7 @@
 		14D876F320CA72BF00EE3E4A /* vector in Resources */ = {isa = PBXBuildFile; fileRef = 14D876C920CA72BF00EE3E4A /* vector */; };
 		14D876F420CA72BF00EE3E4A /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 14D876CA20CA72BF00EE3E4A /* version.c */; };
 		14D876F520CA72BF00EE3E4A /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 14D876CA20CA72BF00EE3E4A /* version.c */; };
-		14DCF3DB20BFF264007193A2 /* Audio.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14DCF3DA20BFF264007193A2 /* Audio.mm */; };
+		14DCF3DB20BFF264007193A2 /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DCF3DA20BFF264007193A2 /* Audio.m */; };
 		14EF82D41F83DE5400C25D68 /* package in Resources */ = {isa = PBXBuildFile; fileRef = 14EF82D31F83DE5400C25D68 /* package */; };
 		15427CD3198F221400DC375D /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4251834BDA200142BE0 /* libcocos2d iOS.a */; };
 		15427CD5198F222200DC375D /* libluacocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15427CD2198F220600DC375D /* libluacocos2d iOS.a */; };
@@ -269,6 +271,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		140EC7FC20DC986B00FC3968 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		140EC7FD20DC986B00FC3968 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		140EC80120DC9B2400FC3968 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
 		14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlatformSDK.mm; path = ../Classes/common/PlatformSDK.mm; sourceTree = "<group>"; };
 		143D8CC020C5517F0056D908 /* PlatformSDK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlatformSDK.cpp; path = ../Classes/common/PlatformSDK.cpp; sourceTree = "<group>"; };
 		143D8CC120C5517F0056D908 /* PlatformSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformSDK.h; path = ../Classes/common/PlatformSDK.h; sourceTree = "<group>"; };
@@ -319,7 +324,7 @@
 		14D876CA20CA72BF00EE3E4A /* version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = version.c; path = ../Classes/lame/version.c; sourceTree = "<group>"; };
 		14D876CB20CA72BF00EE3E4A /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = ../Classes/lame/version.h; sourceTree = "<group>"; };
 		14DCF3D920BFF264007193A2 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Audio.h; path = ../../Classes/common/Audio/ios/Audio.h; sourceTree = "<group>"; };
-		14DCF3DA20BFF264007193A2 /* Audio.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Audio.mm; path = ../../Classes/common/Audio/ios/Audio.mm; sourceTree = "<group>"; };
+		14DCF3DA20BFF264007193A2 /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Audio.m; path = ../../Classes/common/Audio/ios/Audio.m; sourceTree = "<group>"; };
 		14EF82D31F83DE5400C25D68 /* package */ = {isa = PBXFileReference; lastKnownFileType = folder; name = package; path = ../../../package; sourceTree = "<group>"; };
 		15427CE2198F237300DC375D /* lua_module_register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_module_register.h; path = ../Classes/lua_module_register.h; sourceTree = "<group>"; };
 		15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = "../../cocos2d-x/build/cocos2d_libs.xcodeproj"; sourceTree = "<group>"; };
@@ -432,6 +437,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140EC80220DC9B2400FC3968 /* AdSupport.framework in Frameworks */,
 				98362FFB1F35E8A5004E8D29 /* libpbc iOS.a in Frameworks */,
 				294D0D721D0D572600F7F5D4 /* CoreText.framework in Frameworks */,
 				9FA3AE4E1BE9BCC900FC9645 /* CFNetwork.framework in Frameworks */,
@@ -524,7 +530,9 @@
 			isa = PBXGroup;
 			children = (
 				14DCF3D920BFF264007193A2 /* Audio.h */,
-				14DCF3DA20BFF264007193A2 /* Audio.mm */,
+				14DCF3DA20BFF264007193A2 /* Audio.m */,
+				140EC7FC20DC986B00FC3968 /* Utils.h */,
+				140EC7FD20DC986B00FC3968 /* Utils.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -693,6 +701,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				140EC80120DC9B2400FC3968 /* AdSupport.framework */,
 				294D0D711D0D572600F7F5D4 /* CoreText.framework */,
 				9FA3AE4D1BE9BCC900FC9645 /* CFNetwork.framework */,
 				ED545A8A1B68A24500C3958E /* libiconv.dylib */,
@@ -1022,7 +1031,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14DCF3DB20BFF264007193A2 /* Audio.mm in Sources */,
+				14DCF3DB20BFF264007193A2 /* Audio.m in Sources */,
 				14D876CC20CA72BF00EE3E4A /* bitstream.c in Sources */,
 				14D876E820CA72BF00EE3E4A /* tables.c in Sources */,
 				14D876D420CA72BF00EE3E4A /* id3tag.c in Sources */,
@@ -1055,6 +1064,7 @@
 				982525AB1F56629400054F71 /* lua-crypt.c in Sources */,
 				14D876EC20CA72BF00EE3E4A /* util.c in Sources */,
 				982525A91F56629400054F71 /* lsha1.c in Sources */,
+				140EC7FE20DC986B00FC3968 /* Utils.m in Sources */,
 				98DF410C1F1DF3A700E1BF12 /* bit.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
