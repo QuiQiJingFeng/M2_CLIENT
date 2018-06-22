@@ -1322,7 +1322,7 @@ end
 function CommonUtil:changehandCardsData(allPai)--整理下手牌的数据结构 allPai 不缺牌情况下的所有手牌 
 
     local handle_cards = { }
-    for i= 1,4 do
+    for i= 1,5 do
         handle_cards[i] = {}
         for j= 1,10 do
             handle_cards[i][j] = 0
@@ -1332,6 +1332,7 @@ function CommonUtil:changehandCardsData(allPai)--整理下手牌的数据结构 
     for _,value in ipairs(allPai) do
         local card_type = math.floor(value / 10) + 1
         local card_value = value % 10
+
         handle_cards[card_type][10] = handle_cards[card_type][10] + 1
         handle_cards[card_type][card_value] = handle_cards[card_type][card_value] + 1
     end
