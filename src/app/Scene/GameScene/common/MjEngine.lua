@@ -193,6 +193,7 @@ function MjEngine:initDataValue()
 	self._allPlayerSpecialOutCardsValue = {}
 	self._allPlayerLightHandCardsValue = {}--商丘麻将亮四打一	
 	self._allPlayerStandHandCardsValue = {}	
+	self._allHandCardsTingValue = {}
 
 	for i,direction in ipairs(self._currentGameDirections) do
 		self._allPlayerLightHandCardsValue[direction] = {}
@@ -286,6 +287,7 @@ function MjEngine:sendCards(msg, direction)--发牌 13张
 end
 
 function MjEngine:sendCardsEffect()
+	self._tingPaiNotFreshen = false
 	local sendDealFinish = false
 
 	for i,direction in ipairs(self._currentGameDirections) do
@@ -638,11 +640,24 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				node:setSelectState(false)
 			end
 		end
+		--在点击出列的时候设置听字标记
+		if self._allHandCardsTingValue and #self._allHandCardsTingValue >= 1 then --维持听字标记的状态
+			print("====================维持听字标记的状态")
+		   self._allHandCardsTingValue = {} --重置状态
+
+		   self._isThereAnyTing = false
+			if self:TingStateBS() then
+				self._isThereAnyTing = true
+			end
+		   self:checkMyHandTingStatu()
+		end
+		if self._tingPaiNotFreshen then
+			self:TingPaiNotFreshenUI()
+		end
 	end
 
 	--出牌
 	if refreshOut then
-
 		local cardZorder = 0
 		if not self._allPlayerOutCardsNode[direction] then
 			self._allPlayerOutCardsNode[direction] = {}
@@ -671,6 +686,16 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			end
 			node:setPosition(self._allOutCardsNodePos[tostring(direction)][i])
 			node:setVisible(true)
+			--听牌后出的那张牌要翻面
+			print("=====lkkkkkkkkkkkkkkkk11111111111",direction,self._tingPaiNotFreshen)
+			if direction == lt.Constants.DIRECTION.NAN and self._tingPaiNotFreshen then
+				print("=====lkkkkkkkkkkkkkkkk",self._tingPaiValue)
+			   if self._tingPaiValue and self._tingPaiValue == info then
+			   		print("=====BackBg=========")
+			   		node:BackBg(true)
+			   end
+			end
+
 		end
 	end
 
@@ -836,6 +861,26 @@ function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 	table.insert(self._allPlayerOutCardsValue[direction], value)
 end
 
+function MjEngine:GetTingPaiNotFreshen()
+	return self._tingPaiNotFreshen
+end
+
+function MjEngine:TingPaiNotFreshen(direction, isTing)--听牌后防止刷新
+
+	self._allHandCardsTingValue = {}
+	self._tingPaiNotFreshen = isTing
+	--self:configAllPlayerCards(lt.Constants.DIRECTION.NAN,false,true,false,false)--第一次打出的听牌不显示所以在此刷新
+	print("===========出听牌后的状态===========",self._tingPaiNotFreshen)
+end
+function MjEngine:TingPaiNotFreshenUI()
+	self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] = self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] or {}
+	for i,handNode in ipairs(self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN]) do
+		if handNode:isVisible() then
+			handNode:TingPaiMB()
+		end
+	end
+end
+
 function MjEngine:goOutOneHandSpecialCardAtDirection(direction, value)--出了一张特殊 补花 飘癞子
 	self._allPlayerSpecialOutCardsValue[direction] = self._allPlayerSpecialOutCardsValue[direction] or {}
 
@@ -843,6 +888,7 @@ function MjEngine:goOutOneHandSpecialCardAtDirection(direction, value)--出了�
 end
 
 function MjEngine:getOneHandCardAtDirection(direction, value)--起了一张牌
+	self._tingOutCardValue = value
 	value = value or 99
 	self._allPlayerStandHandCardsValue[direction] = self._allPlayerStandHandCardsValue[direction] or {}
 	table.insert(self._allPlayerStandHandCardsValue[direction], value)
@@ -990,40 +1036,73 @@ function MjEngine:isFlower(value)
 	return false
 end
 
-function MjEngine:checkMyHandStatu(handList)
+function MjEngine:checkMyHandButtonActionStatu(handList,state)
     local tObjCpghObj = {
         tObjChi = nil,
         tObjPeng = nil,
         tObjGang = nil,
-        tObjHu = nil--抢杠胡  自摸
+        tObjHu = nil,--抢杠胡  自摸
+        tObjTing = nil --听牌
     }
-    --检测杠
-	local tempHandCards = clone(handList)
+    local huBs = false
+    if state then
+	    --检测杠
+		local tempHandCards = clone(handList)
 
-	local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
-	dump(anGangCards)
+		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
+		dump(anGangCards)
 
-	local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[lt.Constants.DIRECTION.NAN], tempHandCards)
-	dump(pengGang)
+		local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[lt.Constants.DIRECTION.NAN], tempHandCards)
+		dump(pengGang)
 
-	if #anGangCards > 0 or #pengGang > 0 then
-		tObjCpghObj.tObjGang = {}
+		if #anGangCards > 0 or #pengGang > 0 then
+			tObjCpghObj.tObjGang = {}
+		end
+
+		for i,v in ipairs(anGangCards) do
+			table.insert(tObjCpghObj.tObjGang, v)
+		end
+
+		for i,v in ipairs(pengGang) do
+			table.insert(tObjCpghObj.tObjGang, v)
+		end
+
+		--检测胡
+		if self:checkIsHu(handList) then
+			print("自摸了###########################################")
+			tObjCpghObj.tObjHu = {}
+			huBs = true
+		else
+			huBs = false
+			print("没有自摸###########################################")
+		end
+	end
+	if not huBs then 
+		if self._tingPaiNotFreshen then --听过牌的人检测过后会再动打出去
+			if self._clickCardCallback and self._tingOutCardValue then
+				local statee = 1
+				self._clickCardCallback(self._tingOutCardValue,statee)
+			end
+			--local arg = {command = "PLAY_CARD", card = value}--普通出牌
+			--lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+		end
 	end
 
-	for i,v in ipairs(anGangCards) do
-		table.insert(tObjCpghObj.tObjGang, v)
-	end
+	local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[2]
+	if setisTing == 1 then --报听
+		if  not self._tingPaiNotFreshen then --听牌后不再弹出听牌的按钮
+		    self._isThereAnyTing = false
+			local isCardTing = false
+			if self:TingStateBS() then
+				isCardTing = true
+				self._isThereAnyTing = true
+			end
 
-	for i,v in ipairs(pengGang) do
-		table.insert(tObjCpghObj.tObjGang, v)
-	end
-
-	--检测胡
-	if self:checkIsHu(handList) then
-		print("自摸了###########################################")
-		tObjCpghObj.tObjHu = {}
-	else
-		print("没有自摸###########################################")
+		    if isCardTing then
+		    	tObjCpghObj.tObjTing = {}
+		    end
+		end
+	else--不抱听
 	end
 
  --    --显示吃碰杠胡控件
@@ -1031,6 +1110,22 @@ function MjEngine:checkMyHandStatu(handList)
 	-- self:viewActionButtons(tObjCpghObj, false)
 
 	return tObjCpghObj
+end
+
+function MjEngine:TingStateBS() --得到有没有听得牌
+	local bs = 1
+	for key,value in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
+		local isTing = self:isCanTingByCard(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], value)--出一张手牌是否可以听
+		if isTing then
+			bs = bs + 1
+			break
+		end
+	end
+	if bs > 1 then
+	   return true
+	else
+		return false
+	end
 end
 
 function MjEngine:getAllCanHuCards(tempHandCards, value)
@@ -1056,10 +1151,10 @@ end
 
 function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否可以听
     print("++++++++++++++检测听牌的牌++++++++++++",value)
-    dump(tempHandCards)
-	for i,v in ipairs(tempHandCards) do
+    local allCardsValueTable = clone(tempHandCards)
+	for i,v in ipairs(allCardsValueTable) do
 		if v == value then
-			table.remove(tempHandCards, i)
+			table.remove(allCardsValueTable, i)
 			break
 		end
 	end
@@ -1067,7 +1162,7 @@ function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否�
 	local allCardsValue = lt.DataManager:getGameAllCardsValue()
 
 	for i,card in ipairs(allCardsValue) do
-		if self:checkIsHu(tempHandCards, card) then
+		if self:checkIsHu(allCardsValueTable, card) then
 			return true
 		end
 	end
@@ -1111,32 +1206,45 @@ function MjEngine:checkIsHu(HandCards, card)
 end
 
 function MjEngine:checkMyHandTingStatu()
+	local isCanTing = false
+	--[[
 	local isCanTing = false 
+	for key,value in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
+		local isTing = self:isCanTingByCard(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], value)--出一张手牌是否可以听
+		if isTing then
+			table.insert(self._allHandCardsTingValue,value)
+			handNode:showTing()--显示听得标志
+			isCanTing = true
+
+		end
+	end--]]
 	self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] = self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] or {}
-	print("===============检测是否听牌================")
 	for i,handNode in ipairs(self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN]) do
-
 		if handNode:isVisible() then
-			
-			local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
-
-			local isTing = self:isCanTingByCard(tempHandCards, handNode:getTag())--出一张手牌是否可以听
-
-			if isTing then
-				handNode:showTing()--显示按钮
-				isCanTing = true
-				local tObjCpghObj = {
-			        tObjTing = nil,
-			    }
-				 tObjCpghObj.tObjTing = {}
-				 table.insert(tObjCpghObj.tObjTing, handNode:getTag())
-	            --显示吃碰杠胡控件
-		    	self._deleget:viewHideActPanelAndMenu()
-		    	self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
-		    	self._deleget:viewActionButtons(tObjCpghObj, true)
+			print("=======================打印听得状态",self._tingPaiNotFreshen)
+			if not self._tingPaiNotFreshen then
+				if self._isThereAnyTing then --有没有听，没听则不执行
+					local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
+					local isTing = self:isCanTingByCard(tempHandCards, handNode:getTag())--出一张手牌是否可以听
+					if isTing then
+						table.insert(self._allHandCardsTingValue,handNode:getTag())
+						print("==========handNode:getTag()========",handNode:getTag())
+						print(#self._allHandCardsTingValue)
+						dump(self._allHandCardsTingValue)
+						handNode:showTing()--显示听字标记
+						isCanTing = true
+					else
+						if self._isThereAnyTing then
+							handNode:TingPaiMB()
+						end
+					end
+				end
+			else
+				handNode:TingPaiMB()
 			end
 		end
 	end
+
 	return isCanTing
 end
 
@@ -1145,6 +1253,30 @@ function MjEngine:setClickCardCallBack(callBack)
 end
 
 function MjEngine:onClickHandCard(cardNode, value)
+	print("==============sssssssssss11111111111111111")
+	---[[
+	local bsNum = 0
+	if self._allHandCardsTingValue and #self._allHandCardsTingValue >= 1 then
+		print("llllllssssss",#self._allHandCardsTingValue)
+		dump(self._allHandCardsTingValue)
+		for i=1,#self._allHandCardsTingValue do
+			if self._allHandCardsTingValue[i] == value then
+				bsNum = bsNum + 1
+				cardNode:showTing()
+			end
+		end
+		if bsNum >=1 then
+			print("代表听牌堆里面有听得牌往下面接着走")
+		else
+			return
+		end
+	end
+	print("啦啦啦啦啦啦啦TingPaiNotFreshen",self._tingPaiNotFreshen)
+
+	if self._tingPaiNotFreshen then
+		return
+	end
+	--]]
 
 	if lt.DataManager:getRePlayState() then
 		return
@@ -1207,14 +1339,22 @@ function MjEngine:onClickHandCard(cardNode, value)
 		self._deleget:hideHuCardsTipsMj()
 
 		if self._clickCardCallback then
+			local state = 0
 			print("点击出牌", value)
-			self._clickCardCallback(value)
+			if bsNum >= 1 then --代表听牌出牌
+				state = 2
+			else
+				state = 1
+			end
+			if state == 2 then
+				self._tingPaiValue = value
+			end
+			self._clickCardCallback(value,state)
 		end
 	end
 end
 
 function MjEngine:onClickLightHandCard(cardNode, value)
-
 	if lt.DataManager:getRePlayState() then
 		return
 	end
@@ -1350,7 +1490,7 @@ function MjEngine:gameOverShow()--游戏结束 推到牌
 
 end
 
-function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
+function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 	local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
 	if not direction then
 		return
@@ -1361,12 +1501,13 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
 		info = {}
 		info["value"] = msg.item["value"]
 		info["from"] = msg.item["from"]
-		info["type"] = msg.item["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡>
+		info["type"] = msg.item["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡 7听>
 
 		local formDirection = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
 		local outValue = self._allPlayerOutCardsValue[formDirection][#self._allPlayerOutCardsValue[formDirection]]
 
 		if outValue and outValue == msg.item["value"] then
+			print("========================dddddddddddddddddddd走了这里")
  			table.remove(self._allPlayerOutCardsValue[formDirection], #self._allPlayerOutCardsValue[formDirection])
 
  			--self._allPlayerOutCardsNode[formDirection][#self._allPlayerOutCardsNode]:removeFromParent()
@@ -1390,6 +1531,8 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
 		offNum = 3
 	elseif msg.item["type"] == 5 then
 		offNum = 4
+	elseif msg.item["type"] == 7 then --听
+		offNum = 1
 	end
 
 	if lt.DataManager:getRePlayState() then
@@ -1444,7 +1587,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
 		end
 	end
 
-	if msg.item["type"] ~= 6 then
+	if msg.item["type"] ~= 6 and msg.item["type"] ~= 7 then
 		if not self._allPlayerCpgCardsValue[direction] then
 			self._allPlayerCpgCardsValue[direction] = {}
 		end
@@ -1463,8 +1606,16 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡
 				table.insert(self._allPlayerCpgCardsValue[direction], info)
 			end
 		end
+	else
+		print("推倒胡收到听牌走这里啦啦啦啦",msg.item["value"])
+		--这里需要删去听得牌而且需要保持剩下的牌不变
+		self:goOutOneHandCardAtDirection(direction, msg.item["value"])
 	end	
-	self:configAllPlayerCards(direction, true, true, false, false)
+
+	self:configAllPlayerCards(direction, true, true, true, false)--4 false --> true 
+	if self._tingPaiNotFreshen then
+		self:TingPaiNotFreshenUI()
+	end
 
 end
 
