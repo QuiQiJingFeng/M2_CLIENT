@@ -296,9 +296,11 @@ function GameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
         local isHu = tObjCpghObj.tObjHu ~= nil
         self:setBtnEnabled(self.m_objCommonUi.m_btnHu, isHu)
     end
-
-    self:setBtnEnabled(self.m_objCommonUi.m_btnPass, true)
-
+    if tObjCpghObj.tObjHu and lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
+        self:setBtnEnabled(self.m_objCommonUi.m_btnPass,false) --推倒胡胡牌不能过
+    else
+        self:setBtnEnabled(self.m_objCommonUi.m_btnPass, true)
+    end
     self.m_objCommonUi.m_btnPass.isPassSendMsg = isPassSendMsg --是否发请求
 
     local count = 0
