@@ -1085,6 +1085,10 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state)
 			end
 			--local arg = {command = "PLAY_CARD", card = value}--普通出牌
 			--lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+		end	
+	else
+		if  not self._tingPaiNotFreshen then --没报听不能胡牌
+			tObjCpghObj.tObjHu = nil
 		end
 	end
 
