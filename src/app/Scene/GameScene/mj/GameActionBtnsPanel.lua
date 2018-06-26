@@ -145,6 +145,10 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
         end
 
     elseif pSender == self.m_objCommonUi.m_btnTing then
+        self._deleget:checkMyHandTingStatu()
+        self.m_objCommonUi.m_btnTing:setEnabled(false)
+        self.m_objCommonUi.m_btnTing:setVisible(false)
+        self:viewHideActPanelAndMenu()                  
         -- if self.onTingAction then
         --     self:onTingAction()
         -- else
@@ -284,7 +288,7 @@ function GameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
     end
 
     if self.m_objCommonUi.m_btnTing then
-        local isTing = tObjCpghObj.tObjTind ~= nil
+        local isTing = tObjCpghObj.tObjTing ~= nil
         self:setBtnEnabled(self.m_objCommonUi.m_btnTing, isTing)
     end
 
@@ -569,6 +573,8 @@ function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
         path = "game/mjcomm/animation/aniWord/wordGang.png"
     elseif msg.item["type"] == 6 then
         path = "game/mjcomm/animation/aniWord/wordHu.png"--wordZm
+    elseif msg.item["type"] == 7 then
+        path = "game/mjcomm/animation/aniTing/aniTing_11.png"--wordZm
     end
     word:setSpriteFrame(path)
     

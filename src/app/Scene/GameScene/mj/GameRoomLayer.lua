@@ -129,8 +129,12 @@ function GameRoomLayer:viewHuCardsTipsMenu(canHuCards)
 	self._gameActionBtnsPanel:viewHuCardsTipsMenu(canHuCards)
 end
 
-function GameRoomLayer:checkMyHandStatu(handList) --检测吃椪杠
-	local tObjCpghObj = self._engine:checkMyHandStatu(handList) 
+function GameRoomLayer:checkMyHandTingStatu()
+	self._engine:checkMyHandTingStatu()
+end
+
+function GameRoomLayer:checkMyHandButtonActionStatu(handList,state) --检测吃椪杠
+	local tObjCpghObj = self._engine:checkMyHandButtonActionStatu(handList,state) 
     --显示吃碰杠胡控件
     self:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
 	self:viewActionButtons(tObjCpghObj, false)
@@ -148,7 +152,7 @@ function GameRoomLayer:isVisibleGameActionBtnsPanel()
 	return self._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:isVisible()
 end
 
-function GameRoomLayer:onClickCard(value) 
+function GameRoomLayer:onClickCard(value,state) 
 
 	if self:isVisibleGameActionBtnsPanel() then
 		print("碰杠胡了不能点牌了")
@@ -162,8 +166,17 @@ function GameRoomLayer:onClickCard(value)
 	
 	if self._currentOutPutPlayerPos and self._currentOutPutPlayerPos == lt.DataManager:getMyselfPositionInfo().user_pos then
 		print("出牌########################", value)
-		local arg = {command = "PLAY_CARD", card = value}
-		lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+		if state == 1 then
+			print("普通出牌")
+			local arg = {command = "PLAY_CARD", card = value}--普通出牌
+			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+		else
+			print("听牌出牌")
+			local arg = {command = "TING_CARD", card = value}--听牌出牌
+			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+			local direction = self:getPlayerDirectionByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+			self._engine:TingPaiNotFreshen(direction,true)
+		end
 	else
 		print("不该自己出牌！！！！！！！！！！")
 	end
@@ -263,15 +276,13 @@ end
 function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 	self._currentOutPutPlayerPos = msg.user_pos
 	msg.card_list = msg.card_list or {}
-
+	print("============打印",msg.user_pos,lt.DataManager:getMyselfPositionInfo().user_pos)
 	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
-
+		print("================有没有进来============")
 		local handList = {}
 		local cpgList = {}
 		--摸牌 ->出牌
 		local newCard = nil
-
-		--self:checkMyHandTingStatu()--检测听牌
 		
 		if msg.operator == 2 then--     还有没有摸牌不能胡牌
 			print("碰出牌")
@@ -313,10 +324,17 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 		self._engine:updateNanHandCardValue(lt.Constants.DIRECTION.NAN, handList)
 		self._engine:updateNanCpgCardValue(lt.Constants.DIRECTION.NAN, cpgList)
 		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
-
-		if self._ischeckMyHandStatu then--杠地开花
-			self:checkMyHandStatu(handList)
+		
+		if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then 
+			local state = self._ischeckMyHandStatu
+			self:checkMyHandButtonActionStatu(handList,state)
 			self._ischeckMyHandStatu = false
+		else
+			if self._ischeckMyHandStatu then--杠地开花
+				local state = self._ischeckMyHandStatu
+				self:checkMyHandButtonActionStatu(handList,state)
+				self._ischeckMyHandStatu = false
+			end
 		end
 
 	else--不是本人

@@ -28,6 +28,10 @@ function MjLieOutFaceItem:getRootNode()
 	return self._rootNode
 end
 
+function MjLieOutFaceItem:BackBg(bool)
+	self._backBg:setVisible(bool)
+end
+
 function MjLieOutFaceItem:setAnchorPoint(x, y)
 	self._rootNode:setAnchorPoint(x, y)
 end
