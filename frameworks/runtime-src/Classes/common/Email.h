@@ -31,7 +31,7 @@ private:
     
     void Recv(SOCKET& s, char* buf, int len);
     
-    string Base64Encode(const string& src);
+    
 public:
     static Email* getInstance();
     /*
@@ -47,9 +47,21 @@ public:
     bool SendEmail(const string& smtpServer,int smtpPort, const string& username, const string& pw, const string& to,const string& title, const string& data);
     
     Value SendEmail(ValueVector vector);
+
+    string Base64Encode(const string& src);
+
+    Value Base64Encode(ValueVector vector);
     
+    /*
+     读取所有邮件的标题
+     */
+    string ReadAllEmailTitle(const string& imapServer, int port, const string& username, const string& passwd);
+
+    Value ReadAllEmailTitle(ValueVector vector);
     inline static void registerFunc(){
         REGISTER_PLATFORM(Email::SendEmail,Email::getInstance(),Email::,"Email:SendEmail")
+        REGISTER_PLATFORM(Email::Base64Encode,Email::getInstance(),Email::,"Email:Base64Encode")
+        REGISTER_PLATFORM(Email::ReadAllEmailTitle,Email::getInstance(),Email::,"Email:ReadAllEmailTitle")
     }
 private:
     static Email* __instance;

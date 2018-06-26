@@ -138,7 +138,53 @@ bool Email::SendEmail(const string& smtpServer,int smtpPort, const string& usern
     return true;
 }
 
+string Email::ReadAllEmailTitle(const string& imapServer, int port, const string& username, const string& passwd){
+    hostent *ph = gethostbyname(imapServer.c_str());
+    if( ph == NULL ) {
+        printf("FYD EMAIL IMAP HOST ERROR\n");
+        return "";
+    }
+    sockaddr_in sin;
+    memset(&sin, 0, sizeof(sin));
+    sin.sin_family = AF_INET;
+    sin.sin_port = htons(port);    //port of IMAP
+    memcpy(&sin.sin_addr.s_addr,ph->h_addr_list[0], ph->h_length);
+    
+    //connect to the mail server
+    SOCKET s = socket(PF_INET, SOCK_STREAM, 0);
+    if( connect(s, (sockaddr*)&sin, sizeof(sin)) ) {
+        printf("FYD EMAIL FAILED TO CONNECT MAIL SERVER\n");
+        return "";
+    }
+    
+    char recvBuffer[1024*1024];
+    Recv(s, recvBuffer, sizeof(recvBuffer));    //wait for greeting message
+    string info = string("A01 LOGIN ") + username + " " + passwd+"\n";
+    Send(s, info);
+    Recv(s, recvBuffer, sizeof(recvBuffer));
+    if( string(recvBuffer).substr(0, 6) != "A01 OK" ) {
+        printf("FYD EMAIL LOGIN ERROR\n");
+        return "";
+    }
+    info = "A02 SELECT INBOX\n";
+    Send(s, info);
+    Recv(s, recvBuffer, sizeof(recvBuffer));
+    
+    info = "A03 FETCH 1:* body[header.fields (\"subject\")]\n";
+    Send(s, info);
+    Recv(s, recvBuffer, sizeof(recvBuffer));
+    return string(recvBuffer);
+}
 
+Value Email::ReadAllEmailTitle(ValueVector vector)
+{
+    string imapServer = vector[0].asString();
+    int port = vector[1].asInt();
+    string username = vector[2].asString();
+    string password = vector[3].asString();
+    string str = ReadAllEmailTitle(imapServer,port,username,password);
+    return Value(str);
+}
 
 Value Email::SendEmail(ValueVector vector)
 {
@@ -154,6 +200,11 @@ Value Email::SendEmail(ValueVector vector)
 }
 
 
+Value Email::Base64Encode(ValueVector vector)
+{
+    string str = vector[0].asString();
+    return Value(str);
+}
 
 
 
