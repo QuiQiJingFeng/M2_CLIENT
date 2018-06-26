@@ -37,7 +37,8 @@ hellolua/main.cpp \
 ../../../Classes/lame/version.c \
 ../../../Classes/common/JSONManager.cpp \
 ../../../Classes/common/PlatformSDK.cpp \
-../../../Classes/common/Utils.cpp
+../../../Classes/common/Utils.cpp \
+../../../Classes/common/Email.cpp
 
 LOCAL_C_INCLUDES := \
 $(LOCAL_PATH)/../../../Classes \
