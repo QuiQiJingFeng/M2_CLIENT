@@ -43,6 +43,8 @@ function GamePlayCardsPanel:ctor(deleget)
 	self._surRoomCount = lt.CommonUtil:getChildByNames(self._rootNode, "Node_OtherNum", "Text_Num")--剩余局数
 
 	local nodeClock = lt.CommonUtil:getChildByNames(self._rootNode, "Node_Clock")--中间方向盘
+	local Image_HuCardLight = lt.CommonUtil:getChildByNames(self._rootNode, "Image_HuCardLight")
+	Image_HuCardLight:setVisible(false)
 	
 	self._timeClock = nodeClock:getChildByName("AtlasLabel_ClockNum")
 
@@ -629,6 +631,9 @@ function GamePlayCardsPanel:onDealDown(msg)   --发牌13张手牌
 	if roomSetting then
 		if roomSetting.game_type == lt.Constants.GAME_TYPE.HZMJ then
 			local allCardsNum = 112
+			self._surCardsNum:setString(allCardsNum - 13 * roomSetting.seat_num)
+		elseif roomSetting.game_type == lt.Constants.GAME_TYPE.TDH then
+			local allCardsNum = 136
 			self._surCardsNum:setString(allCardsNum - 13 * roomSetting.seat_num)
 		end
 	end

@@ -372,8 +372,44 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 	if not specialRefresh then
 		self._engine:goOutOneHandCardAtDirection(direction, value)
 	end
-	
-	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
+	local HandFreshBs = false
+	for i=1,4 do
+			print("GameOVER金道乐for循环里面") --西南东北
+			if i == 1 then
+				print("=========",i)
+				if i == direction then
+					HandFreshBs = true
+				else
+					HandFreshBs = false
+				end
+				self._engine:configAllPlayerCards(lt.Constants.DIRECTION.XI, false, HandFreshBs, true, specialRefresh)
+			elseif i == 2 then
+				print("=========",i)
+				if i == direction then
+					HandFreshBs = true
+				else
+					HandFreshBs = false
+				end
+				self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, HandFreshBs, true, specialRefresh)
+			elseif i == 3 then
+				print("=========",i)
+				if i == direction then
+					HandFreshBs = true
+				else
+					HandFreshBs = false
+				end
+				self._engine:configAllPlayerCards(lt.Constants.DIRECTION.DONG, false, HandFreshBs, true, specialRefresh)
+			elseif i == 4 then
+				print("=========",i)
+				if i == direction then
+					HandFreshBs = true
+				else
+					HandFreshBs = false
+				end
+				self._engine:configAllPlayerCards(lt.Constants.DIRECTION.BEI, false, HandFreshBs, true, specialRefresh)
+			end
+		end
+	--self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
 end
 
 function GameRoomLayer:onPushPlayerOperatorState(msg)--通知客户端当前 碰/杠 状态

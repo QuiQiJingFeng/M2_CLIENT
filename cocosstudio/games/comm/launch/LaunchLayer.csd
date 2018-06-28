@@ -9,15 +9,15 @@
           <AbstractNodeData Name="Ie_Bg" ActionTag="-689187590" Tag="11" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" LeftEage="316" RightEage="316" TopEage="178" BottomEage="178" Scale9OriginX="316" Scale9OriginY="178" Scale9Width="702" Scale9Height="394" ctype="ImageViewObjectData">
             <Size X="1334.0000" Y="750.0000" />
             <Children>
-              <AbstractNodeData Name="BG3" ActionTag="-1377364720" Tag="128" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="644.0000" RightMargin="644.0000" TopMargin="237.0250" BottomMargin="466.9750" ctype="SpriteObjectData">
-                <Size X="831.0000" Y="435.0000" />
+              <AbstractNodeData Name="BG3" ActionTag="-1377364720" Tag="128" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" TopMargin="-3.7500" BottomMargin="3.7500" ctype="SpriteObjectData">
+                <Size X="1334.0000" Y="750.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="667.0000" Y="489.9750" />
+                <Position X="667.0000" Y="378.7500" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.6533" />
-                <PreSize X="0.0345" Y="0.0613" />
-                <FileData Type="MarkedSubImage" Path="games/comm/launch/BG3.png" Plist="games/comm/launch/LaunchPlist0.plist" />
+                <PrePosition X="0.5000" Y="0.5050" />
+                <PreSize X="1.0000" Y="1.0000" />
+                <FileData Type="Normal" Path="games/comm/launch/BG3new.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Image_5" ActionTag="295412133" Tag="108" IconVisible="False" VerticalEdge="TopEdge" RightMargin="1148.0000" BottomMargin="359.0000" LeftEage="61" RightEage="61" TopEage="129" BottomEage="129" Scale9OriginX="61" Scale9OriginY="129" Scale9Width="64" Scale9Height="133" ctype="ImageViewObjectData">
