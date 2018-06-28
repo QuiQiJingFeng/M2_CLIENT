@@ -72,7 +72,11 @@ static int register_all_packages()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-    CrashReport::initCrashReport("b1a7901db2", true);
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) 
+        CrashReport::initCrashReport("378f15e6d3", true);
+    #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
+        CrashReport::initCrashReport("b1a7901db2", true);
+    #endif
     // set default FPS
     Director::getInstance()->setAnimationInterval(1.0 / 60.0f);
 
