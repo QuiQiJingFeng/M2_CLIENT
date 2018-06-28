@@ -23,6 +23,14 @@ using namespace CocosDenshion;
 #include "common/Utils.h"
 #include "common/PlatformSDK.h"
 
+ //      
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
+#include "bugly/CrashReport.h"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) 
+#include "CrashReport.h"
+#endif
+#include "BuglyLuaAgent.h"
+
 USING_NS_CC;
 using namespace std;
 
@@ -64,12 +72,17 @@ static int register_all_packages()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
+    CrashReport::initCrashReport("b1a7901db2", true);
     // set default FPS
     Director::getInstance()->setAnimationInterval(1.0 / 60.0f);
 
     // register lua module
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
+
+    BuglyLuaAgent::registerLuaExceptionHandler(engine);
+
+
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
     luaopen_PlatformSDK(L);
@@ -141,11 +154,6 @@ bool AppDelegate::applicationDidFinishLaunching()
 #endif
     FileUtils::getInstance()->addSearchPath("src");
     FileUtils::getInstance()->addSearchPath("res");
-    
-//    string writePath = FileUtils::getInstance()->getWritablePath();
-//    writePath += "test.mp3";
-//    Utils::getInstance()->convertToFile("/Users/jingfeng/M2/M2_CLIENT/res/audio/test.wav",writePath.c_str());
-    
     
     
     

@@ -13,10 +13,16 @@
 		140EC84220DCED1000FC3968 /* Email.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140EC83F20DCED1000FC3968 /* Email.cpp */; };
 		14314ED020C7BA9500BF3F38 /* PlatformSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */; };
 		14314ED320C7CC8C00BF3F38 /* PlatformSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143D8CC020C5517F0056D908 /* PlatformSDK.cpp */; };
+		145E8AB220E4C54400827359 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145E8AB120E4C54400827359 /* Bugly.framework */; };
+		145E8AB420E4C55400827359 /* libBuglyAgent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 145E8AB320E4C55400827359 /* libBuglyAgent.a */; };
+		145E8AD120E4D78500827359 /* BuglyLuaAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 145E8ACD20E4D78500827359 /* BuglyLuaAgent.cpp */; };
+		145E8AD220E4D78500827359 /* CrashReport.mm in Sources */ = {isa = PBXBuildFile; fileRef = 145E8AD020E4D78500827359 /* CrashReport.mm */; };
 		1472BBB51F8223AC00FF0B1B /* JSONManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */; };
 		1472BBB61F8223AC00FF0B1B /* JSONManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */; };
 		1472BBB91F8223C400FF0B1B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB71F8223C400FF0B1B /* Utils.cpp */; };
 		1472BBBA1F8223C400FF0B1B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB71F8223C400FF0B1B /* Utils.cpp */; };
+		148E9ED220E3BF1500D084CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148E9ED120E3BF1500D084CD /* Security.framework */; };
+		148E9ED420E3BF3000D084CD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148E9ED320E3BF3000D084CD /* SystemConfiguration.framework */; };
 		14D876CC20CA72BF00EE3E4A /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 14D876A220CA72BF00EE3E4A /* bitstream.c */; };
 		14D876CD20CA72BF00EE3E4A /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 14D876A220CA72BF00EE3E4A /* bitstream.c */; };
 		14D876CE20CA72BF00EE3E4A /* encoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 14D876A420CA72BF00EE3E4A /* encoder.c */; };
@@ -281,10 +287,18 @@
 		14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlatformSDK.mm; path = ../Classes/common/PlatformSDK.mm; sourceTree = "<group>"; };
 		143D8CC020C5517F0056D908 /* PlatformSDK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlatformSDK.cpp; path = ../Classes/common/PlatformSDK.cpp; sourceTree = "<group>"; };
 		143D8CC120C5517F0056D908 /* PlatformSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformSDK.h; path = ../Classes/common/PlatformSDK.h; sourceTree = "<group>"; };
+		145E8AB120E4C54400827359 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bugly.framework; path = ../../BuglyCocosPlugin/BuglySDK/iOS/Bugly.framework; sourceTree = "<group>"; };
+		145E8AB320E4C55400827359 /* libBuglyAgent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBuglyAgent.a; path = ../../BuglyCocosPlugin/CocosPlugin/agent/iOS/BuglyAgent/libBuglyAgent.a; sourceTree = "<group>"; };
+		145E8ACD20E4D78500827359 /* BuglyLuaAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BuglyLuaAgent.cpp; path = ../Classes/bugly/BuglyLuaAgent.cpp; sourceTree = "<group>"; };
+		145E8ACE20E4D78500827359 /* BuglyLuaAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuglyLuaAgent.h; path = ../Classes/bugly/BuglyLuaAgent.h; sourceTree = "<group>"; };
+		145E8ACF20E4D78500827359 /* CrashReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashReport.h; path = ../Classes/bugly/CrashReport.h; sourceTree = "<group>"; };
+		145E8AD020E4D78500827359 /* CrashReport.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CrashReport.mm; path = ../Classes/bugly/CrashReport.mm; sourceTree = "<group>"; };
 		1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JSONManager.cpp; path = ../Classes/common/JSONManager.cpp; sourceTree = "<group>"; };
 		1472BBB41F8223AC00FF0B1B /* JSONManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONManager.h; path = ../Classes/common/JSONManager.h; sourceTree = "<group>"; };
 		1472BBB71F8223C400FF0B1B /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = ../Classes/common/Utils.cpp; sourceTree = "<group>"; };
 		1472BBB81F8223C400FF0B1B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = ../Classes/common/Utils.h; sourceTree = "<group>"; };
+		148E9ED120E3BF1500D084CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		148E9ED320E3BF3000D084CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		14D876A220CA72BF00EE3E4A /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bitstream.c; path = ../Classes/lame/bitstream.c; sourceTree = "<group>"; };
 		14D876A320CA72BF00EE3E4A /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitstream.h; path = ../Classes/lame/bitstream.h; sourceTree = "<group>"; };
 		14D876A420CA72BF00EE3E4A /* encoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = encoder.c; path = ../Classes/lame/encoder.c; sourceTree = "<group>"; };
@@ -441,6 +455,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145E8AB420E4C55400827359 /* libBuglyAgent.a in Frameworks */,
+				145E8AB220E4C54400827359 /* Bugly.framework in Frameworks */,
 				140EC80220DC9B2400FC3968 /* AdSupport.framework in Frameworks */,
 				98362FFB1F35E8A5004E8D29 /* libpbc iOS.a in Frameworks */,
 				294D0D721D0D572600F7F5D4 /* CoreText.framework in Frameworks */,
@@ -452,7 +468,6 @@
 				15427CD3198F221400DC375D /* libcocos2d iOS.a in Frameworks */,
 				3EEEDB61197107C0006A9FF8 /* MediaPlayer.framework in Frameworks */,
 				D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */,
-				1AF4C403178663F200122817 /* libz.dylib in Frameworks */,
 				50805AAF17EBBEAA004CFAD3 /* UIKit.framework in Frameworks */,
 				5023817A17EBBE8300990C9B /* OpenGLES.framework in Frameworks */,
 				F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */,
@@ -461,6 +476,9 @@
 				F293B3D515EB7BE500256477 /* AVFoundation.framework in Frameworks */,
 				F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */,
 				F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */,
+				148E9ED420E3BF3000D084CD /* SystemConfiguration.framework in Frameworks */,
+				148E9ED220E3BF1500D084CD /* Security.framework in Frameworks */,
+				1AF4C403178663F200122817 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +499,17 @@
 				14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */,
 			);
 			name = common;
+			sourceTree = "<group>";
+		};
+		148E9EC520E3BC2F00D084CD /* BuglyCocosPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				145E8ACD20E4D78500827359 /* BuglyLuaAgent.cpp */,
+				145E8ACE20E4D78500827359 /* BuglyLuaAgent.h */,
+				145E8ACF20E4D78500827359 /* CrashReport.h */,
+				145E8AD020E4D78500827359 /* CrashReport.mm */,
+			);
+			name = BuglyCocosPlugin;
 			sourceTree = "<group>";
 		};
 		14D876A120CA72A700EE3E4A /* lame */ = {
@@ -707,6 +736,10 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				145E8AB320E4C55400827359 /* libBuglyAgent.a */,
+				145E8AB120E4C54400827359 /* Bugly.framework */,
+				148E9ED320E3BF3000D084CD /* SystemConfiguration.framework */,
+				148E9ED120E3BF1500D084CD /* Security.framework */,
 				140EC80120DC9B2400FC3968 /* AdSupport.framework */,
 				294D0D711D0D572600F7F5D4 /* CoreText.framework */,
 				9FA3AE4D1BE9BCC900FC9645 /* CFNetwork.framework */,
@@ -739,6 +772,7 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				148E9EC520E3BC2F00D084CD /* BuglyCocosPlugin */,
 				14D876A120CA72A700EE3E4A /* lame */,
 				1472BBA11F81404B00FF0B1B /* common */,
 				98DF410A1F1DF3A700E1BF12 /* bit */,
@@ -1039,6 +1073,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14DCF3DB20BFF264007193A2 /* Audio.m in Sources */,
+				145E8AD220E4D78500827359 /* CrashReport.mm in Sources */,
 				14D876CC20CA72BF00EE3E4A /* bitstream.c in Sources */,
 				14D876E820CA72BF00EE3E4A /* tables.c in Sources */,
 				14D876D420CA72BF00EE3E4A /* id3tag.c in Sources */,
@@ -1050,6 +1085,7 @@
 				985358081F28958300B0250C /* md5lib.c in Sources */,
 				985358061F28958300B0250C /* md5.c in Sources */,
 				14D876E020CA72BF00EE3E4A /* quantize_pvt.c in Sources */,
+				145E8AD120E4D78500827359 /* BuglyLuaAgent.cpp in Sources */,
 				14D876D820CA72BF00EE3E4A /* mpglib_interface.c in Sources */,
 				14D876F020CA72BF00EE3E4A /* VbrTag.c in Sources */,
 				14D876DE20CA72BF00EE3E4A /* psymodel.c in Sources */,
@@ -1267,6 +1303,7 @@
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../BuglyCocosPlugin/BuglySDK/iOS";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -1281,10 +1318,12 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../BuglyCocosPlugin/CocosPlugin/agent/iOS/BuglyAgent";
 				OTHER_LDFLAGS = (
-					"$(_COCOS_LIB_IOS_BEGIN)",
-					"$(_COCOS_LIB_IOS_END)",
+					"-force_load",
+					"$(SRCROOT)/../../BuglyCocosPlugin/CocosPlugin/agent/iOS/BuglyAgent/libBuglyAgent.a",
+					"-force_load",
+					"$(SRCROOT)/../../BuglyCocosPlugin/BuglySDK/iOS/Bugly.framework/Bugly",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=x86_64]" = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
@@ -1310,6 +1349,7 @@
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../BuglyCocosPlugin/BuglySDK/iOS";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1323,11 +1363,8 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					"$(_COCOS_LIB_IOS_BEGIN)",
-					"$(_COCOS_LIB_IOS_END)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../BuglyCocosPlugin/CocosPlugin/agent/iOS/BuglyAgent";
+				OTHER_LDFLAGS = "$(SRCROOT)/../../BuglyCocosPlugin-v1.4.3/CocosPlugin/agent/iOS/BuglyAgent/libBuglyAgent.a";
 				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=x86_64]" = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",

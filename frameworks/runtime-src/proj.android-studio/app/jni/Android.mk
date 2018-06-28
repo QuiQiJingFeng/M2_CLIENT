@@ -1,59 +1,53 @@
 LOCAL_PATH := $(call my-dir)
 
+
+# --- bugly: 引用 libBugly.so ---
+include $(CLEAR_VARS)
+LOCAL_MODULE := bugly_native_prebuilt
+LOCAL_SRC_FILES := prebuilt/$(TARGET_ARCH_ABI)/libBugly.so
+include $(PREBUILT_SHARED_LIBRARY)
+# --- bugly: end ---
+
+
+
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := cocos2dlua_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dlua
 
-LOCAL_SRC_FILES := \
-hellolua/main.cpp \
-../../../Classes/AppDelegate.cpp \
-../../../Classes/bit/bit.c \
-../../../Classes/crypt/lsha1.c \
-../../../Classes/crypt/lua-crypt.c \
-../../../Classes/md5/md5.c \
-../../../Classes/md5/md5lib.c \
-../../../Classes/pbc/pbc-lua.c \
-../../../Classes/lame/VbrTag.c \
-../../../Classes/lame/id3tag.c \
-../../../Classes/lame/psymodel.c \
-../../../Classes/lame/tables.c \
-../../../Classes/lame/bitstream.c \
-../../../Classes/lame/lame.c \
-../../../Classes/lame/quantize.c \
-../../../Classes/lame/takehiro.c \
-../../../Classes/lame/encoder.c \
-../../../Classes/lame/mpglib_interface.c \
-../../../Classes/lame/quantize_pvt.c \
-../../../Classes/lame/util.c \
-../../../Classes/lame/fft.c \
-../../../Classes/lame/newmdct.c \
-../../../Classes/lame/reservoir.c \
-../../../Classes/lame/vbrquantize.c \
-../../../Classes/lame/gain_analysis.c \
-../../../Classes/lame/presets.c \
-../../../Classes/lame/set_get.c \
-../../../Classes/lame/version.c \
-../../../Classes/common/JSONManager.cpp \
-../../../Classes/common/PlatformSDK.cpp \
-../../../Classes/common/Utils.cpp \
-../../../Classes/common/Email.cpp
 
-LOCAL_C_INCLUDES := \
-$(LOCAL_PATH)/../../../Classes \
-$(LOCAL_PATH)/../../../Classes/bit \
-$(LOCAL_PATH)/../../../Classes/crypt \
-$(LOCAL_PATH)/../../../Classes/md5 \
-$(LOCAL_PATH)/../../../Classes/pbc \
-$(LOCAL_PATH)/../../../Classes/lame \
-$(LOCAL_PATH)/../../../Classes/common
+
+
+# 遍历目录及子目录的函数
+define walk
+    $(wildcard $(1)) $(foreach e, $(wildcard $(1)/*), $(call walk, $(e)))
+endef
+ 
+# 遍历Classes目录
+ALLFILES = $(call walk, $(LOCAL_PATH)/../../../Classes)
+ 
+FILE_LIST := hellolua/main.cpp
+# 从所有文件中提取出所有.cpp和.c文件文件
+FILE_LIST += $(filter %.cpp %.c, $(ALLFILES))
+ 
+LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)    
+                   
+FILE_INCLUDES := $(shell find $(LOCAL_PATH)/../../../Classes -type d)
+
+LOCAL_C_INCLUDES := $(FILE_INCLUDES)   
+
+
+
+
 
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END
 
 LOCAL_STATIC_LIBRARIES := cocos2d_lua_static
 LOCAL_STATIC_LIBRARIES += pbc
+LOCAL_STATIC_LIBRARIES += bugly_crashreport_cocos_static
+LOCAL_STATIC_LIBRARIES += bugly_agent_cocos_static_lua
 
 # _COCOS_LIB_ANDROID_BEGIN
 # _COCOS_LIB_ANDROID_END
@@ -62,6 +56,8 @@ include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,scripting/lua-bindings/proj.android)
 $(call import-module,pbc)
+$(call import-module,external/bugly)
+$(call import-module,external/bugly/lua)
 
 
 

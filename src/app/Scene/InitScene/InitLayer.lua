@@ -75,6 +75,8 @@ function InitLayer:requestLogin(body)
                     body = {user_id=user_id,token=token}
                     lt.DataManager:recordAuthData(body)
                     InitLayer:onGetUserInfo(body)
+
+                    a = a + 1
                 end
             end
         end)
@@ -92,7 +94,7 @@ function InitLayer:onLogin()
         self:onAndroidWechatLogin(function(body) 
                 self:requestLogin(body)
             end)
-    elseif device.platform == "ios" then
+    -- elseif device.platform == "ios" then
 
     else
         local index = math.random(1,99999)

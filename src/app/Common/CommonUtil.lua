@@ -1768,7 +1768,7 @@ function CommonUtil:selectServerLogin(game_type,callBack)
     self.selecting = nil
     local body = lt.DataManager:getAuthData()
     body.game_type = game_type
-    
+    print("FYD--->>TOKEN2 == ",body.token)
     local url = string.format("http://%s:%d/operator/get_server_list_by_type",lt.Constants.HOST,lt.Constants.PORT)
     lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
             if recv_msg then
@@ -1780,6 +1780,7 @@ function CommonUtil:selectServerLogin(game_type,callBack)
                     lt.NetWork:disconnect()
                     lt.NetWork:connect(server_info.server_host,server_info.server_port,function() 
                             local data = lt.DataManager:getAuthData()
+                            print("FYD--->>TOKEN3 == ",data.token)
                             lt.NetWork:send({login=data},function(recv_msg)
                                     self.selecting = nil
                                     callBack(recv_msg.result)
