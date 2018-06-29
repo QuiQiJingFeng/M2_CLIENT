@@ -138,6 +138,8 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 		playerLogo:getChildByName("Fzb_Tips"):setVisible(false)
 		playerLogo:getChildByName("Node_Warning"):setVisible(false)
 		playerLogo:getChildByName("Sprite_Ready"):setVisible(false)
+		playerLogo:getChildByName("Image_Light"):setVisible(false)
+		--Image_Light
 		playerLogo:setVisible(false)
 	end
 
@@ -161,6 +163,40 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 				--lt.CommonUtil:addNodeClickEvent(playerLogo, handler(self, self.onSitDownClick))
 			end
 		end
+	end
+end
+
+function GameSelectPosPanel:RestartShow()--游戏结束把听牌标识全false
+	for pos,playerLogo in ipairs(self._tingLogoArray) do
+		playerLogo:setVisible(false)
+	end
+end
+
+function GameSelectPosPanel:ShowTingBS(direction)--听牌标识
+	print("======GameSelectPosPanel:ShowTingBS==>direction",direction)
+	dump(self._tingLogoArray)
+	for pos,playerLogo in ipairs(self._tingLogoArray) do
+		if direction == pos then
+			playerLogo:setVisible(true)
+		end
+	end
+end
+
+function GameSelectPosPanel:ShowLightRing(direction)--光圈标识
+	--print("======ShowLightRing==>direction",direction)
+	dump(self._playerLogoArray)
+	for pos,playerLogo in ipairs(self._playerLogoArray) do
+		if direction == pos then
+			playerLogo:getChildByName("Image_Light"):setVisible(true)
+		else
+			playerLogo:getChildByName("Image_Light"):setVisible(false)
+		end
+	end
+end
+
+function GameSelectPosPanel:HideReady()
+	for pos,playerLogo in ipairs(self._playerLogoArray) do
+		playerLogo:getChildByName("Sprite_Ready"):setVisible(false)
 	end
 end
 
@@ -617,7 +653,7 @@ function GameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 end
 
 function GameSelectPosPanel:onSitDownClick(event) 
-	print("===========sssssssssssss",event:getTag())
+	print("GameSelectPosPanel:onSitDownClick==>event:getTag()",event:getTag())
 	if lt.DataManager:getRePlayState() then
 		self._selectPositionNode = event
 

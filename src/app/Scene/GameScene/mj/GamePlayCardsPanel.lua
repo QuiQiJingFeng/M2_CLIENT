@@ -481,7 +481,7 @@ function GamePlayCardsPanel:configAllPlayerCards(direction)--吃椪杠 手牌
 	self._allPlayerCpgCards[direction] = self._allPlayerCpgCards[direction] or {}
 	for index,CpgNode in pairs(self._allPlayerCpgCardsNode[direction]) do
 		local cardInfo = self._allPlayerCpgCards[direction][index]
-		print("666666666666666666666666666666666666")
+		print("GamePlayCardsPanel:configAllPlayerCards")
 		dump(tostring(cardInfo))
 		if cardInfo then
 			local value = cardInfo.value
@@ -720,7 +720,7 @@ end
 function GamePlayCardsPanel:onPushDrawCard(msg)   --通知其他人有人摸牌 
 
 	local surCardsNum = tonumber(self._surCardsNum:getString())
-	print("剩余牌水电费就是砥砺奋进 ", surCardsNum)
+	print("GamePlayCardsPanel:onPushDrawCard==>surCardsNum", surCardsNum)
 	if surCardsNum and surCardsNum > 0 then
 		self._surCardsNum:setString(surCardsNum - 1)
 	end
