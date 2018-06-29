@@ -159,7 +159,11 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	local gameOverInfo = lt.DataManager:getGameOverInfo()
 	self:setVisible(true)
 	self._resultPanelMask:setVisible(true)
-	self._rewardCodeBtn:setVisible(true)
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then 
+		self._rewardCodeBtn:setVisible(false)
+	else
+		self._rewardCodeBtn:setVisible(true)
+    end
 
 	local winner_pos = gameOverInfo.winner_pos
 	local winner_type = gameOverInfo.winner_type or 1 --自摸 1 抢杠 2

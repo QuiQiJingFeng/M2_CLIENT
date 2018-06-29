@@ -4,7 +4,7 @@ local SettingLayer = class("SettingLayer", lt.BaseLayer, function()
     return cc.CSLoader:createNode("game/mjcomm/gwidget/GameSetLayer.csb")--  FriendLayer
 end)
 
-function SettingLayer:ctor()
+function SettingLayer:ctor(num)
 	SettingLayer.super.ctor(self)
 
 	self._scrollView = self:getChildByName("ScrollView")
@@ -12,6 +12,10 @@ function SettingLayer:ctor()
 	local dissolveRoom = self._scrollView:getChildByName("Btn_DissolveRoom")
 
 	local backLobby = self._scrollView:getChildByName("Btn_BackLobby")
+    if num > 0 then -- 有手牌就判断牌局已经开始
+        backLobby:setVisible(false)
+        dissolveRoom:setPosition(400,721)
+    end
 
     local btnClose = self._scrollView:getChildByName("Btn_Close")
     if lt.DataManager:getRePlayState() then

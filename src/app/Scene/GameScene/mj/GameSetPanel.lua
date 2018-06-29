@@ -128,7 +128,8 @@ function GameSetPanel:onTouchEndVoice()
 end
 
 function GameSetPanel:onSetClick(event) 
-	local setLayer = lt.SettingLayer.new()
+	local Num = self._deleget:getMyHideCardNum()
+	local setLayer = lt.SettingLayer.new(Num)
     lt.UILayerManager:addLayer(setLayer, true)
 end
 

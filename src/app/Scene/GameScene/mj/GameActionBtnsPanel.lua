@@ -146,7 +146,6 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
 
     elseif pSender == self.m_objCommonUi.m_btnTing then
         self._deleget:checkMyHandTingStatu()
-        self.m_objCommonUi.m_btnTing:setEnabled(false)
         self.m_objCommonUi.m_btnTing:setVisible(false)
         self:viewHideActPanelAndMenu()                  
         -- if self.onTingAction then
@@ -305,7 +304,7 @@ function GameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
 
     local count = 0
     for k,v in pairs(tObjCpghObj) do
-    	print("sdflsj!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!dfjsdjfsldjfsjfljsdfljs", k,tostring(v))
+    	print("sdflsjGameActionBtnsPanel:viewActionButtons==>tObjCpghObj==>k==>v", k,tostring(v))
         count = count + 1
     end
 
@@ -474,15 +473,24 @@ function GameActionBtnsPanel:autoShowHuCardsContent()
     end
 end
 
+function GameActionBtnsPanel:createMenuItemt()
+    local mj = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjHuCardsTipsItem.csb")
+
+    return mj
+end
+
 function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
+
+    dump(tObj, "viewHuCardsTipsMenu")
     
     local panelMenu = self.m_objCommonUi.m_panelHuCardTipsContent
 
     panelMenu:removeAllChildren()
-
+    
     local iStartX = 0
     local iGap = 10
     local iPanelMenuWidth = 0
+    --[[
     for i = 1, #tObj do
         local uiItem = self:createMenuItem()
         uiItem:setScale(0.65)
@@ -503,6 +511,29 @@ function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
         iPanelMenuWidth = iPanelMenuWidth + uiItem:getBoundingBox().width
 
         --lt.CommonUtil:addNodeClickEvent(imageBg, handler(self, self.onClickSelectCard))
+    end--]]
+     for i = 1, #tObj do
+        local uiItem = self:createMenuItemt()
+        uiItem:setScale(1)
+        local Text_Zhang = uiItem:getChildByName("Text_Zhang")
+        local Image_Light = uiItem:getChildByName("Node_41"):getChildByName("Image_Light")
+        Image_Light:setVisible(false)
+        local Image_TingSingLight = uiItem:getChildByName("Node_41"):getChildByName("Image_TingSingLight")
+        Image_TingSingLight:setVisible(false)
+        local value = tObj[i]
+        local Num = self._deleget:getotersCard(value)
+        Text_Zhang:setString(Num)
+        local face = uiItem:getChildByName("Node_41"):getChildByName("Sprite_Face")
+        local imageBg = uiItem:getChildByName("Node_41"):getChildByName("Sprite_Bg")
+        imageBg.selectCardData = {card = value, type = iType}
+        --imageBg:setSwallowTouches(false)
+        local cardType = math.floor(value / 10) + 1
+        local cardValue = value % 10
+        face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
+        panelMenu:addChild(uiItem)
+        uiItem:setPosition(cc.p(iStartX, panelMenu:getContentSize().height/2 - uiItem:getBoundingBox().height/2))
+        iStartX = iStartX + uiItem:getBoundingBox().width + iGap
+        iPanelMenuWidth = iPanelMenuWidth + uiItem:getBoundingBox().width
     end
 
     --添加
@@ -513,8 +544,8 @@ function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
     local panelSize = cc.size(iPanelMenuWidth, panelMenu:getContentSize().height)
     --胡牌提示滚动面板的滚动尺寸
     panelMenu:setInnerContainerSize(panelSize)
-    if panelSize.width > 300 then --长度超过了 x 就设置成x，同时允许滚动
-        panelSize.width = 300
+    if panelSize.width > 350 then --长度超过了 x 就设置成x，同时允许滚动
+        panelSize.width = 350
         self:setHuTipsScrollBarEnabled(panelMenu, true)
     else --否则有足够的空间，不需要滚动
         self:setHuTipsScrollBarEnabled(panelMenu, false)
