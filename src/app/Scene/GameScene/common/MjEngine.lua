@@ -387,7 +387,6 @@ function MjEngine:configHuiCard()
 end
 
 function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refreshOut, refreshSpeicalOut)--吃椪杠 手牌 出的牌  用于刷牌
-	
 
 	local cpgOffX = 0
 	local cpgOffY = 0
@@ -775,6 +774,12 @@ function MjEngine:updateNanCpgCardValue(direction, cpgList)
 	self._allPlayerCpgCardsValue[direction] = cpgList
 end
 
+function MjEngine:goOutOneHandSpecialCardAtDirection(direction, value)--出了一张特殊 补花 飘癞子
+	self._allPlayerSpecialOutCardsValue[direction] = self._allPlayerSpecialOutCardsValue[direction] or {}
+
+	table.insert(self._allPlayerSpecialOutCardsValue[direction], value)
+end
+
 function MjEngine:goOutOneLightHandCardAtDirection(direction, value)--出了一张牌
 	self._allPlayerLightHandCardsValue[direction] = self._allPlayerLightHandCardsValue[direction] or {}
 	local isFind = false
@@ -801,9 +806,8 @@ function MjEngine:goOutOneStandHandCardAtDirection(direction, value)--出了一�
 	return isFind
 end
 
-function MjEngine:goOutOneHandCard(direction, value)--出了一张牌
+function MjEngine:replayGoOutOneHandCard(direction, value)--回放出了一张牌
 	if #self._allPlayerLightHandCardsValue[direction] >= 4 then
-			
 		local isRemove = self:goOutOneLightHandCardAtDirection(direction, value)
 
 		if not isRemove then
@@ -814,31 +818,59 @@ function MjEngine:goOutOneHandCard(direction, value)--出了一张牌
 	end
 end
 
---单张牌的变化
-function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
-	 
-	if lt.DataManager:getRePlayState() then
-		self:goOutOneHandCard(direction, value)
-	else
+function MjEngine:goOutOneHandCard(direction, value)--出了一张牌
+	if #self._allPlayerLightHandCardsValue[direction] >= 4 then
+			
 		if direction == lt.Constants.DIRECTION.NAN then
-			self:goOutOneHandCard(direction, value)
+			local isRemove = self:goOutOneLightHandCardAtDirection(direction, value)
+
+			if not isRemove then
+				self:goOutOneStandHandCardAtDirection(direction, value)
+			end
 		else
-			if #self._allPlayerLightHandCardsValue[direction] >= 4 then
-				local isRemove = self:goOutOneLightHandCardAtDirection(direction, value)
-				if not isRemove then
-					table.remove(self._allPlayerStandHandCardsValue[direction], 1)
-				end
-			else
+			local isRemove = self:goOutOneLightHandCardAtDirection(direction, value)
+			if not isRemove then
 				table.remove(self._allPlayerStandHandCardsValue[direction], 1)
 			end
-		 end
+		end
+	else
+		if direction == lt.Constants.DIRECTION.NAN then
+			self:goOutOneStandHandCardAtDirection(direction, value)
+		else
+			table.remove(self._allPlayerStandHandCardsValue[direction], 1)
+		end
+	end
+end
+
+--单张牌的变化
+function MjEngine:goOutOneHandCardAtDirection(direction, value, isSpecialCard)--出了一张牌
+	 
+	if lt.DataManager:getRePlayState() then
+		self:replayGoOutOneHandCard(direction, value)
+	else
+		self:goOutOneHandCard(direction, value)
 	end
 
 	self:sortHandValue(direction)
 
-	self._allPlayerOutCardsValue[direction] = self._allPlayerOutCardsValue[direction] or {}
-	table.insert(self._allPlayerOutCardsValue[direction], value)
-	
+	if not isSpecialCard then
+		local specialRefresh = false
+		for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
+			if value == v then--补花	
+				specialRefresh = true
+				break
+			end
+		end
+		if specialRefresh then
+			self:goOutOneHandSpecialCardAtDirection(direction, value)
+		else
+			self._allPlayerOutCardsValue[direction] = self._allPlayerOutCardsValue[direction] or {}
+			table.insert(self._allPlayerOutCardsValue[direction], value)
+		end
+	else
+		self:goOutOneHandSpecialCardAtDirection(direction, value)
+	end
+
 	local Mydirection = lt.DataManager:getPlayerDirectionByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 	-- 当出去一张牌手中剩余13张牌的时候， 如果手中能够构成胡牌，也要显示能够胡哪些牌
 	if direction == Mydirection then
@@ -856,12 +888,6 @@ function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 		end
 	end
 
-end
-
-function MjEngine:goOutOneHandSpecialCardAtDirection(direction, value)--出了一张特殊 补花 飘癞子
-	self._allPlayerSpecialOutCardsValue[direction] = self._allPlayerSpecialOutCardsValue[direction] or {}
-
-	table.insert(self._allPlayerSpecialOutCardsValue[direction], value)
 end
 
 function MjEngine:getOneHandCardAtDirection(direction, value)--起了一张牌

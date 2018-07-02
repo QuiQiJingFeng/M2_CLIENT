@@ -53,6 +53,7 @@ function GameRoomLayer:ctor()
 end
 
 function GameRoomLayer:initGame()  
+	self._sendRequest = false
 	self._gameSelectPosPanel:initGame()
 	self._gameCompassPanel:initGame()
 
@@ -86,6 +87,7 @@ function GameRoomLayer:getCurrentOutPutPlayerPos()
 end
 
 function GameRoomLayer:onGameConnectAgain()
+	self._sendRequest = false
 	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		self._gameSelectPosPanel:againConfigUI()
 	end	
@@ -164,6 +166,10 @@ end
 
 function GameRoomLayer:onClickCard(value,state) 
 
+	if self._sendRequest then
+		return
+	end
+
 	if self:isVisibleGameActionBtnsPanel() then
 		print("碰杠胡了不能点牌了")
 		return
@@ -179,10 +185,16 @@ function GameRoomLayer:onClickCard(value,state)
 		if state == 1 then
 			print("普通出牌")
 			local arg = {command = "PLAY_CARD", card = value}--普通出牌
+			self._sendRequest = true
+			self._engine:goOutOneHandCardAtDirection(lt.Constants.DIRECTION.NAN, value)
 			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 		else
 			print("听牌出牌")
 			local arg = {command = "TING_CARD", card = value}--听牌出牌
+
+			self._sendRequest = true
+			self._engine:goOutOneHandCardAtDirection(lt.Constants.DIRECTION.NAN, value)
+
 			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 			local direction = self:getPlayerDirectionByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 			self._gameSelectPosPanel:ShowTingBS(direction)
@@ -289,6 +301,7 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 	msg.card_list = msg.card_list or {}
 	print("============打印",msg.user_pos,lt.DataManager:getMyselfPositionInfo().user_pos)
 	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
+		self._sendRequest = false
 		print("================有没有进来============")
 		local handList = {}
 		local cpgList = {}
@@ -367,15 +380,19 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 					card = msg.card
 				}
 				specialRefresh = true
-				self._engine:goOutOneHandSpecialCardAtDirection(direction, value)
+				-- if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+				-- 	self._engine:goOutOneHandSpecialCardAtDirection(direction, value)
+				-- end
 				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				break
 			end
 		end
 	end
-	if not specialRefresh then
-		self._engine:goOutOneHandCardAtDirection(direction, value)
+
+	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+		self._engine:goOutOneHandCardAtDirection(direction, value, specialRefresh)
 	end
+
 	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
 end
 
