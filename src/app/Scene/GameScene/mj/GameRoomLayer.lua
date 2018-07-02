@@ -389,9 +389,12 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 		end
 	end
 
+	--其他玩家从手牌中去掉  （自己的在点击牌出牌的时候处理）
 	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
-		self._engine:goOutOneHandCardAtDirection(direction, value, specialRefresh)
+		self._engine:goOutOneHandCardAtDirection(direction, value)
 	end
+	--把这张牌加到out
+	self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
 
 	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
 end

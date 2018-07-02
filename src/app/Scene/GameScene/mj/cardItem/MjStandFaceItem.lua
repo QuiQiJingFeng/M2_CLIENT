@@ -108,11 +108,6 @@ function MjStandFaceItem:getCardSpecial()
 	return self._specialClick
 end
 
-function MjStandFaceItem:TingPaiMB() 
-	self._blackMask:setVisible(true)
-	--self._blackMask:setTouchEnabled(false)
-end
-
 function MjStandFaceItem:showNormal() 
 	self._backBg:setVisible(false)
 	self._blackMask:setVisible(false)
@@ -121,24 +116,15 @@ function MjStandFaceItem:showNormal()
 end
 
 function MjStandFaceItem:showTing() 
-	self._backBg:setVisible(false)
-	self._blackMask:setVisible(false)
-	self._redMask:setVisible(false)
 	self._tingIcon:setVisible(true)
 end
 
 function MjStandFaceItem:showRedMask() 
-	self._backBg:setVisible(false)
-	self._blackMask:setVisible(false)
 	self._redMask:setVisible(true)
-	self._tingIcon:setVisible(false)
 end
 
 function MjStandFaceItem:showBlackMask() 
-	self._backBg:setVisible(false)
 	self._blackMask:setVisible(true)
-	self._redMask:setVisible(false)
-	self._tingIcon:setVisible(false)
 end
 
 return MjStandFaceItem

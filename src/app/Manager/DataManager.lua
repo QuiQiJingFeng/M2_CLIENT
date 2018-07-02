@@ -308,8 +308,8 @@ function DataManager:getPlayerInfoByPos(pos)
     return nil
 end
 
-function DataManager:getTingPlayerInfo()
-    if not self._getTingPlayerInfo then
+function DataManager:getTingPlayerInfo(flag)
+    if not self._getTingPlayerInfo or flag then
         self._getTingPlayerInfo = {}
     end
     return self._getTingPlayerInfo
