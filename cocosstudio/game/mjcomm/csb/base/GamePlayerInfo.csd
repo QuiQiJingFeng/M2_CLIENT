@@ -155,8 +155,8 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Amount" CanEdit="False" ActionTag="145588166" Tag="2892" IconVisible="False" LeftMargin="-24.9999" RightMargin="-25.0001" TopMargin="76.0000" BottomMargin="-96.0000" FontSize="20" LabelText="99999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="50.0000" Y="20.0000" />
+              <AbstractNodeData Name="Text_Amount" CanEdit="False" ActionTag="145588166" Tag="2892" IconVisible="False" LeftMargin="-4.9999" RightMargin="-5.0001" TopMargin="76.0000" BottomMargin="-96.0000" FontSize="20" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="10.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="0.0001" Y="-86.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -316,8 +316,8 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Amount" ActionTag="1749520812" Tag="3734" IconVisible="False" LeftMargin="41.0000" RightMargin="-91.0000" TopMargin="5.9999" BottomMargin="-25.9999" FontSize="20" LabelText="99999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="50.0000" Y="20.0000" />
+              <AbstractNodeData Name="Text_Amount" CanEdit="False" ActionTag="1749520812" Tag="3734" IconVisible="False" LeftMargin="41.0000" RightMargin="-51.0000" TopMargin="5.9999" BottomMargin="-25.9999" FontSize="20" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="10.0000" Y="20.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="41.0000" Y="-15.9999" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -509,8 +509,8 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Amount" CanEdit="False" ActionTag="-1617207757" Tag="3743" IconVisible="False" LeftMargin="-25.0000" RightMargin="-25.0000" TopMargin="76.0000" BottomMargin="-96.0000" FontSize="20" LabelText="99999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="50.0000" Y="20.0000" />
+              <AbstractNodeData Name="Text_Amount" CanEdit="False" ActionTag="-1617207757" Tag="3743" IconVisible="False" LeftMargin="-5.0000" RightMargin="-5.0000" TopMargin="76.0000" BottomMargin="-96.0000" FontSize="20" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="10.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position Y="-86.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -648,8 +648,8 @@
                 <FileData Type="MarkedSubImage" Path="game/mjcomm/part/iconReady.png" Plist="game/mjcomm/mjPartUi.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Amount" ActionTag="-917309958" Tag="8731" IconVisible="False" LeftMargin="41.0000" RightMargin="-91.0000" TopMargin="4.9998" BottomMargin="-24.9998" FontSize="20" LabelText="99999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="50.0000" Y="20.0000" />
+              <AbstractNodeData Name="Text_Amount" CanEdit="False" ActionTag="-917309958" Tag="8731" IconVisible="False" LeftMargin="41.0000" RightMargin="-51.0000" TopMargin="4.9998" BottomMargin="-24.9998" FontSize="20" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="10.0000" Y="20.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="41.0000" Y="-14.9998" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -804,14 +804,14 @@
               <AbstractNodeData Name="Button_NoPlayer_3" ActionTag="582522647" Tag="4356" IconVisible="False" LeftMargin="192.4017" RightMargin="-298.4017" TopMargin="-55.4212" BottomMargin="-53.5788" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="76" Scale9Height="87" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="106.0000" Y="109.0000" />
                 <Children>
-                  <AbstractNodeData Name="Sprite_Word" ActionTag="-658084989" Tag="4357" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="36.5000" RightMargin="36.5000" TopMargin="60.0002" BottomMargin="16.9998" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="Sprite_Word" ActionTag="-658084989" Tag="4357" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="36.5000" RightMargin="36.5000" TopMargin="59.0002" BottomMargin="15.9998" ctype="SpriteObjectData">
                     <Size X="33.0000" Y="34.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="53.0000" Y="32.9998" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.3028" />
-                    <PreSize X="0.3113" Y="0.2936" />
+                    <PreSize X="0.3113" Y="0.3119" />
                     <FileData Type="MarkedSubImage" Path="game/mjcomm/words/wordBigDong.png" Plist="game/mjcomm/mjPartUi.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>

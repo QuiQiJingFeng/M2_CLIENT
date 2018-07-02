@@ -894,6 +894,24 @@ function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 
 	self._allPlayerOutCardsValue[direction] = self._allPlayerOutCardsValue[direction] or {}
 	table.insert(self._allPlayerOutCardsValue[direction], value)
+	
+	local Mydirection = lt.DataManager:getPlayerDirectionByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+	-- 当出去一张牌手中剩余13张牌的时候， 如果手中能够构成胡牌，也要显示能够胡哪些牌
+	if direction == Mydirection then
+		if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then 
+			local tempHandCards = clone(self._allPlayerStandHandCardsValue[direction])
+			local canHuCards = self:getAllCanHuCards(tempHandCards,99)
+			print("=====>>999999999999999")
+			dump(canHuCards)
+			if #canHuCards > 0 then
+				self._deleget:showHuCardsTipsMj()
+				self._deleget:viewHuCardsTipsMenu(canHuCards)
+			else
+				self._deleget:hideHuCardsTipsMj()
+			end
+		end
+	end
+
 end
 
 function MjEngine:GetTingPaiNotFreshen()
@@ -1167,12 +1185,46 @@ function MjEngine:TingStateBS() --得到有没有听得牌
 	end
 end
 
-function MjEngine:getAllCanHuCards(tempHandCards, value)
+function MjEngine:getotersCard(value)
 
-	for i,v in ipairs(tempHandCards) do
+	local otherCardNum = 0
+	local CardNum = 0
+	for i=1,4 do
+		if self._allPlayerCpgCardsValue then
+			for k,v in pairs(self._allPlayerCpgCardsValue[i]) do  
+				if v == value then
+					CardNum = CardNum + 1
+				end
+			end
+		end
+		if self._allPlayerOutCardsValue then
+			for j,t in pairs(self._allPlayerOutCardsValue[i]) do
+				if t == value then
+					CardNum = CardNum + 1
+				end
+			end
+		end
+	end
+	for k,v in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
 		if v == value then
-			table.remove(tempHandCards, i)
-			break
+				CardNum = CardNum + 1
+		end
+	end
+	if CardNum ~= 4 then
+		otherCardNum = 4 - CardNum
+	end
+	print("otherCardNum==>otherCardNum",otherCardNum)
+    return otherCardNum
+end
+function MjEngine:getAllCanHuCards(tempHandCards, value)
+	print("=============getAllCanHuCards============",value)
+	dump(tempHandCards)
+	if value ~= 99 then--等于99代表不传
+		for i,v in ipairs(tempHandCards) do
+			if v == value then
+				table.remove(tempHandCards, i)
+				break
+			end
 		end
 	end
 
@@ -1260,14 +1312,14 @@ function MjEngine:checkMyHandTingStatu()
 	self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] = self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN] or {}
 	for i,handNode in ipairs(self._allPlayerHandCardsNode[lt.Constants.DIRECTION.NAN]) do
 		if handNode:isVisible() then
-			print("=======================打印听得状态",self._tingPaiNotFreshen)
+			print("MjEngine:checkMyHandTingStatu==>打印听得状态",self._tingPaiNotFreshen)
 			if not self._tingPaiNotFreshen then
 				if self._isThereAnyTing then --有没有听，没听则不执行
 					local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 					local isTing = self:isCanTingByCard(tempHandCards, handNode:getTag())--出一张手牌是否可以听
 					if isTing then
 						table.insert(self._allHandCardsTingValue,handNode:getTag())
-						print("==========handNode:getTag()========",handNode:getTag())
+						print("MjEngine:checkMyHandTingStatu==>>handNode:getTag()========",handNode:getTag())
 						print(#self._allHandCardsTingValue)
 						dump(self._allHandCardsTingValue)
 						handNode:showTing()--显示听字标记
@@ -1285,6 +1337,16 @@ function MjEngine:checkMyHandTingStatu()
 	end
 
 	return isCanTing
+end
+
+function MjEngine:getMyHideCardNum()--得到手牌的数量  
+	local CardNum = 0
+	if #self._allPlayerHandCardsValue >= 1 then
+		for key,value in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
+			CardNum = CardNum + 1
+		end
+	end
+	return CardNum
 end
 
 function MjEngine:setClickCardCallBack(callBack)
@@ -1353,7 +1415,7 @@ function MjEngine:onClickHandCard(cardNode, value)
 		self:showRedMaskOutCards(value)
 
 		for i=1,4 do
-			print("金道乐for循环里面")
+			print("MjEngine:onClickHandCard==>刷新听出去盖着的牌")
 			if i == 1 then
 				self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, false, true, false)
 			elseif i == 2 then
@@ -1366,14 +1428,14 @@ function MjEngine:onClickHandCard(cardNode, value)
 		end
 
 		cardNode:setSelectState(true)
-		print("出列！！！！！！！！！！", value) 
+		print("onClickHandCard==>出列！！！！！！！！！！", value) 
 
 
 		--检测听牌列表
 		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 
 		local canHuCards = self:getAllCanHuCards(tempHandCards, value)
-		print("胡牌tips", #canHuCards)
+		print("onClickHandCard==>胡牌tips", #canHuCards)
 		if #canHuCards > 0 then
 			self._deleget:showHuCardsTipsMj()
 			self._deleget:viewHuCardsTipsMenu(canHuCards)
@@ -1392,7 +1454,7 @@ function MjEngine:onClickHandCard(cardNode, value)
 
 		if self._clickCardCallback then
 			local state = 0
-			print("点击出牌", value)
+			print("onClickHandCard==>点击出牌", value)
 			if bsNum >= 1 then --代表听牌出牌
 				state = 2
 			else
@@ -1438,14 +1500,14 @@ function MjEngine:onClickLightHandCard(cardNode, value)
 		self:showRedMaskOutCards(value)
 
 		cardNode:setSelectState(true)
-		print("出列！！！！！！！！！！", value) 
+		print("onClickLightHandCard==>出列！！！！！！！！！！", value) 
 
 
 		--检测听牌列表
 		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 
 		local canHuCards = self:getAllCanHuCards(tempHandCards, value)
-		print("胡牌tips", #canHuCards)
+		print("onClickLightHandCard==>胡牌tips", #canHuCards)
 		if #canHuCards > 0 then
 			self._deleget:showHuCardsTipsMj()
 			self._deleget:viewHuCardsTipsMenu(canHuCards)
@@ -1463,7 +1525,7 @@ function MjEngine:onClickLightHandCard(cardNode, value)
 		self._deleget:hideHuCardsTipsMj()
 
 		if self._clickCardCallback then
-			print("点击出牌", value)
+			print("onClickLightHandCard==>点击出牌", value)
 			self._clickCardCallback(value)
 		end
 	end
@@ -1560,7 +1622,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		local outValue = self._allPlayerOutCardsValue[formDirection][#self._allPlayerOutCardsValue[formDirection]]
 
 		if outValue and outValue == msg.item["value"] then
-			print("========================dddddddddddddddddddd走了这里")
+			print("MjEngine:noticeSpecialEvent==>outValue存在等于msg.item.value==>走了这里")
  			table.remove(self._allPlayerOutCardsValue[formDirection], #self._allPlayerOutCardsValue[formDirection])
 
  			--self._allPlayerOutCardsNode[formDirection][#self._allPlayerOutCardsNode]:removeFromParent()
@@ -1661,7 +1723,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		end
 	else
 		local directionn = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
-		print("推倒胡收到听牌走这里啦啦啦啦",msg.item["value"],directionn)
+		print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
 		self._tingPaiValue[directionn] = msg.item["value"]
 		--table.insert(self._tingPaiValue,msg.item["value"])
 		--这里需要删去听得牌而且后续需要保持剩下的牌不变
@@ -1672,7 +1734,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 	local HandFreshBs = false
 	for i=1,4 do
-			print("GameOVER金道乐for循环里面") --西南东北
+			print("noticeSpecialEvent==>GameOVER金道乐for循环里面") --西南东北
 			if i == 1 then
 				print("=========",i)
 				if i == direction then

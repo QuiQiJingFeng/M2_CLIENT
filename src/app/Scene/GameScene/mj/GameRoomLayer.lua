@@ -64,6 +64,11 @@ function GameRoomLayer:initGame()
 	end
 end
 
+function GameRoomLayer:getotersCard(value)
+	local Num = self._engine:getotersCard(value)
+    return Num
+end
+
 function GameRoomLayer:againConfigUI()  
 	self._gameSelectPosPanel:againConfigUI()
 	self._gameCompassPanel:initGame()
@@ -102,6 +107,11 @@ function GameRoomLayer:getPlayerDirectionByPos(playerPos)
 		return nil
 	end
 	return self._gameSelectPosPanel:getPlayerDirectionByPos(playerPos)
+end
+
+function GameRoomLayer:getMyHideCardNum()
+	local Num = self._engine:getMyHideCardNum()
+	return Num
 end
 
 function GameRoomLayer:resetActionButtonsData(tObjCpghObj)
@@ -176,6 +186,7 @@ function GameRoomLayer:onClickCard(value,state)
 			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 			local direction = self:getPlayerDirectionByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 			self._engine:TingPaiNotFreshen(direction,true)
+			self._gameSelectPosPanel:ShowTingBS(direction)
 		end
 	else
 		print("不该自己出牌！！！！！！！！！！")
@@ -256,6 +267,7 @@ function GameRoomLayer:onDealDown(msg)--发牌
 		tlAct:gotoFrameAndPlay(0, false)
 	    tlAct:clearFrameEventCallFunc() 
 	    tlAct:setFrameEventCallFunc(func)
+	    self._gameSelectPosPanel:HideReady()
 	end
 end
 
@@ -342,6 +354,8 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 			--self._engine:configAllPlayerCards(direction, false, true, false)
 		end
 	end
+	local direction = self:getPlayerDirectionByPos(msg.user_pos)
+	self._gameSelectPosPanel:ShowLightRing(direction)
 end
 
 function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
@@ -374,41 +388,41 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 	end
 	local HandFreshBs = false
 	for i=1,4 do
-			print("GameOVER金道乐for循环里面") --西南东北
-			if i == 1 then
-				print("=========",i)
-				if i == direction then
-					HandFreshBs = true
-				else
-					HandFreshBs = false
-				end
-				self._engine:configAllPlayerCards(lt.Constants.DIRECTION.XI, false, HandFreshBs, true, specialRefresh)
-			elseif i == 2 then
-				print("=========",i)
-				if i == direction then
-					HandFreshBs = true
-				else
-					HandFreshBs = false
-				end
-				self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, HandFreshBs, true, specialRefresh)
-			elseif i == 3 then
-				print("=========",i)
-				if i == direction then
-					HandFreshBs = true
-				else
-					HandFreshBs = false
-				end
-				self._engine:configAllPlayerCards(lt.Constants.DIRECTION.DONG, false, HandFreshBs, true, specialRefresh)
-			elseif i == 4 then
-				print("=========",i)
-				if i == direction then
-					HandFreshBs = true
-				else
-					HandFreshBs = false
-				end
-				self._engine:configAllPlayerCards(lt.Constants.DIRECTION.BEI, false, HandFreshBs, true, specialRefresh)
+		print("GameRoomLayer:onNoticePlayCard==>GameOVER金道乐for循环里面") --西南东北
+		if i == 1 then
+			print("=========",i)
+			if i == direction then
+				HandFreshBs = true
+			else
+				HandFreshBs = false
 			end
+			self._engine:configAllPlayerCards(lt.Constants.DIRECTION.XI, false, HandFreshBs, true, specialRefresh)
+		elseif i == 2 then
+			print("=========",i)
+			if i == direction then
+				HandFreshBs = true
+			else
+				HandFreshBs = false
+			end
+			self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, HandFreshBs, true, specialRefresh)
+		elseif i == 3 then
+			print("=========",i)
+			if i == direction then
+				HandFreshBs = true
+			else
+				HandFreshBs = false
+			end
+			self._engine:configAllPlayerCards(lt.Constants.DIRECTION.DONG, false, HandFreshBs, true, specialRefresh)
+		elseif i == 4 then
+			print("=========",i)
+			if i == direction then
+				HandFreshBs = true
+			else
+				HandFreshBs = false
+			end
+			self._engine:configAllPlayerCards(lt.Constants.DIRECTION.BEI, false, HandFreshBs, true, specialRefresh)
 		end
+	end
 	--self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
 end
 
@@ -457,7 +471,7 @@ function GameRoomLayer:onRefreshGameOver(msg)--通知客户端 本局结束 带�
 	-- msg.over_type-- 1 正常结束 2 流局 3 房间解散会发送一个结算
 	
 	-- msg.award_list
-
+	self._gameSelectPosPanel:RestartShow()
 	self._currentOutPutPlayerPos = nil--重置绿红状态
 
 	self._engine:gameOverShow()
@@ -468,7 +482,10 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	if self:isVisibleGameActionBtnsPanel() then
 		self._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:setVisible(false)
 	end
-
+	if msg.item["type"] == 7 then --如果是听牌则刷新其他人的听牌杠标识
+		local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
+		self._gameSelectPosPanel:ShowTingBS(direction)
+	end
 	self._engine:noticeSpecialEvent(msg)
 end
 
@@ -488,7 +505,7 @@ function GameRoomLayer:onGamenoticeOtherDistroyRoom(msg)--通知有人解散房�
 		if loginData.user_id ==  msg.confirm_map[1] then --代表是申请人，直接置灰
 			self.ApplyGameOverPanel:buttonNotChick()
 		end
-		lt.UILayerManager:addLayer(self.ApplyGameOverPanel,false)
+		lt.UILayerManager:addLayer(self.ApplyGameOverPanel,true)
 	else
 		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
 	end	

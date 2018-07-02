@@ -32,12 +32,16 @@ function ApplyGameOverPanel:ctor(deleget)
 	self._bn_Cancel = self.root:getChildByName("Bn_Cancel")--拒绝
 	self._bn_Sure = self.root:getChildByName("Bn_Sure")--同意
 
+	self._buttonEnabled0_1 = self.root:getChildByName("ButtonEnabled0_1")
+	self._buttonEnabled0_2 = self.root:getChildByName("ButtonEnabled0_2")
+	self._buttonEnabled0_1:setVisible(false)
+	self._buttonEnabled0_2:setVisible(false)
+
 	lt.CommonUtil:addNodeClickEvent(self._bn_Cancel, handler(self, self.onCancelClick))
 	lt.CommonUtil:addNodeClickEvent(self._bn_Sure, handler(self, self.onSureClick))
 
 end
 function ApplyGameOverPanel:show(Timeer,nameidText)
-	print("[[[[[[[[[[[[")
 	dump(nameidText)
 
 	local roomInfo = lt.DataManager:getGameRoomInfo()
@@ -50,8 +54,7 @@ function ApplyGameOverPanel:show(Timeer,nameidText)
 			self._applicaContent:setString("玩家【"..player.user_name.."】申请解散房间，请等待其他玩家选择（超过2分钟未做选择，则默认同意)")
 		end
 	end
-	print("ffffffffff")
-	dump(needApplyPlayer)
+
 	for i,player in ipairs(needApplyPlayer) do
 		self._stateLableTable[i]:setTag(player.user_id)
 		self._nameLableTable[i]:setString(player.user_name)
@@ -65,11 +68,11 @@ function ApplyGameOverPanel:show(Timeer,nameidText)
 	end
 
 	for i,lable in ipairs(self._stateLableTable) do
-		print("=======1111111",lable:getTag())
+		print("ApplyGameOverPanel===>lable:getTag()",lable:getTag())
 		for k,userId in ipairs(nameidText) do
 			print(lable:getTag(),"==========",tonumber(userId))
 			if lable:getTag() == tonumber(userId) then
-				print("sssssssssssssss")
+				print("ApplyGameOverPanel===>玩家同意")
 				lable:setString("玩家同意")
 				lable:setColor(cc.c3b(0,255,0))
 			end
@@ -101,9 +104,9 @@ function ApplyGameOverPanel:onUpdate(dt)
 		ss = pp
 		if ss<60 and ff=="" then
 			if ss < 10 then
-				self._timeLabel:setString("0"..ss)
+				self._timeLabel:setString("00".."/".."0"..ss)
 			else
-				self._timeLabel:setString(ss)
+				self._timeLabel:setString("00".."/"..ss)
 			end
 		else
 			if ss < 10 then
@@ -139,9 +142,10 @@ end
 
 function ApplyGameOverPanel:buttonNotChick()
 	--成功按钮灰掉
-	self._bn_Cancel:setEnabled(false)
-	self._bn_Sure:setEnabled(false)
-
+	self._bn_Cancel:setVisible(false)
+	self._bn_Sure:setVisible(false)
+	self._buttonEnabled0_1:setVisible(true)
+	self._buttonEnabled0_2:setVisible(true)
 end
 
 function ApplyGameOverPanel:onClose()
