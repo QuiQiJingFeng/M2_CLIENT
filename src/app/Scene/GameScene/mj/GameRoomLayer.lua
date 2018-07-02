@@ -141,8 +141,8 @@ function GameRoomLayer:viewHuCardsTipsMenu(canHuCards)
 	self._gameActionBtnsPanel:viewHuCardsTipsMenu(canHuCards)
 end
 
-function GameRoomLayer:checkMyHandTingStatu()
-	self._engine:checkMyHandTingStatu()
+function GameRoomLayer:checkMyHandTingStatu(bool)
+	self._engine:checkMyHandTingStatu(bool)
 end
 
 function GameRoomLayer:checkMyHandButtonActionStatu(handList,state) --检测吃椪杠

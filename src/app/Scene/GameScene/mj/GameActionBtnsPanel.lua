@@ -145,7 +145,7 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
         end
 
     elseif pSender == self.m_objCommonUi.m_btnTing then
-        self._deleget:checkMyHandTingStatu()
+        self._deleget:checkMyHandTingStatu(true)
         self.m_objCommonUi.m_btnTing:setVisible(false)
         self:viewHideActPanelAndMenu()                  
         -- if self.onTingAction then
@@ -166,14 +166,15 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
         end
 
     elseif pSender == self.m_objCommonUi.m_btnPass then
+       
+        if self.m_objCommonUi.m_btnTing:isVisible() then
+            self._deleget:checkMyHandTingStatu(false)
+        end
+
         if pSender.isPassSendMsg then
             self:onPassAction()
         else
             self:onPassClick()
-            --self:refreshHandCards()
-            --self.m_objModel.tObjCpghByMoPai = nil
-            --重置倒计时
-            --self:viewSendCardDelayTime({cTableNumExtra=self.m_objModel:getMeTableNumExtra()})
         end
         --self.m_objModel.m_chiPengGangTing = 0
         self:viewHideActPanelAndMenu()
