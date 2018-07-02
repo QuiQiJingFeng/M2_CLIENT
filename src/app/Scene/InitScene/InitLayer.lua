@@ -75,8 +75,6 @@ function InitLayer:requestLogin(body)
                     body = {user_id=user_id,token=token}
                     lt.DataManager:recordAuthData(body)
                     InitLayer:onGetUserInfo(body)
-
-                    a = a + 1
                 end
             end
         end)

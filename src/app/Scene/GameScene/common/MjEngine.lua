@@ -687,50 +687,9 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			end
 			node:setPosition(self._allOutCardsNodePos[tostring(direction)][i])
 			node:setVisible(true)
-			--[[
-			--听牌后出的那张牌要翻面
-			print("=====lkkkkkkkkkkkkkkkk11111111111",direction,self._tingPaiNotFreshen)
-			if direction == lt.Constants.DIRECTION.NAN and self._tingPaiNotFreshen then
-				print("=====lkkkkkkkkkkkkkkkk",self._tingPaiValue)
-			   if self._tingPaiValue and self._tingPaiValue == info then
-			   		print("=====BackBg=========")
-			   		node:BackBg(true)
-			   end
-			end--]]
-			--if direction == lt.Constants.DIRECTION.NAN and self._tingPaiNotFreshen then
-			---[[
-			dump(self._tingPaiValue,"打印盖着的牌")
-				for k,v in pairs(self._tingPaiValue) do--k -- 方向 v--听牌值
-				--local directionn = lt.DataManager:getPlayerDirectionByPos(k)
-				if direction == k and v == info then
-					print("=====BackBg=========")
-				   	node:BackBg(true)
-				   	break  --出的牌里面可能会有和听得牌同植的牌，所以遍历到就跳出来
-				end
-			end--]]
-			--[[
-			dump(self._tingPaiValue,"打印盖着的牌")
-			if #self._tingPaiValue >= 1 then
-			   		for i=1,#self._tingPaiValue do
-			   			if self._tingPaiValue[i] == info then
-			   				node:BackBg(true)
-			   			end
-			   		end
-			end--]]
-				
-				--if direction == lt.Constants.DIRECTION.NAN
-				--[[
-			   if #self._tingPaiValue >= 1 then
-			   		for i=1,#self._tingPaiValue do
-			   			if self._tingPaiValue[i] == info then
-			   				node:BackBg(true)
-			   			end
-			   		end
-			   		print("=====BackBg=========")
-			   		
-			   end--]]
-			--end
-
+			if info == 99 then
+				node:BackBg(true)
+			end
 		end
 	end
 
@@ -1413,20 +1372,6 @@ function MjEngine:onClickHandCard(cardNode, value)
 		self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false, false)--原来选中的牌回归原位
 		--从出的牌中筛选出将要出的牌
 		self:showRedMaskOutCards(value)
-
-		for i=1,4 do
-			print("MjEngine:onClickHandCard==>刷新听出去盖着的牌")
-			if i == 1 then
-				self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, false, true, false)
-			elseif i == 2 then
-				self:configAllPlayerCards(lt.Constants.DIRECTION.BEI, false, false, true, false)
-			elseif i == 3 then
-				self:configAllPlayerCards(lt.Constants.DIRECTION.XI, false, false, true, false)
-			elseif i == 4 then
-				self:configAllPlayerCards(lt.Constants.DIRECTION.DONG, false, false, true, false)
-			end
-		end
-
 		cardNode:setSelectState(true)
 		print("onClickHandCard==>出列！！！！！！！！！！", value) 
 
@@ -1730,45 +1675,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		self:goOutOneHandCardAtDirection(direction, msg.item["value"])
 	end	
 
-	--self:configAllPlayerCards(direction, true, true, true, false)--4 false --> true 
-
-	local HandFreshBs = false
-	for i=1,4 do
-			print("noticeSpecialEvent==>GameOVER金道乐for循环里面") --西南东北
-			if i == 1 then
-				print("=========",i)
-				if i == direction then
-					HandFreshBs = true
-				else
-					HandFreshBs = false
-				end
-				self:configAllPlayerCards(lt.Constants.DIRECTION.XI, true, HandFreshBs, true, specialRefresh)
-			elseif i == 2 then
-				print("=========",i)
-				if i == direction then
-					HandFreshBs = true
-				else
-					HandFreshBs = false
-				end
-				self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, HandFreshBs, true, specialRefresh)
-			elseif i == 3 then
-				print("=========",i)
-				if i == direction then
-					HandFreshBs = true
-				else
-					HandFreshBs = false
-				end
-				self:configAllPlayerCards(lt.Constants.DIRECTION.DONG, true, HandFreshBs, true, specialRefresh)
-			elseif i == 4 then
-				print("=========",i)
-				if i == direction then
-					HandFreshBs = true
-				else
-					HandFreshBs = false
-				end
-				self:configAllPlayerCards(lt.Constants.DIRECTION.BEI, true, HandFreshBs, true, specialRefresh)
-			end
-		end
+	self:configAllPlayerCards(direction, true, true, true, false)--4 false --> true 
 
 	if self._tingPaiNotFreshen then
 		self:TingPaiNotFreshenUI()

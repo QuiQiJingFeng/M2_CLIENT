@@ -188,7 +188,9 @@ end
 -- 记录下登陆 房间服务器的令牌
 function DataManager:recordAuthData(data)
     self._auth_data = data
-    buglySetUserId(data.user_id)
+    if buglySetUserId then
+        buglySetUserId(data.user_id)
+    end
 end
 
 function DataManager:getAuthData()
