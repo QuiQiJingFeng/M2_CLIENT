@@ -185,7 +185,6 @@ function GameRoomLayer:onClickCard(value,state)
 			local arg = {command = "TING_CARD", card = value}--听牌出牌
 			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 			local direction = self:getPlayerDirectionByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
-			self._engine:TingPaiNotFreshen(direction,true)
 			self._gameSelectPosPanel:ShowTingBS(direction)
 		end
 	else
@@ -337,17 +336,8 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 		self._engine:updateNanCpgCardValue(lt.Constants.DIRECTION.NAN, cpgList)
 		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
 		
-		if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then 
-			local state = self._ischeckMyHandStatu
-			self:checkMyHandButtonActionStatu(handList,state)
-			self._ischeckMyHandStatu = false
-		else
-			if self._ischeckMyHandStatu then--杠地开花
-				local state = self._ischeckMyHandStatu
-				self:checkMyHandButtonActionStatu(handList,state)
-				self._ischeckMyHandStatu = false
-			end
-		end
+		self:checkMyHandButtonActionStatu(handList, self._ischeckMyHandStatu)--暗杠  回头杠 胡 听
+		self._ischeckMyHandStatu = false
 
 	else--不是本人
 		if msg.operator == 1 then--摸得 getOneHandCardAtDirection

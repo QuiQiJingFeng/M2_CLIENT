@@ -100,6 +100,10 @@ function DataManager:onPushAllRoomInfo(msg)
         self._gameRoomInfo = msg.refresh_room_info
     end
 
+    if msg.ting_list then
+        self._getTingPlayerInfo = msg.ting_list
+    end 
+
     self._pushAllRoomInfo = msg
     lt.GameEventManager:post(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN)
 end
@@ -304,6 +308,25 @@ function DataManager:getPlayerInfoByPos(pos)
     return nil
 end
 
+function DataManager:getTingPlayerInfo()
+    if not self._getTingPlayerInfo then
+        self._getTingPlayerInfo = {}
+    end
+    return self._getTingPlayerInfo
+end
+
+function DataManager:isTingPlayerByPos(pos)
+
+    local info = self:getTingPlayerInfo()
+    for k,v in ipairs(info) do
+        if v.user_pos == pos then
+            return true
+        end
+    end
+
+    return false
+end
+
 function DataManager:setPlayerDirectionTable(directions)
     self._playerDirectionTable = directions
 end
@@ -370,7 +393,10 @@ function DataManager:clearGameData()   --清除牌局数据
     self:setReplayDataDispose(nil)
     self:setRePlayState(false)
     self:setMyselfPositionInfo(nil)
+    self._getTingPlayerInfo = nil
 end
+
+
 
 return DataManager
 
