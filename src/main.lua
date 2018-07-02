@@ -42,7 +42,9 @@ function __G__TRACKBACK__(msg)
     print("----------------------------------------")
     print(trace_msg)
     print("----------------------------------------")
-    buglyReportLuaException(tostring(trace_msg), debug.traceback())
+    if buglyReportLuaException then
+        buglyReportLuaException(tostring(trace_msg), debug.traceback())
+    end
 end
 
 local status, msg = xpcall(main, __G__TRACKBACK__)
