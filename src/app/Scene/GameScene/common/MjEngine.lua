@@ -827,6 +827,13 @@ function MjEngine:replayGoOutOneHandCard(direction, value)--回放出了一张�
 	else
 		self:goOutOneStandHandCardAtDirection(direction, value)
 	end
+
+	for i,v in ipairs(self._allPlayerHandCardsValue[direction]) do
+		if v == value then
+			table.remove(self._allPlayerHandCardsValue[direction], i)
+			break
+		end
+	end
 end
 
 function MjEngine:goOutOneHandCard(direction, value)--出了一张牌
@@ -1222,12 +1229,11 @@ end
 function MjEngine:getAllCanHuCards(tempHandCards, value)
 	print("=============getAllCanHuCards============",value)
 	dump(tempHandCards)
-	if value ~= 99 then--等于99代表不传
-		for i,v in ipairs(tempHandCards) do
-			if v == value then
-				table.remove(tempHandCards, i)
-				break
-			end
+
+	for i,v in ipairs(tempHandCards) do
+		if v == value then
+			table.remove(tempHandCards, i)
+			break
 		end
 	end
 
@@ -1413,7 +1419,7 @@ function MjEngine:onClickHandCard(cardNode, value)
 			end	
 		end
 
-		self._deleget:hideHuCardsTipsMj()
+		--self._deleget:hideHuCardsContent()
 
 		if self._clickCardCallback then
 			local state = 1
@@ -1492,15 +1498,19 @@ function MjEngine:onClickLightHandCard(cardNode, value)
 	else
 		for k,outCardsNode in pairs(self._allPlayerOutCardsNode) do
 			for i,v in ipairs(outCardsNode) do
-				v:showNormal()
+				v:hidRedMask()
 			end	
 		end
 
-		self._deleget:hideHuCardsTipsMj()
+		--self._deleget:hideHuCardsContent()
 
 		if self._clickCardCallback then
-			print("onClickLightHandCard==>点击出牌", value)
-			self._clickCardCallback(value)
+			local state = 1
+			if isClickTing and self._isSelectTing then
+				state = 2
+			end
+			self._clickCardCallback(value, state)
+			
 		end
 	end
 end

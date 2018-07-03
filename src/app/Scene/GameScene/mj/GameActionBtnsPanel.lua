@@ -464,6 +464,11 @@ function GameActionBtnsPanel:hideHuCardsTipsMj()
     self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(false)
 end
 
+function GameActionBtnsPanel:hideHuCardsContent()
+    self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(false)
+    self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(false)
+end
+
 function GameActionBtnsPanel:autoShowHuCardsContent()
     if self.m_objCommonUi.m_panelHuCardTipsContent:isVisible() then
         self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(false)

@@ -137,6 +137,10 @@ function GameRoomLayer:hideHuCardsTipsMj()
 	self._gameActionBtnsPanel:hideHuCardsTipsMj()
 end
 
+function GameRoomLayer:hideHuCardsContent()
+	self._gameActionBtnsPanel:hideHuCardsContent()
+end
+
 function GameRoomLayer:viewHuCardsTipsMenu(canHuCards)
 	self._gameActionBtnsPanel:viewHuCardsTipsMenu(canHuCards)
 end
@@ -390,10 +394,15 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 	end
 
 	--其他玩家从手牌中去掉  （自己的在点击牌出牌的时候处理）
-	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+	if lt.DataManager:getRePlayState() then
 		self._engine:goOutOneHandCardAtDirection(direction, value)
+	else
+		if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+			self._engine:goOutOneHandCardAtDirection(direction, value)
+		end
 	end
-	--把这张牌加到out
+
+	--把这张牌加到out  先通知noticeSpecial 再 NoticePlayCard
 	self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
 
 	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
@@ -458,6 +467,10 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	if msg.item["type"] == 7 then --如果是听牌则刷新其他人的听牌杠标识
 		local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
 		self._gameSelectPosPanel:ShowTingBS(direction)
+
+		if lt.DataManager:getRePlayState() and msg.item["value"] then
+			self._engine:goOutOneHandCardAtDirection(direction, msg.item["value"])
+		end
 	end
 	self._engine:noticeSpecialEvent(msg)
 end
