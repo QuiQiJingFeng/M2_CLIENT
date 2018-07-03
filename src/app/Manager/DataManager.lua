@@ -316,14 +316,13 @@ function DataManager:getTingPlayerInfo(flag)
 end
 
 function DataManager:isTingPlayerByPos(pos)
-
     local info = self:getTingPlayerInfo()
+
     for k,v in ipairs(info) do
         if v.user_pos == pos then
-            return true
+            return v.ting
         end
     end
-
     return false
 end
 
@@ -334,6 +333,15 @@ end
 function DataManager:getPlayerDirectionByPos(pos)
     self._playerDirectionTable = self._playerDirectionTable or {}
     return self._playerDirectionTable[pos]
+end
+
+function DataManager:getPlayerPosByDirection(direction)
+    for pos,v in pairs(self._playerDirectionTable) do
+        if v == direction then
+            return pos
+        end
+    end
+    return nil
 end
 
 function DataManager:setRePlayState(bs)--布尔值

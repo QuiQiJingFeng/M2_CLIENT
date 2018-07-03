@@ -309,6 +309,12 @@ function MjEngine:sendCardsEffect()
 					self._allPlayerStandHandCardsValue[direction][i] = 99
 				end
 			end
+			for i=1,13 do
+				if direction ~= lt.Constants.DIRECTION.NAN then
+					self._allPlayerHandCardsValue[direction] = self._allPlayerHandCardsValue[direction] or {}
+					self._allPlayerHandCardsValue[direction][i] = 99
+				end
+			end
 		end
 		self:configAllPlayerCards(direction, true, true, true, true)
 	end
@@ -759,8 +765,13 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 end
 
 --所有牌的变化
-function MjEngine:updateNanHandCardValue(direction, handList)--通知自己出牌的时候会把手牌和吃椪杠的牌发过来
-	
+function MjEngine:updateNanHandCardValue(direction, handList, fourCardList)--通知自己出牌的时候会把手牌和吃椪杠的牌发过来
+	fourCardList = fourCardList or {}
+	for k,v in pairs(fourCardList) do
+		local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
+		self._allPlayerLightHandCardsValue[direction] = v.cards
+	end
+
 	local tempFourCardList = clone(self._allPlayerLightHandCardsValue[direction])
 	self._allPlayerStandHandCardsValue[direction] = {}
 	for i,card in ipairs(handList) do
@@ -1002,13 +1013,9 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		print("####################################", isTing)
 
 		if #self._allPlayerLightHandCardsValue[direction] >= 4 then
-			if self:isFlower(value) then
-				node:showNormal()
-			else
+			if not self:isFlower(value) then
 				node:showBlackMask() 
 			end
-		else
-			node:showNormal()
 		end
 
 		if isTing then
@@ -1016,12 +1023,10 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		else
 			if #self._allHandCardsTingValue > 0 and self._isSelectTing then
 				node:showBlackMask()
-			else
-				node:showNormal()
 			end 
 		end
 
-		local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+		local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getPlayerPosByDirection(direction))
 
 		if isBaoTing then
 			node:showBlackMask()

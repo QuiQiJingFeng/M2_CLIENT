@@ -349,7 +349,7 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 			table.insert(handList, newCard)--将新摸得牌放到最后14号位
 		end
 
-		self._engine:updateNanHandCardValue(lt.Constants.DIRECTION.NAN, handList)
+		self._engine:updateNanHandCardValue(lt.Constants.DIRECTION.NAN, handList, msg.four_card_list)
 		self._engine:updateNanCpgCardValue(lt.Constants.DIRECTION.NAN, cpgList)
 		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
 		
