@@ -33,6 +33,8 @@ LanguageString["REPLAYCODETEXT"]			    		= "请输入回放码"
 
 LanguageString["PLAYER_NOT_GREEN_OVER"] = "玩家【%s】不同意解散房间,请继续游戏"
 
+LanguageString["SENDTOZHANHJIINFO"] = "没有请求到战绩信息"
+
 
 function LanguageString:getString(key)
 	return LanguageString[key] or nil

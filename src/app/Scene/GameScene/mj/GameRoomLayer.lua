@@ -111,11 +111,6 @@ function GameRoomLayer:getPlayerDirectionByPos(playerPos)
 	return self._gameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 end
 
-function GameRoomLayer:getMyHideCardNum()
-	local Num = self._engine:getMyHideCardNum()
-	return Num
-end
-
 function GameRoomLayer:resetActionButtonsData(tObjCpghObj)
 	self._gameActionBtnsPanel:resetActionButtonsData(tObjCpghObj)
 end

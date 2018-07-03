@@ -1345,16 +1345,6 @@ function MjEngine:checkMyHandTingStatu(isSelectTing)
 	self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false, false)	
 end
 
-function MjEngine:getMyHideCardNum()--得到手牌的数量  
-	local CardNum = 0
-	if #self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN] >= 1 then
-		for key,value in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
-			CardNum = CardNum + 1
-		end
-	end
-	return CardNum
-end
-
 function MjEngine:setClickCardCallBack(callBack)
 	self._clickCardCallback = callBack
 end

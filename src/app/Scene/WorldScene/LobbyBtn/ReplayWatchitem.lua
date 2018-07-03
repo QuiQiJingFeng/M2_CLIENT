@@ -80,6 +80,12 @@ function ReplayWatchitem:onDetail(event)
     local user_url = "https://replaycord.oss-cn-hongkong.aliyuncs.com/".."all".."/"..self._replay_id..".txt"
 
 	lt.CommonUtil:sendXMLHTTPrequrest("GET",user_url,body,function(recv_msg)
+        if not recv_msg then
+            print("请求的是空值")
+            local text = lt.LanguageString:getString("SENDTOZHANHJIINFO")
+            lt.MsgboxLayer:showMsgBox(text, false,function()  print("===1===")  end, function()  print("===2===") end, true, 15)
+            return
+        end
 		local receive = string.split(recv_msg, "\n")
 		local ReplayAllTable = {}
         local ReplayOneTable = {}
@@ -158,7 +164,7 @@ function ReplayWatchitem:onDetail(event)
 
         dump(ReplayOneTable)
         --table.insert(allEventData,1,ReplayOneTable)
-        print("[[[[[[[[[")
+        print("[[[[[[[[[allEventData")
         dump(allEventData)
         lt.DataManager:setReplayDataDispose(allEventData)--把回放数据先维护起来
 
