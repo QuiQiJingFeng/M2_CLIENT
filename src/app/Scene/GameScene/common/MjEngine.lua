@@ -1010,7 +1010,7 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 				end
 			end
 		end
-		print("####################################", isTing)
+		lt.CommonUtil.print("####################################", isTing)
 
 		if #self._allPlayerLightHandCardsValue[direction] >= 4 then
 			if not self:isFlower(value) then
@@ -1120,12 +1120,12 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state)
 
 		--检测胡
 		if self:checkIsHu(handList) then
-			print("自摸了###########################################")
+			lt.CommonUtil.print("自摸了###########################################")
 			tObjCpghObj.tObjHu = {}
 			huBs = true
 		else
 			huBs = false
-			print("没有自摸###########################################")
+			lt.CommonUtil.print("没有自摸###########################################")
 		end
 	end
 
@@ -1239,11 +1239,11 @@ function MjEngine:getotersCard(value)--胡牌的番
 	end
 	otherCardNum = 4 - CardNum
 
-	print("otherCardNum==>otherCardNum",otherCardNum)
+	lt.CommonUtil.print("otherCardNum==>otherCardNum",otherCardNum)
     return otherCardNum
 end
 function MjEngine:getAllCanHuCards(tempHandCards, value)
-	print("=============getAllCanHuCards============",value)
+	lt.CommonUtil.print("=============getAllCanHuCards============",value)
 	dump(tempHandCards)
 
 	for i,v in ipairs(tempHandCards) do
@@ -1266,7 +1266,7 @@ function MjEngine:getAllCanHuCards(tempHandCards, value)
 end
 
 function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否可以听
-    print("++++++++++++++检测听牌的牌++++++++++++",value)
+    lt.CommonUtil.print("++++++++++++++检测听牌的牌++++++++++++",value)
     local allCardsValueTable = clone(tempHandCards)
 	for i,v in ipairs(allCardsValueTable) do
 		if v == value then
@@ -1350,7 +1350,7 @@ function MjEngine:setClickCardCallBack(callBack)
 end
 
 function MjEngine:onClickHandCard(cardNode, value)
-	print("MjEngine:onClickHandCard")
+	lt.CommonUtil.print("MjEngine:onClickHandCard")
 	if lt.DataManager:getRePlayState() then
 		return
 	end
@@ -1403,14 +1403,14 @@ function MjEngine:onClickHandCard(cardNode, value)
 		--从出的牌中筛选出将要出的牌
 		self:showRedMaskOutCards(value)
 		cardNode:setSelectState(true)
-		print("onClickHandCard==>出列！！！！！！！！！！", value) 
+		lt.CommonUtil.print("onClickHandCard==>出列！！！！！！！！！！", value) 
 
 
 		--检测听牌列表
 		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 
 		local canHuCards = self:getAllCanHuCards(tempHandCards, value)
-		print("onClickHandCard==>胡牌tips", #canHuCards)
+		lt.CommonUtil.print("onClickHandCard==>胡牌tips", #canHuCards)
 		if #canHuCards > 0 then
 			self._deleget:showHuCardsTipsMj()
 			self._deleget:viewHuCardsTipsMenu(canHuCards)
@@ -1486,14 +1486,14 @@ function MjEngine:onClickLightHandCard(cardNode, value)
 		self:showRedMaskOutCards(value)
 
 		cardNode:setSelectState(true)
-		print("onClickLightHandCard==>出列！！！！！！！！！！", value) 
+		lt.CommonUtil.print("onClickLightHandCard==>出列！！！！！！！！！！", value) 
 
 
 		--检测听牌列表
 		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 
 		local canHuCards = self:getAllCanHuCards(tempHandCards, value)
-		print("onClickLightHandCard==>胡牌tips", #canHuCards)
+		lt.CommonUtil.print("onClickLightHandCard==>胡牌tips", #canHuCards)
 		if #canHuCards > 0 then
 			self._deleget:showHuCardsTipsMj()
 			self._deleget:viewHuCardsTipsMenu(canHuCards)
@@ -1635,7 +1635,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 			local outValue = self._allPlayerOutCardsValue[formDirection][#self._allPlayerOutCardsValue[formDirection]]
 
 			if outValue and outValue == msg.item["value"] then
-				print("MjEngine:noticeSpecialEvent==>outValue存在等于msg.item.value==>走了这里")
+				lt.CommonUtil.print("MjEngine:noticeSpecialEvent==>outValue存在等于msg.item.value==>走了这里")
 	 			table.remove(self._allPlayerOutCardsValue[formDirection], #self._allPlayerOutCardsValue[formDirection])
 
 				self:configAllPlayerCards(formDirection, false, false, true, false)
@@ -1772,7 +1772,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 	--听牌处理
 	if msg.item["type"] == 7 then
 		local directionn = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
-		print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
+		lt.CommonUtil.print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
 
 		local info = {}
 		info["user_pos"] = msg.item["from"]
@@ -1981,7 +1981,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		if self:checkIsHu(allRoomInfo.card_list) then
 			tObjCpghObj.tObjHu = {}
 		else
-			print("没有自摸")
+			lt.CommonUtil.print("没有自摸")
 		end			
 	end
 

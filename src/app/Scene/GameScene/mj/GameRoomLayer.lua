@@ -170,7 +170,7 @@ function GameRoomLayer:onClickCard(value,state)
 	end
 
 	if self:isVisibleGameActionBtnsPanel() then
-		print("碰杠胡了不能点牌了")
+		lt.CommonUtil.print("碰杠胡了不能点牌了")
 		return
 	end
 	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
@@ -180,15 +180,15 @@ function GameRoomLayer:onClickCard(value,state)
 	end
 	
 	if self._currentOutPutPlayerPos and self._currentOutPutPlayerPos == lt.DataManager:getMyselfPositionInfo().user_pos then
-		print("出牌########################", value)
+		lt.CommonUtil.print("出牌########################", value)
 		if not state or state == 1 then
-			print("普通出牌")
+			lt.CommonUtil.print("普通出牌")
 			local arg = {command = "PLAY_CARD", card = value}--普通出牌
 			self._sendRequest = true
 			self._engine:goOutOneHandCardAtDirection(lt.Constants.DIRECTION.NAN, value)
 			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 		elseif state == 2 then
-			print("听牌出牌")
+			lt.CommonUtil.print("听牌出牌")
 			local arg = {command = "TING_CARD", card = value}--听牌出牌
 
 			self._sendRequest = true
@@ -199,7 +199,7 @@ function GameRoomLayer:onClickCard(value,state)
 			self._gameSelectPosPanel:ShowTingBS(direction)
 		end
 	else
-		print("不该自己出牌！！！！！！！！！！")
+		lt.CommonUtil.print("不该自己出牌！！！！！！！！！！")
 	end
 end
 
@@ -298,17 +298,17 @@ end
 function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 	self._currentOutPutPlayerPos = msg.user_pos
 	msg.card_list = msg.card_list or {}
-	print("============打印",msg.user_pos,lt.DataManager:getMyselfPositionInfo().user_pos)
+	lt.CommonUtil.print("============打印",msg.user_pos,lt.DataManager:getMyselfPositionInfo().user_pos)
 	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
 		self._sendRequest = false
-		print("================有没有进来============")
+		lt.CommonUtil.print("================有没有进来============")
 		local handList = {}
 		local cpgList = {}
 		--摸牌 ->出牌
 		local newCard = nil
 		
 		if msg.operator == 2 then--     还有没有摸牌不能胡牌
-			print("碰出牌")
+			lt.CommonUtil.print("碰出牌")
 			self._ischeckMyHandStatu = false
 			for i,card in ipairs(msg.card_list) do
 				table.insert(handList, card)
@@ -544,7 +544,7 @@ function GameRoomLayer:ReplaysurSpeed()
 end
 
 function GameRoomLayer:onEnter()   
-    print("GameRoomLayer:onEnter")
+    lt.CommonUtil.print("GameRoomLayer:onEnter")
     
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.GAME_CMD, handler(self, self.onGameCMDResponse), "GameRoomLayer.onGameCMDResponse")
 
@@ -569,7 +569,7 @@ function GameRoomLayer:onEnter()
 end
 
 function GameRoomLayer:onExit()
-    print("GameRoomLayer:onExit")
+    lt.CommonUtil.print("GameRoomLayer:onExit")
    
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.GAME_CMD, "GameRoomLayer:onGameCMDResponse")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GameRoomLayer:onGameConnectAgain")

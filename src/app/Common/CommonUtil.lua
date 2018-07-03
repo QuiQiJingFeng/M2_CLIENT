@@ -20,6 +20,12 @@ function CommonUtil.printf(...)
     end
 end
 
+function CommonUtil.dump(...)
+    if DEBUG_LOG then
+        dump(...)
+    end
+end
+
 function CommonUtil.printTable(t, indent)
     local pre = string.rep("\t", indent)
     for k,v in pairs(t) do

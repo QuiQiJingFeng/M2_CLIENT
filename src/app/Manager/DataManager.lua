@@ -41,11 +41,8 @@ function DataManager:init()
 end
 
 function DataManager:onjoinRoomResponse(msg)
-    
-    print("__________________________", msg.result)
-    dump(msg, "msg")
+
     if msg.result == "success" then
-        print("加入房间")
         local gameInfo = lt.DataManager:getGameRoomInfo()
         if not gameInfo or not gameInfo.room_setting or not gameInfo.room_setting.game_type then
             return
@@ -55,25 +52,6 @@ function DataManager:onjoinRoomResponse(msg)
             local gameScene = lt.GameScene.new()
             lt.SceneManager:replaceScene(gameScene)
         end
-
-        -- local gameInfo = lt.DataManager:getGameRoomInfo()
-
-        -- dump(gameInfo, "gameInfo")
-        -- local gameid = 1
-
-        -- if gameInfo and gameInfo.room_setting and gameInfo.room_setting.game_type then
-        --     gameid = gameInfo.room_setting.game_type
-        -- end
-
-        -- if gameid == 1 then --红中麻将
-        --     print("FYD+++++++++切换游戏场景")
-        --     local gameScene = lt.GameScene.new()
-        --     lt.SceneManager:replaceScene(gameScene)
-        -- elseif gameid == 2 then --斗地主
-        --     local gameScene = lt.DDZGameScene.new()
-        --     lt.SceneManager:replaceScene(gameScene)
-        -- end     
-
     else
         print("加入房间失败")
     end
@@ -94,7 +72,6 @@ function DataManager:clearPushAllRoomInfo()
 end
 
 function DataManager:onPushAllRoomInfo(msg)
-    dump(msg,"ON PUSH ALL ROOM INFO",100)
 
     if msg.refresh_room_info then
         self._gameRoomInfo = msg.refresh_room_info
@@ -217,7 +194,6 @@ function DataManager:getGameRoomInfo(flag)
 end
 
 function DataManager:onRefreshRoomInfo(msg)
-    dump(msg,"FYD===onRefreshRoomInfo",11)
     self._gameRoomInfo = msg
 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO)

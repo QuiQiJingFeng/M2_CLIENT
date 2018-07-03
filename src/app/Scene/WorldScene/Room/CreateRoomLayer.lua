@@ -220,8 +220,8 @@ function CreateRoomLayer:createGameList(iGameId, index, iGameIds)
             selectBtn = btnTab
         	self:gameBtnOnTap(i)
 
-            -- dump(btnTab, "btnTab")
-            -- dump(self.gameBtnList, "self.gameBtnList")
+            -- lt.CommonUtil.dump(btnTab, "btnTab")
+            -- lt.CommonUtil.dump(self.gameBtnList, "self.gameBtnList")
 
             for i, vBtn in pairs(self.gameBtnList) do 
                 if btnTab == vBtn then
@@ -244,9 +244,7 @@ function CreateRoomLayer:createGameList(iGameId, index, iGameIds)
 end
 
 function CreateRoomLayer:onjoinRoomResponse( tObj )
-	dump(tObj, "创建房间返回")
     if tObj.result == "success" then
-        dump(self.selectTable, "self.selectTable")
         local gameInfo = self.selectTable
         -- 斗地主
         -- if gameInfo.game_type == 2 then
@@ -341,7 +339,7 @@ function CreateRoomLayer:initTDHRule( ... )
     self.selectTable = {}
     self.selectTable.other_setting = {1, 0, 0, 0}
     if not self.tGamesRuleConfig then
-        dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+        lt.CommonUtil.dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
         return
     end
 
@@ -485,7 +483,7 @@ function CreateRoomLayer:initTDHRule( ... )
                     lt.PreferenceManager:setCreateRoominfoE(1)
                 end
             else
-                dump(self.selectTable)
+                lt.CommonUtil.dump(self.selectTable)
                 self.selectTable.other_setting[i+1] = 0
                 playRule[i].isSelect = false
                 playRule[i].selectNode:setVisible(false)
@@ -499,7 +497,7 @@ function CreateRoomLayer:initTDHRule( ... )
             end
         end, false)
     end
-    dump(self.selectTable, "self.selectTable")
+    lt.CommonUtil.dump(self.selectTable, "self.selectTable")
 
 
 
@@ -593,7 +591,7 @@ function CreateRoomLayer:initPLZRule( ... )
     self.selectTable = {}
     self.selectTable.other_setting = {1, 0}
     if not self.tGamesRuleConfig then
-        dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+        lt.CommonUtil.dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
         return
     end
 
@@ -706,7 +704,7 @@ function CreateRoomLayer:initPLZRule( ... )
                 self.selectTable.other_setting[i+2] = 1
                 playRule[i]._textNode:setColor(SelectColor)
             else
-                dump(self.selectTable)
+                lt.CommonUtil.dump(self.selectTable)
                 self.selectTable.other_setting[i+2] = 0
                 playRule[i].isSelect = false
                 playRule[i].selectNode:setVisible(false)
@@ -737,7 +735,7 @@ function CreateRoomLayer:initPLZRule( ... )
             end
         end, false)
     end
-    dump(self.selectTable, "self.selectTable")
+    lt.CommonUtil.dump(self.selectTable, "self.selectTable")
 
 
 
@@ -813,7 +811,7 @@ function CreateRoomLayer:initDDZRule( ... )
     self.selectTable = {}
     self.selectTable.other_setting = {1, 0, 0, 0, 0}
     if not self.tGamesRuleConfig then
-        dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+        lt.CommonUtil.dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
         return
     end
 
@@ -832,7 +830,7 @@ function CreateRoomLayer:initDDZRule( ... )
     local playRule = {}
     local payType = {1, 2, 3}
 
-    dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+    lt.CommonUtil.dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
 
     local roundType = {self.tGamesRuleConfig.tGamesRule.round[1][3], self.tGamesRuleConfig.tGamesRule.round[2][3], self.tGamesRuleConfig.tGamesRule.round[3][3]}
     -- local playNumType = {4, 3, 2}
@@ -1018,7 +1016,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 	self.selectTable = {}
     self.selectTable.other_setting = {1, 0, 0, 0, 0}
 	if not self.tGamesRuleConfig then
-		dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+		lt.CommonUtil.dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
 		return
 	end
 
@@ -1166,7 +1164,7 @@ function CreateRoomLayer:initHZMJRule( ... )
                     lt.PreferenceManager:setCreateRoominfoHZMJG(1)
                 end
 			else
-                dump(self.selectTable)
+                lt.CommonUtil.dump(self.selectTable)
 				self.selectTable.other_setting[i+2] = 0
 				playRule[i].isSelect = false
 				playRule[i].selectNode:setVisible(false)
@@ -1182,7 +1180,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 			end
 	    end, false)
 	end
-    dump(self.selectTable, "self.selectTable")
+    lt.CommonUtil.dump(self.selectTable, "self.selectTable")
 
 
 
@@ -1290,7 +1288,7 @@ function CreateRoomLayer:initSQMJRule( ... )
     self.selectTable = {}
     self.selectTable.other_setting = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     if not self.tGamesRuleConfig then
-        dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
+        lt.CommonUtil.dump(self.tGamesRuleConfig, "self.tGamesRuleConfig")
         return
     end
 
@@ -1490,7 +1488,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                     lt.PreferenceManager:setCreateRoominfoSQMJF(1)
                 end
             else
-                dump(self.selectTable)
+                lt.CommonUtil.dump(self.selectTable)
                 self.selectTable.other_setting[i+3] = 0
                 playRule[i].isSelect = false
                 playRule[i].selectNode:setVisible(false)
@@ -1538,7 +1536,7 @@ function CreateRoomLayer:initSQMJRule( ... )
                     lt.PreferenceManager:setCreateRoominfoSQMJM(1)
                 end
             else
-                dump(self.selectTable)
+                lt.CommonUtil.dump(self.selectTable)
                 self.selectTable.other_setting[i+5] = 0
                 qitaRule[i].isSelect = false
                 qitaRule[i].selectNode:setVisible(false)
@@ -1563,7 +1561,7 @@ function CreateRoomLayer:initSQMJRule( ... )
         end, false)
     end
     
-    dump(self.selectTable, "self.selectTable")
+    lt.CommonUtil.dump(self.selectTable, "self.selectTable")
 
 
 
@@ -1780,7 +1778,7 @@ function CreateRoomLayer:createGameMenuItem(item, isMore)
         11.打折
     ]]
 
-    -- dump(item, "item")
+    -- lt.CommonUtil.dump(item, "item")
     --isMore 是否收纳在更多游戏中
     local btn = cc.CSLoader:createNode("game/common/CreateRoomMenuBtnItem.csb")
     btn.img_bg = btn:getChildByName("Image_Bg")     
@@ -1938,7 +1936,7 @@ function CreateRoomLayer:sendCreateRoom( ... )
         tempTable.is_open_voice = false
         tempTable.is_open_gps = false
 
-        dump(tempTable, "创建房间")
+        lt.CommonUtil.dump(tempTable, "创建房间")
 
         local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = { room_setting = tempTable}}
         -- 发送消息
