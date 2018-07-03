@@ -467,10 +467,6 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	if msg.item["type"] == 7 then --如果是听牌则刷新其他人的听牌杠标识
 		local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
 		self._gameSelectPosPanel:ShowTingBS(direction)
-
-		if lt.DataManager:getRePlayState() and msg.item["value"] then
-			self._engine:goOutOneHandCardAtDirection(direction, msg.item["value"])
-		end
 	end
 	self._engine:noticeSpecialEvent(msg)
 end

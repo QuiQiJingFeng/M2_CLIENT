@@ -867,6 +867,17 @@ function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 		self:replayGoOutOneHandCard(direction, value)
 	else
 		self:goOutOneHandCard(direction, value)
+
+		if direction == lt.Constants.DIRECTION.NAN then
+			for i,v in ipairs(self._allPlayerHandCardsValue[direction]) do
+				if v == value then
+					table.remove(self._allPlayerHandCardsValue[direction], i)
+					break
+				end
+			end
+		else
+			table.remove(self._allPlayerHandCardsValue[direction], 1)
+		end
 	end
 
 	self:sortHandValue(direction)
@@ -1331,7 +1342,7 @@ end
 
 function MjEngine:getMyHideCardNum()--得到手牌的数量  
 	local CardNum = 0
-	if #self._allPlayerHandCardsValue >= 1 then
+	if #self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN] >= 1 then
 		for key,value in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
 			CardNum = CardNum + 1
 		end
@@ -1597,26 +1608,6 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		return
 	end
 
-	local info = nil
-	if msg.item then
-		info = {}
-		info["value"] = msg.item["value"]
-		info["from"] = msg.item["from"]
-		info["type"] = msg.item["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡 7听>
-
-		local formDirection = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
-		local outValue = self._allPlayerOutCardsValue[formDirection][#self._allPlayerOutCardsValue[formDirection]]
-
-		if outValue and outValue == msg.item["value"] then
-			print("MjEngine:noticeSpecialEvent==>outValue存在等于msg.item.value==>走了这里")
- 			table.remove(self._allPlayerOutCardsValue[formDirection], #self._allPlayerOutCardsValue[formDirection])
-
- 			--self._allPlayerOutCardsNode[formDirection][#self._allPlayerOutCardsNode]:removeFromParent()
-			--table.remove(self._allPlayerOutCardsNode[formDirection], #self._allPlayerOutCardsNode)
-			self:configAllPlayerCards(formDirection, false, false, true, false)
-		end
-	end
-
 	if not msg.item["type"] then
 		return
 	end
@@ -1636,59 +1627,26 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		offNum = 1
 	end
 
-	if lt.DataManager:getRePlayState() then
-		local n = 1
-		local removeNum = 0
-
-		if #self._allPlayerLightHandCardsValue[direction] > 0 then
-			local n = 1
-			while (n <= #self._allPlayerLightHandCardsValue[direction]) do
-				if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
-					table.remove(self._allPlayerLightHandCardsValue[direction], n)
-					removeNum = removeNum + 1
-				else
-					n = n + 1
-				end
-			end
-		end
-
-		if removeNum < offNum then
-			while (n <= #self._allPlayerStandHandCardsValue[direction]) do
-				if self._allPlayerStandHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
-					table.remove(self._allPlayerStandHandCardsValue[direction], n)
-					removeNum = removeNum + 1
-				else
-					n = n + 1
-				end
-			end
-		end
-	else
-		if direction ~= lt.Constants.DIRECTION.NAN then
-			local removeNum = 0
-			if #self._allPlayerLightHandCardsValue[direction] > 0 then
-				local n = 1
-				while (n <= #self._allPlayerLightHandCardsValue[direction]) do
-					if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
-						table.remove(self._allPlayerLightHandCardsValue[direction], n)
-						removeNum = removeNum + 1
-					else
-						n = n + 1
-					end
-				end
-			end
-
-			local newOffNum = offNum - removeNum
-			if newOffNum > 0 then
-				for i=1,newOffNum do
-					if #self._allPlayerStandHandCardsValue[direction] > 0 then
-						table.remove(self._allPlayerStandHandCardsValue[direction], 1)
-					end
-				end
-			end
-		end
-	end
-
+	--听牌出牌进行单独处理
 	if msg.item["type"] ~= 6 and msg.item["type"] ~= 7 then
+		local info = nil
+		if msg.item then
+			info = {}
+			info["value"] = msg.item["value"]
+			info["from"] = msg.item["from"]
+			info["type"] = msg.item["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡 7听>
+
+			local formDirection = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
+			local outValue = self._allPlayerOutCardsValue[formDirection][#self._allPlayerOutCardsValue[formDirection]]
+
+			if outValue and outValue == msg.item["value"] then
+				print("MjEngine:noticeSpecialEvent==>outValue存在等于msg.item.value==>走了这里")
+	 			table.remove(self._allPlayerOutCardsValue[formDirection], #self._allPlayerOutCardsValue[formDirection])
+
+				self:configAllPlayerCards(formDirection, false, false, true, false)
+			end
+		end
+
 		if not self._allPlayerCpgCardsValue[direction] then
 			self._allPlayerCpgCardsValue[direction] = {}
 		end
@@ -1707,9 +1665,116 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 				table.insert(self._allPlayerCpgCardsValue[direction], info)
 			end
 		end
-	end	
 
+		if lt.DataManager:getRePlayState() then
+			local removeNum = 0
 
+			if #self._allPlayerLightHandCardsValue[direction] > 0 then
+				local n = 1
+				while (n <= #self._allPlayerLightHandCardsValue[direction]) do
+					if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
+						table.remove(self._allPlayerLightHandCardsValue[direction], n)
+						removeNum = removeNum + 1
+					else
+						n = n + 1
+					end
+				end
+			end
+
+			if removeNum < offNum then
+				local n = 1
+				while (n <= #self._allPlayerStandHandCardsValue[direction]) do
+					if self._allPlayerStandHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
+						table.remove(self._allPlayerStandHandCardsValue[direction], n)
+						removeNum = removeNum + 1
+					else
+						n = n + 1
+					end
+				end
+			end
+
+			local a = 1
+			local allRemoveNum = 0
+			while (a <= #self._allPlayerHandCardsValue[direction]) do
+				if self._allPlayerHandCardsValue[direction][a] == msg.item["value"] and allRemoveNum < offNum then
+					table.remove(self._allPlayerStandHandCardsValue[direction], a)
+					allRemoveNum = allRemoveNum + 1
+				else
+					a = a + 1
+				end
+			end
+		else
+			if direction ~= lt.Constants.DIRECTION.NAN then
+				local removeNum = 0
+				if #self._allPlayerLightHandCardsValue[direction] > 0 then
+					local n = 1
+					while (n <= #self._allPlayerLightHandCardsValue[direction]) do
+						if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
+							table.remove(self._allPlayerLightHandCardsValue[direction], n)
+							removeNum = removeNum + 1
+						else
+							n = n + 1
+						end
+					end
+				end
+
+				local newOffNum = offNum - removeNum
+				if newOffNum > 0 then
+					for i=1,newOffNum do
+						if #self._allPlayerStandHandCardsValue[direction] > 0 then
+							table.remove(self._allPlayerStandHandCardsValue[direction], 1)
+						end
+					end
+				end
+
+				local a = 1
+				local allRemoveNum = 0
+				while (a <= #self._allPlayerHandCardsValue[direction]) do
+					table.remove(self._allPlayerStandHandCardsValue[direction], 1)
+					allRemoveNum = allRemoveNum + 1
+				end
+			else
+				local removeNum = 0
+
+				if #self._allPlayerLightHandCardsValue[direction] > 0 then
+					local n = 1
+					while (n <= #self._allPlayerLightHandCardsValue[direction]) do
+						if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
+							table.remove(self._allPlayerLightHandCardsValue[direction], n)
+							removeNum = removeNum + 1
+						else
+							n = n + 1
+						end
+					end
+				end
+
+				if removeNum < offNum then
+					local n = 1
+					while (n <= #self._allPlayerStandHandCardsValue[direction]) do
+						if self._allPlayerStandHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
+							table.remove(self._allPlayerStandHandCardsValue[direction], n)
+							removeNum = removeNum + 1
+						else
+							n = n + 1
+						end
+					end
+				end
+
+				local a = 1
+				local allRemoveNum = 0
+				while (a <= #self._allPlayerHandCardsValue[direction]) do
+					if self._allPlayerHandCardsValue[direction][a] == msg.item["value"] and allRemoveNum < offNum then
+						table.remove(self._allPlayerStandHandCardsValue[direction], a)
+						allRemoveNum = allRemoveNum + 1
+					else
+						a = a + 1
+					end
+				end			
+			end
+		end
+	end
+
+	--听牌处理
 	if msg.item["type"] == 7 then
 		local directionn = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
 		print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
@@ -1719,6 +1784,10 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		info["ting"] = true
 		local tingInfo = lt.DataManager:getTingPlayerInfo()
 		table.insert( tingInfo, info )
+
+		if lt.DataManager:getRePlayState() and msg.item["value"] then
+			self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+		end
 	end
 
 	self:configAllPlayerCards(direction, true, true, true, false)--4 false --> true 
