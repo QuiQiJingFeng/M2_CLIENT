@@ -116,6 +116,23 @@ function GameActionBtnsPanel:ctor(deleget)
     self.m_objCommonUi.m_nodeActionBtns:setVisible(false)
     self.m_objCommonUi.m_nodeHuCardTips:setVisible(false)
 
+    local rect = cc.rect(0,0,0, 0)
+    self._clippingNode = cc.ClippingRectangleNode:create(rect)      
+    --self._clippingNode:setPosition(22 * self._winScale, 20 * self._winScale)
+    self._clippingNode:setPosition(36, 0)
+    self.m_objCommonUi.m_nodeHuCardTips:addChild(self._clippingNode)
+
+    self.m_objCommonUi.m_imgHuCardTipsBg:retain()
+    self.m_objCommonUi.m_panelHuCardTipsContent:retain()
+
+    self.m_objCommonUi.m_imgHuCardTipsBg:removeFromParent()
+    self.m_objCommonUi.m_panelHuCardTipsContent:removeFromParent()
+
+    self._clippingNode:addChild(self.m_objCommonUi.m_imgHuCardTipsBg)
+    self._clippingNode:addChild(self.m_objCommonUi.m_panelHuCardTipsContent)
+
+
+    self._allHutipsCardNode = {}
 end
 
 function GameActionBtnsPanel:onClickCpghEvent(pSender)
@@ -455,27 +472,40 @@ end
 
 function GameActionBtnsPanel:showHuCardsTipsMj()
     self.m_objCommonUi.m_nodeHuCardTips:setVisible(true)
-    self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(true)
-    self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(true)
+    self._clippingNode:setVisible(true)
+    self:runEffect()
+end
+
+function GameActionBtnsPanel:runEffect()
+    self.m_objCommonUi.m_panelHuCardTipsContent:stopAllActions()
+    self.m_objCommonUi.m_imgHuCardTipsBg:stopAllActions()
+
+    local contentX = self.m_objCommonUi.m_panelHuCardTipsContent:getContentSize().width
+    self.m_objCommonUi.m_panelHuCardTipsContent:setPosition(-contentX, 0)
+    local bgX = self.m_objCommonUi.m_imgHuCardTipsBg:getContentSize().width
+    self.m_objCommonUi.m_imgHuCardTipsBg:setPosition(-bgX, 0)
+
+    local moveBy1 = cc.MoveBy:create(0.5, ccp(contentX + 20, 0))
+    local moveBy2 = cc.MoveBy:create(0.5, ccp(bgX, 0))
+
+    self.m_objCommonUi.m_panelHuCardTipsContent:runAction(moveBy1)
+    self.m_objCommonUi.m_imgHuCardTipsBg:runAction(moveBy2)
 end
 
 function GameActionBtnsPanel:hideHuCardsTipsMj()
     self.m_objCommonUi.m_nodeHuCardTips:setVisible(false)
-    self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(false)
 end
 
 function GameActionBtnsPanel:hideHuCardsContent()
-    self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(false)
-    self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(false)
+    self._clippingNode:setVisible(false)
 end
 
 function GameActionBtnsPanel:autoShowHuCardsContent()
-    if self.m_objCommonUi.m_panelHuCardTipsContent:isVisible() then
-        self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(false)
-        self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(false)
+    if self._clippingNode:isVisible() then
+        self._clippingNode:setVisible(false)
     else
-        self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(true)
-        self.m_objCommonUi.m_imgHuCardTipsBg:setVisible(true)
+        self._clippingNode:setVisible(true)
+        self:runEffect()
     end
 end
 
@@ -483,6 +513,44 @@ function GameActionBtnsPanel:createMenuItemt()
     local mj = cc.CSLoader:createNode("game/mjcomm/csb/mjui/green/MjHuCardsTipsItem.csb")
 
     return mj
+end
+
+function GameActionBtnsPanel:refreshHuCardNum(info, type)--2 别人出牌  1起拍 3 吃碰杠
+    if type == 1 or type == 2 then
+        for i,item in ipairs(self._allHutipsCardNode) do
+            if item:getCardValue() == info then
+                item:setCardNum(item:getCardNum() - 1)
+                break
+            end
+        end
+    elseif type == 3 then
+        -- info["value"] = msg.item["value"]
+        -- info["from"] = msg.item["from"]
+        -- info["type"] = msg.item["type"]--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡 7听>
+
+        local offNum = 0--吃椪杠少牌处理
+        if info["type"] == 1 then
+
+        elseif info["type"] == 2 then
+            offNum = 2
+        elseif info["type"] == 3 then   
+            offNum = 1
+        elseif info["type"] == 4 then
+            offNum = 3
+        elseif info["type"] == 5 then
+            offNum = 4
+        elseif info["type"] == 7 then --听==出牌
+
+        end
+        if offNum ~= 0 then
+            for i,item in ipairs(self._allHutipsCardNode) do
+                if item:getCardValue() == info["value"] then
+                    item:setCardNum(item:getCardNum() - offNum)
+                    break
+                end
+            end
+        end
+    end
 end
 
 function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
@@ -493,53 +561,26 @@ function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
 
     panelMenu:removeAllChildren()
     
+    self._allHutipsCardNode = {}
+
     local iStartX = 0
     local iGap = 10
     local iPanelMenuWidth = 0
-    --[[
+
     for i = 1, #tObj do
-        local uiItem = self:createMenuItem()
-        uiItem:setScale(0.65)
+        local uiItem = lt.MjHuCardTipsItem.new()
+
         local value = tObj[i]
+        local num = self._deleget:getotersCard(value)
+        uiItem:setCardIcon(value)
+        uiItem:setCardNum(num)
 
-        local face = uiItem:getChildByName("Node_Mj"):getChildByName("Sprite_Face")
-        local imageBg = uiItem:getChildByName("Node_Mj"):getChildByName("Image_Bg")
-        imageBg.selectCardData = {card = value, type = iType}
-        imageBg:setSwallowTouches(false)
-        local cardType = math.floor(value / 10) + 1
-        local cardValue = value % 10
-        face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
-
-        panelMenu:addChild(uiItem)
-
-        uiItem:setPosition(cc.p(iStartX, panelMenu:getContentSize().height/2 - uiItem:getBoundingBox().height/2))
-        iStartX = iStartX + uiItem:getBoundingBox().width + iGap
-        iPanelMenuWidth = iPanelMenuWidth + uiItem:getBoundingBox().width
-
-        --lt.CommonUtil:addNodeClickEvent(imageBg, handler(self, self.onClickSelectCard))
-    end--]]
-     for i = 1, #tObj do
-        local uiItem = self:createMenuItemt()
-        uiItem:setScale(1)
-        local Text_Zhang = uiItem:getChildByName("Text_Zhang")
-        local Image_Light = uiItem:getChildByName("Node_41"):getChildByName("Image_Light")
-        Image_Light:setVisible(false)
-        local Image_TingSingLight = uiItem:getChildByName("Node_41"):getChildByName("Image_TingSingLight")
-        Image_TingSingLight:setVisible(false)
-        local value = tObj[i]
-        local Num = self._deleget:getotersCard(value)
-        Text_Zhang:setString(Num)
-        local face = uiItem:getChildByName("Node_41"):getChildByName("Sprite_Face")
-        local imageBg = uiItem:getChildByName("Node_41"):getChildByName("Sprite_Bg")
-        imageBg.selectCardData = {card = value, type = iType}
-        --imageBg:setSwallowTouches(false)
-        local cardType = math.floor(value / 10) + 1
-        local cardValue = value % 10
-        face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
         panelMenu:addChild(uiItem)
         uiItem:setPosition(cc.p(iStartX, panelMenu:getContentSize().height/2 - uiItem:getBoundingBox().height/2))
         iStartX = iStartX + uiItem:getBoundingBox().width + iGap
         iPanelMenuWidth = iPanelMenuWidth + uiItem:getBoundingBox().width
+
+        table.insert(self._allHutipsCardNode, uiItem)
     end
 
     --添加
@@ -562,8 +603,9 @@ function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
     local imgMenuBg = self.m_objCommonUi.m_imgHuCardTipsBg
     imgMenuBg:setContentSize(cc.size(panelSize.width + 4 * iGap - 5, imgMenuBg:getContentSize().height))
 
-    self.m_objCommonUi.m_panelHuCardTipsContent:setVisible(true)
-
+    local rect = cc.rect(0, -(imgMenuBg:getContentSize().height + 10) / 2, panelSize.width + 4 * iGap + 20, imgMenuBg:getContentSize().height + 10)
+    self._clippingNode:setClippingRegion(rect)
+    
 end
 
 --胡牌提示滚动条设置
@@ -618,7 +660,6 @@ function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
     word:setSpriteFrame(path)
     
     for i=1,12 do
-
         local delay = cc.DelayTime:create(0.1 * i)
 
         local func1 = cc.CallFunc:create(function()
@@ -628,7 +669,7 @@ function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
                 self._specialEventNode[direction]:setVisible(false)
             end
         end)
-        local sequence = cc.Sequence:create(delay, func1)
+        local sequence = cc.Sequence:create(delay, func1,nil)
         light:runAction(sequence)
     end
 end

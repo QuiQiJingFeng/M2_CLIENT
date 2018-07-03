@@ -124,6 +124,11 @@ function GameRoomLayer:viewHideActPanelAndMenu(tObjCpghObj, isPassSendMsg)
 end
 
 --胡牌tips
+
+function GameRoomLayer:refreshHuCardNum(info, type)
+	self._gameActionBtnsPanel:refreshHuCardNum(info, type)
+end
+
 function GameRoomLayer:showHuCardsTipsMj()
 	self._gameActionBtnsPanel:showHuCardsTipsMj()
 end
@@ -292,6 +297,8 @@ function GameRoomLayer:onPushDrawCard(msg)--通知有人摸牌
 		--检测自己的手牌情况  --吃椪杠胡
 		--self:checkMyHandStatu()
 		self._ischeckMyHandStatu = true
+
+		self:refreshHuCardNum(msg.card, 1)
 	end
 end
 
@@ -388,6 +395,10 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 		end
 	end
 
+	--把这张牌加到out  先通知noticeSpecial 再 NoticePlayCard
+	self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
+	self:refreshHuCardNum(msg.card, 2)
+
 	--其他玩家从手牌中去掉  （自己的在点击牌出牌的时候处理）
 	if lt.DataManager:getRePlayState() then
 		self._engine:goOutOneHandCardAtDirection(direction, value)
@@ -396,9 +407,6 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 			self._engine:goOutOneHandCardAtDirection(direction, value)
 		end
 	end
-
-	--把这张牌加到out  先通知noticeSpecial 再 NoticePlayCard
-	self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
 
 	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
 end

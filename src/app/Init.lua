@@ -109,6 +109,7 @@ ltMetaTable["MjStandFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjStandFaceIte
 ltMetaTable["MjLieCpgItem"] = "app.Scene.GameScene.mj.cardItem.MjLieCpgItem"
 ltMetaTable["MjLieOutFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjLieOutFaceItem"
 ltMetaTable["MjLieFaceItem"] = "app.Scene.GameScene.mj.cardItem.MjLieFaceItem"
+ltMetaTable["MjHuCardTipsItem"] = "app.Scene.GameScene.mj.cardItem.MjHuCardTipsItem"
 
 ltMetaTable["GameRoomLayer"] = "app.Scene.GameScene.mj.GameRoomLayer"
 

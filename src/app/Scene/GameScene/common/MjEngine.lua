@@ -219,7 +219,7 @@ function MjEngine:clearUiData()
 	lt.DataManager:getTingPlayerInfo(true)
 
 	self._isSelectTing = false
-
+	self._deleget:hideHuCardsTipsMj()
 	self._huiRootNode:removeAllChildren()
 end
 
@@ -894,6 +894,7 @@ function MjEngine:goOutOneHandCardAtDirection(direction, value)--出了一张牌
 	self:sortHandValue(direction)
 end
 
+--out牌
 function MjEngine:getOneOutCardAtDirection(direction, value, isSpecialCard)
 	if not isSpecialCard then
 		local specialRefresh = false
@@ -1246,10 +1247,12 @@ function MjEngine:getAllCanHuCards(tempHandCards, value)
 	lt.CommonUtil.print("=============getAllCanHuCards============",value)
 	dump(tempHandCards)
 
-	for i,v in ipairs(tempHandCards) do
-		if v == value then
-			table.remove(tempHandCards, i)
-			break
+	if value then
+		for i,v in ipairs(tempHandCards) do
+			if v == value then
+				table.remove(tempHandCards, i)
+				break
+			end
 		end
 	end
 
@@ -1425,7 +1428,7 @@ function MjEngine:onClickHandCard(cardNode, value)
 			end	
 		end
 
-		--self._deleget:hideHuCardsContent()
+		self._deleget:hideHuCardsContent()
 
 		if self._clickCardCallback then
 			local state = 1
@@ -1622,6 +1625,9 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		offNum = 1
 	end
 
+	--刷新胡牌面板
+	self._deleget:refreshHuCardNum(msg.item, 3)
+
 	--听牌出牌进行单独处理
 	if msg.item["type"] ~= 6 and msg.item["type"] ~= 7 then
 		local info = nil
@@ -1786,6 +1792,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 	end
 
 	self:configAllPlayerCards(direction, true, true, true, false)--4 false --> true 
+
 end
 
 function MjEngine:onClientConnectAgain()--  断线重连
