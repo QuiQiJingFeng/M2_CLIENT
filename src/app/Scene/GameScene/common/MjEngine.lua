@@ -243,7 +243,10 @@ function MjEngine:angainConfigUi()--继续游戏
 	self._showCardsLayer:setVisible(false)
 end
 
-function MjEngine:sendCards(msg, direction)--发牌 13张
+function MjEngine:sendCards(msg, pos)--发牌 13张
+
+	local direction = lt.DataManager:getPlayerDirectionByPos(pos)
+
 	self._showCardsLayer:setVisible(true)
 	local cards = msg.cards or {}
 
@@ -256,7 +259,15 @@ function MjEngine:sendCards(msg, direction)--发牌 13张
 		self._allPlayerHandCardsValue[direction] = cards
 		
 		self._allPlayerStandHandCardsValue[direction] = {}
-		local tempFourCardList = clone(fourCardList)
+
+		self._allPlayerLightHandCardsValue[direction] = {}
+
+		for i,cardItem in pairs(fourCardList) do
+			local dire = lt.DataManager:getPlayerDirectionByPos(cardItem.user_pos)
+			self._allPlayerLightHandCardsValue[dire] = cardItem.cards
+		end
+
+		local tempFourCardList = clone(self._allPlayerLightHandCardsValue[direction])
 
 		for i,card in ipairs(cards) do
 
@@ -272,11 +283,6 @@ function MjEngine:sendCards(msg, direction)--发牌 13张
 			if isStandHandCard then
 				table.insert(self._allPlayerStandHandCardsValue[direction], card)
 			end
-		end
-
-		for i,cardItem in pairs(fourCardList) do
-			local dire = lt.DataManager:getPlayerDirectionByPos(cardItem.user_pos)
-			self._allPlayerLightHandCardsValue[dire] = cardItem.cards
 		end
 
 		self:sortHandValue(direction)
@@ -1278,6 +1284,12 @@ function MjEngine:checkIsHu(HandCards, card)
 			config.hiPoint = (settingInfo.other_setting[4] == 1)  and true or false
 
 		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.SQMJ then
+			for i,card in ipairs(tempHandCards) do
+				if self:isFlower(card) then
+					return false
+				end
+			end
+
 		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.TDH then
 			-- 游戏设置项[数组]
 		    -- [1] 底分
@@ -1395,9 +1407,9 @@ function MjEngine:onClickHandCard(cardNode, value)
 		end
 		
 	else
-		for k,outCardsNode in pairs(self._allPlayerOutCardsNode) do
+		for k,outCardsNode in pairs(self._allPlayerOutCardsNode) do--筛选出来的选中的牌的状态重置
 			for i,v in ipairs(outCardsNode) do
-				v:showNormal()
+				v:hidRedMask()
 			end	
 		end
 
@@ -1427,14 +1439,31 @@ function MjEngine:onClickLightHandCard(cardNode, value)
 		return
 	end
 
+	if #self._allPlayerLightHandCardsValue[lt.Constants.DIRECTION.NAN] < 4 and not self:isFlower(value) then
+		return
+	end
+
+	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)--报过了
+	if isTing then
+		return
+	end
+
+	local isClickTing = false
+	for i,v in ipairs(self._allHandCardsTingValue) do
+		if v == value then
+			isClickTing = true
+			break
+		end
+	end
+
+	if not isClickTing and #self._allHandCardsTingValue > 0 and self._isSelectTing then
+		return
+	end
+
 	if not self._deleget:getCurrentOutPutPlayerPos() or self._deleget:getCurrentOutPutPlayerPos() ~= lt.DataManager:getMyselfPositionInfo().user_pos then
 		self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false, false)--原来选中的牌回归原位
 		cardNode:showRedMask()
 		self:showRedMaskOutCards(value)
-		return
-	end
-
-	if #self._allPlayerLightHandCardsValue[lt.Constants.DIRECTION.NAN] < 4 and not self:isFlower(value) then
 		return
 	end
 

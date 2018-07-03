@@ -65,8 +65,11 @@ function MjLieOutFaceItem:showNormal()
 end
 
 function MjLieOutFaceItem:showRedMask()
-	self:showNormal()
 	self._redMask:setVisible(true)
+end
+
+function MjLieOutFaceItem:hidRedMask()
+	self._redMask:setVisible(false)
 end
 
 function MjLieOutFaceItem:showLightMask()

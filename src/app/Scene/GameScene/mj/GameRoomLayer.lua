@@ -182,13 +182,13 @@ function GameRoomLayer:onClickCard(value,state)
 	
 	if self._currentOutPutPlayerPos and self._currentOutPutPlayerPos == lt.DataManager:getMyselfPositionInfo().user_pos then
 		print("出牌########################", value)
-		if state == 1 then
+		if not state or state == 1 then
 			print("普通出牌")
 			local arg = {command = "PLAY_CARD", card = value}--普通出牌
 			self._sendRequest = true
 			self._engine:goOutOneHandCardAtDirection(lt.Constants.DIRECTION.NAN, value)
 			lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
-		else
+		elseif state == 2 then
 			print("听牌出牌")
 			local arg = {command = "TING_CARD", card = value}--听牌出牌
 
@@ -221,9 +221,9 @@ function GameRoomLayer:onDealDown(msg)--发牌
     	for i=1,#msg do
 
     		for k,v in pairs(msg[i]) do
-    			local direction = self:getPlayerDirectionByPos(v.user_pos)
+    			--local direction = self:getPlayerDirectionByPos(v.user_pos)
     			--self._engine:sendCards(v.cards, direction, v.four_card_list) 
-    			self._engine:sendCards(v, direction)
+    			self._engine:sendCards(v, v.user_pos)
     		end
     	end
     else
@@ -260,7 +260,7 @@ function GameRoomLayer:onDealDown(msg)--发牌
 
 	    		local sendCards = function( )
 	    			--self._engine:sendCards(msg.cards, lt.Constants.DIRECTION.NAN, msg.four_card_list)
-	    			self._engine:sendCards(msg, lt.Constants.DIRECTION.NAN)
+	    			self._engine:sendCards(msg, msg.user_pos)
 	    		end
 
 	    		local func1 = cc.CallFunc:create(removeShaiZi)
