@@ -478,7 +478,7 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 end
 
 function GameRoomLayer:onNoticePao(msg)
-
+	
 end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求

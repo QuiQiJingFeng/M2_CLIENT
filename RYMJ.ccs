@@ -655,6 +655,8 @@
               <Image Name="btnVoiceY.png" />
               <Image Name="btnYellow.png" />
               <Image Name="btnZm.png" />
+              <Image Name="run.png" />
+              <Image Name="runNot.png" />
               <Image Name="textDis.png" />
               <Image Name="textReturn.png" />
               <Image Name="textReturnLobby.png" />

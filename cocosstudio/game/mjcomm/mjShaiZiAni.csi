@@ -113,6 +113,8 @@
       <FilePathData Path="game/mjcomm/gwidget/setting/CheckBox_Bg.png" />
       <FilePathData Path="game/mjcomm/gwidget/setting/CheckBox_Gou.png" />
       <FilePathData Path="game/mjcomm/gwidget/img/shareIconBg.png" />
+      <FilePathData Path="game/mjcomm/button/run.png" />
+      <FilePathData Path="game/mjcomm/button/runNot.png" />
     </ImageFiles>
     <MaxSize Width="1024" Height="2048" />
   </Content>

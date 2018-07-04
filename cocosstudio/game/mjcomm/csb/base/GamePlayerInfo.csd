@@ -9,7 +9,7 @@
           <AbstractNodeData Name="Image_Ting_1" ActionTag="1473684339" Tag="8735" RotationSkewX="90.0000" RotationSkewY="90.0000" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="243.0413" RightMargin="971.9587" TopMargin="286.0250" BottomMargin="443.9750" LeftEage="39" RightEage="39" TopEage="6" BottomEage="6" Scale9OriginX="39" Scale9OriginY="6" Scale9Width="41" Scale9Height="8" ctype="ImageViewObjectData">
             <Size X="119.0000" Y="20.0000" />
             <Children>
-              <AbstractNodeData Name="Sprite_TingRed" CanEdit="False" ActionTag="-1821537943" Tag="8736" IconVisible="False" LeftMargin="46.0000" RightMargin="46.0000" TopMargin="-6.5000" BottomMargin="-1.5000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="Sprite_TingRed" ActionTag="-1821537943" Tag="8736" IconVisible="False" LeftMargin="46.0000" RightMargin="46.0000" TopMargin="-6.5000" BottomMargin="-1.5000" ctype="SpriteObjectData">
                 <Size X="27.0000" Y="28.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="59.5000" Y="12.5000" />
@@ -32,7 +32,7 @@
           <AbstractNodeData Name="Image_Ting_2" ActionTag="1583126163" Tag="8739" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="607.5000" RightMargin="607.5000" TopMargin="565.3250" BottomMargin="164.6750" LeftEage="39" RightEage="39" TopEage="6" BottomEage="6" Scale9OriginX="39" Scale9OriginY="6" Scale9Width="41" Scale9Height="8" ctype="ImageViewObjectData">
             <Size X="119.0000" Y="20.0000" />
             <Children>
-              <AbstractNodeData Name="Sprite_TingRed" CanEdit="False" ActionTag="1153266641" Tag="8740" IconVisible="False" LeftMargin="46.0000" RightMargin="46.0000" TopMargin="-6.5000" BottomMargin="-1.5000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="Sprite_TingRed" ActionTag="1153266641" Tag="8740" IconVisible="False" LeftMargin="46.0000" RightMargin="46.0000" TopMargin="-6.5000" BottomMargin="-1.5000" ctype="SpriteObjectData">
                 <Size X="27.0000" Y="28.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="59.5000" Y="12.5000" />
@@ -959,6 +959,61 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5320" />
+            <PreSize X="0.0000" Y="0.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Node_PaoLayer" ActionTag="911078482" Tag="767" IconVisible="True" RightMargin="1334.0000" TopMargin="750.0000" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <Children>
+              <AbstractNodeData Name="Pao_Btn" ActionTag="-1097454348" Tag="765" IconVisible="False" LeftMargin="335.3700" RightMargin="-503.3700" TopMargin="-257.5000" BottomMargin="162.5000" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="138" Scale9Height="65" ctype="ImageViewObjectData">
+                <Size X="168.0000" Y="95.0000" />
+                <Children>
+                  <AbstractNodeData Name="Image_174" ActionTag="-2126304427" Tag="768" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="35.0000" RightMargin="35.0000" TopMargin="27.0000" BottomMargin="27.0000" LeftEage="32" RightEage="32" TopEage="13" BottomEage="13" Scale9OriginX="32" Scale9OriginY="13" Scale9Width="34" Scale9Height="15" ctype="ImageViewObjectData">
+                    <Size X="98.0000" Y="41.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="84.0000" Y="47.5000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5000" Y="0.5000" />
+                    <PreSize X="0.5833" Y="0.4316" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/button/run.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="419.3700" Y="210.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="game/mjcomm/button/btnGreen.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Not_Pao_Btn" ActionTag="798319032" Tag="766" IconVisible="False" LeftMargin="829.0000" RightMargin="-997.0000" TopMargin="-257.5000" BottomMargin="162.5000" LeftEage="55" RightEage="55" TopEage="31" BottomEage="31" Scale9OriginX="55" Scale9OriginY="31" Scale9Width="58" Scale9Height="33" ctype="ImageViewObjectData">
+                <Size X="168.0000" Y="95.0000" />
+                <Children>
+                  <AbstractNodeData Name="Image_175" ActionTag="1207670186" Tag="769" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="35.0000" RightMargin="35.0000" TopMargin="27.0000" BottomMargin="27.0000" LeftEage="32" RightEage="32" TopEage="13" BottomEage="13" Scale9OriginX="32" Scale9OriginY="13" Scale9Width="34" Scale9Height="15" ctype="ImageViewObjectData">
+                    <Size X="98.0000" Y="41.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="84.0000" Y="47.5000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5000" Y="0.5000" />
+                    <PreSize X="0.5833" Y="0.4316" />
+                    <FileData Type="MarkedSubImage" Path="game/mjcomm/button/runNot.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="913.0000" Y="210.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="game/mjcomm/button/btnBlue.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
         </Children>
