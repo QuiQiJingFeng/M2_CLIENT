@@ -1096,7 +1096,9 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state)
         tObjHu = nil,--抢杠胡  自摸
         tObjTing = nil --听牌
     }
-    local huBs = false
+    local isCanHu = false
+    local isCanGang = false
+
     if state then
 	    --检测杠
 		local tempHandCards = clone(handList)
@@ -1109,6 +1111,8 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state)
 
 		if #anGangCards > 0 or #pengGang > 0 then
 			tObjCpghObj.tObjGang = {}
+
+			isCanGang = true
 		end
 
 		for i,v in ipairs(anGangCards) do
@@ -1123,9 +1127,9 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state)
 		if self:checkIsHu(handList) then
 			lt.CommonUtil.print("自摸了###########################################")
 			tObjCpghObj.tObjHu = {}
-			huBs = true
+			isCanHu = true
 		else
-			huBs = false
+			isCanHu = false
 			lt.CommonUtil.print("没有自摸###########################################")
 		end
 	end
@@ -1135,7 +1139,7 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state)
 	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 
 	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
-		if not huBs then 
+		if not isCanHu and not isCanGang then 
 			if isTing then --听过牌的人检测过后会再动打出去
 				if self._clickCardCallback and self._tingOutCardValue then
 					local statee = 1
@@ -1601,6 +1605,7 @@ function MjEngine:gameOverShow()--游戏结束 推到牌
 end
 
 function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
+
 	local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
 	if not direction then
 		return
@@ -1728,12 +1733,12 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 					end
 				end
 
-				local a = 1
-				local allRemoveNum = 0
-				while (a <= #self._allPlayerHandCardsValue[direction]) do
-					table.remove(self._allPlayerStandHandCardsValue[direction], 1)
-					allRemoveNum = allRemoveNum + 1
+				for i=1,offNum do
+					if #self._allPlayerHandCardsValue[direction] > 0 then
+						table.remove(self._allPlayerHandCardsValue[direction], 1)
+					end
 				end
+
 			else
 				local removeNum = 0
 
@@ -1765,7 +1770,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 				local allRemoveNum = 0
 				while (a <= #self._allPlayerHandCardsValue[direction]) do
 					if self._allPlayerHandCardsValue[direction][a] == msg.item["value"] and allRemoveNum < offNum then
-						table.remove(self._allPlayerStandHandCardsValue[direction], a)
+						table.remove(self._allPlayerHandCardsValue[direction], a)
 						allRemoveNum = allRemoveNum + 1
 					else
 						a = a + 1

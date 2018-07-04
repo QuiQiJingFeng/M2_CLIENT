@@ -75,6 +75,8 @@ GUO     过]]--
     NOTICE_DDZ_GAMEOVER = "NoticeDDZGameOver",
     -- 快捷发言
     NOTICE_FAST_SPAKE = "notice_fast_spake",
+
+    NOTICE_PAO = "notice_pao",
 }
 
 local handler_id = 0

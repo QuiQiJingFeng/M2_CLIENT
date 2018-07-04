@@ -397,7 +397,10 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 
 	--把这张牌加到out  先通知noticeSpecial 再 NoticePlayCard
 	self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
-	self:refreshHuCardNum(msg.card, 2)
+	
+	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+		self:refreshHuCardNum(msg.card, 2)
+	end
 
 	--其他玩家从手牌中去掉  （自己的在点击牌出牌的时候处理）
 	if lt.DataManager:getRePlayState() then
@@ -472,6 +475,10 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 		self._gameSelectPosPanel:ShowTingBS(direction)
 	end
 	self._engine:noticeSpecialEvent(msg)
+end
+
+function GameRoomLayer:onNoticePao(msg)
+
 end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
@@ -574,6 +581,8 @@ function GameRoomLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameRoomLayer.onRefreshGameOver")
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GameRoomLayer.onNoticeSpecialEvent")
+
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, handler(self, self.onNoticePao), "GameRoomLayer.onNoticePao")
 end
 
 function GameRoomLayer:onExit()
@@ -595,7 +604,7 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameRoomLayer:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameRoomLayer:onNoticeSpecialEvent")
 
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, "GameRoomLayer.onNoticePao")
 end
-
 
 return GameRoomLayer
