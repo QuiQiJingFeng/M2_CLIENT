@@ -183,7 +183,14 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
         end
 
     elseif pSender == self.m_objCommonUi.m_btnPass then
-       
+        if pSender.isPassSendMsg then
+            self:onPassAction()
+        else
+            self:onPassClick()
+        end
+
+        self:viewHideActPanelAndMenu()
+
         if self.m_objCommonUi.m_btnTing:isVisible() then
             self._deleget:checkMyHandTingStatu(false)
         end
@@ -193,13 +200,7 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
             self._deleget:autoPutOutCard()
         end
 
-        if pSender.isPassSendMsg then
-            self:onPassAction()
-        else
-            self:onPassClick()
-        end
         --self.m_objModel.m_chiPengGangTing = 0
-        self:viewHideActPanelAndMenu()
 
     elseif pSender == self.m_objCommonUi.m_btnMenuPass then -- 二级菜单的【过】按钮
         if pSender.isPassSendMsg then
@@ -318,7 +319,8 @@ function GameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
         local isHu = tObjCpghObj.tObjHu ~= nil
         self:setBtnEnabled(self.m_objCommonUi.m_btnHu, isHu)
     end
-    if tObjCpghObj.tObjHu and lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
+    local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+    if tObjCpghObj.tObjHu and lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH and isTing then
         self:setBtnEnabled(self.m_objCommonUi.m_btnPass,false) --推倒胡胡牌不能过
     else
         self:setBtnEnabled(self.m_objCommonUi.m_btnPass, true)
