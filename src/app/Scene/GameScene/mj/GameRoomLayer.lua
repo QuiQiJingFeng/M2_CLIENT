@@ -305,10 +305,10 @@ end
 function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 	self._currentOutPutPlayerPos = msg.user_pos
 	msg.card_list = msg.card_list or {}
-	lt.CommonUtil.print("============打印",msg.user_pos,lt.DataManager:getMyselfPositionInfo().user_pos)
+
+	local direction = self:getPlayerDirectionByPos(msg.user_pos)
 	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
 		self._sendRequest = false
-		lt.CommonUtil.print("================有没有进来============")
 		local handList = {}
 		local cpgList = {}
 		--摸牌 ->出牌
@@ -359,11 +359,11 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 		self._ischeckMyHandStatu = false
 
 	else--不是本人
-		if msg.operator == 1 then--摸得 getOneHandCardAtDirection
-			--self._engine:configAllPlayerCards(direction, false, true, false)
-		end
+
+		self._engine:updateLightCardValue(msg.four_card_list)
+		self._engine:configAllPlayerCards(direction, false, true, false, false)
 	end
-	local direction = self:getPlayerDirectionByPos(msg.user_pos)
+	
 	self._gameSelectPosPanel:ShowLightRing(direction)
 end
 

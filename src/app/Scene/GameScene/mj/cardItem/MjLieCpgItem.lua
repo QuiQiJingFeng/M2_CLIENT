@@ -75,6 +75,9 @@ function MjLieCpgItem:updateInfo(info)
 			arrow:setRotation(du)
 		end
 
+		local imageMask = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_Mask")
+		imageMask:setVisible(false)
+
 		local face = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Face")
 		face:setSpriteFrame("game/mjcomm/cards/card_"..cardType.."_"..cardValue..".png")
 		
