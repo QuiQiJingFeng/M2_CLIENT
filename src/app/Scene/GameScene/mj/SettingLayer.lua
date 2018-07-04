@@ -14,9 +14,11 @@ function SettingLayer:ctor()
 	local backLobby = self._scrollView:getChildByName("Btn_BackLobby")
 
     local gameInfo = lt.DataManager:getGameRoomInfo()
-    if gameInfo.room_setting.round > 0 then -- 局数大于0就判断牌局已经开始
+    if gameInfo.cur_round > 0 then -- 局数大于0就判断牌局已经开始
         backLobby:setVisible(false)
         dissolveRoom:setPosition(400,721)
+    else
+        backLobby:setVisible(true)
     end
 
     local btnClose = self._scrollView:getChildByName("Btn_Close")

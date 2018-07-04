@@ -482,17 +482,17 @@ function GameRoomLayer:onGamenoticeOtherDistroyRoom(msg)--通知有人解散房�
 	local loginData = lt.DataManager:getPlayerInfo()
 	local aa = os.date("%Y.%m.%d.%H:%M:%S",msg.distroy_time)
 	local timeer = os.time()
-	local cc = msg.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
+	local other_time = msg.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
 	if not self.ApplyGameOverPanel then
 		self.ApplyGameOverPanel = lt.ApplyGameOverPanel.new(self)
-		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
+		self.ApplyGameOverPanel:show(other_time,msg.confirm_map)
 		dump(msg.confirm_map[1])
 		if loginData.user_id ==  msg.confirm_map[1] then --代表是申请人，直接置灰
 			self.ApplyGameOverPanel:buttonNotChick()
 		end
 		lt.UILayerManager:addLayer(self.ApplyGameOverPanel,true)
 	else
-		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
+		self.ApplyGameOverPanel:show(other_time,msg.confirm_map)
 	end	
 end
 function GameRoomLayer:onCloseApplyGameOverPanel()
