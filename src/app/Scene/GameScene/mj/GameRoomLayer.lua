@@ -477,10 +477,6 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	self._engine:noticeSpecialEvent(msg)
 end
 
-function GameRoomLayer:onNoticePao(msg)
-	
-end
-
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
 
 end
@@ -489,17 +485,17 @@ function GameRoomLayer:onGamenoticeOtherDistroyRoom(msg)--通知有人解散房�
 	local loginData = lt.DataManager:getPlayerInfo()
 	local aa = os.date("%Y.%m.%d.%H:%M:%S",msg.distroy_time)
 	local timeer = os.time()
-	local cc = msg.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
+	local other_time = msg.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
 	if not self.ApplyGameOverPanel then
 		self.ApplyGameOverPanel = lt.ApplyGameOverPanel.new(self)
-		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
+		self.ApplyGameOverPanel:show(other_time,msg.confirm_map)
 		dump(msg.confirm_map[1])
 		if loginData.user_id ==  msg.confirm_map[1] then --代表是申请人，直接置灰
 			self.ApplyGameOverPanel:buttonNotChick()
 		end
 		lt.UILayerManager:addLayer(self.ApplyGameOverPanel,true)
 	else
-		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
+		self.ApplyGameOverPanel:show(other_time,msg.confirm_map)
 	end	
 end
 function GameRoomLayer:onCloseApplyGameOverPanel()
@@ -581,8 +577,6 @@ function GameRoomLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameRoomLayer.onRefreshGameOver")
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GameRoomLayer.onNoticeSpecialEvent")
-
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, handler(self, self.onNoticePao), "GameRoomLayer.onNoticePao")
 end
 
 function GameRoomLayer:onExit()
@@ -603,8 +597,6 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, "GameRoomLayer:onPushPlayerOperatorState")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameRoomLayer:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameRoomLayer:onNoticeSpecialEvent")
-
-    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PAO, "GameRoomLayer.onNoticePao")
 end
 
 return GameRoomLayer

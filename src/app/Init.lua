@@ -23,6 +23,7 @@ ltMetaTable["CommonUtil"] = "app.Common.CommonUtil"
 ltMetaTable["Constants"] = "app.Common.Constants"
 ltMetaTable["LanguageString"] = "app.Common.LanguageString"
 ltMetaTable["HeadImage"] = "app.Common.HeadImage"
+ltMetaTable["scheduler"] = "app.Common.scheduler"
 
 --manager
 ltMetaTable["ActivityPushManager"] = "app.Manager.ActivityPushManager"
