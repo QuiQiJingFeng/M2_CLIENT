@@ -339,6 +339,21 @@ function PreferenceManager:getCreateRoominfoE()
 	return monsterId
 end
 
+function PreferenceManager:setCreateRoominfoF(monsterId)--记录推到胡记录房间信息 只可自摸胡
+	local key = "CREATEROOMINFOTDHF"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoF()
+	local key = "CREATEROOMINFOTDHF"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
 function PreferenceManager:setCreateRoominfoSQMJA(monsterId)--记录商丘麻将记录房间信息 资费
 	local key = "CREATEROOMINFOSQMJA"
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
@@ -534,6 +549,21 @@ function PreferenceManager:getCreateRoominfoSQMJM()
 	return monsterId
 end
 
+function PreferenceManager:setCreateRoominfoSQMJN(monsterId)--记录商丘麻将记录房间信息 明听暗听
+	local key = "CREATEROOMINFOSQMJN"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJN()
+	local key = "CREATEROOMINFOSQMJN"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
 function PreferenceManager:setCreateRoominfoPLZA(monsterId)--记录飘癞子记录房间信息 资费
 	local key = "CREATEROOMINFOPLZA"
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
@@ -677,6 +707,21 @@ end
 
 function PreferenceManager:getCreateRoominfoHZMJG()
 	local key = "CREATEROOMINFOHZMJG"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoHZMJH(monsterId)--记录红中麻将记录房间信息 明听暗听
+	local key = "CREATEROOMINFOHZMJH"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoHZMJH()
+	local key = "CREATEROOMINFOHZMJH"
 	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
 	--if monsterId == 0 then
 	--	monsterId = 1

@@ -17,7 +17,7 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/cardBgGreen/mjLieVerticalFace.png" Plist="game/mjcomm/mjTingAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_TingArrow" ActionTag="1002208246" VisibleForFrame="False" Tag="90" IconVisible="False" LeftMargin="-2.5000" RightMargin="-0.5000" TopMargin="-37.0000" BottomMargin="43.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_TingArrow" ActionTag="1002208246" Tag="90" IconVisible="False" LeftMargin="-2.5000" RightMargin="-0.5000" TopMargin="-37.0000" BottomMargin="43.0000" ctype="SpriteObjectData">
             <Size X="47.0000" Y="60.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="21.0000" Y="73.0000" />
