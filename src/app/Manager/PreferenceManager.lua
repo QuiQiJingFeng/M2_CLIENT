@@ -714,21 +714,6 @@ function PreferenceManager:getCreateRoominfoHZMJG()
 	return monsterId
 end
 
-function PreferenceManager:setCreateRoominfoHZMJH(monsterId)--记录红中麻将记录房间信息 明听暗听
-	local key = "CREATEROOMINFOHZMJH"
-	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
-  	cc.UserDefault:getInstance():flush()
-end
-
-function PreferenceManager:getCreateRoominfoHZMJH()
-	local key = "CREATEROOMINFOHZMJH"
-	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
-	--if monsterId == 0 then
-	--	monsterId = 1
-	--end
-	return monsterId
-end
-
 function PreferenceManager:setCreateRoominfoDDZA(monsterId)--记录斗地主记录房间信息 资费
 	local key = "CREATEROOMINFODDZA"
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)

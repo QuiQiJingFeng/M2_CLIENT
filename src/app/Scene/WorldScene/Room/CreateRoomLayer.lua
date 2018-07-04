@@ -467,6 +467,9 @@ function CreateRoomLayer:initTDHRule( ... )
 
         lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
             if playRule[i].isSelect == false then
+                if i == 1 then
+                    playRule[3]:setVisible(true)
+                end
                 playRule[i].isSelect = true
                 playRule[i].selectNode:setVisible(true) 
                 self.selectTable.other_setting[i+1] = 1
@@ -479,6 +482,9 @@ function CreateRoomLayer:initTDHRule( ... )
                     lt.PreferenceManager:setCreateRoominfoF(1)
                 end
             else
+                if i == 1 then
+                    playRule[3]:setVisible(false)
+                end
                 lt.CommonUtil.dump(self.selectTable)
                 self.selectTable.other_setting[i+1] = 0
                 playRule[i].isSelect = false
@@ -1057,7 +1063,6 @@ function CreateRoomLayer:initHZMJRule( ... )
 	-- [3] 七对胡牌
 	-- [4] 喜分
 	-- [5] 一码不中当全中
-    -- [6] 明听暗听
 
 	local payTable = {}
 	local roundTable = {}
@@ -1068,7 +1073,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 	local roundType = {4, 8, 16}
     local playNumType = {4, 3, 2}
 	local jiangType = {2, 4, 6}
-	local ruleType = {0, 0, 0, 0}
+	local ruleType = {0, 0, 0}
 
     -- 房主出资， 对应局数多少
     local allPay = {20, 40, 80}
@@ -1210,9 +1215,7 @@ function CreateRoomLayer:initHZMJRule( ... )
                 end
 			end
 	    end, false)
-	end
 
-    for i=1,4 do
         local rulePalel = self.m_hzmjRule:getChildByName("Panel_Play".. i)
         rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
         rulePalel.selectNode:setVisible(false)
@@ -1233,8 +1236,6 @@ function CreateRoomLayer:initHZMJRule( ... )
                     lt.PreferenceManager:setCreateRoominfoHZMJF(1)
                 elseif i == 3 then
                     lt.PreferenceManager:setCreateRoominfoHZMJG(1)
-                elseif i == 4 then
-                    lt.PreferenceManager:setCreateRoominfoHZMJH(1)
                 end
             else
                 lt.CommonUtil.dump(self.selectTable)
@@ -1249,12 +1250,11 @@ function CreateRoomLayer:initHZMJRule( ... )
                     lt.PreferenceManager:setCreateRoominfoHZMJF(0)
                 elseif i == 3 then
                     lt.PreferenceManager:setCreateRoominfoHZMJG(0)
-                elseif i == 4 then
-                    lt.PreferenceManager:setCreateRoominfoHZMJH(0)
                 end
             end
         end, false)
-    end
+	end
+
     lt.CommonUtil.dump(self.selectTable, "self.selectTable")
 
 
@@ -1354,16 +1354,6 @@ function CreateRoomLayer:initHZMJRule( ... )
     elseif lt.PreferenceManager:getCreateRoominfoHZMJG() == -99 then
         --第一次进入
         playRule[3]:onClick()
-    end
-
-    if lt.PreferenceManager:getCreateRoominfoHZMJH() and lt.PreferenceManager:getCreateRoominfoHZMJH()~=0 then
-        print(lt.PreferenceManager:getCreateRoominfoHZMJH())
-        playRule[4]:onClick()
-    elseif lt.PreferenceManager:getCreateRoominfoHZMJH() == 0 then 
-        --没选中走这里不作任何操作
-    elseif lt.PreferenceManager:getCreateRoominfoHZMJH() == -99 then
-        --第一次进入
-        playRule[4]:onClick()
     end
 end
 

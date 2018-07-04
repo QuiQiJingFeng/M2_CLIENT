@@ -879,52 +879,6 @@
                             <EndColor A="255" R="255" G="255" B="255" />
                             <ColorVector ScaleY="1.0000" />
                           </AbstractNodeData>
-                          <AbstractNodeData Name="Panel_Play4" ActionTag="116920261" Tag="2892" IconVisible="False" LeftMargin="37.0000" RightMargin="780.0000" TopMargin="434.0000" BottomMargin="40.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                            <Size X="150.0000" Y="50.0000" />
-                            <Children>
-                              <AbstractNodeData Name="Image_FangZhu" ActionTag="345108333" Tag="2893" IconVisible="False" LeftMargin="15.4431" RightMargin="94.5569" TopMargin="3.7370" BottomMargin="4.2630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="10" Scale9Height="12" ctype="ImageViewObjectData">
-                                <Size X="40.0000" Y="42.0000" />
-                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                                <Position X="35.4431" Y="25.2630" />
-                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                                <CColor A="255" R="255" G="255" B="255" />
-                                <PrePosition X="0.2363" Y="0.5053" />
-                                <PreSize X="0.2667" Y="0.8400" />
-                                <FileData Type="MarkedSubImage" Path="game/common/img/checkBox_gray_2.png" Plist="game/common/CreateRoomPlist0.plist" />
-                              </AbstractNodeData>
-                              <AbstractNodeData Name="Text_Pay" ActionTag="-1408411782" Tag="2894" IconVisible="False" LeftMargin="65.0000" RightMargin="5.0000" TopMargin="16.1371" BottomMargin="13.8629" FontSize="20" LabelText="明听暗听" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                                <Size X="80.0000" Y="20.0000" />
-                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                                <Position X="105.0000" Y="23.8629" />
-                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                                <CColor A="255" R="95" G="95" B="94" />
-                                <PrePosition X="0.7000" Y="0.4773" />
-                                <PreSize X="0.5333" Y="0.4000" />
-                                <OutlineColor A="255" R="255" G="0" B="0" />
-                                <ShadowColor A="255" R="110" G="110" B="110" />
-                              </AbstractNodeData>
-                              <AbstractNodeData Name="Image_Select" ActionTag="952047897" Tag="2895" IconVisible="False" LeftMargin="14.4431" RightMargin="93.5569" TopMargin="5.2369" BottomMargin="5.7631" LeftEage="16" RightEage="16" TopEage="16" BottomEage="16" Scale9OriginX="16" Scale9OriginY="16" Scale9Width="10" Scale9Height="7" ctype="ImageViewObjectData">
-                                <Size X="42.0000" Y="39.0000" />
-                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                                <Position X="35.4431" Y="25.2631" />
-                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                                <CColor A="255" R="255" G="255" B="255" />
-                                <PrePosition X="0.2363" Y="0.5053" />
-                                <PreSize X="0.2800" Y="0.7800" />
-                                <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_mulOptionMark.png" Plist="game/common/CreateRoomPlist0.plist" />
-                              </AbstractNodeData>
-                            </Children>
-                            <AnchorPoint />
-                            <Position X="37.0000" Y="40.0000" />
-                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                            <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.0383" Y="0.0763" />
-                            <PreSize X="0.1551" Y="0.0954" />
-                            <SingleColor A="255" R="128" G="0" B="128" />
-                            <FirstColor A="255" R="150" G="200" B="255" />
-                            <EndColor A="255" R="255" G="255" B="255" />
-                            <ColorVector ScaleY="1.0000" />
-                          </AbstractNodeData>
                         </Children>
                         <AnchorPoint />
                         <Position X="10.4291" Y="20.1838" />

@@ -1152,17 +1152,18 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 
 	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH or lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
+		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[2]
 		if not isCanHu and not isCanGang then 
 			if isTing then --听过牌的人检测过后会再动打出去
 				self:autoPutOutCard()
 			end	
 		else
-			if not isTing then --没报听不能胡牌
+			if not isTing then --没报听不能胡牌  --推倒胡报不报听都能胡牌暂时注释掉
 				tObjCpghObj.tObjHu = nil
 			end
 		end
 
-		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[2]
+		
 		if setisTing == 1 then --报听
 			if  not isTing then --听牌后不再弹出听牌的按钮
 			    self._isThereAnyTing = false
@@ -1180,6 +1181,28 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 		end
 
 	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
+		if not isCanHu and not isCanGang then 
+			if isTing then --听过牌的人检测过后会再动打出去
+				self:autoPutOutCard()
+			end	
+		else
+			if not isTing then --没报听不能胡牌
+				tObjCpghObj.tObjHu = nil
+			end
+		end
+
+		if  not isTing then --听牌后不再弹出听牌的按钮
+			    self._isThereAnyTing = false
+				local isCardTing = false
+				if self:isCanTingCard() then
+					isCardTing = true
+					self._isThereAnyTing = true
+				end
+
+			if isCardTing then
+			    tObjCpghObj.tObjTing = {}
+			end
+		end
 	end
 
 	return tObjCpghObj
@@ -1807,9 +1830,10 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		info["ting"] = true
 		local tingInfo = lt.DataManager:getTingPlayerInfo()
 		table.insert( tingInfo, info )
-
-		if lt.DataManager:getRePlayState() and msg.item["value"] then
-			self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+		if not self._whatTing then--明听发的不走这里
+			if lt.DataManager:getRePlayState() and msg.item["value"] then
+				self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+			end
 		end
 	end
 
@@ -1999,8 +2023,29 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	end
 end
 
-function MjEngine:setEngineConfig()
+function MjEngine:setMingTingConfig()
+	 --1 暗听 0明听
+	 print("=====ssssssssss")
+	 dump(self._gameRoomInfo)
+	 dump(lt.DataManager:getGameRoomSetInfo())
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
+		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[5]
+		if setisTing == 1 then
+			self._whatTing = true --暗听
+		else
+			self._whatTing = false--明听
+		end
+	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
+		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[13]
+		if setisTing == 1 then
+			self._whatTing = true --暗听
+		else
+			self._whatTing = false--明听
+		end
+	end
+end
 
+function MjEngine:setEngineConfig()
 	--在检测胡牌之前不同玩法的条件设置 当条件满足了在check是否可以胡牌
 
 	--红中玩法 +-可胡七对  +-喜分 +-一码不中当全中

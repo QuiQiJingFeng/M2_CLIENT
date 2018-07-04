@@ -53,6 +53,7 @@ function GameRoomLayer:ctor()
 end
 
 function GameRoomLayer:initGame()  
+	self._engine:setMingTingConfig()
 	self._sendRequest = false
 	self._gameSelectPosPanel:initGame()
 	self._gameCompassPanel:initGame()
