@@ -23,6 +23,8 @@ function MjLieFaceItem:ctor(handDirection)
 
 	self._spriteArrow = self._rootNode:getChildByName("Sprite_Arrow")
 
+	self._tingIcon = self._rootNode:getChildByName("Sprite_TingArrow")
+
 	self:showNormal()
 end
 
@@ -119,6 +121,11 @@ function MjLieFaceItem:showNormal()
 	self._imageMaskRed:setVisible(false)
 	self._spriteArrow:setVisible(false)
 	self._blackMask:setVisible(false)
+	self._tingIcon:setVisible(false)
+end
+
+function MjLieFaceItem:showTing() 
+	self._tingIcon:setVisible(true)
 end
 
 function MjLieFaceItem:showRedMask()
