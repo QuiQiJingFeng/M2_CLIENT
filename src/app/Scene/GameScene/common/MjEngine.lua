@@ -1154,10 +1154,7 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH or lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
 		if not isCanHu and not isCanGang then 
 			if isTing then --听过牌的人检测过后会再动打出去
-				if self._clickCardCallback and self._tingOutCardValue then
-					local statee = 1
-					self._clickCardCallback(self._tingOutCardValue,statee)
-				end
+				self:autoPutOutCard()
 			end	
 		else
 			if not isTing then --没报听不能胡牌
@@ -1186,6 +1183,13 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 	end
 
 	return tObjCpghObj
+end
+
+function MjEngine:autoPutOutCard()--自动出牌
+	if self._clickCardCallback and self._tingOutCardValue then
+		local statee = 1
+		self._clickCardCallback(self._tingOutCardValue,statee)
+	end
 end
 
 function MjEngine:isCanTingCard() --是否可以听牌 仅仅为了显示听的按钮

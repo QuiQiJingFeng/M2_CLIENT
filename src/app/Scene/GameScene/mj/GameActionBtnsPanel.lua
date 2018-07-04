@@ -187,6 +187,11 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
         if self.m_objCommonUi.m_btnTing:isVisible() then
             self._deleget:checkMyHandTingStatu(false)
         end
+        local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+
+        if isBaoTing then
+            self._deleget:autoPutOutCard()
+        end
 
         if pSender.isPassSendMsg then
             self:onPassAction()

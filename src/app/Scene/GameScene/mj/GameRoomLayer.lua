@@ -164,6 +164,10 @@ function GameRoomLayer:setClickEvent()
 	self._engine:setClickCardCallBack(handler(self, self.onClickCard))
 end
 
+function GameRoomLayer:autoPutOutCard() 
+	self._engine:autoPutOutCard()
+end
+
 function GameRoomLayer:isVisibleGameActionBtnsPanel() 
 	return self._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:isVisible()
 end
