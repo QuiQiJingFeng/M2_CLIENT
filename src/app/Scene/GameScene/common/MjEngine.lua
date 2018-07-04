@@ -1158,9 +1158,12 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 				self:autoPutOutCard()
 			end	
 		else
-			if not isTing then --没报听不能胡牌  --推倒胡报不报听都能胡牌暂时注释掉
-				tObjCpghObj.tObjHu = nil
-			end
+			--if setisTing == 1 then--是否报听
+				--[[
+				if not isTing then --没报听不能胡牌  --推倒胡报不报听都能胡牌暂时注释掉
+					tObjCpghObj.tObjHu = nil
+				end--]]
+			--end
 		end
 
 		

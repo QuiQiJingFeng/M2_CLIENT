@@ -376,7 +376,7 @@ function CreateRoomLayer:initTDHRule( ... )
     local roundType = {4, 8, 16}
     local playNumType = {4}
     local jiangType = {1,0}--胡牌
-    local ruleType = {0, 0,0}
+    local ruleType = {0,0,0}
 
     -- 房主出资， 对应局数多少
     local allPay = {20, 40, 80}
@@ -467,14 +467,16 @@ function CreateRoomLayer:initTDHRule( ... )
 
         lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
             if playRule[i].isSelect == false then
-                if i == 1 then
-                    playRule[3]:setVisible(true)
-                end
                 playRule[i].isSelect = true
-                playRule[i].selectNode:setVisible(true) 
-                self.selectTable.other_setting[i+1] = 1
+                playRule[i].selectNode:setVisible(true)
+                if i == 1 or i == 2 then
+                    self.selectTable.other_setting[i+1] = 1
+                else
+                    self.selectTable.other_setting[5] = 1
+                end
                 playRule[i]._textNode:setColor(SelectColor)
                 if i == 1 then
+                    playRule[3]:setVisible(true)
                     lt.PreferenceManager:setCreateRoominfoD(1)
                 elseif i == 2 then
                     lt.PreferenceManager:setCreateRoominfoE(1)
@@ -482,17 +484,19 @@ function CreateRoomLayer:initTDHRule( ... )
                     lt.PreferenceManager:setCreateRoominfoF(1)
                 end
             else
-                if i == 1 then
-                    playRule[3]:setVisible(false)
-                end
                 lt.CommonUtil.dump(self.selectTable)
-                self.selectTable.other_setting[i+1] = 0
+                if i == 1 or i == 2 then
+                    self.selectTable.other_setting[i+1] = 0
+                else
+                    self.selectTable.other_setting[5] = 0
+                end
                 playRule[i].isSelect = false
                 playRule[i].selectNode:setVisible(false)
                 playRule[i]._textNode:setColor(NormalColor) 
 
                 if i == 1 then
                     lt.PreferenceManager:setCreateRoominfoD(0)
+                    playRule[3]:setVisible(false)
                 elseif i == 2 then
                     lt.PreferenceManager:setCreateRoominfoE(0)
                 elseif i == 3 then
