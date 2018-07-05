@@ -47,6 +47,15 @@
     <ClInclude Include="..\Classes\pbc\pbc.h">
       <Filter>Classes\pbc</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\common\PlatformSDK.h">
+      <Filter>Classes\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\common\JSONManager.h">
+      <Filter>Classes\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\common\Utils.h">
+      <Filter>Classes\common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -76,6 +85,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\pbc\pbc-lua.c">
       <Filter>Classes\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\common\PlatformSDK.cpp">
+      <Filter>Classes\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\common\JSONManager.cpp">
+      <Filter>Classes\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\common\Utils.cpp">
+      <Filter>Classes\common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

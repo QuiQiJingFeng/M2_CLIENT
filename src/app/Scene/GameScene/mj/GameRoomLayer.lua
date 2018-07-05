@@ -477,9 +477,13 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	end
 	if msg.item["type"] == 7 then --如果是听牌则刷新其他人的听牌杠标识
 		local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
-		self._gameSelectPosPanel:ShowTingBS(direction)
+		self:ShowTingGang(direction)
 	end
 	self._engine:noticeSpecialEvent(msg)
+end
+
+function GameRoomLayer:ShowTingGang(direction)
+	self._gameSelectPosPanel:ShowTingBS(direction)
 end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求

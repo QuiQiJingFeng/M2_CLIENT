@@ -121,7 +121,9 @@ function MjLieFaceItem:showNormal()
 	self._imageMaskRed:setVisible(false)
 	self._spriteArrow:setVisible(false)
 	self._blackMask:setVisible(false)
-	self._tingIcon:setVisible(false)
+	if self._tingIcon then
+		self._tingIcon:setVisible(false)
+	end
 end
 
 function MjLieFaceItem:showTing() 

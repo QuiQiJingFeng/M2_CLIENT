@@ -1016,7 +1016,7 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		node:setCardIcon(value)
 		node:setTag(value)
 		node:showNormal()
-
+		
 		local isTing = false
 		if self._allHandCardsTingValue and #self._allHandCardsTingValue >= 1 then
 			for i=1,#self._allHandCardsTingValue do
@@ -1042,7 +1042,6 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		end
 
 		local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getPlayerPosByDirection(direction))
-
 		if isBaoTing then
 			node:showBlackMask()
 		end
@@ -1083,7 +1082,6 @@ function MjEngine:updateLieHandCardsNode(node, direction, info, type)
 					end
 				end
 			end
-
 			if isTing then
 				node:showTing()
 			else
@@ -1176,7 +1174,7 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 	--检测听牌
 
 	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
-
+	lt.CommonUtil.print("isTing检测有没有报听听听听听听听听听听听听听听听听听听听听听听听听听听听",isTing)
 	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH or lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
 		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[2]
 		if not isCanHu and not isCanGang then 
@@ -1239,8 +1237,15 @@ end
 
 function MjEngine:autoPutOutCard()--自动出牌
 	if self._clickCardCallback and self._tingOutCardValue then
-		local statee = 1
-		self._clickCardCallback(self._tingOutCardValue,statee)
+		local function func()
+		   local statee = 1
+		   self._clickCardCallback(self._tingOutCardValue,statee)			
+		end
+		local delay = cc.DelayTime:create(1)
+		local func1 = cc.CallFunc:create(func)
+		local sequence = cc.Sequence:create(delay, func1)
+		self._deleget:runAction(sequence)
+
 	end
 end
 
@@ -1257,7 +1262,7 @@ function MjEngine:isCanTingCard() --是否可以听牌 仅仅为了显示听的�
 		end
 	end
 	--local istingInfo = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
-	print("检测显示听按钮", isCanTing)
+	lt.CommonUtil.print("检测显示听按钮", isCanTing)
 	return isCanTing
 end
 
@@ -1405,19 +1410,16 @@ end
 
 function MjEngine:checkMyHandTingStatu(isSelectTing)
 	self._isSelectTing = isSelectTing
-
 	local isting = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 	if isting then
 		return
 	end
- 
 	for key,value in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
 		local isTing = self:isCanTingByCard(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], value)--出一张手牌是否可以听
 		if isTing then
 			table.insert(self._allHandCardsTingValue,value)
 		end
 	end
-	dump(self._allHandCardsTingValue)
 	self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false, false)	
 end
 
@@ -1854,11 +1856,28 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		local directionn = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
 		lt.CommonUtil.print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
 
-		local info = {}
-		info["user_pos"] = msg.item["from"]
-		info["ting"] = true
 		local tingInfo = lt.DataManager:getTingPlayerInfo()
-		table.insert( tingInfo, info )
+        if tingInfo and #tingInfo > 0 then  --这边的处理是考虑到断线重连
+        	local BSNum = 1 
+        	for k,v in pairs(tingInfo) do
+        		if v.user_pos == msg.item["from"] then
+        			v.ting = true
+        			BSNum = BSNum + 1
+        		end
+        	end
+        	if BSNum == 1 then
+        		local info = {}
+				info["user_pos"] = msg.item["from"]
+				info["ting"] = true
+				table.insert( tingInfo, info )
+        	end
+        else
+        	local info = {}
+			info["user_pos"] = msg.item["from"]
+			info["ting"] = true
+			table.insert( tingInfo, info )
+        end
+		lt.CommonUtil.print("noticeSpecialEvent==>",tingInfo)
 		if not self._whatTing then--明听发的不走这里
 			if lt.DataManager:getRePlayState() and msg.item["value"] then
 				self:goOutOneHandCardAtDirection(direction, msg.item["value"])
@@ -1976,7 +1995,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	self._huiCardValue = allRoomInfo.huicard
 
 	self:configHuiCard()
-
+	
     --当前事件  
 
 	--我的吃碰杠通知
@@ -2040,13 +2059,27 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		end
 	end
 
-	tObjCpghObj = self:checkMyHandButtonActionStatu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], state, tObjCpghObj)
+	if allRoomInfo.cur_play_pos == lt.DataManager:getMyselfPositionInfo().user_pos then--该自己出牌才检查
+		local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+		if isTing then
+			self._tingOutCardValue = allRoomInfo.card_list[#allRoomInfo.card_list]
+			self:autoPutOutCard()
+		end	
+	   tObjCpghObj = self:checkMyHandButtonActionStatu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], state, tObjCpghObj)
+	end
+
+	for k,v in pairs(allRoomInfo.ting_list) do --断线回来如何听过牌则显示玩家面前的听杠子
+        if v.ting == true then
+        	local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
+        	self._deleget:ShowTingGang(direction)
+        end
+    end
 
     --显示吃碰杠胡控件
     self._deleget:viewHideActPanelAndMenu()
     self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
     self._deleget:viewActionButtons(tObjCpghObj, true)
-
+    
 	for i,direction in ipairs(self._currentGameDirections) do
 		self:configAllPlayerCards(direction, true, true, true, true)
 	end
@@ -2054,9 +2087,6 @@ end
 
 function MjEngine:setMingTingConfig()
 	 --1 暗听 0明听
-	 print("=====ssssssssss")
-	 dump(self._gameRoomInfo)
-	 dump(lt.DataManager:getGameRoomSetInfo())
 	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
 		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[5]
 		if setisTing == 1 then

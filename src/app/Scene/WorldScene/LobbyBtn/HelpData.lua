@@ -22,14 +22,16 @@ function HelpData:show(id)
 		self._rootNode:removeFromParent()
 	end
 
-	if id == 1 then
-		self._rootNode = cc.CSLoader:createNode("hallcomm/Help_1.csb")
-	elseif id == 2 then
-		self._rootNode = cc.CSLoader:createNode("hallcomm/Help_2.csb")
-	elseif id == 3 then
+	if id == 1 then --1 红中 2 斗地主 3 商丘麻将 4 飘癞子 5 推倒胡
 		self._rootNode = cc.CSLoader:createNode("hallcomm/Help_3.csb")
-	elseif id == 4 then
+	elseif id == 2 then--
 		self._rootNode = cc.CSLoader:createNode("hallcomm/Help_4.csb")
+	elseif id == 3 then
+		self._rootNode = cc.CSLoader:createNode("hallcomm/Help_1.csb")
+	elseif id == 4 then
+		self._rootNode = cc.CSLoader:createNode("hallcomm/Help_5.csb")
+	elseif id == 5 then
+		self._rootNode = cc.CSLoader:createNode("hallcomm/Help_2.csb")
 	end
 	self:addChild(self._rootNode)
 

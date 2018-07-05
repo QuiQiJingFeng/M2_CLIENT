@@ -12,34 +12,20 @@ function LobbyHelpLayer:ctor()
 
 	self._menu_GameList = mainNode:getChildByName("Menu_GameList")--滚动列表
 	local size = self._menu_GameList:getContentSize()
-	self._menu_GameList:setInnerContainerSize(cc.size(size.width,320))--人数 x 80
+	self._menu_GameList:setInnerContainerSize(cc.size(size.width,250))--人数 x 80
 
-	--local posy = {425,340,255,170,85,0}
-	local posY = 160
-
-	for i=1,4 do
+	self._gameTbnNameTable = {}
+	
+	local posY = 428--140
+	for i=1,5 do
 		if i ~= 1 then
-			posY = posY+85
+			posY = posY-72
 		end
 		local btnTab = ccui.Button:create("game/common/img/createRoom_btnNormal.png", "game/common/img/createRoom_btnNormal.png", "game/common/img/createRoom_btnNormal.png", 1) 
 		btnTab:setPosition(5,posY)
 		btnTab:setScale9Enabled(true)
 	    btnTab:setAnchorPoint(0,0)
 	    btnTab:setScale(0.85)
-
-	    if i == 4 then
-	    	self._texure = ccui.Button:create("game/common/img/createRoom_btnSelect.png", "game/common/img/createRoom_btnSelect.png", "game/common/img/createRoom_btnSelect.png", 1)
-	    	self._texure:setPosition(0,0)
-	    	self._texure:setScale9Enabled(true)
-    		self._texure:setAnchorPoint(0,0)
-    		self._texure:setScale(1.0)
-	    	btnTab:addChild(self._texure)
-
-	    	self._helpDate = lt.HelpData.new()
-	    	self._helpDate:show(4)
-	    	self._scrollView_Info:addChild(self._helpDate)
-	    end
-		
 
 		local function menuZhuCeCallback(sender,eventType)
 	        if eventType == ccui.TouchEventType.began then
@@ -68,37 +54,20 @@ function LobbyHelpLayer:ctor()
     			    self._texure:setScale(1.0)
 	    			btnTab:addChild(self._texure)
     			end
+    				--[[
+    				for k,v in pairs(self._gameTbnNameTable) do
+    					if v ~= i then
+    						v:setVisible(false)
+    					end
+    				end--]]
     				if  not self._helpDate then
 	    			    self._helpDate = lt.HelpData.new()
 	    				self._helpDate:show(i)
 	    				self._scrollView_Info:addChild(self._helpDate)
     				else
     					self._helpDate:show(i)
-
     				end
-    				--[[ --内容      
-    			    local _Text = ccui.Text:create();
-    				_Text:setFontSize(30)
-    				_Text:setString("fgsdgdsgdfsgfdsgsdfgsdfgdfsgfsdgdfssdfgsdfgsdfgsdfgfsdgsdfgdfsgdfsdfsgdfs")
-					self._scrollView_Info:addChild(_Text)
-					--]]
-				--[[
-				local text = lt.LanguageString:getString("LOBBYHELP_1")
-       	 		local line = ccui.Text:create()
-        		line:setFontSize(25)
-        		line:setFontName("font/fzcy.TTF")
-        		--local color = string.split(content.fontColor, ",")
-        	  	--line:setTextColor(cc.c4b(tonumber(color[1]), tonumber(color[2]), tonumber(color[3]), 255))
-        		line:ignoreContentAdaptWithSize(false)
-        		line:setTextAreaSize(cc.size(1080, 0))
-        		line:setString(text)
-        		line:setContentSize(cc.size(1080, line:getVirtualRendererSize().height))
-        		self.contentList:pushBackCustomItem(line)--]]
-				
-
-
-	    		
-    			
+					
         	elseif eventType == ccui.TouchEventType.canceled then
             	--print("取消点击")
         	end
@@ -106,19 +75,48 @@ function LobbyHelpLayer:ctor()
 		btnTab:addTouchEventListener(menuZhuCeCallback)
 		self._menu_GameList:addChild(btnTab)
 
+		if i == 1 then  --1 红中 2 斗地主  ImageText120 3 商丘麻将  ImageText112 4 飘癞子 ImageText114  5 推倒胡 ImageText6
+			self._textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--名称
+	    	self._textSpr1:setPosition(100,45)
+	    	btnTab:addChild(self._textSpr1,1)
+	  	    table.insert( self._gameTbnNameTable, self._textSpr1 )
+		elseif i == 2 then
+			self._textSpr2 = cc.Sprite:create("games/comm/lobbySpecial/ImageText120.png")--名称
+	    	self._textSpr2:setPosition(100,45)
+	    	btnTab:addChild(self._textSpr2,1)
+	    	table.insert( self._gameTbnNameTable, self._textSpr2 )
+		elseif i == 3 then
+			self._textSpr3 = cc.Sprite:create("games/comm/lobbySpecial/ImageText112.png")--名称
+	    	self._textSpr3:setPosition(100,45)
+	    	btnTab:addChild(self._textSpr3,1)
+	    	table.insert( self._gameTbnNameTable, self._textSpr3 )
+		elseif i == 4 then
+			self._textSpr4 = cc.Sprite:create("games/comm/lobbySpecial/ImageText114.png")--名称
+    		self._textSpr4:setPosition(100,45)
+    		btnTab:addChild(self._textSpr4,1)
+    		table.insert( self._gameTbnNameTable, self._textSpr4 )
+    	elseif i == 5 then
+    		self._textSpr5 = cc.Sprite:create("games/comm/lobbySpecial/ImageText6.png")--名称
+    		self._textSpr5:setPosition(100,45)
+    		btnTab:addChild(self._textSpr5,1)
+    		table.insert( self._gameTbnNameTable, self._textSpr5 )
+		end
 
+		if i == 1 then
+		    self._texure = ccui.Button:create("game/common/img/createRoom_btnSelect.png", "game/common/img/createRoom_btnSelect.png", "game/common/img/createRoom_btnSelect.png", 1)
+		    self._texure:setPosition(0,0)
+		    self._texure:setScale9Enabled(true)
+	    	self._texure:setAnchorPoint(0,0)
+	    	self._texure:setScale(1.0)
+		    btnTab:addChild(self._texure)
 
+		    --self._textSpr5:setVisible(false)
 
-
-		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--名称
-    	textSpr:setPosition(100,45)
-    	btnTab:addChild(textSpr,1)
+		    self._helpDate = lt.HelpData.new()
+		    self._helpDate:show(5)
+		    self._scrollView_Info:addChild(self._helpDate)
+	    end
 	end
-
-	
-	
-
-
 	
 	lt.CommonUtil:addNodeClickEvent(Bn_Close, handler(self, self.onclose))
 	

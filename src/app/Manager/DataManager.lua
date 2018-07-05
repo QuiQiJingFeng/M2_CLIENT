@@ -294,7 +294,7 @@ end
 
 function DataManager:isTingPlayerByPos(pos)
     local info = self:getTingPlayerInfo()
-
+    dump(info,"isTingPlayerByPos==>打印所有听牌的人")
     for k,v in ipairs(info) do
         if v.user_pos == pos then
             return v.ting

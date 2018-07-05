@@ -5573,6 +5573,7 @@
           <Project Name="Help_2.csd" Type="Layer" />
           <Project Name="Help_3.csd" Type="Layer" />
           <Project Name="Help_4.csd" Type="Layer" />
+          <Project Name="Help_5.csd" Type="Layer" />
         </Folder>
         <Image Name="bg.png" />
       </RootFolder>
