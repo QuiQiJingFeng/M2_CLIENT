@@ -62,6 +62,10 @@ MjEngine.CARD_TYPE = {
 	HAND = 1, 
 	CPG = 2,
 	OUT = 3,
+
+	LIE_NORMAL = 4,
+	LIE_LIGHTHAND = 5,--亮四打一
+	LIE_HAND = 6,--回放  明牌
 }
 
 MjEngine.CARD_SPECIAL = {
@@ -533,10 +537,9 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			end
 
 			if node then
-				self:updateLieHandCardsNode(node, direction, info)
+				self:updateLieHandCardsNode(node, direction, info, self.CARD_TYPE.LIE_LIGHTHAND)
 			else
-
-				node = self:createLieFaceItemByDirection(direction,info)
+				node = self:createLieFaceItemByDirection(direction, info, self.CARD_TYPE.LIE_LIGHTHAND)
 				self._allPlayerHandCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 
 				table.insert(self._allPlayerLightHandCardsNode[direction], node)
@@ -581,7 +584,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 
 				if direction ~= lt.Constants.DIRECTION.NAN then
 					if lt.DataManager:getRePlayState() then
-						self:updateLieHandCardsNode(node, direction, info)
+						self:updateLieHandCardsNode(node, direction, info, self.CARD_TYPE.LIE_HAND)
 					else
 						self:updateCardsNode(node, self.CARD_TYPE.HAND, direction, info)
 					end
@@ -592,7 +595,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				if lt.DataManager:getRePlayState() then
 
 					if direction ~= lt.Constants.DIRECTION.NAN then
-						node = self:createLieFaceItemByDirection(direction,info)
+						node = self:createLieFaceItemByDirection(direction,info,self.CARD_TYPE.LIE_HAND)
 						self._allPlayerHandCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 					else
 						node = self:createCardsNode(self.CARD_TYPE.HAND, direction, info)
@@ -1057,25 +1060,48 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 
 end
 
-function MjEngine:updateLieHandCardsNode(node, direction, info)
+function MjEngine:updateLieHandCardsNode(node, direction, info, type)
 	if node then
 		node:setCardIcon(info)
 		node:setTag(info)
+		node:showNormal()
 
-		if #self._allPlayerLightHandCardsValue[direction] < 4 then
-			if self:isFlower(info) then
-				node:showNormal()
-			else
-				node:showBlackMask() 
+		if type == self.CARD_TYPE.LIE_LIGHTHAND and direction == lt.Constants.DIRECTION.NAN then
+
+			if #self._allPlayerLightHandCardsValue[direction] < 4 then
+				if not self:isFlower(info) then
+					node:showBlackMask() 
+				end
 			end
 
-		else
-			node:showNormal()
+			local isTing = false
+			if self._allHandCardsTingValue and #self._allHandCardsTingValue >= 1 then
+				for i=1,#self._allHandCardsTingValue do
+					if self._allHandCardsTingValue[i] == info then
+						isTing = true
+						break
+					end
+				end
+			end
+
+			if isTing then
+				node:showTing()
+			else
+				if #self._allHandCardsTingValue > 0 and self._isSelectTing then
+					node:showBlackMask()
+				end 
+			end
+
+			local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getPlayerPosByDirection(direction))
+
+			if isBaoTing then
+				node:showBlackMask()
+			end
 		end
 	end
 end
 
-function MjEngine:createLieFaceItemByDirection(direction, info)
+function MjEngine:createLieFaceItemByDirection(direction, info, type)
 
 	local lieFaceNode = lt.MjLieFaceItem.new(direction)
 	if lieFaceNode then
@@ -1086,7 +1112,7 @@ function MjEngine:createLieFaceItemByDirection(direction, info)
 			end
 			lieFaceNode:setScale(2.0)
 		end
-		self:updateLieHandCardsNode(lieFaceNode, direction, info)
+		self:updateLieHandCardsNode(lieFaceNode, direction, info, type)
 	end
 
     return lieFaceNode
@@ -1158,9 +1184,12 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 				self:autoPutOutCard()
 			end	
 		else
-			if not isTing then --没报听不能胡牌  --推倒胡报不报听都能胡牌暂时注释掉
-				tObjCpghObj.tObjHu = nil
-			end
+			--if setisTing == 1 then--是否报听
+				--[[
+				if not isTing then --没报听不能胡牌  --推倒胡报不报听都能胡牌暂时注释掉
+					tObjCpghObj.tObjHu = nil
+				end--]]
+			--end
 		end
 
 		
@@ -1623,7 +1652,7 @@ function MjEngine:gameOverShow()--游戏结束 推到牌
 
 							local value = nil
 							if v.card_list[index] then
-								local lieFaceNode = self:createLieFaceItemByDirection(direction, v.card_list[index])
+								local lieFaceNode = self:createLieFaceItemByDirection(direction, v.card_list[index], self.CARD_TYPE.LIE_HAND)
 								lieFaceNode:setPosition(node:getPosition())
 								--local root = node:getParent()
 								self._allPlayerHandCardsPanel[direction]:addChild(lieFaceNode:getRootNode(), cardZorder)
