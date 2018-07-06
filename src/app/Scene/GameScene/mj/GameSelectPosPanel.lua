@@ -838,7 +838,9 @@ function GameSelectPosPanel:onClientConnectAgain()
 end
 
 function GameSelectPosPanel:onNoticePao(msg) 
-	self._nodePaoLayer:setVisible(true)
+	if not lt.DataManager:getRePlayState() then
+		self._nodePaoLayer:setVisible(true)
+	end
 end
 
 function GameSelectPosPanel:onEnter()   

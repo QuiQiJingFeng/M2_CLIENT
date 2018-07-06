@@ -119,6 +119,10 @@ function MjStandFaceItem:showTing()
 	self._tingIcon:setVisible(true)
 end
 
+function MjStandFaceItem:hideTing() 
+	self._tingIcon:setVisible(false)
+end
+
 function MjStandFaceItem:showRedMask() 
 	self._redMask:setVisible(true)
 end

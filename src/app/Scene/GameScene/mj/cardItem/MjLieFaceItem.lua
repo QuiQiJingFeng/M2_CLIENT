@@ -132,6 +132,12 @@ function MjLieFaceItem:showTing()
 	end
 end
 
+function MjLieFaceItem:hideTing() 
+	if self._tingIcon then
+		self._tingIcon:setVisible(false)
+	end
+end
+
 function MjLieFaceItem:showRedMask()
 	self:showNormal()
 	self._imageMaskRed:setVisible(true)

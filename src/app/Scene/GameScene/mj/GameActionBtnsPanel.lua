@@ -685,7 +685,7 @@ function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
 end
 
 function GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent(msg)  
-    if not msg or not msg.user_pos or not msg.card then
+    if not msg or not msg.type or not msg.user_pos or not msg.card then
         return
     end
     local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
@@ -699,6 +699,12 @@ function GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent(msg)
     local word = self._specialEventNode[direction]:getChildByName("Sprite_Word")
 
     local path = "game/mjcomm/animation/aniWord/wordLai.png"
+
+    if msg.type == 1 then--补花
+        path = "game/mjcomm/animation/aniWord/wordLai.png"
+    elseif msg.type == 2 then--飘癞子
+        path = "game/mjcomm/animation/aniWord/wordLai.png"
+    end
 
     word:setSpriteFrame(path)
     

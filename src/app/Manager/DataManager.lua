@@ -237,7 +237,20 @@ function DataManager:getGameAllCardsValue()
                 end
             end
         elseif settingInfo.game_type == lt.Constants.GAME_TYPE.SQMJ then
+            --是否带风
+            local isFeng = lt.DataManager:getGameRoomSetInfo().other_setting[2]
+            if isFeng == 1 then
+                for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE2) do
+                    table.insert(allCardsValue, v)
+                    if v < 41 then
+                        cardsAllNum = cardsAllNum + 4
+                    else
+                        cardsAllNum = cardsAllNum + 1
+                    end
+                end
+            end
 
+            --花
             for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
                 table.insert(allCardsValue, v)
                 if v < 41 then
@@ -294,7 +307,6 @@ end
 
 function DataManager:isTingPlayerByPos(pos)
     local info = self:getTingPlayerInfo()
-    dump(info,"isTingPlayerByPos==>打印所有听牌的人")
     for k,v in ipairs(info) do
         if v.user_pos == pos then
             return v.ting

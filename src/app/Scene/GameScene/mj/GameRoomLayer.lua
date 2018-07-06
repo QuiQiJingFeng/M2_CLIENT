@@ -88,6 +88,11 @@ function GameRoomLayer:getCurrentOutPutPlayerPos()
 end
 
 function GameRoomLayer:onGameConnectAgain()
+
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	--癞子
+	self._huiCardValue = allRoomInfo.huicard
+
 	self._sendRequest = false
 	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		self._gameSelectPosPanel:againConfigUI()
@@ -226,6 +231,9 @@ function GameRoomLayer:onDealDown(msg)--发牌
 	-- if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
 	-- 	self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	-- end
+
+	self._huiCardValue = msg.huicard
+
     if lt.DataManager:getRePlayState() then
     	for i=1,#msg do
 
@@ -358,11 +366,10 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 
 		self._engine:updateNanHandCardValue(lt.Constants.DIRECTION.NAN, handList, msg.four_card_list)
 		self._engine:updateNanCpgCardValue(lt.Constants.DIRECTION.NAN, cpgList)
-		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
-		
 		self:checkMyHandButtonActionStatu(handList, self._ischeckMyHandStatu)--暗杠  回头杠 胡 听
 		self._ischeckMyHandStatu = false
-
+		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
+		
 	else--不是本人
 
 		self._engine:updateLightCardValue(msg.four_card_list)
@@ -387,6 +394,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 		for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
 			if value == v then--补花	
 				local info = {
+					type = 1,
 					user_pos = msg.user_pos,
 					card = msg.card
 				}
@@ -396,6 +404,20 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 				-- end
 				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				break
+			end
+		end
+
+		print("癞子牌+++++++++++++++", self._huiCardValue, value)
+		if self._huiCardValue then
+			if self._huiCardValue == value then
+				local info = {
+					type = 2,
+					user_pos = msg.user_pos,
+					card = msg.card,
+				}
+				specialRefresh = true
+
+				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 			end
 		end
 	end

@@ -20,7 +20,7 @@ function GameScene:ctor()
 
     dump(gameInfo, "gameInfo")
 
-    if gameid == lt.Constants.GAME_TYPE.HZMJ or gameid == lt.Constants.GAME_TYPE.SQMJ or gameid == lt.Constants.GAME_TYPE.TDH then --红中麻将
+    if gameid ~= 2 then
         self._gameRoomLayer = lt.GameRoomLayer.new()
         self:addChild(self._gameRoomLayer)
     elseif gameid == 2 then --斗地主

@@ -1043,6 +1043,7 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 
 		local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getPlayerPosByDirection(direction))
 		if isBaoTing then
+			node:hideTing()
 			node:showBlackMask()
 		end
 
@@ -1093,6 +1094,7 @@ function MjEngine:updateLieHandCardsNode(node, direction, info, type)
 			local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getPlayerPosByDirection(direction))
 
 			if isBaoTing then
+				node:hideTing()
 				node:showBlackMask()
 			end
 		end
@@ -1124,6 +1126,17 @@ function MjEngine:isFlower(value)
 end
 
 function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
+
+	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+
+	if self._isNeedBaoTing == 1 then
+		--牌上显示听字
+		if isTing then
+			self:checkMyHandTingStatu()
+		end
+	else
+		self:checkMyHandTingStatu()
+	end
 
     if not tObjCpghObj then
 	    tObjCpghObj = {
@@ -1359,7 +1372,7 @@ function MjEngine:checkIsHu(HandCards, card)
 					return false
 				end
 			end
-
+			config.huiCard = self._huiCardValue
 		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.TDH then
 			-- 游戏设置项[数组]
 		    -- [1] 底分
@@ -1919,6 +1932,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 
 	--所有玩家吃椪杠的牌  
 	if allRoomInfo.card_stack then
+		dump(allRoomInfo.card_stack, "断线重连￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥")
 		for i,cardStack in ipairs(allRoomInfo.card_stack) do
 			local direction = lt.DataManager:getPlayerDirectionByPos(cardStack.user_pos)
 			self._allPlayerCpgCardsValue[direction]	= {}
@@ -1936,6 +1950,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 
 	--所有出的牌
 	if allRoomInfo.put_cards then
+		dump(allRoomInfo.put_cards, "断线重连￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥")
 		for i,info in ipairs(allRoomInfo.put_cards) do
 			if info.user_pos then
 				local direction = lt.DataManager:getPlayerDirectionByPos(info.user_pos)
@@ -2029,11 +2044,22 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 		if isTing then
 			self._tingOutCardValue = allRoomInfo.card_list[#allRoomInfo.card_list]
-			self:autoPutOutCard()
+			--self:autoPutOutCard()
 		end	
+
+		if self._isNeedBaoTing == 1 then
+			--牌上显示听字
+			if isTing then
+				self:checkMyHandTingStatu()
+			end
+		else
+			self:checkMyHandTingStatu()
+		end
+
 	   tObjCpghObj = self:checkMyHandButtonActionStatu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], state, tObjCpghObj)
 	end
 
+	allRoomInfo.ting_list = allRoomInfo.ting_list or {}
 	for k,v in pairs(allRoomInfo.ting_list) do --断线回来如何听过牌则显示玩家面前的听杠子
         if v.ting == true then
         	local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
