@@ -1172,63 +1172,30 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 	end
 
 	--检测听牌
+	local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+	lt.CommonUtil.print("当前玩家有没有报听",isBaoTing)
 
-	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
-	lt.CommonUtil.print("isTing检测有没有报听听听听听听听听听听听听听听听听听听听听听听听听听听听",isTing)
-	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH or lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
-		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[2]
-		if not isCanHu and not isCanGang then 
-			if isTing then --听过牌的人检测过后会再动打出去
-				self:autoPutOutCard()
-			end	
-		else
-			--if setisTing == 1 then--是否报听
-				--[[
-				if not isTing then --没报听不能胡牌  --推倒胡报不报听都能胡牌暂时注释掉
-					tObjCpghObj.tObjHu = nil
-				end--]]
-			--end
+	--不同麻将的报听玩法处理
+
+	if isBaoTing then--报听了   不再弹出听牌的按钮
+		if not isCanHu and not isCanGang then
+			self:autoPutOutCard()--听过牌的人检测过后会再动打出去
 		end
-
-		
-		if setisTing == 1 then --报听
-			if  not isTing then --听牌后不再弹出听牌的按钮
-			    self._isThereAnyTing = false
-				local isCardTing = false
-				if self:isCanTingCard() then
-					isCardTing = true
-					self._isThereAnyTing = true
-				end
-
-			    if isCardTing then
-			    	tObjCpghObj.tObjTing = {}
-			    end
-			end
-		else--不抱听
-		end
-
-	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
-		if not isCanHu and not isCanGang then 
-			if isTing then --听过牌的人检测过后会再动打出去
-				self:autoPutOutCard()
-			end	
-		else
-			if not isTing then --没报听不能胡牌
+	else--没报听
+		if self._isNeedBaoTing == 1 then --需要报听 
+			if isCanHu then--不报听不能胡
 				tObjCpghObj.tObjHu = nil
 			end
-		end
 
-		if  not isTing then --听牌后不再弹出听牌的按钮
-			    self._isThereAnyTing = false
-				local isCardTing = false
-				if self:isCanTingCard() then
-					isCardTing = true
-					self._isThereAnyTing = true
-				end
-
-			if isCardTing then
-			    tObjCpghObj.tObjTing = {}
+			local isCardTing = false
+			if self:isCanTingCard() then--检测是否可以报听
+				isCardTing = true
 			end
+
+		    if isCardTing then
+		    	tObjCpghObj.tObjTing = {}
+		    end
+		else--不抱听
 		end
 	end
 
@@ -1857,30 +1824,29 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		lt.CommonUtil.print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
 
 		local tingInfo = lt.DataManager:getTingPlayerInfo()
-        if tingInfo and #tingInfo > 0 then  --这边的处理是考虑到断线重连
-        	local BSNum = 1 
-        	for k,v in pairs(tingInfo) do
-        		if v.user_pos == msg.item["from"] then
-        			v.ting = true
-        			BSNum = BSNum + 1
-        		end
-        	end
-        	if BSNum == 1 then
-        		local info = {}
-				info["user_pos"] = msg.item["from"]
-				info["ting"] = true
-				table.insert( tingInfo, info )
-        	end
-        else
-        	local info = {}
+
+    	local isExit = false
+    	for k,v in pairs(tingInfo) do
+    		if v.user_pos == msg.item["from"] then
+    			v.ting = true
+    			isExit = true
+    		end
+    	end
+    	if not isExit then
+    		local info = {}
 			info["user_pos"] = msg.item["from"]
 			info["ting"] = true
 			table.insert( tingInfo, info )
-        end
+    	end
+
 		lt.CommonUtil.print("noticeSpecialEvent==>",tingInfo)
-		if not self._whatTing then--明听发的不走这里
-			if lt.DataManager:getRePlayState() and msg.item["value"] then
-				self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+
+		if self._isNeedBaoTing then
+			if not self._isAnTing then--明听发的不走这里
+				if lt.DataManager:getRePlayState() and msg.item["value"] then--不是回放在 点击牌的时候加
+					
+					self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+				end
 			end
 		end
 	end
@@ -2086,20 +2052,26 @@ function MjEngine:onClientConnectAgain()--  断线重连
 end
 
 function MjEngine:setMingTingConfig()
+	self._isNeedBaoTing = 0
+
 	 --1 暗听 0明听
 	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
+		self._isNeedBaoTing = lt.DataManager:getGameRoomSetInfo().other_setting[2]
+
 		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[5]
 		if setisTing == 1 then
-			self._whatTing = true --暗听
+			self._isAnTing = true --暗听
 		else
-			self._whatTing = false--明听
+			self._isAnTing = false--明听
 		end
 	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
+		self._isNeedBaoTing = 1
+
 		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[13]
 		if setisTing == 1 then
-			self._whatTing = true --暗听
+			self._isAnTing = true --暗听
 		else
-			self._whatTing = false--明听
+			self._isAnTing = false--明听
 		end
 	end
 end

@@ -710,7 +710,8 @@ function GameSelectPosPanel:onSitDownResponse(msg)
 end
 
 function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
-
+	self._nodePaoLayer:setVisible(false)
+	
 	for pos,SitPos in pairs(self._currentSitPosArray) do
 		SitPos:setVisible(false)
 	end
