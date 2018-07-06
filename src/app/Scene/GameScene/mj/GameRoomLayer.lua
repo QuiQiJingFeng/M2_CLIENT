@@ -81,6 +81,18 @@ end
 function GameRoomLayer:resetCurrentOutPutPlayerPos()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	self._currentOutPutPlayerPos = allRoomInfo.cur_play_pos
+
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	--癞子
+	self:setHuiCardValue(allRoomInfo.huicard)
+end
+
+function GameRoomLayer:setHuiCardValue(huiValue)
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+		self._huiCardValue = lt.Constants.HONG_ZHONG_VALUE
+	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+		self._huiCardValue = huiValue
+	end
 end
 
 function GameRoomLayer:getCurrentOutPutPlayerPos()
@@ -88,6 +100,11 @@ function GameRoomLayer:getCurrentOutPutPlayerPos()
 end
 
 function GameRoomLayer:onGameConnectAgain()
+
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	--癞子
+	self:setHuiCardValue(allRoomInfo.huicard)
+
 	self._sendRequest = false
 	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		self._gameSelectPosPanel:againConfigUI()
@@ -226,6 +243,9 @@ function GameRoomLayer:onDealDown(msg)--发牌
 	-- if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
 	-- 	self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	-- end
+
+	self:setHuiCardValue(msg.huicard)
+
     if lt.DataManager:getRePlayState() then
     	for i=1,#msg do
 
@@ -358,11 +378,10 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 
 		self._engine:updateNanHandCardValue(lt.Constants.DIRECTION.NAN, handList, msg.four_card_list)
 		self._engine:updateNanCpgCardValue(lt.Constants.DIRECTION.NAN, cpgList)
-		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
-		
 		self:checkMyHandButtonActionStatu(handList, self._ischeckMyHandStatu)--暗杠  回头杠 胡 听
 		self._ischeckMyHandStatu = false
-
+		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
+		
 	else--不是本人
 
 		self._engine:updateLightCardValue(msg.four_card_list)
@@ -387,6 +406,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 		for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
 			if value == v then--补花	
 				local info = {
+					type = 1,
 					user_pos = msg.user_pos,
 					card = msg.card
 				}
@@ -396,6 +416,22 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 				-- end
 				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				break
+			end
+		end
+
+		if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+			print("癞子牌+++++++++++++++", self._huiCardValue, value)
+			if self._huiCardValue then
+				if self._huiCardValue == value then
+					local info = {
+						type = 2,
+						user_pos = msg.user_pos,
+						card = msg.card,
+					}
+					specialRefresh = true
+
+					lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
+				end
 			end
 		end
 	end
@@ -477,9 +513,13 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	end
 	if msg.item["type"] == 7 then --如果是听牌则刷新其他人的听牌杠标识
 		local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
-		self._gameSelectPosPanel:ShowTingBS(direction)
+		self:ShowTingGang(direction)
 	end
 	self._engine:noticeSpecialEvent(msg)
+end
+
+function GameRoomLayer:ShowTingGang(direction)
+	self._gameSelectPosPanel:ShowTingBS(direction)
 end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
@@ -522,9 +562,19 @@ function GameRoomLayer:onGamenoticeOtherRefuse(msg)--如果有人拒绝解散
 end
 
 function GameRoomLayer:CloseRoom()
-	local worldScene = lt.WorldScene.new()
-    lt.SceneManager:replaceScene(worldScene)
-    lt.NetWork:disconnect()
+	local gameInfo = lt.DataManager:getGameRoomInfo()
+	lt.CommonUtil.print("====================gameInfo.cur_round============>",gameInfo.cur_round)
+	if gameInfo.cur_round > 1  then
+		lt.CommonUtil.print("===============大于一局但没有打完走这里有结算================")
+		self:onCloseApplyGameOverPanel()
+		self._gameResultPanel:setVisible(true)
+		self._gameResultPanel:GameOver()
+	else
+		lt.CommonUtil.print("===============一局没打完走这，没有结算===============")
+		local worldScene = lt.WorldScene.new()
+	    lt.SceneManager:replaceScene(worldScene)
+	    lt.NetWork:disconnect()
+	end
 end
 
 function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--

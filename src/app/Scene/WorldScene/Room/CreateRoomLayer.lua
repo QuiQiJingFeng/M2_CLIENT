@@ -543,6 +543,11 @@ function CreateRoomLayer:initTDHRule( ... )
 
 
     self.selectTable.other_setting[1] = 1
+    if self.selectTable.other_setting[2] == 0 then
+        playRule[3]:setVisible(false)
+    else
+        playRule[3]:setVisible(true)
+    end
 
 
     -- 上面配置
@@ -638,14 +643,14 @@ function CreateRoomLayer:initPLZRule( ... )
     self.selectTable.game_type = lt.Constants.GAME_TYPE.PLZ
     -- 游戏设置项[数组]
     -- [1] 底分
-    -- [2] 自摸还是可点炮
+    -- [2] 是否可点炮
     local jiangNum = {}
     local payTable = {}
     local roundTable = {}
     local playNumTable = {}
     local playRule = {}
     local payType = {1, 2, 3}
-    local jiangType = {1,0}
+    local jiangType = {0}
     local roundType = {4, 8, 16}
     local playNumType = {4}
     --local ruleType = {0, 0, 0}
@@ -729,52 +734,33 @@ function CreateRoomLayer:initPLZRule( ... )
                 end
             end
         end, false)
-        --[[
-        local rulePalel = self._plzRule:getChildByName("Panel_Play".. i)
-        rulePalel.selectNode = rulePalel:getChildByName("Image_Select")
-        rulePalel.selectNode:setVisible(false)
-        rulePalel._textNode = rulePalel:getChildByName("Text_Pay")  
-        playRule[i] = rulePalel
-        rulePalel.isSelect = false
-
-        lt.CommonUtil:addNodeClickEvent(rulePalel, function( ... )
-            if playRule[i].isSelect == false then
-                playRule[i].isSelect = true
-                playRule[i].selectNode:setVisible(true) 
-                self.selectTable.other_setting[i+2] = 1
-                playRule[i]._textNode:setColor(SelectColor)
-            else
-                lt.CommonUtil.dump(self.selectTable)
-                self.selectTable.other_setting[i+2] = 0
-                playRule[i].isSelect = false
-                playRule[i].selectNode:setVisible(false)
-                playRule[i]._textNode:setColor(NormalColor) 
-            end
-        end, false)--]]
     end
 
-    for i=1,2 do
-        --胡牌
-        local jiangPalel = self._plzRule:getChildByName("Panel_Jiang".. i)
-        jiangPalel.selectNode = jiangPalel:getChildByName("Image_Select")
-        jiangPalel.selectNode:setVisible(false) 
-        jiangPalel._textNode = jiangPalel:getChildByName("Text_Pay")
-        jiangNum[i] = jiangPalel
 
-        lt.CommonUtil:addNodeClickEvent(jiangPalel, function( ... )
-            for i, v in pairs(jiangNum) do 
-                if v == jiangPalel then
-                    v.selectNode:setVisible(true)
-                    v._textNode:setColor(SelectColor)
-                    self.selectTable.other_setting[2] = jiangType[i]
-                    lt.PreferenceManager:setCreateRoominfoPLZC(i)
-                else
-                    v.selectNode:setVisible(false)
-                    v._textNode:setColor(NormalColor)
-                end
-            end
-        end, false)
-    end
+    --胡牌
+    local jiangPalel = self._plzRule:getChildByName("Panel_Jiang1")
+    jiangPalel.selectNode = jiangPalel:getChildByName("Image_Select")
+    jiangPalel.selectNode:setVisible(false) 
+    jiangPalel._textNode = jiangPalel:getChildByName("Text_Pay")
+    jiangNum[1] = jiangPalel
+    jiangNum[1].isSelect = false
+
+    lt.CommonUtil:addNodeClickEvent(jiangPalel, function( ... )
+        if jiangNum[1].isSelect == false then
+            jiangNum[1].isSelect = true
+            jiangNum[1].selectNode:setVisible(true)
+            self.selectTable.other_setting[2] = 1
+            jiangNum[1]._textNode:setColor(SelectColor)
+            lt.PreferenceManager:setCreateRoominfoPLZC(1)
+        else
+            jiangNum[1].isSelect = false
+            jiangNum[1].selectNode:setVisible(false)
+            self.selectTable.other_setting[2] = 0
+            jiangNum[1]._textNode:setColor(NormalColor) 
+            lt.PreferenceManager:setCreateRoominfoPLZC(0)
+        end
+    end, false)
+    
     lt.CommonUtil.dump(self.selectTable, "self.selectTable")
 
 
@@ -833,10 +819,19 @@ function CreateRoomLayer:initPLZRule( ... )
     else
         roundTable[1]:onClick()
     end
-
+    --[[
     if lt.PreferenceManager:getCreateRoominfoPLZC() then
         jiangNum[lt.PreferenceManager:getCreateRoominfoPLZC()]:onClick()
     else
+        jiangNum[1]:onClick()
+    end--]]
+    if lt.PreferenceManager:getCreateRoominfoPLZC() and lt.PreferenceManager:getCreateRoominfoPLZC()~=0 then
+        print(lt.PreferenceManager:getCreateRoominfoPLZC())
+        jiangNum[1]:onClick()
+    elseif lt.PreferenceManager:getCreateRoominfoPLZC() == 0 then 
+        --没选中走这里不作任何操作
+    elseif lt.PreferenceManager:getCreateRoominfoPLZC() == -99 then
+        --第一次进入
         jiangNum[1]:onClick()
     end
 

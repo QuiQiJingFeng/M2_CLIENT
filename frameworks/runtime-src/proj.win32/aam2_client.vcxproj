@@ -68,7 +68,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(EngineRoot);$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\bit;$(ProjectDir)..\Classes\crypt;$(ProjectDir)..\Classes\md5;$(ProjectDir)..\Classes\pbc;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\Classes\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)external\xxtea;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)external\curl\include\win32;$(EngineRoot)extensions;$(EngineRoot)tools\simulator\libsimulator\lib;$(EngineRoot)tools\simulator\libsimulator\lib\protobuf-lite;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot);$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\bit;$(ProjectDir)..\Classes\crypt;$(ProjectDir)..\Classes\md5;$(ProjectDir)..\Classes\lame;$(ProjectDir)..\Classes\pbc;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\Classes\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)external\xxtea;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)external\curl\include\win32;$(EngineRoot)extensions;$(EngineRoot)tools\simulator\libsimulator\lib;$(EngineRoot)tools\simulator\libsimulator\lib\protobuf-lite;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -191,6 +191,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\common\JSONManager.h" />
+    <ClInclude Include="..\Classes\common\PlatformSDK.h" />
     <ClInclude Include="..\Classes\common\Utils.h" />
     <ClInclude Include="..\Classes\md5\md5.h" />
     <ClInclude Include="..\Classes\pbc\pbc.h" />
@@ -204,6 +205,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /D /E /
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\bit\bit.c" />
     <ClCompile Include="..\Classes\common\JSONManager.cpp" />
+    <ClCompile Include="..\Classes\common\PlatformSDK.cpp" />
     <ClCompile Include="..\Classes\common\Utils.cpp" />
     <ClCompile Include="..\Classes\crypt\lsha1.c" />
     <ClCompile Include="..\Classes\crypt\lua-crypt.c" />

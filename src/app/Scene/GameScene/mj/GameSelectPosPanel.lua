@@ -710,7 +710,8 @@ function GameSelectPosPanel:onSitDownResponse(msg)
 end
 
 function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
-
+	self._nodePaoLayer:setVisible(false)
+	
 	for pos,SitPos in pairs(self._currentSitPosArray) do
 		SitPos:setVisible(false)
 	end
@@ -837,7 +838,9 @@ function GameSelectPosPanel:onClientConnectAgain()
 end
 
 function GameSelectPosPanel:onNoticePao(msg) 
-	self._nodePaoLayer:setVisible(true)
+	if not lt.DataManager:getRePlayState() then
+		self._nodePaoLayer:setVisible(true)
+	end
 end
 
 function GameSelectPosPanel:onEnter()   

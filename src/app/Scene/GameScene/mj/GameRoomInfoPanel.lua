@@ -24,22 +24,24 @@ end
 
 function GameRoomInfoPanel:onDealDown(msg)
 	local roomSetting = lt.DataManager:getGameRoomInfo().room_setting
+
+	local curRound = 0
+
+    if lt.DataManager:getRePlayState() then
+    	if msg[1] then
+    		for i,v in pairs(msg[1]) do
+    			curRound = v.cur_round
+    			break
+    		end
+    	end
+    else
+    	curRound = msg.cur_round
+    end
+    
+    curRound = curRound or 0
+    lt.DataManager:getGameRoomInfo().cur_round = curRound
+
 	if roomSetting then
-
-		local curRound = 0
-
-	    if lt.DataManager:getRePlayState() then
-	    	if msg[1] then
-	    		for i,v in pairs(msg[1]) do
-	    			curRound = v.cur_round
-	    			break
-	    		end
-	    	end
-	    else
-	    	curRound = msg.cur_round
-	    end
-	    
-	    curRound = curRound or 0
 		lt.CommonUtil:getChildByNames(self, "Node_TableInfo", "Text_JuShu"):setString(curRound.."/"..roomSetting.round)
 	end
 end
