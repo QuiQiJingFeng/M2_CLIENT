@@ -548,9 +548,19 @@ function GameRoomLayer:onGamenoticeOtherRefuse(msg)--如果有人拒绝解散
 end
 
 function GameRoomLayer:CloseRoom()
-	local worldScene = lt.WorldScene.new()
-    lt.SceneManager:replaceScene(worldScene)
-    lt.NetWork:disconnect()
+	local gameInfo = lt.DataManager:getGameRoomInfo()
+	lt.CommonUtil.print("====================gameInfo.cur_round============>",gameInfo.cur_round)
+	if gameInfo.cur_round > 1  then
+		lt.CommonUtil.print("===============大于一局但没有打完走这里有结算================")
+		self:onCloseApplyGameOverPanel()
+		self._gameResultPanel:setVisible(true)
+		self._gameResultPanel:GameOver()
+	else
+		lt.CommonUtil.print("===============一局没打完走这，没有结算===============")
+		local worldScene = lt.WorldScene.new()
+	    lt.SceneManager:replaceScene(worldScene)
+	    lt.NetWork:disconnect()
+	end
 end
 
 function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--

@@ -82,8 +82,10 @@ function ApplyGameOverPanel:show(Timeer,nameidText)
 	self._timeNumber = Timeer
 
     if #nameidText == #roomInfo.players then
-    	local worldScene = lt.WorldScene.new()
-    	lt.SceneManager:replaceScene(worldScene)
+    	--用不上
+    	--self._deleget:CloseRoom()
+    	--local worldScene = lt.WorldScene.new()
+    	--lt.SceneManager:replaceScene(worldScene)
     end
 end 
 
