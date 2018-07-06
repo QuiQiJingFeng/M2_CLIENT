@@ -288,6 +288,9 @@ function GameActionBtnsPanel:setBtnEnabled(btn, bIsEnable)
     btn:setVisible(bIsEnable)
     btn:setTouchEnabled(bIsEnable)
     btn:setColor(bIsEnable and cNormal or cDisable)
+    if lt.DataManager:getRePlayState() then --战绩回放下不显按钮
+        btn:setVisible(false)
+    end
 end
 
 --显示吃碰杠胡按钮  
