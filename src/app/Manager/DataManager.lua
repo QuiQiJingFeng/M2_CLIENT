@@ -123,6 +123,7 @@ function DataManager:listenNetDisconnect()
         if room_id then
             lt.CommonUtil:sepecailServerLogin(room_id,function(result) 
                 if result == "success" then
+                    times = 3
                     self._pushAllRoomInfo = {}
                     local arg = {room_id = room_id}
                     lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
