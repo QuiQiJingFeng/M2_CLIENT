@@ -44,7 +44,7 @@
                   <AbstractNodeData Name="ScrollView_Info" ActionTag="1210978352" Tag="1388" IconVisible="False" RightMargin="-12.0000" TopMargin="4.0000" BottomMargin="77.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                     <Size X="967.0000" Y="535.0000" />
                     <Children>
-                      <AbstractNodeData Name="HZMJ_Rule" ActionTag="1236236640" Tag="370" IconVisible="False" LeftMargin="10.4291" RightMargin="46.5709" TopMargin="-9.1838" BottomMargin="20.1838" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                      <AbstractNodeData Name="HZMJ_Rule" ActionTag="1236236640" VisibleForFrame="False" Tag="370" IconVisible="False" LeftMargin="10.4291" RightMargin="46.5709" TopMargin="-9.1838" BottomMargin="20.1838" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                         <Size X="967.0000" Y="524.0000" />
                         <Children>
                           <AbstractNodeData Name="Text_Pay" ActionTag="-1178447808" Tag="371" IconVisible="False" LeftMargin="48.1920" RightMargin="798.8080" TopMargin="39.3294" BottomMargin="454.6706" FontSize="30" LabelText="资　费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -2678,7 +2678,7 @@
                                 <PreSize X="0.2667" Y="0.8400" />
                                 <FileData Type="MarkedSubImage" Path="game/common/img/checkBox_gray_2.png" Plist="game/common/CreateRoomPlist0.plist" />
                               </AbstractNodeData>
-                              <AbstractNodeData Name="Text_Pay" ActionTag="-1856037638" Tag="2886" IconVisible="False" LeftMargin="65.0000" RightMargin="5.0000" TopMargin="18.5314" BottomMargin="11.4686" FontSize="20" LabelText="明听暗听" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                              <AbstractNodeData Name="Text_Pay" ActionTag="-1856037638" Tag="2886" IconVisible="False" LeftMargin="65.0000" RightMargin="5.0000" TopMargin="18.5314" BottomMargin="11.4686" FontSize="20" LabelText="是否暗听" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                                 <Size X="80.0000" Y="20.0000" />
                                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                                 <Position X="105.0000" Y="21.4686" />
@@ -2723,7 +2723,7 @@
                         <EndColor A="255" R="255" G="255" B="255" />
                         <ColorVector ScaleY="1.0000" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="TDH_Rule" ActionTag="1260662300" VisibleForFrame="False" Tag="1930" IconVisible="False" LeftMargin="10.4300" RightMargin="46.5700" TopMargin="-9.0000" BottomMargin="20.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                      <AbstractNodeData Name="TDH_Rule" ActionTag="1260662300" Tag="1930" IconVisible="False" LeftMargin="10.4300" RightMargin="46.5700" TopMargin="-9.0000" BottomMargin="20.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                         <Size X="967.0000" Y="524.0000" />
                         <Children>
                           <AbstractNodeData Name="Text_Pay" ActionTag="-1241399454" Tag="1931" IconVisible="False" LeftMargin="48.1920" RightMargin="798.8080" TopMargin="39.3294" BottomMargin="454.6706" FontSize="30" LabelText="资　费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -3420,7 +3420,7 @@
                             <EndColor A="255" R="255" G="255" B="255" />
                             <ColorVector ScaleY="1.0000" />
                           </AbstractNodeData>
-                          <AbstractNodeData Name="Panel_Play2" ActionTag="1597689006" Tag="1996" IconVisible="False" LeftMargin="406.5965" RightMargin="410.4035" TopMargin="382.8843" BottomMargin="91.1157" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                          <AbstractNodeData Name="Panel_Play2" ActionTag="1597689006" Tag="1996" IconVisible="False" LeftMargin="634.6000" RightMargin="182.4000" TopMargin="382.8843" BottomMargin="91.1157" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                             <Size X="150.0000" Y="50.0000" />
                             <Children>
                               <AbstractNodeData Name="Image_FangZhu" ActionTag="671593157" Tag="1997" IconVisible="False" LeftMargin="15.4431" RightMargin="94.5569" TopMargin="3.7370" BottomMargin="4.2630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="10" Scale9Height="12" ctype="ImageViewObjectData">
@@ -3456,17 +3456,17 @@
                               </AbstractNodeData>
                             </Children>
                             <AnchorPoint />
-                            <Position X="406.5965" Y="91.1157" />
+                            <Position X="634.6000" Y="91.1157" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.4205" Y="0.1739" />
+                            <PrePosition X="0.6563" Y="0.1739" />
                             <PreSize X="0.1551" Y="0.0954" />
                             <SingleColor A="255" R="128" G="0" B="128" />
                             <FirstColor A="255" R="150" G="200" B="255" />
                             <EndColor A="255" R="255" G="255" B="255" />
                             <ColorVector ScaleY="1.0000" />
                           </AbstractNodeData>
-                          <AbstractNodeData Name="Panel_Play3" ActionTag="372151768" Tag="2888" IconVisible="False" LeftMargin="634.6000" RightMargin="182.4000" TopMargin="382.8800" BottomMargin="91.1200" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                          <AbstractNodeData Name="Panel_Play3" ActionTag="372151768" Tag="2888" IconVisible="False" LeftMargin="406.6000" RightMargin="410.4000" TopMargin="382.8800" BottomMargin="91.1200" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                             <Size X="150.0000" Y="50.0000" />
                             <Children>
                               <AbstractNodeData Name="Image_FangZhu" ActionTag="176166374" Tag="2889" IconVisible="False" LeftMargin="15.4431" RightMargin="94.5569" TopMargin="3.7370" BottomMargin="4.2630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="10" Scale9Height="12" ctype="ImageViewObjectData">
@@ -3479,7 +3479,7 @@
                                 <PreSize X="0.2667" Y="0.8400" />
                                 <FileData Type="MarkedSubImage" Path="game/common/img/checkBox_gray_2.png" Plist="game/common/CreateRoomPlist0.plist" />
                               </AbstractNodeData>
-                              <AbstractNodeData Name="Text_Pay" ActionTag="-320601956" Tag="2890" IconVisible="False" LeftMargin="65.0000" RightMargin="5.0000" TopMargin="16.1437" BottomMargin="13.8563" FontSize="20" LabelText="明听暗听" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                              <AbstractNodeData Name="Text_Pay" ActionTag="-320601956" Tag="2890" IconVisible="False" LeftMargin="65.0000" RightMargin="5.0000" TopMargin="16.1437" BottomMargin="13.8563" FontSize="20" LabelText="是否暗听" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                                 <Size X="80.0000" Y="20.0000" />
                                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                                 <Position X="105.0000" Y="23.8563" />
@@ -3502,10 +3502,10 @@
                               </AbstractNodeData>
                             </Children>
                             <AnchorPoint />
-                            <Position X="634.6000" Y="91.1200" />
+                            <Position X="406.6000" Y="91.1200" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.6563" Y="0.1739" />
+                            <PrePosition X="0.4205" Y="0.1739" />
                             <PreSize X="0.1551" Y="0.0954" />
                             <SingleColor A="255" R="128" G="0" B="128" />
                             <FirstColor A="255" R="150" G="200" B="255" />
