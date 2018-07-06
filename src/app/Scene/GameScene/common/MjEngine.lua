@@ -1125,6 +1125,16 @@ function MjEngine:isFlower(value)
 	return false
 end
 
+function MjEngine:exitHuiNum(HandCards)
+	local num = 0
+	for k,v in pairs(HandCards) do
+		if v == self._huiCardValue then
+			num = num + 1
+		end
+	end
+	return num
+end
+
 function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 
 	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
@@ -1303,7 +1313,6 @@ function MjEngine:getotersCard(value)--胡牌的番
 end
 function MjEngine:getAllCanHuCards(tempHandCards, value)
 	lt.CommonUtil.print("=============getAllCanHuCards============",value)
-	dump(tempHandCards)
 
 	if value then
 		for i,v in ipairs(tempHandCards) do
@@ -1348,6 +1357,7 @@ function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否�
 end
 
 function MjEngine:checkIsHu(HandCards, card)
+
 	local tempHandCards = clone(HandCards)
 	local config = {}--config.isQiDui,config.huiCard,config.hiPoint,config.hiPoint.shiShanYao
 	if self._gameRoomInfo and self._gameRoomInfo.room_setting then
@@ -1372,7 +1382,6 @@ function MjEngine:checkIsHu(HandCards, card)
 					return false
 				end
 			end
-			config.huiCard = self._huiCardValue
 		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.TDH then
 			-- 游戏设置项[数组]
 		    -- [1] 底分
@@ -1382,6 +1391,19 @@ function MjEngine:checkIsHu(HandCards, card)
 		    config = {}
 		    config.isQiDui = true
 			config.shiShanYao = (settingInfo.other_setting[4] == 1)  and true or false
+		
+		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.PLZ then
+
+			local num = self:exitHuiNum(tempHandCards)
+			if num >= 2 then
+				return false
+			end
+
+			if num == 1 and card == self._huiCardValue then
+				return false
+			end
+
+			config.huiCard = self._huiCardValue
 		end
 	end
 
@@ -1932,7 +1954,6 @@ function MjEngine:onClientConnectAgain()--  断线重连
 
 	--所有玩家吃椪杠的牌  
 	if allRoomInfo.card_stack then
-		dump(allRoomInfo.card_stack, "断线重连￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥")
 		for i,cardStack in ipairs(allRoomInfo.card_stack) do
 			local direction = lt.DataManager:getPlayerDirectionByPos(cardStack.user_pos)
 			self._allPlayerCpgCardsValue[direction]	= {}
@@ -1950,7 +1971,6 @@ function MjEngine:onClientConnectAgain()--  断线重连
 
 	--所有出的牌
 	if allRoomInfo.put_cards then
-		dump(allRoomInfo.put_cards, "断线重连￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥")
 		for i,info in ipairs(allRoomInfo.put_cards) do
 			if info.user_pos then
 				local direction = lt.DataManager:getPlayerDirectionByPos(info.user_pos)

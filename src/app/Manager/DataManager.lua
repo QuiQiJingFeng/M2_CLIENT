@@ -73,7 +73,7 @@ end
 
 function DataManager:onPushAllRoomInfo(msg)
     print("===================断线重连======================")
-    dump(msg)
+
     if msg.refresh_room_info then
         self._gameRoomInfo = msg.refresh_room_info
     end
