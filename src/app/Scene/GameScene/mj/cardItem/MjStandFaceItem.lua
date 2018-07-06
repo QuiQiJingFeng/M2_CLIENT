@@ -23,7 +23,7 @@ function MjStandFaceItem:ctor(handDirection)
 		self._blackMask = lt.CommonUtil:getChildByNames(rootNode, "Image_Mask")--
 		self._redMask = lt.CommonUtil:getChildByNames(rootNode, "Image_MaskRed")--
 		self._tingIcon = lt.CommonUtil:getChildByNames(rootNode, "Sprite_TingArrow")--听牌
-
+		self._lightMask = rootNode:getChildByName("Image_Light")
 		self:showNormal()
 	end
 end
@@ -42,6 +42,10 @@ end
 
 function MjStandFaceItem:getPosition()
 	return self._rootNode:getPosition()
+end
+
+function MjStandFaceItem:setScale(scale)
+	self._rootNode:setScale(scale)
 end
 
 function MjStandFaceItem:setVisible(bool)
@@ -113,6 +117,7 @@ function MjStandFaceItem:showNormal()
 	self._blackMask:setVisible(false)
 	self._redMask:setVisible(false)
 	self._tingIcon:setVisible(false)
+	self._lightMask:setVisible(false)
 end
 
 function MjStandFaceItem:showTing() 
@@ -129,6 +134,11 @@ end
 
 function MjStandFaceItem:showBlackMask() 
 	self._blackMask:setVisible(true)
+end
+
+function MjStandFaceItem:showLightMask()
+	self:showNormal()
+	self._lightMask:setVisible(true)
 end
 
 return MjStandFaceItem

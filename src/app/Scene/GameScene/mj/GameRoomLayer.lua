@@ -81,6 +81,18 @@ end
 function GameRoomLayer:resetCurrentOutPutPlayerPos()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	self._currentOutPutPlayerPos = allRoomInfo.cur_play_pos
+
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	--癞子
+	self:setHuiCardValue(allRoomInfo.huicard)
+end
+
+function GameRoomLayer:setHuiCardValue(huiValue)
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+		self._huiCardValue = lt.Constants.HONG_ZHONG_VALUE
+	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+		self._huiCardValue = huiValue
+	end
 end
 
 function GameRoomLayer:getCurrentOutPutPlayerPos()
@@ -91,7 +103,7 @@ function GameRoomLayer:onGameConnectAgain()
 
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	--癞子
-	self._huiCardValue = allRoomInfo.huicard
+	self:setHuiCardValue(allRoomInfo.huicard)
 
 	self._sendRequest = false
 	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
@@ -232,7 +244,7 @@ function GameRoomLayer:onDealDown(msg)--发牌
 	-- 	self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	-- end
 
-	self._huiCardValue = msg.huicard
+	self:setHuiCardValue(msg.huicard)
 
     if lt.DataManager:getRePlayState() then
     	for i=1,#msg do
@@ -407,17 +419,19 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 			end
 		end
 
-		print("癞子牌+++++++++++++++", self._huiCardValue, value)
-		if self._huiCardValue then
-			if self._huiCardValue == value then
-				local info = {
-					type = 2,
-					user_pos = msg.user_pos,
-					card = msg.card,
-				}
-				specialRefresh = true
+		if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+			print("癞子牌+++++++++++++++", self._huiCardValue, value)
+			if self._huiCardValue then
+				if self._huiCardValue == value then
+					local info = {
+						type = 2,
+						user_pos = msg.user_pos,
+						card = msg.card,
+					}
+					specialRefresh = true
 
-				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
+					lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
+				end
 			end
 		end
 	end

@@ -28,6 +28,10 @@ function MjLieOutFaceItem:getRootNode()
 	return self._rootNode
 end
 
+function MjLieOutFaceItem:setScale(scale)
+	self._rootNode:setScale(scale)
+end
+
 function MjLieOutFaceItem:BackBg(bool)
 	self._backBg:setVisible(bool)
 end

@@ -256,8 +256,7 @@ function MjEngine:sendCards(msg, pos)--发牌 13张
 
 	local fourCardList = msg.four_card_list or {}
 
-	self._huiCardValue = msg.huicard
-	self:configHuiCard()
+	self:setHuiCardValue(msg.huicard)
 
 	if direction then--and lt.DataManager:getRePlayState()
 		self._allPlayerHandCardsValue[direction] = cards
@@ -745,6 +744,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				self:updateCardsNode(node, self.CARD_TYPE.OUT, direction, info)
 			else
 				node = self:createCardsNode(self.CARD_TYPE.OUT, direction, info)
+				node:setScale(0.8)
 				node:setAnchorPoint(0.5, 0.5)
 
 				table.insert(self._allPlayerSpecialOutCardsNode[direction], node)
@@ -1017,6 +1017,14 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		node:setTag(value)
 		node:showNormal()
 		
+		if self._huiCardValue and value == self._huiCardValue then
+			if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+				node:showRedMask()
+			elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+				node:showLightMask()
+			end
+		end
+
 		local isTing = false
 		if self._allHandCardsTingValue and #self._allHandCardsTingValue >= 1 then
 			for i=1,#self._allHandCardsTingValue do
@@ -1056,6 +1064,10 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		node:setCardIcon(value)
 		node:setValue(value)
 		node:showNormal()
+
+		if value == self._huiCardValue then
+			node:showLightMask()
+		end
 	end	
 
 end
@@ -1890,6 +1902,15 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 end
 
+function MjEngine:setHuiCardValue(huiValue)
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+		self._huiCardValue = lt.Constants.HONG_ZHONG_VALUE
+	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+		self._huiCardValue = huiValue
+		self:configHuiCard()
+	end
+end
+
 function MjEngine:onClientConnectAgain()--  断线重连
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 
@@ -1993,10 +2014,8 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	end
 
 	--癞子
-	self._huiCardValue = allRoomInfo.huicard
+	self:setHuiCardValue(allRoomInfo.huicard)
 
-	self:configHuiCard()
-	
     --当前事件  
 
 	--我的吃碰杠通知
