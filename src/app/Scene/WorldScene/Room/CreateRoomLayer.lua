@@ -543,6 +543,11 @@ function CreateRoomLayer:initTDHRule( ... )
 
 
     self.selectTable.other_setting[1] = 1
+    if self.selectTable.other_setting[2] == 0 then
+        playRule[3]:setVisible(false)
+    else
+        playRule[3]:setVisible(true)
+    end
 
 
     -- 上面配置
@@ -2019,7 +2024,7 @@ function CreateRoomLayer:sendCreateRoom( ... )
         tempTable.game_type = self.selectTable.game_type
         tempTable.pay_type =  self.selectTable.pay
         tempTable.round = self.selectTable.round
-        tempTable.seat_num = self.selectTable.playNum
+        tempTable.seat_num = 2--self.selectTable.playNum
 
         tempTable.other_setting = {}
         for i = 1, #self.selectTable.other_setting do
