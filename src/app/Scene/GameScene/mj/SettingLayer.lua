@@ -266,6 +266,7 @@ function SettingLayer:onDissolveRoom()--申请解散房间
     --self:addChild(ApplyGameOverPanel,10)
     
     ---[[
+    self:onClose()
     local roomInfo = lt.DataManager:getGameRoomInfo()
     local loginData = lt.DataManager:getPlayerInfo()
     dump(roomInfo)
