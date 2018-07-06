@@ -594,7 +594,7 @@ function PreferenceManager:getCreateRoominfoPLZB()
 	return monsterId
 end
 
-function PreferenceManager:setCreateRoominfoPLZC(monsterId)--记录飘癞子记录房间信息 自摸
+function PreferenceManager:setCreateRoominfoPLZC(monsterId)--记录飘癞子记录房间信息 是否可点炮
 	local key = "CREATEROOMINFOPLZC"
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
   	cc.UserDefault:getInstance():flush()
@@ -602,10 +602,10 @@ end
 
 function PreferenceManager:getCreateRoominfoPLZC()
 	local key = "CREATEROOMINFOPLZC"
-	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
-	if monsterId == 0 then
-		monsterId = 1
-	end
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+		--monsterId = 1
+	--end
 	return monsterId
 end
 
