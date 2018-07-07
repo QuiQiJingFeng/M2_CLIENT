@@ -1259,8 +1259,20 @@ function MjEngine:isCanTingCard() --是否可以听牌 仅仅为了显示听的�
 		if isTing then
 			--table.insert(self._allHandCardsTingValue,value)
 			--handNode:showTing()--显示听得标志
-			isCanTing = true
-			break
+			if self._gameRoomInfo.room_setting.game_type == lt.Constants.GAME_TYPE.SQMJ then
+				for i,v in ipairs(self._allPlayerStandHandCardsValue[lt.Constants.DIRECTION.NAN]) do
+					if value == v then
+						isCanTing = true
+						break
+					end
+				end
+			else
+				isCanTing = true
+			end
+
+			if isCanTing then
+				break
+			end
 		end
 	end
 	--local istingInfo = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
