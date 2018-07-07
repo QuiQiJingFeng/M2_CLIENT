@@ -415,6 +415,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 				-- if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
 				-- 	self._engine:goOutOneHandSpecialCardAtDirection(direction, value)
 				-- end
+				lt.AudioManager:playSpecialEventSound(8)
 				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				break
 			end
@@ -430,7 +431,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 						card = msg.card,
 					}
 					specialRefresh = true
-
+					lt.AudioManager:playSpecialEventSound(9)
 					lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				end
 			end
@@ -517,6 +518,8 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 		self:ShowTingGang(direction)
 	end
 	self._engine:noticeSpecialEvent(msg)
+
+	lt.AudioManager:playSpecialEventSound(msg.item["type"])
 end
 
 function GameRoomLayer:ShowTingGang(direction)

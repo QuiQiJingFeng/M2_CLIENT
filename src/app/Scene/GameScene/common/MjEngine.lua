@@ -1348,7 +1348,6 @@ function MjEngine:getAllCanHuCards(tempHandCards, value)
 end
 
 function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否可以听
-    lt.CommonUtil.print("++++++++++++++检测听牌的牌++++++++++++",value)
     local allCardsValueTable = clone(tempHandCards)
 	for i,v in ipairs(allCardsValueTable) do
 		if v == value then

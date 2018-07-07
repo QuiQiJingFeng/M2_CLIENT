@@ -384,13 +384,11 @@ end
 
 -- ################################################## 通用音效 ##################################################
 function AudioManager:buttonClicked()
-	--self:playSound("res/hallcomm/sound/lobby/", "btn")
-
 	self:playSound("game/mjcomm/sound/mj/", "btn")
 end
 
 function AudioManager:playMjCardSound(value, sex)--0 女 1 男
-	--self:playSound("res/hallcomm/sound/lobby/", "btn")
+
 	sex = sex or 0
 	local path = "game/mjcomm/sound/mj/"
 	local soundStr = "m"
@@ -398,6 +396,35 @@ function AudioManager:playMjCardSound(value, sex)--0 女 1 男
 		soundStr = "w"..value
 	elseif sex == 1 then
 		soundStr = "m"..value
+	end
+	self:playSound(path, soundStr)
+end
+
+function AudioManager:playSpecialEventSound(type, sex)--0 女 1 男
+	sex = sex or 0
+	--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡 7听>
+	local path = "game/mjcomm/sound/mj/"
+	local soundStr = "m"
+	if sex == 0 then
+		soundStr = "w_"
+	else
+		soundStr = "m_"
+	end
+
+	if type == 1 then
+		soundStr = soundStr.."chi"
+	elseif type == 2 then
+		soundStr = soundStr.."peng"
+	elseif type == 3 or type == 4 or type == 5 then
+		soundStr = soundStr.."gang"
+	elseif type == 6 then
+		soundStr = soundStr.."hu"
+	elseif type == 7 then
+		soundStr = soundStr.."ting"
+	elseif type == 8 then
+		soundStr = soundStr.."buhua"
+	elseif type == 9 then
+		soundStr = soundStr.."huanpai"
 	end
 	self:playSound(path, soundStr)
 end
