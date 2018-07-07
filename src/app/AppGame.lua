@@ -78,7 +78,7 @@ function AppGame:init()
     --lt.GameTopViewManager:init()
 
     -- 音效初始化
-    --lt.AudioManager:init()
+    lt.AudioManager:init()
 
     -- 降帧优化
     --self:updateOptimised()

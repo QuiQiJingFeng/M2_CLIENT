@@ -1212,7 +1212,9 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFu
                 beganFunc()
             end
         elseif event_type == ccui.TouchEventType.ended then
-           
+            
+            lt.AudioManager:buttonClicked()
+
             if isScale then
                 node:setScale(oldScaleX, oldScaleY)
             end

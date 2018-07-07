@@ -4,7 +4,7 @@ local pi = math.pi
 local debugSEMonsterId = 58
 
 -- ################################################## 世界界面(菜单界面) ##################################################
-local WorldMenuLayer = class("WorldMenuLayer", function()
+local WorldMenuLayer = class("WorldMenuLayer", lt.BaseLayer, function()
     return cc.CSLoader:createNode("hallcomm/lobby/LobbyLayer1.csb")
 end)
 
@@ -23,7 +23,7 @@ WorldMenuLayer._buttonListArray = nil
 
 function WorldMenuLayer:ctor()
     --self._updateLayer = cc.CSLoader:createNode("games/comm/launch//UpdateLayer.csb")
-
+    WorldMenuLayer.super.ctor(self)
     local baseLayer = self:getChildByName("Ie_Bg") --csd
 
     --设置按钮
@@ -114,6 +114,9 @@ function WorldMenuLayer:ctor()
 end
 
 function WorldMenuLayer:onEnter()
+    print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%++++++++")
+    lt.AudioManager:playMusic("hallcomm/sound/lobby/", "bg_music", true)
+
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.ROOM_LIST_UPDATE, handler(self, self.listenRoomListUpdate), "WorldMenuLayer.listenRoomListUpdate")
 end
 

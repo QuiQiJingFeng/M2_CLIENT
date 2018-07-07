@@ -127,6 +127,12 @@ function SettingLayer:setshow()
             for i, v in pairs(selectNumGameyy) do 
                 if v == musicPalel then
                     v.selectNode:setVisible(true)
+
+                    if i < 4 then
+                        lt.AudioManager:playMusic("game/mjcomm/sound/bg_music/", "gameBgMusic_"..i, true)
+                    else
+                        lt.AudioManager:stopMusic(false)
+                    end
                     lt.PreferenceManager:setGemeyy(i) 
                 else
                     v.selectNode:setVisible(false)

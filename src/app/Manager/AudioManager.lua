@@ -1,20 +1,17 @@
 
 -- 用于管理游戏内音效
+local audio = require("cocos.framework.audio")
+
 local AudioManager = {}
 
 AudioManager._bgMusicStack = nil
 AudioManager._effectMusic  = nil
-
-AudioManager._bgPath 	 = nil
-AudioManager._effectPath = nil
-AudioManager._suffix   = nil
 
 AudioManager._musicTable = nil
 AudioManager._soundTable = nil
 
 AudioManager._musicOn   	= false
 AudioManager._soundOn   	= false
-AudioManager._soundCast 	= "ch"
 
 AudioManager._isPauseMusic = false
 
@@ -24,21 +21,8 @@ AudioManager._musicPause	= false
 AudioManager._soundSysOn	= true
 AudioManager._soundExtraOn 	= true
 
-AudioManager._hitSoundElapse   = 0
-AudioManager._hitSoundInterval = 0.2
-
 function AudioManager:init()
 	-- 根据平台决定格式
-	if device.platform == "mac" or device.platform == "ios" then
-    	self._suffix	= "aac"
-	elseif device.platform == "android" then
-    	self._suffix	= "ogg"
-    else
-    	self._suffix	= "wav"
-    end
-
-    self._bgPath	 = "audio/bg/"
-    self._effectPath = "audio/"..self._suffix.."/"
 
     self._musicTable = {}
     self._soundTable = {}
@@ -55,13 +39,6 @@ function AudioManager:init()
 
     self._soundSysOn 	= true
     self._soundExtraOn = true
-
-    local soundCast = lt.PreferenceManager:getCastSet()
-    self:setSoundCast(soundCast)
-end
-
-function AudioManager:onUpdate(delta)
-	self._hitSoundElapse = self._hitSoundElapse + delta
 end
 
 -- ################################################## 音乐 ##################################################
@@ -96,12 +73,12 @@ function AudioManager:setMusicOn(musicOn)
 end
 
 -- 缓存音乐
-function AudioManager:preloadMusic(musicName)
+function AudioManager:preloadMusic(path, musicName)
 	if not musicName then
 		return
 	end
 
-	musicName = string.format("%s%s.mp3", self._bgPath, musicName)
+	musicName = string.format("%s%s.mp3", path, musicName)
 
 	self:_preloadMusic(musicName)
 end
@@ -117,12 +94,12 @@ function AudioManager:_preloadMusic(musicName)
 end
 
 -- 卸载音乐
-function AudioManager:unloadMusic(musicName)
+function AudioManager:unloadMusic(path, musicName)
 	if not musicName then
 		return
 	end
 
-	musicName = string.format("%s%s.mp3", self._bgPath, musicName)
+	musicName = string.format("%s%s.mp3", path, musicName)
 
 	self:_unloadMusic(musicName)
 end
@@ -137,12 +114,12 @@ function AudioManager:_unloadMusic(musicName)
 
 end
 
-function AudioManager:playMusic(musicName, loop)
+function AudioManager:playMusic(path, musicName, loop)
 	if not musicName then
 		return
 	end
 
-	musicName = string.format("%s%s.mp3", self._bgPath, musicName)
+	musicName = string.format("%s%s.mp3", path, musicName)
 
 	return self:_playMusic(musicName, loop)
 end
@@ -179,12 +156,12 @@ function AudioManager:_playMusic(musicName, loop)
 	audio.playMusic(self._bgMusicStack[#self._bgMusicStack], loop)
 end
 
-function AudioManager:pushMusic(musicName, loop)
+function AudioManager:pushMusic(path, musicName, loop)
 	if not musicName then
 		return
 	end
 
-	musicName = string.format("%s%s.mp3", self._bgPath, musicName)
+	musicName = string.format("%s%s.mp3", path, musicName)
 
 	return self:_pushMusic(musicName, loop)
 end
@@ -310,27 +287,12 @@ function AudioManager:setSoundOn(soundOn)
 	lt.PreferenceManager:setSoundOn(self._soundOn)
 end
 
-function AudioManager:setSoundCast(soundCast)
-	if soundCast == 1 then
-		self._soundCast = "ch"
-	else
-		-- 默认日语
-		self._soundCast = "jp"
-	end
-end
-
-function AudioManager:preloadBossSound(soundName)
-	soundName = string.format("boss/%s/%s", self._soundCast, soundName)
-
-	return self:preloadSound(soundName, level)
-end
-
-function AudioManager:preloadSound(soundName, level)
+function AudioManager:preloadSound(path, soundName, level)
 	if not soundName then
 		return
 	end
 
-	soundName = string.format("%s%s.%s", self._effectPath, soundName, self._suffix)
+	soundName = string.format("%s%s.mp3", path, soundName)
 
 	self:_preloadSound(soundName, level)
 
@@ -343,26 +305,14 @@ function AudioManager:_preloadSound(soundName, level)
 	audio.preloadSound(soundName)
 end
 
-function AudioManager:playSound(soundName, loop)
+function AudioManager:playSound(path, soundName, loop)
 	if not soundName then
 		return
 	end
 
-	soundName = string.format("%s%s.%s", self._effectPath, soundName, self._suffix)
+	soundName = string.format("%s%s.mp3", path, soundName)
 
 	return self:_playSound(soundName, loop)
-end
-
-function AudioManager:playRoleSound(soundName, loop)
-	soundName = string.format("role/%s/%s", self._soundCast, soundName)
-
-	return self:playSound(soundName, loop)
-end
-
-function AudioManager:playBossSound(soundName, loop)
-	soundName = string.format("boss/%s/%s", self._soundCast, soundName)
-
-	return self:playSound(soundName, loop)
 end
 
 function AudioManager:_playSound(soundName, loop)
@@ -434,18 +384,22 @@ end
 
 -- ################################################## 通用音效 ##################################################
 function AudioManager:buttonClicked()
-	self:playSound("ui/audio_btn_clicked")
+	--self:playSound("res/hallcomm/sound/lobby/", "btn")
+
+	self:playSound("game/mjcomm/sound/mj/", "btn")
 end
 
--- 播放受击特效(每0.2s一次音效)
-function AudioManager:playHitSound(soundName)
-	if self._hitSoundElapse < self._hitSoundInterval then
-		return
+function AudioManager:playMjCardSound(value, sex)--0 女 1 男
+	--self:playSound("res/hallcomm/sound/lobby/", "btn")
+	sex = sex or 0
+	local path = "game/mjcomm/sound/mj/"
+	local soundStr = "m"
+	if sex == 0 then
+		soundStr = "w"..value
+	elseif sex == 1 then
+		soundStr = "m"..value
 	end
-
-	self._hitSoundElapse = 0
-
-	self:playSound(soundName)
+	self:playSound(path, soundStr)
 end
 
 return AudioManager

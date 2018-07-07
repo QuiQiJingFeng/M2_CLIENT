@@ -402,6 +402,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 
 	local specialRefresh = false
 	if value then
+		lt.AudioManager:playMjCardSound(value, 0)
 
 		for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
 			if value == v then--补花	
@@ -611,6 +612,12 @@ end
 
 function GameRoomLayer:onEnter()   
     lt.CommonUtil.print("GameRoomLayer:onEnter")
+    local musicIndex = lt.PreferenceManager:getGemeyy() or 1
+    if musicIndex >= 4 then
+    	lt.AudioManager:stopMusic(false)
+    else
+    	lt.AudioManager:playMusic("game/mjcomm/sound/bg_music/", "gameBgMusic_"..musicIndex, true)
+    end
     
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.GAME_CMD, handler(self, self.onGameCMDResponse), "GameRoomLayer.onGameCMDResponse")
 
