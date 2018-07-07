@@ -26,18 +26,10 @@ ltMetaTable["HeadImage"] = "app.Common.HeadImage"
 ltMetaTable["scheduler"] = "app.Common.scheduler"
 
 --manager
-ltMetaTable["ActivityPushManager"] = "app.Manager.ActivityPushManager"
 ltMetaTable["AudioManager"] = "app.Manager.AudioManager"
-ltMetaTable["AudioMsgManager"] = "app.Manager.AudioMsgManager"
-ltMetaTable["ConfigManager"] = "app.Manager.ConfigManager"
 ltMetaTable["DataManager"] = "app.Manager.DataManager"
-ltMetaTable["CacheManager"] = "app.Manager.CacheManager"
 ltMetaTable["GameEventManager"] = "app.Manager.GameEventManager"
-ltMetaTable["NewFlagManager"] = "app.Manager.NewFlagManager"
-ltMetaTable["NoticeManager"] = "app.Manager.NoticeManager"
 ltMetaTable["PreferenceManager"] = "app.Manager.PreferenceManager"
-ltMetaTable["PushManager"] = "app.Manager.PushManager"
-ltMetaTable["StringManager"] = "app.Manager.StringManager"
 ltMetaTable["UILayerManager"] = "app.Manager.UILayerManager"
 ltMetaTable["ResourceManager"] = "app.Manager.ResourceManager"
 ltMetaTable["SceneManager"] = "app.Manager.SceneManager"
@@ -45,7 +37,6 @@ ltMetaTable["SceneManager"] = "app.Manager.SceneManager"
 --net
 ltMetaTable["Protobuf"] = "app.Net.Protobuf"
 ltMetaTable["NetWork"] = "app.Net.NetWork"
-ltMetaTable["SocketConstants"] = "app.Net.SocketConstants"
 
 --msgbox
 ltMetaTable["MsgboxLayer"] = "app.UI.MsgboxLayer"
@@ -60,14 +51,9 @@ ltMetaTable["Initagreement"] = "app.Scene.InitScene.Initagreement"
 ltMetaTable["InitLayer"] = "app.Scene.InitScene.InitLayer"
 ltMetaTable["InitScene"] = "app.Scene.InitScene.InitScene"
 
-ltMetaTable["StartLayer"] = "app.Scene.StartScene.StartLayer"
-ltMetaTable["StartScene"] = "app.Scene.StartScene.StartScene"
-
-ltMetaTable["WorldLayer"] = "app.Scene.WorldScene.WorldLayer"
-ltMetaTable["WorldLoadingLayer"] = "app.Scene.WorldScene.WorldLoadingLayer"
 ltMetaTable["WorldMenuLayer"] = "app.Scene.WorldScene.WorldMenuLayer"
+ltMetaTable["WorldMenuLayerRoomItem"] = "app.Scene.WorldScene.WorldMenuLayerRoomItem"
 ltMetaTable["WorldNoticeLayer"] = "app.Scene.WorldScene.WorldNoticeLayer"
-ltMetaTable["WorldResultLayer"] = "app.Scene.WorldScene.WorldResultLayer"
 ltMetaTable["WorldUILayer"] = "app.Scene.WorldScene.WorldUILayer"
 ltMetaTable["WorldScene"] = "app.Scene.WorldScene.WorldScene"
 

@@ -39,85 +39,21 @@ function AppGame:init()
     -- 初始化随机种子
     math.randomseed(tostring(os.time()):reverse():sub(1, 6))  
 
-
 	--初始化工具库
 	AppGame.Util = {}
-
-	--事件触发器
-	--AppEvent = require("manager.event_manager")
-	--初始化网络库
-	--require "network.protobuf"
 
 	require("app.Net.Protobuf")
 
 	lt.NetWork:init()
 
-    -- 配置初始化
-    lt.ConfigManager:init()
-
-    -- 初始化SocketApi
-    --lt.SocketApi:init()
-
     -- 初始化资源管理
     lt.ResourceManager:init()
 
-    -- 初始化游戏文本
-    --lt.StringManager:init()
-
-    lt.CacheManager:init()
     -- 数据初始化
     lt.DataManager:init()
 
-    -- -- 推送初始化 -未获取玩家palyerid
-    -- lt.PushManager:init()
-
-    -- 初始化消息中心
-    --lt.GameEventManager:init()
-
-    -- 初始化游戏首页信息
-    --lt.GameTopViewManager:init()
-
     -- 音效初始化
     lt.AudioManager:init()
-
-    -- 降帧优化
-    --self:updateOptimised()
-
-    -- 屏蔽字
-    --lt.WarnStrFunc:init()
-
-    -- PK管理
-    --lt.MatchGroupManager:init()
-
-    -- 系统公告走马灯
-    --lt.AnnouncementManager:init()
-
-    -- 语音监听
-    -- lt.AudioMsgManager:init()
-
-    -- if lt.Constants.IPHONEX then
-    --     lt.CommonUtil.print("is IphoneX launch")
-    -- end
-
-    if DEBUG_LOG then
-        if device.platform == "ios" or device.platform == "android" then
-            DEBUG_LOG = false
-        end 
-    end
-
-    --[[
-        版本特殊处理
-        1、删除推送测试
-        ]]
-    -- if device.platform == "ios" or device.platform == "android" then
-    --     if not lt.PreferenceManager:isSpecialUpdate(1) then
-    --         lt.PreferenceManager:setSpecialUpdate(1)
-    --         -- 执行特殊操作（xx/xx/xx xxxxx）
-    --         lt.PreferenceManager:reSetActiveActivityCallmeSwitch()--清除本地玩家推送数据
-    --         lt.PreferenceManager:setNoticeInited(false)
-    --         cpp.GamePlatform:clearAllPush()--清除手机系统所有推送
-    --     end
-    -- end
 
     self:loadSpriteFrames()
 end

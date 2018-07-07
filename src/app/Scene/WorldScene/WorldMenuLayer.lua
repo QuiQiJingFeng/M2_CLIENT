@@ -1,25 +1,8 @@
 
-local pi = math.pi
-
-local debugSEMonsterId = 58
-
 -- ################################################## 世界界面(菜单界面) ##################################################
 local WorldMenuLayer = class("WorldMenuLayer", lt.BaseLayer, function()
     return cc.CSLoader:createNode("hallcomm/lobby/LobbyLayer1.csb")
 end)
-
-WorldMenuLayer._winScale = lt.CacheManager:getWinScale()
-
-WorldMenuLayer._worldLayer = nil
-
-local locationScale = WorldMenuLayer._winScale
-if locationScale < 1 then
-    locationScale = locationScale * 0.8
-end
-
-WorldMenuLayer._rightZoomBtnstatus = 1 --右上角缩放按钮状态 1 伸出 2 缩进
-
-WorldMenuLayer._buttonListArray = nil
 
 function WorldMenuLayer:ctor()
     --self._updateLayer = cc.CSLoader:createNode("games/comm/launch//UpdateLayer.csb")
