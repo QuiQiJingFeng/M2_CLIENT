@@ -1,8 +1,11 @@
 
 local LanguageString = {}
 
-LanguageString["STRING_GAME_NAME_1"] 				= "红中麻将"
+LanguageString["STRING_GAME_NAME_1"] 			= "红中麻将"
 LanguageString["STRING_GAME_NAME_2"]			= "斗地主"
+LanguageString["STRING_GAME_NAME_3"]			= "商丘麻将"
+LanguageString["STRING_GAME_NAME_4"]			= "飘癞子"
+LanguageString["STRING_GAME_NAME_5"]			= "推倒胡"
 
 LanguageString["DISTROY_ROOM_paramater_error"]			= "客户端参数错误"
 LanguageString["DISTROY_ROOM_server_error"]				= "服务器错误"
