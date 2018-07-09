@@ -267,7 +267,7 @@ function MjEngine:sendCards(msg, pos)--发牌 13张
 
 		for i,cardItem in pairs(fourCardList) do
 			local dire = lt.DataManager:getPlayerDirectionByPos(cardItem.user_pos)
-			self._allPlayerLightHandCardsValue[dire] = cardItem.cards
+			self._allPlayerLightHandCardsValue[dire] = cardItem.cards or {}
 		end
 
 		local tempFourCardList = clone(self._allPlayerLightHandCardsValue[direction])
@@ -772,7 +772,7 @@ function MjEngine:updateNanHandCardValue(direction, handList, fourCardList)--通
 	fourCardList = fourCardList or {}
 	for k,v in pairs(fourCardList) do
 		local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
-		self._allPlayerLightHandCardsValue[direction] = v.cards
+		self._allPlayerLightHandCardsValue[direction] = v.cards or {}
 	end
 
 	local tempFourCardList = clone(self._allPlayerLightHandCardsValue[direction])
@@ -1934,7 +1934,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	if allRoomInfo.four_card_list then
 		for i,fourCardItem in ipairs(allRoomInfo.four_card_list) do
 			local dire = lt.DataManager:getPlayerDirectionByPos(fourCardItem.user_pos)
-			self._allPlayerLightHandCardsValue[dire] = fourCardItem.cards
+			self._allPlayerLightHandCardsValue[dire] = fourCardItem.cards or {}
 		end
 	end
 
