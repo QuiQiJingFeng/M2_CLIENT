@@ -1,6 +1,6 @@
 
 local GameRoomLayer = class("GameRoomLayer", lt.BaseLayer)
-ENDRONDBS = 1
+
 function GameRoomLayer:ctor()
 	GameRoomLayer.super.ctor(self)
 
@@ -582,8 +582,15 @@ function GameRoomLayer:CloseRoom()
 end
 
 function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--
-	if ENDRONDBS ~= 2 then
-		local text = "房间已被解散"
+	--type 解散类型 1 玩家申请解散  2、房主解散 3、牌局打完解散 4 时间到了解散
+	if msg.room_id == lt.DataManager:getGameRoomInfo().room_id and msg.type ~= 3 then
+
+		local text = lt.LanguageString:getString("ROOM_ALREADY_DISTROY")
+
+		if msg.type == 4 then
+			text = lt.LanguageString:getString("ROOM_ALREADY_DISTROY_BY_TIME")
+		end
+		
 		lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.CloseRoom),nil, true)
 	end
 end

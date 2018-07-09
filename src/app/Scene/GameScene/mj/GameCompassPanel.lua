@@ -113,18 +113,15 @@ function GameCompassPanel:configUI()
 end
 
 function GameCompassPanel:initGame() --每局结束牌桌清桌 
-	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
-	if not allRoomInfo.card_list or not next(allRoomInfo.card_list) then--入座界面	
-		self._nodeCardNum:setVisible(false)
-		self._nodeOtherNum:setVisible(false)
-		self:onClientConnectAgain()
-	end
 
+	self:onClientConnectAgain()
 	if lt.DataManager:isClientConnectAgainPlaying() then
 
 		self._nodeCardNum:setVisible(true)
 		self._nodeOtherNum:setVisible(true)		
-		self:onClientConnectAgain()
+	else
+		self._nodeCardNum:setVisible(false)
+		self._nodeOtherNum:setVisible(false)
 	end
 end
 
@@ -137,13 +134,8 @@ function GameCompassPanel:onDealDown(msg)   --发牌13张手牌
 
 	local roomSetting = lt.DataManager:getGameRoomSetInfo()
 	if roomSetting then
-		if roomSetting.game_type == lt.Constants.GAME_TYPE.HZMJ then
-			local allCardsNum = 112
-			self._surCardsNum:setString(allCardsNum - 13 * roomSetting.seat_num)
-		elseif roomSetting.game_type == lt.Constants.GAME_TYPE.TDH then
-			local allCardsNum = 136
-			self._surCardsNum:setString(allCardsNum - 13 * roomSetting.seat_num)
-		end
+		local llCardsValue, cardsAllNum = lt.DataManager:getGameAllCardsValue()
+		self._surCardsNum:setString(cardsAllNum - 13 * roomSetting.seat_num)
 	end
 
 	local curRound = msg.cur_round or 0	

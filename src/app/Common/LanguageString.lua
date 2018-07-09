@@ -38,6 +38,9 @@ LanguageString["PLAYER_NOT_GREEN_OVER"] = "玩家【%s】不同意解散房间,�
 
 LanguageString["SENDTOZHANHJIINFO"] = "没有请求到战绩信息"
 
+LanguageString["ROOM_ALREADY_DISTROY"] = "房间已被解散"
+
+LanguageString["ROOM_ALREADY_DISTROY_BY_TIME"] = "游戏时间超时，房间已被解散"
 
 function LanguageString:getString(key)
 	return LanguageString[key] or nil

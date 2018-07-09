@@ -323,7 +323,7 @@ function GameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
         self:setBtnEnabled(self.m_objCommonUi.m_btnHu, isHu)
     end
     local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
-    if tObjCpghObj.tObjHu and lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH and isTing then
+    if tObjCpghObj.tObjHu and isTing then
         self:setBtnEnabled(self.m_objCommonUi.m_btnPass,false) --推倒胡胡牌不能过
     else
         self:setBtnEnabled(self.m_objCommonUi.m_btnPass, true)

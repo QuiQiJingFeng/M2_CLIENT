@@ -13,12 +13,9 @@ end
 -- @param isCloseBox	回调完之后是否自动关闭弹窗
 -- @param iClockTime	闹钟时间
 function MsgboxLayer:showMsgBox(txtContent, isOneBtn, sureFunc, cancelFunc, isCloseBox, iClockTime)
-	if not self.layer then
-		print("++++++++++")
-		local layer = cc.CSLoader:createNode("game/common/MsgBoxLayer.csb")
-		layer:retain()
-		self.layer = layer
-	end
+
+	self.layer = cc.CSLoader:createNode("game/common/MsgBoxLayer.csb")
+
 	-- local parent = self.layer:getParent()
 	-- print("PARENT = ",parent)
 	-- if not self.layer:getParent() then

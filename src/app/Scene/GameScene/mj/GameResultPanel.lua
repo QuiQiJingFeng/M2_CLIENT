@@ -172,7 +172,6 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	local over_type = gameOverInfo.over_type
 
 	if last_round then
-		ENDRONDBS = 2
 		self._resultStartAgainBtn:setVisible(false)
 		self._resultTotalEndBtn:setVisible(true)
 		self._resultWeChatShareBtn:setVisible(false)
@@ -271,7 +270,7 @@ end
 function GameResultPanel:GameOver()
 	self:setVisible(true)
 	self._resultPanelMask:setVisible(true)
-	ENDRONDBS = 2
+
 	self._resultStartAgainBtn:setVisible(false)
 	self._resultTotalEndBtn:setVisible(true)
 	self._resultWeChatShareBtn:setVisible(false)
