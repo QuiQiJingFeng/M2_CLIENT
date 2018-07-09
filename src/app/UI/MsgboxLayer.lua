@@ -99,14 +99,13 @@ end
 -- @param isScale
 function MsgboxLayer:setSureClick( func, isClose, isScale )
 	lt.CommonUtil:addNodeClickEvent(self.btnSure, function( ... )
-		if isClose then
-			self:onClose()
-		end
 		if func then
 			func()
 		end
 
-
+		if isClose then
+			self:onClose()
+		end
 
 	end, isScale)
 end
@@ -117,13 +116,13 @@ end
 -- @param isScale
 function MsgboxLayer:setCancelClick( func, isClose, isScale )
 	lt.CommonUtil:addNodeClickEvent(self.btnCancel, function( ... )
-		if isClose then
-			self:onClose()
-		end
+
 		if func then
 			func()
 		end
-
+		if isClose then
+			self:onClose()
+		end
 	end, isScale)
 end
 
