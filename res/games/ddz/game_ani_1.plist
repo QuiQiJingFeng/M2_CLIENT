@@ -51,7 +51,7 @@
 			<key>games/ddz/game/liandui10.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1130,1835},{257,211}}</string>
+				<string>{{1130,1836},{257,211}}</string>
 				<key>offset</key>
 				<string>{9,-4}</string>
 				<key>rotated</key>
@@ -62,7 +62,7 @@
 			<key>games/ddz/game/liandui2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{695,1653},{351,181}}</string>
+				<string>{{836,1653},{351,181}}</string>
 				<key>offset</key>
 				<string>{0,-25}</string>
 				<key>rotated</key>
@@ -73,7 +73,7 @@
 			<key>games/ddz/game/liandui3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{791,1836},{337,202}}</string>
+				<string>{{791,1841},{337,202}}</string>
 				<key>offset</key>
 				<string>{0,-8}</string>
 				<key>rotated</key>
@@ -128,11 +128,11 @@
 			<key>games/ddz/game/liandui8.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1490,1095},{256,210}}</string>
+				<string>{{1389,1835},{256,210}}</string>
 				<key>offset</key>
 				<string>{10,-4}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{351,231}</string>
 			</dict>
@@ -161,7 +161,7 @@
 			<key>games/ddz/game/shunzi1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{407,1679},{38,33}}</string>
+				<string>{{388,755},{38,33}}</string>
 				<key>offset</key>
 				<string>{1,-6}</string>
 				<key>rotated</key>
@@ -293,7 +293,7 @@
 			<key>games/ddz/game/shunzi20.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1048,1561},{269,272}}</string>
+				<string>{{1189,1561},{269,272}}</string>
 				<key>offset</key>
 				<string>{1,0}</string>
 				<key>rotated</key>
@@ -337,7 +337,7 @@
 			<key>games/ddz/game/shunzi3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1319,1425},{242,243}}</string>
+				<string>{{1460,1425},{242,243}}</string>
 				<key>offset</key>
 				<string>{-3,-3}</string>
 				<key>rotated</key>
@@ -443,6 +443,28 @@
 				<false />
 				<key>sourceSize</key>
 				<string>{798,608}</string>
+			</dict>
+			<key>games/ddz/game/ImageText33.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{407,1679},{213,160}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{213,160}</string>
+			</dict>
+			<key>games/ddz/game/ImageText34.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{622,1679},{212,160}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{212,160}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>

@@ -17,8 +17,8 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.3569" Y="1.0737" />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="hallcomm/lobby/snow/snow.plist" Plist="" />
-                <BlendFunc Src="1" Dst="769" />
+                <FileData Type="Default" Path="Default/defaultParticle.plist" Plist="" />
+                <BlendFunc Src="775" Dst="1" />
               </AbstractNodeData>
               <AbstractNodeData Name="Particle_2" ActionTag="-1326018020" VisibleForFrame="False" Tag="547" IconVisible="True" PositionPercentYEnabled="True" LeftMargin="959.9999" RightMargin="374.0001" TopMargin="-102.6750" BottomMargin="852.6750" ctype="ParticleObjectData">
                 <Size X="0.0000" Y="0.0000" />
@@ -28,18 +28,8 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.7196" Y="1.1369" />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="hallcomm/lobby/snow/snow.plist" Plist="" />
-                <BlendFunc Src="1" Dst="769" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="Image_SnowShading" ActionTag="1412022433" Tag="418" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" StretchWidthEnable="True" StretchHeightEnable="True" LeftEage="440" RightEage="440" TopEage="247" BottomEage="247" Scale9OriginX="440" Scale9OriginY="247" Scale9Width="454" Scale9Height="256" ctype="ImageViewObjectData">
-                <Size X="1334.0000" Y="750.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="667.0000" Y="375.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.5000" />
-                <PreSize X="1.0000" Y="1.0000" />
-                <FileData Type="Normal" Path="hallcomm/lobby/snow/img_snow_shading.png" Plist="" />
+                <FileData Type="Default" Path="Default/defaultParticle.plist" Plist="" />
+                <BlendFunc Src="775" Dst="1" />
               </AbstractNodeData>
               <AbstractNodeData Name="Panel_CreateJoin" ActionTag="578322551" Tag="3654" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" StretchWidthEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="1334.0000" Y="750.0000" />
@@ -60,7 +50,7 @@
                   <AbstractNodeData Name="Image_1" ActionTag="1956176821" Tag="506" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="TopEdge" LeftMargin="1.0004" RightMargin="-1.0005" BottomMargin="101.0000" StretchWidthEnable="True" Scale9Enable="True" LeftEage="574" RightEage="440" TopEage="14" BottomEage="14" Scale9OriginX="574" Scale9OriginY="14" Scale9Width="320" Scale9Height="71" ctype="ImageViewObjectData">
                     <Size X="1334.0000" Y="99.0000" />
                     <Children>
-                      <AbstractNodeData Name="BG53_8" ActionTag="-1356600427" VisibleForFrame="False" Tag="507" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="451.3119" RightMargin="452.6881" BottomMargin="3.0000" ctype="SpriteObjectData">
+                      <AbstractNodeData Name="BG53_8" ActionTag="-1356600427" VisibleForFrame="False" Tag="507" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="451.3120" RightMargin="452.6880" BottomMargin="3.0000" ctype="SpriteObjectData">
                         <Size X="430.0000" Y="96.0000" />
                         <Children>
                           <AbstractNodeData Name="BG55_15" ActionTag="-1964609639" Tag="519" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="178.5000" RightMargin="178.5000" TopMargin="24.4952" BottomMargin="30.5048" ctype="SpriteObjectData">
@@ -76,7 +66,7 @@
                           </AbstractNodeData>
                         </Children>
                         <AnchorPoint ScaleX="0.5016" ScaleY="1.0000" />
-                        <Position X="666.9999" Y="99.0000" />
+                        <Position X="667.0000" Y="99.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5000" Y="1.0000" />
@@ -205,14 +195,14 @@
                         <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/headBgHuan.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_NickName" ActionTag="-1871276610" Tag="44" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="130.9996" RightMargin="303.0205" TopMargin="12.0000" BottomMargin="71.0000" FontSize="28" LabelText="我" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="28.0000" Y="32.0000" />
+                      <AbstractNodeData Name="Tt_NickName" ActionTag="-1871276610" Tag="44" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="130.9996" RightMargin="303.0205" TopMargin="14.0000" BottomMargin="73.0000" FontSize="28" LabelText="我" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="28.0000" Y="28.0000" />
                         <AnchorPoint ScaleY="0.5000" />
                         <Position X="130.9996" Y="87.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.2835" Y="0.7565" />
-                        <PreSize X="0.0606" Y="0.2783" />
+                        <PreSize X="0.0606" Y="0.2435" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="0" G="0" B="0" />
                       </AbstractNodeData>
@@ -241,18 +231,6 @@
                       </AbstractNodeData>
                       <AbstractNodeData Name="Bn_Recharge" ActionTag="-1213725252" Tag="233" IconVisible="False" LeftMargin="452.0129" RightMargin="-71.9928" TopMargin="16.7000" BottomMargin="47.3000" LeftEage="17" RightEage="17" TopEage="18" BottomEage="18" Scale9OriginX="17" Scale9OriginY="18" Scale9Width="48" Scale9Height="15" ctype="ImageViewObjectData">
                         <Size X="82.0000" Y="51.0000" />
-                        <Children>
-                          <AbstractNodeData Name="Image_SnowRecharge" ActionTag="-682777173" Tag="2827" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="7.5000" RightMargin="7.5000" TopMargin="1.5000" BottomMargin="1.5000" LeftEage="22" RightEage="22" TopEage="15" BottomEage="15" Scale9OriginX="22" Scale9OriginY="15" Scale9Width="23" Scale9Height="18" ctype="ImageViewObjectData">
-                            <Size X="67.0000" Y="48.0000" />
-                            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                            <Position X="41.0000" Y="25.5000" />
-                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                            <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.5000" Y="0.5000" />
-                            <PreSize X="0.8171" Y="0.9412" />
-                            <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_recharge.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                          </AbstractNodeData>
-                        </Children>
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="493.0129" Y="72.8000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -261,25 +239,25 @@
                         <PreSize X="0.1775" Y="0.4435" />
                         <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btn_Rechargeg.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_GameGold" ActionTag="-2089553442" Tag="577" IconVisible="False" LeftMargin="370.1914" RightMargin="30.8287" TopMargin="25.3450" BottomMargin="57.6550" FontSize="28" LabelText="1125" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="61.0000" Y="32.0000" />
+                      <AbstractNodeData Name="Tt_GameGold" ActionTag="-2089553442" Tag="577" IconVisible="False" LeftMargin="372.6914" RightMargin="33.3287" TopMargin="27.3450" BottomMargin="59.6550" FontSize="28" LabelText="1125" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="56.0000" Y="28.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="400.6914" Y="73.6550" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="233" G="197" B="34" />
                         <PrePosition X="0.8673" Y="0.6405" />
-                        <PreSize X="0.1320" Y="0.2783" />
+                        <PreSize X="0.1212" Y="0.2435" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_UserId" ActionTag="826229484" Tag="100" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="129.9997" RightMargin="166.0204" TopMargin="45.4996" BottomMargin="38.5004" FontSize="26" LabelText="ID：07118916" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="166.0000" Y="31.0000" />
+                      <AbstractNodeData Name="Tt_UserId" ActionTag="826229484" Tag="100" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="129.9997" RightMargin="176.0204" TopMargin="47.9996" BottomMargin="41.0004" FontSize="26" LabelText="ID：07118916" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="156.0000" Y="26.0000" />
                         <AnchorPoint ScaleY="0.5000" />
                         <Position X="129.9997" Y="54.0004" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.2814" Y="0.4696" />
-                        <PreSize X="0.3593" Y="0.2696" />
+                        <PreSize X="0.3376" Y="0.2261" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="0" G="0" B="0" />
                       </AbstractNodeData>
@@ -293,14 +271,14 @@
                         <PreSize X="0.2316" Y="0.4435" />
                         <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/ButtonRefresh.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_NickNameDDD" ActionTag="933888818" Tag="3132" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="272.0001" RightMargin="166.0200" TopMargin="11.3225" BottomMargin="71.6775" FontSize="28" LabelText="..." ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="24.0000" Y="32.0000" />
+                      <AbstractNodeData Name="Tt_NickNameDDD" ActionTag="933888818" Tag="3132" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="272.0001" RightMargin="148.0200" TopMargin="13.3225" BottomMargin="73.6775" FontSize="28" LabelText="..." ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="42.0000" Y="28.0000" />
                         <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                        <Position X="296.0001" Y="87.6775" />
+                        <Position X="314.0001" Y="87.6775" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.6407" Y="0.7624" />
-                        <PreSize X="0.0519" Y="0.2783" />
+                        <PrePosition X="0.6796" Y="0.7624" />
+                        <PreSize X="0.0909" Y="0.2435" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="0" G="0" B="0" />
                       </AbstractNodeData>
@@ -316,7 +294,7 @@
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Bn_Set" ActionTag="-1943013790" Tag="229" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1192.5000" RightMargin="72.5000" TopMargin="21.7639" BottomMargin="108.2361" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Bn_Set" ActionTag="-1943013790" Tag="229" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1242.0090" RightMargin="22.9910" TopMargin="28.7170" BottomMargin="101.2830" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="ButtonSetText_4" ActionTag="824198630" Tag="140" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="50.9999" BottomMargin="-4.9999" ctype="SpriteObjectData">
@@ -330,59 +308,16 @@
                         <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_LVset.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Image_SnowButton" ActionTag="1619402605" Tag="754" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
-                        <Size X="51.0000" Y="27.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="40.7100" Y="58.8000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5900" Y="0.8400" />
-                        <PreSize X="0.7391" Y="0.3857" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_btton.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                      </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1227.0000" Y="143.2361" />
+                    <Position X="1276.5090" Y="136.2830" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.9198" Y="0.7162" />
+                    <PrePosition X="0.9569" Y="0.6814" />
                     <PreSize X="0.0517" Y="0.3500" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/ButtonSet.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Bn_Email" ActionTag="1960636530" VisibleForFrame="False" Tag="231" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1008374.5000" RightMargin="-1007109.5000" TopMargin="21.7100" BottomMargin="108.2900" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
-                    <Size X="69.0000" Y="70.0000" />
-                    <Children>
-                      <AbstractNodeData Name="ButtonEmailText_1" ActionTag="-823908915" Tag="137" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="48.0000" BottomMargin="-2.0000" ctype="SpriteObjectData">
-                        <Size X="44.0000" Y="24.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="34.5000" Y="10.0000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5000" Y="0.1429" />
-                        <PreSize X="0.6377" Y="0.3429" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/ButtonEmailText.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                        <BlendFunc Src="1" Dst="771" />
-                      </AbstractNodeData>
-                      <AbstractNodeData Name="Image_SnowButton" ActionTag="-232387730" Tag="755" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
-                        <Size X="51.0000" Y="27.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="40.7100" Y="58.8000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5900" Y="0.8400" />
-                        <PreSize X="0.7391" Y="0.3857" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_btton.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                      </AbstractNodeData>
-                    </Children>
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1008409.0000" Y="143.2900" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="755.9288" Y="0.7165" />
-                    <PreSize X="0.0517" Y="0.3500" />
-                    <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/ButtonEmail.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="Button_VIP" ActionTag="723942431" Tag="224" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1042.5000" RightMargin="222.5000" TopMargin="21.7655" BottomMargin="108.2345" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_VIP" ActionTag="723942431" Tag="224" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1149.1299" RightMargin="115.8701" TopMargin="28.7170" BottomMargin="101.2830" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="69.0000" Y="70.0000" />
                     <Children>
                       <AbstractNodeData Name="img_LVvip_1" ActionTag="2053340390" Tag="210" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="51.0000" BottomMargin="-5.0000" ctype="SpriteObjectData">
@@ -396,22 +331,12 @@
                         <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_textDaLi.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Image_SnowButton" ActionTag="1690143194" Tag="756" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
-                        <Size X="51.0000" Y="27.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="40.7100" Y="58.8000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5900" Y="0.8400" />
-                        <PreSize X="0.7391" Y="0.3857" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_btton.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                      </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1077.0000" Y="143.2345" />
+                    <Position X="1183.6299" Y="136.2830" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.8073" Y="0.7162" />
+                    <PrePosition X="0.8873" Y="0.6814" />
                     <PreSize X="0.0517" Y="0.3500" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_DaLiLobby.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
@@ -420,76 +345,112 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_OfNotice" ActionTag="1966736704" VisibleForFrame="False" Tag="647" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="842.5000" RightMargin="422.5000" TopMargin="21.7100" BottomMargin="108.2900" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
-                    <Size X="69.0000" Y="70.0000" />
+                  <AbstractNodeData Name="Button_Rec" ActionTag="1371181278" Tag="440" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1056.2506" RightMargin="208.7494" TopMargin="29.2170" BottomMargin="101.7830" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="47" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="69.0000" Y="69.0000" />
                     <Children>
-                      <AbstractNodeData Name="Image_SnowButton" ActionTag="-1071135364" Tag="753" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
-                        <Size X="51.0000" Y="27.0000" />
+                      <AbstractNodeData Name="img_LVvip_1" ActionTag="-196717933" Tag="441" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="9.4253" RightMargin="15.5747" TopMargin="50.8782" BottomMargin="-5.8782" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="24.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="40.7100" Y="58.8000" />
+                        <Position X="31.4253" Y="6.1218" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5900" Y="0.8400" />
-                        <PreSize X="0.7391" Y="0.3857" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_btton.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                      </AbstractNodeData>
-                      <AbstractNodeData Name="Sprite_25_0" ActionTag="-485676058" Tag="651" IconVisible="False" LeftMargin="13.0005" RightMargin="10.9995" TopMargin="51.0000" BottomMargin="-5.0000" ctype="SpriteObjectData">
-                        <Size X="45.0000" Y="24.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="35.5005" Y="7.0000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5145" Y="0.1000" />
-                        <PreSize X="0.6522" Y="0.3429" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_Notice.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
+                        <PrePosition X="0.4554" Y="0.0887" />
+                        <PreSize X="0.6377" Y="0.3478" />
+                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_LVzhanji.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Image_GongGao" ActionTag="-619471584" Tag="10617" IconVisible="False" LeftMargin="37.4731" RightMargin="-11.4731" TopMargin="-10.5033" BottomMargin="37.5033" Scale9Enable="True" Scale9Width="34" Scale9Height="35" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Image_SmzZsjb" Visible="False" ActionTag="217140355" VisibleForFrame="False" Tag="442" IconVisible="False" LeftMargin="42.8962" RightMargin="-16.8962" TopMargin="-11.5028" BottomMargin="37.5028" Scale9Enable="True" Scale9Width="34" Scale9Height="35" ctype="ImageViewObjectData">
                         <Size X="43.0000" Y="43.0000" />
                         <Children>
-                          <AbstractNodeData Name="Text_85" ActionTag="-268838396" Tag="10618" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="21.5000" RightMargin="21.5000" TopMargin="17.4623" BottomMargin="25.5377" FontSize="18" LabelText="" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ctype="TextObjectData">
+                          <AbstractNodeData Name="Text_85" ActionTag="2069818471" Tag="443" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="21.5000" RightMargin="21.5000" TopMargin="17.8708" BottomMargin="25.1292" FontSize="18" LabelText="" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ctype="TextObjectData">
                             <Size X="0.0000" Y="0.0000" />
                             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                            <Position X="21.5000" Y="25.5377" />
+                            <Position X="21.5000" Y="25.1292" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.5000" Y="0.5939" />
+                            <PrePosition X="0.5000" Y="0.5844" />
                             <PreSize X="0.0000" Y="0.0000" />
                             <OutlineColor A="255" R="255" G="0" B="0" />
                             <ShadowColor A="255" R="110" G="110" B="110" />
                           </AbstractNodeData>
                         </Children>
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="58.9731" Y="59.0033" />
+                        <Position X="64.3962" Y="59.0028" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.8547" Y="0.8429" />
-                        <PreSize X="0.6232" Y="0.6143" />
+                        <PrePosition X="0.9333" Y="0.8551" />
+                        <PreSize X="0.6232" Y="0.6232" />
                         <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/Sp_redpoint.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="877.0000" Y="143.2900" />
+                    <Position X="1090.7506" Y="136.2830" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.6574" Y="0.7165" />
-                    <PreSize X="0.0517" Y="0.3500" />
-                    <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btn_Notice.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
+                    <PrePosition X="0.8177" Y="0.6814" />
+                    <PreSize X="0.0517" Y="0.3450" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="hallcomm/lobby/img/record.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="hallcomm/lobby/img/record.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="hallcomm/lobby/img/record.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Smz" ActionTag="1371181278" Tag="440" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="592.5000" RightMargin="672.5000" TopMargin="21.7136" BottomMargin="108.2864" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="69.0000" Y="70.0000" />
+                  <AbstractNodeData Name="Button_Rule" ActionTag="-2134947867" Tag="9715" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="963.3713" RightMargin="301.6287" TopMargin="29.2170" BottomMargin="101.7830" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="47" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="69.0000" Y="69.0000" />
                     <Children>
-                      <AbstractNodeData Name="Image_SnowButton" ActionTag="1921458284" Tag="752" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
-                        <Size X="51.0000" Y="27.0000" />
+                      <AbstractNodeData Name="img_LVvip_1" ActionTag="545402581" Tag="9716" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="50.0000" BottomMargin="-5.0000" ctype="SpriteObjectData">
+                        <Size X="44.0000" Y="24.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="40.7100" Y="58.8000" />
+                        <Position X="34.5000" Y="7.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5900" Y="0.8400" />
-                        <PreSize X="0.7391" Y="0.3857" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_btton.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
+                        <PrePosition X="0.5000" Y="0.1014" />
+                        <PreSize X="0.6377" Y="0.3478" />
+                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_LVrule.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
+                        <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="img_LVvip_1" ActionTag="-196717933" Tag="441" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="51.0000" BottomMargin="-5.0000" ctype="SpriteObjectData">
+                      <AbstractNodeData Name="Image_SmzZsjb" Visible="False" ActionTag="-523266278" VisibleForFrame="False" Tag="9717" IconVisible="False" LeftMargin="42.8962" RightMargin="-16.8962" TopMargin="-11.5028" BottomMargin="37.5028" Scale9Enable="True" Scale9Width="34" Scale9Height="35" ctype="ImageViewObjectData">
+                        <Size X="43.0000" Y="43.0000" />
+                        <Children>
+                          <AbstractNodeData Name="Text_85" ActionTag="-2128141287" Tag="9718" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="21.5000" RightMargin="21.5000" TopMargin="17.8708" BottomMargin="25.1292" FontSize="18" LabelText="" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ctype="TextObjectData">
+                            <Size X="0.0000" Y="0.0000" />
+                            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                            <Position X="21.5000" Y="25.1292" />
+                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                            <CColor A="255" R="255" G="255" B="255" />
+                            <PrePosition X="0.5000" Y="0.5844" />
+                            <PreSize X="0.0000" Y="0.0000" />
+                            <OutlineColor A="255" R="255" G="0" B="0" />
+                            <ShadowColor A="255" R="110" G="110" B="110" />
+                          </AbstractNodeData>
+                        </Children>
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="64.3962" Y="59.0028" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.9333" Y="0.8551" />
+                        <PreSize X="0.6232" Y="0.6232" />
+                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/Sp_redpoint.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
+                      </AbstractNodeData>
+                    </Children>
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="997.8713" Y="136.2830" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.7480" Y="0.6814" />
+                    <PreSize X="0.0517" Y="0.3450" />
+                    <TextColor A="255" R="65" G="65" B="70" />
+                    <DisabledFileData Type="Normal" Path="hallcomm/lobby/img/rule.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="hallcomm/lobby/img/rule.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="hallcomm/lobby/img/rule.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Button_Smz" ActionTag="-605966507" Tag="9719" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="870.4921" RightMargin="394.5079" TopMargin="28.7170" BottomMargin="101.2830" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="69.0000" Y="70.0000" />
+                    <Children>
+                      <AbstractNodeData Name="img_LVvip_1" ActionTag="1542789508" Tag="9720" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="51.0000" BottomMargin="-5.0000" ctype="SpriteObjectData">
                         <Size X="44.0000" Y="24.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="34.5000" Y="7.0000" />
@@ -500,10 +461,10 @@
                         <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/wordSmz.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Image_SmzZsjb" ActionTag="217140355" Tag="442" IconVisible="False" LeftMargin="42.8962" RightMargin="-16.8962" TopMargin="-10.5028" BottomMargin="37.5028" Scale9Enable="True" Scale9Width="34" Scale9Height="35" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Image_SmzZsjb" Visible="False" ActionTag="-1319162340" VisibleForFrame="False" Tag="9721" IconVisible="False" LeftMargin="42.8962" RightMargin="-16.8962" TopMargin="-10.5028" BottomMargin="37.5028" Scale9Enable="True" Scale9Width="34" Scale9Height="35" ctype="ImageViewObjectData">
                         <Size X="43.0000" Y="43.0000" />
                         <Children>
-                          <AbstractNodeData Name="Text_85" ActionTag="2069818471" Tag="443" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="21.5000" RightMargin="21.5000" TopMargin="17.8708" BottomMargin="25.1292" FontSize="18" LabelText="" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ctype="TextObjectData">
+                          <AbstractNodeData Name="Text_85" ActionTag="-56946517" Tag="9722" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="21.5000" RightMargin="21.5000" TopMargin="17.8708" BottomMargin="25.1292" FontSize="18" LabelText="" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ctype="TextObjectData">
                             <Size X="0.0000" Y="0.0000" />
                             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                             <Position X="21.5000" Y="25.1292" />
@@ -525,211 +486,15 @@
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="627.0000" Y="143.2864" />
+                    <Position X="904.9921" Y="136.2830" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.4700" Y="0.7164" />
+                    <PrePosition X="0.6784" Y="0.6814" />
                     <PreSize X="0.0517" Y="0.3500" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btnSmz.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                     <PressedFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btnSmz.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                     <NormalFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btnSmz.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="Bn_InviteCode" ActionTag="482536817" Tag="13891" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="742.5000" RightMargin="522.5000" TopMargin="21.7136" BottomMargin="108.2864" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="69.0000" Y="70.0000" />
-                    <Children>
-                      <AbstractNodeData Name="Image_SnowButton" ActionTag="-639767847" Tag="751" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
-                        <Size X="51.0000" Y="27.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="40.7100" Y="58.8000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5900" Y="0.8400" />
-                        <PreSize X="0.7391" Y="0.3857" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_btton.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                      </AbstractNodeData>
-                      <AbstractNodeData Name="img_LVvip_1" ActionTag="-77451495" Tag="13892" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="3.0000" RightMargin="3.0000" TopMargin="51.0000" BottomMargin="-5.0000" ctype="SpriteObjectData">
-                        <Size X="63.0000" Y="24.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="34.5000" Y="7.0000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5000" Y="0.1000" />
-                        <PreSize X="0.9130" Y="0.3429" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/wordTjm.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                        <BlendFunc Src="1" Dst="771" />
-                      </AbstractNodeData>
-                      <AbstractNodeData Name="Image_TjmZsjb" ActionTag="1409904503" Tag="13893" IconVisible="False" LeftMargin="42.2902" RightMargin="-16.2902" TopMargin="-10.5030" BottomMargin="37.5030" Scale9Enable="True" Scale9Width="34" Scale9Height="35" ctype="ImageViewObjectData">
-                        <Size X="43.0000" Y="43.0000" />
-                        <Children>
-                          <AbstractNodeData Name="Text_85" ActionTag="-899679126" Tag="13894" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="21.9214" RightMargin="21.0786" TopMargin="17.4623" BottomMargin="25.5377" FontSize="18" LabelText="" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ctype="TextObjectData">
-                            <Size X="0.0000" Y="0.0000" />
-                            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                            <Position X="21.9214" Y="25.5377" />
-                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                            <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.5098" Y="0.5939" />
-                            <PreSize X="0.0000" Y="0.0000" />
-                            <OutlineColor A="255" R="255" G="0" B="0" />
-                            <ShadowColor A="255" R="110" G="110" B="110" />
-                          </AbstractNodeData>
-                        </Children>
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="63.7902" Y="59.0030" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.9245" Y="0.8429" />
-                        <PreSize X="0.6232" Y="0.6143" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/Sp_redpoint.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                      </AbstractNodeData>
-                    </Children>
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="777.0000" Y="143.2864" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5825" Y="0.7164" />
-                    <PreSize X="0.0517" Y="0.3500" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btnTjm.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <PressedFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btnTjm.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <NormalFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btnTjm.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Expand" ActionTag="-358615357" Tag="530" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="892.5000" RightMargin="372.5000" TopMargin="21.7611" BottomMargin="108.2389" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="39" Scale9Height="48" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="69.0000" Y="70.0000" />
-                    <Children>
-                      <AbstractNodeData Name="Image_SnowButton" ActionTag="-1007901590" Tag="750" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="15.2100" RightMargin="2.7900" TopMargin="-2.3000" BottomMargin="45.3000" LeftEage="16" RightEage="16" TopEage="8" BottomEage="8" Scale9OriginX="16" Scale9OriginY="8" Scale9Width="19" Scale9Height="11" ctype="ImageViewObjectData">
-                        <Size X="51.0000" Y="27.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="40.7100" Y="58.8000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5900" Y="0.8400" />
-                        <PreSize X="0.7391" Y="0.3857" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_btton.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                      </AbstractNodeData>
-                      <AbstractNodeData Name="img_Expand" ActionTag="1336537457" Tag="531" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="12.5000" RightMargin="12.5000" TopMargin="51.0000" BottomMargin="-5.0000" ctype="SpriteObjectData">
-                        <Size X="44.0000" Y="24.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="34.5000" Y="7.0000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5000" Y="0.1000" />
-                        <PreSize X="0.6377" Y="0.3429" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_Expand.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                        <BlendFunc Src="1" Dst="771" />
-                      </AbstractNodeData>
-                      <AbstractNodeData Name="Image_TjmZsjb" ActionTag="-1473890111" Tag="397" IconVisible="False" LeftMargin="41.6841" RightMargin="-15.6841" TopMargin="-10.5008" BottomMargin="37.5008" Scale9Enable="True" Scale9Width="34" Scale9Height="35" ctype="ImageViewObjectData">
-                        <Size X="43.0000" Y="43.0000" />
-                        <Children>
-                          <AbstractNodeData Name="Text_85" ActionTag="65121176" Tag="398" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="21.9214" RightMargin="21.0786" TopMargin="17.4623" BottomMargin="25.5377" FontSize="18" LabelText="" ShadowOffsetX="1.0000" ShadowOffsetY="-1.0000" ctype="TextObjectData">
-                            <Size X="0.0000" Y="0.0000" />
-                            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                            <Position X="21.9214" Y="25.5377" />
-                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                            <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.5098" Y="0.5939" />
-                            <PreSize X="0.0000" Y="0.0000" />
-                            <OutlineColor A="255" R="255" G="0" B="0" />
-                            <ShadowColor A="255" R="110" G="110" B="110" />
-                          </AbstractNodeData>
-                        </Children>
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="63.1841" Y="59.0008" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.9157" Y="0.8429" />
-                        <PreSize X="0.6232" Y="0.6143" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/Sp_redpoint.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                      </AbstractNodeData>
-                      <AbstractNodeData Name="img_Tip" ActionTag="-730924066" Tag="766" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-36.5000" RightMargin="-36.5000" TopMargin="72.0000" BottomMargin="-58.0000" ctype="SpriteObjectData">
-                        <Size X="142.0000" Y="56.0000" />
-                        <Children>
-                          <AbstractNodeData Name="Text" ActionTag="2108051334" Tag="767" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="8.0000" RightMargin="8.0000" TopMargin="16.8301" BottomMargin="15.1699" FontSize="21" LabelText="免费获取金币" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                            <Size X="126.0000" Y="24.0000" />
-                            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                            <Position X="71.0000" Y="27.1699" />
-                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                            <CColor A="255" R="229" G="229" B="229" />
-                            <PrePosition X="0.5000" Y="0.4852" />
-                            <PreSize X="0.8873" Y="0.4286" />
-                            <OutlineColor A="255" R="255" G="0" B="0" />
-                            <ShadowColor A="255" R="110" G="110" B="110" />
-                          </AbstractNodeData>
-                          <AbstractNodeData Name="img_Coin" ActionTag="-802108014" VisibleForFrame="False" Tag="768" IconVisible="False" LeftMargin="-21.0000" RightMargin="117.0000" TopMargin="-6.0000" BottomMargin="16.0000" ctype="SpriteObjectData">
-                            <Size X="46.0000" Y="46.0000" />
-                            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                            <Position X="2.0000" Y="39.0000" />
-                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                            <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.0141" Y="0.6964" />
-                            <PreSize X="0.3239" Y="0.8214" />
-                            <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
-                            <BlendFunc Src="1" Dst="771" />
-                          </AbstractNodeData>
-                        </Children>
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="34.5000" Y="-30.0000" />
-                        <Scale ScaleX="0.9000" ScaleY="0.9000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5000" Y="-0.4286" />
-                        <PreSize X="2.0580" Y="0.8000" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_coinTip.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                        <BlendFunc Src="1" Dst="771" />
-                      </AbstractNodeData>
-                    </Children>
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="927.0000" Y="143.2389" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.6949" Y="0.7162" />
-                    <PreSize X="0.0517" Y="0.3500" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_ExpandBtn.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <PressedFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_ExpandBtn.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <NormalFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_ExpandBtn.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Activity" ActionTag="-1736351504" VisibleForFrame="False" Tag="532" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="482.0000" RightMargin="776.0000" TopMargin="13.9500" BottomMargin="99.9500" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="1" RightEage="1" TopEage="1" BottomEage="1" Scale9OriginX="1" Scale9OriginY="1" Scale9Width="2" Scale9Height="2" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="76.0000" Y="86.1000" />
-                    <Children>
-                      <AbstractNodeData Name="img_Activity" CanEdit="False" ActionTag="-1651137625" Tag="533" IconVisible="False" LeftMargin="-14.9398" RightMargin="-21.0602" TopMargin="-18.2401" BottomMargin="-17.6599" ctype="SpriteObjectData">
-                        <Size X="112.0000" Y="122.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="41.0602" Y="43.3401" />
-                        <Scale ScaleX="0.8000" ScaleY="0.8000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5403" Y="0.5034" />
-                        <PreSize X="1.4737" Y="1.4170" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/sp_activity_bright.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                        <BlendFunc Src="1" Dst="771" />
-                      </AbstractNodeData>
-                      <AbstractNodeData Name="img_Activity2" CanEdit="False" ActionTag="-1562317166" Tag="376" IconVisible="False" LeftMargin="-14.9393" RightMargin="-21.0607" TopMargin="-18.2400" BottomMargin="-17.6600" ctype="SpriteObjectData">
-                        <Size X="112.0000" Y="122.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="41.0607" Y="43.3400" />
-                        <Scale ScaleX="0.8000" ScaleY="0.8000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5403" Y="0.5034" />
-                        <PreSize X="1.4737" Y="1.4170" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btn_activity.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                        <BlendFunc Src="1" Dst="771" />
-                      </AbstractNodeData>
-                    </Children>
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="520.0000" Y="143.0000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.3898" Y="0.7150" />
-                    <PreSize X="0.0570" Y="0.4305" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/bgAlphaRect.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <PressedFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/bgAlphaRect.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-                    <NormalFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/bgAlphaRect.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -745,7 +510,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Pl_function" ActionTag="-1105395929" Tag="335" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="523.5162" RightMargin="58.4838" TopMargin="556.0000" BottomMargin="124.0000" ClipAble="False" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="Pl_function" ActionTag="-1105395929" VisibleForFrame="False" Tag="335" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="513.2021" RightMargin="68.7979" TopMargin="788.0246" BottomMargin="-108.0246" ClipAble="False" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="752.0000" Y="70.0000" />
                 <Children>
                   <AbstractNodeData Name="Bn_Record" ActionTag="-1431284679" Tag="232" IconVisible="False" LeftMargin="297.0000" RightMargin="309.0000" TopMargin="-0.0715" BottomMargin="-0.9285" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="96" Scale9Height="19" ctype="ImageViewObjectData">
@@ -760,18 +525,6 @@
                   </AbstractNodeData>
                   <AbstractNodeData Name="Bn_Help" ActionTag="191501993" Tag="230" IconVisible="False" LeftMargin="593.1900" RightMargin="12.8100" TopMargin="-0.0711" BottomMargin="-0.9289" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="96" Scale9Height="19" ctype="ImageViewObjectData">
                     <Size X="146.0000" Y="71.0000" />
-                    <Children>
-                      <AbstractNodeData Name="Image_SnowRule" ActionTag="-1968551304" Tag="583" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="36.0000" RightMargin="36.0000" TopMargin="-1.4000" BottomMargin="55.4000" LeftEage="24" RightEage="24" TopEage="5" BottomEage="5" Scale9OriginX="24" Scale9OriginY="5" Scale9Width="26" Scale9Height="7" ctype="ImageViewObjectData">
-                        <Size X="74.0000" Y="17.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="73.0000" Y="63.9000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5000" Y="0.9000" />
-                        <PreSize X="0.5068" Y="0.2394" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_rule.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                      </AbstractNodeData>
-                    </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="666.1900" Y="34.5711" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -782,18 +535,6 @@
                   </AbstractNodeData>
                   <AbstractNodeData Name="Bn_newPlayer" ActionTag="1850909506" VisibleForFrame="False" Tag="3322" IconVisible="False" LeftMargin="10.3380" RightMargin="595.6620" TopMargin="-0.0715" BottomMargin="-0.9285" LeftEage="48" RightEage="48" TopEage="23" BottomEage="23" Scale9OriginX="48" Scale9OriginY="23" Scale9Width="50" Scale9Height="25" ctype="ImageViewObjectData">
                     <Size X="146.0000" Y="71.0000" />
-                    <Children>
-                      <AbstractNodeData Name="Image_SnowNewbie" ActionTag="-588748963" Tag="419" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="65.2000" RightMargin="6.8000" TopMargin="-1.4000" BottomMargin="55.4000" LeftEage="24" RightEage="24" TopEage="5" BottomEage="5" Scale9OriginX="24" Scale9OriginY="5" Scale9Width="26" Scale9Height="7" ctype="ImageViewObjectData">
-                        <Size X="74.0000" Y="17.0000" />
-                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="102.2000" Y="63.9000" />
-                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                        <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.7000" Y="0.9000" />
-                        <PreSize X="0.5068" Y="0.2394" />
-                        <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_ newbie.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                      </AbstractNodeData>
-                    </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="83.3380" Y="34.5715" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -814,29 +555,19 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="899.5162" Y="159.0000" />
+                <Position X="889.2021" Y="-73.0246" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6743" Y="0.2120" />
+                <PrePosition X="0.6666" Y="-0.0974" />
                 <PreSize X="0.5637" Y="0.0933" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Ie_Notice" ActionTag="-924667591" Tag="944" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" TopMargin="680.8900" BottomMargin="-0.8900" StretchWidthEnable="True" Scale9Enable="True" LeftEage="1" RightEage="1" TopEage="13" BottomEage="13" Scale9OriginX="1" Scale9OriginY="13" Scale9Width="2" Scale9Height="45" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Ie_Notice" ActionTag="-924667591" VisibleForFrame="False" Tag="944" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="0.0001" TopMargin="818.6984" BottomMargin="-138.6983" StretchWidthEnable="True" Scale9Enable="True" LeftEage="1" RightEage="1" TopEage="13" BottomEage="13" Scale9OriginX="1" Scale9OriginY="13" Scale9Width="2" Scale9Height="45" ctype="ImageViewObjectData">
                 <Size X="1334.0000" Y="70.0000" />
                 <Children>
-                  <AbstractNodeData Name="Image_SnowBottom" ActionTag="199221668" Tag="584" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BottomEdge" TopMargin="5.0000" StretchWidthEnable="True" LeftEage="439" RightEage="439" TopEage="21" BottomEage="21" Scale9OriginX="439" Scale9OriginY="21" Scale9Width="455" Scale9Height="23" ctype="ImageViewObjectData">
-                    <Size X="1334.0000" Y="65.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="667.0000" Y="32.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5000" Y="0.4643" />
-                    <PreSize X="1.0000" Y="0.9286" />
-                    <FileData Type="Normal" Path="hallcomm/lobby/snow/img_snow_bottom.png" Plist="" />
-                  </AbstractNodeData>
                   <AbstractNodeData Name="Image_397" ActionTag="1124158074" Tag="2136" IconVisible="False" LeftMargin="24.9773" RightMargin="1268.0227" TopMargin="25.3690" BottomMargin="6.6310" LeftEage="13" RightEage="13" TopEage="12" BottomEage="12" Scale9OriginX="13" Scale9OriginY="12" Scale9Width="14" Scale9Height="14" ctype="ImageViewObjectData">
                     <Size X="41.0000" Y="38.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -847,26 +578,26 @@
                     <PreSize X="0.0307" Y="0.5429" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/BG7.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Pl_Notice" ActionTag="-435346569" Tag="151" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="77.9972" RightMargin="356.0028" TopMargin="22.5320" BottomMargin="7.4680" ClipAble="True" BackColorAlpha="0" ColorAngle="90.0000" LeftEage="11" RightEage="11" TopEage="16" BottomEage="16" Scale9OriginX="-11" Scale9OriginY="-16" Scale9Width="22" Scale9Height="32" ctype="PanelObjectData">
+                  <AbstractNodeData Name="Pl_Notice" ActionTag="-435346569" Tag="151" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="65.2096" RightMargin="368.7904" TopMargin="121.6357" BottomMargin="-91.6357" ClipAble="True" BackColorAlpha="0" ColorAngle="90.0000" LeftEage="11" RightEage="11" TopEage="16" BottomEage="16" Scale9OriginX="-11" Scale9OriginY="-16" Scale9Width="22" Scale9Height="32" ctype="PanelObjectData">
                     <Size X="900.0000" Y="40.0000" />
                     <Children>
-                      <AbstractNodeData Name="Tt_Notice" ActionTag="482277366" Tag="51" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="830.0000" RightMargin="-170.0000" TopMargin="3.0000" BottomMargin="3.0000" FontSize="30" LabelText="公告公告公告公告" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="240.0000" Y="34.0000" />
+                      <AbstractNodeData Name="Tt_Notice" ActionTag="482277366" Tag="51" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="830.0000" RightMargin="-170.0000" TopMargin="5.0000" BottomMargin="5.0000" FontSize="30" LabelText="公告公告公告公告" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="240.0000" Y="30.0000" />
                         <AnchorPoint ScaleY="0.5000" />
                         <Position X="830.0000" Y="20.0000" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="229" G="229" B="229" />
                         <PrePosition X="0.9222" Y="0.5000" />
-                        <PreSize X="0.2667" Y="0.8500" />
+                        <PreSize X="0.2667" Y="0.7500" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="527.9972" Y="27.4680" />
+                    <Position X="515.2096" Y="-71.6357" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.3958" Y="0.3924" />
+                    <PrePosition X="0.3862" Y="-1.0234" />
                     <PreSize X="0.6747" Y="0.5714" />
                     <SingleColor A="255" R="150" G="200" B="255" />
                     <FirstColor A="255" R="150" G="200" B="255" />
@@ -895,103 +626,93 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" />
-                <Position X="667.0000" Y="-0.8900" />
+                <Position X="667.0001" Y="-138.6983" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="-0.0012" />
+                <PrePosition X="0.5000" Y="-0.1849" />
                 <PreSize X="1.0000" Y="0.0933" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/bg_downNotice.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Version" ActionTag="809589248" Alpha="153" Tag="70" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="BottomEdge" LeftMargin="1167.6230" RightMargin="14.3770" TopMargin="654.5420" BottomMargin="64.4580" FontSize="26" LabelText="1.0.1.0.2.200" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="152.0000" Y="31.0000" />
+              <AbstractNodeData Name="Text_Version" ActionTag="809589248" Alpha="153" Tag="70" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="BottomEdge" LeftMargin="1230.4395" RightMargin="12.5605" TopMargin="714.0359" BottomMargin="9.9641" FontSize="26" LabelText="1.0.0.1" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="91.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                <Position X="1319.6230" Y="79.9580" />
+                <Position X="1321.4395" Y="22.9641" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.9892" Y="0.1066" />
-                <PreSize X="0.1139" Y="0.0413" />
+                <PrePosition X="0.9906" Y="0.0306" />
+                <PreSize X="0.0682" Y="0.0347" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Ie_MyRoom" ActionTag="-1949102114" Tag="224" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="103.0000" RightMargin="831.0000" TopMargin="215.0000" BottomMargin="135.0000" TouchEnable="True" Scale9Enable="True" LeftEage="48" RightEage="48" TopEage="48" BottomEage="48" Scale9OriginX="48" Scale9OriginY="48" Scale9Width="23" Scale9Height="20" ctype="ImageViewObjectData">
-                <Size X="400.0000" Y="400.0000" />
+              <AbstractNodeData Name="Ie_MyRoom" ActionTag="-1949102114" Tag="224" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="90.0001" RightMargin="817.9999" TopMargin="186.6641" BottomMargin="84.3359" TouchEnable="True" Scale9Enable="True" LeftEage="48" RightEage="48" TopEage="48" BottomEage="48" Scale9OriginX="48" Scale9OriginY="48" Scale9Width="330" Scale9Height="383" ctype="ImageViewObjectData">
+                <Size X="426.0000" Y="479.0000" />
                 <Children>
-                  <AbstractNodeData Name="Image_SnowRoof" ActionTag="-937824488" Tag="748" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="19.5000" RightMargin="327.5000" TopMargin="5.0000" BottomMargin="369.0000" LeftEage="17" RightEage="17" TopEage="8" BottomEage="8" Scale9OriginX="17" Scale9OriginY="8" Scale9Width="19" Scale9Height="10" ctype="ImageViewObjectData">
-                    <Size X="53.0000" Y="26.0000" />
+                  <AbstractNodeData Name="Tt_Name" ActionTag="-1667373776" Tag="254" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="37.5011" RightMargin="348.4989" TopMargin="105.4878" BottomMargin="353.5122" FontSize="20" LabelText="游戏" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="40.0000" Y="20.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="46.0000" Y="382.0000" />
+                    <Position X="57.5011" Y="363.5122" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.1150" Y="0.9550" />
-                    <PreSize X="0.1325" Y="0.0650" />
-                    <FileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_roof.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Name" CanEdit="False" ActionTag="-1667373776" Tag="254" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="40.0000" RightMargin="320.0000" TopMargin="78.0000" BottomMargin="299.0000" FontSize="20" LabelText="游戏" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="40.0000" Y="23.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="60.0000" Y="310.5000" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.1500" Y="0.7763" />
-                    <PreSize X="0.1000" Y="0.0575" />
+                    <PrePosition X="0.1350" Y="0.7589" />
+                    <PreSize X="0.0939" Y="0.0418" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Operate" CanEdit="False" ActionTag="-426546882" Tag="230" IconVisible="False" VerticalEdge="TopEdge" LeftMargin="340.0000" RightMargin="20.0000" TopMargin="78.0000" BottomMargin="299.0000" FontSize="20" LabelText="操作" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="40.0000" Y="23.0000" />
+                  <AbstractNodeData Name="Tt_Operate" ActionTag="-426546882" Tag="230" IconVisible="False" VerticalEdge="TopEdge" LeftMargin="337.5012" RightMargin="48.4988" TopMargin="105.4878" BottomMargin="353.5122" FontSize="20" LabelText="操作" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="40.0000" Y="20.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="360.0000" Y="310.5000" />
+                    <Position X="357.5012" Y="363.5122" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.9000" Y="0.7763" />
-                    <PreSize X="0.1000" Y="0.0575" />
+                    <PrePosition X="0.8392" Y="0.7589" />
+                    <PreSize X="0.0939" Y="0.0418" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_State" CanEdit="False" ActionTag="644195046" Tag="231" IconVisible="False" VerticalEdge="TopEdge" LeftMargin="228.0008" RightMargin="131.9992" TopMargin="78.0000" BottomMargin="299.0000" FontSize="20" LabelText="状态" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="40.0000" Y="23.0000" />
+                  <AbstractNodeData Name="Tt_State" ActionTag="644195046" Tag="231" IconVisible="False" VerticalEdge="TopEdge" LeftMargin="225.5019" RightMargin="160.4981" TopMargin="105.4878" BottomMargin="353.5122" FontSize="20" LabelText="状态" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="40.0000" Y="20.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="248.0008" Y="310.5000" />
+                    <Position X="245.5019" Y="363.5122" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.6200" Y="0.7763" />
-                    <PreSize X="0.1000" Y="0.0575" />
+                    <PrePosition X="0.5763" Y="0.7589" />
+                    <PreSize X="0.0939" Y="0.0418" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Id" CanEdit="False" ActionTag="-1348571258" Tag="233" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="127.0000" RightMargin="233.0000" TopMargin="78.0000" BottomMargin="299.0000" FontSize="20" LabelText="房号" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="40.0000" Y="23.0000" />
+                  <AbstractNodeData Name="Tt_Id" ActionTag="-1348571258" Tag="233" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="124.5012" RightMargin="261.4988" TopMargin="105.4878" BottomMargin="353.5122" FontSize="20" LabelText="房号" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="40.0000" Y="20.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="147.0000" Y="310.5000" />
+                    <Position X="144.5012" Y="363.5122" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.3675" Y="0.7763" />
-                    <PreSize X="0.1000" Y="0.0575" />
+                    <PrePosition X="0.3392" Y="0.7589" />
+                    <PreSize X="0.0939" Y="0.0418" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Pl_InfoBg" ActionTag="336648524" Tag="1539" IconVisible="False" LeftMargin="10.0000" RightMargin="-10.0000" TopMargin="18.0000" BottomMargin="72.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-                    <Size X="400.0000" Y="310.0000" />
+                  <AbstractNodeData Name="Pl_InfoBg" ActionTag="336648524" Tag="1539" IconVisible="False" LeftMargin="21.6707" RightMargin="4.3293" TopMargin="66.6354" BottomMargin="62.3646" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+                    <Size X="400.0000" Y="350.0000" />
                     <AnchorPoint />
-                    <Position X="10.0000" Y="72.0000" />
+                    <Position X="21.6707" Y="62.3646" />
                     <Scale ScaleX="0.9450" ScaleY="0.8161" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0250" Y="0.1800" />
-                    <PreSize X="1.0000" Y="0.7750" />
+                    <PrePosition X="0.0509" Y="0.1302" />
+                    <PreSize X="0.9390" Y="0.7307" />
                     <SingleColor A="255" R="255" G="150" B="100" />
                     <FirstColor A="255" R="255" G="150" B="100" />
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
-                    <InnerNodeSize Width="400" Height="310" />
+                    <InnerNodeSize Width="400" Height="350" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Bn_Refresh" CanEdit="False" ActionTag="1361346907" Tag="1634" IconVisible="False" LeftMargin="306.5300" RightMargin="25.4700" TopMargin="347.5100" BottomMargin="22.4900" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="38" Scale9Height="8" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Bn_Refresh" ActionTag="1361346907" Tag="1634" IconVisible="False" LeftMargin="322.3867" RightMargin="35.6133" TopMargin="427.1993" BottomMargin="21.8007" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="38" Scale9Height="8" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="68.0000" Y="30.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="340.5300" Y="37.4900" />
+                    <Position X="356.3867" Y="36.8007" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.8513" Y="0.0937" />
-                    <PreSize X="0.1700" Y="0.0750" />
+                    <PrePosition X="0.8366" Y="0.0768" />
+                    <PreSize X="0.1596" Y="0.0626" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btn_refreshMyRoom.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                     <PressedFileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btn_refreshMyRoom.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
@@ -999,25 +720,25 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Prompt" CanEdit="False" ActionTag="572102997" Tag="237" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="15.0000" RightMargin="115.0000" TopMargin="354.7625" BottomMargin="24.2375" FontSize="18" LabelText="出资但不参与的房间仅显示一天内" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="270.0000" Y="21.0000" />
+                  <AbstractNodeData Name="Tt_Prompt" ActionTag="572102997" Tag="237" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="26.0307" RightMargin="129.9693" TopMargin="433.8836" BottomMargin="27.1164" FontSize="18" LabelText="出资但不参与的房间仅显示一天内" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="270.0000" Y="18.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="15.0000" Y="34.7375" />
+                    <Position X="26.0307" Y="36.1164" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="191" G="184" B="178" />
-                    <PrePosition X="0.0375" Y="0.0868" />
-                    <PreSize X="0.6750" Y="0.0525" />
+                    <PrePosition X="0.0611" Y="0.0754" />
+                    <PreSize X="0.6338" Y="0.0376" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="SV_UserInfo" CanEdit="False" ActionTag="1044907321" VisibleForFrame="False" Tag="238" IconVisible="False" LeftMargin="426.0000" RightMargin="-276.0000" TopMargin="5.7480" BottomMargin="29.2520" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Enable="True" LeftEage="16" RightEage="16" TopEage="26" BottomEage="26" Scale9OriginX="16" Scale9OriginY="26" Scale9Width="17" Scale9Height="61" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+                  <AbstractNodeData Name="SV_UserInfo" ActionTag="1044907321" VisibleForFrame="False" Tag="238" IconVisible="False" LeftMargin="426.0000" RightMargin="-250.0000" TopMargin="84.7480" BottomMargin="29.2520" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Enable="True" LeftEage="16" RightEage="16" TopEage="26" BottomEage="26" Scale9OriginX="16" Scale9OriginY="26" Scale9Width="17" Scale9Height="61" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                     <Size X="250.0000" Y="365.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.4952" />
                     <Position X="676.0000" Y="210.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="1.6900" Y="0.5250" />
-                    <PreSize X="0.6250" Y="0.9125" />
+                    <PrePosition X="1.5869" Y="0.4384" />
+                    <PreSize X="0.5869" Y="0.7620" />
                     <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/BG58.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
                     <SingleColor A="255" R="255" G="150" B="100" />
                     <FirstColor A="255" R="255" G="150" B="100" />
@@ -1025,10 +746,10 @@
                     <ColorVector ScaleY="1.0000" />
                     <InnerNodeSize Width="250" Height="365" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Pl_NoData" CanEdit="False" ActionTag="-434145148" Tag="190" IconVisible="False" LeftMargin="38.5557" RightMargin="30.1290" TopMargin="51.0388" BottomMargin="83.3641" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="Pl_NoData" ActionTag="-434145148" Tag="190" IconVisible="False" LeftMargin="38.5557" RightMargin="56.1290" TopMargin="130.0388" BottomMargin="83.3641" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="331.3153" Y="265.5971" />
                     <Children>
-                      <AbstractNodeData Name="BG51_21" CanEdit="False" ActionTag="-1129588736" Tag="192" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="52.6577" RightMargin="52.6577" TopMargin="53.8003" BottomMargin="87.7968" ctype="SpriteObjectData">
+                      <AbstractNodeData Name="BG51_21" ActionTag="-1129588736" Tag="192" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="52.6577" RightMargin="52.6577" TopMargin="53.8003" BottomMargin="87.7968" ctype="SpriteObjectData">
                         <Size X="226.0000" Y="124.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="165.6577" Y="149.7968" />
@@ -1039,14 +760,14 @@
                         <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/BG51.png" Plist="hallcomm/lobby/LobbyPlist0.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Text_2" CanEdit="False" ActionTag="-1527370451" Tag="523" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="45.6577" RightMargin="45.6577" TopMargin="211.5970" BottomMargin="8.0001" FontSize="20" LabelText="您当前没有创建的房间&#xA;快去开房与好友一起游戏吧" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="240.0000" Y="46.0000" />
+                      <AbstractNodeData Name="Text_2" ActionTag="-1527370451" Tag="523" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="45.6577" RightMargin="45.6577" TopMargin="214.5970" BottomMargin="11.0001" FontSize="20" LabelText="您当前没有创建的房间&#xA;快去开房与好友一起游戏吧" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="240.0000" Y="40.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="165.6577" Y="31.0001" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="191" G="184" B="178" />
                         <PrePosition X="0.5000" Y="0.1167" />
-                        <PreSize X="0.7244" Y="0.1732" />
+                        <PreSize X="0.7244" Y="0.1506" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -1055,49 +776,49 @@
                     <Position X="38.5557" Y="348.9612" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0964" Y="0.8724" />
-                    <PreSize X="0.8283" Y="0.6640" />
+                    <PrePosition X="0.0905" Y="0.7285" />
+                    <PreSize X="0.7777" Y="0.5545" />
                     <SingleColor A="255" R="150" G="200" B="255" />
                     <FirstColor A="255" R="150" G="200" B="255" />
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Button_Friend" ActionTag="168255730" VisibleForFrame="False" Tag="229" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="211.5704" RightMargin="-26.5704" TopMargin="-6.2200" BottomMargin="345.2200" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="185" Scale9Height="39" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="Button_Friend" ActionTag="168255730" VisibleForFrame="False" Tag="229" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="211.5704" RightMargin="-0.5704" TopMargin="-1.4247" BottomMargin="419.4247" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="215.0000" Y="61.0000" />
                     <Children>
-                      <AbstractNodeData Name="Text_Num" ActionTag="-375313683" Tag="230" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="82.0025" RightMargin="100.9975" TopMargin="17.0008" BottomMargin="12.9992" FontSize="26" LabelText="(0)" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="32.0000" Y="31.0000" />
+                      <AbstractNodeData Name="Text_Num" ActionTag="-375313683" Tag="230" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="82.0025" RightMargin="93.9975" TopMargin="19.5008" BottomMargin="15.4992" FontSize="26" LabelText="(0)" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="39.0000" Y="26.0000" />
                         <AnchorPoint ScaleY="0.5000" />
                         <Position X="82.0025" Y="28.4992" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.3814" Y="0.4672" />
-                        <PreSize X="0.1488" Y="0.5082" />
+                        <PreSize X="0.1814" Y="0.4262" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="319.0704" Y="375.7200" />
+                    <Position X="319.0704" Y="449.9247" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.7977" Y="0.9393" />
-                    <PreSize X="0.5375" Y="0.1525" />
+                    <PrePosition X="0.7490" Y="0.9393" />
+                    <PreSize X="0.5047" Y="0.1273" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                    <PressedFileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_friend2.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
-                    <NormalFileData Type="MarkedSubImage" Path="hallcomm/lobby/snow/img_snow_friend1.png" Plist="hallcomm/lobby/LobbyPlist2.plist" />
+                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="303.0000" Y="335.0000" />
+                <Position X="303.0001" Y="323.8359" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2271" Y="0.4467" />
-                <PreSize X="0.2999" Y="0.5333" />
-                <FileData Type="Normal" Path="hallcomm/lobby/bgbg.png" Plist="" />
+                <PrePosition X="0.2271" Y="0.4318" />
+                <PreSize X="0.3193" Y="0.6387" />
+                <FileData Type="MarkedSubImage" Path="hallcomm/lobby/ImgMyHome.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
               </AbstractNodeData>
               <AbstractNodeData Name="Node_ReChargeLayer" Visible="False" ActionTag="1637165229" VisibleForFrame="False" Tag="139" IconVisible="True" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" StretchWidthEnable="True" StretchHeightEnable="True" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                 <Size X="1334.0000" Y="750.0000" />

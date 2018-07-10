@@ -39,11 +39,6 @@ function SceneManager:resetOrder()
 end
 
 function SceneManager:replaceScene(scene)
-	-- if app:getResetFlag() then
-	-- 	-- 游戏重置中 无法切换场景
-	-- 	return
-	-- end
-
 	self:resetOrder()
 	cc.Director:getInstance():replaceScene(scene)
 end

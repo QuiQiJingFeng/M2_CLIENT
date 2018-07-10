@@ -28,11 +28,52 @@ function UILayerManager:clearWorldUILayer()
 	self:resetStack()
 end
 
+-- 通过名字去删除layer, 避免没有在同一个页面的时候获取不到layer
+function UILayerManager:removeLayerWithName(__name)
+	local findShow = false
+	local tempLayer
+	for idx,showLayer in ipairs(self._popLayersStack) do
+		local name = showLayer:getName()
+		if type(name) == "string" and name == __name then
+			findShow = true
+			tempLayer = showLayer
+			break
+		end
+	end
+
+	if findShow then
+		self:removeLayer(tempLayer)
+	else
+		print("Warning::not find this name [" .. __name .. "] Please Check the input name!!!!!!!!!!!!!")
+	end
+end
+
+-- 通过名字寻找Layer
+function UILayerManager:findLayer(__name)	
+	local findShow = false
+	local tempLayer
+	for idx,showLayer in ipairs(self._popLayersStack) do
+		local name = showLayer:getName()
+		if type(name) == "string" and name == __name then
+			findShow = true
+			tempLayer = showLayer
+			break
+		end
+	end
+
+	if findShow then
+		return tempLayer
+	end
+	return false
+end
+
 function UILayerManager:addLayer(uilayer, coexist, params)
 	if not self._worldUILayer then
 		lt.CommonUtil.print("has not worldUILayer !!!!")
 		return
 	end
+	-- 默认是透明层, 游戏中不会有完全遮罩
+	coexist = coexist == nil and true or coexist
 
 	if coexist then
 		-- 共存 (当前页面为 次级页面)

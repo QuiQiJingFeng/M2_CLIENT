@@ -3,206 +3,7 @@
 <plist version="1.0">
 	<dict>
 		<key>frames</key>
-		<dict>
-			<key>games/comm/launch/BG1.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{312,327},{53,48}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{53,48}</string>
-			</dict>
-			<key>games/comm/launch/BG4.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{300,475},{31,27}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{31,27}</string>
-			</dict>
-			<key>games/comm/launch/BG5.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{253,327},{60,57}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{60,57}</string>
-			</dict>
-			<key>games/comm/launch/BG9.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{53,491},{10,10}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{10,10}</string>
-			</dict>
-			<key>games/comm/launch/ButtonSure.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{1,394},{168,95}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{168,95}</string>
-			</dict>
-			<key>games/comm/launch/ImageText1.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{930,1},{252,37}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{252,37}</string>
-			</dict>
-			<key>games/comm/launch/ImageText2.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{969,1},{205,37}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{205,37}</string>
-			</dict>
-			<key>games/comm/launch/ImageText3.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{969,208},{117,37}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{117,37}</string>
-			</dict>
-			<key>games/comm/launch/ImageText5.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{171,394},{208,56}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{208,56}</string>
-			</dict>
-			<key>games/comm/launch/launch_image_1.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{623,1},{164,305}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{164,305}</string>
-			</dict>
-			<key>games/comm/launch/launch_image_2.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{1,1},{186,391}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{186,391}</string>
-			</dict>
-			<key>games/comm/launch/launch_image_3.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{381,371},{107,74}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{107,74}</string>
-			</dict>
-			<key>games/comm/launch/launch_image_4.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{248,475},{50,35}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{50,35}</string>
-			</dict>
-			<key>games/comm/launch/UpdateProgress0.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{171,475},{75,33}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{75,33}</string>
-			</dict>
-			<key>games/comm/launch/UpdateProgress1.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{171,452},{450,21}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{450,21}</string>
-			</dict>
-			<key>games/comm/launch/UpdateProgress2.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{1,491},{50,16}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{50,16}</string>
-			</dict>
-			<key>games/comm/launch/Check0.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{189,327},{62,62}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{62,62}</string>
-			</dict>
-			<key>games/comm/launch/Check1.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{362,327},{42,39}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{42,39}</string>
-			</dict>
-		</dict>
+		<dict />
 		<key>metadata</key>
 		<dict>
 			<key>format</key>
@@ -212,14 +13,14 @@
 			<key>realTextureFileName</key>
 			<string>LaunchPlist1.png</string>
 			<key>size</key>
-			<string>{1024,512}</string>
+			<string>{32,32}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>1024</integer>
+			<integer>32</integer>
 			<key>height</key>
-			<integer>512</integer>
+			<integer>32</integer>
 		</dict>
 	</dict>
 </plist>

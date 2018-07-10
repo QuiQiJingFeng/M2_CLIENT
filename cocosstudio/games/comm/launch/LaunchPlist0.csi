@@ -1,9 +1,6 @@
 <PlistInfoProjectFile>
   <PropertyGroup Name="LaunchPlist0" Type="Plist" ID="f3d5b687-d314-477a-994f-6bb809b05d21" Version="3.10.0.0" />
   <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="True" ctype="PlistInfoData">
-    <ImageFiles>
-      <FilePathData Path="games/comm/launch/BG3.png" />
-    </ImageFiles>
     <MaxSize Width="1024" Height="1024" />
   </Content>
 </PlistInfoProjectFile>

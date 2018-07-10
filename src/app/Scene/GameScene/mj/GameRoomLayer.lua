@@ -581,15 +581,13 @@ end
 function GameRoomLayer:onGamenoticeOtherRefuse(msg)--如果有人拒绝解散
 	local canclePlayer = lt.DataManager:getPlayerInfoByPos(msg.user_pos)
 	local loginData = lt.DataManager:getPlayerInfo()
-	--if loginData.user_id ~=  msg.user_id then  --让所有人都知道所以注释掉这句
-		local name = ""
-		if canclePlayer then
-			name = canclePlayer.user_name
-		end
+	local name = ""
+	if canclePlayer then
+		name = canclePlayer.user_name
+	end
 
-		local text = string.format(lt.LanguageString:getString("PLAYER_NOT_GREEN_OVER"), name)
-	    lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.onCloseApplyGameOverPanel),nil, true)
-	--end
+	local text = string.format(lt.LanguageString:getString("PLAYER_NOT_GREEN_OVER"), name)
+    lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.onCloseApplyGameOverPanel),nil, true)
 end
 
 function GameRoomLayer:CloseRoom()
