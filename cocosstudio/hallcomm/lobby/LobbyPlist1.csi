@@ -228,6 +228,7 @@
       <FilePathData Path="hallcomm/lobby/img/btn_Rechargeg.png" />
       <FilePathData Path="hallcomm/lobby/img/btn_begainGame.png" />
       <FilePathData Path="hallcomm/lobby/img/serviceIcon.png" />
+      <FilePathData Path="hallcomm/lobby/ImgMyHome.png" />
     </ImageFiles>
     <MaxSize Width="1024" Height="2048" />
   </Content>

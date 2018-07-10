@@ -2153,29 +2153,6 @@
           </Folder>
           <Folder Name="comm">
             <Folder Name="launch">
-              <PlistImageFolder Image="LaunchPlist0.png" PListFile="LaunchPlist0.plist" Name=".LaunchPlist0_PList.Dir">
-                <PlistImageFile Name="games_comm_launch_BG3.png" Key="games/comm/launch/BG3.png" />
-              </PlistImageFolder>
-              <PlistImageFolder Image="LaunchPlist1.png" PListFile="LaunchPlist1.plist" Name=".LaunchPlist1_PList.Dir">
-                <PlistImageFile Name="games_comm_launch_BG1.png" Key="games/comm/launch/BG1.png" />
-                <PlistImageFile Name="games_comm_launch_BG4.png" Key="games/comm/launch/BG4.png" />
-                <PlistImageFile Name="games_comm_launch_BG5.png" Key="games/comm/launch/BG5.png" />
-                <PlistImageFile Name="games_comm_launch_BG9.png" Key="games/comm/launch/BG9.png" />
-                <PlistImageFile Name="games_comm_launch_ButtonSure.png" Key="games/comm/launch/ButtonSure.png" />
-                <PlistImageFile Name="games_comm_launch_Check0.png" Key="games/comm/launch/Check0.png" />
-                <PlistImageFile Name="games_comm_launch_Check1.png" Key="games/comm/launch/Check1.png" />
-                <PlistImageFile Name="games_comm_launch_ImageText1.png" Key="games/comm/launch/ImageText1.png" />
-                <PlistImageFile Name="games_comm_launch_ImageText2.png" Key="games/comm/launch/ImageText2.png" />
-                <PlistImageFile Name="games_comm_launch_ImageText3.png" Key="games/comm/launch/ImageText3.png" />
-                <PlistImageFile Name="games_comm_launch_ImageText5.png" Key="games/comm/launch/ImageText5.png" />
-                <PlistImageFile Name="games_comm_launch_launch_image_1.png" Key="games/comm/launch/launch_image_1.png" />
-                <PlistImageFile Name="games_comm_launch_launch_image_2.png" Key="games/comm/launch/launch_image_2.png" />
-                <PlistImageFile Name="games_comm_launch_launch_image_3.png" Key="games/comm/launch/launch_image_3.png" />
-                <PlistImageFile Name="games_comm_launch_launch_image_4.png" Key="games/comm/launch/launch_image_4.png" />
-                <PlistImageFile Name="games_comm_launch_UpdateProgress0.png" Key="games/comm/launch/UpdateProgress0.png" />
-                <PlistImageFile Name="games_comm_launch_UpdateProgress1.png" Key="games/comm/launch/UpdateProgress1.png" />
-                <PlistImageFile Name="games_comm_launch_UpdateProgress2.png" Key="games/comm/launch/UpdateProgress2.png" />
-              </PlistImageFolder>
               <Image Name="bg_down.png" />
               <Image Name="BG0.png" />
               <Image Name="BG1.png" />
@@ -2187,6 +2164,7 @@
               <Image Name="ButtonSure.png" />
               <Image Name="Check0.png" />
               <Image Name="Check1.png" />
+              <Image Name="daopying.png" />
               <Image Name="ImageText1.png" />
               <Image Name="ImageText2.png" />
               <Image Name="ImageText3.png" />
@@ -2196,10 +2174,6 @@
               <Image Name="launch_image_3.png" />
               <Image Name="launch_image_4.png" />
               <Project Name="LaunchLayer.csd" Type="Layer" />
-              <PlistInfo Name="LaunchPlist0.csi" Type="Plist" />
-              <Image Name="LaunchPlist0.png" />
-              <PlistInfo Name="LaunchPlist1.csi" Type="Plist" />
-              <Image Name="LaunchPlist1.png" />
               <Project Name="LoginLayer.csd" Type="Layer" />
               <Project Name="testNode.csd" Type="Node" />
               <Project Name="UpdateLayer.csd" Type="Layer" />
@@ -2340,6 +2314,8 @@
               <Image Name="ImageText30.png" />
               <Image Name="ImageText31.png" />
               <Image Name="ImageText32.png" />
+              <Image Name="ImageText33.png" />
+              <Image Name="ImageText34.png" />
               <Image Name="ImageText35.png" />
               <Image Name="ImageText40.png" />
               <Image Name="ImageText41.png" />
@@ -5281,6 +5257,8 @@
               <Image Name="myRoom_btn1.png" />
               <Image Name="myRoom_btn2.png" />
               <Image Name="myRoom_btn3.png" />
+              <Image Name="noticebg.png" />
+              <Image Name="record.png" />
               <Image Name="record_button_1.png" />
               <Image Name="record_button_2.png" />
               <Image Name="refreshCoinIcon.png" />
@@ -5292,6 +5270,7 @@
               <Image Name="RotaryTableQiPao.png" />
               <Image Name="RotaryTableQRBg.png" />
               <Image Name="rotaryTableTitle.png" />
+              <Image Name="rule.png" />
               <Image Name="serviceIcon.png" />
               <Image Name="sp_activity_bright.png" />
               <Image Name="Sp_redpoint.png" />
@@ -5323,26 +5302,7 @@
               <Image Name="wordTjm.png" />
               <Image Name="wordVIP.png" />
             </Folder>
-            <Folder Name="snow">
-              <Image Name="img_snow_ newbie.png" />
-              <Image Name="img_snow_bottom.png" />
-              <Image Name="img_snow_btton.png" />
-              <Image Name="img_snow_fish.png" />
-              <Image Name="img_snow_friend1.png" />
-              <Image Name="img_snow_friend2.png" />
-              <Image Name="img_snow_recharge.png" />
-              <Image Name="img_snow_roof.png" />
-              <Image Name="img_snow_room.png" />
-              <Image Name="img_snow_rotary.png" />
-              <Image Name="img_snow_rule.png" />
-              <Image Name="img_snow_shading.png" />
-              <PlistParticleFile Name="snow.plist" />
-              <Image Name="snow1.png" />
-            </Folder>
             <Project Name="AddFriendLayer.csd" Type="Layer" />
-            <Image Name="bg.png" />
-            <Image Name="bgbg.png" />
-            <Image Name="buttonbg.png" />
             <Project Name="CreateGuideLayer.csd" Type="Layer" />
             <Project Name="ExpandShareFriendsLayer1.csd" Type="Layer" />
             <Project Name="ExpandShareFriendsLayer2.csd" Type="Layer" />
@@ -5354,6 +5314,7 @@
             <Project Name="FriendOperationLayer.csd" Type="Layer" />
             <Project Name="FriendPlayerInfoItem.csd" Type="Layer" />
             <PlistInfo Name="FriendPlist.csi" Type="Plist" />
+            <Image Name="ImgMyHome.png" />
             <Project Name="LobbyGuideLayer.csd" Type="Layer" />
             <Project Name="LobbyKefu.csd" Type="Layer" />
             <Project Name="LobbyLayer1.csd" Type="Layer" />
@@ -5376,6 +5337,7 @@
             <Project Name="WebViewLayer.csd" Type="Layer" />
             <Project Name="WechatInviteLayer.csd" Type="Layer" />
             <Project Name="WechatShareLayer.csd" Type="Layer" />
+            <Project Name="LobbyHeZuo.csd" Type="Layer" />
           </Folder>
           <Folder Name="preserve">
             <Folder Name="comm">
@@ -5572,7 +5534,6 @@
           <Project Name="Help_3.csd" Type="Layer" />
           <Project Name="Help_4.csd" Type="Layer" />
         </Folder>
-        <Image Name="bg.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>

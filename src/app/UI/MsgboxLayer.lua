@@ -101,6 +101,11 @@ end
 -- @param isClose  after onClick close MsgBox 
 -- @param isScale
 function MsgboxLayer:setSureClick( func, isClose, isScale )
+	self.btnSure:setEnabled(true)
+	if self.btnSure.onClick then
+		self.btnSure.onClick = nil
+	end
+	print("注册Sure事件", func)
 	lt.CommonUtil:addNodeClickEvent(self.btnSure, function( ... )
 		if isClose then
 			self:onClose()
@@ -108,9 +113,6 @@ function MsgboxLayer:setSureClick( func, isClose, isScale )
 		if func then
 			func()
 		end
-
-
-
 	end, isScale)
 end
 
@@ -119,6 +121,10 @@ end
 -- @param isClose  after onClick close MsgBox 
 -- @param isScale
 function MsgboxLayer:setCancelClick( func, isClose, isScale )
+	self.btnCancel:setEnabled(true)
+	if self.btnCancel.onClick then
+		self.btnCancel.onClick = nil
+	end
 	lt.CommonUtil:addNodeClickEvent(self.btnCancel, function( ... )
 		if isClose then
 			self:onClose()
@@ -159,6 +165,9 @@ end
 
 function MsgboxLayer:onClose( ... )
 	lt.UILayerManager:removeLayer(self.layer)
+
+	self.btnSure:setEnabled(false)
+	self.btnCancel:setEnabled(false)
 	-- print("MsgBox Close")
 	-- self.txtClock:stopAllActions()
 	

@@ -22,28 +22,36 @@ WorldMenuLayer._rightZoomBtnstatus = 1 --右上角缩放按钮状态 1 伸出 2 
 WorldMenuLayer._buttonListArray = nil
 
 function WorldMenuLayer:ctor()
-    --self._updateLayer = cc.CSLoader:createNode("games/comm/launch//UpdateLayer.csb")
+
+    -- print( kefuBtn, shareBtn, helpBtn, recordBtn)
 
     local baseLayer = self:getChildByName("Ie_Bg") --csd
-
     --设置按钮
     local setBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Bn_Set")
+    -- 规则
+    local helpBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_Rule")
+
+    -- vip（合作按钮）
+    local vipBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_VIP")
+    -- 实名认证btn
+    local smzBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_Smz")
+    -- 战绩
+    local recordBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_Rec")
     --个人信息
     local infoBtn= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Ie_HeadBg"):getChildByName("Ie_Shade")
     local Tt_NickName= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickName")
+    -- ID
     local Tt_UserId= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_UserId")
+    -- 名字后面三个点
     local Tt_NickNameDDD= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickNameDDD")
-    local shareBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Ie_Notice"):getChildByName("Button_OfShare")
-    local kefuBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Ie_Notice"):getChildByName("Button_OfService")
+    -- 分享btn
+    local shareBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Bn_Share")
+    -- 客服btn
+    local kefuBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Bn_Kefu")
+    -- 充值按钮
     local shopBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Bn_Recharge")
-    --local lobbyNoticeMsgBoxBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_OfNotice")
-    local mergeBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Others")
-    local recordBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Record")
-    local helpBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_function"):getChildByName("Bn_Help")
 
-    
     local loginData = lt.DataManager:getPlayerInfo()
-
     local count = 0 
     if not loginData.user_name then
         loginData.user_name = " "
@@ -59,64 +67,61 @@ function WorldMenuLayer:ctor()
     if not loginData.user_id then
         loginData.user_id = " "
     end
-    
     Tt_UserId:setString("ID："..loginData.user_id)
-
     if count <= 8 then --只显示最多8位  
        Tt_NickName:setString(loginData.user_name)
        Tt_NickNameDDD:setVisible(false)
     else
         local nameText = loginData.user_name
-
         local substring = lt.CommonUtil:GetMaxLenString(nameText,8)
         Tt_NickName:setString(substring)
         Tt_NickNameDDD:setVisible(true)
-        --[[
-
-       local tt = string.sub(aa,1,8)
-       print("===------")
-       print(tt)
-       Tt_NickName:setString(tt)
-       Tt_NickNameDDD:setVisible(true)--]]
     end    
 
     local createRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_CreateRoom")
     local joinRoomBtn = self:getChildByName("Ie_Bg"):getChildByName("Bn_JoinRoom")
-    
+    -- 创建房间
     self.Se_Create = createRoomBtn:getChildByName("Se_Create")
     self.Se_Return = createRoomBtn:getChildByName("Se_Return")
-
-    --lt.CommonUtil:addNodeClickEvent(lobbyNoticeMsgBoxBtn, handler(self, self.onClicklobbyNoticeMsgBoxBtn))
+    -- 添加事件
     lt.CommonUtil:addNodeClickEvent(shopBtn, handler(self, self.onClickshopBtn))
-    lt.CommonUtil:addNodeClickEvent(kefuBtn, handler(self, self.onClickkefuBtn))
-    lt.CommonUtil:addNodeClickEvent(shareBtn, handler(self, self.onClickshareBtn))
+    -- lt.CommonUtil:addNodeClickEvent(kefuBtn, handler(self, self.onClickkefuBtn))
+    -- lt.CommonUtil:addNodeClickEvent(shareBtn, handler(self, self.onClickshareBtn))
+    lt.CommonUtil:addNodeClickEvent(smzBtn, handler(self, self.onClickSMZBtn))
     lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
     lt.CommonUtil:addNodeClickEvent(infoBtn, handler(self, self.onClickinfoBtn))
     lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickCreateRoomBtn))
     lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickJoinRoomBtn))
-    lt.CommonUtil:addNodeClickEvent(mergeBtn, handler(self, self.onClickmergeBtn))
-    lt.CommonUtil:addNodeClickEvent(recordBtn, handler(self, self.onClickrecordBtn))
     lt.CommonUtil:addNodeClickEvent(helpBtn, handler(self, self.onClickhelpBtn))
-    -- self:checkRightBtnNode()
-    -- self:updateNewFlagInfo()
-    --lt.UILayerManager:addLayer(commonAlertLayer, true)
-
+    lt.CommonUtil:addNodeClickEvent(recordBtn, handler(self, self.onClickrecordBtn))
+    lt.CommonUtil:addNodeClickEvent(vipBtn, handler(self, self.onClickVIPBtn))
 
     self.bg_NoData = lt.CommonUtil:getChildByNames(self,"Ie_Bg","Ie_Bg","Ie_MyRoom","Pl_NoData")
-
     local tb_room_info = lt.CommonUtil:getChildByNames(self,"Ie_Bg","Ie_Bg","Ie_MyRoom","Pl_InfoBg")
-
     local UITableView = require("app.UI.UITableView")
     self.tb_room_info = UITableView:bindNode(tb_room_info,"app.Scene.WorldScene.WorldMenuLayerRoomItem")
-
     self:listenRoomListUpdate()
-
 end
 
 function WorldMenuLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.ROOM_LIST_UPDATE, handler(self, self.listenRoomListUpdate), "WorldMenuLayer.listenRoomListUpdate")
 end
 
+-- 实名认证界面
+function WorldMenuLayer:onClickSMZBtn()
+    
+end
+
+-- vip界面
+function WorldMenuLayer:onClickVIPBtn()
+    -- LobbyHeZuo
+    print("vip界面")
+    local layer = lt.LobbyHezuo:new()
+    lt.UILayerManager:addLayer(layer, true)
+end
+
+
+-- 监听事件
 function WorldMenuLayer:listenRoomListUpdate()
 
     local body = lt.DataManager:getAuthData()
@@ -140,11 +145,11 @@ function WorldMenuLayer:listenRoomListUpdate()
 end
 
 function WorldMenuLayer:onClickSetBtn(event)
-    -- local setLayer = lt.SetLayer.new()
-    -- lt.UILayerManager:addLayer(setLayer, true)
-    local callBack = function(str) 
-        print("FYD===>>",str)
-    end
+    local setLayer = lt.SetLayer.new()
+    lt.UILayerManager:addLayer(setLayer, true)
+    -- local callBack = function(str) 
+    --     print("FYD===>>",str)
+    -- end
     -- lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
     -- local data = {0,"萌芽娱乐","畅玩麻将体验","https://mengyagame.com",""}
     -- local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
@@ -152,20 +157,17 @@ function WorldMenuLayer:onClickSetBtn(event)
     --     print("FYD ERROR: SIGNIN FAILED ",ret)
     -- end
 
-    local path = cc.FileUtils:getInstance():getWritablePath()
-    local img_path = path.."share.png"
-    cc.utils:captureScreen(function(succeed, outputFile) 
-            print("FYD====>>>succeed=== ",succeed)
-            print("FYD----->outputFile ===  ",outputFile)
-            lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
-            local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareImg",{outputFile},"(Ljava/lang/String;)V")
-            if not ok then
-                print("FYD ERROR: SHARE IMAGE ",ret)
-            end
-        end,"share.png")
-
-
-    
+    -- local path = cc.FileUtils:getInstance():getWritablePath()
+    -- local img_path = path.."share.png"
+    -- cc.utils:captureScreen(function(succeed, outputFile) 
+    --         print("FYD====>>>succeed=== ",succeed)
+    --         print("FYD----->outputFile ===  ",outputFile)
+    --         lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
+    --         local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareImg",{outputFile},"(Ljava/lang/String;)V")
+    --         if not ok then
+    --             print("FYD ERROR: SHARE IMAGE ",ret)
+    --         end
+    --     end,"share.png")
 end
 
 function WorldMenuLayer:onClickhelpBtn(event)

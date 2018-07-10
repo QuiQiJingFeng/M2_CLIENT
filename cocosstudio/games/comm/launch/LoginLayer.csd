@@ -9,17 +9,17 @@
           <AbstractNodeData Name="Pl_Bg" ActionTag="533016168" Tag="68" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="398.8598" RightMargin="405.0093" TopMargin="462.8677" BottomMargin="54.0009" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="530.1309" Y="233.1314" />
             <Children>
-              <AbstractNodeData Name="Bn_Rule" ActionTag="-132102939" Tag="411" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="502.0780" RightMargin="-223.9471" TopMargin="65.0011" BottomMargin="131.1303" LeftEage="90" RightEage="90" TopEage="10" BottomEage="10" Scale9OriginX="90" Scale9OriginY="10" Scale9Width="72" Scale9Height="17" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Bn_Rule" ActionTag="-132102939" Tag="411" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="178.8983" RightMargin="99.2326" TopMargin="197.8069" BottomMargin="-1.6755" LeftEage="90" RightEage="90" TopEage="10" BottomEage="10" Scale9OriginX="90" Scale9OriginY="10" Scale9Width="72" Scale9Height="17" ctype="ImageViewObjectData">
                 <Size X="252.0000" Y="37.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="628.0780" Y="149.6303" />
+                <Position X="304.8983" Y="16.8245" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="1.1848" Y="0.6418" />
+                <PrePosition X="0.5751" Y="0.0722" />
                 <PreSize X="0.4754" Y="0.1587" />
-                <FileData Type="MarkedSubImage" Path="games/comm/launch/ImageText1.png" Plist="games/comm/launch/LaunchPlist1.plist" />
+                <FileData Type="Normal" Path="games/comm/launch/ImageText1.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Bn_LoginRule" ActionTag="1271499365" Tag="412" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="418.1129" RightMargin="50.0181" TopMargin="52.5009" BottomMargin="118.6305" LeftEage="20" RightEage="20" TopEage="20" BottomEage="20" Scale9OriginX="20" Scale9OriginY="20" Scale9Width="22" Scale9Height="22" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Bn_LoginRule" ActionTag="1271499365" Tag="412" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="94.9276" RightMargin="373.2033" TopMargin="185.3067" BottomMargin="-14.1753" LeftEage="20" RightEage="20" TopEage="20" BottomEage="20" Scale9OriginX="20" Scale9OriginY="20" Scale9Width="22" Scale9Height="22" ctype="ImageViewObjectData">
                 <Size X="62.0000" Y="62.0000" />
                 <Children>
                   <AbstractNodeData Name="Se_Check" ActionTag="587915501" Tag="413" IconVisible="False" LeftMargin="10.1178" RightMargin="9.8822" TopMargin="11.5000" BottomMargin="11.5000" ctype="SpriteObjectData">
@@ -30,19 +30,19 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5019" Y="0.5000" />
                     <PreSize X="0.6774" Y="0.6290" />
-                    <FileData Type="MarkedSubImage" Path="games/comm/launch/Check1.png" Plist="games/comm/launch/LaunchPlist1.plist" />
+                    <FileData Type="Normal" Path="games/comm/launch/Check1.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="449.1129" Y="149.6305" />
+                <Position X="125.9276" Y="16.8247" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8472" Y="0.6418" />
+                <PrePosition X="0.2375" Y="0.0722" />
                 <PreSize X="0.1170" Y="0.2659" />
-                <FileData Type="MarkedSubImage" Path="games/comm/launch/Check0.png" Plist="games/comm/launch/LaunchPlist1.plist" />
+                <FileData Type="Normal" Path="games/comm/launch/Check0.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Bn_Login" ActionTag="1894645410" Tag="85" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="110.0655" RightMargin="110.0655" TopMargin="35.6315" BottomMargin="102.4999" Scale9Enable="True" LeftEage="113" RightEage="113" TopEage="36" BottomEage="36" Scale9OriginX="55" Scale9OriginY="36" Scale9Width="58" Scale9Height="23" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Bn_Login" ActionTag="1894645410" Tag="85" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="114.3842" RightMargin="105.7467" TopMargin="74.5105" BottomMargin="63.6209" Scale9Enable="True" LeftEage="113" RightEage="113" TopEage="36" BottomEage="36" Scale9OriginX="55" Scale9OriginY="36" Scale9Width="58" Scale9Height="23" ctype="ImageViewObjectData">
                 <Size X="310.0000" Y="95.0000" />
                 <Children>
                   <AbstractNodeData Name="ImageText5_2" ActionTag="860250274" Tag="63" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="51.0000" RightMargin="51.0000" TopMargin="19.5000" BottomMargin="19.5000" ctype="SpriteObjectData">
@@ -53,17 +53,17 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.6710" Y="0.5895" />
-                    <FileData Type="MarkedSubImage" Path="games/comm/launch/ImageText5.png" Plist="games/comm/launch/LaunchPlist1.plist" />
+                    <FileData Type="Normal" Path="games/comm/launch/ImageText5.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="265.0655" Y="149.9999" />
+                <Position X="269.3842" Y="111.1209" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.6434" />
+                <PrePosition X="0.5081" Y="0.4766" />
                 <PreSize X="0.5848" Y="0.4075" />
-                <FileData Type="MarkedSubImage" Path="games/comm/launch/ButtonSure.png" Plist="games/comm/launch/LaunchPlist1.plist" />
+                <FileData Type="Normal" Path="games/comm/launch/ButtonSure.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5058" ScaleY="0.4737" />

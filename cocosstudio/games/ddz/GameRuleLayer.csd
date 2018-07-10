@@ -83,13 +83,23 @@
                         <PreSize X="0.0982" Y="0.2116" />
                         <FileData Type="MarkedSubImage" Path="game/zpcomm/img/Check0.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Ie_Pay2" ActionTag="-1159513323" Tag="1873" IconVisible="False" LeftMargin="401.0005" RightMargin="103.9995" TopMargin="6.0481" BottomMargin="225.0003" Scale9Enable="True" LeftEage="9" RightEage="9" TopEage="10" BottomEage="10" Scale9OriginX="9" Scale9OriginY="10" Scale9Width="37" Scale9Height="42" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Ie_Pay2" ActionTag="-1159513323" Tag="1873" IconVisible="False" LeftMargin="268.7573" RightMargin="236.2427" TopMargin="5.6989" BottomMargin="225.3495" Scale9Enable="True" LeftEage="9" RightEage="9" TopEage="10" BottomEage="10" Scale9OriginX="9" Scale9OriginY="10" Scale9Width="37" Scale9Height="42" ctype="ImageViewObjectData">
                         <Size X="55.0000" Y="62.0000" />
                         <AnchorPoint ScaleY="0.5000" />
-                        <Position X="401.0005" Y="256.0003" />
+                        <Position X="268.7573" Y="256.3495" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="191" G="191" B="191" />
-                        <PrePosition X="0.7161" Y="0.8736" />
+                        <PrePosition X="0.4799" Y="0.8748" />
+                        <PreSize X="0.0982" Y="0.2116" />
+                        <FileData Type="MarkedSubImage" Path="game/zpcomm/img/Check0.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="Ie_Pay3" ActionTag="1660643773" Tag="316" IconVisible="False" LeftMargin="400.5883" RightMargin="104.4117" TopMargin="5.6989" BottomMargin="225.3495" Scale9Enable="True" LeftEage="9" RightEage="9" TopEage="10" BottomEage="10" Scale9OriginX="9" Scale9OriginY="10" Scale9Width="37" Scale9Height="42" ctype="ImageViewObjectData">
+                        <Size X="55.0000" Y="62.0000" />
+                        <AnchorPoint ScaleY="0.5000" />
+                        <Position X="400.5883" Y="256.3495" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="191" G="191" B="191" />
+                        <PrePosition X="0.7153" Y="0.8748" />
                         <PreSize X="0.0982" Y="0.2116" />
                         <FileData Type="MarkedSubImage" Path="game/zpcomm/img/Check0.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
                       </AbstractNodeData>
@@ -104,47 +114,58 @@
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_Round3" ActionTag="1189290481" Tag="1875" IconVisible="False" LeftMargin="456.2992" RightMargin="31.7008" TopMargin="76.0551" BottomMargin="180.9933" FontSize="36" LabelText="20局" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                      <AbstractNodeData Name="Tt_Round3" ActionTag="1189290481" Tag="1875" IconVisible="False" LeftMargin="467.8922" RightMargin="20.1078" TopMargin="76.3521" BottomMargin="180.6963" FontSize="36" LabelText="20局" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                         <Size X="72.0000" Y="36.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="492.2992" Y="198.9933" />
+                        <Position X="503.8922" Y="198.6963" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="116" G="61" B="0" />
-                        <PrePosition X="0.8791" Y="0.6790" />
+                        <PrePosition X="0.8998" Y="0.6780" />
                         <PreSize X="0.1286" Y="0.1228" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_Round2" ActionTag="1550138607" Tag="1876" IconVisible="False" LeftMargin="323.0554" RightMargin="164.9446" TopMargin="74.1628" BottomMargin="182.8856" FontSize="36" LabelText="12局" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                      <AbstractNodeData Name="Tt_Round2" ActionTag="1550138607" Tag="1876" IconVisible="False" LeftMargin="323.0554" RightMargin="164.9446" TopMargin="76.3521" BottomMargin="180.6963" FontSize="36" LabelText="12局" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                         <Size X="72.0000" Y="36.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="359.0554" Y="200.8856" />
+                        <Position X="359.0554" Y="198.6963" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="116" G="61" B="0" />
-                        <PrePosition X="0.6412" Y="0.6855" />
+                        <PrePosition X="0.6412" Y="0.6780" />
                         <PreSize X="0.1286" Y="0.1228" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_Pay2" ActionTag="681717077" Tag="1877" IconVisible="False" LeftMargin="461.3212" RightMargin="62.6788" TopMargin="18.2811" BottomMargin="238.7673" FontSize="36" LabelText="AA" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                      <AbstractNodeData Name="Tt_Pay2" ActionTag="681717077" Tag="1877" IconVisible="False" LeftMargin="341.0554" RightMargin="182.9446" TopMargin="15.5787" BottomMargin="241.4697" FontSize="36" LabelText="AA" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                         <Size X="36.0000" Y="36.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="479.3212" Y="256.7673" />
+                        <Position X="359.0554" Y="259.4697" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="116" G="61" B="0" />
-                        <PrePosition X="0.8559" Y="0.8762" />
+                        <PrePosition X="0.6412" Y="0.8854" />
                         <PreSize X="0.0643" Y="0.1228" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_Pay1" ActionTag="-1276662552" Tag="1878" IconVisible="False" LeftMargin="193.7991" RightMargin="222.2009" TopMargin="19.2810" BottomMargin="237.7674" FontSize="36" LabelText="房主扣费" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="144.0000" Y="36.0000" />
+                      <AbstractNodeData Name="Tt_Pay1" ActionTag="-1276662552" Tag="1878" IconVisible="False" LeftMargin="194.3944" RightMargin="293.6056" TopMargin="15.5787" BottomMargin="241.4697" FontSize="36" LabelText="房主" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="72.0000" Y="36.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="265.7991" Y="255.7674" />
+                        <Position X="230.3944" Y="259.4697" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="116" G="61" B="0" />
-                        <PrePosition X="0.4746" Y="0.8728" />
-                        <PreSize X="0.2571" Y="0.1228" />
+                        <PrePosition X="0.4114" Y="0.8854" />
+                        <PreSize X="0.1286" Y="0.1228" />
+                        <OutlineColor A="255" R="255" G="0" B="0" />
+                        <ShadowColor A="255" R="110" G="110" B="110" />
+                      </AbstractNodeData>
+                      <AbstractNodeData Name="Tt_Pay3" ActionTag="1698013692" Tag="317" IconVisible="False" LeftMargin="467.8922" RightMargin="20.1078" TopMargin="15.5787" BottomMargin="241.4697" FontSize="36" LabelText="赢家" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="72.0000" Y="36.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="503.8922" Y="259.4697" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="116" G="61" B="0" />
+                        <PrePosition X="0.8998" Y="0.8854" />
+                        <PreSize X="0.1286" Y="0.1228" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -201,13 +222,13 @@
                         <PreSize X="0.2074" Y="0.1092" />
                         <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Ie_Round2" ActionTag="481460579" Tag="1886" IconVisible="False" LeftMargin="270.0112" RightMargin="234.9888" TopMargin="63.4617" BottomMargin="167.5867" Scale9Enable="True" LeftEage="9" RightEage="9" TopEage="10" BottomEage="10" Scale9OriginX="9" Scale9OriginY="10" Scale9Width="37" Scale9Height="42" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Ie_Round2" ActionTag="481460579" Tag="1886" IconVisible="False" LeftMargin="268.7573" RightMargin="236.2427" TopMargin="63.8967" BottomMargin="167.1517" Scale9Enable="True" LeftEage="9" RightEage="9" TopEage="10" BottomEage="10" Scale9OriginX="9" Scale9OriginY="10" Scale9Width="37" Scale9Height="42" ctype="ImageViewObjectData">
                         <Size X="55.0000" Y="62.0000" />
                         <AnchorPoint ScaleY="0.5000" />
-                        <Position X="270.0112" Y="198.5867" />
+                        <Position X="268.7573" Y="198.1517" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="191" G="191" B="191" />
-                        <PrePosition X="0.4822" Y="0.6777" />
+                        <PrePosition X="0.4799" Y="0.6762" />
                         <PreSize X="0.0982" Y="0.2116" />
                         <FileData Type="MarkedSubImage" Path="game/zpcomm/img/Check0.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
                       </AbstractNodeData>
@@ -221,23 +242,23 @@
                         <PreSize X="0.0982" Y="0.2116" />
                         <FileData Type="MarkedSubImage" Path="game/zpcomm/img/Check0.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Ie_Round3" ActionTag="753150152" Tag="1888" IconVisible="False" LeftMargin="401.3562" RightMargin="103.6438" TopMargin="63.8967" BottomMargin="167.1517" Scale9Enable="True" LeftEage="9" RightEage="9" TopEage="10" BottomEage="10" Scale9OriginX="9" Scale9OriginY="10" Scale9Width="37" Scale9Height="42" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Ie_Round3" ActionTag="753150152" Tag="1888" IconVisible="False" LeftMargin="400.5883" RightMargin="104.4117" TopMargin="63.8967" BottomMargin="167.1517" Scale9Enable="True" LeftEage="9" RightEage="9" TopEage="10" BottomEage="10" Scale9OriginX="9" Scale9OriginY="10" Scale9Width="37" Scale9Height="42" ctype="ImageViewObjectData">
                         <Size X="55.0000" Y="62.0000" />
                         <AnchorPoint ScaleY="0.5150" />
-                        <Position X="401.3562" Y="199.0817" />
+                        <Position X="400.5883" Y="199.0817" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="191" G="191" B="191" />
-                        <PrePosition X="0.7167" Y="0.6793" />
+                        <PrePosition X="0.7153" Y="0.6793" />
                         <PreSize X="0.0982" Y="0.2116" />
                         <FileData Type="MarkedSubImage" Path="game/zpcomm/img/Check0.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Tt_Round1" ActionTag="120966867" Tag="1889" IconVisible="False" LeftMargin="198.4485" RightMargin="307.5515" TopMargin="76.3521" BottomMargin="180.6963" FontSize="36" LabelText="6局" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                      <AbstractNodeData Name="Tt_Round1" ActionTag="120966867" Tag="1889" IconVisible="False" LeftMargin="203.3944" RightMargin="302.6056" TopMargin="76.3521" BottomMargin="180.6963" FontSize="36" LabelText="6局" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                         <Size X="54.0000" Y="36.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="225.4485" Y="198.6963" />
+                        <Position X="230.3944" Y="198.6963" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="116" G="61" B="0" />
-                        <PrePosition X="0.4026" Y="0.6780" />
+                        <PrePosition X="0.4114" Y="0.6780" />
                         <PreSize X="0.0964" Y="0.1228" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
@@ -273,13 +294,13 @@
                         <PreSize X="0.0982" Y="0.2116" />
                         <FileData Type="MarkedSubImage" Path="game/zpcomm/img/Check1.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Ie_RoundCheck" ActionTag="-509392614" Tag="1896" IconVisible="False" LeftMargin="136.9147" RightMargin="368.0853" TopMargin="63.7299" BottomMargin="167.3185" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="35" Scale9Height="42" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Ie_RoundCheck" ActionTag="-509392614" Tag="1896" IconVisible="False" LeftMargin="136.9147" RightMargin="368.0853" TopMargin="63.8967" BottomMargin="167.1517" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="35" Scale9Height="42" ctype="ImageViewObjectData">
                         <Size X="55.0000" Y="62.0000" />
                         <AnchorPoint ScaleY="0.5000" />
-                        <Position X="136.9147" Y="198.3185" />
+                        <Position X="136.9147" Y="198.1517" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.2445" Y="0.6767" />
+                        <PrePosition X="0.2445" Y="0.6762" />
                         <PreSize X="0.0982" Y="0.2116" />
                         <FileData Type="MarkedSubImage" Path="game/zpcomm/img/Check1.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
                       </AbstractNodeData>

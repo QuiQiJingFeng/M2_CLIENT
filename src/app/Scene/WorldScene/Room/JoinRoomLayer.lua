@@ -54,10 +54,6 @@ function JoinRoomLayer:onClickNumKey(event)
 			dump(result, "result")
             if result ~= "success" then
                 print("connect failed")
-
-                
-
-
                 return
             end
             local arg = {room_id = roomNum}--weixin
