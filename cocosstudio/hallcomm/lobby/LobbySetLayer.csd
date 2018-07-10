@@ -122,7 +122,7 @@
                 <PreSize X="0.2204" Y="0.1172" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/img/Check0.png" Plist="hallcomm/common/CommonPlist0.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Bn_MusicOff" ActionTag="108199302" Tag="344" IconVisible="False" LeftMargin="420.0000" RightMargin="99.2466" TopMargin="77.4848" BottomMargin="276.5000" TouchEnable="True" Scale9Enable="True" LeftEage="46" TopEage="11" BottomEage="11" Scale9OriginX="46" Scale9OriginY="11" Scale9Width="1" Scale9Height="25" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Bn_MusicOff" ActionTag="108199302" Tag="344" IconVisible="False" LeftMargin="420.0000" RightMargin="99.2467" TopMargin="77.4848" BottomMargin="276.5000" TouchEnable="True" Scale9Enable="True" LeftEage="46" TopEage="11" BottomEage="11" Scale9OriginX="46" Scale9OriginY="11" Scale9Width="1" Scale9Height="25" ctype="ImageViewObjectData">
                 <Size X="123.6725" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="Text_15" ActionTag="-561849858" Tag="831" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="74.6043" RightMargin="13.0682" TopMargin="5.5000" BottomMargin="5.5000" FontSize="36" LabelText="关" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

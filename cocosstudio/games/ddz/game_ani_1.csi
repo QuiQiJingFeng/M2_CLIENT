@@ -42,6 +42,8 @@
       <FilePathData Path="games/ddz/game/chuntian12.png" />
       <FilePathData Path="games/ddz/game/chuntian13.png" />
       <FilePathData Path="games/ddz/game/chuntian14.png" />
+      <FilePathData Path="games/ddz/game/ImageText33.png" />
+      <FilePathData Path="games/ddz/game/ImageText34.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="2048" />
   </Content>

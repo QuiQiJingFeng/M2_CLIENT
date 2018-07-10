@@ -4,7 +4,8 @@ local SettingLayer = class("SettingLayer", lt.BaseLayer, function()
     return cc.CSLoader:createNode("game/mjcomm/gwidget/GameSetLayer.csb")--  FriendLayer
 end)
 
-function SettingLayer:ctor()
+function SettingLayer:ctor(delete)
+    self._deleget = delete
 	SettingLayer.super.ctor(self)
 
 	self._scrollView = self:getChildByName("ScrollView")
@@ -49,6 +50,7 @@ function SettingLayer:setshow()
         -- select背景颜色
         local bgPalel = self._scrollView:getChildByName("BGColor_".. i)
         bgPalel.selectNode = bgPalel:getChildByName("Image_Select")
+        bgPalel.selectNode:setVisible(false)
         bgPalel._textNode = bgPalel:getChildByName("image_result")
         selectNumBgcolor[i] = bgPalel
 
@@ -64,10 +66,11 @@ function SettingLayer:setshow()
         end
 
         lt.CommonUtil:addNodeClickEvent(bgPalel, function( ... )
-            for i, v in pairs(selectNumBgcolor) do 
-                if v == bgPalel then
+            for i, v in pairs(selectNumBgcolor) do
+                 if v == bgPalel then
                     v.selectNode:setVisible(true)
                     lt.PreferenceManager:setBgcolor(i)
+                    self._deleget:setRoomBg(i)
                 else
                     v.selectNode:setVisible(false)
                 end
@@ -96,8 +99,10 @@ function SettingLayer:setshow()
         lt.CommonUtil:addNodeClickEvent(mjPalel, function( ... )
             for i, v in pairs(selectNumMjcolor) do 
                 if v == mjPalel then
+                    print("=========ssssssssssffffffffffffff",i)
                     v.selectNode:setVisible(true)
                     lt.PreferenceManager:setMJcolor(i)
+                    self._deleget:UpdateCardBgColor()
                 else
                     v.selectNode:setVisible(false)
                 end

@@ -33,7 +33,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Tt_Countent" ActionTag="1957679449" Tag="216" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="2.0160" RightMargin="-2.0160" TopMargin="75.2009" BottomMargin="4.7991" IsCustomSize="True" FontSize="30" LabelText="" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="Tt_Countent" ActionTag="1957679449" Tag="216" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="TopEdge" LeftMargin="2.0160" RightMargin="-2.0160" TopMargin="75.2009" BottomMargin="4.7991" IsCustomSize="True" FontSize="30" LabelText="12345" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="630.0000" Y="320.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
                     <Position X="317.0160" Y="324.7991" />

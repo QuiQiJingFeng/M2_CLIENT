@@ -1,17 +1,23 @@
 local DDZGameRoomLayer = class("DDZGameRoomLayer", lt.BaseLayer)
-
 local DragCardsView = require("app.Scene.GameScene.ddz.DragCardsView")
-
 local ddzGameFunc = require("app.Scene.GameScene.ddz.ddzGameFunc")
-
 local Card = require("app.Scene.GameScene.ddz.Card")
-
 local ChatLayer = require("app.Scene.GameScene.ChatLayer")
+local GameRuleLayer = require("app.Scene.GameScene.ddz.GameRuleLayer")
+local DDZTotalLayer = require("app.Scene.GameScene.ddz.DDZTotalLayer")
     
 table.merge(DDZGameRoomLayer, ddzGameFunc)
 
 function DDZGameRoomLayer:ctor( ... )
-	
+	lt.ResourceManager:addSpriteFrames("games/ddz/game_ani_1.plist", "games/ddz/game_ani_1.png")
+	lt.ResourceManager:addSpriteFrames("games/ddz/game_ani_2.plist", "games/ddz/game_ani_2.png")
+	lt.ResourceManager:addSpriteFrames("games/ddz/game_ani_3.plist", "games/ddz/game_ani_3.png")
+	lt.ResourceManager:addSpriteFrames("games/ddz/game_ani_4.plist", "games/ddz/game_ani_4.png")
+
+	dump(AudioEngine, "AudioEngine")
+	-- 背景音乐
+	local index = math.random(3) % 3
+	AudioEngine.playMusic("game/mjcomm/sound/bg_music/gameBgMusic_" .. index.. ".mp3", true)
 	-- body
 	DDZGameRoomLayer.super.ctor(self)
 
@@ -24,9 +30,6 @@ function DDZGameRoomLayer:ctor( ... )
 	local gameLayer = cc.CSLoader:createNode("games/ddz/GameLayerLandscape.csb")--背景层
 
 	self:addChild(gameLayer)
-
-
-
 
 	self.gameLayer = gameLayer
 
@@ -61,7 +64,7 @@ function DDZGameRoomLayer:ctor( ... )
 	self.txtPlayRule2 = img_tableInfo:getChildByName("Text_PlayRule2")
 	-- 底分
 	self.txtPlayRule3 = img_tableInfo:getChildByName("AtlasLabel_Base")
-	
+	self.txtRoomTime = self.txtPlayRule3
 	-- 3张底牌
 	self.imgBaseCard = {}
 	self.imgBaseCard[1] = gameLayer:getChildByName("Image_LandCard1")
@@ -133,12 +136,33 @@ function DDZGameRoomLayer:ctor( ... )
 		-- 玩家的倒计时
 		node.clock = node:getChildByName("Node_Clock")
 
+		-- node.ani = node:getChildByName("Sprite_Ani")
+
 		self.playerNodeInfo[i] = node
 	end
+
+	-- 春天粒子
+	self.m_nodeWinOrLosSprites = gameLayer:getChildByName("Node_WinOrLose")
+    self.m_spSpringPic = self.m_nodeWinOrLosSprites:getChildByName("Sprite_Spring")
+    self.m_particle = self.m_nodeWinOrLosSprites:getChildByName("Particle_Spring")
+	self.m_nodeWinOrLosSprites:setLocalZOrder(101)
 
 	-- 这个是什么鬼 复盘的时候摆牌的位置？
 	-- Node_DragLayer
 	local Node_DragLayer = gameLayer:getChildByName("Node_DragLayer")
+	-- 动画摆放的位置
+	local Node_ANI = gameLayer:getChildByName("Node_ANI")
+	Node_ANI:setVisible(true)
+
+	Node_ANI:setLocalZOrder(101)
+	self.Node_ANI = Node_ANI
+	self.m_tArrSpAni = {}
+	for i = 1, 3 do 
+	    self.m_tArrSpAni[i] = Node_ANI:getChildByName("Sprite_Ani"..i)
+	    self.m_tArrSpAni[i]:setVisible(false)
+	end
+
+
 	-- 退出游戏功能
 	local btnBackGame = gameLayer:getChildByName("Bn_GameBack")
 
@@ -154,7 +178,15 @@ function DDZGameRoomLayer:ctor( ... )
 
 	self:addNodeClickEvent(btnFace, function( ... )
 		local __ChatLayer = ChatLayer:new()
-		lt.UILayerManager:addLayer(__ChatLayer)	
+		lt.UILayerManager:addLayer(__ChatLayer, true)	
+	end)
+
+	
+	-- 打开自己的
+	self:addNodeClickEvent(btnGameRule, function( ... )
+		local layer = GameRuleLayer:new()
+		layer:initGameSetting(self.roomInfo.room_setting)
+		self:addChild(layer)
 	end)
 
 
@@ -164,6 +196,8 @@ function DDZGameRoomLayer:ctor( ... )
 	local cardPanle = gameLayer:getChildByName("Panel_BaseCard")
 	-- 结算层
 	local resultLayer = gameLayer:getChildByName("Node_ResultLayer")
+
+	self.resultLayer = resultLayer
 	-- 游戏帮助层
 	local panelHelp = gameLayer:getChildByName("Bg_Help_Start")
 	self.panelHelp = panelHelp
@@ -187,7 +221,20 @@ function DDZGameRoomLayer:ctor( ... )
 	self.btnBackRoom = panelHelp:getChildByName("Button_Back")
 	-- 返回大厅
 	self:addNodeClickEvent(self.btnBackRoom, function( ... )
-		self:onBackLobby()
+		local loginData = self:getPlayerInfo()
+		dump(loginData, "loginData")
+		dump(self.roomInfo, "self.roomInfo")
+		if loginData.user_id == self.roomInfo.room_setting.owner_id then
+			print("房主返回大厅")
+			local text = string.format(lt.LanguageString:getString("ROOM_OWNER_LEAVE"))
+    		lt.MsgboxLayer:showMsgBox(text, false, function( ... )
+    			self:onBackLobby()
+    		end, function( ... )
+    			
+    		end, true, 10)
+    	else
+			self:onBackLobby()
+		end
 	end)
 
 	-- 没有开始的时候的帮助页面(离开，设置，解散房间)
@@ -201,6 +248,19 @@ function DDZGameRoomLayer:ctor( ... )
 	end)
 	-- 解散房间
 	self.btnNSDisRoom = btnNoStart:getChildByName("Button_Disband")
+
+	-- 解散房间的事件
+	self:addNodeClickEvent(self.btnNSDisRoom, function( ... )
+
+		local text = string.format(lt.LanguageString:getString("ROOM_OWNER_DISBAND"))
+		lt.MsgboxLayer:showMsgBox(text, false, function( ... )
+			self:openDisBandLayer()
+		end, function( ... )
+
+		end, true, 10)
+	end)
+
+
 	-- 设置
 	self.btnNSSetting = btnNoStart:getChildByName("Button_Setting")
 	-- 更多设置选项 Bn_More
@@ -267,6 +327,8 @@ function DDZGameRoomLayer:ctor( ... )
 
 	-- 继续游戏按钮, 小局的时候显示
 	self:addNodeClickEvent(btn_Continue, function( ... )
+		-- 初始化界面
+		self:initUIview()
 		self:sendReadyReq()
 	end)
 	local btnName = {"Button_One", "Button_Two", "Button_Three", "Button_No"}
@@ -279,6 +341,7 @@ function DDZGameRoomLayer:ctor( ... )
 			self:sendDemand(PointNums[i])				
 		end)
 		btnPoint[i] = btn
+		btn:setSwallowTouches(true)
 	end
 
 	self.btnPoint = btnPoint
@@ -312,6 +375,7 @@ function DDZGameRoomLayer:ctor( ... )
 		self:addNodeClickEvent(btn, function()
 			self:sendMainReq(btnNums[i])
 		end)
+		btn:setSwallowTouches(true)
 	end
 
 	-- 是否加倍
@@ -323,6 +387,7 @@ function DDZGameRoomLayer:ctor( ... )
 		self:addNodeClickEvent(btn, function()
 			self:sendDoubleReq(btnNums[i])
 		end)
+		btn:setSwallowTouches(true)
 	end	
 
 	-- 抢地主和不抢
@@ -334,6 +399,8 @@ function DDZGameRoomLayer:ctor( ... )
 		self:addNodeClickEvent(btn, function()
 			self:sendMainReq(btnNums[i])
 		end)
+
+		btn:setSwallowTouches(true)
 	end
 		
 	-- 出牌
@@ -417,6 +484,7 @@ function DDZGameRoomLayer:onTime( iPlayExtraNum, callFunc, isReapt)
 
 		if timeNum < 3 then
 			-- 播放声音
+			AudioEngine.playEffect("game/mjcomm/sound/zp/clock.mp3")
 		end 
 
 		if timeNum < 0 then
@@ -459,9 +527,7 @@ function DDZGameRoomLayer:judgeSelectCard(iNowType, arg_value)
 	-- self.iTablePlayer = pos
 	-- self.cTableCardType = tObj.cCardType
 	-- self.cTableCardValue = tObj.cCardValue
-
-	print("iNowType, arg_value, self.cTableCardType, cTableCardValue", iNowType, arg_value, self.cTableCardType, self.cTableCardValue)
-
+	-- print("iNowType, arg_value, self.cTableCardType, cTableCardValue", iNowType, arg_value, self.cTableCardType, self.cTableCardValue)
 
 	if iNowType == -1 then
 		self.m_btnSendCard2:setBright(false)
@@ -516,30 +582,6 @@ end
 -- sendReadyReq
 -- @param pos in index
 function DDZGameRoomLayer:sendReadyReq( pos )
-
-	-- dump(lt.MsgboxLayer, "lt.MsgboxLayer")
-
-	-- print(lt.MsgboxLayer, "lt.MsgboxLayer")
-	-- dump(lt)
-
-	-- local msgBoxLayer = lt.MsgboxLayer:showMsgBox()
-	-- self:addChild(msgBoxLayer, 100)
-
-	-- local sureFunc = function()
-	-- 	print("这个是确定按钮")
-	-- end
-	-- local cancelFunc = function()
-	-- 	print("这个是取消按钮")
-	-- 	self:onBackLobby()
-	-- end
-
-	-- local isOneBtn = false
-	-- local isCloselayer = false
-	-- local iClockTime = 10
-	-- msgBoxLayer:showMsgBox("这个是显示信息", isOneBtn, sureFunc, cancelFunc, isCloselayer, iClockTime)
-
-	-- msgBoxLayer:showMsgBox()
-
 	print("sendReady ")
 	local arg = {pos = self:getMyExtraNum()}
     lt.NetWork:sendTo(lt.GameEventManager.EVENT.SIT_DOWN, arg)
@@ -556,8 +598,10 @@ function DDZGameRoomLayer:openSetting( ... )
 end
 -- 申请解散房间
 function DDZGameRoomLayer:openDisBandLayer( ... )
-
-
+	print("申请解散房间")
+    local roomInfo = lt.DataManager:getGameRoomInfo()
+    local arg = {room_id = roomInfo.room_id} --1.room_id //解散类型  1 玩家申请解散  2、房主解散
+    lt.NetWork:sendTo(lt.GameEventManager.EVENT.DISTROY_ROOM,arg)--]]
 end
 
 function DDZGameRoomLayer:onBackLobby()
@@ -565,24 +609,28 @@ function DDZGameRoomLayer:onBackLobby()
 end
 
 function DDZGameRoomLayer:getPlayerInfo( ... )
+	return lt.DataManager:getPlayerInfo()
+end
+
+function DDZGameRoomLayer:getRoomInfo( ... )
 	return lt.DataManager:getGameRoomInfo()
 end
 
 
 function DDZGameRoomLayer:openHelpLayer( ... )
-
 	-- 开始游戏之后就统一是申请解散和设置界面
 	local loginData = self:getPlayerInfo()
-	dump(loginData)
-	self.roomInfo.owner = loginData.iUserID
+	dump(loginData, "loginData")
+	-- self.roomInfo.owner = loginData.iUserID
 	dump(self.roomInfo, "self.roomInfo")
-
-	if self.roomInfo.owner == loginData.iUserID and self.bGameStart == false then
+	dump(self.bGameStart, "self.bGameStart" )
+	if self.roomInfo.room_setting.owner_id == loginData.user_id and self.bGameStart == false then
 		--房主专用界面		
+		print("房主专用界面")
 		self.btnNoStart:setVisible(true)
 		self.panelHelp:setVisible(false)
 	else
-
+		print("不是房主的界面")
 		if self.bGameStart == true then
 			self.btnBackRoom:setVisible(false)
 			self.btnDisband:setVisible(true)
@@ -604,10 +652,34 @@ end
 -- 初始化游戏界面
 function DDZGameRoomLayer:initUIview( )
 
+	self.bGameOver = false
+	-- 春天图片
+	self.m_nodeWinOrLosSprites:setVisible(false)
+	self.m_spSpringPic:setVisible(false)
+	-- self.nodeConGame:setVisible(false)
+	self.nodeDemand:setVisible(false)
+	self.nodePlayOther:setVisible(false)
+	self.nodeMainPlay:setVisible(false)
+	self.nodeIsDouble:setVisible(false)
+	self.nodePalyCard:setVisible(false)
+	self.nodeQiangMain:setVisible(false)
+	self.spNoBigger:setVisible(false)
+	self.spMustThree:setVisible(false)
 	-- 设置玩家人数(取座位号用)
 	self:setPlayNum(3)
 	self:setGameInfo(self.roomInfo)
 	self.bGameStart = false
+
+	-- 结算层
+	self.resultLayer:setVisible(false)
+	self.resultLayer:removeAllChildren()
+
+	-- 继续游戏层
+	self.nodeConGame:setVisible(false)
+
+	--当前桌面上面准备的人
+
+	self.sitList = {}
 
 	-- 当前桌面上出牌的人
 	self.iTablePlayer = 0
@@ -622,6 +694,8 @@ function DDZGameRoomLayer:initUIview( )
 
 	self.cTableCardType = 0
 	self.cTableCardValue = 0
+
+	self.iMainplayer = 0
 
 	dump(self.roomInfo, "self.roomInfo")
 	-- 是否显示准备按钮
@@ -640,50 +714,107 @@ function DDZGameRoomLayer:initUIview( )
 			break
 		end
 	end
-
-
 	-- 设置自己的座位号
 	self:setMyExtraNum(iUserPost)
+	self:refreshPlayerConfig()
 
-	for i, v in pairs(self.roomInfo.players) do
-		local pos = self:s2cPlayerPos(v.user_pos)
-		local node = self.playerNodeInfo[pos]
-		node:setVisible(true)
-		node.imgBg:setVisible(true)
-		node.imgWaitSend:setVisible(false)
-		node.imgHead:setVisible(true)
-		node.imgDisNet:setVisible(false)
-		node.imgPlaybg:setVisible(true)
-	
-		if v.is_sit then
-			self.playerNodeInfo[pos].ready:setVisible(true)
+	-- self.btnReady:setVisible(bIfReady == false)
+
+	if self.GameCardLayer then
+		self.GameCardLayer:cleanLayer()
+	else
+		self.GameCardLayer = DragCardsView:new()
+		self.GameCardLayer:initCtrl(self)
+		self.gameLayer:addChild(self.GameCardLayer, 50)
+	end
+
+
+	self.t_SendCards = {{}, {}, {}}
+	self:refreshSendCard(1)
+	self:refreshSendCard(2)
+	self:refreshSendCard(3)
+
+
+	for i = 1, 3 do 
+		self.imgBaseCard[i]:setVisible(false)
+		if self.imgBaseCard[i].card then
+			self.imgBaseCard[i].card:removeFromParent()
 		end
-		self.imgNongMin[pos]:setVisible(true)
 	end
-
-	self.btnReady:setVisible(bIfReady == false)
-	self.GameCardLayer = DragCardsView:new()
-
-	self.GameCardLayer:initCtrl(self)
-	self:addChild(self.GameCardLayer)
-
 	self:test()
-
-	if bIfReady == false then
-		local onTime = 10
-		self:onTime(2, function( node )
-			node:stopAllActions()
-			self:onBackLobby()
-		end, false)	
-	end
 end
 
 function DDZGameRoomLayer:test( ... )
 
+	-- print("----------------------test-----------------------------")
+
+	-- self:runAction(cc.Sequence:create(cc.DelayTime:create(1), cc.CallFunc:create(function()
+	-- 	self:showAniFeiJi()
+	-- end)))
+
+
+	 -- 	local players = {
+	 -- 		[1] = {
+	 -- 			["cur_score"]  = 0,
+	-- 		["disconnect"] = false,
+	-- 		["gold_num"]   = 0,
+	-- 		["is_sit"]     = true,
+	-- 		["score"]      = 0,
+	-- 		["user_id"]    = 11249,
+	-- 		["user_ip"]    = "::ffff:1.198.29.212",
+	-- 		["user_name"]  = "游客1001",
+	-- 		["user_pic"]   = "http://xxxx.png",
+	-- 		["user_pos"]   = 1,
+	 -- 		},
+	 -- 		[2] = {
+	--  		["cur_score"]  = 0,
+	-- 		["disconnect"] = false,
+	-- 		["gold_num"]   = 0,
+	-- 		["is_sit"]     = true,
+	-- 		["score"]      = 0,
+	-- 		["user_id"]    = 11250,
+	-- 		["user_ip"]    = "::ffff:1.198.29.212",
+	-- 		["user_name"]  = "游客1002",
+	-- 		["user_pic"]   = "http://xxxx.png",
+	-- 		["user_pos"]   = 1,
+
+ -- 		},
+ -- 		[3] = {
+ -- 			["cur_score"]  = 0,
+	-- 		["disconnect"] = false,
+	-- 		["gold_num"]   = 0,
+	-- 		["is_sit"]     = true,
+	-- 		["score"]      = 0,
+	-- 		["user_id"]    = 11251,
+	-- 		["user_ip"]    = "::ffff:1.198.29.212",
+	-- 		["user_name"]  = "游客1003",
+	-- 		["user_pic"]   = "http://xxxx.png",
+	-- 		["user_pos"]   = 1,
+ -- 		},
+ -- 	}
+
+ 	-- {"notice_total_sattle":{"sattle_list":[{"ming_gang_num":0,"hu_num":0,"user_pos":1,"score":-18,"reward_num":0,"an_gang_num":0,"user_id":11539},{"ming_gang_num":0,"hu_num":0,"user_pos":2,"score":36,"reward_num":0,"an_gang_num":0,"user_id":11540},{"ming_gang_num":0,"hu_num":0,"user_pos":3,"score":-18,"reward_num":0,"an_gang_num":0,"user_id":11541}],"begin_time":"2018-07-07 16:26:33","room_id":711096}}
+
+ 	local players = {
+ 		[1] = {user_pos = 1, user_id = 10058, score = 10, user_name = "小狗1"},
+ 		[2] = {user_pos = 2, user_id = 10059, score = 20, user_name = "小狗2"},
+ 		[3] = {user_pos = 3, user_id = 10060, score = -30, user_name = "小狗3"},
+ 	}
+ 	
+	local resultLayer = DDZTotalLayer:new()
+	resultLayer:setPlayerInfo(players)
+	-- lt.UILayerManager:addLayer(resultLayer, false)
+
+	self:addChild(resultLayer)
 
 	-- self:endClock(2)
 
-	-- local handCards = {105, 105, 105, 105, 107, 108, 107, 107, 107, 108, 108, 108, 109, 109, 109}
+	-- print(bit.bor(2, 3))
+	-- print(bit._or(2, 3))
+
+
+
+	-- local handCards = {103, 103, 103, 104, 104,104,105,105,105,106,106,106,107,107, 107, 108, 109, 120, 110, 114}
 
 	-- self.GameCardLayer:refreshCardList(handCards)
 	-- self.GameCardLayer:refreshCardNode(true)
@@ -740,11 +871,6 @@ function DDZGameRoomLayer:test( ... )
 
 	-- self:pushPlayCard(msg1)
 
-
-	
-	
-
-
 	-- self.t_SendCards = {
 	-- 	{104, 104, 104, 104, 104, 104,104, 104, 104,104, 104, 104,},
 	-- 	{104, 104, 104, 104, 104, 104,104, 104, 104,104, 104, 104,},
@@ -759,11 +885,11 @@ end
 -- 设置一下自己的座位号(根据id 得出 座位号中的人在自己的方位)
 function DDZGameRoomLayer:setMyExtraNum( iPost )
 	self.meExtraNum = iPost
-	print("self.meExtraNum  = ", self.meExtraNum)
+	-- print("self.meExtraNum  = ", self.meExtraNum)
 end
 
 function DDZGameRoomLayer:getMyExtraNum( ... )
-	print("getMyExtraNum  = ", self.meExtraNum)
+	-- print("getMyExtraNum  = ", self.meExtraNum)
 	return self.meExtraNum or 1 
 end
 
@@ -778,6 +904,11 @@ end
 
 -- 转换成是谁在操作，可根据服务器获取
 function DDZGameRoomLayer:s2cPlayerPos(iPost)
+
+	if not iPost and type(iPost) ~= "number" then
+		print("ERROR::iPost is nil")
+		return -1
+	end
 
 	local meExtraNum = self:getMyExtraNum()
 	local iPlayerNum = self:getPlayNum()
@@ -805,6 +936,7 @@ function DDZGameRoomLayer:setGameInfo( roomInfo1 )
 		ROOM_TYPE = 2,	-- 1，经典， 2欢乐
 		BOOM_NUM = 3,	-- 几炸封顶
 	}
+	local bhlddz = self.roomInfo.room_setting.other_setting[ruleType.ROOM_TYPE] == 2 
 
 	local roomInfo = clone(roomInfo1)
 	dump(roomInfo, "setGameInfo")
@@ -847,46 +979,112 @@ function DDZGameRoomLayer:onPushSitDown( msgData )
 	for i = 1, 3 do 
 		self.playerNodeInfo[i].ready:setVisible(false)
 	end
+	local isMeSit = false
 	for i , v in pairs(msgData.sit_list) do 
 		local pos = self:s2cPlayerPos(v.user_pos)
+		if pos == 2 then
+			isMeSit = true
+		end
 		self.playerNodeInfo[pos].ready:setVisible(true)
+	end
+	self.sitList = msgData.sit_list
+
+	if isMeSit then
+		local iMaxRound = self.roomInfo.room_setting.round
+		local iRoundIndex = msgData.cur_round + 1
+
+		local txt = iRoundIndex .. "/" .. iMaxRound
+		self.roundIndex:setString(txt)
 	end
 end
 
 function DDZGameRoomLayer:onSitDownResponse( msgData )
-
 	dump(msgData,"onSitDownResponse")
-
 	self.btnReady:setVisible(false)
 	self.playerNodeInfo[2].ready:setVisible(true)
+	self:endClock(2)
 end
 
 function DDZGameRoomLayer:refreshPlayerConfig( msgData )
-
-	self.roomInfo = self:getPlayerInfo()
+	print("--------refreshPlayerConfig---------------");
+	self.roomInfo = self:getRoomInfo()
 	local loginData = lt.DataManager:getPlayerInfo()
 
-	for i, v in pairs(self.roomInfo.players) do 
-		if loginData.user_id == v.user_id then -- 不是自己， 就看下是否准备了
-			bIfReady = v.is_sit
-			iUserPost = v.user_pos
-			break
+	dump(self.roomInfo, "--------refreshPlayerConfig---------------")
+	-- dump(loginData, "--------refreshPlayerConfig---------------")
+	-- for i, v in pairs(self.roomInfo.players) do 
+	-- 	if loginData.user_id == v.user_id then -- 不是自己， 就看下是否准备了
+	-- 		--  = v.is_sit
+	-- 		iUserPost = v.user_pos
+	-- 		break
+	-- 	end
+	-- end
+	dump(self.sitList, "self.sitList")
+
+	local bIfReady = false
+	for i, v in pairs(self.sitList) do 
+		local pos = self:s2cPlayerPos(v.user_pos)
+		if pos == 2 then
+			bIfReady = true 
 		end
 	end
+
+	print("self.nodeMainPlay")
+	local bHaveMain = self.iMainplayer > 0 
 
 	for i = 1, 3 do 
 		local pos = self:s2cPlayerPos(i)
 		self.playerNodeInfo[pos]:setVisible(false)
-		self.imgNongMin[pos]:setVisible(false)
+		if self.iMainplayer ~= i then
+			self.imgNongMin[pos]:setVisible(false)	
+		end
+
+		if not bHaveMain then
+			self.imgDiZhu[pos]:setVisible(false)			
+		end
 	end
 
 	for i, v in pairs(self.roomInfo.players) do
 		local pos = self:s2cPlayerPos(v.user_pos)
-		self.playerNodeInfo[pos]:setVisible(true)
-		self.playerNodeInfo[pos].ready:setVisible(v.is_sit)
-		self.imgNongMin[pos]:setVisible(true)
+		local node = self.playerNodeInfo[pos]
+		node:setVisible(true)
+		node.imgPlaybg:setVisible(true)
+		node.ready:setVisible(v.is_sit)
+		node.imgBg:setVisible(true)
+		node.imgHead:setVisible(true)
+		node.txtName:setVisible(true)
+		node.txtName:setString(v.user_name)
+		node.iAmount:setVisible(true)
+		node.iAmount:setString(v.score)
+		if self.iMainplayer ~= v.user_pos then
+			self.imgNongMin[pos]:setVisible(true)
+		end
+		node.imgDisNet:setVisible(v.disconnect)
+		node.cardInfo:setVisible(false)
 	end
-	self.btnReady:setVisible(bIfReady == false)
+
+	-- 局数
+	local iMaxRound = self.roomInfo.room_setting.round
+	local iRoundIndex = self.roomInfo.cur_round
+
+	local txt = iRoundIndex .. "/" .. iMaxRound
+	self.roundIndex:setString(txt)
+
+	if self.roomInfo.cur_round and self.roomInfo.cur_round > 0 then
+
+	else
+		self.btnReady:setVisible(bIfReady == false)
+		-- 当继续游戏的时候不用倒计时
+		if bIfReady == false then
+			-- local onTime = 10
+			self:onTime(2, function( node )
+				node:stopAllActions()
+				self:onBackLobby()
+			end, false)	
+		else
+			self:endClock(2)
+		end
+	end
 end
 
 function DDZGameRoomLayer:noticePointDemand( tObj )
@@ -895,20 +1093,55 @@ function DDZGameRoomLayer:noticePointDemand( tObj )
 	local iPos = self:s2cPlayerPos(tObj.userExtra)
 	self.iDemandpoint[iPos] = tObj.userDemand
 	self:endClock(iPos)
+	print("txtRoomTime设置底分", tObj.nowTableTime)
+	self.txtRoomTime:setString(tObj.nowTableTime)
+
+	local imgjd  =  { 
+		[1] = "ImageText24", 
+		[2] = "ImageText25", 
+		[3] = "ImageText26", 
+		[0] = "ImageText27"
+	}	
+
+	local hlddz = 
+	{
+		[1] = "ImageText30", 
+		[2] = "ImageText31", 
+		[0] = "ImageText32"
+	}
+
+
+	local strSprite  = "games/ddz/game/" .. imgjd[tObj.userDemand]..".png"
+    local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(strSprite)
+	if frame then
+		self.playerNodeInfo[iPos].pointDemand:setSpriteFrame(frame)
+	end
+
+	local cLevelNum = 1
+    if cLevelNum == 2 then 
+        strPerson = string.format("w_")
+    else 
+        strPerson = string.format("m_")
+    end 
+   	local temp = string.format("%s%df",strPerson, tObj.userDemand)
+  
+    AudioEngine.playEffect(self:getSoundResPath(temp))
 
 	-- 显示分数
-
+	self.playerNodeInfo[iPos].pointDemand:setVisible(true)
 	-- 记录下分数
 
 end
 
-
-
 function DDZGameRoomLayer:noticeMainPlayer( tObj )
 	dump(tObj, "noticeMainPlayer")
-
+	for i = 1, 3 do 
+		self.playerNodeInfo[i].pointDemand:setVisible(false)
+	end
 	local pos = self:s2cPlayerPos(tObj.userExtra)
 	dump(pos, "地主的pos")
+
+	self.iMainplayer = tObj.userExtra
 
 	self.iHandCardNums[pos] = 20
 	dump(self.iHandCardNums, 'self.iHandCardNums')
@@ -919,29 +1152,35 @@ function DDZGameRoomLayer:noticeMainPlayer( tObj )
 
 	self.imgDiZhu[pos]:setVisible(true)
 	self.imgNongMin[pos]:setVisible(false)
+	print("txtRoomTime设置底分", tObj.nowTableTime)
+	self.txtRoomTime:setString(tObj.nowTableTime)
 
 	if pos == 2 then
 		self.GameCardLayer:addCard(tObj.baseCard)
 	end
-
-
 	-- 刷新顶上面的牌
 	self.baseCard = tObj.baseCard
 	for i = 1, 3 do 
 		local cardNum = self.baseCard[i]
 		local card = Card:createCard(cardNum)
-		self.imgBaseCard[i]:addChild(card)
-		local size = self.imgBaseCard[i]:getContentSize()
-		card:setPosition(size.width/2, size.height/2)
-		card:setScale(0.27, 0.3)
+		self.imgBaseCard[i]:setVisible(false)	
+		local node1 = self.imgBaseCard[i]:getParent()
+		-- self.imgBaseCard[i]:addChild(card)
+		node1:addChild(card)
+		local px, py  = self.imgBaseCard[i]:getPosition()
+		card:setPosition(px, py)
+		-- card:setPosition(size.width/2, size.height/2)
+		card:setScale(0.28, 0.32)
+		-- 标记下， 为了删除
+		self.imgBaseCard[i].card = card
 	end
-
-
 end
 
 function DDZGameRoomLayer:touchLayer( ... )
 	-- 判断设置界面是否打开?
 	self.GameCardLayer:touchLayer()
+	-- 关闭 菜单选项
+	self:closeHelpLayer()
 end
 
 function DDZGameRoomLayer:serverMainPlayer( tObj )
@@ -950,7 +1189,6 @@ function DDZGameRoomLayer:serverMainPlayer( tObj )
 	-- 显示农民界面
 	self.imgDiZhu[pos]:setVisible(true)
 	self.imgNongMin[pos]:setVisible(false)
-
 end
 function DDZGameRoomLayer:noticeSendCard( tObj )
 	dump(tObj, "noticeSendCard")
@@ -960,27 +1198,45 @@ function DDZGameRoomLayer:noticeSendCard( tObj )
 
 	self.nodePalyCard:setVisible(false)
 	self.nodePlayOther:setVisible(false)
+	print("txtRoomTime设置底分", tObj.nowTableTime)
+	self.txtRoomTime:setString(tObj.nowTableTime)
 
-	self.t_SendCards[pos] = tObj.cCards
+	self.t_SendCards[pos] = tObj.cCards or {}
 	self:refreshSendCard(pos)
 	self.playerNodeInfo[pos].imgPass:setVisible(false)	
 	self.playerNodeInfo[pos].cardNum:setString(tObj.cLestCardNum)
 
-
 	if pos == 2 then
-		self.GameCardLayer:removeCard(tObj.cCards)
+		self.GameCardLayer:removeCard(self.t_SendCards[pos])
 	end
 
 	-- 过。
 	if tObj.cCardNum == 0 then
 		self.playerNodeInfo[pos].imgPass:setVisible(true)	
+
+		local strPerson 
+        local temp 
+        local cLevelNum = 1
+        if cLevelNum == 2 then 
+            strPerson = string.format("w")
+        else 
+            strPerson = string.format("m")
+        end 
+        math.randomseed(os.time())
+        local iRand = math.random(0,2)
+        temp = string.format("%s_buyao%d",strPerson,iRand)
+        AudioEngine.playEffect(self:getSoundResPath(temp))
 	else
+		self.playerNodeInfo[pos].imgPass:setVisible(false)	
 		self.iTablePlayer = pos
 		self.cTableCardType = tObj.cCardType
 		self.cTableCardValue = tObj.cCardValue
+
+		-- 动画
+		self:callbackEndAniFlyCard(pos, self.cTableCardType)
+		-- 声音
+		self:playPaiXingSound(self.cTableCardType, self.cTableCardValue, pos)
 	end
-
-
 end
 function DDZGameRoomLayer:serverPointDemand( tObj )
 	dump(tObj, "serverPointDemand")
@@ -991,6 +1247,12 @@ function DDZGameRoomLayer:serverPointDemand( tObj )
 		self.nodeDemand:setVisible(true)
 	end
 	self:onTime(pos)
+	-- print("txtRoomTime设置底分", tObj.nowTableTime)
+	-- self.txtRoomTime:setString(tObj.nowTableTime)
+
+	for i = 1, 3 do 
+		self.playerNodeInfo[i].ready:setVisible(false)
+	end
 
 	local roomInfo = self.roomInfo
 
@@ -1000,6 +1262,7 @@ function DDZGameRoomLayer:serverPointDemand( tObj )
 		BOOM_NUM = 3,	-- 几炸封顶
 	}
 
+	self.bDemand = false
 	-- 经典斗地主
 	if roomInfo.room_setting.other_setting[ruleType.ROOM_TYPE] == 1 then
 
@@ -1021,6 +1284,15 @@ function DDZGameRoomLayer:serverPointDemand( tObj )
 
 			self.btnPoint[3]:setEnabled(true)
 			self.btnPoint[3]:setBright(true)
+		else
+			self.btnPoint[1]:setEnabled(true)
+			self.btnPoint[2]:setEnabled(true)
+			-- 设置灰色
+			self.btnPoint[1]:setBright(true)
+			self.btnPoint[2]:setBright(true)
+
+			self.btnPoint[3]:setEnabled(true)
+			self.btnPoint[3]:setBright(true)
 		end
 	else --欢乐斗地主  （分下看谁是第个叫分的人, 看是不是自己，暂时不考虑）
 		-- 抢地主
@@ -1033,12 +1305,108 @@ end
 function DDZGameRoomLayer:noticeDDZGameOver( tObj )
 	dump(tObj, "noticeDDZGameOver")
 
+	-- required int32 	over_type = 1;     	// 1 正常结束 2 流局 3 房间解散会发送一个结算
+	-- required int32 	nowTableTime = 1;   
+	-- repeated Item 	players = 2;       	// 玩家的信息 * 3
+	-- required bool  	bIfSpring = 3;		// 是否春天
+	-- required int32 	iTime = 4;			// 房间倍数
+	-- required int32 	iBoomNums = 5;		// 炸弹的个数
+	-- repeated int32 	iLastCard = 6;		// 剩下的牌，最多传两家的， 不用传3家 
+	self.txtRoomTime:setString(tObj.nowTableTime)
 
+	local score = {0, 0, 0}
+	local cardList = {{}, {}, {}}
 
+	for i, v in ipairs(tObj.players) do 
+		score[v.user_pos] = v.cur_score
+		for k ,vv in pairs(v.card_list) do 
+			if vv ~= 0  then
+				table.insert(cardList[v.user_pos], vv)
+			end
+		end
+	end
 
-	
+	local meExtraNum = self:getMyExtraNum()
+	-- 声音
+	if score[meExtraNum] > 0 then
+		AudioEngine.playEffect(self:getSoundResPath("win"))
+	else
+		AudioEngine.playEffect(self:getSoundResPath("lose"))
+	end
+	if tObj.over_type == 1 then
+		self.bGameOver = true
+	end
+	local func = function()
+		-- 总结算
+		if 	tObj.over_type ==  1 then
+			print("该总结算了")
+			self.nodeConGame:setVisible(false) 
+		else
+			print("继续游戏")
+			-- 继续游戏
+			self.nodeConGame:setVisible(true)
+			self.nodeConGame:setLocalZOrder(100)
+		end 
+		self.resultLayer:setVisible(true)
+		self.resultLayer:removeAllChildren()
+		self.resultLayer:setLocalZOrder(99)
+		local size = cc.Director:getInstance():getWinSize()
+
+		for i = 1, 3 do 
+			local iClientPos = self:s2cPlayerPos(i)
+			-- 显示分数
+			local ptPosition
+		    local ptAnchorPos 
+		    if iClientPos == 1 then 
+		        ptPosition = cc.p(size.width*0.12,size.height*0.75)
+		        ptAnchorPos = cc.p(0,0.5)
+		    elseif iClientPos == 2 then 
+		        ptPosition = cc.p(size.width/2,180)
+		        ptAnchorPos = cc.p(0.5,0.5)
+		    elseif iClientPos == 3 then 
+		        ptPosition = cc.p(size.width*0.85,size.height*0.75)
+		        ptAnchorPos = cc.p(1,0.5)
+		    end 
+		    local scrollNumber = lt.ScrollNumber:create(12, "games/bj/game/part/numWin.png", "games/bj/game/part/numLost.png")
+			scrollNumber:setVisible(true)
+			scrollNumber:setNumber(score[i])
+			scrollNumber:setPosition(ptPosition)
+			scrollNumber:setAnchorPoint(ptAnchorPos)
+			self.resultLayer:addChild(scrollNumber)
+			self.t_SendCards[iClientPos] = cardList[i]
+		end
+
+		-- 把三家出的牌都清空掉， 然后把剩余的牌以出的牌的形式显示出牌， 
+		self.t_SendCards[2] = {}
+		self:refreshSendCard(1)
+		self:refreshSendCard(2)
+		self:refreshSendCard(3)
+	end
+
+	-- 春天
+	if tObj.bIfSpring then
+		-- 春天特效的背景
+		self.m_nodeWinOrLosSprites:setVisible(true)
+		--春天粒子
+        self.m_spSpringPic:setVisible(true)
+        -- local jTo = cc.JumpTo:create(3,cc.p(self.m_spSpringPic:getPosition()),5,6) --参数(时间，目标位置，高度，次数)
+        -- self.m_spSpringPic:runAction(jTo)
+        self.m_spSpringPic:runAction(cc.Sequence:create(cc.DelayTime:create(5), cc.CallFunc:create(function()
+        	self.m_nodeWinOrLosSprites:setVisible(false)
+        end)))
+        self.m_particle:start()
+        self.m_particle:setVisible(true)
+
+        -- self.m_nodeWinOrLosSprites:runAction(cc.Sequence:create(cc.DelayTime:create(3), cc.CallFunc:create(function()
+        	-- self.m_nodeWinOrLosSprites:setVisible(false)
+        	func()
+        -- end)))
+    else
+    	func()
+	end
 end
 
+-- 发牌
 function DDZGameRoomLayer:onDealDown( tObj )
 	dump(tObj, "onDealDown")
 	self.bGameStart = true
@@ -1052,6 +1420,16 @@ function DDZGameRoomLayer:onDealDown( tObj )
 			cardNum = cardNum + 1
 		end
 	end
+
+	-- 局数
+	local iMaxRound = self.roomInfo.room_setting.round
+	local iRoundIndex = tObj.cur_round 
+
+	local txt = iRoundIndex .. "/" .. iMaxRound
+	self.roundIndex:setString(txt)
+
+
+
 	self.GameCardLayer:refreshCardList(cardList)
 	self.GameCardLayer:refreshCardNode(true)
 
@@ -1091,9 +1469,12 @@ function DDZGameRoomLayer:onDealDown( tObj )
 	self.playerNodeInfo[1].cardNum:runAction(cc.RepeatForever:create(seqFunc))
 	
 	-- 把手隐藏掉
+	-- 把不叫的标志干掉
 	for i = 1, 3 do 
 		self.playerNodeInfo[i].ready:setVisible(false)
+		self.playerNodeInfo[i].pointDemand:setVisible(false)
 	end
+
 	self.iHandCardNums = {17, 17, 17}
 end
 
@@ -1130,6 +1511,7 @@ function DDZGameRoomLayer:noticeFastSPake( tObj )
                 local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(strSprite)
                 self.m_tArrNodeChat[idx].imgFace:setSpriteFrame(frame)
                 self.m_tArrNodeChat[idx].imgFace:setVisible(true)
+                self.m_tArrNodeChat[idx].imgBg:setVisible(false)
             -- 快捷
             elseif intIndex > 101 and intIndex < 102 + #tDDZFastInfo then
 
@@ -1150,6 +1532,9 @@ function DDZGameRoomLayer:noticeFastSPake( tObj )
                         break
                     end
                 end
+
+                local cLevelNum = 1
+                AudioEngine.playEffect(self:getSoundResPath((cLevelNum == 1 and "m" or "w") .. "_" .. iChatStrIdx))
             end
             local function funHideChat()
                 self.m_tArrNodeChat[idx].imgBg:setVisible(false)
@@ -1169,10 +1554,10 @@ function DDZGameRoomLayer:pushPlayCard( tObj )
 	dump(tObj, "DDZGameRoomLayer:pushPlayCard")
 
 	self.m_iSelectHint = 0
-
-	self.GameCardLayer:unSelectAllCard()
-
 	local iPos = self:s2cPlayerPos(tObj.user_pos)
+	if self.iTablePlayer ~= 0 and iPos == 2 then
+		self.GameCardLayer:unSelectAllCard()
+	end
 	local pos1 = self:s2cPlayerPos(1)
 	local pos2 = self:s2cPlayerPos(2)
 	local pos3 = self:s2cPlayerPos(3)
@@ -1180,7 +1565,6 @@ function DDZGameRoomLayer:pushPlayCard( tObj )
 	self.playerNodeInfo[pos1].cardNum:setString(tObj.userCardNum[1])
 	self.playerNodeInfo[pos2].cardNum:setString(tObj.userCardNum[2])
 	self.playerNodeInfo[pos3].cardNum:setString(tObj.userCardNum[3])
-
 
 	local vis = self.playerNodeInfo[3]:isVisible()
 	local vis1 = self.playerNodeInfo[3].cardNum:isVisible()
@@ -1194,10 +1578,18 @@ function DDZGameRoomLayer:pushPlayCard( tObj )
 		self:refreshSendCard(1)
 		self:refreshSendCard(2)
 		self:refreshSendCard(3)
+		for i = 1, 3 do 
+			self.playerNodeInfo[i].imgPass:setVisible(false)
+		end
 	else
+		-- 自己出的牌
 		self.t_SendCards[iPos] = {}
 		self:refreshSendCard(iPos)
+		-- 自己的过标志
+		self.playerNodeInfo[iPos].imgPass:setVisible(false)
 	end
+
+
 
 	local bMustPass = false
 
@@ -1214,20 +1606,16 @@ function DDZGameRoomLayer:pushPlayCard( tObj )
 			-- 不是自己牌权, 查看是否有能打过的牌，没有的话不让出牌
 			local bigger = self:tipsBiggerCard()
 
+			print("查找更大的牌型:", bigger)
+
 			if bigger == false then
 				bMustPass = true
 				self.spNoBigger:setVisible(true)
-				-- self.spNoBigger:setZorder(199)
 				self.spNoBigger:retain()
 				self.spNoBigger:removeFromParent()
 				self.GameCardLayer:addChild(self.spNoBigger)
-
-				print("self.spNoBigger:getPosition()", self.spNoBigger:getPosition())
-
-				local func1 = cc.FadeOut:create(3)
-				-- local func2 = cc.FadeIn:create(1)
-
-				-- self.spNoBigger:runAction(cc.RepeatForever:create(cc.Sequence:create(func1, func2)))
+				local func1 = cc.FadeOut:create(5)
+				self.spNoBigger:setOpacity(255)
 				self.spNoBigger:runAction(func1)
 			end
 			self.nodePlayOther:setVisible(true)
@@ -1235,11 +1623,113 @@ function DDZGameRoomLayer:pushPlayCard( tObj )
 	end
 
 	if bMustPass then
-
+		self:onTime(iPos, function( clock )
+			clock:stopAllActions()
+			clock:setVisible(false)
+			local tSelect = {}	 
+			self:sendCardReq(tSelect)
+		end)
 	else
 		self:onTime(iPos)
 	end
 end
+
+-- 断线重连
+function DDZGameRoomLayer:onNoticePlayerConnectState( tObj )
+	dump(tObj, "onNoticePlayerConnectState")
+
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+
+	dump(allRoomInfo, "allRoomInfo")
+
+
+end
+
+--通知有人解散房间
+function DDZGameRoomLayer:onGamenoticeOtherDistroyRoom( tObj )
+	dump(tObj, "onGamenoticeOtherDistroyRoom")
+
+	local loginData = lt.DataManager:getPlayerInfo()
+	-- local aa = os.date("%Y.%m.%d.%H:%M:%S",tObj.distroy_time)
+	local timeer = os.time()
+	local tempTime = tObj.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
+	if not self.ApplyGameOverPanel then
+		self.ApplyGameOverPanel = lt.ApplyGameOverPanel.new(self)
+		self.ApplyGameOverPanel:show(tempTime, tObj.confirm_map)
+		
+		if loginData.user_id ==  tObj.confirm_map[1] then --代表是申请人，直接置灰
+			self.ApplyGameOverPanel:buttonNotChick()
+		end
+		lt.UILayerManager:addLayer(self.ApplyGameOverPanel,true)
+	else
+		self.ApplyGameOverPanel:show(tempTime, tObj.confirm_map)
+	end	
+end
+
+-- 关闭弹框
+function DDZGameRoomLayer:onCloseApplyGameOverPanel( tObj )
+	dump(tObj, "关闭解散弹框onGamenoticeOtherRefuse")
+
+	lt.UILayerManager:removeLayer(self.ApplyGameOverPanel)
+	self.ApplyGameOverPanel = nil
+end
+
+  --如果有人拒绝解散
+function DDZGameRoomLayer:onGamenoticeOtherRefuse()
+	local canclePlayer = lt.DataManager:getPlayerInfoByPos(msg.user_pos)
+	local loginData = lt.DataManager:getPlayerInfo()
+	local name = ""
+	if canclePlayer then
+		name = canclePlayer.user_name
+	end
+
+	local text = string.format(lt.LanguageString:getString("PLAYER_NOT_GREEN_OVER"), name)
+    lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.onCloseApplyGameOverPanel),nil, true)
+end
+
+ --如果房间被销毁
+function DDZGameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--
+	print("onGamenoticePlayerDistroyRoom房间已被解散")
+	if self.bGameOver == false then
+		local text = "房间已被解散"
+		lt.MsgboxLayer:showMsgBox(text, true, function( ... )
+			print("单机确定按钮")
+			self:CloseRoom()	
+		end, nil, true)
+	else
+		print("等待玩家退出房间")
+	end
+end
+
+function DDZGameRoomLayer:CloseRoom( )
+	local worldScene = lt.WorldScene.new()
+    lt.SceneManager:replaceScene(worldScene)
+    lt.NetWork:disconnect()
+end
+
+function DDZGameRoomLayer:onNoticeTotalSattle( tObj)
+	dump(tObj, "onNoticeTotalSattle")
+	-- {"notice_total_sattle":{"sattle_list":[{"ming_gang_num":0,"hu_num":0,"user_pos":1,"score":-18,"reward_num":0,"an_gang_num":0,"user_id":11539},{"ming_gang_num":0,"hu_num":0,"user_pos":2,"score":36,"reward_num":0,"an_gang_num":0,"user_id":11540},{"ming_gang_num":0,"hu_num":0,"user_pos":3,"score":-18,"reward_num":0,"an_gang_num":0,"user_id":11541}],"begin_time":"2018-07-07 16:26:33","room_id":711096}}
+	local resultLayer = DDZTotalLayer:new()
+	local playerInfo = {{}, {}, {}}
+	for i = 1, 3 do 
+		local pos = self.roomInfo.players[i].user_pos
+		playerInfo[pos].user_name = self.roomInfo.players[i].user_name
+		playerInfo[pos].user_id = self.roomInfo.players[i].user_id
+		local pos = self:s2cPlayerPos(tObj.sattle_list[i].user_pos)
+		playerInfo[pos].score = tObj.sattle_list[i].score
+	end
+	-- 
+	resultLayer:setPlayerInfo(playerInfo)
+	self:addChild(resultLayer)
+
+	-- 初始化分享界面
+end
+
+
+
+
+
 
 function DDZGameRoomLayer:onEnter() 
     -- 离开房间
@@ -1253,7 +1743,7 @@ function DDZGameRoomLayer:onEnter()
 
   	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DEAL_DOWN, handler(self, self.onDealDown), "DDZGameRoomLayer.onDealDown")
 	-- 发牌通知
-   	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.SERVER_SEND_CARD, handler(self, self.serverSendCard), "DDZGameRoomLayer.ServerSendCard")
+
    	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_POINT_DEMAND, handler(self, self.noticePointDemand), "DDZGameRoomLayer.NoticePointDemand")
    	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_MAIN_PLAYER, handler(self, self.noticeMainPlayer), "DDZGameRoomLayer.NoticeMainPlayer")
    	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.SERVER_MAIN_PLAYER, handler(self, self.serverMainPlayer), "DDZGameRoomLayer.ServerMainPlayer")
@@ -1264,18 +1754,34 @@ function DDZGameRoomLayer:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_FAST_SPAKE, handler(self, self.noticeFastSPake), "DDZGameRoomLayer.noticeFastSPake")
 
 
-	
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, handler(self, self.onNoticePlayerConnectState), "DDZGameRoomLayer.onNoticePlayerConnectState")
+
+	--通知有人解散房间
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_OTHER_DISTROY_ROOM, handler(self, self.onGamenoticeOtherDistroyRoom), "DDZGameRoomLayer.onGamenoticeOtherDistroyRoom")
+    --如果有人拒绝解散
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_OTHER_REFUSE, handler(self, self.onGamenoticeOtherRefuse), "DDZGameRoomLayer.onGamenoticeOtherRefuse")
+    --如果房间被销毁
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_DISTROY_ROOM, handler(self, self.onGamenoticePlayerDistroyRoom), "DDZGameRoomLayer.onGamenoticePlayerDistroyRoom")
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, handler(self, self.onNoticeTotalSattle), "DDZGameRoomLayer.onNoticeTotalSattle")
+
+
 
 end
 
 
 function DDZGameRoomLayer:onExit()
+
+	lt.ResourceManager:removeSpriteFrames("games/ddz/game_ani_1.plist", "games/ddz/game_ani_1.png")
+	lt.ResourceManager:removeSpriteFrames("games/ddz/game_ani_2.plist", "games/ddz/game_ani_2.png")
+	lt.ResourceManager:removeSpriteFrames("games/ddz/game_ani_3.plist", "games/ddz/game_ani_3.png")
+	lt.ResourceManager:removeSpriteFrames("games/ddz/game_ani_4.plist", "games/ddz/game_ani_4.png")
+
+
 	print("DDZGameRoomLayer.onExit")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.LEAVE_ROOM, "DDZGameRoomLayer.onBackLobbyResponse")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.SIT_DOWN, "DDZGameRoomLayer.onBackDownResponse")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_SIT_DOWN, "DDZGameRoomLayer.onPushSitDown")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "DDZGameRoomLayer.refreshPlayerConfig")
-	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.SERVER_SEND_CARD, "DDZGameRoomLayer.ServerSendCard")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_POINT_DEMAND, "DDZGameRoomLayer.NoticePointDemand")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_MAIN_PLAYER, "DDZGameRoomLayer.NoticeMainPlayer")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.SERVER_MAIN_PLAYER, "DDZGameRoomLayer.ServerMainPlayer")
@@ -1285,6 +1791,11 @@ function DDZGameRoomLayer:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.DEAL_DOWN, "DDZGameRoomLayer.onDealDown")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAY_CARD, "DDZGameRoomLayer.pushPlayCard")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_FAST_SPAKE, "DDZGameRoomLayer.noticeFastSPake")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_CONNECT_STATE, "DDZGameRoomLayer.onNoticePlayerConnectState")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_OTHER_DISTROY_ROOM, "DDZGameRoomLayer.onGamenoticeOtherDistroyRoom")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_OTHER_REFUSE, "DDZGameRoomLayer.onGamenoticeOtherRefuse")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PLAYER_DISTROY_ROOM, "DDZGameRoomLayer.onGamenoticePlayerDistroyRoom")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, "DDZGameRoomLayer.onNoticeTotalSattle")
 
 end
 

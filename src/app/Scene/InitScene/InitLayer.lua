@@ -73,6 +73,9 @@ function InitLayer:requestLogin(body)
                     local user_id = recv_msg.user_id
                     local token = recv_msg.token
                     body = {user_id=user_id,token=token}
+
+                    dump(body, "现在的token")
+
                     lt.DataManager:recordAuthData(body)
                     InitLayer:onGetUserInfo(body)
                 end

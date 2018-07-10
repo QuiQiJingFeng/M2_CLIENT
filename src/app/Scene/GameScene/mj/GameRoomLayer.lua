@@ -21,7 +21,13 @@ function GameRoomLayer:ctor()
 	-- required int32 cur_round = 9;     //当前游戏的局数
 
 	self._gameBgPanel = lt.GameBgPanel.new()--背景层
-
+	local xuanzhonBgcolor = lt.PreferenceManager:getBgcolor() --记录选中背景颜色
+	if xuanzhonBgcolor == 0 then
+		self:setRoomBg(1)--新手默认是第一项
+	else
+		self:setRoomBg(xuanzhonBgcolor)--设置玩家以前选中的颜色
+	end
+	
 	self._gameCompassPanel = lt.GameCompassPanel.new(self)--罗盘层
 
 	self._engine = lt.MjEngine:open(self)
@@ -147,6 +153,11 @@ function GameRoomLayer:refreshHuCardNum(info, type)
 	self._gameActionBtnsPanel:refreshHuCardNum(info, type)
 end
 
+--设置房间背景颜色
+function GameRoomLayer:setRoomBg(id)
+	self._gameBgPanel:setRoomBg(id)
+end
+
 function GameRoomLayer:showHuCardsTipsMj()
 	self._gameActionBtnsPanel:showHuCardsTipsMj()
 end
@@ -184,6 +195,22 @@ end
 
 function GameRoomLayer:autoPutOutCard() 
 	self._engine:autoPutOutCard()
+end
+
+function GameRoomLayer:UpdateCardBgColor() 
+	local gameInfo = lt.DataManager:getGameRoomInfo()
+	local playerNum = gameInfo.room_setting.seat_num
+	local currentGameDirections = nil
+	if playerNum == 2 then--二人麻将
+		currentGameDirections = {2, 4}
+	elseif playerNum == 3 then
+		currentGameDirections = {1, 2, 3}
+	elseif playerNum == 4 then
+		currentGameDirections = {1, 2, 3, 4} 
+	end
+	for k,v in pairs(currentGameDirections) do
+		self._engine:configAllPlayerCards(v, true, true, true, true)	
+	end
 end
 
 function GameRoomLayer:isVisibleGameActionBtnsPanel() 
@@ -554,27 +581,22 @@ end
 function GameRoomLayer:onGamenoticeOtherRefuse(msg)--如果有人拒绝解散
 	local canclePlayer = lt.DataManager:getPlayerInfoByPos(msg.user_pos)
 	local loginData = lt.DataManager:getPlayerInfo()
-	--if loginData.user_id ~=  msg.user_id then  --让所有人都知道所以注释掉这句
-		local name = ""
-		if canclePlayer then
-			name = canclePlayer.user_name
-		end
+	local name = ""
+	if canclePlayer then
+		name = canclePlayer.user_name
+	end
 
-		local text = string.format(lt.LanguageString:getString("PLAYER_NOT_GREEN_OVER"), name)
-	    lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.onCloseApplyGameOverPanel),nil, true)
-	--end
+	local text = string.format(lt.LanguageString:getString("PLAYER_NOT_GREEN_OVER"), name)
+    lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.onCloseApplyGameOverPanel),nil, true)
 end
 
 function GameRoomLayer:CloseRoom()
-	local gameInfo = lt.DataManager:getGameRoomInfo()
-	lt.CommonUtil.print("====================gameInfo.cur_round============>",gameInfo.cur_round)
-	if gameInfo.cur_round > 1  then
-		lt.CommonUtil.print("===============大于一局但没有打完走这里有结算================")
+	if self._totalOverDataInfo then
 		self:onCloseApplyGameOverPanel()
-		self._gameResultPanel:setVisible(true)
 		self._gameResultPanel:GameOver()
+
+		--self:GameResultEnd()
 	else
-		lt.CommonUtil.print("===============一局没打完走这，没有结算===============")
 		local worldScene = lt.WorldScene.new()
 	    lt.SceneManager:replaceScene(worldScene)
 	    lt.NetWork:disconnect()
@@ -620,6 +642,24 @@ function GameRoomLayer:ReplaysurSpeed()
 	self._rePlayManager:surSpeed()
 end
 
+function GameRoomLayer:onnoticeTotalSattle(msg)
+	self._totalOverDataInfo = msg
+end
+
+function GameRoomLayer:showGameResultTotalEndLayer()
+	if self._totalOverDataInfo then
+		if not self._resultTotalLayer then
+			self._resultTotalLayer = lt.GmaeResultTotalEndLayer.new(self._totalOverDataInfo, self)
+			lt.UILayerManager:addLayer(self._resultTotalLayer,true)
+		end
+		self._resultTotalLayer:show(self._totalOverDataInfo)
+	end
+end
+
+function GameRoomLayer:closeGmaeResultTotalEndLayer()
+	lt.UILayerManager:removeLayer(self._resultTotalLayer)
+end
+
 function GameRoomLayer:onEnter()   
     lt.CommonUtil.print("GameRoomLayer:onEnter")
     local musicIndex = lt.PreferenceManager:getGemeyy() or 1
@@ -649,6 +689,8 @@ function GameRoomLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameRoomLayer.onRefreshGameOver")
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GameRoomLayer.onNoticeSpecialEvent")
+
+  	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, handler(self, self.onnoticeTotalSattle), "GameRoomLayer.onnoticeTotalSattle")
 end
 
 function GameRoomLayer:onExit()
@@ -669,6 +711,7 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, "GameRoomLayer:onPushPlayerOperatorState")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameRoomLayer:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameRoomLayer:onNoticeSpecialEvent")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, "GameRoomLayer:onnoticeTotalSattle")
 end
 
 return GameRoomLayer

@@ -1020,7 +1020,7 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Node_Escape" CanEdit="False" ActionTag="-307918846" VisibleForFrame="False" Tag="1513" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" StretchWidthEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Node_Escape" ActionTag="-307918846" VisibleForFrame="False" Tag="1513" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" StretchWidthEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1334.0000" Y="750.0000" />
             <Children>
               <AbstractNodeData Name="Sprite_Escape1" ActionTag="-896935099" Tag="1515" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="182.3811" RightMargin="1105.6189" TopMargin="281.2750" BottomMargin="422.7250" ctype="SpriteObjectData">
@@ -1272,7 +1272,7 @@
             <PreSize X="0.2736" Y="1.0000" />
             <FileData Type="MarkedSubImage" Path="games/ddz/game/bgBtnHelp.png" Plist="games/ddz/game_1.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Bg_Help_NoStart" CanEdit="False" ActionTag="-1529270064" VisibleForFrame="False" Tag="346" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="BothEdge" LeftMargin="968.1581" RightMargin="0.8419" TopMargin="-0.3861" BottomMargin="0.3861" StretchHeightEnable="True" LeftEage="120" RightEage="120" TopEage="18" BottomEage="18" Scale9OriginX="120" Scale9OriginY="18" Scale9Width="125" Scale9Height="19" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Bg_Help_NoStart" ActionTag="-1529270064" VisibleForFrame="False" Tag="346" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="BothEdge" LeftMargin="968.1581" RightMargin="0.8419" TopMargin="-0.3861" BottomMargin="0.3861" StretchHeightEnable="True" LeftEage="120" RightEage="120" TopEage="18" BottomEage="18" Scale9OriginX="120" Scale9OriginY="18" Scale9Width="125" Scale9Height="19" ctype="ImageViewObjectData">
             <Size X="365.0000" Y="750.0000" />
             <Children>
               <AbstractNodeData Name="Button_Back" ActionTag="-452102899" Tag="347" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="135.5840" RightMargin="29.4160" TopMargin="154.8976" BottomMargin="535.1024" TouchEnable="True" Scale9Enable="True" LeftEage="1" RightEage="1" Scale9OriginX="1" Scale9Width="2" Scale9Height="4" ctype="ImageViewObjectData">
@@ -1624,7 +1624,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Node_TableButtons1" ActionTag="2103376470" VisibleForFrame="False" Tag="1527" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="667.0000" RightMargin="667.0000" TopMargin="461.6250" BottomMargin="288.3750" ctype="SingleNodeObjectData">
+          <AbstractNodeData Name="Node_TableButtons1" ActionTag="2103376470" VisibleForFrame="False" Tag="1527" IconVisible="True" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="667.0000" RightMargin="667.0000" TopMargin="375.0000" BottomMargin="375.0000" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
               <AbstractNodeData Name="Button_Start" ActionTag="-715092865" Tag="1200" IconVisible="False" LeftMargin="-95.2012" RightMargin="-96.7988" TopMargin="-42.4992" BottomMargin="-42.5008" Scale9Enable="True" LeftEage="52" RightEage="52" TopEage="29" BottomEage="29" Scale9OriginX="52" Scale9OriginY="29" Scale9Width="88" Scale9Height="27" ctype="ImageViewObjectData">
@@ -1639,10 +1639,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
-            <Position X="667.0000" Y="288.3750" />
+            <Position X="667.0000" Y="375.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.3845" />
+            <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
           <AbstractNodeData Name="Node_TableButtons2" ActionTag="-1594170736" VisibleForFrame="False" Tag="386" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="667.0000" RightMargin="667.0000" TopMargin="455.4750" BottomMargin="294.5250" ctype="SingleNodeObjectData">
@@ -1875,7 +1875,7 @@
             <PrePosition X="0.5000" Y="0.3947" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Node_TableButtons7" ActionTag="1894012674" VisibleForFrame="False" Tag="170" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="667.6671" RightMargin="666.3329" TopMargin="457.2750" BottomMargin="292.7250" ctype="SingleNodeObjectData">
+          <AbstractNodeData Name="Node_TableButtons7" Visible="False" ActionTag="1894012674" Tag="170" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="667.6671" RightMargin="666.3329" TopMargin="457.2750" BottomMargin="292.7250" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
               <AbstractNodeData Name="Button_Qiangdizhu" ActionTag="-1723241701" Tag="171" IconVisible="False" LeftMargin="-246.0000" RightMargin="54.0000" TopMargin="-42.5000" BottomMargin="-42.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="162" Scale9Height="63" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
@@ -1925,24 +1925,24 @@
             <PrePosition X="0.3616" Y="0.0791" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_NoBigger" ActionTag="2046394194" VisibleForFrame="False" Tag="467" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="406.5000" RightMargin="406.5000" TopMargin="568.0038" BottomMargin="106.9962" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_NoBigger" ActionTag="2046394194" VisibleForFrame="False" Tag="467" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="406.5000" RightMargin="406.5000" TopMargin="631.5000" BottomMargin="43.5000" ctype="SpriteObjectData">
             <Size X="521.0000" Y="75.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="667.0000" Y="144.4962" />
+            <Position X="667.0000" Y="81.0000" />
             <Scale ScaleX="1.5000" ScaleY="1.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.1927" />
+            <PrePosition X="0.5000" Y="0.1080" />
             <PreSize X="0.3906" Y="0.1000" />
             <FileData Type="MarkedSubImage" Path="games/ddz/game/ImageText23.png" Plist="games/ddz/game_1.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_MustThree" ActionTag="-2071996808" VisibleForFrame="False" Tag="966" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="322.0050" RightMargin="301.9950" TopMargin="599.0000" BottomMargin="70.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_MustThree" ActionTag="-2071996808" VisibleForFrame="False" Tag="966" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="322.0050" RightMargin="301.9950" TopMargin="624.0000" BottomMargin="45.0000" ctype="SpriteObjectData">
             <Size X="710.0000" Y="81.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="677.0050" Y="110.5000" />
+            <Position X="677.0050" Y="85.5000" />
             <Scale ScaleX="1.5000" ScaleY="1.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5075" Y="0.1473" />
+            <PrePosition X="0.5075" Y="0.1140" />
             <PreSize X="0.5322" Y="0.1080" />
             <FileData Type="MarkedSubImage" Path="games/ddz/game/ImageText42.png" Plist="games/ddz/game_1.plist" />
             <BlendFunc Src="1" Dst="771" />
@@ -2062,6 +2062,54 @@
             <NormalFileData Type="MarkedSubImage" Path="game/zpcomm/img/Button_5.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Node_ANI" ActionTag="221719145" VisibleForFrame="False" Tag="294" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" StretchWidthEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+            <Size X="1334.0000" Y="750.0000" />
+            <Children>
+              <AbstractNodeData Name="Sprite_Ani1" ActionTag="-63529893" Tag="295" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" LeftMargin="300.0000" RightMargin="988.0000" TopMargin="278.6111" BottomMargin="425.3889" ctype="SpriteObjectData">
+                <Size X="46.0000" Y="46.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="323.0000" Y="448.3889" />
+                <Scale ScaleX="1.5000" ScaleY="1.5000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.2421" Y="0.5979" />
+                <PreSize X="0.0345" Y="0.0613" />
+                <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Sprite_Ani2" Visible="False" ActionTag="-2000572876" Tag="296" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BottomEdge" LeftMargin="644.0000" RightMargin="644.0000" TopMargin="504.0000" BottomMargin="200.0000" ctype="SpriteObjectData">
+                <Size X="46.0000" Y="46.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="667.0000" Y="223.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.2973" />
+                <PreSize X="0.0345" Y="0.0613" />
+                <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Sprite_Ani3" ActionTag="-2004305868" Tag="297" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="RightEdge" LeftMargin="988.0000" RightMargin="300.0000" TopMargin="286.9750" BottomMargin="417.0250" ctype="SpriteObjectData">
+                <Size X="46.0000" Y="46.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="1011.0000" Y="440.0250" />
+                <Scale ScaleX="1.5000" ScaleY="1.5000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.7579" Y="0.5867" />
+                <PreSize X="0.0345" Y="0.0613" />
+                <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="1.0000" Y="1.0000" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

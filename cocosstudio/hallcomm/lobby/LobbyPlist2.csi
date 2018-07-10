@@ -1,18 +1,6 @@
 <PlistInfoProjectFile>
   <PropertyGroup Name="LobbyPlist2" Type="Plist" ID="c37fc282-eca5-43a1-a18f-6df9afecf442" Version="3.10.0.0" />
   <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
-    <ImageFiles>
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_ newbie.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_btton.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_fish.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_friend1.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_friend2.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_recharge.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_roof.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_room.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_rotary.png" />
-      <FilePathData Path="hallcomm/lobby/snow/img_snow_rule.png" />
-    </ImageFiles>
     <MaxSize Width="1024" Height="1024" />
   </Content>
 </PlistInfoProjectFile>

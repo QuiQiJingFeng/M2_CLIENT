@@ -3,6 +3,7 @@ local ScrollNumber = class("ScrollNumber", ccui.Layout)
 
 --设置数字，iNum 数字  bIsPlay 是否播放动画
 function ScrollNumber:setNumber(iNum, bIsPlay, iPointDis)
+    self:removeAllChildren(true)
     if not iNum then
         lt.CommonUtil.print("player score nil !!!!!!!!!!!!!!!!")
         return
@@ -10,8 +11,6 @@ function ScrollNumber:setNumber(iNum, bIsPlay, iPointDis)
 
     local numStr = string.format("%0.2f", iNum) --两位
     iNum = tonumber(numStr)
-
-    self:removeAllChildren(true)
 
     bIsPlay = bIsPlay or false
     self.m_iNum = iNum
@@ -85,17 +84,21 @@ end
 --sLostNumberPngUrl 负数的图片（可以不设置，不设置表示数字前没有正负号）
 --isHasPoint 是否有小数点，nil 表示没有
 function ScrollNumber:create(iPngNumCount, sWinNumberPngUrl, sLostNumberPngUrl, isHasPoint)
+
     iPngNumCount = iPngNumCount or 11
     if isHasPoint then
         --有小数点，是12张
         iPngNumCount = iPngNumCount + 1
     end
-    sWinNumberPngUrl = sWinNumberPngUrl or "nn/nnRoom/nn_win_nums.png"
-    sLostNumberPngUrl = sLostNumberPngUrl or "nn/nnRoom/nn_fail_nums.png"
+
+    sWinNumberPngUrl = sWinNumberPngUrl or "games/bj/game/part/numWin.png"
+    sLostNumberPngUrl = sLostNumberPngUrl or "games/bj/game/part/numLost.png"
 
     local obj = ScrollNumber:new()
+
     obj.m_sWinPngUrl = sWinNumberPngUrl
     obj.m_sLostPngUrl = sLostNumberPngUrl
+    obj:setClippingEnabled(true)
 
     local sp = display.newSprite(sWinNumberPngUrl)
 

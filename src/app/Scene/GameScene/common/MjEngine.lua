@@ -543,7 +543,6 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 
 				table.insert(self._allPlayerLightHandCardsNode[direction], node)
 			end
-
 			node:setVisible(true)
 
 			local x = self._allCpgNodePos[direction].x
@@ -566,6 +565,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			--设置手牌的初始状态
 			node:setOrginPosition(node:getPosition())
 			node:setSelectState(false)
+			node:setCardBgColor(direction)--设置手牌的颜色
 		end
 
 		--暗着的手牌
@@ -657,6 +657,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				node:setOrginPosition(node:getPosition())
 				node:setSelectState(false)
 			end
+			node:setCardBgColor(direction)--设置手牌的颜色
 		end
 	end
 
@@ -693,6 +694,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			if info == 99 then
 				node:BackBg(true)
 			end
+			node:setOutCardBgColor(direction)--刷新出的牌的背景颜色
 		end
 	end
 
@@ -1056,7 +1058,7 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		end
 
 	elseif cardType == self.CARD_TYPE.CPG then
-		node:updateInfo(info)
+		node:updateInfo(info,direction)
 		node:setCpgInfo(info)
 
 	elseif cardType == self.CARD_TYPE.OUT then 

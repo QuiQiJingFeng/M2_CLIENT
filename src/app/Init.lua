@@ -56,6 +56,8 @@ ltMetaTable["WorldMenuLayerRoomItem"] = "app.Scene.WorldScene.WorldMenuLayerRoom
 ltMetaTable["WorldNoticeLayer"] = "app.Scene.WorldScene.WorldNoticeLayer"
 ltMetaTable["WorldUILayer"] = "app.Scene.WorldScene.WorldUILayer"
 ltMetaTable["WorldScene"] = "app.Scene.WorldScene.WorldScene"
+ltMetaTable["WaitLayer"] = "app.Scene.WorldScene.WaitLayer"
+ltMetaTable["ChatLayer"] = "app.Scene.GameScene.ChatLayer"
 
 --layer
 ltMetaTable["BaseLayer"]			    = "app.Scene.WorldScene.Common.BaseLayer"
@@ -74,7 +76,7 @@ ltMetaTable["ReplayWatchLayer"]			= "app.Scene.WorldScene.LobbyBtn.ReplayWatchLa
 ltMetaTable["ReplayWatchitem"]			= "app.Scene.WorldScene.LobbyBtn.ReplayWatchitem"
 ltMetaTable["LobbyHelpLayer"]			= "app.Scene.WorldScene.LobbyBtn.LobbyHelpLayer"
 ltMetaTable["HelpData"]			= "app.Scene.WorldScene.LobbyBtn.HelpData"
-
+ltMetaTable["LobbyHezuo"]			= "app.Scene.WorldScene.LobbyBtn.LobbyHezuo"
 
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
@@ -126,6 +128,5 @@ ltMetaTable["ScrollView"]               = "app.Widget.ScrollView"
 ltMetaTable["ScrollViewCell"]           = "app.Widget.ScrollViewCell"
 
 ltMetaTable["PlatformSDK"] = "app.Common.PlatformSDK"
-
 
 

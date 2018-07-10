@@ -19,17 +19,7 @@
           <AbstractNodeData Name="Ie_BG" ActionTag="214335240" Tag="1140" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="267.0000" RightMargin="267.0000" TopMargin="199.9750" BottomMargin="200.0250" Scale9Enable="True" LeftEage="25" RightEage="25" TopEage="26" BottomEage="26" Scale9OriginX="25" Scale9OriginY="26" Scale9Width="28" Scale9Height="27" ctype="ImageViewObjectData">
             <Size X="800.0000" Y="350.0000" />
             <Children>
-              <AbstractNodeData Name="Image_16" ActionTag="1024204372" Tag="1148" IconVisible="False" LeftMargin="27.8560" RightMargin="471.1440" TopMargin="30.6812" BottomMargin="39.3188" LeftEage="99" RightEage="99" TopEage="92" BottomEage="92" Scale9OriginX="99" Scale9OriginY="92" Scale9Width="103" Scale9Height="96" ctype="ImageViewObjectData">
-                <Size X="301.0000" Y="280.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="178.3560" Y="179.3188" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2229" Y="0.5123" />
-                <PreSize X="0.3762" Y="0.8000" />
-                <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_ThreeNeedOne.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="Image_17" ActionTag="480304414" Tag="1149" IconVisible="False" LeftMargin="426.1586" RightMargin="130.8414" TopMargin="197.2981" BottomMargin="65.7019" LeftEage="80" RightEage="80" TopEage="28" BottomEage="28" Scale9OriginX="80" Scale9OriginY="28" Scale9Width="83" Scale9Height="31" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_17" ActionTag="480304414" Tag="1149" IconVisible="False" LeftMargin="260.4651" RightMargin="296.5349" TopMargin="208.0195" BottomMargin="54.9805" LeftEage="80" RightEage="80" TopEage="28" BottomEage="28" Scale9OriginX="80" Scale9OriginY="28" Scale9Width="83" Scale9Height="31" ctype="ImageViewObjectData">
                 <Size X="243.0000" Y="87.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_85" ActionTag="-632474776" Tag="1457" IconVisible="False" LeftMargin="32.9459" RightMargin="32.0541" TopMargin="23.6689" BottomMargin="26.3311" LeftEage="58" RightEage="58" TopEage="12" BottomEage="12" Scale9OriginX="58" Scale9OriginY="12" Scale9Width="62" Scale9Height="13" ctype="ImageViewObjectData">
@@ -44,31 +34,31 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="547.6586" Y="109.2019" />
+                <Position X="381.9651" Y="98.4805" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6846" Y="0.3120" />
+                <PrePosition X="0.4775" Y="0.2814" />
                 <PreSize X="0.3038" Y="0.2486" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/btn_DiY.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_5" ActionTag="-799810239" Tag="1150" IconVisible="False" LeftMargin="463.6588" RightMargin="168.3412" TopMargin="42.6154" BottomMargin="265.3846" FontSize="42" LabelText="游戏凑局" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_5" ActionTag="-799810239" Tag="1150" IconVisible="False" LeftMargin="297.9644" RightMargin="334.0356" TopMargin="53.3366" BottomMargin="254.6634" FontSize="42" LabelText="游戏合作" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="168.0000" Y="42.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="547.6588" Y="286.3846" />
+                <Position X="381.9644" Y="275.6634" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="64" G="32" B="32" />
-                <PrePosition X="0.6846" Y="0.8182" />
+                <PrePosition X="0.4775" Y="0.7876" />
                 <PreSize X="0.2100" Y="0.1200" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_WX" ActionTag="-1262570241" Tag="1151" IconVisible="False" LeftMargin="348.1588" RightMargin="52.8412" TopMargin="106.1496" BottomMargin="205.8504" FontSize="38" LabelText="请加微信:233333333333" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_WX" ActionTag="-1262570241" Tag="1151" IconVisible="False" LeftMargin="182.4644" RightMargin="218.5356" TopMargin="116.8710" BottomMargin="195.1290" FontSize="38" LabelText="请加微信:233333333333" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="399.0000" Y="38.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="547.6588" Y="224.8504" />
+                <Position X="381.9644" Y="214.1290" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="64" G="32" B="32" />
-                <PrePosition X="0.6846" Y="0.6424" />
+                <PrePosition X="0.4775" Y="0.6118" />
                 <PreSize X="0.4988" Y="0.1086" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

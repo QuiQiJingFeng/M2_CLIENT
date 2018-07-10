@@ -31,6 +31,8 @@ LanguageString["ROOM_COST_2"]			    			= "玩家平摊"
 LanguageString["ROOM_COST_3"]			    			= "赢家出资"
 
 LanguageString["REPLAYCODETEXT"]			    		= "请输入回放码"
+LanguageString["ROOM_OWNER_LEAVE"]			    		= "返回大厅您的房间扔会保留哦！"
+LanguageString["ROOM_OWNER_DISBAND"]			    	= "解散房间不扣除金币，是否确定解散？"
 
 
 
