@@ -70,6 +70,18 @@ function GameResultPanel:ctor(deleget)
 			self._allPlayerResultNode[direction]:getChildByName("Node_ResultInfoItem"):setVisible(true)
 		end
 	end
+
+	local msg = {cur_score_list = {
+	{user_pos = 1},
+	{user_pos = 2},
+	}}
+
+	self:onRefreshScoreResponse(msg)
+
+-- msg.cur_score_list
+-- user_pos
+-- delt_score
+
 end
 
 function GameResultPanel:onStartAgainClick(event) --继续游戏
@@ -145,9 +157,6 @@ end
 
 function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 带结算
 	-- msg.over_type-- 1 正常结束 2 流局 3 房间解散会发送一个结算
-	
-	-- msg.award_list
-
  	local awardCards = lt.DataManager:getGameOverInfo().award_list
 	if awardCards then
 		if not self._winAwardCodeLayer then
@@ -242,6 +251,7 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 					node:addChild(scrollNumber)
 					scrollNumber:setTag(100)
 				end
+				print("++++++++++++++++++++++++++++!!!!!!!!!!!!!!!!!!!!!!!!!!!", v.cur_score)
 				scrollNumber:setVisible(true)
 				scrollNumber:setNumber(v.cur_score)
 			end
@@ -255,16 +265,8 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	-- card_list
 end
 
-function GameResultPanel:onnoticeTotalSattle(msg)
-	self._resultInfo = msg
-end
-
 function GameResultPanel:onTotalEndClick(event)
-	if self._resultInfo then
-		local resultLayer = lt.GmaeResultTotalEndLayer.new(self._resultInfo)
-		resultLayer:show(self._resultInfo)
-		lt.UILayerManager:addLayer(resultLayer,true)
-	end
+	self._deleget:showGameResultTotalEndLayer()
 end
 
 function GameResultPanel:GameOver()
@@ -275,10 +277,8 @@ function GameResultPanel:GameOver()
 	self._resultTotalEndBtn:setVisible(true)
 	self._resultWeChatShareBtn:setVisible(false)
 	self._resultLeaveRoomBtn:setVisible(false)
-	if self._resultInfo then
-		local resultLayer = lt.GmaeResultTotalEndLayer.new(self._resultInfo)
-		resultLayer:show(self._resultInfo)
-		lt.UILayerManager:addLayer(resultLayer,true)
+	for i=1,4 do 
+		self:getChildByName("Node_ScrollNumPos_"..i):setVisible(false)
 	end
 end
 
@@ -292,14 +292,14 @@ function GameResultPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameResultPanel.onRefreshGameOver")
 
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, handler(self, self.onRefreshScoreResponse), "GameResultPanel.onRefreshScoreResponse")
-	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, handler(self, self.onnoticeTotalSattle), "GameResultPanel.onnoticeTotalSattle")
+	--lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, handler(self, self.onnoticeTotalSattle), "GameResultPanel.onnoticeTotalSattle")
 
 end
 
 function GameResultPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameResultPanel:onRefreshGameOver")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, "GameResultPanel:onRefreshScoreResponse")
-	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, "GameResultPanel:onnoticeTotalSattle")
+	--lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, "GameResultPanel:onnoticeTotalSattle")
 end
 
 return GameResultPanel

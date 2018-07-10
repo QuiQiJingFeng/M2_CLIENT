@@ -15,7 +15,6 @@ function MjStandFaceItem:ctor(handDirection)
 	end
 	if handDirection == lt.Constants.DIRECTION.NAN then
 		local rootNode = self._rootNode:getChildByName("Node_Mj")
-
 		self._imageBg = lt.CommonUtil:getChildByNames(rootNode, "Image_Bg")--点击事件层
 
 		self._faceValue = lt.CommonUtil:getChildByNames(rootNode, "Sprite_Face")--牌值
@@ -25,6 +24,36 @@ function MjStandFaceItem:ctor(handDirection)
 		self._tingIcon = lt.CommonUtil:getChildByNames(rootNode, "Sprite_TingArrow")--听牌
 		self._lightMask = rootNode:getChildByName("Image_Light")
 		self:showNormal()
+		self._bgn = lt.CommonUtil:getChildByNames(rootNode,"Sprite_Bg")
+	else
+		self._bgq = self._rootNode:getChildByName("Sprite_Bg")
+	end
+	--self:setCardBgColor(3,handDirection)
+end
+
+function MjStandFaceItem:setCardBgColor(direction)--设置牌背面颜色
+	local xuanzhonMjcolor = lt.PreferenceManager:getMJcolor() --记录选中麻将颜色
+	if xuanzhonMjcolor == 0 then
+		xuanzhonMjcolor = 1
+	end
+
+	local color = "cardBgGreen"
+	if xuanzhonMjcolor == 1 then
+		color = "cardBgGreen"  --绿
+	elseif xuanzhonMjcolor == 2 then
+		color = "cardBgBlue"   --蓝
+	elseif xuanzhonMjcolor == 3 then
+		color = "cardBgYellow" --黄
+	end
+
+	if direction == lt.Constants.DIRECTION.NAN then
+		self._bgn:setSpriteFrame("game/mjcomm/"..color.."/mjStandFace.png")
+	elseif direction == lt.Constants.DIRECTION.XI then
+		self._bgq:setSpriteFrame("game/mjcomm/"..color.."/mjStandSide.png")
+	elseif direction == lt.Constants.DIRECTION.DONG then --
+		self._bgq:setSpriteFrame("game/mjcomm/"..color.."/mjStandSide.png")
+	elseif direction == lt.Constants.DIRECTION.BEI then
+		self._bgq:setSpriteFrame("game/mjcomm/"..color.."/mjStandBack.png")
 	end
 end
 
