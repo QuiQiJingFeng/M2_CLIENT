@@ -303,6 +303,12 @@
     <content url="file://$MODULE_DIR$/../../../cocos2d-x/external/android-specific/tremolo/Tremolo">
       <sourceFolder url="file://$MODULE_DIR$/../../../cocos2d-x/external/android-specific/tremolo/Tremolo" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../../../cocos2d-x/external/bugly">
+      <sourceFolder url="file://$MODULE_DIR$/../../../cocos2d-x/external/bugly" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../cocos2d-x/external/bugly/lua">
+      <sourceFolder url="file://$MODULE_DIR$/../../../cocos2d-x/external/bugly/lua" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../cocos2d-x/external/bullet/BulletCollision/BroadphaseCollision">
       <sourceFolder url="file://$MODULE_DIR$/../../../cocos2d-x/external/bullet/BulletCollision/BroadphaseCollision" isTestSource="false" />
     </content>
@@ -417,6 +423,9 @@
     <content url="file://$MODULE_DIR$/../../Classes/bit">
       <sourceFolder url="file://$MODULE_DIR$/../../Classes/bit" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../../Classes/bugly">
+      <sourceFolder url="file://$MODULE_DIR$/../../Classes/bugly" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../../Classes/common">
       <sourceFolder url="file://$MODULE_DIR$/../../Classes/common" isTestSource="false" />
     </content>
@@ -425,6 +434,9 @@
     </content>
     <content url="file://$MODULE_DIR$/../../Classes/lame">
       <sourceFolder url="file://$MODULE_DIR$/../../Classes/lame" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../Classes/lame/vector">
+      <sourceFolder url="file://$MODULE_DIR$/../../Classes/lame/vector" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../../Classes/md5">
       <sourceFolder url="file://$MODULE_DIR$/../../Classes/md5" isTestSource="false" />

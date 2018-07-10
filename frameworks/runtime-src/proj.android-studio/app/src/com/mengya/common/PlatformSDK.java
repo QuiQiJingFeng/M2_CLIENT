@@ -24,6 +24,7 @@ public class PlatformSDK{
 	  public static void registerCallBack(int call_back){
           if(call_back > 0) {
               __call_back = call_back;
+              Cocos2dxLuaJavaBridge.retainLuaFunction(__call_back);
           }else{
               Log.e("FYD","CALL BACK ID == 0");
           }

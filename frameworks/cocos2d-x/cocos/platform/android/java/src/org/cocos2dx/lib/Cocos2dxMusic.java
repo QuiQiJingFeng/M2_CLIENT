@@ -31,6 +31,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileInputStream;
 
 public class Cocos2dxMusic {
@@ -274,7 +275,9 @@ public class Cocos2dxMusic {
 
         try {
             if (path.startsWith("/")) {
-                final FileInputStream fis = new FileInputStream(path);
+                File tempFile = new File(path);
+                final FileInputStream fis = new FileInputStream(tempFile);
+                mediaPlayer.reset();
                 mediaPlayer.setDataSource(fis.getFD());
                 fis.close();
             } else {
