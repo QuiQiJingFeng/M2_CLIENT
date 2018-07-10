@@ -8,14 +8,15 @@ local WorldMenuLayer = class("WorldMenuLayer", function()
     return cc.CSLoader:createNode("hallcomm/lobby/LobbyLayer1.csb")
 end)
 
-WorldMenuLayer._winScale = lt.CacheManager:getWinScale()
+-- WorldMenuLayer._winScale = cc.Director:getInstance():getWinSize()
+-- WorldMenuLayer._winScale = lt.CacheManager:getWinScale()
 
 WorldMenuLayer._worldLayer = nil
 
-local locationScale = WorldMenuLayer._winScale
-if locationScale < 1 then
-    locationScale = locationScale * 0.8
-end
+-- local locationScale = WorldMenuLayer._winScale
+-- if locationScale < 1 then
+--     locationScale = locationScale * 0.8
+-- end
 
 WorldMenuLayer._rightZoomBtnstatus = 1 --右上角缩放按钮状态 1 伸出 2 缩进
 
