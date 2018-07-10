@@ -83,6 +83,16 @@
                 <FileData Type="MarkedSubImage" Path="game/mjcomm/part/iconTingArrow.png" Plist="game/mjcomm/mjPartUi.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
+              <AbstractNodeData Name="Image_Light" ActionTag="2141178133" Tag="22" IconVisible="False" RightMargin="-91.6000" TopMargin="-131.0000" Scale9Enable="True" LeftEage="22" RightEage="20" TopEage="28" BottomEage="28" Scale9OriginX="22" Scale9OriginY="28" Scale9Width="9" Scale9Height="6" ctype="ImageViewObjectData">
+                <Size X="91.6000" Y="131.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="game/mjcomm/animation/aniPlayerLight/mjBgLight.png" Plist="game/mjcomm/mjChat.plist" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint />
             <Position />

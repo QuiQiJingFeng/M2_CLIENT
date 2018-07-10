@@ -164,6 +164,14 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 			end
 		end
 	end
+
+	self._nodePaoLayer = self:getChildByName("Node_PaoLayer")
+	self._nodePaoLayer:setVisible(false)
+	self._paoBtn = self._nodePaoLayer:getChildByName("Pao_Btn")
+	self._notPaoBtn = self._nodePaoLayer:getChildByName("Not_Pao_Btn")
+
+	lt.CommonUtil:addNodeClickEvent(self._paoBtn, handler(self, self.onSelectPaoClick))
+	lt.CommonUtil:addNodeClickEvent(self._notPaoBtn, handler(self, self.onSelectNoPaoClick))
 end
 
 function GameSelectPosPanel:RestartShow()--游戏结束把听牌标识全false
@@ -178,12 +186,24 @@ function GameSelectPosPanel:ShowTingBS(direction)--听牌标识
 	for pos,playerLogo in ipairs(self._tingLogoArray) do
 		if direction == pos then
 			playerLogo:setVisible(true)
+			break
+		end
+	end
+end
+
+function GameSelectPosPanel:HideTingBS(direction)--听牌标识
+	print("======GameSelectPosPanel:ShowTingBS==>direction",direction)
+	dump(self._tingLogoArray)
+	for pos,playerLogo in ipairs(self._tingLogoArray) do
+		if direction == pos then
+			playerLogo:setVisible(false)
+			break
 		end
 	end
 end
 
 function GameSelectPosPanel:ShowLightRing(direction)--光圈标识
-	--print("======ShowLightRing==>direction",direction)
+
 	dump(self._playerLogoArray)
 	for pos,playerLogo in ipairs(self._playerLogoArray) do
 		if direction == pos then
@@ -200,13 +220,18 @@ function GameSelectPosPanel:HideReady()
 	end
 end
 
-function GameSelectPosPanel:againConfigUI()
+function GameSelectPosPanel:againConfigUI()-- 继续游戏 不退程序断线 回到选座界面
 	for i,v in ipairs(self._currentSitPosArray) do
 		v:setVisible(true)
 	end
 	self._allPlayerSitOk = false
 	self:configPlayer()--初始化玩家头像
-	--self:configPlayerScore()
+
+	self:clientConnectShowPao()
+
+	-- if lt.DataManager:isClientConnectAgain() then
+	-- 	self:configPlayerScore()
+	-- end
 end
 
 function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果在选座位阶段 会走 initGame
@@ -215,8 +240,41 @@ function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果
 	end
 
 	self:configRotation()--初始化座位方位
-	--self:configPlayer()--初始化玩家头像
 	self:configPlayerScore()
+
+	self:clientConnectShowPao()
+end
+
+function GameSelectPosPanel:clientConnectShowPao()
+	if lt.DataManager:isClientConnectAgain() then
+		local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+
+		if allRoomInfo.operators then
+			for i,operator in ipairs(allRoomInfo.operators) do
+				if operator == "PAO" then
+					self:showPaoLayer()
+					break
+				end
+			end
+		end
+
+		local tingList = allRoomInfo.ting_list or {}
+		
+		for i,info in ipairs(tingList) do
+			local direction = self:getPlayerDirectionByPos(info.user_pos)
+			if direction then
+				if info.ting then
+					self:ShowTingBS(direction)
+				else
+					self:HideTingBS(direction)
+				end
+			end
+		end
+	end
+end
+
+function GameSelectPosPanel:showPaoLayer()
+	self._nodePaoLayer:setVisible(true)
 end
 
 function GameSelectPosPanel:refreshPositionInfo()
@@ -652,6 +710,18 @@ function GameSelectPosPanel:getPlayerDirectionByPos(playerPos)
 	return nil
 end
 
+function GameSelectPosPanel:onSelectPaoClick(event) 
+	self._nodePaoLayer:setVisible(false)
+	local arg = {command = "PAO", pao_num = 1}
+    lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+end
+
+function GameSelectPosPanel:onSelectNoPaoClick(event) 
+	self._nodePaoLayer:setVisible(false)
+	local arg = {command = "PAO", pao_num = 0}
+    lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+end
+
 function GameSelectPosPanel:onSitDownClick(event) 
 	print("GameSelectPosPanel:onSitDownClick==>event:getTag()",event:getTag())
 	if lt.DataManager:getRePlayState() then
@@ -690,7 +760,8 @@ function GameSelectPosPanel:onSitDownResponse(msg)
 end
 
 function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
-
+	self._nodePaoLayer:setVisible(false)
+	
 	for pos,SitPos in pairs(self._currentSitPosArray) do
 		SitPos:setVisible(false)
 	end
@@ -816,6 +887,11 @@ function GameSelectPosPanel:onClientConnectAgain()
 	-- end
 end
 
+function GameSelectPosPanel:onNoticePao(msg) 
+	if not lt.DataManager:getRePlayState() then
+		self._nodePaoLayer:setVisible(true)
+	end
+end
 
 function GameSelectPosPanel:onEnter()   
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DEAL_DOWN, handler(self, self.onDealDown), "GameSelectPosPanel:onDealDown")
@@ -826,6 +902,7 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, handler(self, self.onRefreshScoreResponse), "GameSelectPosPanel:onRefreshScoreResponse")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameSelectPosPanel:onRefreshGameOver")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSelectPosPanel:onClientConnectAgain")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, handler(self, self.onNoticePao), "GameSelectPosPanel.onNoticePao")
 end
 
 function GameSelectPosPanel:onExit()
@@ -837,7 +914,7 @@ function GameSelectPosPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_PLAYER_CUR_SCORE, "GameSelectPosPanel:onRefreshScoreResponse")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameSelectPosPanel:onRefreshGameOver")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GameSelectPosPanel:onClientConnectAgain")
-
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PAO, "GameSelectPosPanel.onNoticePao")
 end
 
 return GameSelectPosPanel

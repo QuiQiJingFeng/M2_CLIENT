@@ -59,6 +59,11 @@ function MjLieCpgItem:updateInfo(info)
 	local cardValue = value % 10
 
 	for i=1,5 do
+		
+		local Sprite_TingArrow = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_TingArrow")
+		if Sprite_TingArrow then
+			Sprite_TingArrow:setVisible(false)
+		end
 		self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back"):setVisible(false)
 		self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_MaskRed"):setVisible(false)
 		--self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_Mask"):setVisible(false)
@@ -68,6 +73,10 @@ function MjLieCpgItem:updateInfo(info)
 		if formDirection then
 			local du = (lt.Constants.DIRECTION.NAN - formDirection) * 90
 			arrow:setRotation(du)
+		end
+		if i ~= 5 then
+			local imageMask = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Image_Mask")
+		    imageMask:setVisible(false)
 		end
 
 		local face = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Face")

@@ -20,57 +20,6 @@ function CommonUtil.printf(...)
     end
 end
 
--- 屏幕震动
-function CommonUtil.screenShakerNew(shakerTime,diff,intval)
-    
-    local scene = cc.Director:getInstance():getRunningScene()
-    local scheduler = cc.Director:getInstance():getScheduler()
-    local schedulerId = nil
-    local init_x = 0       --[[初始位置x]]
-    local init_y = 0       --[[初始位置y]]
-    local diff_x = 0       --[[偏移量x]]
-    local diff_y = 0       --[[偏移量y]]
-    local diff_max = diff == nil and 3 or diff     --[[最大偏移量]]
-    local interval = intval == nil and 0.01 or intval  --[[震动频率]]
-    local totalTime = shakerTime == nil and 0.3 or shakerTime    --[[震动时间]]
-    local time = 0         --[[计时器]]
-
-
-    local target = scene
-    init_x = target:getPositionX()
-    init_y = target:getPositionY()
-
-    local function stop()
-        time = 0
-        if schedulerId then
-            scheduler:unscheduleScriptEntry(schedulerId)
-        end
-        target:setPosition(cc.p(init_x, init_y))
-    end
-
-    local function shake(ft)
-        if time >= totalTime then
-            stop()
-            return
-        end
-        time = time+ft
-        diff_x = math.random(-diff_max, diff_max)*math.random()
-        diff_y = math.random(-diff_max, diff_max)*math.random()
-        target:setPosition(cc.p(init_x+diff_x, init_y+diff_y))
-    end
-
-
-    local function run()
-        schedulerId = scheduler:scheduleScriptFunc(function (ft)
-            shake(ft)
-            end, interval,false)
-    end
-
-    run()
-
-end
-
-
 function CommonUtil.dump(...)
     if DEBUG_LOG then
         dump(...)
@@ -1238,8 +1187,6 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFu
         return
     end
 
-
-
     isScale = isScale == nil and true or isScale
 
     node:setTouchEnabled(true)
@@ -1247,7 +1194,7 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFu
     if callBack then
         if node.onClick then
             print("Warning:: node.onClick is exist, Duplicate assignment onClick\n")
-            -- return
+            return
         end
         node.onClick  = callBack
     end
@@ -1262,24 +1209,23 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFu
                 node:setScale(oldScaleX-0.1, oldScaleY-0.1)
             end
             if beganFunc then
-                return beganFunc()
+                beganFunc()
             end
         elseif event_type == ccui.TouchEventType.ended then
-            -- 点击声音
-            AudioEngine.playEffect("hallcomm/sound/btn.mp3", false) 
+            
+            lt.AudioManager:buttonClicked()
+
             if isScale then
                 node:setScale(oldScaleX, oldScaleY)
             end
             if callBack then
                 callBack(node)
             end
-        elseif event_type == ccui.TouchEventType.canceled then
-  
+        elseif event_type == ccui.TouchEventType.canceled then   
             node:setScale(oldScaleX, oldScaleY)
             if cancelFunc then
                 cancelFunc()
             end
-            
         end
     end)
 end

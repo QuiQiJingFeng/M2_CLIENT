@@ -11,8 +11,6 @@ WorldScene._worldUILayer 	= nil -- 游戏UI界面
 WorldScene._worldLoadingLayer = nil
 
 function WorldScene:ctor()
-    -- self._worldLayer = lt.WorldLayer.new(self)
-    -- self:addChild(self._worldLayer)
 
     self._worldMenuLayer = lt.WorldMenuLayer.new()
     self:addChild(self._worldMenuLayer)

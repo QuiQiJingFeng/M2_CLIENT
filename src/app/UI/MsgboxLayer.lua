@@ -13,12 +13,9 @@ end
 -- @param isCloseBox	回调完之后是否自动关闭弹窗
 -- @param iClockTime	闹钟时间
 function MsgboxLayer:showMsgBox(txtContent, isOneBtn, sureFunc, cancelFunc, isCloseBox, iClockTime)
-	if not self.layer then
-		print("++++++++++")
-		local layer = cc.CSLoader:createNode("game/common/MsgBoxLayer.csb")
-		layer:retain()
-		self.layer = layer
-	end
+
+	self.layer = cc.CSLoader:createNode("game/common/MsgBoxLayer.csb")
+
 	-- local parent = self.layer:getParent()
 	-- print("PARENT = ",parent)
 	-- if not self.layer:getParent() then
@@ -101,18 +98,15 @@ end
 -- @param isClose  after onClick close MsgBox 
 -- @param isScale
 function MsgboxLayer:setSureClick( func, isClose, isScale )
-	self.btnSure:setEnabled(true)
-	if self.btnSure.onClick then
-		self.btnSure.onClick = nil
-	end
-	print("注册Sure事件", func)
 	lt.CommonUtil:addNodeClickEvent(self.btnSure, function( ... )
-		if isClose then
-			self:onClose()
-		end
 		if func then
 			func()
 		end
+
+		if isClose then
+			self:onClose()
+		end
+
 	end, isScale)
 end
 
@@ -121,18 +115,14 @@ end
 -- @param isClose  after onClick close MsgBox 
 -- @param isScale
 function MsgboxLayer:setCancelClick( func, isClose, isScale )
-	self.btnCancel:setEnabled(true)
-	if self.btnCancel.onClick then
-		self.btnCancel.onClick = nil
-	end
 	lt.CommonUtil:addNodeClickEvent(self.btnCancel, function( ... )
-		if isClose then
-			self:onClose()
-		end
+
 		if func then
 			func()
 		end
-
+		if isClose then
+			self:onClose()
+		end
 	end, isScale)
 end
 
@@ -165,9 +155,6 @@ end
 
 function MsgboxLayer:onClose( ... )
 	lt.UILayerManager:removeLayer(self.layer)
-
-	self.btnSure:setEnabled(false)
-	self.btnCancel:setEnabled(false)
 	-- print("MsgBox Close")
 	-- self.txtClock:stopAllActions()
 	

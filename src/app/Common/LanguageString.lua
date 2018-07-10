@@ -1,8 +1,11 @@
 
 local LanguageString = {}
 
-LanguageString["STRING_GAME_NAME_1"] 				= "红中麻将"
+LanguageString["STRING_GAME_NAME_1"] 			= "红中麻将"
 LanguageString["STRING_GAME_NAME_2"]			= "斗地主"
+LanguageString["STRING_GAME_NAME_3"]			= "商丘麻将"
+LanguageString["STRING_GAME_NAME_4"]			= "飘癞子"
+LanguageString["STRING_GAME_NAME_5"]			= "推倒胡"
 
 LanguageString["DISTROY_ROOM_paramater_error"]			= "客户端参数错误"
 LanguageString["DISTROY_ROOM_server_error"]				= "服务器错误"
@@ -37,6 +40,9 @@ LanguageString["PLAYER_NOT_GREEN_OVER"] = "玩家【%s】不同意解散房间,�
 
 LanguageString["SENDTOZHANHJIINFO"] = "没有请求到战绩信息"
 
+LanguageString["ROOM_ALREADY_DISTROY"] = "房间已被解散"
+
+LanguageString["ROOM_ALREADY_DISTROY_BY_TIME"] = "游戏时间超时，房间已被解散"
 
 function LanguageString:getString(key)
 	return LanguageString[key] or nil

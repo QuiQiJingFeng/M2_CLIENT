@@ -10,7 +10,7 @@ msg.common"
 Result
 success
 fail
-Ñ
+ï
 msg/ddz.protomsg.ddz"0
 ReqPointDemand
 
@@ -32,10 +32,11 @@ userDemand"_
 	userExtra (R	userExtra
 
 userDemand (R
-userDemand"L
+userDemand"j
 NoticeMainPlayer
 	userExtra (R	userExtra
-baseCard (RbaseCard"Š
+baseCard (RbaseCard
+	iRoomTime (R	iRoomTime"Š
 Item
 user_id (	RuserId
 user_pos (RuserPos
@@ -72,7 +73,7 @@ cCardValue"
 Result
 success
 	auth_fail
-“:
+¡<
 msg/user.protomsg.user"H
 FastSpakeReq
 user_pos (RuserPos
@@ -99,7 +100,7 @@ fast_index (	R	fastIndex"F
 
 disconnect
  (R
-disconnect"…
+disconnect" 
 RoomSetting
 	game_type (RgameType
 round (Rround
@@ -107,8 +108,9 @@ disconnect"…
 seat_num (RseatNum$
 is_friend_room (RisFriendRoom"
 is_open_voice (RisOpenVoice
-is_open_gps (R	isOpenGps#
-other_setting (RotherSetting"I
+is_open_gps (R	isOpenGps
+owner_id (RownerId#
+other_setting	 (RotherSetting"I
 CreateRoomReq8
 room_setting (2.msg.user.RoomSettingRroomSetting"9
 CreateRoomRsp(
@@ -172,10 +174,11 @@ expireTime
 	cur_round (RcurRound"=
 SitItem
 user_id (RuserId
-user_pos (RuserPos"T
+user_pos (RuserPos"q
 PushSitDown
 room_id (RroomId,
-sit_list (2.msg.user.SitItemRsitList"?
+sit_list (2.msg.user.SitItemRsitList
+	cur_round (RcurRound"?
 FourCardItem
 user_pos (RuserPos
 cards (Rcards"å
@@ -200,11 +203,12 @@ randomNums
 
 card_stack (2.msg.user.GPItemR	cardStack 
 userCardNum (RuserCardNum<
-four_card_list (2.msg.user.FourCardItemRfourCardList"X
+four_card_list (2.msg.user.FourCardItemRfourCardList"–
 NoticePlayCard
 user_id (RuserId
 card (Rcard
-user_pos (RuserPos"j
+user_pos (RuserPos<
+four_card_list (2.msg.user.FourCardItemRfourCardList"j
 NoticePengCard
 user_id (RuserId
 user_pos (RuserPos$
@@ -262,7 +266,7 @@ handle_num (R	handleNum"L
 cards (Rcards"9
 TingItem
 user_pos (RuserPos
-ting (Rting"ê
+ting (Rting"‡
 PushAllRoomInfoE
 refresh_room_info (2.msg.user.RefreshRoomInfoRrefreshRoomInfo
 	card_list (RcardList
@@ -295,7 +299,8 @@ cBaseCards
 huicard (Rhuicard<
 four_card_list (2.msg.user.FourCardItemRfourCardList/
 	mark_list (2.msg.user.MarkItemRmarkList/
-	ting_list (2.msg.user.TingItemRtingList"Y
+	ting_list (2.msg.user.TingItemRtingList
+	ting_card (RtingCard"Y
 GoldItem
 user_id (RuserId
 user_pos (RuserPos
@@ -360,7 +365,7 @@ begin_time (	R	beginTime"
 NoticeYingKou
 user_pos (RuserPos
 card (Rcard"
-	NoticePao*‹
+	NoticePao*…
 Result
 success
 paramater_error
@@ -382,7 +387,13 @@ auth_faild
 no_support_command
 no_permission_distroy
 current_in_room
-no_position*5
+no_position
+operator_error
+in_four_cardlist
+already_ting_card
+	must_zimo
+can_not_hui_card
+not_allow_ting*5
 GangType
 AN_GANG
 	MING_GANG

@@ -1,6 +1,6 @@
 
 local GameRoomLayer = class("GameRoomLayer", lt.BaseLayer)
-ENDRONDBS = 1
+
 function GameRoomLayer:ctor()
 	GameRoomLayer.super.ctor(self)
 
@@ -53,6 +53,7 @@ function GameRoomLayer:ctor()
 end
 
 function GameRoomLayer:initGame()  
+	self._engine:setMingTingConfig()
 	self._sendRequest = false
 	self._gameSelectPosPanel:initGame()
 	self._gameCompassPanel:initGame()
@@ -80,6 +81,18 @@ end
 function GameRoomLayer:resetCurrentOutPutPlayerPos()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	self._currentOutPutPlayerPos = allRoomInfo.cur_play_pos
+
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	--癞子
+	self:setHuiCardValue(allRoomInfo.huicard)
+end
+
+function GameRoomLayer:setHuiCardValue(huiValue)
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+		self._huiCardValue = lt.Constants.HONG_ZHONG_VALUE
+	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+		self._huiCardValue = huiValue
+	end
 end
 
 function GameRoomLayer:getCurrentOutPutPlayerPos()
@@ -87,6 +100,11 @@ function GameRoomLayer:getCurrentOutPutPlayerPos()
 end
 
 function GameRoomLayer:onGameConnectAgain()
+
+	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
+	--癞子
+	self:setHuiCardValue(allRoomInfo.huicard)
+
 	self._sendRequest = false
 	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		self._gameSelectPosPanel:againConfigUI()
@@ -164,6 +182,10 @@ function GameRoomLayer:setClickEvent()
 	self._engine:setClickCardCallBack(handler(self, self.onClickCard))
 end
 
+function GameRoomLayer:autoPutOutCard() 
+	self._engine:autoPutOutCard()
+end
+
 function GameRoomLayer:isVisibleGameActionBtnsPanel() 
 	return self._gameActionBtnsPanel.m_objCommonUi.m_nodeActionBtns:isVisible()
 end
@@ -221,6 +243,9 @@ function GameRoomLayer:onDealDown(msg)--发牌
 	-- if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
 	-- 	self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	-- end
+
+	self:setHuiCardValue(msg.huicard)
+
     if lt.DataManager:getRePlayState() then
     	for i=1,#msg do
 
@@ -305,10 +330,10 @@ end
 function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 	self._currentOutPutPlayerPos = msg.user_pos
 	msg.card_list = msg.card_list or {}
-	lt.CommonUtil.print("============打印",msg.user_pos,lt.DataManager:getMyselfPositionInfo().user_pos)
+
+	local direction = self:getPlayerDirectionByPos(msg.user_pos)
 	if msg.user_pos ==  lt.DataManager:getMyselfPositionInfo().user_pos then--自己
 		self._sendRequest = false
-		lt.CommonUtil.print("================有没有进来============")
 		local handList = {}
 		local cpgList = {}
 		--摸牌 ->出牌
@@ -353,17 +378,16 @@ function GameRoomLayer:onPushPlayCard(msg)--通知该出牌
 
 		self._engine:updateNanHandCardValue(lt.Constants.DIRECTION.NAN, handList, msg.four_card_list)
 		self._engine:updateNanCpgCardValue(lt.Constants.DIRECTION.NAN, cpgList)
-		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
-		
 		self:checkMyHandButtonActionStatu(handList, self._ischeckMyHandStatu)--暗杠  回头杠 胡 听
 		self._ischeckMyHandStatu = false
-
+		self._engine:configAllPlayerCards(lt.Constants.DIRECTION.NAN, true, true, false, false)
+		
 	else--不是本人
-		if msg.operator == 1 then--摸得 getOneHandCardAtDirection
-			--self._engine:configAllPlayerCards(direction, false, true, false)
-		end
+
+		self._engine:updateLightCardValue(msg.four_card_list)
+		self._engine:configAllPlayerCards(direction, false, true, false, false)
 	end
-	local direction = self:getPlayerDirectionByPos(msg.user_pos)
+	
 	self._gameSelectPosPanel:ShowLightRing(direction)
 end
 
@@ -378,10 +402,12 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 
 	local specialRefresh = false
 	if value then
+		lt.AudioManager:playMjCardSound(value, 0)
 
 		for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
 			if value == v then--补花	
 				local info = {
+					type = 1,
 					user_pos = msg.user_pos,
 					card = msg.card
 				}
@@ -389,15 +415,35 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 				-- if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
 				-- 	self._engine:goOutOneHandSpecialCardAtDirection(direction, value)
 				-- end
+				lt.AudioManager:playSpecialEventSound(8)
 				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				break
+			end
+		end
+
+		if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+			print("癞子牌+++++++++++++++", self._huiCardValue, value)
+			if self._huiCardValue then
+				if self._huiCardValue == value then
+					local info = {
+						type = 2,
+						user_pos = msg.user_pos,
+						card = msg.card,
+					}
+					specialRefresh = true
+					lt.AudioManager:playSpecialEventSound(9)
+					lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
+				end
 			end
 		end
 	end
 
 	--把这张牌加到out  先通知noticeSpecial 再 NoticePlayCard
 	self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
-	self:refreshHuCardNum(msg.card, 2)
+	
+	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+		self:refreshHuCardNum(msg.card, 2)
+	end
 
 	--其他玩家从手牌中去掉  （自己的在点击牌出牌的时候处理）
 	if lt.DataManager:getRePlayState() then
@@ -469,9 +515,15 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	end
 	if msg.item["type"] == 7 then --如果是听牌则刷新其他人的听牌杠标识
 		local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
-		self._gameSelectPosPanel:ShowTingBS(direction)
+		self:ShowTingGang(direction)
 	end
 	self._engine:noticeSpecialEvent(msg)
+
+	lt.AudioManager:playSpecialEventSound(msg.item["type"])
+end
+
+function GameRoomLayer:ShowTingGang(direction)
+	self._gameSelectPosPanel:ShowTingBS(direction)
 end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求
@@ -482,17 +534,17 @@ function GameRoomLayer:onGamenoticeOtherDistroyRoom(msg)--通知有人解散房�
 	local loginData = lt.DataManager:getPlayerInfo()
 	local aa = os.date("%Y.%m.%d.%H:%M:%S",msg.distroy_time)
 	local timeer = os.time()
-	local cc = msg.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
+	local other_time = msg.distroy_time - timeer - 2 --和服务端时间有延迟，所以减去俩秒
 	if not self.ApplyGameOverPanel then
 		self.ApplyGameOverPanel = lt.ApplyGameOverPanel.new(self)
-		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
+		self.ApplyGameOverPanel:show(other_time,msg.confirm_map)
 		dump(msg.confirm_map[1])
 		if loginData.user_id ==  msg.confirm_map[1] then --代表是申请人，直接置灰
 			self.ApplyGameOverPanel:buttonNotChick()
 		end
 		lt.UILayerManager:addLayer(self.ApplyGameOverPanel,true)
 	else
-		self.ApplyGameOverPanel:show(cc,msg.confirm_map)
+		self.ApplyGameOverPanel:show(other_time,msg.confirm_map)
 	end	
 end
 function GameRoomLayer:onCloseApplyGameOverPanel()
@@ -512,14 +564,31 @@ function GameRoomLayer:onGamenoticeOtherRefuse(msg)--如果有人拒绝解散
 end
 
 function GameRoomLayer:CloseRoom()
-	local worldScene = lt.WorldScene.new()
-    lt.SceneManager:replaceScene(worldScene)
-    lt.NetWork:disconnect()
+	local gameInfo = lt.DataManager:getGameRoomInfo()
+	lt.CommonUtil.print("====================gameInfo.cur_round============>",gameInfo.cur_round)
+	if gameInfo.cur_round > 1  then
+		lt.CommonUtil.print("===============大于一局但没有打完走这里有结算================")
+		self:onCloseApplyGameOverPanel()
+		self._gameResultPanel:setVisible(true)
+		self._gameResultPanel:GameOver()
+	else
+		lt.CommonUtil.print("===============一局没打完走这，没有结算===============")
+		local worldScene = lt.WorldScene.new()
+	    lt.SceneManager:replaceScene(worldScene)
+	    lt.NetWork:disconnect()
+	end
 end
 
 function GameRoomLayer:onGamenoticePlayerDistroyRoom(msg)--
-	if ENDRONDBS ~= 2 then
-		local text = "房间已被解散"
+	--type 解散类型 1 玩家申请解散  2、房主解散 3、牌局打完解散 4 时间到了解散
+	if msg.room_id == lt.DataManager:getGameRoomInfo().room_id and msg.type ~= 3 then
+
+		local text = lt.LanguageString:getString("ROOM_ALREADY_DISTROY")
+
+		if msg.type == 4 then
+			text = lt.LanguageString:getString("ROOM_ALREADY_DISTROY_BY_TIME")
+		end
+		
 		lt.MsgboxLayer:showMsgBox(text,true, handler(self, self.CloseRoom),nil, true)
 	end
 end
@@ -551,6 +620,12 @@ end
 
 function GameRoomLayer:onEnter()   
     lt.CommonUtil.print("GameRoomLayer:onEnter")
+    local musicIndex = lt.PreferenceManager:getGemeyy() or 1
+    if musicIndex >= 4 then
+    	lt.AudioManager:stopMusic(false)
+    else
+    	lt.AudioManager:playMusic("game/mjcomm/sound/bg_music/", "gameBgMusic_"..musicIndex, true)
+    end
     
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.GAME_CMD, handler(self, self.onGameCMDResponse), "GameRoomLayer.onGameCMDResponse")
 
@@ -592,8 +667,6 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_OPERATOR_STATE, "GameRoomLayer:onPushPlayerOperatorState")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameRoomLayer:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameRoomLayer:onNoticeSpecialEvent")
-
 end
-
 
 return GameRoomLayer

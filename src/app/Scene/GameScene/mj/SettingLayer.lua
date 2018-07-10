@@ -14,9 +14,14 @@ function SettingLayer:ctor()
 	local backLobby = self._scrollView:getChildByName("Btn_BackLobby")
 
     local gameInfo = lt.DataManager:getGameRoomInfo()
-    if gameInfo.room_setting.round > 0 then -- 局数大于0就判断牌局已经开始
+    if gameInfo.cur_round > 0 and not lt.DataManager:getRePlayState() then -- 局数大于0就判断牌局已经开始
         backLobby:setVisible(false)
         dissolveRoom:setPosition(400,721)
+    else
+        backLobby:setVisible(true)
+        if lt.DataManager:getRePlayState() then
+            backLobby:setPosition(400,721)
+        end
     end
 
     local btnClose = self._scrollView:getChildByName("Btn_Close")
@@ -122,6 +127,12 @@ function SettingLayer:setshow()
             for i, v in pairs(selectNumGameyy) do 
                 if v == musicPalel then
                     v.selectNode:setVisible(true)
+
+                    if i < 4 then
+                        lt.AudioManager:playMusic("game/mjcomm/sound/bg_music/", "gameBgMusic_"..i, true)
+                    else
+                        lt.AudioManager:stopMusic(false)
+                    end
                     lt.PreferenceManager:setGemeyy(i) 
                 else
                     v.selectNode:setVisible(false)
@@ -261,6 +272,7 @@ function SettingLayer:onDissolveRoom()--申请解散房间
     --self:addChild(ApplyGameOverPanel,10)
     
     ---[[
+    self:onClose()
     local roomInfo = lt.DataManager:getGameRoomInfo()
     local loginData = lt.DataManager:getPlayerInfo()
     dump(roomInfo)
@@ -286,19 +298,10 @@ function SettingLayer:bb()
 end
 
 function SettingLayer:onBackLobby()
-    local tObjCpghObj = {}
-    self._deleget:viewHideActPanelAndMenu()
-    self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
-    self._deleget:viewActionButtons(tObjCpghObj, true)
-    --[[
-    if lt.DataManager:getRePlayState() then
-        lt.MJplayBackManager:closeReplay()
-        local worldScene = lt.WorldScene.new()
-        lt.SceneManager:replaceScene(worldScene)
-        lt.NetWork:disconnect()
-    else
-        lt.NetWork:sendTo(lt.GameEventManager.EVENT.LEAVE_ROOM)
-    end--]]
+    lt.MJplayBackManager:closeReplay()
+    local worldScene = lt.WorldScene.new()
+    lt.SceneManager:replaceScene(worldScene)
+    lt.NetWork:disconnect()
 end
 
 function SettingLayer:onBackLobbyResponse(msg)

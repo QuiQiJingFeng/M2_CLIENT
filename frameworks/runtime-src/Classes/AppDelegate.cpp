@@ -26,10 +26,12 @@ using namespace CocosDenshion;
  //      
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
 #include "bugly/CrashReport.h"
+#include "BuglyLuaAgent.h"
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) 
 #include "CrashReport.h"
-#endif
 #include "BuglyLuaAgent.h"
+#endif
+
 
 USING_NS_CC;
 using namespace std;
@@ -83,8 +85,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     // register lua module
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
-
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     BuglyLuaAgent::registerLuaExceptionHandler(engine);
+#endif
 
 
     lua_State* L = engine->getLuaStack()->getLuaState();

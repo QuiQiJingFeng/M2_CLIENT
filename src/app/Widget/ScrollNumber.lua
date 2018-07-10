@@ -3,6 +3,11 @@ local ScrollNumber = class("ScrollNumber", ccui.Layout)
 
 --设置数字，iNum 数字  bIsPlay 是否播放动画
 function ScrollNumber:setNumber(iNum, bIsPlay, iPointDis)
+    if not iNum then
+        lt.CommonUtil.print("player score nil !!!!!!!!!!!!!!!!")
+        return
+    end
+
     local numStr = string.format("%0.2f", iNum) --两位
     iNum = tonumber(numStr)
 

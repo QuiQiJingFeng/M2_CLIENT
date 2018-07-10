@@ -29,7 +29,7 @@ GameEventManager.EVENT = {
     LEAVE_ROOM = "leave_room",--回到大厅
     DISTROY_ROOM = "distroy_room",
     CONFIRM_DISTROY_ROOM = "confirm_distroy_room",
-    NOTICE_TOTAL_SATTLE  = "notice_total_sattle",--刷新总结算
+
     GAME_CMD = "game_cmd",  --[[游戏中的请求 DEAL_FINISH  发牌完毕
 PLAY_CARD  出牌
 PENG    碰
@@ -54,7 +54,7 @@ GUO     过]]--
     PUSH_PLAYER_OPERATOR_STATE = "push_player_operator_state",--通知客户端当前 碰/杠 状态
 
     NOTICE_GAME_OVER = "notice_game_over",--通知客户端 本局结束 带结算
-
+    NOTICE_TOTAL_SATTLE  = "notice_total_sattle",--刷新总结算
     PUSH_ALL_ROOM_INFO = "push_all_room_info",  --获取全部的房间信息
 
     REFRESH_PLAYER_CUR_SCORE = "refresh_player_cur_score",--牌局中积分发生变化
@@ -75,6 +75,8 @@ GUO     过]]--
     NOTICE_DDZ_GAMEOVER = "NoticeDDZGameOver",
     -- 快捷发言
     NOTICE_FAST_SPAKE = "notice_fast_spake",
+
+    NOTICE_PAO = "notice_pao",
 }
 
 local handler_id = 0

@@ -16,132 +16,110 @@ function PreferenceManager:init()
 	-- mac 下 ~/Library/Preferences/com.cocos.quick.apps.player.plist
 end
 
--- 游戏战斗麦克风
-function PreferenceManager:setBattleMicSet(micSet)
+-- ################################################## 游戏设置 ##################################################
+function PreferenceManager:getSettingDefault()
+	if not isset(self._gameDefault, "setting") then
+		self._gameDefault["setting"] = {}
+	end
+
+	return self._gameDefault["setting"]
+end
+
+-- 游戏音效音量
+function PreferenceManager:setSoundOn(soundOn)
 	local settingDefault = self:getSettingDefault()
 
-	settingDefault["battle_mic"] = micSet
+	settingDefault["sound_on"] = soundOn
 
-	local key = "GAME_DEFAULT_SETTING_BATTLE_MIC"
-	cc.UserDefault:getInstance():setBoolForKey(key, micSet)
+	local key = "GAME_DEFAULT_SETTING_SOUND_ON"
+	cc.UserDefault:getInstance():setBoolForKey(key, soundOn)
 	-- 刷新写入  
   	cc.UserDefault:getInstance():flush()
 end
 
-function PreferenceManager:getBattleMicSet()
+function PreferenceManager:getSoundOn()
 	local settingDefault = self:getSettingDefault()
 
-	local micSet = settingDefault["battle_mic"]
-	if micSet == nil then
-		local key = "GAME_DEFAULT_SETTING_BATTLE_MIC"
-		micSet = cc.UserDefault:getInstance():getBoolForKey(key, false)
-		settingDefault["battle_mic"] = micSet
+	local soundOn = settingDefault["sound_on"]
+	if soundOn == nil then
+		local key = "GAME_DEFAULT_SETTING_SOUND_ON"
+		soundOn = cc.UserDefault:getInstance():getBoolForKey(key, true)
+		settingDefault["sound_on"] = soundOn
 	end
 
-	return micSet
+	return soundOn
 end
 
-function PreferenceManager:setSelectMonsterId(monsterId)--魔王的宝藏上次选择的id
+function PreferenceManager:setSoundValue(soundValue)
 	local settingDefault = self:getSettingDefault()
-	local serverId = lt.DataManager:getCurServerId()
-	local playerId = lt.DataManager:getPlayerId()
-	settingDefault["select_monster_id"] = monsterId
 
-	local key = "GAME_DEFAULT_SELECT_MONSTER_ID"..serverId.."_"..playerId
-	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+	settingDefault["sound_value"] = soundValue
+
+	local key = "GAME_DEFAULT_SETTING_SOUND_VALUE"
+	cc.UserDefault:getInstance():setIntegerForKey(key, soundValue)
 	-- 刷新写入  
   	cc.UserDefault:getInstance():flush()
 end
 
-function PreferenceManager:getSelectMonsterId()
+function PreferenceManager:getSoundValue()
 	local settingDefault = self:getSettingDefault()
 
-	local monsterId = settingDefault["select_monster_id"]
-	if monsterId == nil then
-		local serverId = lt.DataManager:getCurServerId()
-		local playerId = lt.DataManager:getPlayerId()
-		local key = "GAME_DEFAULT_SELECT_MONSTER_ID"..serverId.."_"..playerId
-		monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
-		settingDefault["select_monster_id"] = monsterId
+	local soundValue = settingDefault["sound_value"]
+	if not soundValue then
+		local key = "GAME_DEFAULT_SETTING_SOUND_VALUE"
+		soundValue = cc.UserDefault:getInstance():getIntegerForKey(key, 100)
+		settingDefault["sound"] = soundValue
 	end
 
-	return monsterId
+	return soundValue
 end
 
--- ################################################## 称号 ##################################################
---称号红点
-function PreferenceManager:setPlayerTitleNotice(titleId, flag)
+-- 游戏音乐音量
+function PreferenceManager:setMusicOn(musicOn)
 	local settingDefault = self:getSettingDefault()
 
-	local serverId = lt.DataManager:getCurServerId()
-	local playerId = lt.DataManager:getPlayerId()
+	settingDefault["music_on"] = musicOn
 
-	local key = "GAME_PLAYER_TITLE_NOTICE"..serverId.."_"..playerId
-	local titleTable = self:getPlayerTitleNotice()
-	titleTable[tostring(titleId)] = flag
-	cc.UserDefault:getInstance():setStringForKey(key, json.encode(titleTable))
+	local key = "GAME_DEFAULT_SETTING_MUSIC_ON"
+	cc.UserDefault:getInstance():setBoolForKey(key, musicOn)
+	-- 刷新写入  
   	cc.UserDefault:getInstance():flush()
 end
 
-function PreferenceManager:getPlayerTitleNotice()
-	if not self._playerTitleNotice then
-		local serverId = lt.DataManager:getCurServerId()
-		local playerId = lt.DataManager:getPlayerId()
-		local key = "GAME_PLAYER_TITLE_NOTICE"..serverId.."_"..playerId
-		local activeActivityPushTable = cc.UserDefault:getInstance():getStringForKey(key, "{}")
-		self._playerTitleNotice = json.decode(activeActivityPushTable)
+function PreferenceManager:getMusicOn()
+	local settingDefault = self:getSettingDefault()
+
+	local musicOn = settingDefault["music_on"]
+	if musicOn == nil then
+		local key = "GAME_DEFAULT_SETTING_MUSIC_ON"
+		musicOn = cc.UserDefault:getInstance():getBoolForKey(key, true)
+		settingDefault["music_on"] = musicOn
 	end
-	return self._playerTitleNotice
+
+	return musicOn
 end
 
-function PreferenceManager:resetPlayerTitleNotice()
-	if self._playerTitleNotice then
-		self._playerTitleNotice = nil
-	end
+function PreferenceManager:setMusicValue(musicValue)
+	local settingDefault = self:getSettingDefault()
 
-	local serverId = lt.DataManager:getCurServerId()
-	local playerId = lt.DataManager:getPlayerId()
-	local key = "GAME_PLAYER_TITLE_NOTICE"..serverId.."_"..playerId
-	local titleTable = {}
-	cc.UserDefault:getInstance():setStringForKey(key, json.encode(titleTable))
+	settingDefault["music"] = musicValue
+
+	local key = "GAME_DEFAULT_SETTING_MUSIC"
+	cc.UserDefault:getInstance():setIntegerForKey(key, musicValue)
   	cc.UserDefault:getInstance():flush()
 end
 
---玩家获取的称号
-function PreferenceManager:setPlayerTitle(titleId, info)--0 为永久 
-	local serverId = lt.DataManager:getCurServerId()
-	local playerId = lt.DataManager:getPlayerId()
-	local key = "GAME_PLAYER_TITLE"..serverId.."_"..playerId
-	local titleTable = self:getPlayerTitleTable() or {}
-	titleTable[tostring(titleId)] = info
-	cc.UserDefault:getInstance():setStringForKey(key, json.encode(titleTable))
-  	cc.UserDefault:getInstance():flush()
-end
+function PreferenceManager:getMusicValue()
+	local settingDefault = self:getSettingDefault()
 
-function PreferenceManager:getPlayerTitleTable()
-	if not self._playerTitleTable then
-		local serverId = lt.DataManager:getCurServerId()
-		local playerId = lt.DataManager:getPlayerId()
-		local key = "GAME_PLAYER_TITLE"..serverId.."_"..playerId
-		local activeActivityPushTable = cc.UserDefault:getInstance():getStringForKey(key)
-		self._playerTitleTable = json.decode(activeActivityPushTable)
-	end
-	return self._playerTitleTable
-end
-
-function PreferenceManager:resetPlayerTitle(tempTitleTable)--重设
-	if self._playerTitleTable then
-		self._playerTitleTable = nil
-	end
-	if not tempTitleTable then
-		tempTitleTable = {}
+	local musicValue = settingDefault["music"]
+	if not musicValue then
+		local key = "GAME_DEFAULT_SETTING_MUSIC"
+		musicValue = cc.UserDefault:getInstance():getIntegerForKey(key, 100)
+		settingDefault["music"] = musicValue
 	end
 
-	local serverId = lt.DataManager:getCurServerId()
-	local playerId = lt.DataManager:getPlayerId()
-	local key = "GAME_PLAYER_TITLE"..serverId.."_"..playerId
-	cc.UserDefault:getInstance():setStringForKey(key, json.encode(tempTitleTable))
-  	cc.UserDefault:getInstance():flush()
+	return musicValue
 end
 
 function PreferenceManager:setBgcolor(monsterId)--游戏背景颜色选择保存
@@ -332,6 +310,21 @@ end
 
 function PreferenceManager:getCreateRoominfoE()
 	local key = "CREATEROOMINFOTDHE"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
+function PreferenceManager:setCreateRoominfoF(monsterId)--记录推到胡记录房间信息 只可自摸胡
+	local key = "CREATEROOMINFOTDHF"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoF()
+	local key = "CREATEROOMINFOTDHF"
 	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
 	--if monsterId == 0 then
 	--	monsterId = 1
@@ -534,6 +527,21 @@ function PreferenceManager:getCreateRoominfoSQMJM()
 	return monsterId
 end
 
+function PreferenceManager:setCreateRoominfoSQMJN(monsterId)--记录商丘麻将记录房间信息 明听暗听
+	local key = "CREATEROOMINFOSQMJN"
+	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
+  	cc.UserDefault:getInstance():flush()
+end
+
+function PreferenceManager:getCreateRoominfoSQMJN()
+	local key = "CREATEROOMINFOSQMJN"
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+	--	monsterId = 1
+	--end
+	return monsterId
+end
+
 function PreferenceManager:setCreateRoominfoPLZA(monsterId)--记录飘癞子记录房间信息 资费
 	local key = "CREATEROOMINFOPLZA"
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
@@ -564,7 +572,7 @@ function PreferenceManager:getCreateRoominfoPLZB()
 	return monsterId
 end
 
-function PreferenceManager:setCreateRoominfoPLZC(monsterId)--记录飘癞子记录房间信息 自摸
+function PreferenceManager:setCreateRoominfoPLZC(monsterId)--记录飘癞子记录房间信息 是否可点炮
 	local key = "CREATEROOMINFOPLZC"
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
   	cc.UserDefault:getInstance():flush()
@@ -572,10 +580,10 @@ end
 
 function PreferenceManager:getCreateRoominfoPLZC()
 	local key = "CREATEROOMINFOPLZC"
-	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
-	if monsterId == 0 then
-		monsterId = 1
-	end
+	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key,-99)
+	--if monsterId == 0 then
+		--monsterId = 1
+	--end
 	return monsterId
 end
 

@@ -35,10 +35,12 @@ function layer:createAssetsManager()
     cc.Director:getInstance():getEventDispatcher():addEventListenerWithFixedPriority(listener, 1)
 end
 
-function layer:onUpdateEvent(event)
+function layer:onUpdateEvent(event,code)
     local am = self.assets_manager
-
-    local eventCode = event:getEventCode()
+    local eventCode = code
+    if event then
+        eventCode = event:getEventCode()
+    end
 
     if eventCode == EVENT_CODE.ERROR_NO_LOCAL_MANIFEST then
         print("No local manifest file found, skip assets update.")
@@ -55,7 +57,6 @@ function layer:onUpdateEvent(event)
             -- print('manifest 文件下载成功')
         else
             self:showProcess(percent)
-
         end
     elseif eventCode == EVENT_CODE.ERROR_DOWNLOAD_MANIFEST or 
            eventCode == EVENT_CODE.ERROR_PARSE_MANIFEST or 
@@ -108,9 +109,7 @@ end
 
 function layer:processError(eventCode)
     if eventCode == EVENT_CODE.ERROR_DOWNLOAD_MANIFEST then
-        --manifest文件下载失败，需要提示用户是否重新下载project.manifest
-        self.assets_manager:setState(EVENT_CODE.ALREADY_UP_TO_DATE)
-        self.assets_manager:update()
+        self:onUpdateEvent(nil,EVENT_CODE.ALREADY_UP_TO_DATE)
     elseif eventCode == EVENT_CODE.UPDATE_FAILED then
         --部分文件下载成功
         self.assets_manager:downloadFailedAssets()

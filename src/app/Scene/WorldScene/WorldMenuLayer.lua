@@ -104,6 +104,9 @@ function WorldMenuLayer:ctor()
 end
 
 function WorldMenuLayer:onEnter()
+    print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%++++++++")
+    lt.AudioManager:playMusic("hallcomm/sound/lobby/", "bg_music", true)
+
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.ROOM_LIST_UPDATE, handler(self, self.listenRoomListUpdate), "WorldMenuLayer.listenRoomListUpdate")
 end
 

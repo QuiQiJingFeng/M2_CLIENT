@@ -62,6 +62,10 @@ MjEngine.CARD_TYPE = {
 	HAND = 1, 
 	CPG = 2,
 	OUT = 3,
+
+	LIE_NORMAL = 4,
+	LIE_LIGHTHAND = 5,--亮四打一
+	LIE_HAND = 6,--回放  明牌
 }
 
 MjEngine.CARD_SPECIAL = {
@@ -252,8 +256,7 @@ function MjEngine:sendCards(msg, pos)--发牌 13张
 
 	local fourCardList = msg.four_card_list or {}
 
-	self._huiCardValue = msg.huicard
-	self:configHuiCard()
+	self:setHuiCardValue(msg.huicard)
 
 	if direction then--and lt.DataManager:getRePlayState()
 		self._allPlayerHandCardsValue[direction] = cards
@@ -264,7 +267,7 @@ function MjEngine:sendCards(msg, pos)--发牌 13张
 
 		for i,cardItem in pairs(fourCardList) do
 			local dire = lt.DataManager:getPlayerDirectionByPos(cardItem.user_pos)
-			self._allPlayerLightHandCardsValue[dire] = cardItem.cards
+			self._allPlayerLightHandCardsValue[dire] = cardItem.cards or {}
 		end
 
 		local tempFourCardList = clone(self._allPlayerLightHandCardsValue[direction])
@@ -533,10 +536,9 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			end
 
 			if node then
-				self:updateLieHandCardsNode(node, direction, info)
+				self:updateLieHandCardsNode(node, direction, info, self.CARD_TYPE.LIE_LIGHTHAND)
 			else
-
-				node = self:createLieFaceItemByDirection(direction,info)
+				node = self:createLieFaceItemByDirection(direction, info, self.CARD_TYPE.LIE_LIGHTHAND)
 				self._allPlayerHandCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 
 				table.insert(self._allPlayerLightHandCardsNode[direction], node)
@@ -581,7 +583,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 
 				if direction ~= lt.Constants.DIRECTION.NAN then
 					if lt.DataManager:getRePlayState() then
-						self:updateLieHandCardsNode(node, direction, info)
+						self:updateLieHandCardsNode(node, direction, info, self.CARD_TYPE.LIE_HAND)
 					else
 						self:updateCardsNode(node, self.CARD_TYPE.HAND, direction, info)
 					end
@@ -592,7 +594,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				if lt.DataManager:getRePlayState() then
 
 					if direction ~= lt.Constants.DIRECTION.NAN then
-						node = self:createLieFaceItemByDirection(direction,info)
+						node = self:createLieFaceItemByDirection(direction,info,self.CARD_TYPE.LIE_HAND)
 						self._allPlayerHandCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 					else
 						node = self:createCardsNode(self.CARD_TYPE.HAND, direction, info)
@@ -742,6 +744,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				self:updateCardsNode(node, self.CARD_TYPE.OUT, direction, info)
 			else
 				node = self:createCardsNode(self.CARD_TYPE.OUT, direction, info)
+				node:setScale(0.8)
 				node:setAnchorPoint(0.5, 0.5)
 
 				table.insert(self._allPlayerSpecialOutCardsNode[direction], node)
@@ -769,7 +772,7 @@ function MjEngine:updateNanHandCardValue(direction, handList, fourCardList)--通
 	fourCardList = fourCardList or {}
 	for k,v in pairs(fourCardList) do
 		local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
-		self._allPlayerLightHandCardsValue[direction] = v.cards
+		self._allPlayerLightHandCardsValue[direction] = v.cards or {}
 	end
 
 	local tempFourCardList = clone(self._allPlayerLightHandCardsValue[direction])
@@ -794,6 +797,18 @@ end
 
 function MjEngine:updateNanCpgCardValue(direction, cpgList)
 	self._allPlayerCpgCardsValue[direction] = cpgList
+end
+
+function MjEngine:updateLightCardValue(fourCardList)--四打一
+	fourCardList = fourCardList or {}
+
+	--亮四打一
+	if fourCardList then
+		for i,fourCardItem in pairs(fourCardList) do
+			local dire = lt.DataManager:getPlayerDirectionByPos(fourCardItem.user_pos)
+			self._allPlayerLightHandCardsValue[dire] = fourCardItem.cards
+		end
+	end
 end
 
 function MjEngine:goOutOneHandSpecialCardAtDirection(direction, value)--出了一张特殊 补花 飘癞子
@@ -1001,6 +1016,14 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		node:setCardIcon(value)
 		node:setTag(value)
 		node:showNormal()
+		
+		if self._huiCardValue and value == self._huiCardValue then
+			if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+				node:showRedMask()
+			elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+				node:showLightMask()
+			end
+		end
 
 		local isTing = false
 		if self._allHandCardsTingValue and #self._allHandCardsTingValue >= 1 then
@@ -1011,7 +1034,6 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 				end
 			end
 		end
-		lt.CommonUtil.print("####################################", isTing)
 
 		if #self._allPlayerLightHandCardsValue[direction] >= 4 then
 			if not self:isFlower(value) then
@@ -1028,8 +1050,8 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		end
 
 		local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getPlayerPosByDirection(direction))
-
 		if isBaoTing then
+			node:hideTing()
 			node:showBlackMask()
 		end
 
@@ -1042,29 +1064,56 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		node:setCardIcon(value)
 		node:setValue(value)
 		node:showNormal()
+
+		if value == self._huiCardValue then
+			node:showLightMask()
+		end
 	end	
 
 end
 
-function MjEngine:updateLieHandCardsNode(node, direction, info)
+function MjEngine:updateLieHandCardsNode(node, direction, info, type)
 	if node then
 		node:setCardIcon(info)
 		node:setTag(info)
+		node:showNormal()
 
-		if #self._allPlayerLightHandCardsValue[direction] < 4 then
-			if self:isFlower(info) then
-				node:showNormal()
-			else
-				node:showBlackMask() 
+		if type == self.CARD_TYPE.LIE_LIGHTHAND and direction == lt.Constants.DIRECTION.NAN then
+
+			if #self._allPlayerLightHandCardsValue[direction] < 4 then
+				if not self:isFlower(info) then
+					node:showBlackMask() 
+				end
 			end
 
-		else
-			node:showNormal()
+			local isTing = false
+			if self._allHandCardsTingValue and #self._allHandCardsTingValue >= 1 then
+				for i=1,#self._allHandCardsTingValue do
+					if self._allHandCardsTingValue[i] == info then
+						isTing = true
+						break
+					end
+				end
+			end
+			if isTing then
+				node:showTing()
+			else
+				if #self._allHandCardsTingValue > 0 and self._isSelectTing then
+					node:showBlackMask()
+				end 
+			end
+
+			local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getPlayerPosByDirection(direction))
+
+			if isBaoTing then
+				node:hideTing()
+				node:showBlackMask()
+			end
 		end
 	end
 end
 
-function MjEngine:createLieFaceItemByDirection(direction, info)
+function MjEngine:createLieFaceItemByDirection(direction, info, type)
 
 	local lieFaceNode = lt.MjLieFaceItem.new(direction)
 	if lieFaceNode then
@@ -1075,7 +1124,7 @@ function MjEngine:createLieFaceItemByDirection(direction, info)
 			end
 			lieFaceNode:setScale(2.0)
 		end
-		self:updateLieHandCardsNode(lieFaceNode, direction, info)
+		self:updateLieHandCardsNode(lieFaceNode, direction, info, type)
 	end
 
     return lieFaceNode
@@ -1088,27 +1137,54 @@ function MjEngine:isFlower(value)
 	return false
 end
 
-function MjEngine:checkMyHandButtonActionStatu(handList,state)
-    local tObjCpghObj = {
-        tObjChi = nil,
-        tObjPeng = nil,
-        tObjGang = nil,
-        tObjHu = nil,--抢杠胡  自摸
-        tObjTing = nil --听牌
-    }
-    local huBs = false
+function MjEngine:exitHuiNum(HandCards)
+	local num = 0
+	for k,v in pairs(HandCards) do
+		if v == self._huiCardValue then
+			num = num + 1
+		end
+	end
+	return num
+end
+
+function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
+
+	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+
+	if self._isNeedBaoTing == 1 then
+		--牌上显示听字
+		if isTing then
+			self:checkMyHandTingStatu()
+		end
+	else
+		self:checkMyHandTingStatu()
+	end
+
+    if not tObjCpghObj then
+	    tObjCpghObj = {
+	        tObjChi = nil,
+	        tObjPeng = nil,
+	        tObjGang = nil,
+	        tObjHu = nil,--抢杠胡  自摸
+	        tObjTing = nil --听牌
+	    }
+    end
+
+    local isCanHu = false
+    local isCanGang = false
+
     if state then
 	    --检测杠
 		local tempHandCards = clone(handList)
 
 		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
-		dump(anGangCards)
 
 		local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[lt.Constants.DIRECTION.NAN], tempHandCards)
-		dump(pengGang)
 
 		if #anGangCards > 0 or #pengGang > 0 then
-			tObjCpghObj.tObjGang = {}
+			tObjCpghObj.tObjGang = tObjCpghObj.tObjGang or {}
+
+			isCanGang = true
 		end
 
 		for i,v in ipairs(anGangCards) do
@@ -1123,52 +1199,56 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state)
 		if self:checkIsHu(handList) then
 			lt.CommonUtil.print("自摸了###########################################")
 			tObjCpghObj.tObjHu = {}
-			huBs = true
+			isCanHu = true
 		else
-			huBs = false
+			isCanHu = false
 			lt.CommonUtil.print("没有自摸###########################################")
 		end
 	end
 
 	--检测听牌
+	local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+	lt.CommonUtil.print("当前玩家有没有报听",isBaoTing)
 
-	local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+	--不同麻将的报听玩法处理
 
-	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
-		if not huBs then 
-			if isTing then --听过牌的人检测过后会再动打出去
-				if self._clickCardCallback and self._tingOutCardValue then
-					local statee = 1
-					self._clickCardCallback(self._tingOutCardValue,statee)
-				end
-			end	
-		else
-			if not isTing then --没报听不能胡牌
+	if isBaoTing then--报听了   不再弹出听牌的按钮
+		if not isCanHu and not isCanGang then
+			self:autoPutOutCard()--听过牌的人检测过后会再动打出去
+		end
+	else--没报听
+		if self._isNeedBaoTing == 1 then --需要报听 
+			if isCanHu then--不报听不能胡
 				tObjCpghObj.tObjHu = nil
 			end
-		end
 
-		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[2]
-		if setisTing == 1 then --报听
-			if  not isTing then --听牌后不再弹出听牌的按钮
-			    self._isThereAnyTing = false
-				local isCardTing = false
-				if self:isCanTingCard() then
-					isCardTing = true
-					self._isThereAnyTing = true
-				end
-
-			    if isCardTing then
-			    	tObjCpghObj.tObjTing = {}
-			    end
+			local isCardTing = false
+			if self:isCanTingCard() then--检测是否可以报听
+				isCardTing = true
 			end
+
+		    if isCardTing then
+		    	tObjCpghObj.tObjTing = {}
+		    end
 		else--不抱听
 		end
-
-	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
 	end
 
 	return tObjCpghObj
+end
+
+function MjEngine:autoPutOutCard()--自动出牌
+	if self._clickCardCallback and self._tingOutCardValue then
+		local function func()
+		   local statee = 1
+		   self._clickCardCallback(self._tingOutCardValue,statee)			
+		end
+		local delay = cc.DelayTime:create(1)
+		local func1 = cc.CallFunc:create(func)
+		local sequence = cc.Sequence:create(delay, func1)
+		self._deleget:runAction(sequence)
+
+	end
 end
 
 function MjEngine:isCanTingCard() --是否可以听牌 仅仅为了显示听的按钮
@@ -1179,12 +1259,24 @@ function MjEngine:isCanTingCard() --是否可以听牌 仅仅为了显示听的�
 		if isTing then
 			--table.insert(self._allHandCardsTingValue,value)
 			--handNode:showTing()--显示听得标志
-			isCanTing = true
-			break
+			if self._gameRoomInfo.room_setting.game_type == lt.Constants.GAME_TYPE.SQMJ then
+				for i,v in ipairs(self._allPlayerStandHandCardsValue[lt.Constants.DIRECTION.NAN]) do
+					if value == v then
+						isCanTing = true
+						break
+					end
+				end
+			else
+				isCanTing = true
+			end
+
+			if isCanTing then
+				break
+			end
 		end
 	end
 	--local istingInfo = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
-
+	lt.CommonUtil.print("检测显示听按钮", isCanTing)
 	return isCanTing
 end
 
@@ -1245,7 +1337,6 @@ function MjEngine:getotersCard(value)--胡牌的番
 end
 function MjEngine:getAllCanHuCards(tempHandCards, value)
 	lt.CommonUtil.print("=============getAllCanHuCards============",value)
-	dump(tempHandCards)
 
 	if value then
 		for i,v in ipairs(tempHandCards) do
@@ -1269,7 +1360,6 @@ function MjEngine:getAllCanHuCards(tempHandCards, value)
 end
 
 function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否可以听
-    lt.CommonUtil.print("++++++++++++++检测听牌的牌++++++++++++",value)
     local allCardsValueTable = clone(tempHandCards)
 	for i,v in ipairs(allCardsValueTable) do
 		if v == value then
@@ -1290,6 +1380,7 @@ function MjEngine:isCanTingByCard(tempHandCards, value)--出一张手牌是否�
 end
 
 function MjEngine:checkIsHu(HandCards, card)
+
 	local tempHandCards = clone(HandCards)
 	local config = {}--config.isQiDui,config.huiCard,config.hiPoint,config.hiPoint.shiShanYao
 	if self._gameRoomInfo and self._gameRoomInfo.room_setting then
@@ -1314,7 +1405,6 @@ function MjEngine:checkIsHu(HandCards, card)
 					return false
 				end
 			end
-
 		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.TDH then
 			-- 游戏设置项[数组]
 		    -- [1] 底分
@@ -1324,6 +1414,19 @@ function MjEngine:checkIsHu(HandCards, card)
 		    config = {}
 		    config.isQiDui = true
 			config.shiShanYao = (settingInfo.other_setting[4] == 1)  and true or false
+		
+		elseif settingInfo.game_type == lt.Constants.GAME_TYPE.PLZ then
+
+			local num = self:exitHuiNum(tempHandCards)
+			if num >= 2 then
+				return false
+			end
+
+			if num == 1 and card == self._huiCardValue then
+				return false
+			end
+
+			config.huiCard = self._huiCardValue
 		end
 	end
 
@@ -1332,19 +1435,16 @@ end
 
 function MjEngine:checkMyHandTingStatu(isSelectTing)
 	self._isSelectTing = isSelectTing
-
 	local isting = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 	if isting then
 		return
 	end
- 
 	for key,value in pairs(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) do
 		local isTing = self:isCanTingByCard(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], value)--出一张手牌是否可以听
 		if isTing then
 			table.insert(self._allHandCardsTingValue,value)
 		end
 	end
-	dump(self._allHandCardsTingValue)
 	self:configAllPlayerCards(lt.Constants.DIRECTION.NAN, false, true, false, false)	
 end
 
@@ -1579,7 +1679,7 @@ function MjEngine:gameOverShow()--游戏结束 推到牌
 
 							local value = nil
 							if v.card_list[index] then
-								local lieFaceNode = self:createLieFaceItemByDirection(direction, v.card_list[index])
+								local lieFaceNode = self:createLieFaceItemByDirection(direction, v.card_list[index], self.CARD_TYPE.LIE_HAND)
 								lieFaceNode:setPosition(node:getPosition())
 								--local root = node:getParent()
 								self._allPlayerHandCardsPanel[direction]:addChild(lieFaceNode:getRootNode(), cardZorder)
@@ -1601,6 +1701,7 @@ function MjEngine:gameOverShow()--游戏结束 推到牌
 end
 
 function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
+
 	local direction = lt.DataManager:getPlayerDirectionByPos(msg.user_pos)
 	if not direction then
 		return
@@ -1728,12 +1829,12 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 					end
 				end
 
-				local a = 1
-				local allRemoveNum = 0
-				while (a <= #self._allPlayerHandCardsValue[direction]) do
-					table.remove(self._allPlayerStandHandCardsValue[direction], 1)
-					allRemoveNum = allRemoveNum + 1
+				for i=1,offNum do
+					if #self._allPlayerHandCardsValue[direction] > 0 then
+						table.remove(self._allPlayerHandCardsValue[direction], 1)
+					end
 				end
+
 			else
 				local removeNum = 0
 
@@ -1765,7 +1866,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 				local allRemoveNum = 0
 				while (a <= #self._allPlayerHandCardsValue[direction]) do
 					if self._allPlayerHandCardsValue[direction][a] == msg.item["value"] and allRemoveNum < offNum then
-						table.remove(self._allPlayerStandHandCardsValue[direction], a)
+						table.remove(self._allPlayerHandCardsValue[direction], a)
 						allRemoveNum = allRemoveNum + 1
 					else
 						a = a + 1
@@ -1780,19 +1881,45 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 		local directionn = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
 		lt.CommonUtil.print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
 
-		local info = {}
-		info["user_pos"] = msg.item["from"]
-		info["ting"] = true
 		local tingInfo = lt.DataManager:getTingPlayerInfo()
-		table.insert( tingInfo, info )
 
-		if lt.DataManager:getRePlayState() and msg.item["value"] then
-			self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+    	local isExit = false
+    	for k,v in pairs(tingInfo) do
+    		if v.user_pos == msg.item["from"] then
+    			v.ting = true
+    			isExit = true
+    		end
+    	end
+    	if not isExit then
+    		local info = {}
+			info["user_pos"] = msg.item["from"]
+			info["ting"] = true
+			table.insert( tingInfo, info )
+    	end
+
+		lt.CommonUtil.print("noticeSpecialEvent==>",tingInfo)
+
+		if self._isNeedBaoTing then
+			if not self._isAnTing then--明听发的不走这里
+				if lt.DataManager:getRePlayState() and msg.item["value"] then--不是回放在 点击牌的时候加
+					
+					self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+				end
+			end
 		end
 	end
 
 	self:configAllPlayerCards(direction, true, true, true, false)--4 false --> true 
 
+end
+
+function MjEngine:setHuiCardValue(huiValue)
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then
+		self._huiCardValue = lt.Constants.HONG_ZHONG_VALUE
+	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
+		self._huiCardValue = huiValue
+		self:configHuiCard()
+	end
 end
 
 function MjEngine:onClientConnectAgain()--  断线重连
@@ -1807,7 +1934,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	if allRoomInfo.four_card_list then
 		for i,fourCardItem in ipairs(allRoomInfo.four_card_list) do
 			local dire = lt.DataManager:getPlayerDirectionByPos(fourCardItem.user_pos)
-			self._allPlayerLightHandCardsValue[dire] = fourCardItem.cards
+			self._allPlayerLightHandCardsValue[dire] = fourCardItem.cards or {}
 		end
 	end
 
@@ -1844,10 +1971,14 @@ function MjEngine:onClientConnectAgain()--  断线重连
 			local direction = lt.DataManager:getPlayerDirectionByPos(info.user_pos)
 			if direction ~= lt.Constants.DIRECTION.NAN then--不是自己
 				self._allPlayerStandHandCardsValue[direction] = {}
-
+				self._allPlayerHandCardsValue[direction] = {}
 				local handNum = info.handle_num - #self._allPlayerLightHandCardsValue[direction]
-				for i=1,handNum do
-					table.insert(self._allPlayerStandHandCardsValue[direction], 99)
+
+				for i=1,info.handle_num do
+					if i <= handNum then
+						table.insert(self._allPlayerStandHandCardsValue[direction], 99)
+					end
+					table.insert(self._allPlayerHandCardsValue[direction], 99)
 				end
 			end
 		end
@@ -1894,9 +2025,7 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	end
 
 	--癞子
-	self._huiCardValue = allRoomInfo.huicard
-
-	self:configHuiCard()
+	self:setHuiCardValue(allRoomInfo.huicard)
 
     --当前事件  
 
@@ -1951,59 +2080,79 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	-- 	end
 	-- end	
 
-	local putOutType = 0 --  1摸牌出牌  2 碰牌出牌 
+	local state = 0 --  1摸牌出牌  2 碰牌出牌 
 
 	if allRoomInfo.cur_play_pos and allRoomInfo.cur_play_pos == lt.DataManager:getMyselfPositionInfo().user_pos  then
 		if allRoomInfo.card then--如果有card则说明是摸牌出牌,否则是碰牌出牌
-			putOutType = 1
+			state = true
 		else
-			putOutType = 2
+			state = false
 		end
 	end
 
-	if putOutType == 1 then
-	    --检测杠
-		local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
+	if allRoomInfo.cur_play_pos == lt.DataManager:getMyselfPositionInfo().user_pos then--该自己出牌才检查
+		local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+		if isTing then
+			self._tingOutCardValue = allRoomInfo.card_list[#allRoomInfo.card_list]
+			--self:autoPutOutCard()
+		end	
 
-
-		dump(tempHandCards)
-
-		local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards) 
-
-		local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[lt.Constants.DIRECTION.NAN], tempHandCards)
-
-		if #anGangCards > 0 or #pengGang > 0 then
-			tObjCpghObj.tObjGang =  tObjCpghObj.tObjGang or {}
-		end
-
-		for i,v in ipairs(anGangCards) do
-			table.insert(tObjCpghObj.tObjGang, v)
-		end
-
-		for i,v in ipairs(pengGang) do
-			table.insert(tObjCpghObj.tObjGang, v)
-		end
-
-		--检测胡
-		if self:checkIsHu(allRoomInfo.card_list) then
-			tObjCpghObj.tObjHu = {}
+		if self._isNeedBaoTing == 1 then
+			--牌上显示听字
+			if isTing then
+				self:checkMyHandTingStatu()
+			end
 		else
-			lt.CommonUtil.print("没有自摸")
-		end			
+			self:checkMyHandTingStatu()
+		end
+
+	   tObjCpghObj = self:checkMyHandButtonActionStatu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], state, tObjCpghObj)
 	end
+
+	allRoomInfo.ting_list = allRoomInfo.ting_list or {}
+	for k,v in pairs(allRoomInfo.ting_list) do --断线回来如何听过牌则显示玩家面前的听杠子
+        if v.ting == true then
+        	local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
+        	self._deleget:ShowTingGang(direction)
+        end
+    end
 
     --显示吃碰杠胡控件
     self._deleget:viewHideActPanelAndMenu()
     self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
     self._deleget:viewActionButtons(tObjCpghObj, true)
-
+    
 	for i,direction in ipairs(self._currentGameDirections) do
 		self:configAllPlayerCards(direction, true, true, true, true)
 	end
 end
 
-function MjEngine:setEngineConfig()
+function MjEngine:setMingTingConfig()
+	self._isNeedBaoTing = 0
 
+	 --1 暗听 0明听
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
+		self._isNeedBaoTing = lt.DataManager:getGameRoomSetInfo().other_setting[2]
+
+		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[5]
+		if setisTing == 1 then
+			self._isAnTing = true --暗听
+		else
+			self._isAnTing = false--明听
+		end
+	elseif lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.SQMJ then
+		self._isNeedBaoTing = 1
+
+		local setisTing = lt.DataManager:getGameRoomSetInfo().other_setting[13]
+		if setisTing == 1 then
+			self._isAnTing = true --暗听
+		else
+			self._isAnTing = false--明听
+		end
+	end
+end
+
+function MjEngine:setEngineConfig()
 	--在检测胡牌之前不同玩法的条件设置 当条件满足了在check是否可以胡牌
 
 	--红中玩法 +-可胡七对  +-喜分 +-一码不中当全中

@@ -172,7 +172,6 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	local over_type = gameOverInfo.over_type
 
 	if last_round then
-		ENDRONDBS = 2
 		self._resultStartAgainBtn:setVisible(false)
 		self._resultTotalEndBtn:setVisible(true)
 		self._resultWeChatShareBtn:setVisible(false)
@@ -255,11 +254,27 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	-- score
 	-- card_list
 end
+
 function GameResultPanel:onnoticeTotalSattle(msg)
 	self._resultInfo = msg
 end
 
 function GameResultPanel:onTotalEndClick(event)
+	if self._resultInfo then
+		local resultLayer = lt.GmaeResultTotalEndLayer.new(self._resultInfo)
+		resultLayer:show(self._resultInfo)
+		lt.UILayerManager:addLayer(resultLayer,true)
+	end
+end
+
+function GameResultPanel:GameOver()
+	self:setVisible(true)
+	self._resultPanelMask:setVisible(true)
+
+	self._resultStartAgainBtn:setVisible(false)
+	self._resultTotalEndBtn:setVisible(true)
+	self._resultWeChatShareBtn:setVisible(false)
+	self._resultLeaveRoomBtn:setVisible(false)
 	if self._resultInfo then
 		local resultLayer = lt.GmaeResultTotalEndLayer.new(self._resultInfo)
 		resultLayer:show(self._resultInfo)

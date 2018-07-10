@@ -183,18 +183,24 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
         end
 
     elseif pSender == self.m_objCommonUi.m_btnPass then
-       
-        if self.m_objCommonUi.m_btnTing:isVisible() then
-            self._deleget:checkMyHandTingStatu(false)
-        end
-
         if pSender.isPassSendMsg then
             self:onPassAction()
         else
             self:onPassClick()
         end
-        --self.m_objModel.m_chiPengGangTing = 0
+
         self:viewHideActPanelAndMenu()
+
+        if self.m_objCommonUi.m_btnTing:isVisible() then
+            self._deleget:checkMyHandTingStatu(false)
+        end
+        local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+
+        if isBaoTing then
+            self._deleget:autoPutOutCard()
+        end
+
+        --self.m_objModel.m_chiPengGangTing = 0
 
     elseif pSender == self.m_objCommonUi.m_btnMenuPass then -- 二级菜单的【过】按钮
         if pSender.isPassSendMsg then
@@ -282,6 +288,9 @@ function GameActionBtnsPanel:setBtnEnabled(btn, bIsEnable)
     btn:setVisible(bIsEnable)
     btn:setTouchEnabled(bIsEnable)
     btn:setColor(bIsEnable and cNormal or cDisable)
+    if lt.DataManager:getRePlayState() then --战绩回放下不显按钮
+        btn:setVisible(false)
+    end
 end
 
 --显示吃碰杠胡按钮  
@@ -313,7 +322,8 @@ function GameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
         local isHu = tObjCpghObj.tObjHu ~= nil
         self:setBtnEnabled(self.m_objCommonUi.m_btnHu, isHu)
     end
-    if tObjCpghObj.tObjHu and lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then
+    local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+    if tObjCpghObj.tObjHu and isTing then
         self:setBtnEnabled(self.m_objCommonUi.m_btnPass,false) --推倒胡胡牌不能过
     else
         self:setBtnEnabled(self.m_objCommonUi.m_btnPass, true)
@@ -566,7 +576,7 @@ function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
     local iStartX = 0
     local iGap = 10
     local iPanelMenuWidth = 0
-
+    --tObj = {12,12,14,15,16,18,21}
     for i = 1, #tObj do
         local uiItem = lt.MjHuCardTipsItem.new()
 
@@ -576,28 +586,33 @@ function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
         uiItem:setCardNum(num)
 
         panelMenu:addChild(uiItem)
-        uiItem:setPosition(cc.p(iStartX, panelMenu:getContentSize().height/2 - uiItem:getBoundingBox().height/2))
+        uiItem:setPosition(cc.p(iStartX, panelMenu:getContentSize().height/2 - uiItem:getBoundingBox().height/2+10))
         iStartX = iStartX + uiItem:getBoundingBox().width + iGap
         iPanelMenuWidth = iPanelMenuWidth + uiItem:getBoundingBox().width
 
         table.insert(self._allHutipsCardNode, uiItem)
     end
-
-    --添加
+--[[
+    local textSpr = cc.Sprite:create("game/mjcomm/part/arrow_down.png")--最近战绩 
+    textSpr:setPosition(cc.p(self.m_objCommonUi.m_imgHuCardTipsBg:getContentSize().width/2, self.m_objCommonUi.m_imgHuCardTipsBg:getContentSize().height/2))
+    textSpr:setRotation(90)
+    textSpr:setScale(0.8)
+    self.m_objCommonUi.m_imgHuCardTipsBg:addChild(textSpr,1)--]]
 
     iPanelMenuWidth = iPanelMenuWidth + (#tObj - 1) * iGap
 
     --胡牌提示滚动面板的实际尺寸
     local panelSize = cc.size(iPanelMenuWidth, panelMenu:getContentSize().height)
     --胡牌提示滚动面板的滚动尺寸
-    panelMenu:setInnerContainerSize(panelSize)
+  
     if panelSize.width > 350 then --长度超过了 x 就设置成x，同时允许滚动
         panelSize.width = 350
         self:setHuTipsScrollBarEnabled(panelMenu, true)
     else --否则有足够的空间，不需要滚动
         self:setHuTipsScrollBarEnabled(panelMenu, false)
     end
-    panelMenu:setContentSize(panelSize)
+    panelMenu:setInnerContainerSize(cc.size(iPanelMenuWidth, panelMenu:getContentSize().height+20))
+    panelMenu:setContentSize(cc.size(panelSize.width, panelMenu:getContentSize().height+20))
 
     --背景变化
     local imgMenuBg = self.m_objCommonUi.m_imgHuCardTipsBg
@@ -612,17 +627,21 @@ end
 function GameActionBtnsPanel:setHuTipsScrollBarEnabled(uiScrollBar, isEnabled, iDisY)
     uiScrollBar:setScrollBarEnabled(isEnabled)
     if uiScrollBar:isScrollBarEnabled() then
-        uiScrollBar:setScrollBarAutoHideTime(1)
-        uiScrollBar:setScrollBarColor(cc.c3b(255, 255, 255))
+        uiScrollBar:setScrollBarAutoHideTime(2)
+        uiScrollBar:setScrollBarColor(cc.c3b(255,255,255))--84,255,159))
         local p = uiScrollBar:getScrollBarPositionFromCornerForHorizontal()
         p.y = 0
         if iDisY then
             p.y = p.y + iDisY 
         end
         uiScrollBar:setScrollBarPositionFromCornerForHorizontal(p)
+        uiScrollBar:setScrollBarPositionFromCorner(cc.p(0,10))
         uiScrollBar:setScrollBarWidth(4)
     end
     uiScrollBar:setTouchEnabled(isEnabled)
+    if isEnabled then
+        uiScrollBar:setScrollBarAutoHideEnabled(false)
+    end
 end
 
 function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
@@ -675,7 +694,7 @@ function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
 end
 
 function GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent(msg)  
-    if not msg or not msg.user_pos or not msg.card then
+    if not msg or not msg.type or not msg.user_pos or not msg.card then
         return
     end
     local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
@@ -689,6 +708,12 @@ function GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent(msg)
     local word = self._specialEventNode[direction]:getChildByName("Sprite_Word")
 
     local path = "game/mjcomm/animation/aniWord/wordLai.png"
+
+    if msg.type == 1 then--补花
+        path = "game/mjcomm/animation/aniWord/wordLai.png"
+    elseif msg.type == 2 then--飘癞子
+        path = "game/mjcomm/animation/aniWord/wordLai.png"
+    end
 
     word:setSpriteFrame(path)
     

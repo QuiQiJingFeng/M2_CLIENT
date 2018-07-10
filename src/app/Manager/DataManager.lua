@@ -72,6 +72,7 @@ function DataManager:clearPushAllRoomInfo()
 end
 
 function DataManager:onPushAllRoomInfo(msg)
+    print("===================断线重连======================")
 
     if msg.refresh_room_info then
         self._gameRoomInfo = msg.refresh_room_info
@@ -122,6 +123,7 @@ function DataManager:listenNetDisconnect()
         if room_id then
             lt.CommonUtil:sepecailServerLogin(room_id,function(result) 
                 if result == "success" then
+                    times = 3
                     self._pushAllRoomInfo = {}
                     local arg = {room_id = room_id}
                     lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
@@ -236,7 +238,20 @@ function DataManager:getGameAllCardsValue()
                 end
             end
         elseif settingInfo.game_type == lt.Constants.GAME_TYPE.SQMJ then
+            --是否带风
+            local isFeng = lt.DataManager:getGameRoomSetInfo().other_setting[2]
+            if isFeng == 1 then
+                for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE2) do
+                    table.insert(allCardsValue, v)
+                    if v < 41 then
+                        cardsAllNum = cardsAllNum + 4
+                    else
+                        cardsAllNum = cardsAllNum + 1
+                    end
+                end
+            end
 
+            --花
             for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
                 table.insert(allCardsValue, v)
                 if v < 41 then
@@ -293,7 +308,6 @@ end
 
 function DataManager:isTingPlayerByPos(pos)
     local info = self:getTingPlayerInfo()
-
     for k,v in ipairs(info) do
         if v.user_pos == pos then
             return v.ting
