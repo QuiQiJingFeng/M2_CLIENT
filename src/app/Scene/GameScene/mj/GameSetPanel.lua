@@ -52,6 +52,10 @@ function GameSetPanel:ctor(deleget)
 	self.__recording = false
 end
 
+function GameSetPanel:UpdateCardBgColor()--暂停
+	self._deleget:UpdateCardBgColor()
+end
+
 function GameSetPanel:onTouchReplayUIShow()--显示出来
 	self._panel_RecordCtrl:setVisible(true)
 	local Button_Voice = self:getChildByName("Button_Voice")
@@ -128,12 +132,16 @@ function GameSetPanel:onTouchEndVoice()
 end
 
 function GameSetPanel:onSetClick(event) 
-	local setLayer = lt.SettingLayer.new()
+	local setLayer = lt.SettingLayer.new(self)
     lt.UILayerManager:addLayer(setLayer, true)
 end
 
 function GameSetPanel:onRuleClick(event) 
 
+end
+
+function GameSetPanel:setRoomBg(id)
+	self._deleget:setRoomBg(id)
 end
 
 function GameSetPanel:onNoticeSendAudio(content)

@@ -5,9 +5,9 @@ local GmaeResultTotalEndLayer = class("GmaeResultTotalEndLayer", lt.BaseLayer, f
 end)
 local posY = 80
 -- 1334  
-function GmaeResultTotalEndLayer:ctor(info)
+function GmaeResultTotalEndLayer:ctor(info, deleget)
 	GmaeResultTotalEndLayer.super.ctor(self)
-
+    self._deleget = deleget
 	self._Ie_Bg = self:getChildByName("Ie_Bg")
     self._bn_Close = self._Ie_Bg:getChildByName("Bn_Close")
     local Node_Status = self._Ie_Bg:getChildByName("Node_Status")
@@ -100,7 +100,7 @@ array = {room_id = 10086,sattle_list = {[1] = {user_id = 10086,user_pos = 1,hu_n
 end
 
 function GmaeResultTotalEndLayer:onClose()
-    lt.UILayerManager:removeLayer(self)
+    self._deleget:closeGmaeResultTotalEndLayer()
 end
 
 function GmaeResultTotalEndLayer:onLeave()
