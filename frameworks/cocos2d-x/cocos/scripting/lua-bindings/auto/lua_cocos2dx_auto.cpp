@@ -5,7 +5,7 @@
 #include "scripting/lua-bindings/manual/CCComponentLua.h"
 #include "scripting/lua-bindings/manual/tolua_fix.h"
 #include "scripting/lua-bindings/manual/LuaBasicConversions.h"
-
+#include "scripting/lua-bindings/manual/CCLuaEngine.h"
 int lua_cocos2dx_Ref_release(lua_State* tolua_S)
 {
     int argc = 0;
@@ -76987,14 +76987,18 @@ int lua_cocos2dx_RenderTexture_saveToFile(lua_State* tolua_S)
 
             if (!ok) { break; }
             std::function<void (cocos2d::RenderTexture *, const std::basic_string<char> &)> arg3;
-            do {
-			// Lambda binding for lua is not supported.
-			assert(false);
-		} while(0)
-		;
-
+            int funcId = 0;
+            if(lua_isfunction(tolua_S, 5)){
+                funcId = toluafix_ref_function(tolua_S, 5, 0);
+            }
+            
             if (!ok) { break; }
-            bool ret = cobj->saveToFile(arg0, arg1, arg2, arg3);
+            bool ret = cobj->saveToFile(arg0, arg1, arg2, [tolua_S,funcId](cocos2d::RenderTexture * texture,const std::basic_string<char> & filename){
+                if(funcId > 0){
+                    lua_pushstring(tolua_S,filename.c_str());
+                    cocos2d::LuaEngine::getInstance()->getLuaStack()->executeFunctionByHandler(funcId, 1);
+                }
+            });
             tolua_pushboolean(tolua_S,(bool)ret);
             return 1;
         }
