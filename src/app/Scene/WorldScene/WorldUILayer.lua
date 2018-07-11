@@ -22,7 +22,7 @@ function WorldUILayer:onEnter()
 end
 
 function WorldUILayer:onExit()
-    lt.UILayerManager:clearWorldUILayer()
+    
 end
 
 function WorldUILayer:updateInfo()
