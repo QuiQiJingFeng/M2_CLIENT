@@ -14,7 +14,8 @@ function LobbyHelpLayer:ctor()
 	local size = self._menu_GameList:getContentSize()
 	self._menu_GameList:setInnerContainerSize(cc.size(size.width,250))--人数 x 80
 
-	self._gameTbnNameTable = {}
+	self._lowNodeTable = {}
+	self._deepNodeTable = {}
 	
 	local posY = 428--140
 	for i=1,5 do
@@ -45,6 +46,22 @@ function LobbyHelpLayer:ctor()
     			    self._texure:setScale(1.0)
 	    			btnTab:addChild(self._texure)
 
+	    			for k,v in ipairs(self._lowNodeTable) do
+	    		    	if k == i then
+	    		    		v:setVisible(false)
+	    		    		for p,t in ipairs(self._deepNodeTable) do
+	    		    			if p == i then
+	    		    				t:setVisible(true)
+	    		    			else
+	    		    				t:setVisible(false)
+	    		    			end
+	    		    		end
+	    		    		
+			    		else
+			    			v:setVisible(true)
+	    		    	end
+	    		    end
+
 	    		else
 	    			print("=======选中状态======")
 	    			self._texure = ccui.Button:create("game/common/img/createRoom_btnSelect.png", "game/common/img/createRoom_btnSelect.png", "game/common/img/createRoom_btnSelect.png", 1)
@@ -54,12 +71,6 @@ function LobbyHelpLayer:ctor()
     			    self._texure:setScale(1.0)
 	    			btnTab:addChild(self._texure)
     			end
-    				--[[
-    				for k,v in pairs(self._gameTbnNameTable) do
-    					if v ~= i then
-    						v:setVisible(false)
-    					end
-    				end--]]
     				if  not self._helpDate then
 	    			    self._helpDate = lt.HelpData.new()
 	    				self._helpDate:show(i)
@@ -76,30 +87,61 @@ function LobbyHelpLayer:ctor()
 		self._menu_GameList:addChild(btnTab)
 
 		if i == 1 then  --1 红中 2 斗地主  ImageText120 3 商丘麻将  ImageText112 4 飘癞子 ImageText114  5 推倒胡 ImageText6
-			self._textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--名称
-	    	self._textSpr1:setPosition(100,45)
-	    	btnTab:addChild(self._textSpr1,1)
-	  	    table.insert( self._gameTbnNameTable, self._textSpr1 )
+			local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText2.png")--名称
+	    	textSpr1:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+	    	textSpr1:setVisible(false)
+	    	btnTab:addChild(textSpr1,1)
+	  	    table.insert( self._lowNodeTable, textSpr1 )
+
+	  	    local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--名称
+	    	textSpr:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+	    	textSpr:setVisible(true)
+	    	btnTab:addChild(textSpr,1)
+	  	    table.insert( self._deepNodeTable, textSpr )
 		elseif i == 2 then
-			self._textSpr2 = cc.Sprite:create("games/comm/lobbySpecial/ImageText120.png")--名称
-	    	self._textSpr2:setPosition(100,45)
-	    	btnTab:addChild(self._textSpr2,1)
-	    	table.insert( self._gameTbnNameTable, self._textSpr2 )
+			local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText119.png")--名称
+	    	textSpr1:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+	    	btnTab:addChild(textSpr1,1)
+	    	table.insert( self._lowNodeTable, textSpr1 )
+
+	    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText120.png")--名称
+	    	textSpr:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+	    	textSpr:setVisible(false)
+	    	btnTab:addChild(textSpr,1)
+	  	    table.insert( self._deepNodeTable, textSpr )
 		elseif i == 3 then
-			self._textSpr3 = cc.Sprite:create("games/comm/lobbySpecial/ImageText112.png")--名称
-	    	self._textSpr3:setPosition(100,45)
-	    	btnTab:addChild(self._textSpr3,1)
-	    	table.insert( self._gameTbnNameTable, self._textSpr3 )
+			local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText111.png")--名称
+	    	textSpr1:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+	    	btnTab:addChild(textSpr1,1)
+	    	table.insert( self._lowNodeTable, textSpr1 )
+
+	    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText112.png")--名称
+	    	textSpr:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+	    	textSpr:setVisible(false)
+	    	btnTab:addChild(textSpr,1)
+	  	    table.insert( self._deepNodeTable, textSpr )
 		elseif i == 4 then
-			self._textSpr4 = cc.Sprite:create("games/comm/lobbySpecial/ImageText114.png")--名称
-    		self._textSpr4:setPosition(100,45)
-    		btnTab:addChild(self._textSpr4,1)
-    		table.insert( self._gameTbnNameTable, self._textSpr4 )
+			local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText113.png")--名称
+    		textSpr1:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+    		btnTab:addChild(textSpr1,1)
+    		table.insert( self._lowNodeTable, textSpr1 )
+
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText114.png")--名称
+	    	textSpr:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+	    	textSpr:setVisible(false)
+	    	btnTab:addChild(textSpr,1)
+	  	    table.insert( self._deepNodeTable, textSpr )
     	elseif i == 5 then
-    		self._textSpr5 = cc.Sprite:create("games/comm/lobbySpecial/ImageText6.png")--名称
-    		self._textSpr5:setPosition(100,45)
-    		btnTab:addChild(self._textSpr5,1)
-    		table.insert( self._gameTbnNameTable, self._textSpr5 )
+    		local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText7.png")--名称
+    		textSpr1:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+    		btnTab:addChild(textSpr1,1)
+    		table.insert( self._lowNodeTable, textSpr1 )
+
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText6.png")--名称
+	    	textSpr:setPosition(btnTab:getContentSize().width/2,btnTab:getContentSize().height/2)
+	    	textSpr:setVisible(false)
+	    	btnTab:addChild(textSpr,1)
+	  	    table.insert( self._deepNodeTable, textSpr )
 		end
 
 		if i == 1 then
@@ -109,8 +151,6 @@ function LobbyHelpLayer:ctor()
 	    	self._texure:setAnchorPoint(0,0)
 	    	self._texure:setScale(1.0)
 		    btnTab:addChild(self._texure)
-
-		    --self._textSpr5:setVisible(false)
 
 		    self._helpDate = lt.HelpData.new()
 		    self._helpDate:show(5)

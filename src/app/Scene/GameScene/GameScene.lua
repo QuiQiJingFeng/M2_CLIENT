@@ -39,6 +39,8 @@ function GameScene:ctor()
     self._gameNoticeLayer = lt.WorldNoticeLayer.new()
     self:addChild(self._gameNoticeLayer)
 
+    lt.UILayerManager:clearWorldUILayer()
+
     lt.UILayerManager:setWorldMenuLayer(self._gameRoomLayer)
     lt.UILayerManager:setWorldUILayer(self._gameUILayer)
 
