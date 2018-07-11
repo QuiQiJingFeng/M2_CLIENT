@@ -1,34 +1,38 @@
-package com.mengya.common;
+package com.common;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
-import org.cocos2dx.lib.Cocos2dxLuaJavaBridge;
 
-public class Utils {
+public class Device {
     private Activity __activity;
-    private Utils() {}
-    private static Utils __instance = null;
+    private Device() {}
+    private static Device __instance = null;
     public static synchronized Object getInstance(){
         if (__instance == null) {
-            __instance = new Utils();
+            __instance = new Device();
         }
         return __instance;
     }
 
-	
     protected static final String PREFS_FILE = "device_info.xml";
     protected static final String PREFS_DEVICE_ID = "device_id";
     protected static final String PREFS_DEVICE_TYPE = "device_type";
+    private static ClipboardManager __manater;
 
     public void init(Activity activity){
+
         __activity = (Cocos2dxActivity) activity;
+
+        __manater = (ClipboardManager) __activity.getSystemService(Context.CLIPBOARD_SERVICE);
      }
 
      /*
@@ -67,5 +71,35 @@ public class Utils {
             prefs.edit().putString(PREFS_DEVICE_TYPE, type).commit();
         }
         return type;
+    }
+
+    /*
+    * 复制内容到剪切板
+    * */
+    public boolean copyToClipBoard(String content){
+        try {
+            ClipData data = ClipData.newPlainText("com_mengya_game", content);
+            __manater.setPrimaryClip(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public String getClipFromBoard() {
+        try {
+            //判断剪贴板里是否有内容
+            if (!__manater.hasPrimaryClip()) {
+                return "";
+            }
+
+            ClipData clip = __manater.getPrimaryClip();
+            String text = clip.getItemAt(0).getText().toString();
+            return text;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

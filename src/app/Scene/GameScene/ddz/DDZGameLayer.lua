@@ -970,6 +970,8 @@ function DDZGameRoomLayer:onBackLobbyResponse( msg )
 	if msg.result == "success" then
     	local worldScene = lt.WorldScene.new()
         lt.SceneManager:replaceScene(worldScene)
+    else
+    	lt.PromptPanel:showPrompt(lt.Constants.PROMPT[msg.result])
     end
 end
 

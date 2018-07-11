@@ -45,6 +45,9 @@ function GameScene:ctor()
     -- self.__ChatLayer = ChatLayer:new()
     -- self._gameUILayer:addChild(self.__ChatLayer)
     -- self.__ChatLayer:setVisible(false)
+
+    --进入游戏场景 清空剪切板
+    lt.SDK.Device.copyToClipBoard("")
     
 end
 

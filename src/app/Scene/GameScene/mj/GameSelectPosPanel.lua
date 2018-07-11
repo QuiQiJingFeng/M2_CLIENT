@@ -755,13 +755,17 @@ function GameSelectPosPanel:onSitDownResponse(msg)
     if msg.result == "success" then
 	    self:configRotation(true)
     else
-
+    	lt.PromptPanel:showPrompt(lt.Constants.PROMPT[msg.result])
     end
 end
 
 function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
 	self._nodePaoLayer:setVisible(false)
 	
+	--进入游戏之中后 隐藏邀请按钮
+	
+	lt.GameEventManager:post(lt.GameEventManager.EVENT.HIDE_INVITE_BTN)
+
 	for pos,SitPos in pairs(self._currentSitPosArray) do
 		SitPos:setVisible(false)
 	end

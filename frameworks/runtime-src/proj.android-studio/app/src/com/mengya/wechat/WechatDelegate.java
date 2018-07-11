@@ -12,13 +12,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 
-import com.mengya.common.CustomRunable;
-import com.mengya.common.PlatformSDK;
+import com.common.CustomRunable;
+import com.common.FYDSDK;
 import com.mengya.constants.PurchaseCode;
 import com.mengya.constants.SharePlatformType;
 import com.tencent.mm.opensdk.modelpay.PayResp;
@@ -68,9 +65,10 @@ public class WechatDelegate extends BroadcastReceiver {
     private static int platform;
 
     private final static int SHARE_IMAGE  = 0x001;
+    private static int CALL_BACK = 0x002;
 
 
-    public synchronized static WechatDelegate getInstance() {
+    public synchronized static Object getInstance() {
         if (null == instance) {
             instance = new WechatDelegate();
         }
@@ -157,34 +155,9 @@ public class WechatDelegate extends BroadcastReceiver {
         return wxApi.isWXAppInstalled();
     }
 
-    /**
-     * 微信支付
-     * @param orderUrl
-     */
-    public static void pay(String orderUrl) {
-
-//        PayReq req = new PayReq();
-//        Map<String, String> params = new HashMap<String, String>();
-//
-//        for (String param : orderUrl.split("&")) {
-//            int i = param.indexOf("=");
-//            params.put(param.substring(0, i), param.substring(i+1, param.length()));
-//        }
-//
-//        req.appId = params.get("appid");
-//        req.partnerId = params.get("partnerid");
-//        req.packageValue = params.get("package");
-//        req.timeStamp = params.get("timestamp");
-//        req.prepayId= params.get("prepayid");
-//        req.nonceStr= params.get("noncestr");
-//        req.sign = params.get("sign");
-//
-//
-//        wxApi.sendReq(req);
-    }
-
-    public static void signIn()
+    public static void signIn(int callBack)
     {
+        CALL_BACK = callBack;
         try
         {
             InputStream in = mActivity.getContext().openFileInput("wechat.json");
@@ -215,7 +188,8 @@ public class WechatDelegate extends BroadcastReceiver {
                         jsonObject1.put("result", "success");
                         jsonObject1.put("openid", jObject.getString("openid"));
                         jsonObject1.put("access_token", jObject.getString("access_token"));
-                        PlatformSDK.invokeCallBack(jsonObject1.toString());
+                        Object[] array = {jsonObject1.toString()};
+                        FYDSDK.callBackWithVector(CALL_BACK,array);
                     }catch(Exception e) {
                         Log.e(TAG, "error json object generate");
                     }
@@ -252,7 +226,8 @@ public class WechatDelegate extends BroadcastReceiver {
                     JSONObject jsonObject1 = new JSONObject();
                     jsonObject1.put("action", "AUTH");
                     jsonObject1.put("result", "failed");
-                    PlatformSDK.invokeCallBack(jsonObject1.toString());
+                    Object[] array = {jsonObject1.toString()};
+                    FYDSDK.callBackWithVector(CALL_BACK,array);
 
                 return;
             }
@@ -291,7 +266,8 @@ public class WechatDelegate extends BroadcastReceiver {
                         JSONObject jsonObject1 = new JSONObject();
                         jsonObject1.put("action", "AUTH");
                         jsonObject1.put("result", "failed");
-                        PlatformSDK.invokeCallBack(jsonObject1.toString());
+                        Object[] array = {jsonObject1.toString()};
+                        FYDSDK.callBackWithVector(CALL_BACK,array);
                 }
             }
             else if(jObject.has("openid"))
@@ -309,14 +285,16 @@ public class WechatDelegate extends BroadcastReceiver {
                     jsonObject1.put("result", "success");
                     jsonObject1.put("openid", jObject.getString("openid"));
                     jsonObject1.put("access_token", jObject.getString("access_token"));
-                    PlatformSDK.invokeCallBack(jsonObject1.toString());
+                    Object[] array = {jsonObject1.toString()};
+                    FYDSDK.callBackWithVector(CALL_BACK,array);
             }
             else
             {
                     JSONObject jsonObject1 = new JSONObject();
                     jsonObject1.put("action", "AUTH");
                     jsonObject1.put("result", "failed");
-                    PlatformSDK.invokeCallBack(jsonObject1.toString());
+                    Object[] array = {jsonObject1.toString()};
+                    FYDSDK.callBackWithVector(CALL_BACK,array);
             }
         }
 
@@ -325,7 +303,8 @@ public class WechatDelegate extends BroadcastReceiver {
                 JSONObject jsonObject1 = new JSONObject();
                 jsonObject1.put("action", "AUTH");
                 jsonObject1.put("result", "failed");
-                PlatformSDK.invokeCallBack(jsonObject1.toString());
+                Object[] array = {jsonObject1.toString()};
+                FYDSDK.callBackWithVector(CALL_BACK,array);
             }catch(Exception e1){
                 Log.e(TAG,"error json object generate");
             }
@@ -362,7 +341,8 @@ public class WechatDelegate extends BroadcastReceiver {
                 JSONObject jsonObject1 = new JSONObject();
                 jsonObject1.put("action", "AUTH");
                 jsonObject1.put("result", "cancel");
-                PlatformSDK.invokeCallBack(jsonObject1.toString());
+                Object[] array = {jsonObject1.toString()};
+                FYDSDK.callBackWithVector(CALL_BACK,array);
             }catch(Exception e){
                 Log.e(TAG,"error json object generate");
             }
@@ -374,7 +354,8 @@ public class WechatDelegate extends BroadcastReceiver {
                 JSONObject jsonObject1 = new JSONObject();
                 jsonObject1.put("action", "AUTH");
                 jsonObject1.put("result", "failed");
-                PlatformSDK.invokeCallBack(jsonObject1.toString());
+                Object[] array = {jsonObject1.toString()};
+                FYDSDK.callBackWithVector(CALL_BACK,array);
             }catch(Exception e){
                 Log.e(TAG,"error json object generate");
             }
@@ -408,7 +389,8 @@ public class WechatDelegate extends BroadcastReceiver {
                     JSONObject jsonObject1 = new JSONObject();
                     jsonObject1.put("action", "SHARE");
                     jsonObject1.put("result", "success");
-                    PlatformSDK.invokeCallBack(jsonObject1.toString());
+                    Object[] array = {jsonObject1.toString()};
+                    FYDSDK.callBackWithVector(CALL_BACK,array);
                 } catch (Exception e) {
                     Log.e(TAG, "error json object generate");
                 }
@@ -422,7 +404,8 @@ public class WechatDelegate extends BroadcastReceiver {
                     JSONObject jsonObject1 = new JSONObject();
                     jsonObject1.put("action", "SHARE");
                     jsonObject1.put("result", "failed");
-                    PlatformSDK.invokeCallBack(jsonObject1.toString());
+                    Object[] array = {jsonObject1.toString()};
+                    FYDSDK.callBackWithVector(CALL_BACK,array);
                 } catch (Exception e) {
                     Log.e(TAG, "error json object generate");
                 }
@@ -432,19 +415,23 @@ public class WechatDelegate extends BroadcastReceiver {
     }
 
 
-    public static void wxshareImg(String imgStr)
+    public static void wxshareImg(String imgStr,int callBack)
     {
         if(!wxApi.isWXAppInstalled()){
             try {
                 JSONObject jsonObject1 = new JSONObject();
                 jsonObject1.put("action", "SHARE");
                 jsonObject1.put("result", "un_install_wechat");
-                PlatformSDK.invokeCallBack(jsonObject1.toString());
+
+                Object[] array = {jsonObject1.toString()};
+                FYDSDK.callBackWithVector(callBack,array);
             }catch(Exception e) {
                 Log.e(TAG, "error json object generate");
             }
             return;
         }
+
+        CALL_BACK = callBack;
 
         Bitmap  bmp = BitmapFactory.decodeFile(imgStr);
         WXImageObject imgObj = new WXImageObject(bmp);
@@ -460,7 +447,7 @@ public class WechatDelegate extends BroadcastReceiver {
         wxApi.sendReq(req);
     }
 
-    public static void shareURL(int plat, String titleStr, String desStr, String urlStr, String imgStr)
+    public static void shareURL(int plat, String titleStr, String desStr, String urlStr, String imgStr,int callBack)
     {
         // Log.e("wxshareURL", "wxshareURL");
         // Log.d("wxshareURL", "wxshareURL" + platform + titleStr + desStr + urlStr+ "图片路径：" + imgStr);
@@ -469,13 +456,14 @@ public class WechatDelegate extends BroadcastReceiver {
                 JSONObject jsonObject1 = new JSONObject();
                 jsonObject1.put("action", "SHARE");
                 jsonObject1.put("result", "un_install_wechat");
-                PlatformSDK.invokeCallBack(jsonObject1.toString());
+                Object[] array = {jsonObject1.toString()};
+                FYDSDK.callBackWithVector(callBack,array);
             }catch(Exception e) {
                 Log.e(TAG, "error json object generate");
             }
             return;
         }
-
+        CALL_BACK = callBack;
         platform = plat;
 
 
@@ -503,7 +491,8 @@ public class WechatDelegate extends BroadcastReceiver {
                 JSONObject jsonObject1 = new JSONObject();
                 jsonObject1.put("action", "SHARE");
                 jsonObject1.put("result", "success");
-                PlatformSDK.invokeCallBack(jsonObject1.toString());
+                Object[] array = {jsonObject1.toString()};
+                FYDSDK.callBackWithVector(CALL_BACK,array);
             } catch (Exception e) {
                 Log.e(TAG, "error json object generate");
             }
@@ -550,22 +539,6 @@ public class WechatDelegate extends BroadcastReceiver {
 
         return result;
     }
-
-    private static Handler handler = new Handler(Looper.getMainLooper()){
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SHARE_IMAGE:
-                {
-
-                }
-                break;
-                default:
-                    break;
-            }
-        }
-    };
 
 }
 

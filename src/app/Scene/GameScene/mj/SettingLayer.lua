@@ -314,6 +314,8 @@ function SettingLayer:onBackLobbyResponse(msg)
     	local worldScene = lt.WorldScene.new()
         lt.SceneManager:replaceScene(worldScene)
         lt.NetWork:disconnect()
+    else
+        lt.PromptPanel:showPrompt(lt.Constants.PROMPT[recv_msg.result])
     end
 end
 

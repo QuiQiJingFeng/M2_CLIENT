@@ -138,40 +138,47 @@ function WorldMenuLayer:listenRoomListUpdate()
                 lt.CommonUtil:hide(self.Se_Create)
             else
                 lt.CommonUtil:hide(self.Se_Return)
-                lt.CommonUtil:show(self.Se_Create)     
+                lt.CommonUtil:show(self.Se_Create)   
             end
 
             if info.room_list and #info.room_list > 0 then
                 lt.CommonUtil:hide(self.bg_NoData)
                 self.tb_room_info:setData(info.room_list,0,10)
             end
+
+
+
+            --如果没有在房间当中并且剪切板中有房间号,那么可以加入
+            local clipstr = lt.SDK.Device.getClipFromBoard()
+            if not clipstr or clipstr == "" then
+                return
+            end
+            local room_id = string.match(clipstr, "房号：%[(%d+)%]")
+            if not room_id then
+                return
+            end
+            local msg = string.format("检测到剪切板中房间号为%d,是否加入房间？",room_id)
+            lt.MsgboxLayer:showMsgBox(msg, false, function()
+                local arg = {room_id = room_id}
+                lt.CommonUtil:sepecailServerLogin(room_id,function(result) 
+                    if result ~= "success" then
+                        lt.PromptPanel:showPrompt(lt.Constants.PROMPT[result])
+                        return
+                    end
+                    lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+                end)
+            end, function()
+                lt.SDK.Device.copyToClipBoard("")
+            end, true)
+
+
+            
         end)
 end
 
 function WorldMenuLayer:onClickSetBtn(event)
     local setLayer = lt.SetLayer.new()
     lt.UILayerManager:addLayer(setLayer, true)
-    -- local callBack = function(str) 
-    --     print("FYD===>>",str)
-    -- end
-    -- lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
-    -- local data = {0,"萌芽娱乐","畅玩麻将体验","https://mengyagame.com",""}
-    -- local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
-    -- if not ok then
-    --     print("FYD ERROR: SIGNIN FAILED ",ret)
-    -- end
-
-    -- local path = cc.FileUtils:getInstance():getWritablePath()
-    -- local img_path = path.."share.png"
-    -- cc.utils:captureScreen(function(succeed, outputFile) 
-    --         print("FYD====>>>succeed=== ",succeed)
-    --         print("FYD----->outputFile ===  ",outputFile)
-    --         lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
-    --         local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareImg",{outputFile},"(Ljava/lang/String;)V")
-    --         if not ok then
-    --             print("FYD ERROR: SHARE IMAGE ",ret)
-    --         end
-    --     end,"share.png")
 end
 
 function WorldMenuLayer:onClickhelpBtn(event)

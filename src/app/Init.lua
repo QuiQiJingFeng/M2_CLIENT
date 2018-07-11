@@ -118,6 +118,9 @@ ltMetaTable["GameEndExploitsLayer"] = "app.Scene.GameScene.mj.GameEndExploitsLay
 
 ltMetaTable["SettingLayer"] = "app.Scene.GameScene.mj.SettingLayer"
 
+ltMetaTable["InvitePanel"] = "app.Scene.GameScene.commonPanel.InvitePanel"
+ltMetaTable["PromptPanel"] = "app.Scene.GameScene.commonPanel.PromptPanel"
+
 -- ddz
 ltMetaTable["DDZGameLayer"]			= "app.Scene.GameScene.ddz.DDZGameLayer"
 ltMetaTable["DDZGameScene"]			= "app.Scene.GameScene.ddz.DDZGameScene"
@@ -127,6 +130,8 @@ ltMetaTable["ScrollNumber"]				= "app.Widget.ScrollNumber"
 ltMetaTable["ScrollView"]               = "app.Widget.ScrollView"
 ltMetaTable["ScrollViewCell"]           = "app.Widget.ScrollViewCell"
 
-ltMetaTable["PlatformSDK"] = "app.Common.PlatformSDK"
+ltMetaTable["SDK"] = "app.Common.SDK"
+ltMetaTable["CPLUS"] = "app.Common.CPLUS"
+
 
 

@@ -14,11 +14,8 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
-#include<unistd.h>  
-
-#include "cocos2d.h"
-#include "PlatformSDK.h"
-USING_NS_CC;
+#include<unistd.h>
+#include "FYDC.h"
 typedef int SOCKET;
 
 #define SOCKET_ERROR -1
@@ -46,22 +43,22 @@ public:
     
     bool SendEmail(const string& smtpServer,int smtpPort, const string& username, const string& pw, const string& to,const string& title, const string& data);
     
-    Value SendEmail(ValueVector vector);
+    FValue SendEmail(FValueVector vector);
 
     string Base64Encode(const string& src);
 
-    Value Base64Encode(ValueVector vector);
+    FValue Base64Encode(FValueVector vector);
     
     /*
      读取所有邮件的标题
      */
     string ReadAllEmailTitle(const string& imapServer, int port, const string& username, const string& passwd);
 
-    Value ReadAllEmailTitle(ValueVector vector);
-    inline static void registerFunc(){
-        REGISTER_PLATFORM(Email::SendEmail,Email::getInstance(),Email::,"Email:SendEmail")
-        REGISTER_PLATFORM(Email::Base64Encode,Email::getInstance(),Email::,"Email:Base64Encode")
-        REGISTER_PLATFORM(Email::ReadAllEmailTitle,Email::getInstance(),Email::,"Email:ReadAllEmailTitle")
+    FValue ReadAllEmailTitle(FValueVector vector);
+    void registerFunc(){
+        REG_OBJ_FUNC(Email::SendEmail,Email::getInstance(),Email::,"Email:SendEmail")
+        REG_OBJ_FUNC(Email::Base64Encode,Email::getInstance(),Email::,"Email:Base64Encode")
+        REG_OBJ_FUNC(Email::ReadAllEmailTitle,Email::getInstance(),Email::,"Email:ReadAllEmailTitle")
     }
 private:
     static Email* __instance;

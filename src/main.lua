@@ -13,8 +13,9 @@ local WHITE_LIST = {
 
 local function main()
     if device.platform == "ios" or device.platform == "android" then
-        local PlatformSDK = require("app.Common.PlatformSDK")
-        local device_id = PlatformSDK.getDeviceId("Utils")
+        local SDK = require("app.Common.SDK")
+        local device_id = SDK.Device.getDeviceId()
+        print("FYD =======",device_id)
         if device_id and WHITE_LIST[tostring(device_id)] then
             local writePath = cc.FileUtils:getInstance():getWritablePath()
             local rfile = io.open(writePath .. "project.manifest","rb")

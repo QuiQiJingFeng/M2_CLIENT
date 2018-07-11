@@ -1,4 +1,4 @@
-package com.mengya.common;
+package com.common;
 
 import android.media.AudioFormat;
 import android.media.AudioRecord;
