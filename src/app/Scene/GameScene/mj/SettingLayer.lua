@@ -169,6 +169,11 @@ function SettingLayer:setshow()
                 if v == yxPalel then
                     v.selectNode:setVisible(true)
                     lt.PreferenceManager:setGemeyx(i)  
+                    if i == 1 then
+                        lt.AudioManager:resumeSound()--开
+                    elseif i == 2 then
+                        lt.AudioManager:pauseSound()--关
+                    end
                 else
                     v.selectNode:setVisible(false)
                 end

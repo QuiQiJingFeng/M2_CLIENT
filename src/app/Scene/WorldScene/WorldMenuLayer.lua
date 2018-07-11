@@ -216,19 +216,15 @@ function WorldMenuLayer:onClickshareBtn(event)
     lt.UILayerManager:addLayer(WXShareLayer, true)
 end
 
-function WorldMenuLayer:onClickinfoBtn(event)
-    local MJplayBackLayer = lt.MJplayBackLayer.new()
-    self:addChild(MJplayBackLayer)
-        
-    --[[
+function WorldMenuLayer:onClickinfoBtn(event) 
+    ---[[--头像
     local url = "http://neoimaging.beareyes.com.cn/png2/ni_png_2_1518.png"
     local uid = "123456"
-    local HeadLayer = lt.HeadImage.new(url,uid,400,400,1)
-     lt.UILayerManager:addLayer(HeadLayer, true)--]]
-    --[[
-    print("------------gerenxinxi")
-     local lobbyInfoLayer = lt.lobbyInfoLayer.new()
-     lt.UILayerManager:addLayer(lobbyInfoLayer, true)--]]
+    local HeadLayer = lt.HeadImage.new(url,uid,64,697,1)
+    lt.UILayerManager:addLayer(HeadLayer, true)--]]
+    ---[[
+    local lobbyInfoLayer = lt.lobbyInfoLayer.new()
+    lt.UILayerManager:addLayer(lobbyInfoLayer, true)--]]
 end
 
 function WorldMenuLayer:onClickCreateRoomBtn(event)
