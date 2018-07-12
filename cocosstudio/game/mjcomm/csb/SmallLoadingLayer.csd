@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="MarkedSubImage" Path="game/mjcomm/part/bgMark_1.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+            <FileData Type="MarkedSubImage" Path="game/mjcomm/part/bgMark_1.png" Plist="game/mjcomm/mjPartUi.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="Image_Bg" ActionTag="-334454392" Tag="309" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="422.0000" RightMargin="422.0000" TopMargin="330.0000" BottomMargin="330.0000" Scale9Enable="True" LeftEage="130" RightEage="130" TopEage="45" BottomEage="45" Scale9OriginX="130" Scale9OriginY="45" Scale9Width="130" Scale9Height="7" ctype="ImageViewObjectData">
             <Size X="490.0000" Y="90.0000" />
@@ -48,7 +48,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.3673" Y="0.1200" />
-            <FileData Type="MarkedSubImage" Path="game/mjcomm/part/smallLoading_bg.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
+            <FileData Type="MarkedSubImage" Path="game/mjcomm/part/smallLoading_bg.png" Plist="game/mjcomm/mjPartUi.plist" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
