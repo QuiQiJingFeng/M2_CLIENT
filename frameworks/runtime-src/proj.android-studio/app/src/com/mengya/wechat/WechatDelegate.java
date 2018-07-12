@@ -26,6 +26,7 @@ import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.mm.sdk.openapi.WXImageObject;
 import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.openapi.WXTextObject;
 import com.tencent.mm.sdk.openapi.WXWebpageObject;
 
 import org.apache.http.HttpEntity;
@@ -414,6 +415,36 @@ public class WechatDelegate extends BroadcastReceiver {
         }
     }
 
+    public static void wxshareMsg(String content,boolean isCircle,int callBack)
+    {
+        if(!wxApi.isWXAppInstalled()){
+            try {
+                JSONObject jsonObject1 = new JSONObject();
+                jsonObject1.put("action", "SHARE");
+                jsonObject1.put("result", "un_install_wechat");
+
+                Object[] array = {jsonObject1.toString()};
+                FYDSDK.callBackWithVector(callBack,array);
+            }catch(Exception e) {
+                Log.e(TAG, "error json object generate");
+            }
+            return;
+        }
+        CALL_BACK = callBack;
+        WXTextObject textObj = new WXTextObject();
+        textObj.text = content;
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.mediaObject = textObj;
+        msg.description = content;
+
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = "share_msg";
+        req.message = msg;
+        req.scene = isCircle?
+        SendMessageToWX.Req.WXSceneTimeline :
+        SendMessageToWX.Req.WXSceneSession;
+        wxApi.sendReq(req);
+    }
 
     public static void wxshareImg(String imgStr,int callBack)
     {
