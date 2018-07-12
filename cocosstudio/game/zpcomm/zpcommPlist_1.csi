@@ -2,12 +2,6 @@
   <PropertyGroup Name="zpcommPlist_1" Type="Plist" ID="1eb3b8a4-27d7-4539-b480-4db84b04bfc7" Version="3.10.0.0" />
   <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
     <ImageFiles>
-      <FilePathData Path="game/zpcomm/img/bg_chat_bubble_left_bottom.png" />
-      <FilePathData Path="game/zpcomm/img/bg_chat_bubble_right_buttom.png" />
-      <FilePathData Path="game/zpcomm/img/BG1.png" />
-      <FilePathData Path="game/zpcomm/img/BG10.png" />
-      <FilePathData Path="game/zpcomm/img/BG11.png" />
-      <FilePathData Path="game/zpcomm/img/BG12.png" />
       <FilePathData Path="game/zpcomm/img/BG13.png" />
       <FilePathData Path="game/zpcomm/img/BG14.png" />
       <FilePathData Path="game/zpcomm/img/BG15.png" />
@@ -108,50 +102,7 @@
       <FilePathData Path="game/zpcomm/img/ImageText15.png" />
       <FilePathData Path="game/zpcomm/img/ImageText18.png" />
       <FilePathData Path="game/zpcomm/img/ImageText19.png" />
-      <FilePathData Path="game/zpcomm/cards/16.png" />
-      <FilePathData Path="game/zpcomm/cards/17.png" />
-      <FilePathData Path="game/zpcomm/cards/black_1.png" />
-      <FilePathData Path="game/zpcomm/cards/black_10.png" />
-      <FilePathData Path="game/zpcomm/cards/black_11.png" />
-      <FilePathData Path="game/zpcomm/cards/black_12.png" />
-      <FilePathData Path="game/zpcomm/cards/black_13.png" />
-      <FilePathData Path="game/zpcomm/cards/black_2.png" />
-      <FilePathData Path="game/zpcomm/cards/black_3.png" />
-      <FilePathData Path="game/zpcomm/cards/black_4.png" />
-      <FilePathData Path="game/zpcomm/cards/black_5.png" />
-      <FilePathData Path="game/zpcomm/cards/black_6.png" />
-      <FilePathData Path="game/zpcomm/cards/black_7.png" />
-      <FilePathData Path="game/zpcomm/cards/black_8.png" />
-      <FilePathData Path="game/zpcomm/cards/black_9.png" />
-      <FilePathData Path="game/zpcomm/cards/card_bg.png" />
-      <FilePathData Path="game/zpcomm/cards/cover.png" />
-      <FilePathData Path="game/zpcomm/cards/HuaSe_1.png" />
-      <FilePathData Path="game/zpcomm/cards/HuaSe_2.png" />
-      <FilePathData Path="game/zpcomm/cards/HuaSe_3.png" />
-      <FilePathData Path="game/zpcomm/cards/HuaSe_4.png" />
-      <FilePathData Path="game/zpcomm/cards/lz.png" />
-      <FilePathData Path="game/zpcomm/cards/red_1.png" />
-      <FilePathData Path="game/zpcomm/cards/red_10.png" />
-      <FilePathData Path="game/zpcomm/cards/red_11.png" />
-      <FilePathData Path="game/zpcomm/cards/red_12.png" />
-      <FilePathData Path="game/zpcomm/cards/red_13.png" />
-      <FilePathData Path="game/zpcomm/cards/red_2.png" />
-      <FilePathData Path="game/zpcomm/cards/red_3.png" />
-      <FilePathData Path="game/zpcomm/cards/red_4.png" />
-      <FilePathData Path="game/zpcomm/cards/red_5.png" />
-      <FilePathData Path="game/zpcomm/cards/red_6.png" />
-      <FilePathData Path="game/zpcomm/cards/red_7.png" />
-      <FilePathData Path="game/zpcomm/cards/red_8.png" />
-      <FilePathData Path="game/zpcomm/cards/red_9.png" />
-      <FilePathData Path="game/zpcomm/cards/SHuaSe_1.png" />
-      <FilePathData Path="game/zpcomm/cards/SHuaSe_2.png" />
-      <FilePathData Path="game/zpcomm/cards/SHuaSe_3.png" />
-      <FilePathData Path="game/zpcomm/cards/SHuaSe_4.png" />
       <FilePathData Path="game/zpcomm/img/ImageText17.png" />
-      <FilePathData Path="game/zpcomm/gwidget/img/BG4.png" />
-      <FilePathData Path="game/zpcomm/gwidget/img/BG7.png" />
-      <FilePathData Path="game/zpcomm/gwidget/img/BG19.png" />
-      <FilePathData Path="game/zpcomm/gwidget/img/BG20.png" />
       <FilePathData Path="game/zpcomm/part/bgRecordBtn.png" />
       <FilePathData Path="game/zpcomm/part/iconRecordPause.png" />
       <FilePathData Path="game/zpcomm/part/iconRecordPlay.png" />
@@ -160,6 +111,8 @@
       <FilePathData Path="game/zpcomm/part/wordPlay.png" />
       <FilePathData Path="game/zpcomm/part/wordRecordFast.png" />
       <FilePathData Path="game/zpcomm/part/wordRecordPlay.png" />
+      <FilePathData Path="game/mjcomm/button/run.png" />
+      <FilePathData Path="game/mjcomm/button/runNot.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="2048" />
   </Content>

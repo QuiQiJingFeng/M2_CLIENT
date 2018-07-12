@@ -364,7 +364,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0010" Y="0.9498" />
             <PreSize X="0.1409" Y="0.1067" />
-            <FileData Type="MarkedSubImage" Path="game/zpcomm/img/BG1.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+            <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="Node_Players" CanEdit="False" ActionTag="-152573706" Tag="1855" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" ClipAble="False" BackColorAlpha="0" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1334.0000" Y="750.0000" />
@@ -488,7 +488,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="MarkedSubImage" Path="game/zpcomm/img/BG10.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+                    <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Sprite_PointDemand" ActionTag="367675912" VisibleForFrame="False" Tag="956" IconVisible="False" LeftMargin="172.1013" RightMargin="-285.1013" TopMargin="-15.4081" BottomMargin="-45.5919" ctype="SpriteObjectData">
@@ -704,7 +704,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="MarkedSubImage" Path="game/zpcomm/img/BG10.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+                    <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Sprite_PointDemand" ActionTag="773933804" VisibleForFrame="False" Tag="957" IconVisible="False" LeftMargin="-233.0427" RightMargin="120.0427" TopMargin="-22.6621" BottomMargin="-38.3379" ctype="SpriteObjectData">
@@ -898,7 +898,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.4806" />
                     <PreSize X="0.0517" Y="0.1040" />
-                    <FileData Type="MarkedSubImage" Path="game/zpcomm/img/BG10.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+                    <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Sprite_PointDemand" ActionTag="-1129086972" VisibleForFrame="False" Tag="958" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="610.5000" RightMargin="610.5000" TopMargin="377.8400" BottomMargin="311.1600" ctype="SpriteObjectData">
