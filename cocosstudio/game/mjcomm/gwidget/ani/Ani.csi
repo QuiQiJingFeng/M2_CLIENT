@@ -1,0 +1,17 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="Ani" Type="Plist" ID="30bbfb45-b971-44ad-8951-85589217485e" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="True" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="game/mjcomm/gwidget/ani/Voice1.png" />
+      <FilePathData Path="game/mjcomm/gwidget/ani/Voice2.png" />
+      <FilePathData Path="game/mjcomm/gwidget/ani/Voice3.png" />
+      <FilePathData Path="game/mjcomm/gwidget/ani/Voice4.png" />
+      <FilePathData Path="game/mjcomm/gwidget/ani/record1.png" />
+      <FilePathData Path="game/mjcomm/gwidget/ani/record2.png" />
+      <FilePathData Path="game/mjcomm/gwidget/ani/record3.png" />
+      <FilePathData Path="game/mjcomm/gwidget/ani/record4.png" />
+      <FilePathData Path="game/mjcomm/gwidget/ani/record5.png" />
+    </ImageFiles>
+    <MaxSize Width="256" Height="128" />
+  </Content>
+</PlistInfoProjectFile>

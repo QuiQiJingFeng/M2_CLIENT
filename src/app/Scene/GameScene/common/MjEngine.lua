@@ -1903,10 +1903,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 		if self._isNeedBaoTing then
 			if not self._isAnTing then--明听发的不走这里
-				if lt.DataManager:getRePlayState() and msg.item["value"] then--不是回放在 点击牌的时候加
-					
-					self:goOutOneHandCardAtDirection(direction, msg.item["value"])
-				end
+				self:goOutOneHandCardAtDirection(direction, msg.item["value"])
 			end
 		end
 	end
@@ -2116,6 +2113,9 @@ function MjEngine:onClientConnectAgain()--  断线重连
         if v.ting == true then
         	local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
         	self._deleget:ShowTingGang(direction)
+        else
+        	local direction = lt.DataManager:getPlayerDirectionByPos(v.user_pos)
+        	self._deleget:HideTingGang(direction)
         end
     end
 

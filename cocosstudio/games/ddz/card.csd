@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="MarkedSubImage" Path="game/zpcomm/cards/card_bg.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+            <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_value" ActionTag="-1775381230" VisibleForFrame="False" Tag="807" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="2.7770" RightMargin="97.2230" TopMargin="6.4389" BottomMargin="148.5611" ctype="SpriteObjectData">
@@ -25,7 +25,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1934" Y="0.8368" />
             <PreSize X="0.3506" Y="0.2654" />
-            <FileData Type="MarkedSubImage" Path="game/zpcomm/cards/black_1.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+            <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_sIcon" ActionTag="-1778963130" VisibleForFrame="False" Tag="808" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="14.1611" RightMargin="105.8389" TopMargin="68.5422" BottomMargin="109.4578" ctype="SpriteObjectData">
@@ -36,7 +36,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2023" Y="0.5970" />
             <PreSize X="0.2208" Y="0.1564" />
-            <FileData Type="MarkedSubImage" Path="game/zpcomm/cards/SHuaSe_1.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+            <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_bIcon" ActionTag="713098955" VisibleForFrame="False" Tag="809" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="BottomEdge" LeftMargin="38.3731" RightMargin="9.6269" TopMargin="101.8965" BottomMargin="9.1035" ctype="SpriteObjectData">
@@ -47,7 +47,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5933" Y="0.2801" />
             <PreSize X="0.6883" Y="0.4739" />
-            <FileData Type="MarkedSubImage" Path="game/zpcomm/cards/HuaSe_1.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+            <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_lz" ActionTag="-1714564016" VisibleForFrame="False" Tag="296" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="9.0000" RightMargin="101.0000" TopMargin="122.0000" BottomMargin="21.0000" ctype="SpriteObjectData">
@@ -58,7 +58,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2013" Y="0.2607" />
             <PreSize X="0.2857" Y="0.3223" />
-            <FileData Type="MarkedSubImage" Path="game/zpcomm/cards/lz.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+            <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_value2" ActionTag="18300026" VisibleForFrame="False" Tag="810" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="10.0000" RightMargin="10.0000" TopMargin="1.0000" BottomMargin="1.0000" ctype="SpriteObjectData">
@@ -69,7 +69,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.8701" Y="0.9905" />
-            <FileData Type="MarkedSubImage" Path="game/zpcomm/cards/16.png" Plist="game/zpcomm/zpcommPlist_1.plist" />
+            <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>
