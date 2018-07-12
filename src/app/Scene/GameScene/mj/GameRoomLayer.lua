@@ -127,7 +127,10 @@ function GameRoomLayer:onGameConnectAgain()
 	self._sendRequest = false
 	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		self._gameSelectPosPanel:againConfigUI()
+	else
+		self._gameSelectPosPanel:configPlayer()
 	end	
+
 	self:resetCurrentOutPutPlayerPos()
 	self._gameCompassPanel:initGame()
 	self._engine:onClientConnectAgain()
@@ -632,6 +635,10 @@ end
 
 function GameRoomLayer:ShowTingGang(direction)
 	self._gameSelectPosPanel:ShowTingBS(direction)
+end
+
+function GameRoomLayer:HideTingGang(direction)
+	self._gameSelectPosPanel:HideTingBS(direction)
 end
 
 function GameRoomLayer:onGameCMDResponse(msg)   --游戏请求

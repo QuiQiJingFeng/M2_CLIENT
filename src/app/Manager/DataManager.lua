@@ -82,7 +82,7 @@ function DataManager:onPushAllRoomInfo(msg)
         self._getTingPlayerInfo = msg.ting_list
     end 
 
-    self._pushAllRoomInfo = msg
+    self._pushAllRoomInfo = clone(msg) 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN)
 end
 
