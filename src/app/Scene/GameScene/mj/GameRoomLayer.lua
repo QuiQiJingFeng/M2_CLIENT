@@ -119,8 +119,10 @@ end
 function GameRoomLayer:onGameConnectAgain()
 
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
-	--癞子
-	self:setHuiCardValue(allRoomInfo.huicard)
+	if allRoomInfo.huicard then
+		--癞子
+		self:setHuiCardValue(allRoomInfo.huicard)
+	end
 
 	self._sendRequest = false
 	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
@@ -162,6 +164,71 @@ end
 
 function GameRoomLayer:refreshHuCardNum(info, type)
 	self._gameActionBtnsPanel:refreshHuCardNum(info, type)
+end
+
+function GameRoomLayer:onRefreshRoomInfo(msg)
+	self:checkFzb()
+end
+
+--检测是否需要防作弊
+function GameRoomLayer:checkFzb()
+	local equallyTable = {}
+	local gameInfo = lt.DataManager:getGameRoomInfo()
+	if #gameInfo.players > 1 then
+		local Num = 0
+		for i=1,#gameInfo.players do
+			if i < #gameInfo.players then
+				if gameInfo.players[i].user_ip == gameInfo.players[i+1].user_ip then
+					Num = Num + 1
+					if #equallyTable >= 2 then
+						print(#equallyTable)
+						local Numbs = 0
+						for t=1,#equallyTable do
+							if equallyTable[t].user_id == gameInfo.players[i].user_id then
+								Numbs = 1--等于1代表有这个值
+							end
+						end
+						if Numbs ~= 1 then--不等于1没有相同的值
+							table.insert( equallyTable, gameInfo.players[i] )
+						end
+						local Numbss = 0
+						for j=1,#equallyTable do
+							if equallyTable[j].user_id == gameInfo.players[i+1].user_id then
+								Numbss = 1
+							end
+						end
+						if Numbss ~= 1 then
+							table.insert( equallyTable, gameInfo.players[i+1] )
+						end
+						--[[
+						for k,v in pairs(equallyTable) do
+							print("for玄幻",k,v.user_id,gameInfo.players[i].user_id,gameInfo.players[i+1].user_id)
+							if v.user_id ~= gameInfo.players[i].user_id then
+								table.insert( equallyTable, gameInfo.players[i] )
+							end
+							if v.user_id ~= gameInfo.players[i+1].user_id then
+								table.insert( equallyTable, gameInfo.players[i+1] )
+							end
+						end--]]
+					else						
+						table.insert( equallyTable, gameInfo.players[i] )
+						table.insert( equallyTable, gameInfo.players[i+1] )
+					end 
+				end
+			end
+		end
+		if Num >= 1 then
+			if self._fzbLayer and not tolua.isnull(self._fzbLayer) then
+				self._fzbLayer:Close()
+				self._fzbLayer = nil
+				self._fzbLayer = lt.FzbLayer.new(equallyTable)
+		   	  	lt.UILayerManager:addLayer(self._fzbLayer,true)
+			else
+				self._fzbLayer = lt.FzbLayer.new(equallyTable)
+		   	  	lt.UILayerManager:addLayer(self._fzbLayer,true)
+	   	  	end
+   	  	end
+	end
 end
 
 --设置房间背景颜色
@@ -281,6 +348,9 @@ function GameRoomLayer:onDealDown(msg)--发牌
 	-- if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
 	-- 	self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	-- end
+	if self._fzbLayer then
+		self._fzbLayer:Close()
+	end
 
 	self:setHuiCardValue(msg.huicard)
 
@@ -671,7 +741,14 @@ function GameRoomLayer:closeGmaeResultTotalEndLayer()
 	lt.UILayerManager:removeLayer(self._resultTotalLayer)
 end
 
-function GameRoomLayer:onEnter()   
+function GameRoomLayer:onNoticePao(msg)--这里监听是为了通知跑的时候把防作弊给消除掉
+	if self._fzbLayer then
+		self._fzbLayer:Close()
+	end
+end
+
+function GameRoomLayer:onEnter()
+	self:checkFzb()
     lt.CommonUtil.print("GameRoomLayer:onEnter")
     local musicIndex = lt.PreferenceManager:getGemeyy() or 1
     if musicIndex >= 4 then
@@ -702,6 +779,9 @@ function GameRoomLayer:onEnter()
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GameRoomLayer.onNoticeSpecialEvent")
 
   	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, handler(self, self.onnoticeTotalSattle), "GameRoomLayer.onnoticeTotalSattle")
+
+  	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_ROOM_INFO, handler(self, self.onRefreshRoomInfo), "GameRoomLayer.onRefreshRoomInfo")
+  	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, handler(self, self.onNoticePao), "GameRoomLayer.onNoticePao")
 end
 
 function GameRoomLayer:onExit()
@@ -723,6 +803,8 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameRoomLayer:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameRoomLayer:onNoticeSpecialEvent")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, "GameRoomLayer:onnoticeTotalSattle")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_ROOM_INFO,"GameRoomLayer.onRefreshRoomInfo")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PAO, "GameRoomLayer.onNoticePao")
 end
 
 return GameRoomLayer

@@ -77,6 +77,8 @@ ltMetaTable["ReplayWatchitem"]			= "app.Scene.WorldScene.LobbyBtn.ReplayWatchite
 ltMetaTable["LobbyHelpLayer"]			= "app.Scene.WorldScene.LobbyBtn.LobbyHelpLayer"
 ltMetaTable["HelpData"]			= "app.Scene.WorldScene.LobbyBtn.HelpData"
 ltMetaTable["LobbyHezuo"]			= "app.Scene.WorldScene.LobbyBtn.LobbyHezuo"
+ltMetaTable["FzbLayer"]			= "app.Scene.WorldScene.LobbyBtn.FzbLayer"
+ltMetaTable["GamePlayerinfoLayer"]			= "app.Scene.WorldScene.LobbyBtn.GamePlayerinfoLayer"
 
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"
@@ -118,6 +120,9 @@ ltMetaTable["GameEndExploitsLayer"] = "app.Scene.GameScene.mj.GameEndExploitsLay
 
 ltMetaTable["SettingLayer"] = "app.Scene.GameScene.mj.SettingLayer"
 
+ltMetaTable["InvitePanel"] = "app.Scene.GameScene.commonPanel.InvitePanel"
+ltMetaTable["PromptPanel"] = "app.Scene.GameScene.commonPanel.PromptPanel"
+
 -- ddz
 ltMetaTable["DDZGameLayer"]			= "app.Scene.GameScene.ddz.DDZGameLayer"
 ltMetaTable["DDZGameScene"]			= "app.Scene.GameScene.ddz.DDZGameScene"
@@ -127,6 +132,8 @@ ltMetaTable["ScrollNumber"]				= "app.Widget.ScrollNumber"
 ltMetaTable["ScrollView"]               = "app.Widget.ScrollView"
 ltMetaTable["ScrollViewCell"]           = "app.Widget.ScrollViewCell"
 
-ltMetaTable["PlatformSDK"] = "app.Common.PlatformSDK"
+ltMetaTable["SDK"] = "app.Common.SDK"
+ltMetaTable["CPLUS"] = "app.Common.CPLUS"
+
 
 

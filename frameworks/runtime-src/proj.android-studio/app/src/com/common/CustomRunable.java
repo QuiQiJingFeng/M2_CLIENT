@@ -1,4 +1,4 @@
-package com.mengya.common;
+package com.common;
 
 public class CustomRunable implements Runnable{
     private String _data;

@@ -1794,7 +1794,8 @@ function CommonUtil:selectServerLogin(game_type,callBack)
                                     callBack(recv_msg.result)
                                 end)
                         end)
-                    
+                else
+                    lt.PromptPanel:showPrompt(lt.Constants.PROMPT[recv_msg.result])
                 end
             else
                 lt.DataManager:listenNetDisconnect()
@@ -1802,7 +1803,7 @@ function CommonUtil:selectServerLogin(game_type,callBack)
         end)
 end
 
-function CommonUtil:sepecailServerLogin(room_id,callBack, errCallBack)
+function CommonUtil:sepecailServerLogin(room_id,callBack)
     self.selecting = nil
     local body = lt.DataManager:getAuthData()
     body.room_id = room_id
@@ -1822,7 +1823,7 @@ function CommonUtil:sepecailServerLogin(room_id,callBack, errCallBack)
                                 end)
                         end)
                 else
-                    errCallBack(recv_msg.result)
+                    callBack(recv_msg.result)
                 end
             else
                 lt.DataManager:listenNetDisconnect()
@@ -1855,7 +1856,7 @@ function CommonUtil:recordBegin()
     local writePath = cc.FileUtils:getInstance():getWritablePath()
     local record_path = writePath.."record.wav"
     -- 点击开始 开始录音
-    local ok = lt.PlatformSDK.recordBegin("Audio",record_path);
+    local ok = lt.SDK.Audio.recordBegin(record_path);
     if ok then
         print("录音开始")
     else
@@ -1868,7 +1869,7 @@ end
 function CommonUtil:stopRecord()
     local writePath = cc.FileUtils:getInstance():getWritablePath()
     local record_path = writePath.."record.wav"
-    return lt.PlatformSDK.stopRecord("Audio")
+    return lt.SDK.Audio.stopRecord()
 end
 
 --FYD 转码
@@ -1876,7 +1877,7 @@ function CommonUtil:convertWavToMp3()
     local writePath = cc.FileUtils:getInstance():getWritablePath()
     local record_path = writePath.."record.wav"
     -- 转码 将wav转换成mp3
-    local ret = lt.PlatformSDK.convertWavToMp3("Utils",record_path,writePath.."record.mp3")
+    local ret = lt.CPLUS.Utils.convertWavToMp3(record_path,writePath.."record.mp3")
     if ret then
         --转码成功,读取转码后的数据
         local file = io.open(writePath.."record.mp3","rb")
@@ -1890,17 +1891,17 @@ end
 
 --播放声音
 function CommonUtil:playAudio(path,callBack)
-    return lt.PlatformSDK.playAudioWithPath("Audio",path)
+    return lt.SDK.Audio.playAudioWithPath(path)
 end
 
 --停止 正在播放的声音
 function CommonUtil:stopAllAudio()
-    return lt.PlatformSDK.stopAllAudio("Audio")
+    return lt.SDK.Audio.stopAllAudio()
 end
 
 -- 当前是否正在播放声音
 function CommonUtil:isPlayingAudio()
-    return lt.PlatformSDK.isPlayingAudio("Audio")
+    return lt.SDK.Audio.isPlayingAudio()
 end
 
 

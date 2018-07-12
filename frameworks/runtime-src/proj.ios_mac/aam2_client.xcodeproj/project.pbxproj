@@ -11,8 +11,6 @@
 		140EC80220DC9B2400FC3968 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140EC80120DC9B2400FC3968 /* AdSupport.framework */; };
 		140EC84120DCED1000FC3968 /* Email.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140EC83F20DCED1000FC3968 /* Email.cpp */; };
 		140EC84220DCED1000FC3968 /* Email.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140EC83F20DCED1000FC3968 /* Email.cpp */; };
-		14314ED020C7BA9500BF3F38 /* PlatformSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */; };
-		14314ED320C7CC8C00BF3F38 /* PlatformSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143D8CC020C5517F0056D908 /* PlatformSDK.cpp */; };
 		145E8AB220E4C54400827359 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145E8AB120E4C54400827359 /* Bugly.framework */; };
 		145E8AB420E4C55400827359 /* libBuglyAgent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 145E8AB320E4C55400827359 /* libBuglyAgent.a */; };
 		145E8AD120E4D78500827359 /* BuglyLuaAgent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 145E8ACD20E4D78500827359 /* BuglyLuaAgent.cpp */; };
@@ -21,6 +19,16 @@
 		1472BBB61F8223AC00FF0B1B /* JSONManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */; };
 		1472BBB91F8223C400FF0B1B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB71F8223C400FF0B1B /* Utils.cpp */; };
 		1472BBBA1F8223C400FF0B1B /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1472BBB71F8223C400FF0B1B /* Utils.cpp */; };
+		148C9CDC20F5A18A00087330 /* FValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CD020F5A18A00087330 /* FValue.cpp */; };
+		148C9CDD20F5A18A00087330 /* FYDC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CD220F5A18A00087330 /* FYDC.cpp */; };
+		148C9CDF20F5A18A00087330 /* FYDSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CD720F5A18A00087330 /* FYDSDK.mm */; };
+		148C9CE020F5A18A00087330 /* LuaCBridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CD820F5A18A00087330 /* LuaCBridge.cpp */; };
+		148C9CE120F5A18A00087330 /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CDA20F5A18A00087330 /* Test.cpp */; };
+		148C9CE420F5A18D00087330 /* FValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CD020F5A18A00087330 /* FValue.cpp */; };
+		148C9CE520F5A19700087330 /* FYDC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CD220F5A18A00087330 /* FYDC.cpp */; };
+		148C9CE620F5A1A000087330 /* FYDSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CD520F5A18A00087330 /* FYDSDK.cpp */; };
+		148C9CE720F5A1A600087330 /* LuaCBridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CD820F5A18A00087330 /* LuaCBridge.cpp */; };
+		148C9CE820F5A1A900087330 /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148C9CDA20F5A18A00087330 /* Test.cpp */; };
 		148E9ED220E3BF1500D084CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148E9ED120E3BF1500D084CD /* Security.framework */; };
 		148E9ED420E3BF3000D084CD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148E9ED320E3BF3000D084CD /* SystemConfiguration.framework */; };
 		14D876CC20CA72BF00EE3E4A /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 14D876A220CA72BF00EE3E4A /* bitstream.c */; };
@@ -284,9 +292,6 @@
 		140EC80120DC9B2400FC3968 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
 		140EC83F20DCED1000FC3968 /* Email.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Email.cpp; path = ../Classes/common/Email.cpp; sourceTree = "<group>"; };
 		140EC84020DCED1000FC3968 /* Email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Email.h; path = ../Classes/common/Email.h; sourceTree = "<group>"; };
-		14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlatformSDK.mm; path = ../Classes/common/PlatformSDK.mm; sourceTree = "<group>"; };
-		143D8CC020C5517F0056D908 /* PlatformSDK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlatformSDK.cpp; path = ../Classes/common/PlatformSDK.cpp; sourceTree = "<group>"; };
-		143D8CC120C5517F0056D908 /* PlatformSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformSDK.h; path = ../Classes/common/PlatformSDK.h; sourceTree = "<group>"; };
 		145E8AB120E4C54400827359 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bugly.framework; path = ../../BuglyCocosPlugin/BuglySDK/iOS/Bugly.framework; sourceTree = "<group>"; };
 		145E8AB320E4C55400827359 /* libBuglyAgent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBuglyAgent.a; path = ../../BuglyCocosPlugin/CocosPlugin/agent/iOS/BuglyAgent/libBuglyAgent.a; sourceTree = "<group>"; };
 		145E8ACD20E4D78500827359 /* BuglyLuaAgent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BuglyLuaAgent.cpp; path = ../Classes/bugly/BuglyLuaAgent.cpp; sourceTree = "<group>"; };
@@ -297,6 +302,18 @@
 		1472BBB41F8223AC00FF0B1B /* JSONManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONManager.h; path = ../Classes/common/JSONManager.h; sourceTree = "<group>"; };
 		1472BBB71F8223C400FF0B1B /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = ../Classes/common/Utils.cpp; sourceTree = "<group>"; };
 		1472BBB81F8223C400FF0B1B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = ../Classes/common/Utils.h; sourceTree = "<group>"; };
+		148C9CD020F5A18A00087330 /* FValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FValue.cpp; path = ../Classes/common/FValue.cpp; sourceTree = "<group>"; };
+		148C9CD120F5A18A00087330 /* FValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FValue.h; path = ../Classes/common/FValue.h; sourceTree = "<group>"; };
+		148C9CD220F5A18A00087330 /* FYDC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FYDC.cpp; path = ../Classes/common/FYDC.cpp; sourceTree = "<group>"; };
+		148C9CD320F5A18A00087330 /* FYDC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FYDC.h; path = ../Classes/common/FYDC.h; sourceTree = "<group>"; };
+		148C9CD420F5A18A00087330 /* FYDHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FYDHeaders.h; path = ../Classes/common/FYDHeaders.h; sourceTree = "<group>"; };
+		148C9CD520F5A18A00087330 /* FYDSDK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FYDSDK.cpp; path = ../Classes/common/FYDSDK.cpp; sourceTree = "<group>"; };
+		148C9CD620F5A18A00087330 /* FYDSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FYDSDK.h; path = ../Classes/common/FYDSDK.h; sourceTree = "<group>"; };
+		148C9CD720F5A18A00087330 /* FYDSDK.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FYDSDK.mm; path = ../Classes/common/FYDSDK.mm; sourceTree = "<group>"; };
+		148C9CD820F5A18A00087330 /* LuaCBridge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaCBridge.cpp; path = ../Classes/common/LuaCBridge.cpp; sourceTree = "<group>"; };
+		148C9CD920F5A18A00087330 /* LuaCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuaCBridge.h; path = ../Classes/common/LuaCBridge.h; sourceTree = "<group>"; };
+		148C9CDA20F5A18A00087330 /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Test.cpp; path = ../Classes/common/Test.cpp; sourceTree = "<group>"; };
+		148C9CDB20F5A18A00087330 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Test.h; path = ../Classes/common/Test.h; sourceTree = "<group>"; };
 		148E9ED120E3BF1500D084CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		148E9ED320E3BF3000D084CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		14D876A220CA72BF00EE3E4A /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bitstream.c; path = ../Classes/lame/bitstream.c; sourceTree = "<group>"; };
@@ -488,15 +505,24 @@
 		1472BBA11F81404B00FF0B1B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				148C9CD020F5A18A00087330 /* FValue.cpp */,
+				148C9CD120F5A18A00087330 /* FValue.h */,
+				148C9CD220F5A18A00087330 /* FYDC.cpp */,
+				148C9CD320F5A18A00087330 /* FYDC.h */,
+				148C9CD420F5A18A00087330 /* FYDHeaders.h */,
+				148C9CD520F5A18A00087330 /* FYDSDK.cpp */,
+				148C9CD620F5A18A00087330 /* FYDSDK.h */,
+				148C9CD720F5A18A00087330 /* FYDSDK.mm */,
+				148C9CD820F5A18A00087330 /* LuaCBridge.cpp */,
+				148C9CD920F5A18A00087330 /* LuaCBridge.h */,
+				148C9CDA20F5A18A00087330 /* Test.cpp */,
+				148C9CDB20F5A18A00087330 /* Test.h */,
 				140EC83F20DCED1000FC3968 /* Email.cpp */,
 				140EC84020DCED1000FC3968 /* Email.h */,
 				1472BBB31F8223AC00FF0B1B /* JSONManager.cpp */,
 				1472BBB41F8223AC00FF0B1B /* JSONManager.h */,
 				1472BBB71F8223C400FF0B1B /* Utils.cpp */,
 				1472BBB81F8223C400FF0B1B /* Utils.h */,
-				143D8CC020C5517F0056D908 /* PlatformSDK.cpp */,
-				143D8CC120C5517F0056D908 /* PlatformSDK.h */,
-				14314ECF20C7BA9500BF3F38 /* PlatformSDK.mm */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -1032,7 +1058,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */,
+				148C9CE720F5A1A600087330 /* LuaCBridge.cpp in Sources */,
 				985358091F28958300B0250C /* md5lib.c in Sources */,
+				148C9CE820F5A1A900087330 /* Test.cpp in Sources */,
 				14D876CF20CA72BF00EE3E4A /* encoder.c in Sources */,
 				14D876DB20CA72BF00EE3E4A /* newmdct.c in Sources */,
 				14D876F520CA72BF00EE3E4A /* version.c in Sources */,
@@ -1049,7 +1077,6 @@
 				9FF504851A5E87B100AFDA55 /* ConsoleWindowController.m in Sources */,
 				1472BBB61F8223AC00FF0B1B /* JSONManager.cpp in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
-				14314ED320C7CC8C00BF3F38 /* PlatformSDK.cpp in Sources */,
 				14D876EB20CA72BF00EE3E4A /* takehiro.c in Sources */,
 				1472BBBA1F8223C400FF0B1B /* Utils.cpp in Sources */,
 				98DF42331F1E0E4D00E1BF12 /* pbc-lua.c in Sources */,
@@ -1058,11 +1085,14 @@
 				14D876E920CA72BF00EE3E4A /* tables.c in Sources */,
 				982525AC1F56629400054F71 /* lua-crypt.c in Sources */,
 				982525AA1F56629400054F71 /* lsha1.c in Sources */,
+				148C9CE520F5A19700087330 /* FYDC.cpp in Sources */,
 				98DF410D1F1DF3A700E1BF12 /* bit.c in Sources */,
 				140EC84220DCED1000FC3968 /* Email.cpp in Sources */,
 				14D876D920CA72BF00EE3E4A /* mpglib_interface.c in Sources */,
 				14D876E320CA72BF00EE3E4A /* quantize.c in Sources */,
+				148C9CE620F5A1A000087330 /* FYDSDK.cpp in Sources */,
 				14D876D520CA72BF00EE3E4A /* id3tag.c in Sources */,
+				148C9CE420F5A18D00087330 /* FValue.cpp in Sources */,
 				14D876E520CA72BF00EE3E4A /* reservoir.c in Sources */,
 				14D876F120CA72BF00EE3E4A /* VbrTag.c in Sources */,
 			);
@@ -1081,6 +1111,7 @@
 				14D876E420CA72BF00EE3E4A /* reservoir.c in Sources */,
 				14D876F420CA72BF00EE3E4A /* version.c in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
+				148C9CE020F5A18A00087330 /* LuaCBridge.cpp in Sources */,
 				14D876DA20CA72BF00EE3E4A /* newmdct.c in Sources */,
 				985358081F28958300B0250C /* md5lib.c in Sources */,
 				985358061F28958300B0250C /* md5.c in Sources */,
@@ -1088,10 +1119,10 @@
 				145E8AD120E4D78500827359 /* BuglyLuaAgent.cpp in Sources */,
 				14D876D820CA72BF00EE3E4A /* mpglib_interface.c in Sources */,
 				14D876F020CA72BF00EE3E4A /* VbrTag.c in Sources */,
+				148C9CDF20F5A18A00087330 /* FYDSDK.mm in Sources */,
 				14D876DE20CA72BF00EE3E4A /* psymodel.c in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				14D876DC20CA72BF00EE3E4A /* presets.c in Sources */,
-				14314ED020C7BA9500BF3F38 /* PlatformSDK.mm in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				1472BBB51F8223AC00FF0B1B /* JSONManager.cpp in Sources */,
 				14D876D620CA72BF00EE3E4A /* lame.c in Sources */,
@@ -1099,17 +1130,20 @@
 				14D876D220CA72BF00EE3E4A /* gain_analysis.c in Sources */,
 				14D876CE20CA72BF00EE3E4A /* encoder.c in Sources */,
 				14D876D020CA72BF00EE3E4A /* fft.c in Sources */,
+				148C9CE120F5A18A00087330 /* Test.cpp in Sources */,
 				14D876E620CA72BF00EE3E4A /* set_get.c in Sources */,
 				1472BBB91F8223C400FF0B1B /* Utils.cpp in Sources */,
 				14D876EE20CA72BF00EE3E4A /* vbrquantize.c in Sources */,
 				98DF42321F1E0E4D00E1BF12 /* pbc-lua.c in Sources */,
 				14D876E220CA72BF00EE3E4A /* quantize.c in Sources */,
 				140EC84120DCED1000FC3968 /* Email.cpp in Sources */,
+				148C9CDC20F5A18A00087330 /* FValue.cpp in Sources */,
 				982525AB1F56629400054F71 /* lua-crypt.c in Sources */,
 				14D876EC20CA72BF00EE3E4A /* util.c in Sources */,
 				982525A91F56629400054F71 /* lsha1.c in Sources */,
 				140EC7FE20DC986B00FC3968 /* Utils.m in Sources */,
 				98DF410C1F1DF3A700E1BF12 /* bit.c in Sources */,
+				148C9CDD20F5A18A00087330 /* FYDC.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

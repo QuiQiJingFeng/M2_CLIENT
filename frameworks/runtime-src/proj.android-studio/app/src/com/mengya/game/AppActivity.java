@@ -27,8 +27,7 @@ package com.mengya.game;
 
 import android.os.Bundle;
 import android.view.WindowManager;
-import com.mengya.common.Utils;
-import com.mengya.common.PlatformSDK;
+import com.common.Device;
 import com.mengya.wechat.WechatDelegate;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
@@ -37,8 +36,7 @@ public class AppActivity extends Cocos2dxActivity{
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
-        WechatDelegate.getInstance().init(this);
-        PlatformSDK.init(this);
-        ((Utils)Utils.getInstance()).init(this);
+        ((WechatDelegate)WechatDelegate.getInstance()).init(this);
+        ((Device)Device.getInstance()).init(this);
     }
 }

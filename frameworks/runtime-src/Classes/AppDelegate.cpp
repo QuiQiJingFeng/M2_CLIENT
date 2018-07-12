@@ -21,9 +21,11 @@ using namespace CocosDenshion;
 
 #include "common/JSONManager.h"
 #include "common/Utils.h"
-#include "common/PlatformSDK.h"
 
- //      
+#include "FYDSDK.h"
+#include "FYDC.h"
+#include "LuaCBridge.h"
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
 #include "bugly/CrashReport.h"
 #include "BuglyLuaAgent.h"
@@ -92,7 +94,11 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
-    luaopen_PlatformSDK(L);
+    
+    LuaCBridge::getInstance(L);
+    luaopen_FYDSDK(L);
+    luaopen_FYDC(L);
+    
     register_all_packages();
     LuaStack* stack = engine->getLuaStack();
     stack->setXXTEAKeyAndSign("10cc4fdee2fcd047", strlen("10cc4fdee2fcd047"), "gclR3cu9", strlen("gclR3cu9"));

@@ -176,17 +176,17 @@ string Email::ReadAllEmailTitle(const string& imapServer, int port, const string
     return string(recvBuffer);
 }
 
-Value Email::ReadAllEmailTitle(ValueVector vector)
+FValue Email::ReadAllEmailTitle(FValueVector vector)
 {
     string imapServer = vector[0].asString();
     int port = vector[1].asInt();
     string username = vector[2].asString();
     string password = vector[3].asString();
     string str = ReadAllEmailTitle(imapServer,port,username,password);
-    return Value(str);
+    return FValue(str);
 }
 
-Value Email::SendEmail(ValueVector vector)
+FValue Email::SendEmail(FValueVector vector)
 {
     string smtpServer = vector[0].asString();
     int smtpPort = vector[1].asInt();
@@ -196,14 +196,14 @@ Value Email::SendEmail(ValueVector vector)
     string title = vector[5].asString();
     string content = vector[6].asString();
     bool success = SendEmail(smtpServer,smtpPort,account,password,targetEmail,title,content);
-    return Value(success);
+    return FValue(success);
 }
 
 
-Value Email::Base64Encode(ValueVector vector)
+FValue Email::Base64Encode(FValueVector vector)
 {
     string str = vector[0].asString();
-    return Value(str);
+    return FValue(str);
 }
 
 

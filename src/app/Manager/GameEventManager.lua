@@ -77,6 +77,7 @@ GUO     过]]--
     NOTICE_FAST_SPAKE = "notice_fast_spake",
 
     NOTICE_PAO = "notice_pao",
+    HIDE_INVITE_BTN = "hide_invite_btn"
 }
 
 local handler_id = 0

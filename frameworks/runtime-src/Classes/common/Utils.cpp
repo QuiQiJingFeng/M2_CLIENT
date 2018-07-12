@@ -306,13 +306,13 @@ bool Utils::convertWavToMp3(string wavPath,string mp3Path)
  */
 
 //const char* wav_path,const char* mp3_path
-Value Utils::convertWavToMp3(ValueVector vector)
+FValue Utils::convertWavToMp3(FValueVector vector)
 {
     string wav = vector[0].asString();
     string mp3 = vector[1].asString();
     bool success = convertWavToMp3(wav,mp3);
     
-    return Value(success);
+    return FValue(success);
 }
 
 

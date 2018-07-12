@@ -58,16 +58,6 @@ function ReplayWatchitem:onClose(event)
 end
 
 function ReplayWatchitem:onShare(event)
-
-	local callBack = function(str)
-        print("FYD===>>",str)
-    end
-    --[[分享url接口暂时放这
-    local data = {0,"萌芽娱乐","畅玩麻将体验","https://mengyagame.com",""}
-    --local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
-    lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")    
-    local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "wxshareURL",data,"(Ljava/lang/String;)V")
-	--]]
 	local WXShareLayer = lt.WXShareLayer.new()
     lt.UILayerManager:addLayer(WXShareLayer, true)
 end

@@ -20,9 +20,11 @@ function InitLayer:ctor()
 end
 
 function InitLayer:onAndroidWechatLogin(call_back)
-    local callBack = function(str) 
-        local data = json.decode(str)
-        if data.action == "AUTH" then
+
+    lt.SDK.WechatDelegate.signIn(function(msg)
+            data = json.decode(msg)
+            dump(data,"FYD--->>>登陆")
+            if data.action == "AUTH" then
             if data.result == "success" then
                 local user_url = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s"
                 user_url = string.format(user_url,data.access_token,data.openid) 
@@ -36,28 +38,15 @@ function InitLayer:onAndroidWechatLogin(call_back)
                     body.password = data.access_token
                     body.login_type="release"
                     body.platform="weixin"
-                    local ok,ret = lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "getDeviceInfo",{},"()Ljava/lang/String;")
-            
-                    if ok then
-                        local data = json.decode(ret)
-                        body.device_id = data.device_id
-                        body.device_type = data.device_type
-                        call_back(body)
-                    else
-                        print("error getDeviceInfo ",ret)
-                    end
-                    
+                    body.device_id = lt.SDK.Device.getDeviceId()
+                    body.device_type = lt.SDK.Device.getDeviceType()
+                    call_back(body)
                 end) 
             else
-                print("微信授权失败")
+                lt.PromptPanel:showPrompt("微信授权失败")
             end
-        end
-    end
-    lt.Luaj.callStaticMethod("com/mengya/common/PlatformSDK", "registerCallBack",{callBack},"(I)V")
-    local ok,ret = lt.Luaj.callStaticMethod("com/mengya/wechat/WechatDelegate", "signIn",{},"()V")
-    if not ok then
-        print("FYD ERROR: SIGNIN FAILED ",ret)
-    end
+        end 
+        end)
 end
 
 function InitLayer:requestLogin(body)
@@ -78,6 +67,8 @@ function InitLayer:requestLogin(body)
 
                     lt.DataManager:recordAuthData(body)
                     InitLayer:onGetUserInfo(body)
+                else
+                    lt.PromptPanel:showPrompt(lt.Constants.PROMPT[recv_msg.result])
                 end
             end
         end)

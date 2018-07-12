@@ -20,7 +20,9 @@ function GameSetPanel:ctor(deleget)
 	self:getChildByName("Panel_RecordCtrl"):setVisible(false)
 	self:getChildByName("Node_InviteView"):setVisible(false)
 	self:getChildByName("Bg_ShareLayer"):setVisible(false)
-	self:getChildByName("Button_Invite"):setVisible(false)
+
+	--邀请按钮
+	self.inviteBtn = self:getChildByName("Button_Invite")
 
 	local ruleBtn = self:getChildByName("Button_GameRule")
 	local setBtn = self:getChildByName("Button_More")
@@ -48,8 +50,15 @@ function GameSetPanel:ctor(deleget)
 	
 	lt.CommonUtil:addNodeClickEvent(voiceBtn,handler(self, self.onTouchEndVoice),true,handler(self, self.onTouchBeginVoice),handler(self, self.onTouchCanceled))
 
+	lt.CommonUtil:addNodeClickEvent(self.inviteBtn, handler(self, self.onInviteBtnClick))
 
 	self.__recording = false
+end
+
+function GameSetPanel:onInviteBtnClick()
+	--邀请按钮点击
+	local invitePanel = lt.InvitePanel.new()
+	lt.UILayerManager:addLayer(invitePanel, true)
 end
 
 function GameSetPanel:UpdateCardBgColor()--暂停
@@ -159,8 +168,13 @@ function GameSetPanel:onNoticeSendAudio(content)
 	lt.CommonUtil:playAudio(path)
 end
 
+function GameSetPanel:hideInviteBtn()
+	self.inviteBtn:setVisible(false)
+end
+
 function GameSetPanel:onEnter()   
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SEND_AUDIO, handler(self, self.onNoticeSendAudio), "GameSetPanel.onNoticeSendAudio")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.HIDE_INVITE_BTN, handler(self, self.hideInviteBtn), "GameSetPanel.hideInviteBtn")
 end
 
 function GameSetPanel:onExit()

@@ -40,6 +40,8 @@ function ReplayView:ctor()
 	self._svButton:setInnerContainerSize(cc.size(200*gameNum,size.height))
 	--self._scrollView:setInnerContainerSize(cc.size(1000,580))--单个145 x cell数量 
 	--games/comm/lobbySpecial/
+	self._lowNodeTable = {}
+	self._deepNodeTable = {}
 	local TabPosX = 0
 	for i=1,gameNum do
 		if i > 1 then
@@ -61,6 +63,8 @@ function ReplayView:ctor()
 	    	self:listenRoomListUpdate()
 		end
 
+
+
     	local function menuZhuCeCallback(sender,eventType)
 	        if eventType == ccui.TouchEventType.began then
             	--print("按下按钮")
@@ -78,6 +82,24 @@ function ReplayView:ctor()
     			    self._texure:setAnchorPoint(0,0)
     			    self._texure:setScale(1.0)
 	    			btnTab:addChild(self._texure)
+
+	    		
+
+	    		    for k,v in ipairs(self._lowNodeTable) do
+	    		    	if k == i then
+	    		    		v:setVisible(false)
+	    		    		for p,t in ipairs(self._deepNodeTable) do
+	    		    			if p == i then
+	    		    				t:setVisible(true)
+	    		    			else
+	    		    				t:setVisible(false)
+	    		    			end
+	    		    		end
+	    		    		
+			    		else
+			    			v:setVisible(true)
+	    		    	end
+	    		    end
 
 	    		else
 	    			print("=======选中状态======")
@@ -117,32 +139,75 @@ function ReplayView:ctor()
 		end 
 		btnTab:addTouchEventListener(menuZhuCeCallback)
     	self._svButton:addChild(btnTab,2)
-    	if i == 1 then
-	    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText998.png")--最近战绩 
-	    	textSpr:setPosition(100,45)
-	    	btnTab:addChild(textSpr,1)
-    	elseif i == 2 then
-    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--红中麻将  --按照游戏类型
-	    	textSpr:setPosition(100,45)
-	    	btnTab:addChild(textSpr,1)
-    	elseif i == 3 then
-    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText120.png")--斗地主
-	    	textSpr:setPosition(100,45)
-	    	btnTab:addChild(textSpr,1)
-    	elseif i == 4 then
-    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText112.png")--商丘麻将
-	    	textSpr:setPosition(100,45)
-	    	btnTab:addChild(textSpr,1)
-    	elseif i == 5 then
-    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText114.png")--飘癞子
-	    	textSpr:setPosition(100,45)
-	    	btnTab:addChild(textSpr,1)
-    	elseif i == 6 then
-	    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText6.png")--推倒胡
-	    	textSpr:setPosition(100,45)
-	    	btnTab:addChild(textSpr,1)
-    	end
 
+    	if i == 1 then
+	    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText999.png")--最近战绩 
+	    	textSpr:setPosition(100,45)
+	    	textSpr:setVisible(false)
+	    	btnTab:addChild(textSpr,1)
+	    	table.insert( self._lowNodeTable, textSpr )
+
+	    	local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText998.png")--
+			textSpr1:setPosition(100,45)
+			btnTab:addChild(textSpr1,1)
+			textSpr1:setVisible(true)
+			table.insert( self._deepNodeTable, textSpr1 )
+    	elseif i == 2 then
+    		textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText2.png")--红中麻将  --按照游戏类型
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+	    	table.insert( self._lowNodeTable, textSpr )
+
+	    	local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText0.png")--
+			textSpr1:setPosition(100,45)
+			textSpr1:setVisible(false)
+			btnTab:addChild(textSpr1,1)
+			table.insert( self._deepNodeTable, textSpr1 )
+    	elseif i == 3 then
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText119.png")--斗地主
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+	    	table.insert( self._lowNodeTable, textSpr )
+
+	    	local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText120.png")--
+			textSpr1:setPosition(100,45)
+			textSpr1:setVisible(false)
+			btnTab:addChild(textSpr1,1)
+			table.insert( self._deepNodeTable, textSpr1 )
+    	elseif i == 4 then
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText111.png")--商丘麻将
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+	    	table.insert( self._lowNodeTable, textSpr )
+
+	    	local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText112.png")--
+			textSpr1:setPosition(100,45)
+			textSpr1:setVisible(false)
+			btnTab:addChild(textSpr1,1)
+			table.insert( self._deepNodeTable, textSpr1 )
+    	elseif i == 5 then
+    		local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText113.png")--飘癞子
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+	    	table.insert( self._lowNodeTable, textSpr )
+
+	    	local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText114.png")--
+			textSpr1:setPosition(100,45)
+			textSpr1:setVisible(false)
+			btnTab:addChild(textSpr1,1)
+			table.insert( self._deepNodeTable, textSpr1 )
+    	elseif i == 6 then
+	    	local textSpr = cc.Sprite:create("games/comm/lobbySpecial/ImageText7.png")--推倒胡
+	    	textSpr:setPosition(100,45)
+	    	btnTab:addChild(textSpr,1)
+	    	table.insert( self._lowNodeTable, textSpr )
+
+	    	local textSpr1 = cc.Sprite:create("games/comm/lobbySpecial/ImageText6.png")--
+			textSpr1:setPosition(100,45)
+			textSpr1:setVisible(false)
+			btnTab:addChild(textSpr1,1)
+			table.insert( self._deepNodeTable, textSpr1 )
+    	end
 	end
 	
 --]]

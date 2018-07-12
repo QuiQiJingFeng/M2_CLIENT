@@ -256,7 +256,7 @@ function CreateRoomLayer:onjoinRoomResponse( tObj )
         -- end
         self:onClose()
     else
-        print("创建房间失败", tObj)
+        lt.PromptPanel:showPrompt(lt.Constants.PROMPT[tObj.result])
     end
 end
 

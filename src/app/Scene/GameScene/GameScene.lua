@@ -39,12 +39,17 @@ function GameScene:ctor()
     self._gameNoticeLayer = lt.WorldNoticeLayer.new()
     self:addChild(self._gameNoticeLayer)
 
+    lt.UILayerManager:clearWorldUILayer()
+
     lt.UILayerManager:setWorldMenuLayer(self._gameRoomLayer)
     lt.UILayerManager:setWorldUILayer(self._gameUILayer)
 
     -- self.__ChatLayer = ChatLayer:new()
     -- self._gameUILayer:addChild(self.__ChatLayer)
     -- self.__ChatLayer:setVisible(false)
+
+    --进入游戏场景 清空剪切板
+    lt.SDK.Device.copyToClipBoard("")
     
 end
 

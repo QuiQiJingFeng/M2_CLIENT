@@ -40,7 +40,10 @@ android {
             }
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     sourceSets.main {
         java.srcDir "src"
         res.srcDir "res"
@@ -148,10 +151,10 @@ android.applicationVariants.all { variant ->
     // delete previous files first
     delete "${buildDir}/intermediates/assets/${variant.dirName}"
     variant.mergeAssets.doLast {
-        exec {
-            workingDir "${buildDir}/../../../../../"
-            commandLine 'python',"create_package_all.py"
-        }
+        // exec {
+        //     workingDir "${buildDir}/../../../../../"
+        //     commandLine 'python',"create_package_all.py"
+        // }
         copy {
            from "${buildDir}/../../../../../package"
            into "${buildDir}/intermediates/assets/${variant.dirName}/package"

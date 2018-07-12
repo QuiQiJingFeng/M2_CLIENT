@@ -53,7 +53,7 @@ function DataManager:onjoinRoomResponse(msg)
             lt.SceneManager:replaceScene(gameScene)
         end
     else
-        print("加入房间失败")
+        lt.PromptPanel:showPrompt(lt.Constants.PROMPT[msg.result])
     end
 end
 
@@ -127,6 +127,8 @@ function DataManager:listenNetDisconnect()
                     self._pushAllRoomInfo = {}
                     local arg = {room_id = room_id}
                     lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+                else
+                    lt.PromptPanel:showPrompt(lt.Constants.PROMPT[recv_msg.result])
                 end
             end)
         end

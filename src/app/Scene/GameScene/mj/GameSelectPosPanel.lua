@@ -37,6 +37,7 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 	self._currentPlayerLogArray = {}--玩家打牌中头像
 	self._playerposTableX = {}--玩家头像xpos
 	self._playerposTableY = {}--玩家头像ypos
+	self._PlayHeadTable = {}--玩家头像点击事件
 
 
 	--[[ 玩家的logo 
@@ -66,6 +67,8 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 	for i=1,4 do 
 		table.insert(self._tingLogoArray, self:getChildByName("Image_Ting_"..i))
 		table.insert(self._playerLogoArray, self:getChildByName("Node_Player"..i))
+		self:getChildByName("Node_Player"..i):getChildByName("Image_HeadBg"):getChildByName("Image_Head"):setTag(i)
+		table.insert(self._PlayHeadTable, self:getChildByName("Node_Player"..i):getChildByName("Image_HeadBg"):getChildByName("Image_Head"))--玩家的头像
 		table.insert(self._playerposTableX, self:getChildByName("Node_Player"..i):getPositionX())
 		table.insert(self._playerposTableY, self:getChildByName("Node_Player"..i):getPositionY())
 		table.insert(self._allPlayerPosArray, self._nodeNoPlayer:getChildByName("Button_NoPlayer_"..i))
@@ -165,6 +168,10 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 		end
 	end
 
+	for k,node in pairs(self._PlayHeadTable) do
+        lt.CommonUtil:addNodeClickEvent(node, handler(self, self.onHeadEvent))
+    end
+
 	self._nodePaoLayer = self:getChildByName("Node_PaoLayer")
 	self._nodePaoLayer:setVisible(false)
 	self._paoBtn = self._nodePaoLayer:getChildByName("Pao_Btn")
@@ -172,6 +179,14 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 
 	lt.CommonUtil:addNodeClickEvent(self._paoBtn, handler(self, self.onSelectPaoClick))
 	lt.CommonUtil:addNodeClickEvent(self._notPaoBtn, handler(self, self.onSelectNoPaoClick))
+end
+
+function GameSelectPosPanel:onHeadEvent(event)
+	local pos = lt.DataManager:getPlayerPosByDirection(event:getTag())
+	local info = lt.DataManager:getPlayerInfoByPos(pos)
+
+	self._gamePlayerinfoLayer = lt.GamePlayerinfoLayer.new(info)
+	lt.UILayerManager:addLayer(self._gamePlayerinfoLayer,true)
 end
 
 function GameSelectPosPanel:RestartShow()--游戏结束把听牌标识全false
@@ -755,13 +770,17 @@ function GameSelectPosPanel:onSitDownResponse(msg)
     if msg.result == "success" then
 	    self:configRotation(true)
     else
-
+    	lt.PromptPanel:showPrompt(lt.Constants.PROMPT[msg.result])
     end
 end
 
 function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
 	self._nodePaoLayer:setVisible(false)
 	
+	--进入游戏之中后 隐藏邀请按钮
+	
+	lt.GameEventManager:post(lt.GameEventManager.EVENT.HIDE_INVITE_BTN)
+
 	for pos,SitPos in pairs(self._currentSitPosArray) do
 		SitPos:setVisible(false)
 	end

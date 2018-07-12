@@ -1,4 +1,4 @@
-package com.mengya.common;
+package com.common;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
