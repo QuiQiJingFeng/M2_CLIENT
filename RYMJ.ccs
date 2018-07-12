@@ -698,8 +698,6 @@
               <Image Name="card_5_6.png" />
               <Image Name="card_5_7.png" />
               <Image Name="card_5_8.png" />
-              <Image Name="card_6_1.png" />
-              <Image Name="card_6_2.png" />
               <Image Name="cardShadow.png" />
             </Folder>
             <Folder Name="csb">

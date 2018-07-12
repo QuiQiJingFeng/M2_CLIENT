@@ -741,7 +741,7 @@
                             <OutlineColor A="255" R="255" G="0" B="0" />
                             <ShadowColor A="255" R="110" G="110" B="110" />
                           </AbstractNodeData>
-                          <AbstractNodeData Name="Panel_Play1" ActionTag="-1928041918" Tag="445" IconVisible="False" LeftMargin="177.0025" RightMargin="639.9975" TopMargin="382.8843" BottomMargin="91.1157" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                          <AbstractNodeData Name="Panel_Play1" ActionTag="-1928041918" Tag="445" IconVisible="False" LeftMargin="177.0000" RightMargin="640.0000" TopMargin="382.8843" BottomMargin="91.1157" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                             <Size X="150.0000" Y="50.0000" />
                             <Children>
                               <AbstractNodeData Name="Image_FangZhu" ActionTag="-2055637366" Tag="446" IconVisible="False" LeftMargin="15.4431" RightMargin="94.5569" TopMargin="3.7370" BottomMargin="4.2630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="10" Scale9Height="12" ctype="ImageViewObjectData">
@@ -777,7 +777,7 @@
                               </AbstractNodeData>
                             </Children>
                             <AnchorPoint />
-                            <Position X="177.0025" Y="91.1157" />
+                            <Position X="177.0000" Y="91.1157" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
                             <PrePosition X="0.1830" Y="0.1739" />
@@ -1543,7 +1543,7 @@
                         <EndColor A="255" R="255" G="255" B="255" />
                         <ColorVector ScaleY="1.0000" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="SQMJ_Rule" ActionTag="1206412906" Tag="722" IconVisible="False" LeftMargin="20.4291" RightMargin="36.5709" TopMargin="0.8162" BottomMargin="10.1838" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                      <AbstractNodeData Name="SQMJ_Rule" ActionTag="1206412906" VisibleForFrame="False" Tag="722" IconVisible="False" LeftMargin="20.4291" RightMargin="36.5709" TopMargin="0.8162" BottomMargin="10.1838" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                         <Size X="967.0000" Y="524.0000" />
                         <Children>
                           <AbstractNodeData Name="Text_Pay" ActionTag="268008018" Tag="723" IconVisible="False" LeftMargin="48.1920" RightMargin="798.8080" TopMargin="19.3300" BottomMargin="474.6700" FontSize="30" LabelText="资　费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -2665,6 +2665,52 @@
                             <EndColor A="255" R="255" G="255" B="255" />
                             <ColorVector ScaleY="1.0000" />
                           </AbstractNodeData>
+                          <AbstractNodeData Name="Panel_qiTa8" ActionTag="-886630094" Tag="2884" IconVisible="False" LeftMargin="37.0000" RightMargin="780.0000" TopMargin="534.0000" BottomMargin="-60.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                            <Size X="150.0000" Y="50.0000" />
+                            <Children>
+                              <AbstractNodeData Name="Image_FangZhu" ActionTag="1720172957" Tag="2885" IconVisible="False" LeftMargin="15.4431" RightMargin="94.5569" TopMargin="3.7370" BottomMargin="4.2630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="10" Scale9Height="12" ctype="ImageViewObjectData">
+                                <Size X="40.0000" Y="42.0000" />
+                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                                <Position X="35.4431" Y="25.2630" />
+                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                                <CColor A="255" R="255" G="255" B="255" />
+                                <PrePosition X="0.2363" Y="0.5053" />
+                                <PreSize X="0.2667" Y="0.8400" />
+                                <FileData Type="MarkedSubImage" Path="game/common/img/checkBox_gray_2.png" Plist="game/common/CreateRoomPlist0.plist" />
+                              </AbstractNodeData>
+                              <AbstractNodeData Name="Text_Pay" ActionTag="-1856037638" Tag="2886" IconVisible="False" LeftMargin="65.0000" RightMargin="5.0000" TopMargin="18.5314" BottomMargin="11.4686" FontSize="20" LabelText="是否暗听" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                                <Size X="80.0000" Y="20.0000" />
+                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                                <Position X="105.0000" Y="21.4686" />
+                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                                <CColor A="255" R="95" G="95" B="94" />
+                                <PrePosition X="0.7000" Y="0.4294" />
+                                <PreSize X="0.5333" Y="0.4000" />
+                                <OutlineColor A="255" R="255" G="0" B="0" />
+                                <ShadowColor A="255" R="110" G="110" B="110" />
+                              </AbstractNodeData>
+                              <AbstractNodeData Name="Image_Select" ActionTag="550827692" Tag="2887" IconVisible="False" LeftMargin="15.6735" RightMargin="92.3265" TopMargin="5.2369" BottomMargin="5.7631" LeftEage="16" RightEage="16" TopEage="16" BottomEage="16" Scale9OriginX="16" Scale9OriginY="16" Scale9Width="10" Scale9Height="7" ctype="ImageViewObjectData">
+                                <Size X="42.0000" Y="39.0000" />
+                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                                <Position X="36.6735" Y="25.2631" />
+                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                                <CColor A="255" R="255" G="255" B="255" />
+                                <PrePosition X="0.2445" Y="0.5053" />
+                                <PreSize X="0.2800" Y="0.7800" />
+                                <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_mulOptionMark.png" Plist="game/common/CreateRoomPlist0.plist" />
+                              </AbstractNodeData>
+                            </Children>
+                            <AnchorPoint />
+                            <Position X="37.0000" Y="-60.0000" />
+                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                            <CColor A="255" R="255" G="255" B="255" />
+                            <PrePosition X="0.0383" Y="-0.1145" />
+                            <PreSize X="0.1551" Y="0.0954" />
+                            <SingleColor A="255" R="128" G="0" B="128" />
+                            <FirstColor A="255" R="150" G="200" B="255" />
+                            <EndColor A="255" R="255" G="255" B="255" />
+                            <ColorVector ScaleY="1.0000" />
+                          </AbstractNodeData>
                         </Children>
                         <AnchorPoint />
                         <Position X="20.4291" Y="10.1838" />
@@ -3374,7 +3420,7 @@
                             <EndColor A="255" R="255" G="255" B="255" />
                             <ColorVector ScaleY="1.0000" />
                           </AbstractNodeData>
-                          <AbstractNodeData Name="Panel_Play2" ActionTag="1597689006" Tag="1996" IconVisible="False" LeftMargin="406.5965" RightMargin="410.4035" TopMargin="382.8843" BottomMargin="91.1157" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                          <AbstractNodeData Name="Panel_Play2" ActionTag="1597689006" Tag="1996" IconVisible="False" LeftMargin="634.6000" RightMargin="182.4000" TopMargin="382.8843" BottomMargin="91.1157" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                             <Size X="150.0000" Y="50.0000" />
                             <Children>
                               <AbstractNodeData Name="Image_FangZhu" ActionTag="671593157" Tag="1997" IconVisible="False" LeftMargin="15.4431" RightMargin="94.5569" TopMargin="3.7370" BottomMargin="4.2630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="10" Scale9Height="12" ctype="ImageViewObjectData">
@@ -3410,7 +3456,53 @@
                               </AbstractNodeData>
                             </Children>
                             <AnchorPoint />
-                            <Position X="406.5965" Y="91.1157" />
+                            <Position X="634.6000" Y="91.1157" />
+                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                            <CColor A="255" R="255" G="255" B="255" />
+                            <PrePosition X="0.6563" Y="0.1739" />
+                            <PreSize X="0.1551" Y="0.0954" />
+                            <SingleColor A="255" R="128" G="0" B="128" />
+                            <FirstColor A="255" R="150" G="200" B="255" />
+                            <EndColor A="255" R="255" G="255" B="255" />
+                            <ColorVector ScaleY="1.0000" />
+                          </AbstractNodeData>
+                          <AbstractNodeData Name="Panel_Play3" ActionTag="372151768" Tag="2888" IconVisible="False" LeftMargin="406.6000" RightMargin="410.4000" TopMargin="382.8800" BottomMargin="91.1200" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                            <Size X="150.0000" Y="50.0000" />
+                            <Children>
+                              <AbstractNodeData Name="Image_FangZhu" ActionTag="176166374" Tag="2889" IconVisible="False" LeftMargin="15.4431" RightMargin="94.5569" TopMargin="3.7370" BottomMargin="4.2630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="10" Scale9Height="12" ctype="ImageViewObjectData">
+                                <Size X="40.0000" Y="42.0000" />
+                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                                <Position X="35.4431" Y="25.2630" />
+                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                                <CColor A="255" R="255" G="255" B="255" />
+                                <PrePosition X="0.2363" Y="0.5053" />
+                                <PreSize X="0.2667" Y="0.8400" />
+                                <FileData Type="MarkedSubImage" Path="game/common/img/checkBox_gray_2.png" Plist="game/common/CreateRoomPlist0.plist" />
+                              </AbstractNodeData>
+                              <AbstractNodeData Name="Text_Pay" ActionTag="-320601956" Tag="2890" IconVisible="False" LeftMargin="65.0000" RightMargin="5.0000" TopMargin="16.1437" BottomMargin="13.8563" FontSize="20" LabelText="是否暗听" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                                <Size X="80.0000" Y="20.0000" />
+                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                                <Position X="105.0000" Y="23.8563" />
+                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                                <CColor A="255" R="95" G="95" B="94" />
+                                <PrePosition X="0.7000" Y="0.4771" />
+                                <PreSize X="0.5333" Y="0.4000" />
+                                <OutlineColor A="255" R="255" G="0" B="0" />
+                                <ShadowColor A="255" R="110" G="110" B="110" />
+                              </AbstractNodeData>
+                              <AbstractNodeData Name="Image_Select" ActionTag="-1954359502" Tag="2891" IconVisible="False" LeftMargin="14.4431" RightMargin="93.5569" TopMargin="5.2369" BottomMargin="5.7631" LeftEage="16" RightEage="16" TopEage="16" BottomEage="16" Scale9OriginX="16" Scale9OriginY="16" Scale9Width="10" Scale9Height="7" ctype="ImageViewObjectData">
+                                <Size X="42.0000" Y="39.0000" />
+                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                                <Position X="35.4431" Y="25.2631" />
+                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                                <CColor A="255" R="255" G="255" B="255" />
+                                <PrePosition X="0.2363" Y="0.5053" />
+                                <PreSize X="0.2800" Y="0.7800" />
+                                <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_mulOptionMark.png" Plist="game/common/CreateRoomPlist0.plist" />
+                              </AbstractNodeData>
+                            </Children>
+                            <AnchorPoint />
+                            <Position X="406.6000" Y="91.1200" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
                             <PrePosition X="0.4205" Y="0.1739" />
@@ -3432,7 +3524,7 @@
                         <EndColor A="255" R="255" G="255" B="255" />
                         <ColorVector ScaleY="1.0000" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="PLZ_Rule" ActionTag="908230617" VisibleForFrame="False" Tag="2004" IconVisible="False" LeftMargin="10.0000" RightMargin="47.0000" TopMargin="-9.0000" BottomMargin="20.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                      <AbstractNodeData Name="PLZ_Rule" ActionTag="908230617" Tag="2004" IconVisible="False" LeftMargin="10.0000" RightMargin="47.0000" TopMargin="-9.0000" BottomMargin="20.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                         <Size X="967.0000" Y="524.0000" />
                         <Children>
                           <AbstractNodeData Name="Text_Pay" ActionTag="1887810578" Tag="2005" IconVisible="False" LeftMargin="48.1920" RightMargin="798.8080" TopMargin="39.3294" BottomMargin="454.6706" FontSize="30" LabelText="资　费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -3980,92 +4072,46 @@
                             <OutlineColor A="255" R="255" G="0" B="0" />
                             <ShadowColor A="255" R="110" G="110" B="110" />
                           </AbstractNodeData>
-                          <AbstractNodeData Name="Panel_Jiang1" ActionTag="500542119" Tag="2053" IconVisible="False" LeftMargin="177.2284" RightMargin="639.7716" TopMargin="314.0342" BottomMargin="159.9658" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                          <AbstractNodeData Name="Panel_Jiang1" ActionTag="-894278449" Tag="410" IconVisible="False" LeftMargin="177.0000" RightMargin="640.0000" TopMargin="314.0300" BottomMargin="159.9700" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                             <Size X="150.0000" Y="50.0000" />
                             <Children>
-                              <AbstractNodeData Name="Image_FangZhu" ActionTag="853808527" Tag="2054" IconVisible="False" LeftMargin="12.4431" RightMargin="91.5569" TopMargin="1.2370" BottomMargin="1.7630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="16" Scale9Height="17" ctype="ImageViewObjectData">
-                                <Size X="46.0000" Y="47.0000" />
+                              <AbstractNodeData Name="Image_FangZhu" ActionTag="1915896235" Tag="411" IconVisible="False" LeftMargin="15.4431" RightMargin="94.5569" TopMargin="3.7370" BottomMargin="4.2630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="10" Scale9Height="12" ctype="ImageViewObjectData">
+                                <Size X="40.0000" Y="42.0000" />
                                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                                 <Position X="35.4431" Y="25.2630" />
                                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                                 <CColor A="255" R="255" G="255" B="255" />
                                 <PrePosition X="0.2363" Y="0.5053" />
-                                <PreSize X="0.3067" Y="0.9400" />
-                                <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_oneOptionBg.png" Plist="game/common/CreateRoomPlist0.plist" />
+                                <PreSize X="0.2667" Y="0.8400" />
+                                <FileData Type="MarkedSubImage" Path="game/common/img/checkBox_gray_2.png" Plist="game/common/CreateRoomPlist0.plist" />
                               </AbstractNodeData>
-                              <AbstractNodeData Name="Text_Pay" ActionTag="-881855548" Tag="2055" IconVisible="False" LeftMargin="65.0000" RightMargin="45.0000" TopMargin="18.5316" BottomMargin="11.4684" FontSize="20" LabelText="自摸" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                                <Size X="40.0000" Y="20.0000" />
-                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                                <Position X="85.0000" Y="21.4684" />
-                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                                <CColor A="255" R="95" G="95" B="94" />
-                                <PrePosition X="0.5667" Y="0.4294" />
-                                <PreSize X="0.2667" Y="0.4000" />
-                                <OutlineColor A="255" R="255" G="0" B="0" />
-                                <ShadowColor A="255" R="110" G="110" B="110" />
-                              </AbstractNodeData>
-                              <AbstractNodeData Name="Image_Select" ActionTag="-1084322691" Tag="2056" IconVisible="False" LeftMargin="11.0026" RightMargin="89.9974" TopMargin="0.2370" BottomMargin="0.7630" LeftEage="16" RightEage="16" TopEage="16" BottomEage="16" Scale9OriginX="16" Scale9OriginY="16" Scale9Width="17" Scale9Height="17" ctype="ImageViewObjectData">
-                                <Size X="49.0000" Y="49.0000" />
-                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                                <Position X="35.5026" Y="25.2630" />
-                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                                <CColor A="255" R="255" G="255" B="255" />
-                                <PrePosition X="0.2367" Y="0.5053" />
-                                <PreSize X="0.3267" Y="0.9800" />
-                                <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_oneOptionMark.png" Plist="game/common/CreateRoomPlist0.plist" />
-                              </AbstractNodeData>
-                            </Children>
-                            <AnchorPoint />
-                            <Position X="177.2284" Y="159.9658" />
-                            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                            <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.1833" Y="0.3053" />
-                            <PreSize X="0.1551" Y="0.0954" />
-                            <SingleColor A="255" R="128" G="0" B="128" />
-                            <FirstColor A="255" R="150" G="200" B="255" />
-                            <EndColor A="255" R="255" G="255" B="255" />
-                            <ColorVector ScaleY="1.0000" />
-                          </AbstractNodeData>
-                          <AbstractNodeData Name="Panel_Jiang2" ActionTag="1539348712" Tag="2057" IconVisible="False" LeftMargin="406.8196" RightMargin="410.1804" TopMargin="314.0342" BottomMargin="159.9658" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                            <Size X="150.0000" Y="50.0000" />
-                            <Children>
-                              <AbstractNodeData Name="Image_FangZhu" ActionTag="988676541" Tag="2058" IconVisible="False" LeftMargin="12.4431" RightMargin="91.5569" TopMargin="1.2370" BottomMargin="1.7630" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="16" Scale9Height="17" ctype="ImageViewObjectData">
-                                <Size X="46.0000" Y="47.0000" />
-                                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                                <Position X="35.4431" Y="25.2630" />
-                                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                                <CColor A="255" R="255" G="255" B="255" />
-                                <PrePosition X="0.2363" Y="0.5053" />
-                                <PreSize X="0.3067" Y="0.9400" />
-                                <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_oneOptionBg.png" Plist="game/common/CreateRoomPlist0.plist" />
-                              </AbstractNodeData>
-                              <AbstractNodeData Name="Text_Pay" ActionTag="-416563344" Tag="2059" IconVisible="False" LeftMargin="65.0000" RightMargin="25.0000" TopMargin="16.1440" BottomMargin="13.8560" FontSize="20" LabelText="可点炮" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                              <AbstractNodeData Name="Text_Pay" ActionTag="-1596481055" Tag="412" IconVisible="False" LeftMargin="65.0000" RightMargin="25.0000" TopMargin="18.5314" BottomMargin="11.4686" FontSize="20" LabelText="可点炮" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                                 <Size X="60.0000" Y="20.0000" />
                                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                                <Position X="95.0000" Y="23.8560" />
+                                <Position X="95.0000" Y="21.4686" />
                                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                                 <CColor A="255" R="95" G="95" B="94" />
-                                <PrePosition X="0.6333" Y="0.4771" />
+                                <PrePosition X="0.6333" Y="0.4294" />
                                 <PreSize X="0.4000" Y="0.4000" />
                                 <OutlineColor A="255" R="255" G="0" B="0" />
                                 <ShadowColor A="255" R="110" G="110" B="110" />
                               </AbstractNodeData>
-                              <AbstractNodeData Name="Image_Select" ActionTag="-856352635" Tag="2060" IconVisible="False" LeftMargin="10.9431" RightMargin="90.0569" TopMargin="0.2369" BottomMargin="0.7631" LeftEage="16" RightEage="16" TopEage="16" BottomEage="16" Scale9OriginX="16" Scale9OriginY="16" Scale9Width="17" Scale9Height="17" ctype="ImageViewObjectData">
-                                <Size X="49.0000" Y="49.0000" />
+                              <AbstractNodeData Name="Image_Select" ActionTag="-895732119" Tag="413" IconVisible="False" LeftMargin="15.6735" RightMargin="92.3265" TopMargin="5.2369" BottomMargin="5.7631" LeftEage="16" RightEage="16" TopEage="16" BottomEage="16" Scale9OriginX="16" Scale9OriginY="16" Scale9Width="10" Scale9Height="7" ctype="ImageViewObjectData">
+                                <Size X="42.0000" Y="39.0000" />
                                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                                <Position X="35.4431" Y="25.2631" />
+                                <Position X="36.6735" Y="25.2631" />
                                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                                 <CColor A="255" R="255" G="255" B="255" />
-                                <PrePosition X="0.2363" Y="0.5053" />
-                                <PreSize X="0.3267" Y="0.9800" />
-                                <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_oneOptionMark.png" Plist="game/common/CreateRoomPlist0.plist" />
+                                <PrePosition X="0.2445" Y="0.5053" />
+                                <PreSize X="0.2800" Y="0.7800" />
+                                <FileData Type="MarkedSubImage" Path="game/common/img/createRoom_mulOptionMark.png" Plist="game/common/CreateRoomPlist0.plist" />
                               </AbstractNodeData>
                             </Children>
                             <AnchorPoint />
-                            <Position X="406.8196" Y="159.9658" />
+                            <Position X="177.0000" Y="159.9700" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
-                            <PrePosition X="0.4207" Y="0.3053" />
+                            <PrePosition X="0.1830" Y="0.3053" />
                             <PreSize X="0.1551" Y="0.0954" />
                             <SingleColor A="255" R="128" G="0" B="128" />
                             <FirstColor A="255" R="150" G="200" B="255" />
