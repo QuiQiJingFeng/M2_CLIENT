@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="DebugLayer" Type="Layer" ID="3774f753-7e44-4835-93fc-a9a320723a1e" Version="3.10.0.0" />
+  <PropertyGroup Name="DebugLayer_1" Type="Layer" ID="3774f753-7e44-4835-93fc-a9a320723a1e" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />

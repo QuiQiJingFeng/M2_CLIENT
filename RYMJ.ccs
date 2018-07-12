@@ -797,6 +797,7 @@
                 <File Name="ShieldedFont.txt" />
               </Folder>
               <Folder Name="img">
+                <Image Name="3A.png" />
                 <Image Name="bg_selectView.png" />
                 <Image Name="bg_sitdown.png" />
                 <Image Name="BG10.png" />
