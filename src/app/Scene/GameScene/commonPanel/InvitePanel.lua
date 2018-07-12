@@ -65,9 +65,11 @@ function InvitePanel:onCopyShareClick()
 	]]
 	message = string.format(message,gameName,room_id,round,baseScore,payName)
 
-
 	local success = lt.SDK.Device.copyToClipBoard(message)
 	-- 弹框提示 已经复制到剪切板
+	lt.SDK.WechatDelegate.wxshareMsg(message,false,function(msg) 
+			print("FYD-->>share result = ",msg.result)
+		end)
 end
 
 function InvitePanel:onWeichatCircleClick()
