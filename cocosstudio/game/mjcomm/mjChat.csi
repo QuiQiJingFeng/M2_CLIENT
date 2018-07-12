@@ -1,0 +1,28 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="mjChat" Type="Plist" ID="cf549b30-f546-47f2-a0bf-42c4cda0525a" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="game/mjcomm/gwidget/chat/bg_Input.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/bg_world.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/bg_YY.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_fast1.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_fast2.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_icon1.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_icon2.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_send.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_wenzi.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_world1.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_world2.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_yuyin.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/icon_YY.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/img_bg.png" />
+      <FilePathData Path="game/mjcomm/animation/aniPlayerLight/mjBgLight.png" />
+      <FilePathData Path="game/mjcomm/part/guang.png" />
+      <FilePathData Path="game/mjcomm/gwidget/img/bg_selectView.png" />
+      <FilePathData Path="game/mjcomm/gwidget/img/bg_sitdown.png" />
+      <FilePathData Path="game/mjcomm/gwidget/img/img_HandTiShi.png" />
+      <FilePathData Path="game/mjcomm/gwidget/chat/btn_yuyin_gray.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

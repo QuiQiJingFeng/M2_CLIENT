@@ -1,6 +1,0 @@
-<PlistInfoProjectFile>
-  <PropertyGroup Name="game_card_2" Type="Plist" ID="a9828c8a-e1ee-4f30-a00d-ee95ab669376" Version="3.10.0.0" />
-  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
-    <MaxSize Width="1024" Height="1024" />
-  </Content>
-</PlistInfoProjectFile>
