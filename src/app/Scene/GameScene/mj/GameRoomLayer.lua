@@ -222,12 +222,12 @@ function GameRoomLayer:checkFzb()
 		end
 		if Num >= 1 then
 			if self._fzbLayer and not tolua.isnull(self._fzbLayer) then
-				self._fzbLayer:Close()
+				self:closeFzbLayer()
 				self._fzbLayer = nil
-				self._fzbLayer = lt.FzbLayer.new(equallyTable)
+				self._fzbLayer = lt.FzbLayer.new(equallyTable, self)
 		   	  	lt.UILayerManager:addLayer(self._fzbLayer,true)
 			else
-				self._fzbLayer = lt.FzbLayer.new(equallyTable)
+				self._fzbLayer = lt.FzbLayer.new(equallyTable, self)
 		   	  	lt.UILayerManager:addLayer(self._fzbLayer,true)
 	   	  	end
    	  	end
@@ -750,8 +750,23 @@ end
 
 function GameRoomLayer:onNoticePao(msg)--这里监听是为了通知跑的时候把防作弊给消除掉
 	if self._fzbLayer then
-		self._fzbLayer:Close()
+		self:closeFzbLayer()
 	end
+end
+
+function GameRoomLayer:closeFzbLayer()
+	lt.UILayerManager:removeLayer(self._fzbLayer)
+	self._fzbLayer = nil
+end
+
+function GameRoomLayer:onBackLobbyResponse(msg)
+    if msg.result == "success" then
+    	local worldScene = lt.WorldScene.new()
+        lt.SceneManager:replaceScene(worldScene)
+        lt.NetWork:disconnect()
+    else
+        lt.PromptPanel:showPrompt(LanguageString:getString(recv_msg.result))
+    end
 end
 
 function GameRoomLayer:onEnter()
@@ -787,8 +802,10 @@ function GameRoomLayer:onEnter()
 
   	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, handler(self, self.onnoticeTotalSattle), "GameRoomLayer.onnoticeTotalSattle")
 
-  	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_ROOM_INFO, handler(self, self.onRefreshRoomInfo), "GameRoomLayer.onRefreshRoomInfo")
+  	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.onRefreshRoomInfo), "GameRoomLayer.onRefreshRoomInfo")
   	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, handler(self, self.onNoticePao), "GameRoomLayer.onNoticePao")
+
+  	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.LEAVE_ROOM, handler(self, self.onBackLobbyResponse), "GameRoomLayer:onBackLobbyResponse")
 end
 
 function GameRoomLayer:onExit()
@@ -810,8 +827,9 @@ function GameRoomLayer:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameRoomLayer:onRefreshGameOver")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameRoomLayer:onNoticeSpecialEvent")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_TOTAL_SATTLE, "GameRoomLayer:onnoticeTotalSattle")
-    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_ROOM_INFO,"GameRoomLayer.onRefreshRoomInfo")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO,"GameRoomLayer.onRefreshRoomInfo")
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PAO, "GameRoomLayer.onNoticePao")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.LEAVE_ROOM, "GameRoomLayer:onBackLobbyResponse")
 end
 
 return GameRoomLayer

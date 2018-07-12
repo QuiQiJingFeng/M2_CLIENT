@@ -314,16 +314,6 @@ function SettingLayer:onBackLobby()
     lt.NetWork:disconnect()
 end
 
-function SettingLayer:onBackLobbyResponse(msg)
-    if msg.result == "success" then
-    	local worldScene = lt.WorldScene.new()
-        lt.SceneManager:replaceScene(worldScene)
-        lt.NetWork:disconnect()
-    else
-        lt.PromptPanel:showPrompt(lt.Constants.PROMPT[recv_msg.result])
-    end
-end
-
 function SettingLayer:onDistroyroomResponse(msg)    
     if msg.result ~= "success" then
         --local worldScene = lt.WorldScene.new()
@@ -338,7 +328,6 @@ end
 
 function SettingLayer:onEnter()   
     print("SettingLayer:onEnter")
-    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.LEAVE_ROOM, handler(self, self.onBackLobbyResponse), "SettingLayer:onBackLobbyResponse")
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DISTROY_ROOM, handler(self, self.onDistroyroomResponse), "SettingLayer:onDistroyroomResponse")
 
 
@@ -365,7 +354,9 @@ end
 
 function SettingLayer:onExit()
     print("SettingLayer:onExit")
-    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.LEAVE_ROOM, "SettingLayer:onBackLobbyResponse")
+    
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.DISTROY_ROOM, "SettingLayer:onDistroyroomResponse")
+
     lt.CommonUtil:removeEventListenerTouchOneByOne(self, self._listener)
 end
 

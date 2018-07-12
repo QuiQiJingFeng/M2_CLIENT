@@ -59,19 +59,8 @@ function GamePlayerinfoLayer:onGpsClickEvent(event)
 	self._image_GPSBg:setVisible(true)
 end
 
-function GamePlayerinfoLayer:onCancel(event)
-	lt.NetWork:sendTo(lt.GameEventManager.EVENT.LEAVE_ROOM)
-end
-
 function GamePlayerinfoLayer:Close()
 	lt.UILayerManager:removeLayer(self)
-end
-
-function GamePlayerinfoLayer:onBackLobbyResponse(msg)
-	if msg.result == "success" then
-    	local worldScene = lt.WorldScene.new()
-        lt.SceneManager:replaceScene(worldScene)
-    end
 end
 
 function GamePlayerinfoLayer:onEnter()

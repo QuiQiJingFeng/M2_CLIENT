@@ -1217,6 +1217,58 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 	if isBaoTing then--报听了   不再弹出听牌的按钮
 		if not isCanHu and not isCanGang then
 			self:autoPutOutCard()--听过牌的人检测过后会再动打出去
+
+		elseif isCanGang then--报听后可以开杠
+			
+    		local tObjGang = {}
+			if #anGangCards > 0 then
+				local newHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) 
+			
+				for i,v in ipairs(anGangCards) do
+					local index = 1
+					local removeNum = 1
+					while (index <= #newHandCards and removeNum <= 4 ) do
+						if newHandCards[index] == v then
+							table.remove(newHandCards, index)
+							removeNum = removeNum + 1
+						else
+							index = index + 1
+						end
+					end
+					--如果开杠之后还可以听牌
+					if self:isCanTingByCard(newHandCards) then
+						table.insert(tObjGang, v)
+					end
+				end
+			end
+
+			if #pengGang > 0 then
+				local newHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) 
+			
+				for i,v in ipairs(pengGang) do
+					local index = 1
+					local removeNum = 1
+					while (index <= #newHandCards and removeNum <= 1 ) do
+						if newHandCards[index] == v then
+							table.remove(newHandCards, index)
+							removeNum = removeNum + 1
+						else
+							index = index + 1
+						end
+					end
+					--如果开杠之后还可以听牌
+					if self:isCanTingByCard(newHandCards) then
+						table.insert(tObjGang, v)
+					end
+				end				
+			end
+
+			if #tObjGang > 0 then
+				tObjCpghObj.tObjGang = tObjGang
+			else
+				tObjCpghObj.tObjGang = nil
+			end
+
 		end
 	else--没报听
 		if self._isNeedBaoTing == 1 then --需要报听 
@@ -2033,51 +2085,9 @@ function MjEngine:onClientConnectAgain()--  断线重连
         tObjChi = nil,
         tObjPeng = nil,
         tObjGang = nil,
-        tObjHu = nil--抢杠胡
+        tObjHu = nil,--抢杠胡
+        tObjTing = nil
     }
-
-	if allRoomInfo.operators then
-		local operatorList = {}
-		for i,operator in ipairs(allRoomInfo.operators) do
-			if operator == "CHI" or  operator == "PENG" or operator == "GANG" or operator == "HU" then
-				table.insert(operatorList, operator)
-			elseif operator == "DEAL_FINISH" then
-				local arg = {command = "DEAL_FINISH"}
-				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
-
-			elseif operator == "PLAY_CARD" then
-
-			end
-		end
-        for k,state in pairs(operatorList) do
-        	if state == "CHI" then
-        		tObjCpghObj.tObjChi = {}
-        		table.insert(tObjCpghObj.tObjChi, allRoomInfo.put_card)
-        	elseif state == "PENG" then
-        		tObjCpghObj.tObjPeng = {}
-
-        		--table.insert(tObjCpghObj.tObjPeng, msg.card)
-        	elseif state == "GANG" then
-        		if allRoomInfo.put_card then
-        			tObjCpghObj.tObjGang = {}
-        			table.insert(tObjCpghObj.tObjGang, allRoomInfo.put_card)
-        		end
-        	elseif state == "HU" then--抢杠胡
-        		tObjCpghObj.tObjHu = {}
-        	end
-        end
-	end
-
-    --当前事件  
- --    local putOutType = 0 --  1摸牌出牌  2 碰牌出牌 
-
-	-- if allRoomInfo.cur_play_operator then
-	-- 	if allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD" then	
-	-- 		putOutType = 1
-	-- 	elseif allRoomInfo.cur_play_operator == "WAIT_PLAY_CARD_FROM_PENG" then
-	-- 		putOutType = 2
-	-- 	end
-	-- end	
 
 	local state = 0 --  1摸牌出牌  2 碰牌出牌 
 
@@ -2106,6 +2116,38 @@ function MjEngine:onClientConnectAgain()--  断线重连
 		end
 
 	   tObjCpghObj = self:checkMyHandButtonActionStatu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], state, tObjCpghObj)
+	end
+
+	if allRoomInfo.operators then
+		local operatorList = {}
+		for i,operator in ipairs(allRoomInfo.operators) do
+			if operator == "CHI" or  operator == "PENG" or operator == "GANG" or operator == "HU" then
+				table.insert(operatorList, operator)
+			elseif operator == "DEAL_FINISH" then
+				local arg = {command = "DEAL_FINISH"}
+				lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+
+			elseif operator == "PLAY_CARD" then
+
+			end
+		end
+        for k,state in pairs(operatorList) do
+        	if state == "CHI" then
+        		tObjCpghObj.tObjChi = {}
+        		table.insert(tObjCpghObj.tObjChi, allRoomInfo.put_card)
+        	elseif state == "PENG" then
+        		tObjCpghObj.tObjPeng = {}
+
+        		--table.insert(tObjCpghObj.tObjPeng, msg.card)
+        	elseif state == "GANG" then
+        		if allRoomInfo.put_card then
+        			tObjCpghObj.tObjGang = tObjCpghObj.tObjGang or {}
+        			table.insert(tObjCpghObj.tObjGang, allRoomInfo.put_card)
+        		end
+        	elseif state == "HU" then--抢杠胡
+        		tObjCpghObj.tObjHu = {}
+        	end
+        end
 	end
 
 	allRoomInfo.ting_list = allRoomInfo.ting_list or {}
