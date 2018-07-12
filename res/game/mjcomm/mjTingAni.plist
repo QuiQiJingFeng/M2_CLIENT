@@ -763,28 +763,6 @@
 				<key>sourceSize</key>
 				<string>{80,96}</string>
 			</dict>
-			<key>game/mjcomm/cards/card_6_1.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{856,1930},{80,96}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{80,96}</string>
-			</dict>
-			<key>game/mjcomm/cards/card_6_2.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{940,1930},{80,96}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{80,96}</string>
-			</dict>
 			<key>game/mjcomm/part/gameBg_1.png</key>
 			<dict>
 				<key>frame</key>
