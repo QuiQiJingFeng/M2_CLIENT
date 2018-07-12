@@ -28,7 +28,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition Y="1.0000" />
                 <PreSize X="0.1394" Y="0.5213" />
-                <FileData Type="Normal" Path="games/comm/launch/launch_image_2.png" Plist="" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="Image_6" Visible="False" ActionTag="-772020876" Tag="109" IconVisible="False" LeftMargin="237.5353" RightMargin="1046.4647" TopMargin="230.5166" BottomMargin="484.4834" LeftEage="16" RightEage="16" TopEage="11" BottomEage="11" Scale9OriginX="16" Scale9OriginY="11" Scale9Width="18" Scale9Height="13" ctype="ImageViewObjectData">
                 <Size X="50.0000" Y="35.0000" />
@@ -38,7 +38,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.1968" Y="0.6693" />
                 <PreSize X="0.0375" Y="0.0467" />
-                <FileData Type="Normal" Path="games/comm/launch/launch_image_4.png" Plist="" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="Image_7" Visible="False" ActionTag="-923583134" Tag="110" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1170.0000" BottomMargin="445.0000" LeftEage="54" RightEage="54" TopEage="100" BottomEage="100" Scale9OriginX="54" Scale9OriginY="100" Scale9Width="56" Scale9Height="105" ctype="ImageViewObjectData">
                 <Size X="164.0000" Y="305.0000" />
@@ -48,7 +48,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="1.0000" Y="1.0000" />
                 <PreSize X="0.1229" Y="0.4067" />
-                <FileData Type="Normal" Path="games/comm/launch/launch_image_1.png" Plist="" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="Image_8" Visible="False" ActionTag="1195989282" Tag="111" IconVisible="False" LeftMargin="994.6948" RightMargin="232.3052" TopMargin="250.1838" BottomMargin="425.8162" LeftEage="35" RightEage="35" TopEage="24" BottomEage="24" Scale9OriginX="35" Scale9OriginY="24" Scale9Width="37" Scale9Height="26" ctype="ImageViewObjectData">
                 <Size X="107.0000" Y="74.0000" />
@@ -58,7 +58,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.7858" Y="0.6171" />
                 <PreSize X="0.0802" Y="0.0987" />
-                <FileData Type="Normal" Path="games/comm/launch/launch_image_3.png" Plist="" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="Text_3" Visible="False" ActionTag="463929288" Tag="852" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1323.0002" RightMargin="10.9998" TopMargin="-0.0001" BottomMargin="750.0001" FontSize="36" LabelText="" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="0.0000" Y="0.0000" />

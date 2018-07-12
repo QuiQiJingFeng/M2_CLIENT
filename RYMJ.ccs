@@ -5,19 +5,6 @@
       <RootFolder Name=".">
         <Folder Name="game">
           <Folder Name="common">
-            <Folder Name="hlby">
-              <Image Name="guang.png" />
-              <Image Name="hlby_big_bg.png" />
-              <Image Name="hlby_btn_title_1.png" />
-              <Image Name="hlby_btn_title_2.png" />
-              <Image Name="hlby_btn_title_3.png" />
-              <Image Name="hlby_lobby_btn.png" />
-              <Image Name="hlby_menu_btn_1.png" />
-              <Image Name="hlby_menu_btn_2.png" />
-              <Image Name="hlby_menu_title_1.png" />
-              <Image Name="hlby_menu_title_2.png" />
-              <Image Name="hlby_title_1.png" />
-            </Folder>
             <Folder Name="img">
               <Image Name="bg_editBoxBg.png" />
               <Image Name="bgMark.png" />
@@ -116,7 +103,6 @@
             <PlistInfo Name="CreateRoomPlist0.csi" Type="Plist" />
             <Project Name="GameRuleLayer.csd" Type="Layer" />
             <Project Name="GameRuleListLayer.csd" Type="Layer" />
-            <Project Name="HlbyChangeGameMoneyLayer.csd" Type="Layer" />
             <PlistInfo Name="hlbyGamePlist.csi" Type="Plist" />
             <Project Name="JoinRoomLayer.csd" Type="Layer" />
             <Project Name="LobbyHelpLayer.csd" Type="Layer" />
@@ -1503,7 +1489,6 @@
               <Image Name="BG0.png" />
               <Image Name="BG1.png" />
               <Image Name="BG3.png" />
-              <Image Name="BG3new.png" />
               <Image Name="BG4.png" />
               <Image Name="BG5.png" />
               <Image Name="BG9.png" />
@@ -1515,10 +1500,6 @@
               <Image Name="ImageText2.png" />
               <Image Name="ImageText3.png" />
               <Image Name="ImageText5.png" />
-              <Image Name="launch_image_1.png" />
-              <Image Name="launch_image_2.png" />
-              <Image Name="launch_image_3.png" />
-              <Image Name="launch_image_4.png" />
               <Project Name="LaunchLayer.csd" Type="Layer" />
               <Project Name="LoginLayer.csd" Type="Layer" />
               <Project Name="testNode.csd" Type="Node" />
@@ -1529,9 +1510,6 @@
               <Project Name="UserRuleLayer.csd" Type="Layer" />
             </Folder>
             <Folder Name="lobbySpecial">
-              <Image Name="activity_share.png" />
-              <Image Name="cgmj_title_1.png" />
-              <Image Name="cgmj_title_2.png" />
               <Image Name="Check0.png" />
               <Image Name="Check1.png" />
               <Image Name="CheckBox_Bg.png" />
@@ -1539,30 +1517,16 @@
               <Image Name="create_room_btn_1.png" />
               <Image Name="create_room_btn_2.png" />
               <Image Name="createRoom_free.png" />
-              <Image Name="createRoom_title_1.png" />
-              <Image Name="createRoom_title_2.png" />
-              <Image Name="ExpandShareLogo.png" />
-              <Image Name="gdmj_rule.png" />
-              <Image Name="gdmj_tittle1.png" />
-              <Image Name="gdmj_tittle2.png" />
               <Image Name="ImageText0.png" />
               <Image Name="ImageText119.png" />
               <Image Name="ImageText120.png" />
-              <Image Name="ImageText128.png" />
-              <Image Name="ImageText129.png" />
-              <Image Name="ImageText130.png" />
-              <Image Name="ImageText131.png" />
               <Image Name="ImageText2.png" />
               <Image Name="ImageText6.png" />
               <Image Name="ImageText7.png" />
               <Image Name="img_NewGameLogo.png" />
-              <Image Name="img_nn.png" />
-              <Image Name="img_nnselect.png" />
               <Image Name="img_ssz.png" />
               <Image Name="img_sszselect.png" />
-              <Image Name="img_Title.png" />
               <Image Name="lobby_man.png" />
-              <Image Name="lobby_title.png" />
               <Image Name="lobby_woman.png" />
               <Image Name="pdk_title_1.png" />
               <Image Name="pdk_title_2.png" />
@@ -1570,9 +1534,6 @@
               <Image Name="rotaryTable_2.png" />
               <Image Name="rotaryTable_3.png" />
               <Image Name="rotaryTable_4.png" />
-              <Image Name="rotaryTableGameName.png" />
-              <Image Name="scmj_title_1.png" />
-              <Image Name="scmj_title_2.png" />
             </Folder>
             <PlistInfo Name="comm_1.csi" Type="Plist" />
             <Image Name="ExpandShareIcon.png" />
@@ -2317,9 +2278,6 @@
             </Folder>
             <Project Name="AddFriendLayer.csd" Type="Layer" />
             <Project Name="CreateGuideLayer.csd" Type="Layer" />
-            <Project Name="ExpandShareFriendsLayer1.csd" Type="Layer" />
-            <Project Name="ExpandShareFriendsLayer2.csd" Type="Layer" />
-            <Project Name="ExpandShareFriendsLayer3.csd" Type="Layer" />
             <Project Name="FCMLayer1.csd" Type="Layer" />
             <Project Name="FCMLayer2.csd" Type="Layer" />
             <PlistInfo Name="FCMPlist.csi" Type="Plist" />
