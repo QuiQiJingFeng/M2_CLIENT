@@ -31,6 +31,8 @@ function InitLayer:onAndroidWechatLogin(call_back)
                 lt.CommonUtil:sendXMLHTTPrequrest("GET",user_url,nil,function(recv_msg)
                     local temp = json.decode(recv_msg)
                     local body = {}
+                    body.sex = temp.sex
+                    body.adress = string.format("%s-%s-%s",temp.country,temp.province,temp.city)
                     body.user_name = temp.nickname
                     body.user_pic = temp.headimgurl
                     body.account = data.openid
