@@ -406,8 +406,22 @@ function MjEngine:configHuiCard()
 	end
 end
 
-function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refreshOut, refreshSpeicalOut)--吃椪杠 手牌 出的牌  用于刷牌
+function MjEngine:cardBgColor(bool)
+	self._cardBgColor = bool
+	--检测听牌列表  为了刷新听胡牌的颜色
+	local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
 
+	local canHuCards = self:getAllCanHuCards(tempHandCards, value)
+	lt.CommonUtil.print("onClickHandCard==>胡牌tips", #canHuCards)
+	if #canHuCards > 0 then
+		self._deleget:showHuCardsTipsMj()
+		self._deleget:viewHuCardsTipsMenu(canHuCards)
+	else
+		self._deleget:hideHuCardsTipsMj()
+	end
+end
+
+function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refreshOut, refreshSpeicalOut)--吃椪杠 手牌 出的牌  用于刷牌
 	local cpgOffX = 0
 	local cpgOffY = 0
 
@@ -565,7 +579,6 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			--设置手牌的初始状态
 			node:setOrginPosition(node:getPosition())
 			node:setSelectState(false)
-			node:setCardBgColor(direction)--设置手牌的颜色
 		end
 
 		--暗着的手牌
@@ -657,7 +670,6 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				node:setOrginPosition(node:getPosition())
 				node:setSelectState(false)
 			end
-			node:setCardBgColor(direction)--设置手牌的颜色
 		end
 	end
 
@@ -694,7 +706,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			if info == 99 then
 				node:BackBg(true)
 			end
-			node:setOutCardBgColor(direction)--刷新出的牌的背景颜色
+			--node:setOutCardBgColor(direction)--刷新出的牌的背景颜色
 		end
 	end
 
@@ -766,7 +778,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			node:setVisible(true)
 		end
 	end
-
+	self._cardBgColor = false
 end
 
 --所有牌的变化
@@ -1009,7 +1021,26 @@ function MjEngine:createCardsNode(cardType, direction, info)
 		self:updateCardsNode(node, cardType, direction, info)
 	end
 
+	node:setCardBgColor(self:getCardcolor(),direction)
+
 	return node
+end
+function MjEngine:getCardcolor()
+	local xuanzhonMjcolor = lt.PreferenceManager:getMJcolor() --记录选中麻将颜色
+	if xuanzhonMjcolor == 0 then
+		xuanzhonMjcolor = 1
+	end
+
+	local color = "cardBgGreen"
+	if xuanzhonMjcolor == 1 then
+		color = "cardBgGreen"  --绿
+	elseif xuanzhonMjcolor == 2 then
+		color = "cardBgBlue"   --蓝
+	elseif xuanzhonMjcolor == 3 then
+		color = "cardBgYellow" --黄
+	end
+
+	return color
 end
 
 function MjEngine:updateCardsNode(node, cardType, direction, info)
@@ -1058,7 +1089,7 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 		end
 
 	elseif cardType == self.CARD_TYPE.CPG then
-		node:updateInfo(info,direction)
+		node:updateInfo(info)
 		node:setCpgInfo(info)
 
 	elseif cardType == self.CARD_TYPE.OUT then 
@@ -1071,6 +1102,9 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 			node:showLightMask()
 		end
 	end	
+	if self._cardBgColor then
+		node:setCardBgColor(self:getCardcolor(),direction)
+	end
 
 end
 
@@ -1112,6 +1146,9 @@ function MjEngine:updateLieHandCardsNode(node, direction, info, type)
 				node:showBlackMask()
 			end
 		end
+		if self._cardBgColor then
+			node:setCardBgColor(self:getCardcolor(),direction)
+		end
 	end
 end
 
@@ -1127,6 +1164,7 @@ function MjEngine:createLieFaceItemByDirection(direction, info, type)
 			lieFaceNode:setScale(2.0)
 		end
 		self:updateLieHandCardsNode(lieFaceNode, direction, info, type)
+		lieFaceNode:setCardBgColor(self:getCardcolor(),direction)
 	end
 
     return lieFaceNode
@@ -1219,7 +1257,11 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 			self:autoPutOutCard()--听过牌的人检测过后会再动打出去
 
 		elseif isCanGang then--报听后可以开杠
-			
+
+			local tempHandCards = clone(handList)
+			local anGangCards = lt.CommonUtil:getCanAnGangCards(tempHandCards)
+			local pengGang = lt.CommonUtil:getCanPengGangCards(self._allPlayerCpgCardsValue[lt.Constants.DIRECTION.NAN], tempHandCards)
+
     		local tObjGang = {}
 			if #anGangCards > 0 then
 				local newHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN]) 

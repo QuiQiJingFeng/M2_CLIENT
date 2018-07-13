@@ -24,8 +24,21 @@ function MjLieFaceItem:ctor(handDirection)
 	self._spriteArrow = self._rootNode:getChildByName("Sprite_Arrow")
 
 	self._tingIcon = self._rootNode:getChildByName("Sprite_TingArrow")
+	self._bg = self._rootNode:getChildByName("Sprite_Back")
 
 	self:showNormal()
+end
+
+function MjLieFaceItem:setCardBgColor(color,direction)
+    if direction == lt.Constants.DIRECTION.NAN then
+        self._bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
+    elseif direction == lt.Constants.DIRECTION.XI then
+        self._bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalFace.png")
+    elseif direction == lt.Constants.DIRECTION.DONG then --
+        self._bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalFace.png")
+    elseif direction == lt.Constants.DIRECTION.BEI then
+        self._bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
+    end
 end
 
 function MjLieFaceItem:getRootNode() 

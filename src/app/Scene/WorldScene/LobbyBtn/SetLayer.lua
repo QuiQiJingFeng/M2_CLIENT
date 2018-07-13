@@ -23,15 +23,38 @@ function SetLayer:ctor()
 	lt.CommonUtil:addNodeClickEvent(Bn_Close, function() self:onClose() end, false)	
 	lt.CommonUtil:addNodeClickEvent(Bn_signOut, function() self:signOut() end)	
 	lt.CommonUtil:addNodeClickEvent(Ie_Mark, function() self:onClose() end, false)	
+
+	local xuanzhonGameyx = lt.PreferenceManager:getSoundOn()   --记录选中游戏音效
+	local xuanzhonGameyy = lt.PreferenceManager:getMusicOn()   --记录选中游戏音乐
+
+	if xuanzhonGameyy then
+		local px, py = self.Bn_MusicOn:getPosition()
+		self.MusicCheck:setPosition(px, py)
+	else
+		local px, py = self.Bn_MusicOff:getPosition()
+		self.MusicCheck:setPosition(px, py)
+	end
+
+	if xuanzhonGameyx then
+		local px, py = self.Bn_SoundOn:getPosition()
+		self.SoundCheck:setPosition(px, py)
+	else
+		local px, py = self.Bn_SoundOff:getPosition()
+		self.SoundCheck:setPosition(px, py)
+	end
+
+
 end
 
 function SetLayer:setMusic( isOpen )
 	if isOpen then
 		AudioEngine.setMusicVolume(1)                              --设置背景音乐音量
+		lt.AudioManager:setMusicOn(true)
 		local px, py = self.Bn_MusicOn:getPosition()
 		self.MusicCheck:setPosition(px, py)
 	else
 		AudioEngine.setMusicVolume(0)                              --设置背景音乐音量
+		lt.AudioManager:setMusicOn(false)
 		local px, py = self.Bn_MusicOff:getPosition()
 		self.MusicCheck:setPosition(px, py)
 	end
@@ -45,11 +68,13 @@ end
 
 function SetLayer:setSound( isOpen )
 	if isOpen then
-		AudioEngine.setEffectsVolume(1)                            --设置音效音量
+		AudioEngine.setEffectsVolume(1)    
+		lt.AudioManager:setSoundOn(true)--开                        --设置音效音量
 		local px, py = self.Bn_SoundOn:getPosition()
 		self.SoundCheck:setPosition(px, py)
 	else
 		AudioEngine.setEffectsVolume(0)
+		lt.AudioManager:setSoundOn(false)--关
 		local px, py = self.Bn_SoundOff:getPosition()
 		self.SoundCheck:setPosition(px, py)
 	end

@@ -167,21 +167,6 @@ function PreferenceManager:getGemeyy()
 	return monsterId
 end
 
-function PreferenceManager:setGemeyx(monsterId)--记录选中游戏音效
-	local key = "SELECTGAMEYX"
-	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
-  	cc.UserDefault:getInstance():flush()
-end
-
-function PreferenceManager:getGemeyx()
-	local key = "SELECTGAMEYX"
-	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
-	if monsterId == 0 then
-		monsterId = 1
-	end
-	return monsterId
-end
-
 function PreferenceManager:setGamelanguage(monsterId)--记录选中游戏语言
 	local key = "SELECTGAMELANGUAGE"
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)

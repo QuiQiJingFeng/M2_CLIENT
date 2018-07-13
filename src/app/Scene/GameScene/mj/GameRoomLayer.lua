@@ -28,15 +28,11 @@ function GameRoomLayer:ctor()
 		self:setRoomBg(xuanzhonBgcolor)--设置玩家以前选中的颜色
 	end
 
-	local xuanzhonGameyx = lt.PreferenceManager:getGemeyx()   --记录选中游戏音效
-	if xuanzhonGameyx == 0 then
-         --不存在代表是新手默认在第一项
-            xuanzhonGameyx = 1
-    end
-    if xuanzhonGameyx == 1 then
-    	lt.AudioManager:resumeSound()--开
+	local xuanzhonGameyx = lt.PreferenceManager:getSoundOn()   --记录选中游戏音效
+    if xuanzhonGameyx then
+    	lt.AudioManager:setSoundOn(true)--开
     else
-    	lt.AudioManager:pauseSound()--关
+    	lt.AudioManager:setSoundOn(false)--关
     end
 	
 	self._gameCompassPanel = lt.GameCompassPanel.new(self)--罗盘层
@@ -290,7 +286,8 @@ function GameRoomLayer:UpdateCardBgColor()
 		currentGameDirections = {1, 2, 3, 4} 
 	end
 	for k,v in pairs(currentGameDirections) do
-		self._engine:configAllPlayerCards(v, true, true, true, true)	
+		self._engine:cardBgColor(true)
+		self._engine:configAllPlayerCards(v, true, true, true, true)
 	end
 end
 

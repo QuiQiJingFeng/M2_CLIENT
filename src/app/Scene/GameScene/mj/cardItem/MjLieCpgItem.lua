@@ -116,23 +116,14 @@ function MjLieCpgItem:updateInfo(info,direction)
 				self._rootNode:getChildByName("MJ_Cpg_"..i):setVisible(false)
 			end
 		end
+	end
+end
 
-		local xuanzhonMjcolor = lt.PreferenceManager:getMJcolor() --记录选中麻将颜色
-		if xuanzhonMjcolor == 0 then
-			xuanzhonMjcolor = 1
-		end
-
+function MjLieCpgItem:setCardBgColor(color,direction)--设置出的牌背面颜色
+	for i=1,5 do
 		--设置吃碰杠麻将背景
 		local bg = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Bg")
-		local color = "cardBgYellow"
-
-		if xuanzhonMjcolor == 1 then
-			color = "cardBgGreen"  --绿
-		elseif xuanzhonMjcolor == 2 then
-			color = "cardBgBlue"   --蓝
-		elseif xuanzhonMjcolor == 3 then
-			color = "cardBgYellow" --黄
-		end		if direction == lt.Constants.DIRECTION.NAN then
+		if direction == lt.Constants.DIRECTION.NAN then
 			bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
 		elseif direction == lt.Constants.DIRECTION.XI then
 			bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalFace.png")
@@ -141,7 +132,6 @@ function MjLieCpgItem:updateInfo(info,direction)
 		elseif direction == lt.Constants.DIRECTION.BEI then
 			bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
 		end
-
 	end
 end
 

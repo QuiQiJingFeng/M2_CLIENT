@@ -14,8 +14,12 @@ function MjHuCardTipsItem:ctor()
 
 
     self._face = self:getChildByName("Node_41"):getChildByName("Sprite_Face")
-    local imageBg = self:getChildByName("Node_41"):getChildByName("Sprite_Bg")
+    self._imageBg = self:getChildByName("Node_41"):getChildByName("Sprite_Bg")
     --imageBg:setSwallowTouches(false)
+end
+
+function MjHuCardTipsItem:setCardBgColor(color) 
+    self._imageBg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
 end
 
 function MjHuCardTipsItem:setCardIcon(value) 

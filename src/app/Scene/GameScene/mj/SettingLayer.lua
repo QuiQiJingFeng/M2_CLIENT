@@ -44,7 +44,7 @@ function SettingLayer:setshow()
     local xuanzhonBgcolor = lt.PreferenceManager:getBgcolor() --记录选中背景颜色
     local xuanzhonMjcolor = lt.PreferenceManager:getMJcolor() --记录选中麻将颜色
     local xuanzhonGameyy = lt.PreferenceManager:getGemeyy()   --记录选中游戏音乐
-    local xuanzhonGameyx = lt.PreferenceManager:getGemeyx()   --记录选中游戏音效
+    local xuanzhonGameyx = lt.PreferenceManager:getSoundOn()   --记录选中游戏音效
     local xuanzhonGamelanguage = lt.PreferenceManager:getGamelanguage()   --记录选中游戏语言
     for i=1,3 do    
         -- select背景颜色
@@ -99,7 +99,6 @@ function SettingLayer:setshow()
         lt.CommonUtil:addNodeClickEvent(mjPalel, function( ... )
             for i, v in pairs(selectNumMjcolor) do 
                 if v == mjPalel then
-                    print("=========ssssssssssffffffffffffff",i)
                     v.selectNode:setVisible(true)
                     lt.PreferenceManager:setMJcolor(i)
                     self._deleget:UpdateCardBgColor()
@@ -109,7 +108,7 @@ function SettingLayer:setshow()
             end
         end, false)
     end
-
+    local yyBs = 1
     for i=1,4 do
         -- select游戏音乐
         local musicPalel = self._scrollView:getChildByName("BGMusic_".. i)
@@ -123,9 +122,29 @@ function SettingLayer:setshow()
         end
 
         if i == xuanzhonGameyy then
-            musicPalel.selectNode:setVisible(true)
+            if lt.PreferenceManager:getMusicOn() then --开
+                if i == 4 then
+                    selectNumGameyy[1].selectNode:setVisible(true)
+                    selectNumGameyy[2].selectNode:setVisible(false)
+                    selectNumGameyy[3].selectNode:setVisible(false)
+                    selectNumGameyy[4].selectNode:setVisible(false)
+                else
+                    musicPalel.selectNode:setVisible(true)
+                end
+            else--关
+                if i == 4 then
+                    musicPalel.selectNode:setVisible(true)
+                else
+                    yyBs = yyBs + 1
+                    musicPalel.selectNode:setVisible(false)
+                end
+            end
         else
             musicPalel.selectNode:setVisible(false)
+        end
+
+        if yyBs > 1 and i == 4 then
+            musicPalel.selectNode:setVisible(true)
         end
 
         lt.CommonUtil:addNodeClickEvent(musicPalel, function( ... )
@@ -135,8 +154,10 @@ function SettingLayer:setshow()
 
                     if i < 4 then
                         lt.AudioManager:playMusic("game/mjcomm/sound/bg_music/", "gameBgMusic_"..i, true)
+                        lt.AudioManager:setMusicOn(true)
                     else
-                        lt.AudioManager:stopMusic(false)
+                        --lt.AudioManager:stopMusic(false) --关闭和大厅一样
+                        lt.AudioManager:setMusicOn(false)
                     end
                     lt.PreferenceManager:setGemeyy(i) 
                 else
@@ -153,26 +174,28 @@ function SettingLayer:setshow()
         yxPalel._textNode = yxPalel:getChildByName("image_result")
         selectNumGameyx[i] = yxPalel
 
-        if xuanzhonGameyx == 0 then
-         --不存在代表是新手默认在第一项
-            xuanzhonGameyx = 1
-        end
-
-        if i == xuanzhonGameyx then
-            yxPalel.selectNode:setVisible(true)
+        if xuanzhonGameyx then
+            if i == 1 then
+                yxPalel.selectNode:setVisible(true)
+            elseif i == 2 then
+                yxPalel.selectNode:setVisible(false)
+            end
         else
-            yxPalel.selectNode:setVisible(false)
+            if i == 1 then
+                yxPalel.selectNode:setVisible(false)
+            elseif i == 2 then
+                yxPalel.selectNode:setVisible(true)
+            end
         end
 
         lt.CommonUtil:addNodeClickEvent(yxPalel, function( ... )
             for i, v in pairs(selectNumGameyx) do 
                 if v == yxPalel then
                     v.selectNode:setVisible(true)
-                    lt.PreferenceManager:setGemeyx(i)  
                     if i == 1 then
-                        lt.AudioManager:resumeSound()--开
+                        lt.AudioManager:setSoundOn(true)--开
                     elseif i == 2 then
-                        lt.AudioManager:pauseSound()--关
+                        lt.AudioManager:setSoundOn(false)--关
                     end
                 else
                     v.selectNode:setVisible(false)

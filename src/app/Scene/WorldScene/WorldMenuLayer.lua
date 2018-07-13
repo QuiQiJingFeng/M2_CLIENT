@@ -4,7 +4,7 @@ local pi = math.pi
 local debugSEMonsterId = 58
 
 -- ################################################## 世界界面(菜单界面) ##################################################
-local WorldMenuLayer = class("WorldMenuLayer", function()
+local WorldMenuLayer = class("WorldMenuLayer", lt.BaseLayer,function()
     return cc.CSLoader:createNode("hallcomm/lobby/LobbyLayer1.csb")
 end)
 
@@ -23,7 +23,7 @@ WorldMenuLayer._rightZoomBtnstatus = 1 --右上角缩放按钮状态 1 伸出 2 
 WorldMenuLayer._buttonListArray = nil
 
 function WorldMenuLayer:ctor()
-
+    WorldMenuLayer.super.ctor(self)
     -- print( kefuBtn, shareBtn, helpBtn, recordBtn)
 
     local baseLayer = self:getChildByName("Ie_Bg") --csd

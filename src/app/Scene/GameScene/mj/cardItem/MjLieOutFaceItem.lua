@@ -25,20 +25,7 @@ function MjLieOutFaceItem:ctor(CpgDirection)
 	self:showNormal()
 end
 
-function MjLieOutFaceItem:setOutCardBgColor(direction)--设置出的牌背面颜色
-	local xuanzhonMjcolor = lt.PreferenceManager:getMJcolor() --记录选中麻将颜色
-	if xuanzhonMjcolor == 0 then
-		xuanzhonMjcolor = 1
-	end
-	local color = "cardBgGreen"
-	if xuanzhonMjcolor == 1 then
-		color = "cardBgGreen"  --绿
-	elseif xuanzhonMjcolor == 2 then
-		color = "cardBgBlue"   --蓝
-	elseif xuanzhonMjcolor == 3 then
-		color = "cardBgYellow" --黄
-	end
-
+function MjLieOutFaceItem:setCardBgColor(color,direction)--设置出的牌背面颜色
 	if direction == lt.Constants.DIRECTION.NAN then
 		self._bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
 	elseif direction == lt.Constants.DIRECTION.XI then
