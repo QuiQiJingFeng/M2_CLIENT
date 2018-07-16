@@ -31,6 +31,8 @@ function ReplayView:ctor()
 	self._bn_PageDown = mainLayer:getChildByName("Bn_PageDown")--后一天
 	self._bn_PageDown:setVisible(false)
 
+	self._le_InfoBg = mainLayer:getChildByName("Ie_InfoBg")
+
 	local UITableView = require("app.UI.UITableView")
 	self._zj_room_info = UITableView:bindNode(self._scrollView,"app.Scene.WorldScene.LobbyBtn.Replayitem")
     --self:listenRoomListUpdate()
@@ -269,6 +271,10 @@ function ReplayView:listenRoomListUpdate()--第一次进入
 		print("==========返回成功=============")
 		if result then
 			dump(result)
+			print("======长度=======",#result.replays)
+			if #result.replays == 0 then
+				self._le_InfoBg:setVisible(true)
+			end
 			self._zj_room_info:setData(result.replays,15,15,10)
 		end
 	end)

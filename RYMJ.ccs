@@ -8,6 +8,7 @@
             <Folder Name="img">
               <Image Name="bg_editBoxBg.png" />
               <Image Name="bgMark.png" />
+              <Image Name="btn_OpenPosition.png" />
               <Image Name="btn_recordSure.png" />
               <Image Name="btn_title_1.png" />
               <Image Name="btn_title_2.png" />
@@ -1788,6 +1789,7 @@
               <Image Name="zhadan8.png" />
               <Image Name="zhadan9.png" />
             </Folder>
+            <Image Name="BG20.png" />
             <Project Name="card.csd" Type="Layer" />
             <Project Name="ChatLayer.csd" Type="Layer" />
             <Project Name="DDZLayer.csd" Type="Layer" />
@@ -1999,6 +2001,7 @@
               <Image Name="text_qx.png" />
               <Image Name="weshare.png" />
             </Folder>
+            <Project Name="Authentication.csd" Type="Layer" />
             <PlistInfo Name="CommonPlist0.csi" Type="Plist" />
             <PlistInfo Name="CommonPlist1.csi" Type="Plist" />
             <Project Name="GpsMsgBoxLayer.csd" Type="Layer" />
