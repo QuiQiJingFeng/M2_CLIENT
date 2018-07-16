@@ -703,6 +703,7 @@
                 <Project Name="GameTableInfo.csd" Type="Layer" />
                 <Project Name="InviteViewLayer.csd" Type="Layer" />
                 <Project Name="Node_InviteView.csd" Type="Node" />
+                <Project Name="RecordVoiceLayer.csd" Type="Layer" />
                 <Project Name="ShaiZiAni.csd" Type="Layer" />
               </Folder>
               <Folder Name="mjui">
