@@ -298,8 +298,6 @@ end
 
 function GameSelectPosPanel:configPlayer() --头像 
 	
-	__G__TRACKBACK__("测试++++++++++++++++++++++++")
-
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	

@@ -70,18 +70,6 @@ function GameResultPanel:ctor(deleget)
 			self._allPlayerResultNode[direction]:getChildByName("Node_ResultInfoItem"):setVisible(true)
 		end
 	end
-
-	local msg = {cur_score_list = {
-	{user_pos = 1},
-	{user_pos = 2},
-	}}
-
-	self:onRefreshScoreResponse(msg)
-
--- msg.cur_score_list
--- user_pos
--- delt_score
-
 end
 
 function GameResultPanel:onStartAgainClick(event) --继续游戏
