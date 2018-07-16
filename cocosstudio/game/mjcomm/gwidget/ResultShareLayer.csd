@@ -28,7 +28,7 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/shareFlower.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_Icon" ActionTag="-1528428113" Tag="365" IconVisible="False" LeftMargin="57.8077" RightMargin="572.1923" TopMargin="82.3921" BottomMargin="1131.6079" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_Icon" ActionTag="-1528428113" VisibleForFrame="False" Tag="365" IconVisible="False" LeftMargin="57.8077" RightMargin="572.1923" TopMargin="82.3921" BottomMargin="1131.6079" ctype="SpriteObjectData">
             <Size X="120.0000" Y="120.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
             <Position X="177.8077" Y="1191.6079" />
@@ -39,7 +39,7 @@
             <FileData Type="MarkedSubImage" Path="games/comm/shareIcon.png" Plist="games/comm/comm_1.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_IconBG" ActionTag="876494668" Tag="240" IconVisible="False" LeftMargin="50.6572" RightMargin="564.3428" TopMargin="75.0394" BottomMargin="1121.9606" LeftEage="36" RightEage="36" TopEage="37" BottomEage="37" Scale9OriginX="36" Scale9OriginY="37" Scale9Width="63" Scale9Height="63" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Sprite_IconBG" ActionTag="876494668" VisibleForFrame="False" Tag="240" IconVisible="False" LeftMargin="50.6572" RightMargin="564.3428" TopMargin="75.0394" BottomMargin="1121.9606" LeftEage="36" RightEage="36" TopEage="37" BottomEage="37" Scale9OriginX="36" Scale9OriginY="37" Scale9Width="63" Scale9Height="63" ctype="ImageViewObjectData">
             <Size X="135.0000" Y="137.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="118.1572" Y="1190.4606" />
@@ -49,15 +49,15 @@
             <PreSize X="0.1800" Y="0.1027" />
             <FileData Type="Normal" Path="games/comm/shareIconBG.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_GameName" ActionTag="1188529204" Tag="2701" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="91.0000" RightMargin="91.0000" TopMargin="37.5000" BottomMargin="1083.5000" ctype="SpriteObjectData">
-            <Size X="568.0000" Y="213.0000" />
+          <AbstractNodeData Name="Sprite_GameName" ActionTag="1188529204" Tag="2701" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-32.0000" RightMargin="-32.0000" TopMargin="-170.0000" BottomMargin="856.0000" ctype="SpriteObjectData">
+            <Size X="814.0000" Y="648.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="375.0000" Y="1190.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Position X="375.0000" Y="1180.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.8921" />
-            <PreSize X="0.7573" Y="0.1597" />
-            <FileData Type="MarkedSubImage" Path="games/hzmj/game/hzmjShareGameName.png" Plist="games/hzmj/game_1.plist" />
+            <PrePosition X="0.5000" Y="0.8846" />
+            <PreSize X="0.0613" Y="0.0345" />
+            <FileData Type="Normal" Path="game/mjcomm/gwidget/img/3A.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Image_Content" ActionTag="2021297" Tag="2702" IconVisible="False" LeftMargin="38.0695" RightMargin="35.9305" TopMargin="230.2307" BottomMargin="215.7693" Scale9Enable="True" LeftEage="38" RightEage="38" TopEage="41" BottomEage="41" Scale9OriginX="38" Scale9OriginY="41" Scale9Width="42" Scale9Height="43" ctype="ImageViewObjectData">
@@ -74,13 +74,13 @@
                 <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/shareTitle.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Sprite_People" ActionTag="-1129812747" VisibleForFrame="False" Tag="306" IconVisible="False" LeftMargin="510.6165" RightMargin="-21.6165" TopMargin="-116.5670" BottomMargin="776.5670" ctype="SpriteObjectData">
-                <Size X="187.0000" Y="228.0000" />
+              <AbstractNodeData Name="Sprite_People" ActionTag="-1129812747" Tag="306" IconVisible="False" LeftMargin="503.5000" RightMargin="5.5000" TopMargin="-112.5700" BottomMargin="760.5700" ctype="SpriteObjectData">
+                <Size X="167.0000" Y="240.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="604.1165" Y="890.5670" />
+                <Position X="587.0000" Y="880.5700" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8937" Y="1.0029" />
+                <PrePosition X="0.8683" Y="0.9916" />
                 <PreSize X="0.2766" Y="0.2568" />
                 <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/sharePeople.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
                 <BlendFunc Src="1" Dst="771" />
@@ -139,21 +139,21 @@
               <AbstractNodeData Name="Node_GameInfo" ActionTag="1708595576" Tag="307" IconVisible="True" RightMargin="676.0000" TopMargin="888.0000" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="Sprite_Trophy" ActionTag="-991539355" Tag="308" IconVisible="False" LeftMargin="-37.9091" RightMargin="-358.0909" TopMargin="-322.1126" BottomMargin="-38.8874" ctype="SpriteObjectData">
-                    <Size X="396.0000" Y="361.0000" />
+                  <AbstractNodeData Name="Sprite_Trophy" ActionTag="-991539355" Tag="308" IconVisible="False" LeftMargin="10.0909" RightMargin="-310.0909" TopMargin="-311.6100" BottomMargin="11.6100" ctype="SpriteObjectData">
+                    <Size X="300.0000" Y="300.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="160.0909" Y="141.6126" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <Position X="160.0909" Y="161.6100" />
+                    <Scale ScaleX="1.2000" ScaleY="1.2000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/shareTrophy.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_Time" ActionTag="1138295734" Tag="309" IconVisible="False" LeftMargin="303.9973" RightMargin="-581.9973" TopMargin="-255.9997" BottomMargin="227.9997" FontSize="24" LabelText="2017-03-31 00:00:00 结束" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="278.0000" Y="28.0000" />
+                  <AbstractNodeData Name="Text_Time" ActionTag="1138295734" Tag="309" IconVisible="False" LeftMargin="303.9973" RightMargin="-591.9973" TopMargin="-244.0000" BottomMargin="220.0000" FontSize="24" LabelText="2017-03-31 00:00:00 结束" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="288.0000" Y="24.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="303.9973" Y="241.9997" />
+                    <Position X="303.9973" Y="232.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -161,10 +161,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_RoomNum" ActionTag="-1303957168" Tag="311" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-218.8748" BottomMargin="190.8748" FontSize="24" LabelText="房号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="72.0000" Y="28.0000" />
+                  <AbstractNodeData Name="Text_RoomNum" ActionTag="-1303957168" Tag="311" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-206.8700" BottomMargin="182.8700" FontSize="24" LabelText="房号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="72.0000" Y="24.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="303.9973" Y="204.8748" />
+                    <Position X="303.9973" Y="194.8700" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -172,10 +172,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_BaseCode" ActionTag="-1007996770" Tag="312" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-181.7499" BottomMargin="153.7499" FontSize="24" LabelText="底分：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="72.0000" Y="28.0000" />
+                  <AbstractNodeData Name="Text_BaseCode" ActionTag="-1007996770" Tag="312" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-169.7500" BottomMargin="145.7500" FontSize="24" LabelText="底分：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="72.0000" Y="24.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="303.9973" Y="167.7499" />
+                    <Position X="303.9973" Y="157.7500" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -183,10 +183,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_ZiFei" ActionTag="-1149894376" Tag="1326" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-144.6250" BottomMargin="116.6250" FontSize="24" LabelText="资费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="72.0000" Y="28.0000" />
+                  <AbstractNodeData Name="Text_ZiFei" ActionTag="-1149894376" Tag="1326" IconVisible="False" LeftMargin="303.9973" RightMargin="-375.9973" TopMargin="-132.6300" BottomMargin="108.6300" FontSize="24" LabelText="资费：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="72.0000" Y="24.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="303.9973" Y="130.6250" />
+                    <Position X="303.9973" Y="120.6300" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -194,10 +194,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_RoomOnwer" ActionTag="-208634141" Tag="313" IconVisible="False" LeftMargin="303.9967" RightMargin="-652.5735" TopMargin="-105.5001" BottomMargin="20.0909" IsCustomSize="True" FontSize="24" LabelText="房主：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="Text_RoomOnwer" ActionTag="-208634141" Tag="313" IconVisible="False" LeftMargin="303.9967" RightMargin="-652.5735" TopMargin="-95.5000" BottomMargin="10.0908" IsCustomSize="True" FontSize="24" LabelText="房主：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="348.5768" Y="85.4092" />
                     <AnchorPoint ScaleY="1.0000" />
-                    <Position X="303.9967" Y="105.5001" />
+                    <Position X="303.9967" Y="95.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -246,14 +246,14 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/shareQRcodeBg.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Tips" ActionTag="1086349437" Tag="316" IconVisible="False" LeftMargin="326.8990" RightMargin="103.1010" TopMargin="1174.0721" BottomMargin="48.9279" FontSize="32" LabelText="快来下载游戏&#xA;&#xA;与好友一起打麻将吧！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="320.0000" Y="111.0000" />
+          <AbstractNodeData Name="Text_Tips" ActionTag="1086349437" Tag="316" IconVisible="False" LeftMargin="326.8990" RightMargin="103.1010" TopMargin="1180.0721" BottomMargin="54.9279" FontSize="32" LabelText="快来下载游戏&#xA;&#xA;与好友一起打麻将吧！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="320.0000" Y="99.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="326.8990" Y="104.4279" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4359" Y="0.0783" />
-            <PreSize X="0.4267" Y="0.0832" />
+            <PreSize X="0.4267" Y="0.0742" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

@@ -2,8 +2,9 @@ local FzbLayer = class("FzbLayer", lt.BaseLayer,function()
     return cc.CSLoader:createNode("game/mjcomm/csb/base/GameFzbConfirm.csb")
 end)
 
-function FzbLayer:ctor(info)
+function FzbLayer:ctor(info, deleget)
 	FzbLayer.super.ctor(self)
+	self._deleget = deleget
 	local mainLayer = self:getChildByName("Ie_Bg")
 	self._svContent = mainLayer:getChildByName("SV_Content")
 	self._text_Clock = mainLayer:getChildByName("Text_Clock")--倒计时
@@ -70,26 +71,18 @@ function FzbLayer:onCancel(event)
 	lt.NetWork:sendTo(lt.GameEventManager.EVENT.LEAVE_ROOM)
 end
 
-
 function FzbLayer:Close()
 	print("FYD====>>>CLOSE")
-	lt.UILayerManager:removeLayer(self)
-end
-
-function FzbLayer:onBackLobbyResponse(msg)
-	if msg.result == "success" then
-    	local worldScene = lt.WorldScene.new()
-        lt.SceneManager:replaceScene(worldScene)
-    end
+	self._deleget:closeFzbLayer()
 end
 
 function FzbLayer:onEnter()
 	print("==========================FzbLayer:onEnter======================================")
-	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.LEAVE_ROOM, handler(self, self.onBackLobbyResponse), "FzbLayer.onBackLobbyResponse")
+
 end
 
 function FzbLayer:onExit()
-	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.LEAVE_ROOM, "FzbLayer.onBackLobbyResponse")
+
 end
 
 return FzbLayer

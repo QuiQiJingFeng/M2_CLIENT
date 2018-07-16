@@ -4514,7 +4514,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.5577" Y="0.4316" />
-                    <FileData Type="MarkedSubImage" Path="game/common/hlby/hlby_btn_title_2.png" Plist="game/common/hlbyGamePlist.plist" />
+                    <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -4542,7 +4542,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.5000" />
                     <PreSize X="0.5654" Y="0.4421" />
-                    <FileData Type="MarkedSubImage" Path="game/common/hlby/hlby_btn_title_1.png" Plist="game/common/hlbyGamePlist.plist" />
+                    <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>

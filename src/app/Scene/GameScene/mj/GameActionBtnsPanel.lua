@@ -566,6 +566,20 @@ end
 function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
 
     dump(tObj, "viewHuCardsTipsMenu")
+
+    local xuanzhonMjcolor = lt.PreferenceManager:getMJcolor() --记录选中麻将颜色
+    if xuanzhonMjcolor == 0 then
+        xuanzhonMjcolor = 1
+    end
+
+    local color = "cardBgGreen"
+    if xuanzhonMjcolor == 1 then
+        color = "cardBgGreen"  --绿
+    elseif xuanzhonMjcolor == 2 then
+        color = "cardBgBlue"   --蓝
+    elseif xuanzhonMjcolor == 3 then
+        color = "cardBgYellow" --黄
+    end
     
     local panelMenu = self.m_objCommonUi.m_panelHuCardTipsContent
 
@@ -579,6 +593,7 @@ function GameActionBtnsPanel:viewHuCardsTipsMenu(tObj)
     --tObj = {12,12,14,15,16,18,21}
     for i = 1, #tObj do
         local uiItem = lt.MjHuCardTipsItem.new()
+        uiItem:setCardBgColor(color)
 
         local value = tObj[i]
         local num = self._deleget:getotersCard(value)
