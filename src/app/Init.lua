@@ -79,6 +79,7 @@ ltMetaTable["HelpData"]			= "app.Scene.WorldScene.LobbyBtn.HelpData"
 ltMetaTable["LobbyHezuo"]			= "app.Scene.WorldScene.LobbyBtn.LobbyHezuo"
 ltMetaTable["FzbLayer"]			= "app.Scene.WorldScene.LobbyBtn.FzbLayer"
 ltMetaTable["GamePlayerinfoLayer"]			= "app.Scene.WorldScene.LobbyBtn.GamePlayerinfoLayer"
+ltMetaTable["AuthenticationLayer"]			= "app.Scene.WorldScene.LobbyBtn.AuthenticationLayer"
 
 
 ltMetaTable["JoinRoomLayer"]			= "app.Scene.WorldScene.Room.JoinRoomLayer"

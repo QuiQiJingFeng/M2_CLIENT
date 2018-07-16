@@ -7,18 +7,18 @@
 			<key>game/common/img/bgMark.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{267,579},{53,48}}</string>
+				<string>{{472,565},{53,48}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{53,48}</string>
 			</dict>
 			<key>game/common/img/Button_Yellow.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,278},{168,95}}</string>
+				<string>{{132,52},{168,95}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -40,7 +40,7 @@
 			<key>game/common/img/Button_Green.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{132,52},{168,95}}</string>
+				<string>{{302,52},{168,95}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -51,18 +51,18 @@
 			<key>game/common/img/createRoom_ani_arrows.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{534,247},{85,133}}</string>
+				<string>{{210,272},{85,133}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{85,133}</string>
 			</dict>
 			<key>game/common/img/createRoom_ani_hand.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{322,149},{96,97}}</string>
+				<string>{{345,296},{96,97}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -73,7 +73,7 @@
 			<key>game/common/img/createRoom_ani_tip.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{472,137},{227,60}}</string>
+				<string>{{516,149},{227,60}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -84,7 +84,7 @@
 			<key>game/common/img/createRoom_baseAdd.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{274,503},{74,44}}</string>
+				<string>{{426,498},{74,44}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -95,7 +95,7 @@
 			<key>game/common/img/createRoom_baseBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{440,297},{30,44}}</string>
+				<string>{{239,519},{30,44}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -106,7 +106,7 @@
 			<key>game/common/img/createRoom_baseDel.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{320,547},{74,44}}</string>
+				<string>{{271,523},{74,44}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -117,7 +117,7 @@
 			<key>game/common/img/createRoom_bigBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{486,571},{67,59}}</string>
+				<string>{{271,462},{67,59}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -161,7 +161,7 @@
 			<key>game/common/img/createRoom_closeBtn.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{305,247},{90,90}}</string>
+				<string>{{210,359},{90,90}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -172,7 +172,7 @@
 			<key>game/common/img/createRoom_createTitle.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{397,297},{147,41}}</string>
+				<string>{{578,297},{147,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -183,7 +183,7 @@
 			<key>game/common/img/createRoom_freeFlag.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{237,470},{52,35}}</string>
+				<string>{{39,622},{52,35}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -194,7 +194,7 @@
 			<key>game/common/img/createRoom_gz_bg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{440,366},{88,89}}</string>
+				<string>{{342,394},{88,89}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -205,7 +205,7 @@
 			<key>game/common/img/createRoom_menu_bg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{531,382},{79,80}}</string>
+				<string>{{481,484},{79,80}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -216,7 +216,7 @@
 			<key>game/common/img/createRoom_menuBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{508,463},{58,72}}</string>
+				<string>{{78,513},{58,72}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -249,7 +249,7 @@
 			<key>game/common/img/createRoom_moreNormal.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{621,247},{189,32}}</string>
+				<string>{{622,149},{189,32}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -260,18 +260,18 @@
 			<key>game/common/img/createRoom_moreSelect.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{655,377},{192,35}}</string>
+				<string>{{322,149},{192,35}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{192,35}</string>
 			</dict>
 			<key>game/common/img/createRoom_mulOptionBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{124,622},{40,42}}</string>
+				<string>{{282,673},{40,42}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -282,18 +282,18 @@
 			<key>game/common/img/createRoom_mulOptionMark.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{233,524},{42,39}}</string>
+				<string>{{120,661},{42,39}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{42,39}</string>
 			</dict>
 			<key>game/common/img/createRoom_newFlag.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{325,453},{92,36}}</string>
+				<string>{{152,567},{92,36}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -304,7 +304,7 @@
 			<key>game/common/img/createRoom_noOpenFlag.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{158,431},{92,36}}</string>
+				<string>{{1,622},{92,36}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -315,7 +315,7 @@
 			<key>game/common/img/createRoom_oneOptionBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{366,611},{46,47}}</string>
+				<string>{{368,525},{46,47}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -326,7 +326,7 @@
 			<key>game/common/img/createRoom_oneOptionMark.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{366,560},{49,49}}</string>
+				<string>{{317,525},{49,49}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -337,7 +337,7 @@
 			<key>game/common/img/createRoom_voiceBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{199,270},{81,74}}</string>
+				<string>{{78,361},{81,74}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -348,7 +348,7 @@
 			<key>game/common/img/createRoom_voiceBox.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,622},{40,42}}</string>
+				<string>{{236,685},{40,42}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -359,11 +359,11 @@
 			<key>game/common/img/joinRoom_input.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{199,187},{104,81}}</string>
+				<string>{{487,378},{104,81}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{104,81}</string>
 			</dict>
@@ -381,7 +381,7 @@
 			<key>game/common/img/joinRoom_num_0.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{233,568},{32,46}}</string>
+				<string>{{527,565},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -392,7 +392,7 @@
 			<key>game/common/img/joinRoom_num_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{124,478},{32,46}}</string>
+				<string>{{527,613},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -403,18 +403,18 @@
 			<key>game/common/img/joinRoom_num_10.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{508,523},{86,46}}</string>
+				<string>{{570,446},{86,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{86,46}</string>
 			</dict>
 			<key>game/common/img/joinRoom_num_11.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{438,524},{86,46}}</string>
+				<string>{{433,410},{86,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -425,7 +425,7 @@
 			<key>game/common/img/joinRoom_num_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{158,525},{32,46}}</string>
+				<string>{{39,676},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -436,7 +436,7 @@
 			<key>game/common/img/joinRoom_num_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{192,571},{32,46}}</string>
+				<string>{{1,716},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -447,18 +447,18 @@
 			<key>game/common/img/joinRoom_num_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{226,616},{32,46}}</string>
+				<string>{{164,693},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{32,46}</string>
 			</dict>
 			<key>game/common/img/joinRoom_num_5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{124,526},{32,46}}</string>
+				<string>{{120,702},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -469,7 +469,7 @@
 			<key>game/common/img/joinRoom_num_6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{158,573},{32,46}}</string>
+				<string>{{73,703},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -480,7 +480,7 @@
 			<key>game/common/img/joinRoom_num_7.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{192,619},{32,46}}</string>
+				<string>{{35,724},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -491,7 +491,7 @@
 			<key>game/common/img/joinRoom_num_8.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{226,664},{32,46}}</string>
+				<string>{{1,764},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -502,11 +502,11 @@
 			<key>game/common/img/joinRoom_num_9.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{124,574},{32,46}}</string>
+				<string>{{726,431},{32,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{32,46}</string>
 			</dict>
@@ -524,7 +524,7 @@
 			<key>game/common/img/roomSettingBtn_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{692,377},{158,32}}</string>
+				<string>{{621,340},{158,32}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -535,7 +535,7 @@
 			<key>game/common/img/roomSettingBtn_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{613,438},{158,32}}</string>
+				<string>{{655,377},{158,32}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -546,7 +546,7 @@
 			<key>game/common/img/title_text_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{415,612},{44,41}}</string>
+				<string>{{417,574},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -557,7 +557,7 @@
 			<key>game/common/img/title_text_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{461,632},{44,41}}</string>
+				<string>{{463,615},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -568,7 +568,7 @@
 			<key>game/common/img/title_text_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{415,655},{44,41}}</string>
+				<string>{{417,617},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -579,7 +579,7 @@
 			<key>game/common/img/title_text_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{366,659},{44,41}}</string>
+				<string>{{463,658},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -590,7 +590,7 @@
 			<key>game/common/img/title_text_5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{507,632},{44,41}}</string>
+				<string>{{354,621},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -601,7 +601,7 @@
 			<key>game/common/img/title_text_6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{78,478},{44,41}}</string>
+				<string>{{400,660},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -612,7 +612,7 @@
 			<key>game/common/img/title_text_7.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{260,634},{44,41}}</string>
+				<string>{{239,599},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -623,7 +623,7 @@
 			<key>game/common/img/title_text_8.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{306,671},{44,41}}</string>
+				<string>{{190,607},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -645,18 +645,18 @@
 			<key>game/common/img/img_cancel.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{158,386},{86,43}}</string>
+				<string>{{194,519},{86,43}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{86,43}</string>
 			</dict>
 			<key>game/common/img/img_recharge.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{282,415},{86,41}}</string>
+				<string>{{78,573},{86,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -667,7 +667,7 @@
 			<key>game/common/img/checkBox_gray_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{317,623},{46,47}}</string>
+				<string>{{368,573},{46,47}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -678,7 +678,7 @@
 			<key>game/common/img/checkBox_gray_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{45,650},{40,42}}</string>
+				<string>{{76,661},{40,42}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -689,7 +689,7 @@
 			<key>game/common/img/Button_Bule.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{302,52},{168,95}}</string>
+				<string>{{472,52},{168,95}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -700,7 +700,7 @@
 			<key>game/common/img/btn_title_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{555,571},{101,38}}</string>
+				<string>{{302,359},{101,38}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -711,18 +711,18 @@
 			<key>game/common/img/btn_title_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{171,346},{101,38}}</string>
+				<string>{{563,534},{101,38}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{101,38}</string>
 			</dict>
 			<key>game/common/img/btn_title_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{358,339},{112,35}}</string>
+				<string>{{689,377},{112,35}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -733,11 +733,11 @@
 			<key>game/common/img/btn_title_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{196,431},{84,39}}</string>
+				<string>{{340,484},{84,39}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{84,39}</string>
 			</dict>
@@ -755,7 +755,7 @@
 			<key>game/common/img/title_text_10.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{78,521},{44,41}}</string>
+				<string>{{285,630},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -766,7 +766,7 @@
 			<key>game/common/img/title_text_11.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{260,677},{44,41}}</string>
+				<string>{{236,642},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -777,7 +777,7 @@
 			<key>game/common/img/title_text_12.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{78,564},{44,41}}</string>
+				<string>{{190,650},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -788,7 +788,7 @@
 			<key>game/common/img/title_text_9.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{78,607},{44,41}}</string>
+				<string>{{331,664},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -854,7 +854,7 @@
 			<key>game/common/img/bg_editBoxBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{282,339},{74,74}}</string>
+				<string>{{78,437},{74,74}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -865,7 +865,7 @@
 			<key>game/common/img/btn_recordSure.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{472,52},{174,83}}</string>
+				<string>{{199,187},{174,83}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -876,7 +876,7 @@
 			<key>game/common/img/createRoom_detailBox.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{438,456},{66,68}}</string>
+				<string>{{201,451},{66,68}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -887,7 +887,7 @@
 			<key>game/common/img/createRoom_detailIcon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,664},{34,36}}</string>
+				<string>{{774,431},{34,36}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -909,7 +909,7 @@
 			<key>game/common/img/Text_nextDay.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{78,375},{101,38}}</string>
+				<string>{{161,361},{101,38}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -920,7 +920,7 @@
 			<key>game/common/img/Text_yesterday.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{118,375},{101,38}}</string>
+				<string>{{154,464},{101,38}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -931,7 +931,7 @@
 			<key>game/common/img/img_smallBgRecharge.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{534,137},{108,112}}</string>
+				<string>{{375,186},{108,112}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -942,7 +942,7 @@
 			<key>game/common/img/createRoom_sale.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{196,517},{52,35}}</string>
+				<string>{{317,576},{52,35}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -953,7 +953,7 @@
 			<key>game/common/img/shareRecord.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{246,386},{82,34}}</string>
+				<string>{{618,500},{82,34}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -964,7 +964,7 @@
 			<key>game/common/img/create_friend_select.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{421,149},{146,42}}</string>
+				<string>{{578,149},{146,42}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -975,13 +975,24 @@
 			<key>game/common/img/create_friend_unSelect.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{395,446},{112,41}}</string>
+				<string>{{444,296},{112,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<true />
 				<key>sourceSize</key>
 				<string>{112,41}</string>
+			</dict>
+			<key>game/common/img/btn_OpenPosition.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,278},{207,81}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{207,81}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>

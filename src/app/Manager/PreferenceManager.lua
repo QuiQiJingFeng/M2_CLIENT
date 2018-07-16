@@ -123,13 +123,13 @@ function PreferenceManager:getMusicValue()
 end
 
 function PreferenceManager:setBgcolor(monsterId)--游戏背景颜色选择保存
-	local key = "SELECTBGCOLOR"
+	local key = "SELECTBGCOLOR"..lt.DataManager:getPlayerUid()
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
   	cc.UserDefault:getInstance():flush()
 end
 
 function PreferenceManager:getBgcolor()
-	local key = "SELECTBGCOLOR"
+	local key = "SELECTBGCOLOR"..lt.DataManager:getPlayerUid()
 	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
 	if monsterId == 0 then
 		monsterId = 1
@@ -138,13 +138,13 @@ function PreferenceManager:getBgcolor()
 end
 
 function PreferenceManager:setMJcolor(monsterId)--记录选中麻将颜色
-	local key = "SELECTMJCOLOR"
+	local key = "SELECTMJCOLOR"..lt.DataManager:getPlayerUid()
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
   	cc.UserDefault:getInstance():flush()
 end
 
 function PreferenceManager:getMJcolor()
-	local key = "SELECTMJCOLOR"
+	local key = "SELECTMJCOLOR"..lt.DataManager:getPlayerUid()
 	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
 	if monsterId == 0 then
 		monsterId = 1
@@ -153,13 +153,13 @@ function PreferenceManager:getMJcolor()
 end
 
 function PreferenceManager:setGemeyy(monsterId)--记录选中游戏音乐
-	local key = "SELECTGAMEYY"
+	local key = "SELECTGAMEYY"..lt.DataManager:getPlayerUid()
 	cc.UserDefault:getInstance():setIntegerForKey(key, monsterId)
   	cc.UserDefault:getInstance():flush()
 end
 
 function PreferenceManager:getGemeyy()
-	local key = "SELECTGAMEYY"
+	local key = "SELECTGAMEYY"..lt.DataManager:getPlayerUid()
 	local monsterId = cc.UserDefault:getInstance():getIntegerForKey(key)
 	if monsterId == 0 then
 		monsterId = 1

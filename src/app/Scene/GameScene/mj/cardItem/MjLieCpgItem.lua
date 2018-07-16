@@ -47,7 +47,7 @@ function MjLieCpgItem:allCardVisible()
 end
 
 function MjLieCpgItem:updateInfo(info,direction)
-
+	self._cardInfo = info
 	local value = info.value
 	--local gang_type = info.gang_type--1 暗杠 2 明杠 3 碰杠
 	local from = info.from
@@ -120,17 +120,33 @@ function MjLieCpgItem:updateInfo(info,direction)
 end
 
 function MjLieCpgItem:setCardBgColor(color,direction)--设置出的牌背面颜色
-	for i=1,5 do
-		--设置吃碰杠麻将背景
-		local bg = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Bg")
-		if direction == lt.Constants.DIRECTION.NAN then
-			bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
-		elseif direction == lt.Constants.DIRECTION.XI then
-			bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalFace.png")
-		elseif direction == lt.Constants.DIRECTION.DONG then --
-			bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalFace.png")
-		elseif direction == lt.Constants.DIRECTION.BEI then
-			bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
+	if self._cardInfo.type ~= 5 then
+		for i=1,5 do
+			--设置吃碰杠麻将背景
+			local bg = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Bg")
+			if direction == lt.Constants.DIRECTION.NAN then
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
+			elseif direction == lt.Constants.DIRECTION.XI then
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalFace.png")
+			elseif direction == lt.Constants.DIRECTION.DONG then --
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalFace.png")
+			elseif direction == lt.Constants.DIRECTION.BEI then
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
+			end
+		end
+	else
+		for i=1,5 do
+			--设置暗杠麻将背景
+			local bg = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back")
+			if direction == lt.Constants.DIRECTION.NAN then
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieDisableV.png")
+			elseif direction == lt.Constants.DIRECTION.XI then
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieDisableH.png")
+			elseif direction == lt.Constants.DIRECTION.DONG then --
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalFace.png")
+			elseif direction == lt.Constants.DIRECTION.BEI then
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalFace.png")
+			end
 		end
 	end
 end

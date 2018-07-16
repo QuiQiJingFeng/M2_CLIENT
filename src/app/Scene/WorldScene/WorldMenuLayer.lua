@@ -113,7 +113,8 @@ end
 
 -- 实名认证界面
 function WorldMenuLayer:onClickSMZBtn()
-    
+    local AuthenticationLayer = lt.AuthenticationLayer.new()
+    lt.UILayerManager:addLayer(AuthenticationLayer, true)
 end
 
 -- vip界面

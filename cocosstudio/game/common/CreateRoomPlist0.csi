@@ -91,6 +91,7 @@
       <FilePathData Path="game/common/img/shareRecord.png" />
       <FilePathData Path="game/common/img/create_friend_select.png" />
       <FilePathData Path="game/common/img/create_friend_unSelect.png" />
+      <FilePathData Path="game/common/img/btn_OpenPosition.png" />
     </ImageFiles>
     <MaxSize Width="1024" Height="1024" />
   </Content>
