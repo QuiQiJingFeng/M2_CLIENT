@@ -134,7 +134,7 @@ function GameResultPanel:onRefreshScoreResponse(msg)   --玩家刷新积分（�
 		if node and v.delt_score ~= 0 then
 			local scrollNumber = node:getChildByTag(100)
 			if not scrollNumber then
-				scrollNumber = lt.ScrollNumber:create(12, "games/bj/game/part/numWin.png", "games/bj/game/part/numLost.png")
+				scrollNumber = lt.ScrollNumber:create(12, "game/mjcomm/part/numWin.png", "game/mjcomm/part/numLost.png")
 				scrollNumber:setTag(100)
 				node:addChild(scrollNumber)
 			end
@@ -247,7 +247,7 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 
 				local scrollNumber = node:getChildByTag(100)
 				if not scrollNumber then
-					scrollNumber = lt.ScrollNumber:create(12, "games/bj/game/part/numWin.png", "games/bj/game/part/numLost.png")
+					scrollNumber = lt.ScrollNumber:create(12, "game/mjcomm/part/numWin.png", "game/mjcomm/part/numLost.png")
 					node:addChild(scrollNumber)
 					scrollNumber:setTag(100)
 				end
