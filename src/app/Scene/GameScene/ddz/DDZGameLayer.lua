@@ -1369,7 +1369,7 @@ function DDZGameRoomLayer:noticeDDZGameOver( tObj )
 		        ptPosition = cc.p(size.width*0.85,size.height*0.75)
 		        ptAnchorPos = cc.p(1,0.5)
 		    end 
-		    local scrollNumber = lt.ScrollNumber:create(12, "games/bj/game/part/numWin.png", "games/bj/game/part/numLost.png")
+		    local scrollNumber = lt.ScrollNumber:create(12, "game/mjcomm/part/numWin.png", "game/mjcomm/part/numLost.png")
 			scrollNumber:setVisible(true)
 			scrollNumber:setNumber(score[i])
 			scrollNumber:setPosition(ptPosition)

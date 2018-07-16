@@ -298,6 +298,8 @@ end
 
 function GameSelectPosPanel:configPlayer() --头像 
 	
+	__G__TRACKBACK__("测试++++++++++++++++++++++++")
+
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	
@@ -306,8 +308,6 @@ function GameSelectPosPanel:configPlayer() --头像
 		for i,v in ipairs(self._currentSitPosArray) do
 			v:setVisible(false)
 		end
-	else
-		self._allPlayerSitOk = false
 	end
 
     for k,playerLogo in pairs(self._currentPlayerLogArray) do
@@ -352,7 +352,7 @@ function GameSelectPosPanel:configPlayer() --头像
 	        			self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(true)
 	        			
 	        			if not lt.DataManager:getRePlayState() then--回放
-		        			if not lt.DataManager:isClientConnectAgainPlaying() and not self._allPlayerSitOk then--入座界面
+		        			if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		        				local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
 			        			self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
 		        			end
@@ -361,7 +361,7 @@ function GameSelectPosPanel:configPlayer() --头像
 		        		self._currentPlayerLogArray[sitNode.atDirection]:getChildByName("Sprite_Ready"):setVisible(false)
 	        			
 		        		if not lt.DataManager:getRePlayState() then--回放
-		        			if not lt.DataManager:isClientConnectAgainPlaying() and not self._allPlayerSitOk then--入座界面
+		        			if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 		        				local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(sitNode:getPosition()))
 		        				self._currentPlayerLogArray[sitNode.atDirection]:setPosition(worldPos.x, worldPos.y)
 			        		end	
@@ -378,7 +378,7 @@ function GameSelectPosPanel:configPlayer() --头像
 						end
 
 						if not lt.DataManager:getRePlayState() then--回放
-							if not lt.DataManager:isClientConnectAgainPlaying() and not self._allPlayerSitOk then--入座界面
+							if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
 								local worldPos = self._nodeNoPlayer:convertToWorldSpace(cc.p(mySelfNode:getPosition()))
 								self._currentPlayerLogArray[self.POSITION_TYPE.NAN]:setPosition(worldPos.x, worldPos.y)
 							end
@@ -435,7 +435,7 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 	    local time = 0.5
 	    if du == 0 then
 	    	time = 0
-
+	    	self:configPlayer()
 	    	if CallFunc then
 				CallFunc()
 			end
@@ -449,7 +449,6 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
     	local headVisible = function ( )
 			self._selectPositionNode:setVisible(false)
 			self:configPlayer()
-
 			if CallFunc then
 				CallFunc()
 			end
@@ -768,7 +767,7 @@ end
 function GameSelectPosPanel:onSitDownResponse(msg) 
 
     if msg.result == "success" then
-	    self:configRotation(true)
+	    --self:configRotation(true)
     else
     	lt.PromptPanel:showPrompt(lt.Constants.PROMPT[msg.result])
     end
@@ -843,9 +842,9 @@ function GameSelectPosPanel:onPushSitDown(msg) --推送坐下的信息
 			else
 				self._allPlayerSitOk = false
 			end
-			self:configPlayer()--初始化玩家头像
+			self:configRotation(true)
+			--self:configPlayer()--初始化玩家头像
 		end
-
 	end
 
 end
