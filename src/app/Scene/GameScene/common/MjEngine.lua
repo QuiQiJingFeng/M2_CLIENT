@@ -406,18 +406,24 @@ function MjEngine:configHuiCard()
 	end
 end
 
-function MjEngine:cardBgColor(bool)
-	self._cardBgColor = bool
-	--检测听牌列表  为了刷新听胡牌的颜色
-	local tempHandCards = clone(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN])
-
-	local canHuCards = self:getAllCanHuCards(tempHandCards, value)
-	lt.CommonUtil.print("onClickHandCard==>胡牌tips", #canHuCards)
-	if #canHuCards > 0 then
-		self._deleget:showHuCardsTipsMj()
-		self._deleget:viewHuCardsTipsMenu(canHuCards)
-	else
-		self._deleget:hideHuCardsTipsMj()
+function MjEngine:changeCradColor(direction)
+	for k,node in pairs(self._allPlayerHandCardsNode[direction]) do
+		node:setCardBgColor(self:getCardcolor(),direction)
+	end
+	for k,node in pairs(self._allPlayerLightHandCardsNode[direction]) do
+		node:setCardBgColor(self:getCardcolor(),direction)
+	end
+	for k,node in pairs(self._allPlayerCpgCardsNode[direction]) do
+		node:setCardBgColor(self:getCardcolor(),direction)
+	end
+	for k,node in pairs(self._allPlayerOutCardsNode[direction]) do
+		node:setCardBgColor(self:getCardcolor(),direction)
+	end
+	for k,node in pairs(self._allPlayerSpecialOutCardsNode[direction]) do
+		node:setCardBgColor(self:getCardcolor(),direction)
+	end
+	for k,node in pairs(self._allLieFaceCardNode) do
+		node:setCardBgColor(self:getCardcolor(),direction)
 	end
 end
 
@@ -706,7 +712,6 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			if info == 99 then
 				node:BackBg(true)
 			end
-			--node:setOutCardBgColor(direction)--刷新出的牌的背景颜色
 		end
 	end
 
@@ -778,7 +783,6 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 			node:setVisible(true)
 		end
 	end
-	self._cardBgColor = false
 end
 
 --所有牌的变化
@@ -1102,10 +1106,6 @@ function MjEngine:updateCardsNode(node, cardType, direction, info)
 			node:showLightMask()
 		end
 	end	
-	if self._cardBgColor then
-		node:setCardBgColor(self:getCardcolor(),direction)
-	end
-
 end
 
 function MjEngine:updateLieHandCardsNode(node, direction, info, type)
@@ -1145,9 +1145,6 @@ function MjEngine:updateLieHandCardsNode(node, direction, info, type)
 				node:hideTing()
 				node:showBlackMask()
 			end
-		end
-		if self._cardBgColor then
-			node:setCardBgColor(self:getCardcolor(),direction)
 		end
 	end
 end

@@ -286,8 +286,9 @@ function GameRoomLayer:UpdateCardBgColor()
 		currentGameDirections = {1, 2, 3, 4} 
 	end
 	for k,v in pairs(currentGameDirections) do
-		self._engine:cardBgColor(true)
-		self._engine:configAllPlayerCards(v, true, true, true, true)
+		--self._engine:cardBgColor(true)
+		--self._engine:configAllPlayerCards(v, true, true, true, true)
+		self._engine:changeCradColor(v)
 	end
 end
 
