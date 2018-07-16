@@ -93,7 +93,8 @@ function ScrollNumber:create(iPngNumCount, sWinNumberPngUrl, sLostNumberPngUrl, 
 
     sWinNumberPngUrl = sWinNumberPngUrl or "game/mjcomm/part/numWin.png"
     sLostNumberPngUrl = sLostNumberPngUrl or "game/mjcomm/part/numLost.png"
-
+    sWinNumberPngUrl = "#"..sWinNumberPngUrl
+    sLostNumberPngUrl = "#"..sLostNumberPngUrl
     local obj = ScrollNumber:new()
 
     obj.m_sWinPngUrl = sWinNumberPngUrl
