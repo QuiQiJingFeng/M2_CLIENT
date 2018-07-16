@@ -511,7 +511,6 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 
 	local specialRefresh = false
 	if value then
-		lt.AudioManager:playMjCardSound(value, 0)
 
 		for i,v in ipairs(lt.Constants.ADD_CARD_VALUE_TABLE3) do
 			if value == v then--补花	
@@ -531,7 +530,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 		end
 
 		if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.PLZ then
-			print("癞子牌+++++++++++++++", self._huiCardValue, value)
+
 			if self._huiCardValue then
 				if self._huiCardValue == value then
 					local info = {
@@ -544,6 +543,10 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 					lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				end
 			end
+		end
+ 
+		if not specialRefresh then
+			lt.AudioManager:playMjCardSound(value, 0)
 		end
 	end
 

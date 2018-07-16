@@ -293,7 +293,8 @@ function GameSelectPosPanel:showPaoLayer()
 end
 
 function GameSelectPosPanel:refreshPositionInfo()
-	self:configRotation()--初始化座位方位
+	--self:configRotation()--初始化座位方位
+	self:configPlayer()
 end
 
 function GameSelectPosPanel:configPlayer() --头像 
@@ -595,6 +596,8 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 
 		if du == 0 then
 			self:setPlayerDirectionTable()
+
+			self:configSpriteDnxb()
 			self:configPlayer()
 			return
 		end
@@ -658,7 +661,7 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 				v:setRotation(-du)
 			end
 
-			self._cardsPanel._spriteDnxb:setRotation(du)
+			--self._cardsPanel._spriteDnxb:setRotation(du)
 			for pos,v in ipairs(self._currentSitPosArray) do
 
 				--4 3  3 2 2 1 1 4     4 2 3 1  2 4 1 3   4 1 1 2 2 3 3 4
@@ -685,6 +688,7 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 				end
 			end
 
+			self:configSpriteDnxb()
 		end
 		self:setPlayerDirectionTable()
 	
@@ -699,6 +703,13 @@ function GameSelectPosPanel:setPlayerDirectionTable()
 	end
 	--全局记录一下位置对应的方位
 	lt.DataManager:setPlayerDirectionTable(directionData)
+end
+
+function GameSelectPosPanel:configSpriteDnxb()
+	for pos,sitNode in ipairs(self._currentSitPosArray) do
+		self._cardsPanel._nodeGrayDXNB[sitNode.atDirection].posValue = pos
+	end
+	self._cardsPanel:resetLightUpdate()
 end
 
 function GameSelectPosPanel:configPlayerScore() --初始化和断线重连
@@ -765,10 +776,59 @@ end
 function GameSelectPosPanel:onSitDownResponse(msg) 
 
     if msg.result == "success" then
-	    --self:configRotation(true)
+	    self:configRotation(true)
     else
     	lt.PromptPanel:showPrompt(lt.Constants.PROMPT[msg.result])
     end
+end
+
+function GameSelectPosPanel:onPushSitDown(msg) --推送坐下的信息  
+	if msg.room_id == lt.DataManager:getGameRoomInfo().room_id then
+
+		local sitList = msg.sit_list or {}
+
+		--是不是自己发送的入座协议 走了configRotation(true)
+		local isSendSit = false
+		local meSelfInfo = lt.DataManager:getMyselfPositionInfo()
+		if meSelfInfo and not meSelfInfo.is_sit then
+			for i,sitPlayer in ipairs(sitList) do
+				if lt.DataManager:getPlayerUid() == sitPlayer.user_id and not meSelfInfo.is_sit then
+					isSendSit = true
+					break
+				end
+			end			
+		end
+
+		for i,player in ipairs(lt.DataManager:getGameRoomInfo().players) do
+
+			player.is_sit = false
+			for k,sitPlayer in ipairs(sitList) do
+
+				if player.user_id == sitPlayer.user_id then
+					player.is_sit = true
+					player.user_pos = sitPlayer.user_pos
+					break
+				end
+			end
+		end
+
+		if not self._deleget._gameResultPanel:isVisible() then--结算界面
+			-- 先推onPushSitDown -》再 入座成功 ->rotation->configPlayer
+
+			print("玩家入座了！！！！！！！！！！！！！！！！！！！！")
+			
+			if #sitList == self._playerNum then--最后一个玩家入座的状态在发牌时
+				self._allPlayerSitOk = true
+			else
+				self._allPlayerSitOk = false
+			end
+
+			if not isSendSit then
+				self:configPlayer()--初始化玩家
+			end
+		end
+	end
+
 end
 
 function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
@@ -800,49 +860,6 @@ function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
 
 	if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
 		self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
-	end
-
-end
-
-function GameSelectPosPanel:onPushSitDown(msg) --推送坐下的信息  
-	if msg.room_id == lt.DataManager:getGameRoomInfo().room_id then
-
-		local sitList = msg.sit_list or {}
-
-		local isSendSit = false
-		local meSelfInfo = lt.DataManager:getMyselfPositionInfo()
-		for i,sitPlayer in ipairs(sitList) do
-			if lt.DataManager:getPlayerUid() == sitPlayer.user_id and not meSelfInfo.is_sit then
-				isSendSit = true
-			end
-		end
-
-		for i,player in ipairs(lt.DataManager:getGameRoomInfo().players) do
-
-			player.is_sit = false
-			for k,sitPlayer in ipairs(sitList) do
-
-				if player.user_id == sitPlayer.user_id then
-					player.is_sit = true
-					player.user_pos = sitPlayer.user_pos
-					break
-				end
-			end
-		end
-
-		if not self._deleget._gameResultPanel:isVisible() then--结算界面
-			-- 先推onPushSitDown -》再 入座成功 ->rotation->configPlayer
-
-			print("玩家入座了！！！！！！！！！！！！！！！！！！！！")
-			
-			if #sitList == self._playerNum then--最后一个玩家入座的状态在发牌时
-				self._allPlayerSitOk = true
-			else
-				self._allPlayerSitOk = false
-			end
-			self:configRotation(true)
-			--self:configPlayer()--初始化玩家头像
-		end
 	end
 
 end

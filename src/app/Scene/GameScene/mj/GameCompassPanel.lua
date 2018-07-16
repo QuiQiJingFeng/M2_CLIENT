@@ -77,26 +77,11 @@ function GameCompassPanel:configUI()
 
 	self._nodeLightDXNB = {}--出牌时亮态东西南北的节点  
 
-	for i=1, self._playerNum do
-		local node = self._spriteDnxb:getChildByName("Sprite_Gray_"..i)
-		if not node["originPosX"] then
-			node["originPosX"] = node:getPositionX()
-		end
-
-		if not node["originPosY"] then
-			node["originPosY"] = node:getPositionY()
-		end
-
-		if not node["posValue"] then
-			node["posValue"] = i
-		end
-
-		table.insert(self._nodeGrayDXNB, node)
-	end
-
 	for i=1,4 do
 		nodeClock:getChildByName("Node_Light_"..i):setVisible(false)
 		nodeClock:getChildByName("Node_DNXB_"..i):setVisible(false)
+	
+		self._spriteDnxb:getChildByName("Sprite_Gray_"..i):setVisible(false)
 	end
 
 	for i,direction in ipairs(currentGameDirections) do
@@ -109,6 +94,21 @@ function GameCompassPanel:configUI()
 		self._nodeLightDXNB[direction]:getChildByName("Sprite_Nan"):setVisible(false)
 		self._nodeLightDXNB[direction]:getChildByName("Sprite_Xi"):setVisible(false)
 		self._nodeLightDXNB[direction]:getChildByName("Sprite_Bei"):setVisible(false)
+	
+		local node = self._spriteDnxb:getChildByName("Sprite_Gray_"..direction)
+		if not node["originPosX"] then
+			node["originPosX"] = node:getPositionX()
+		end
+
+		if not node["originPosY"] then
+			node["originPosY"] = node:getPositionY()
+		end
+
+		if not node["posValue"] then
+			node["posValue"] = i
+		end
+		node:setVisible(true)
+		self._nodeGrayDXNB[direction] = node
 	end
 end
 
@@ -218,7 +218,7 @@ function GameCompassPanel:resetLightUpdate()
 		v:setVisible(false)
 	end
 
-	for dire,v in ipairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
+	for dire,v in pairs(self._nodeGrayDXNB) do--重置东南西北出牌高亮状态
 
 		if v.posValue then
 			local path = "game/mjcomm/words/"--wordGrayBei
@@ -237,7 +237,7 @@ function GameCompassPanel:resetLightUpdate()
 end
 
 function GameCompassPanel:configCurDNXB() 
-	for dire,v in ipairs(self._nodeGrayDXNB) do
+	for dire,v in pairs(self._nodeGrayDXNB) do
 		if v.posValue then
 			local path = "game/mjcomm/words/"--wordGrayBei
 			if v.posValue == self._currentOutPutPlayerPos then
