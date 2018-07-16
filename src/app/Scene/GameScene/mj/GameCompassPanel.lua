@@ -295,7 +295,12 @@ function GameCompassPanel:onUpdate(delt)
 	self._time = self._time + delt
 
 	if self._time >= self.UPDATETIME then
-		self._time = 0
+		local meSelfInfo = lt.DataManager:getMyselfPositionInfo()
+		if meSelfInfo and not meSelfInfo.is_sit then
+			lt.NetWork:sendTo(lt.GameEventManager.EVENT.LEAVE_ROOM)
+		else
+			self._time = 0
+		end
 	end
 end
 
@@ -313,7 +318,8 @@ function GameCompassPanel:onEnter()
 	self.schedule_id = scheduler:scheduleScriptFunc(function(dt)
 	    self:onUpdate(dt)
 	end, 1, false)
-	self._time = 0
+	
+	self:resetTimeUpdate(true)
 end
 
 function GameCompassPanel:onExit()

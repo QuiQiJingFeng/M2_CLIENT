@@ -736,8 +736,8 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 
 		self._allPlayerSpecialOutCardsValue[direction] = self._allPlayerSpecialOutCardsValue[direction] or {}
 		
-		local spaceOffX = 100
-		local spaceOffY = 80
+		local spaceOffX = 35
+		local spaceOffY = 30
 
 		local startX = 0
 		local startY = 0
@@ -758,6 +758,12 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 
 		for i,info in ipairs(self._allPlayerSpecialOutCardsValue[direction]) do
 			local node = self._allPlayerSpecialOutCardsNode[direction][i]
+
+			if direction == lt.Constants.DIRECTION.DONG or direction == lt.Constants.DIRECTION.BEI then
+				cardZorder = cardZorder - 1
+			else
+				cardZorder = cardZorder + 1
+			end
 
 			if node then
 				self:updateCardsNode(node, self.CARD_TYPE.OUT, direction, info)

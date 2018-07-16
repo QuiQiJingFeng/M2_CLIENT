@@ -54,6 +54,8 @@
               <Image Name="createRoom_sale.png" />
               <Image Name="createRoom_voiceBg.png" />
               <Image Name="createRoom_voiceBox.png" />
+              <Image Name="ImageText0.png" />
+              <Image Name="ImageText2.png" />
               <Image Name="img_cancel.png" />
               <Image Name="img_recharge.png" />
               <Image Name="img_smallBgRecharge.png" />
@@ -103,6 +105,7 @@
             <PlistInfo Name="CreateRoomPlist0.csi" Type="Plist" />
             <Project Name="GameRuleLayer.csd" Type="Layer" />
             <Project Name="GameRuleListLayer.csd" Type="Layer" />
+            <Project Name="HlbyChangeGameMoneyLayer.csd" Type="Layer" />
             <PlistInfo Name="hlbyGamePlist.csi" Type="Plist" />
             <Project Name="JoinRoomLayer.csd" Type="Layer" />
             <Project Name="LobbyHelpLayer.csd" Type="Layer" />
@@ -1494,6 +1497,8 @@
               <Image Name="ImageText3.png" />
               <Image Name="ImageText5.png" />
               <Project Name="LaunchLayer.csd" Type="Layer" />
+              <PlistInfo Name="LaunchPlist0.csi" Type="Plist" />
+              <PlistInfo Name="LaunchPlist1.csi" Type="Plist" />
               <Project Name="LoginLayer.csd" Type="Layer" />
               <Project Name="testNode.csd" Type="Node" />
               <Project Name="UpdateLayer.csd" Type="Layer" />
@@ -1510,12 +1515,19 @@
               <Image Name="create_room_btn_1.png" />
               <Image Name="create_room_btn_2.png" />
               <Image Name="createRoom_free.png" />
+              <Image Name="daopying.png" />
               <Image Name="ImageText0.png" />
+              <Image Name="ImageText111.png" />
+              <Image Name="ImageText112.png" />
+              <Image Name="ImageText113.png" />
+              <Image Name="ImageText114.png" />
               <Image Name="ImageText119.png" />
               <Image Name="ImageText120.png" />
               <Image Name="ImageText2.png" />
               <Image Name="ImageText6.png" />
               <Image Name="ImageText7.png" />
+              <Image Name="ImageText998.png" />
+              <Image Name="ImageText999.png" />
               <Image Name="img_NewGameLogo.png" />
               <Image Name="img_ssz.png" />
               <Image Name="img_sszselect.png" />
@@ -1538,6 +1550,50 @@
             <Image Name="shareQRCode.png" />
           </Folder>
           <Folder Name="ddz">
+            <Folder Name="card">
+              <Image Name="paibei.png" />
+              <Image Name="paimian.png" />
+              <Image Name="pokerColor1.png" />
+              <Image Name="pokerColor2.png" />
+              <Image Name="pokerColor3.png" />
+              <Image Name="pokerColor4.png" />
+              <Image Name="pokerColorX1.png" />
+              <Image Name="pokerColorX2.png" />
+              <Image Name="pokerColorX3.png" />
+              <Image Name="pokerColorX4.png" />
+              <Image Name="PokerIndex10b.png" />
+              <Image Name="PokerIndex10r.png" />
+              <Image Name="PokerIndex11b.png" />
+              <Image Name="PokerIndex11r.png" />
+              <Image Name="PokerIndex12b.png" />
+              <Image Name="PokerIndex12r.png" />
+              <Image Name="PokerIndex13b.png" />
+              <Image Name="PokerIndex13r.png" />
+              <Image Name="PokerIndex14b.png" />
+              <Image Name="PokerIndex14r.png" />
+              <Image Name="PokerIndex20b.png" />
+              <Image Name="PokerIndex20r.png" />
+              <Image Name="PokerIndex24.png" />
+              <Image Name="PokerIndex25.png" />
+              <Image Name="PokerIndex3b.png" />
+              <Image Name="PokerIndex3r.png" />
+              <Image Name="PokerIndex4b.png" />
+              <Image Name="PokerIndex4r.png" />
+              <Image Name="PokerIndex5b.png" />
+              <Image Name="PokerIndex5r.png" />
+              <Image Name="PokerIndex6b.png" />
+              <Image Name="PokerIndex6r.png" />
+              <Image Name="PokerIndex7b.png" />
+              <Image Name="PokerIndex7r.png" />
+              <Image Name="PokerIndex8b.png" />
+              <Image Name="PokerIndex8r.png" />
+              <Image Name="PokerIndex9b.png" />
+              <Image Name="PokerIndex9r.png" />
+              <Image Name="PokerMark.png" />
+              <Image Name="PokerTopMark.png" />
+              <Image Name="wang24.png" />
+              <Image Name="wang25.png" />
+            </Folder>
             <Folder Name="game">
               <Image Name="bg_game.png" />
               <Image Name="bg_game_1.png" />
@@ -1620,6 +1676,7 @@
               <Image Name="ImageText40.png" />
               <Image Name="ImageText41.png" />
               <Image Name="ImageText42.png" />
+              <Project Name="Layer.csd" Type="Layer" />
               <Image Name="liandui1.png" />
               <Image Name="liandui10.png" />
               <Image Name="liandui2.png" />
@@ -1753,6 +1810,44 @@
             <PlistParticleFile Name="Spring.plist" />
             <Project Name="TotalResultLayer.csd" Type="Layer" />
             <Project Name="WaitLayer.csd" Type="Layer" />
+          </Folder>
+          <Folder Name="hzmj">
+            <Folder Name="game">
+              <Image Name="2.png" />
+              <Image Name="4.png" />
+              <Image Name="6.png" />
+              <Image Name="8.png" />
+              <Image Name="awardBtn.png" />
+              <Image Name="btn_ruleTop11.png" />
+              <Image Name="btn_ruleTop12.png" />
+              <Image Name="btn_ruleTop21.png" />
+              <Image Name="btn_ruleTop22.png" />
+              <Image Name="cardLight.png" />
+              <Image Name="GameNameImg.png" />
+              <Image Name="hzmjShareGameName.png" />
+              <Image Name="img_DiFen.png" />
+              <Image Name="img_hzmj.png" />
+              <Image Name="JiangMaBg.png" />
+              <Image Name="menu_title_1.png" />
+              <Image Name="menu_title_2.png" />
+              <Image Name="menu_title_3.png" />
+              <Image Name="menu_title_4.png" />
+              <Image Name="menu_title_5.png" />
+              <Image Name="mj_bg.png" />
+              <Image Name="mj_flower.png" />
+              <Image Name="shareFlower.png" />
+              <Image Name="ShareGameName.png" />
+              <Image Name="star.png" />
+            </Folder>
+            <Folder Name="landscape">
+              <Project Name="GameBg.csd" Type="Layer" />
+              <Project Name="GameRuleLayer.csd" Type="Layer" />
+              <Project Name="HZMJLayer.csd" Type="Layer" />
+              <Project Name="HZMJPlayLayer.csd" Type="Layer" />
+              <Project Name="HZMJWinAwardLayer.csd" Type="Layer" />
+            </Folder>
+            <PlistInfo Name="game_1.csi" Type="Plist" />
+            <Project Name="hzmjRuleListLayer.csd" Type="Layer" />
           </Folder>
         </Folder>
         <Folder Name="hallcomm">
@@ -2497,6 +2592,7 @@
           <Project Name="Help_2.csd" Type="Layer" />
           <Project Name="Help_3.csd" Type="Layer" />
           <Project Name="Help_4.csd" Type="Layer" />
+          <Project Name="Help_5.csd" Type="Layer" />
         </Folder>
       </RootFolder>
     </Group>
