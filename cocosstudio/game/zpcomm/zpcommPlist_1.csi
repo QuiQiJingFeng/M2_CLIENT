@@ -113,6 +113,10 @@
       <FilePathData Path="game/zpcomm/part/wordRecordPlay.png" />
       <FilePathData Path="game/mjcomm/button/run.png" />
       <FilePathData Path="game/mjcomm/button/runNot.png" />
+      <FilePathData Path="game/zpcomm/gwidget/img/BG19.png" />
+      <FilePathData Path="game/zpcomm/gwidget/img/BG20.png" />
+      <FilePathData Path="game/zpcomm/gwidget/img/BG4.png" />
+      <FilePathData Path="game/zpcomm/gwidget/img/BG7.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="2048" />
   </Content>

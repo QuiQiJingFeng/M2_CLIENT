@@ -7,7 +7,7 @@
 			<key>game/zpcomm/img/BG13.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1458,875},{98,98}}</string>
+				<string>{{1076,510},{98,98}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -73,7 +73,7 @@
 			<key>game/zpcomm/img/BG21.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{740,590},{52,46}}</string>
+				<string>{{1523,772},{52,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -84,7 +84,7 @@
 			<key>game/zpcomm/img/BG22.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{755,385},{83,55}}</string>
+				<string>{{1648,683},{83,55}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -117,7 +117,7 @@
 			<key>game/zpcomm/img/BG25.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1051,299},{67,59}}</string>
+				<string>{{1010,560},{67,59}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -150,7 +150,7 @@
 			<key>game/zpcomm/img/BG36.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{740,538},{53,48}}</string>
+				<string>{{1354,818},{53,48}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -161,7 +161,7 @@
 			<key>game/zpcomm/img/BG37.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1975,1096},{78,66}}</string>
+				<string>{{1043,376},{78,66}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -172,7 +172,7 @@
 			<key>game/zpcomm/img/BG38.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1804,900},{72,73}}</string>
+				<string>{{1974,1019},{72,73}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -194,7 +194,7 @@
 			<key>game/zpcomm/img/BG92.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1703,925},{96,96}}</string>
+				<string>{{338,646},{96,96}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -205,7 +205,7 @@
 			<key>game/zpcomm/img/BG93.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1560,958},{78,78}}</string>
+				<string>{{1795,983},{78,78}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -414,7 +414,7 @@
 			<key>game/zpcomm/img/Button_117.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1614,683},{168,91}}</string>
+				<string>{{1707,753},{168,91}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -480,7 +480,7 @@
 			<key>game/zpcomm/img/Button_31.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1709,753},{168,91}}</string>
+				<string>{{1879,953},{168,91}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -491,7 +491,7 @@
 			<key>game/zpcomm/img/Button_32.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1880,953},{168,91}}</string>
+				<string>{{1700,925},{168,91}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -502,11 +502,11 @@
 			<key>game/zpcomm/img/Button_41.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{471,299},{168,91}}</string>
+				<string>{{1872,1125},{168,91}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{168,91}</string>
 			</dict>
@@ -535,18 +535,18 @@
 			<key>game/zpcomm/img/Button_Back.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1038,512},{72,73}}</string>
+				<string>{{1974,1096},{72,73}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{72,73}</string>
 			</dict>
 			<key>game/zpcomm/img/Button_Chat.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1038,588},{72,73}}</string>
+				<string>{{1795,1065},{72,73}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -568,7 +568,7 @@
 			<key>game/zpcomm/img/Button_Help.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1975,1019},{71,73}}</string>
+				<string>{{1043,299},{71,73}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -579,7 +579,7 @@
 			<key>game/zpcomm/img/Button_Set.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1803,977},{72,73}}</string>
+				<string>{{1967,1173},{72,73}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -590,7 +590,7 @@
 			<key>game/zpcomm/img/Button_Vioce.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1458,977},{72,73}}</string>
+				<string>{{1967,1249},{72,73}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -623,7 +623,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{643,385},{99,108}}</string>
+				<string>{{595,299},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -634,7 +634,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon10.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{471,394},{99,108}}</string>
+				<string>{{471,398},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -645,7 +645,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon11.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{939,299},{99,108}}</string>
+				<string>{{707,299},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -656,7 +656,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon12.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{814,398},{99,108}}</string>
+				<string>{{819,299},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -667,7 +667,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon13.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{628,488},{99,108}}</string>
+				<string>{{931,299},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -678,7 +678,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon14.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{926,402},{99,108}}</string>
+				<string>{{2,440},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -689,7 +689,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon15.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{814,501},{99,108}}</string>
+				<string>{{114,440},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -700,7 +700,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon16.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{926,505},{99,108}}</string>
+				<string>{{226,440},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -711,18 +711,18 @@
 			<key>game/zpcomm/img/ButtonChatIcon17.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1264,730},{99,108}}</string>
+				<string>{{338,440},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{99,108}</string>
 			</dict>
 			<key>game/zpcomm/img/ButtonChatIcon18.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{796,604},{99,108}}</string>
+				<string>{{583,402},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -733,7 +733,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon19.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{908,608},{99,108}}</string>
+				<string>{{450,501},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -744,7 +744,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1020,664},{99,108}}</string>
+				<string>{{695,402},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -755,7 +755,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon20.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1132,738},{99,108}}</string>
+				<string>{{807,402},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -766,7 +766,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon21.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1367,772},{99,108}}</string>
+				<string>{{919,402},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -777,7 +777,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon22.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1479,772},{99,108}}</string>
+				<string>{{2,543},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -788,7 +788,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon23.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1591,855},{99,108}}</string>
+				<string>{{114,543},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -799,7 +799,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon24.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,440},{99,108}}</string>
+				<string>{{226,543},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -810,7 +810,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon25.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{114,440},{99,108}}</string>
+				<string>{{338,543},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -821,7 +821,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon26.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{226,440},{99,108}}</string>
+				<string>{{562,505},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -832,7 +832,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon27.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{338,440},{99,108}}</string>
+				<string>{{450,604},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -843,7 +843,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon28.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{450,497},{99,108}}</string>
+				<string>{{674,505},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -854,7 +854,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon29.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{562,591},{99,108}}</string>
+				<string>{{786,505},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -865,7 +865,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{674,640},{99,108}}</string>
+				<string>{{898,505},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -876,18 +876,18 @@
 			<key>game/zpcomm/img/ButtonChatIcon4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{786,707},{99,108}}</string>
+				<string>{{1073,612},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{99,108}</string>
 			</dict>
 			<key>game/zpcomm/img/ButtonChatIcon5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{898,711},{99,108}}</string>
+				<string>{{1242,730},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -920,7 +920,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1010,767},{99,108}}</string>
+				<string>{{1411,772},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -931,7 +931,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon7.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1122,841},{99,108}}</string>
+				<string>{{2,646},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -942,7 +942,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon8.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1234,842},{99,108}}</string>
+				<string>{{114,646},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -953,7 +953,7 @@
 			<key>game/zpcomm/img/ButtonChatIcon9.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1346,875},{99,108}}</string>
+				<string>{{226,646},{99,108}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -964,7 +964,7 @@
 			<key>game/zpcomm/img/ButtonClose1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1170,644},{90,90}}</string>
+				<string>{{562,608},{90,90}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -975,7 +975,7 @@
 			<key>game/zpcomm/img/card_bg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1115,566},{41,52}}</string>
+				<string>{{1523,867},{41,52}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -986,7 +986,7 @@
 			<key>game/zpcomm/img/Check0.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1051,370},{55,62}}</string>
+				<string>{{1176,644},{55,62}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -997,11 +997,11 @@
 			<key>game/zpcomm/img/Check1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{755,472},{55,62}}</string>
+				<string>{{1176,703},{55,62}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{55,62}</string>
 			</dict>
@@ -1019,7 +1019,7 @@
 			<key>game/zpcomm/img/disconnect.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1038,429},{79,73}}</string>
+				<string>{{1802,900},{79,73}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1052,11 +1052,11 @@
 			<key>game/zpcomm/img/head_sendcard.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{643,299},{168,82}}</string>
+				<string>{{1614,770},{168,82}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{168,82}</string>
 			</dict>
@@ -1074,7 +1074,7 @@
 			<key>game/zpcomm/img/ImageText15.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{815,299},{120,95}}</string>
+				<string>{{471,299},{120,95}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1118,7 +1118,7 @@
 			<key>game/zpcomm/part/bgRecordBtn.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1115,510},{53,52}}</string>
+				<string>{{1354,762},{53,52}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1129,7 +1129,7 @@
 			<key>game/zpcomm/part/iconRecordPause.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1115,611},{41,51}}</string>
+				<string>{{656,608},{41,51}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1140,11 +1140,11 @@
 			<key>game/zpcomm/part/iconRecordPlay.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{583,496},{41,55}}</string>
+				<string>{{1523,822},{41,55}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{41,55}</string>
 			</dict>
@@ -1217,13 +1217,57 @@
 			<key>game/mjcomm/button/runNot.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{583,394},{98,41}}</string>
+				<string>{{1031,458},{98,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<true />
 				<key>sourceSize</key>
 				<string>{98,41}</string>
+			</dict>
+			<key>game/zpcomm/gwidget/img/BG19.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1614,677},{30,27}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{30,27}</string>
+			</dict>
+			<key>game/zpcomm/gwidget/img/BG20.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1614,708},{27,28}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{27,28}</string>
+			</dict>
+			<key>game/zpcomm/gwidget/img/BG4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2041,2},{2,2}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{2,2}</string>
+			</dict>
+			<key>game/zpcomm/gwidget/img/BG7.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2034,2},{3,3}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{3,3}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>
