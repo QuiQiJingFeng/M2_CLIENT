@@ -429,4 +429,18 @@ function AudioManager:playSpecialEventSound(type, sex)--0 女 1 男
 	self:playSound(path, soundStr)
 end
 
+function AudioManager:playFastChatSound(iChatStrIdx, sex)
+
+	sex = sex or 0
+	local path = "game/mjcomm/sound/mj/"
+	local soundStr = "m"
+	if sex == 0 then
+		soundStr = "w_"..iChatStrIdx
+	else
+		soundStr = "m_"..iChatStrIdx
+	end
+
+	self:playSound(path, soundStr)
+end
+
 return AudioManager

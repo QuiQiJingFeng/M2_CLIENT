@@ -176,10 +176,8 @@ function ChatLayer:sendChatReq( strChat )
     tChatReq.user_pos = lt.DataManager:getPlayerUid()
     tChatReq.fast_index = strChat
 
-
     dump(tChatReq, "tChatReq")
-
-    lt.NetWork:sendTo("fast_spake_req", tChatReq)
+    lt.NetWork:sendTo(lt.GameEventManager.EVENT.FAST_SPAKE_REQ, tChatReq)
 end
 
 -----------------------------------------------------------------------------------
