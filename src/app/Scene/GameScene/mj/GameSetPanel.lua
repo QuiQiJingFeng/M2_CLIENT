@@ -28,7 +28,7 @@ function GameSetPanel:ctor(deleget)
 	local setBtn = self:getChildByName("Button_More")
 	self._voiceBtn = self:getChildByName("Button_Voice")
 	self._chatBtn = self:getChildByName("Button_Chat")
-
+	self:configChatVisible()
 
 	self._panel_RecordCtrl = self:getChildByName("Panel_RecordCtrl")
 
@@ -56,6 +56,16 @@ function GameSetPanel:ctor(deleget)
 	lt.CommonUtil:addNodeClickEvent(self.inviteBtn, handler(self, self.onInviteBtnClick))
 
 	self.__recording = false
+end
+
+function GameSetPanel:configChatVisible(bool)
+	if not lt.DataManager:getMyselfPositionInfo().is_sit then
+		self._voiceBtn:setVisible(false)
+		self._chatBtn:setVisible(false)
+	else
+		self._voiceBtn:setVisible(true)
+		self._chatBtn:setVisible(true)
+	end
 end
 
 function GameSetPanel:onInviteBtnClick()
@@ -210,13 +220,22 @@ function GameSetPanel:hideInviteBtn()
 	self.inviteBtn:setVisible(false)
 end
 
+function GameSetPanel:onClientConnectAgain()
+	self:configChatVisible()
+end
+
 function GameSetPanel:onEnter()   
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SEND_AUDIO, handler(self, self.onNoticeSendAudio), "GameSetPanel.onNoticeSendAudio")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.HIDE_INVITE_BTN, handler(self, self.hideInviteBtn), "GameSetPanel.hideInviteBtn")
+
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSetPanel:onClientConnectAgain")
+
 end
 
 function GameSetPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SEND_AUDIO, "GameSetPanel.onNoticeSendAudio")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.HIDE_INVITE_BTN, "GameSetPanel.hideInviteBtn")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GameSetPanel:onClientConnectAgain")
 end
 
 return GameSetPanel

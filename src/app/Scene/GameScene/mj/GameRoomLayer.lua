@@ -121,14 +121,11 @@ function GameRoomLayer:onGameConnectAgain()
 	end
 
 	self._sendRequest = false
-	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
-		self._gameSelectPosPanel:againConfigUI()
-	else
-		self._gameSelectPosPanel:configPlayer()
-	end	
+	self._gameSelectPosPanel:againConfigUI()
 
 	self:resetCurrentOutPutPlayerPos()
 	self._gameCompassPanel:initGame()
+
 	self._engine:onClientConnectAgain()
 	self:hideHuCardsTipsMj()
 	lt.DataManager:clearPushAllRoomInfo()
@@ -233,6 +230,10 @@ end
 --设置房间背景颜色
 function GameRoomLayer:setRoomBg(id)
 	self._gameBgPanel:setRoomBg(id)
+end
+
+function GameRoomLayer:configChatVisible(bool)
+	self._gameSetPanel:configChatVisible(bool)
 end
 
 function GameRoomLayer:showHuCardsTipsMj()
@@ -416,7 +417,6 @@ function GameRoomLayer:onDealDown(msg)--发牌
 		tlAct:gotoFrameAndPlay(0, false)
 	    tlAct:clearFrameEventCallFunc() 
 	    tlAct:setFrameEventCallFunc(func)
-	    self._gameSelectPosPanel:HideReady()
 	end
 end
 
@@ -741,12 +741,13 @@ function GameRoomLayer:showGameResultTotalEndLayer()
 			self._resultTotalLayer = lt.GmaeResultTotalEndLayer.new(self._totalOverDataInfo, self)
 			lt.UILayerManager:addLayer(self._resultTotalLayer,true)
 		end
+		self._resultTotalLayer:setVisible(true)
 		self._resultTotalLayer:show(self._totalOverDataInfo)
 	end
 end
 
 function GameRoomLayer:closeGmaeResultTotalEndLayer()
-	lt.UILayerManager:removeLayer(self._resultTotalLayer)
+	self._resultTotalLayer:setVisible(false)
 end
 
 function GameRoomLayer:onNoticePao(msg)--这里监听是为了通知跑的时候把防作弊给消除掉

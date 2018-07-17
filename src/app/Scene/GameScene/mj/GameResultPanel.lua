@@ -41,7 +41,7 @@ function GameResultPanel:ctor(deleget)
 
 	self._rewardCodeBtn = self:getChildByName("Reward_Code_Btn")
 	lt.CommonUtil:addNodeClickEvent(self._rewardCodeBtn, handler(self, self.onRewardCodeClick))
-
+	self._rewardCodeBtn:setVisible(false)
     --结算界面
     self:setVisible(false)
 
@@ -156,10 +156,10 @@ function GameResultPanel:onRefreshGameOver()   --通知客户端 本局结束 �
 	local gameOverInfo = lt.DataManager:getGameOverInfo()
 	self:setVisible(true)
 	self._resultPanelMask:setVisible(true)
-	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.TDH then 
-		self._rewardCodeBtn:setVisible(false)
-	else
+	if lt.DataManager:getGameRoomSetInfo().game_type == lt.Constants.GAME_TYPE.HZMJ then 
 		self._rewardCodeBtn:setVisible(true)
+	else
+		self._rewardCodeBtn:setVisible(false)
     end
 
 	local winner_pos = gameOverInfo.winner_pos

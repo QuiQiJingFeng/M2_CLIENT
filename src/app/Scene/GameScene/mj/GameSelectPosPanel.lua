@@ -244,12 +244,15 @@ function GameSelectPosPanel:againConfigUI()-- 继续游戏 不退程序断线 �
 
 	self:clientConnectShowPao()
 
+	if lt.DataManager:isClientConnectAgainPlaying() then
+		self:HideReady()
+	end
 	-- if lt.DataManager:isClientConnectAgain() then
 	-- 	self:configPlayerScore()
 	-- end
 end
 
-function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果在选座位阶段 会走 initGame
+function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连 会走 initGame
 	for i,v in ipairs(self._currentSitPosArray) do
 		v:setVisible(true)
 	end
@@ -258,6 +261,9 @@ function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果
 	self:configPlayerScore()
 
 	self:clientConnectShowPao()
+	if lt.DataManager:isClientConnectAgainPlaying() then
+		self:HideReady()
+	end
 end
 
 function GameSelectPosPanel:clientConnectShowPao()
@@ -302,11 +308,10 @@ function GameSelectPosPanel:configPlayer() --头像
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	
-	if lt.DataManager:isClientConnectAgainPlaying() then--断线重连 牌局中
-		self._allPlayerSitOk = true
+	if lt.DataManager:getMyselfPositionInfo().is_sit then
 		for i,v in ipairs(self._currentSitPosArray) do
 			v:setVisible(false)
-		end
+		end		
 	end
 
     for k,playerLogo in pairs(self._currentPlayerLogArray) do
@@ -339,6 +344,7 @@ function GameSelectPosPanel:configPlayer() --头像
 				end
 
 				if player.user_id ~= lt.DataManager:getPlayerInfo().user_id then--别的玩家的头像
+					
 					if not lt.DataManager:getRePlayState() then--回放
 						sitNode:setVisible(false)
 					else
@@ -434,6 +440,7 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 	    local time = 0.5
 	    if du == 0 then
 	    	time = 0
+	    	self._deleget:configChatVisible(true)
 	    	self:configPlayer()
 	    	if CallFunc then
 				CallFunc()
@@ -447,6 +454,7 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 		
     	local headVisible = function ( )
 			self._selectPositionNode:setVisible(false)
+			self._deleget:configChatVisible(true)
 			self:configPlayer()
 			if CallFunc then
 				CallFunc()
@@ -823,7 +831,7 @@ function GameSelectPosPanel:onPushSitDown(msg) --推送坐下的信息
 				self._allPlayerSitOk = false
 			end
 
-			if not isSendSit then
+			if not isSendSit then--不是自己点击入座导致的
 				self:configPlayer()--初始化玩家
 			end
 		end
@@ -833,7 +841,7 @@ end
 
 function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
 	self._nodePaoLayer:setVisible(false)
-	
+	self:HideReady()
 	--进入游戏之中后 隐藏邀请按钮
 	
 	lt.GameEventManager:post(lt.GameEventManager.EVENT.HIDE_INVITE_BTN)
