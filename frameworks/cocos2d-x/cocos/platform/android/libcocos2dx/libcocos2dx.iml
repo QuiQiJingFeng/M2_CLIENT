@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":libcocos2dx" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/../../../../../runtime-src/proj.android-studio" external.system.id="GRADLE" version="4">
+<module external.linked.project.id=":libcocos2dx" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/../../../../../runtime-src/proj.android-studio" external.system.id="GRADLE" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -25,6 +25,7 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/debug" />
+    <exclude-output />
     <content url="file://$MODULE_DIR$/../java/src">
       <sourceFolder url="file://$MODULE_DIR$/../java/src" isTestSource="false" />
     </content>
