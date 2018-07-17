@@ -406,24 +406,27 @@ function MjEngine:configHuiCard()
 	end
 end
 
-function MjEngine:changeCradColor(direction)
-	for k,node in pairs(self._allPlayerHandCardsNode[direction]) do
-		node:setCardBgColor(self:getCardcolor(),direction)
-	end
-	for k,node in pairs(self._allPlayerLightHandCardsNode[direction]) do
-		node:setCardBgColor(self:getCardcolor(),direction)
-	end
-	for k,node in pairs(self._allPlayerCpgCardsNode[direction]) do
-		node:setCardBgColor(self:getCardcolor(),direction)
-	end
-	for k,node in pairs(self._allPlayerOutCardsNode[direction]) do
-		node:setCardBgColor(self:getCardcolor(),direction)
-	end
-	for k,node in pairs(self._allPlayerSpecialOutCardsNode[direction]) do
-		node:setCardBgColor(self:getCardcolor(),direction)
-	end
-	for k,node in pairs(self._allLieFaceCardNode) do
-		node:setCardBgColor(self:getCardcolor(),direction)
+function MjEngine:changeCradColor()
+
+	for k,direction in pairs(self._currentGameDirections) do
+		for k,node in pairs(self._allPlayerHandCardsNode[direction]) do
+			node:setCardBgColor(self:getCardcolor(),direction)
+		end
+		for k,node in pairs(self._allPlayerLightHandCardsNode[direction]) do
+			node:setCardBgColor(self:getCardcolor(),direction)
+		end
+		for k,node in pairs(self._allPlayerCpgCardsNode[direction]) do
+			node:setCardBgColor(self:getCardcolor(),direction)
+		end
+		for k,node in pairs(self._allPlayerOutCardsNode[direction]) do
+			node:setCardBgColor(self:getCardcolor(),direction)
+		end
+		for k,node in pairs(self._allPlayerSpecialOutCardsNode[direction]) do
+			node:setCardBgColor(self:getCardcolor(),direction)
+		end
+		for k,node in pairs(self._allLieFaceCardNode) do
+			node:setCardBgColor(self:getCardcolor(),direction)
+		end		
 	end
 end
 
@@ -1271,8 +1274,8 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 			
 				for i,v in ipairs(anGangCards) do
 					local index = 1
-					local removeNum = 1
-					while (index <= #newHandCards and removeNum <= 4 ) do
+					local removeNum = 0
+					while (index <= #newHandCards and removeNum < 4 ) do
 						if newHandCards[index] == v then
 							table.remove(newHandCards, index)
 							removeNum = removeNum + 1
@@ -1292,8 +1295,8 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 			
 				for i,v in ipairs(pengGang) do
 					local index = 1
-					local removeNum = 1
-					while (index <= #newHandCards and removeNum <= 1 ) do
+					local removeNum = 0
+					while (index <= #newHandCards and removeNum < 1 ) do
 						if newHandCards[index] == v then
 							table.remove(newHandCards, index)
 							removeNum = removeNum + 1
@@ -1312,6 +1315,7 @@ function MjEngine:checkMyHandButtonActionStatu(handList,state, tObjCpghObj)
 				tObjCpghObj.tObjGang = tObjGang
 			else
 				tObjCpghObj.tObjGang = nil
+				self:autoPutOutCard()
 			end
 
 		end

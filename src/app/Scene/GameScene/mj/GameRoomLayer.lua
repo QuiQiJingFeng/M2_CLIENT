@@ -276,21 +276,7 @@ function GameRoomLayer:autoPutOutCard()
 end
 
 function GameRoomLayer:UpdateCardBgColor() 
-	local gameInfo = lt.DataManager:getGameRoomInfo()
-	local playerNum = gameInfo.room_setting.seat_num
-	local currentGameDirections = nil
-	if playerNum == 2 then--二人麻将
-		currentGameDirections = {2, 4}
-	elseif playerNum == 3 then
-		currentGameDirections = {1, 2, 3}
-	elseif playerNum == 4 then
-		currentGameDirections = {1, 2, 3, 4} 
-	end
-	for k,v in pairs(currentGameDirections) do
-		--self._engine:cardBgColor(true)
-		--self._engine:configAllPlayerCards(v, true, true, true, true)
-		self._engine:changeCradColor(v)
-	end
+	self._engine:changeCradColor()
 end
 
 function GameRoomLayer:isVisibleGameActionBtnsPanel() 
