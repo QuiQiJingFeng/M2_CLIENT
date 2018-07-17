@@ -91,7 +91,7 @@ fast_index (	R	fastIndex"F
 GPItem
 value (Rvalue
 from (Rfrom
-type (Rtype"¦
+type (Rtype"à
 UserInfo
 user_id (RuserId
 	user_name (	RuserName
@@ -106,7 +106,9 @@ fast_index (	R	fastIndex"F
 disconnect
  (R
 disconnect
-sex (Rsex" 
+sex (Rsex
+latitude (Rlatitude
+	lontitude (R	lontitude" 
 RoomSetting
 	game_type (RgameType
 round (Rround
