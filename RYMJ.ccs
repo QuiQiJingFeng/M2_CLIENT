@@ -1140,6 +1140,7 @@
                 <Audio Name="m_hu.mp3" />
                 <Audio Name="m_huanpai.mp3" />
                 <Audio Name="m_peng.mp3" />
+                <Audio Name="m_piao.mp3" />
                 <Audio Name="m_ting.mp3" />
                 <Audio Name="m_zm.mp3" />
                 <Audio Name="m1.mp3" />
@@ -1205,6 +1206,7 @@
                 <Audio Name="w_hu.mp3" />
                 <Audio Name="w_huanpai.mp3" />
                 <Audio Name="w_peng.mp3" />
+                <Audio Name="w_piao.mp3" />
                 <Audio Name="w_ting.mp3" />
                 <Audio Name="w_zm.mp3" />
                 <Audio Name="w1.mp3" />
@@ -1353,6 +1355,25 @@
             <PlistInfo Name="mjTingAni.csi" Type="Plist" />
           </Folder>
           <Folder Name="zpcomm">
+            <Folder Name="gwidget">
+              <Folder Name="img">
+                <Image Name="BG1.png" />
+                <Image Name="BG19.png" />
+                <Image Name="BG2.png" />
+                <Image Name="BG20.png" />
+                <Image Name="BG3.png" />
+                <Image Name="BG4.png" />
+                <Image Name="BG7.png" />
+                <Image Name="ImgText2.png" />
+                <Image Name="shareFlower.png" />
+              </Folder>
+              <Project Name="RecordCtrlLayer.csd" Type="Layer" />
+              <Project Name="ResultShareItem.csd" Type="Layer" />
+              <Project Name="ResultShareLayer.csd" Type="Layer" />
+              <Project Name="ResultShareLayer4p.csd" Type="Layer" />
+              <Project Name="ResultShareLayer5p.csd" Type="Layer" />
+              <Project Name="ResultShareLayersrddz.csd" Type="Layer" />
+            </Folder>
             <Folder Name="img">
               <Image Name="BG13.png" />
               <Image Name="BG14.png" />

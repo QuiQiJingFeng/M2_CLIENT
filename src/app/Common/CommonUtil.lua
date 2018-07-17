@@ -1178,7 +1178,7 @@ function CommonUtil:copyToClipboard(message)
     end
 end
 
-function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFunc)
+function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFunc,moveFunc)
     -- local oldScale = 1
     -- local newScale = oldScale
 
@@ -1203,6 +1203,7 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFu
     local oldScaleY = node:getScaleY()
 
     node:addTouchEventListener(function(widget, event_type)
+
         if event_type == ccui.TouchEventType.began then
             -- 缩放
             if isScale then
@@ -1212,7 +1213,6 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFu
                 beganFunc()
             end
         elseif event_type == ccui.TouchEventType.ended then
-            
             lt.AudioManager:buttonClicked()
 
             if isScale then
@@ -1225,6 +1225,12 @@ function CommonUtil:addNodeClickEvent(node, callBack, isScale,beganFunc,cancelFu
             node:setScale(oldScaleX, oldScaleY)
             if cancelFunc then
                 cancelFunc()
+            end
+        elseif event_type == ccui.TouchEventType.moved then
+            if moveFunc then
+                moveFunc(widget, function( )
+                   node:setScale(oldScaleX, oldScaleY)
+                end)
             end
         end
     end)

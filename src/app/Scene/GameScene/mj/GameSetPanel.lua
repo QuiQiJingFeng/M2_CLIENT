@@ -26,7 +26,8 @@ function GameSetPanel:ctor(deleget)
 
 	local ruleBtn = self:getChildByName("Button_GameRule")
 	local setBtn = self:getChildByName("Button_More")
-	local voiceBtn = self:getChildByName("Button_Voice")
+	self._voiceBtn = self:getChildByName("Button_Voice")
+	self._chatBtn = self:getChildByName("Button_Chat")
 
 
 	self._panel_RecordCtrl = self:getChildByName("Panel_RecordCtrl")
@@ -48,7 +49,9 @@ function GameSetPanel:ctor(deleget)
 	lt.CommonUtil:addNodeClickEvent(Button_Fast, handler(self, self.onFast))--加速
 	lt.CommonUtil:addNodeClickEvent(Button_Slowe, handler(self, self.onSlowe))--减速
 	
-	lt.CommonUtil:addNodeClickEvent(voiceBtn,handler(self, self.onTouchEndVoice),true,handler(self, self.onTouchBeginVoice),handler(self, self.onTouchCanceled))
+	lt.CommonUtil:addNodeClickEvent(self._voiceBtn,handler(self, self.onTouchEndVoice),true,handler(self, self.onTouchBeginVoice),handler(self, self.onTouchCanceled), handler(self, self.onTouchMoved))
+
+	lt.CommonUtil:addNodeClickEvent(self._chatBtn, handler(self, self.onChatBtnClick))
 
 	lt.CommonUtil:addNodeClickEvent(self.inviteBtn, handler(self, self.onInviteBtnClick))
 
@@ -67,10 +70,8 @@ end
 
 function GameSetPanel:onTouchReplayUIShow()--显示出来
 	self._panel_RecordCtrl:setVisible(true)
-	local Button_Voice = self:getChildByName("Button_Voice")
-	local Button_Chat = self:getChildByName("Button_Chat")
-	Button_Voice:setVisible(false)--不需要false掉
-	Button_Chat:setVisible(false)
+	self._voiceBtn:setVisible(false)--不需要false掉
+	self._chatBtn:setVisible(false)
 end
 function GameSetPanel:onTouchReplayUIPlay()--播放
 	self._sprite_Play:setVisible(true)
@@ -99,27 +100,64 @@ function GameSetPanel:onSlowe(event)--减速事件
 	self._deleget:ReplaysurSpeed()
 end
 
-
-
-
-
-
-
-
-
+function GameSetPanel:onChatBtnClick(event)
+	local chatLayer = lt.ChatLayer:new()
+	lt.UILayerManager:addLayer(chatLayer, true)		
+end
 
 --开始录音的时候,服务端发过来的声音全部丢弃 并且停止当前的声音
+
+function GameSetPanel:showRecordVoiceLayer()
+	self._recordVoiceLayer = lt.RecordVoiceLayer.new()
+	lt.UILayerManager:addLayer(self._recordVoiceLayer, true)	
+end
+
+function GameSetPanel:hideRecordVoiceLayer()
+	if self._recordVoiceLayer then
+		lt.UILayerManager:removeLayer(self._recordVoiceLayer)
+		self._recordVoiceLayer = nil
+	end
+end
+
 function GameSetPanel:onTouchBeginVoice()
+	self:showRecordVoiceLayer()
+	self._movedCancel = false
 	lt.CommonUtil:stopAllAudio()
 	self.__recording = true
 	self.isStart = lt.CommonUtil:recordBegin()
 end
 
 function GameSetPanel:onTouchCanceled()
+	self:hideRecordVoiceLayer()
+
 	lt.CommonUtil:stopRecord()
 end
 
+function GameSetPanel:onTouchMoved(event, callBack)
+	local x, y = event:getTouchMovePosition().x, event:getTouchMovePosition().y
+    local contentSize = self._voiceBtn:getBoundingBox()
+    local rect = cc.rect(self._voiceBtn:getPositionX()-contentSize.width / 2, self._voiceBtn:getPositionY() - contentSize.height / 2 , contentSize.width, contentSize.height)
+
+    if cc.rectContainsPoint(rect, cc.p(x, y)) then
+    else
+    	self._movedCancel = true
+    	if callBack then
+    		callBack()
+    	end
+        self:hideRecordVoiceLayer()
+        lt.CommonUtil:stopRecord()
+    end
+end
+
 function GameSetPanel:onTouchEndVoice()
+
+	if self._movedCancel then
+		self._movedCancel = false
+		return
+	end
+
+	self:hideRecordVoiceLayer()
+
 	self.__recording = false
 	if not self.isStart then
 		print("ERROR: 内部错误")

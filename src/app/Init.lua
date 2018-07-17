@@ -123,7 +123,7 @@ ltMetaTable["SettingLayer"] = "app.Scene.GameScene.mj.SettingLayer"
 
 ltMetaTable["InvitePanel"] = "app.Scene.GameScene.commonPanel.InvitePanel"
 ltMetaTable["PromptPanel"] = "app.Scene.GameScene.commonPanel.PromptPanel"
-
+ltMetaTable["RecordVoiceLayer"] = "app.Scene.GameScene.commonPanel.RecordVoiceLayer"
 -- ddz
 ltMetaTable["DDZGameLayer"]			= "app.Scene.GameScene.ddz.DDZGameLayer"
 ltMetaTable["DDZGameScene"]			= "app.Scene.GameScene.ddz.DDZGameScene"
