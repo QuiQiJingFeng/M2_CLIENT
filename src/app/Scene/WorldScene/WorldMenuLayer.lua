@@ -84,6 +84,10 @@ function WorldMenuLayer:ctor()
     -- 创建房间
     self.Se_Create = createRoomBtn:getChildByName("Se_Create")
     self.Se_Return = createRoomBtn:getChildByName("Se_Return")
+
+    if lt.DataManager:getPlayerInfo().is_check then
+        smzBtn:setVisible(false)
+    end
     -- 添加事件
     lt.CommonUtil:addNodeClickEvent(shopBtn, handler(self, self.onClickshopBtn))
     -- lt.CommonUtil:addNodeClickEvent(kefuBtn, handler(self, self.onClickkefuBtn))
