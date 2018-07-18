@@ -46,7 +46,7 @@ public class AppActivity extends Cocos2dxActivity{
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
-        ((WechatDelegate)WechatDelegate.getInstance()).init(this);
+        WechatDelegate.init(this);
         ((Device)Device.getInstance()).init(this);
     }
 
