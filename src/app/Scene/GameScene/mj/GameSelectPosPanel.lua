@@ -186,7 +186,14 @@ function GameSelectPosPanel:onHeadEvent(event)
 	local info = lt.DataManager:getPlayerInfoByPos(pos)
 
 	self._gamePlayerinfoLayer = lt.GamePlayerinfoLayer.new(info)
+	self._gamePlayerinfoLayer:UpdateInfo()
 	lt.UILayerManager:addLayer(self._gamePlayerinfoLayer,true)
+end
+
+function GameSelectPosPanel:onRefreshRoomInfo(msg)
+	if self._gamePlayerinfoLayer then
+		self._gamePlayerinfoLayer:UpdateInfo()
+	end
 end
 
 function GameSelectPosPanel:RestartShow()--游戏结束把听牌标识全false
@@ -936,6 +943,7 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameSelectPosPanel:onRefreshGameOver")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSelectPosPanel:onClientConnectAgain")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, handler(self, self.onNoticePao), "GameSelectPosPanel.onNoticePao")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.onRefreshRoomInfo), "GameSelectPosPanel.onRefreshRoomInfo")
 end
 
 function GameSelectPosPanel:onExit()
@@ -948,6 +956,7 @@ function GameSelectPosPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameSelectPosPanel:onRefreshGameOver")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GameSelectPosPanel:onClientConnectAgain")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PAO, "GameSelectPosPanel.onNoticePao")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "GameSelectPosPanel.onRefreshRoomInfo")
 end
 
 return GameSelectPosPanel
