@@ -483,7 +483,11 @@ end
 function GameRoomLayer:onPushDrawCard(msg)--通知有人摸牌
 
 	local direction = self:getPlayerDirectionByPos(msg.user_pos)
-	self._engine:getOneHandCardAtDirection(direction, msg.card)--起了一张牌
+	
+	if not msg.in_liangsidayi then
+		self._engine:getOneHandCardAtDirection(direction, msg.card)--起了一张牌
+	end
+
 	self._engine:configAllPlayerCards(direction, false, true, false, false)
 
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 

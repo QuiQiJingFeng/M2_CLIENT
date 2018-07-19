@@ -1555,8 +1555,19 @@ function MjEngine:setClickCardCallBack(callBack)
 	self._clickCardCallback = callBack
 end
 
+function MjEngine:printLogAllCardValue()
+	dump(self._allPlayerHandCardsValue, "self._allPlayerHandCardsValue")
+	dump(self._allPlayerCpgCardsValue, "self._allPlayerCpgCardsValue")
+	dump(self._allPlayerOutCardsValue, "self._allPlayerOutCardsValue")
+	dump(self._allPlayerSpecialOutCardsValue,"self._allPlayerSpecialOutCardsValue")
+	dump(self._allPlayerLightHandCardsValue, "self._allPlayerLightHandCardsValue")
+	dump(self._allPlayerStandHandCardsValue, "self._allPlayerStandHandCardsValue")
+	dump(self._allHandCardsTingValue, "self._allHandCardsTingValue")
+end
+
 function MjEngine:onClickHandCard(cardNode, value)
 	lt.CommonUtil.print("MjEngine:onClickHandCard")
+
 	if lt.DataManager:getRePlayState() then
 		return
 	end
@@ -1913,8 +1924,8 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 				local removeNum = 0
 				if #self._allPlayerLightHandCardsValue[direction] > 0 then
 					local n = 1
-					while (n <= #self._allPlayerLightHandCardsValue[direction]) do
-						if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
+					while (n <= #self._allPlayerLightHandCardsValue[direction]) and removeNum < offNum do
+						if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] then
 							table.remove(self._allPlayerLightHandCardsValue[direction], n)
 							removeNum = removeNum + 1
 						else
@@ -1943,8 +1954,8 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 				if #self._allPlayerLightHandCardsValue[direction] > 0 then
 					local n = 1
-					while (n <= #self._allPlayerLightHandCardsValue[direction]) do
-						if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
+					while (n <= #self._allPlayerLightHandCardsValue[direction]) and removeNum < offNum do
+						if self._allPlayerLightHandCardsValue[direction][n] == msg.item["value"] then
 							table.remove(self._allPlayerLightHandCardsValue[direction], n)
 							removeNum = removeNum + 1
 						else
@@ -1955,8 +1966,8 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 				if removeNum < offNum then
 					local n = 1
-					while (n <= #self._allPlayerStandHandCardsValue[direction]) do
-						if self._allPlayerStandHandCardsValue[direction][n] == msg.item["value"] and removeNum < offNum then
+					while (n <= #self._allPlayerStandHandCardsValue[direction]) and removeNum < offNum do
+						if self._allPlayerStandHandCardsValue[direction][n] == msg.item["value"] then
 							table.remove(self._allPlayerStandHandCardsValue[direction], n)
 							removeNum = removeNum + 1
 						else
@@ -1967,8 +1978,8 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 				local a = 1
 				local allRemoveNum = 0
-				while (a <= #self._allPlayerHandCardsValue[direction]) do
-					if self._allPlayerHandCardsValue[direction][a] == msg.item["value"] and allRemoveNum < offNum then
+				while (a <= #self._allPlayerHandCardsValue[direction]) and allRemoveNum < offNum do
+					if self._allPlayerHandCardsValue[direction][a] == msg.item["value"] then
 						table.remove(self._allPlayerHandCardsValue[direction], a)
 						allRemoveNum = allRemoveNum + 1
 					else
