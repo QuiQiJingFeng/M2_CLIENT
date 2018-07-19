@@ -615,19 +615,27 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 	end
 
 	--把这张牌加到out  先通知noticeSpecial 再 NoticePlayCard
-	self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
-	
-	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
-		self:refreshHuCardNum(msg.card, 2)
+	if not lt.DataManager:getRePlayState() then
+		self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
+	else
+		if value ~= 99 then
+			self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
+		end
 	end
 
 	--其他玩家从手牌中去掉  （自己的在点击牌出牌的时候处理）
 	if lt.DataManager:getRePlayState() then
-		self._engine:goOutOneHandCardAtDirection(direction, value)
+		if value ~= 99 then--报听出牌会是99  在noticeSpecial里处理
+			self._engine:goOutOneHandCardAtDirection(direction, value)
+		end
 	else
 		if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
 			self._engine:goOutOneHandCardAtDirection(direction, value)
 		end
+	end
+
+	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+		self:refreshHuCardNum(msg.card, 2)
 	end
 
 	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)

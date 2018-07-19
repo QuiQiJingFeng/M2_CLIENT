@@ -682,7 +682,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 		end
 	end
 
-	--出牌
+	--出牌 (注意牌的层级 上下根据y坐标判断， 左右方向根据顺序)
 	if refreshOut then
 		local cardZorder = 0
 		if not self._allPlayerOutCardsNode[direction] then
@@ -692,15 +692,34 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 		for i,v in ipairs(self._allPlayerOutCardsNode[direction]) do
 			v:setVisible(false)
 		end
+		local baseZorder = nil
+		local basePosxy = nil
 
 		self._allPlayerOutCardsValue[direction] = self._allPlayerOutCardsValue[direction] or {}
 		for i,info in ipairs(self._allPlayerOutCardsValue[direction]) do
 			local node = self._allPlayerOutCardsNode[direction][i]
+			
+			if direction == lt.Constants.DIRECTION.NAN or direction == lt.Constants.DIRECTION.BEI then
+				if i == 1 then
+					baseZorder = 1
+					basePosxy = self._allOutCardsNodePos[tostring(direction)][i].y
+				end
+				local tempPosxy = nil
+				tempPosxy = self._allOutCardsNodePos[tostring(direction)][i].y
 
-			if direction == lt.Constants.DIRECTION.DONG or direction == lt.Constants.DIRECTION.BEI then
-				cardZorder = cardZorder - 1
+				if basePosxy and baseZorder then
+					if basePosxy == tempPosxy then
+						cardZorder = baseZorder
+					else
+						cardZorder = -math.floor((tempPosxy - basePosxy) / 54 + 0.5) * baseZorder --四舍五入
+					end
+				end		
 			else
-				cardZorder = cardZorder + 1
+           		if direction == lt.Constants.DIRECTION.DONG then
+           			cardZorder = cardZorder - 1
+           		else
+           			cardZorder = cardZorder + 1
+           		end
 			end
 
 			if node then
@@ -2005,7 +2024,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 	--听牌处理
 	if msg.item["type"] == 7 then
-		local directionn = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
+		local direction = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
 		lt.CommonUtil.print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
 
 		local tingInfo = lt.DataManager:getTingPlayerInfo()
@@ -2026,15 +2045,22 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 		lt.CommonUtil.print("noticeSpecialEvent==>",tingInfo)
 
-		if self._isNeedBaoTing then
-			if not self._isAnTing then--明听发的不走这里
-				self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+		-- if self._isNeedBaoTing then
+		-- 	if not self._isAnTing then--明听发的不走这里
+		-- 		self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+		-- 	end
+		-- end
+
+		local value = msg.item["value"]
+		if lt.DataManager:getRePlayState() then--听牌出牌
+			if self._isNeedBaoTing and self._isAnTing then--回放 暗听需要明牌
+				self:getOneOutCardAtDirection(direction, value)
+				self:goOutOneHandCardAtDirection(direction, value)
 			end
 		end
 	end
 
 	self:configAllPlayerCards(direction, true, true, true, false)--4 false --> true 
-
 end
 
 function MjEngine:setHuiCardValue(huiValue)
