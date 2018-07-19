@@ -131,8 +131,8 @@ function MjEngine:open(deleget)
 
 	self._allOutCardsPanelPos = {--不同玩家人数 不同方位
 		[2] = {
-			[4] = ccp(0, 153),
-			[2] = ccp(0, -140),
+			[4] = ccp(0, 133),
+			[2] = ccp(0, -128),
 		} ,
 
 		[3] = {
@@ -149,10 +149,10 @@ function MjEngine:open(deleget)
 	}
 
 	self._allSpecialOutCardsPanelPos = {
-		ccp(-380, 0),
-		ccp(0, -225),
-		ccp(385, 0),
-		ccp(0, 230),
+		ccp(-400, 200),
+		ccp(-400, -220),
+		ccp(400, -150),
+		ccp(300, 225),
 	}
 
 	self._allOutCardsNodePos = {}--所有方位出的牌的位置 按照ccb资源上的位置
@@ -290,10 +290,10 @@ function MjEngine:sendCards(msg, pos)--发牌 13张
 
 		self:sortHandValue(direction)
 
-		local sortFun = function(a, b)
-			return a < b
-		end
-		table.sort(self._allPlayerLightHandCardsValue[direction], sortFun)
+		-- local sortFun = function(a, b)
+		-- 	return a < b
+		-- end
+		-- table.sort(self._allPlayerLightHandCardsValue[direction], sortFun)
 
 		self:sendCardsEffect()
 	end
@@ -745,19 +745,20 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 		local startX = 0
 		local startY = 0
 
-		if #self._allPlayerSpecialOutCardsValue[direction] % 2 == 0 then--偶数个
-			if direction == lt.Constants.DIRECTION.XI or direction == lt.Constants.DIRECTION.DONG then
-				startY = (#self._allPlayerSpecialOutCardsValue[direction] / 2 - 1)*spaceOffY + spaceOffY/2
-			else
-				startX = (#self._allPlayerSpecialOutCardsValue[direction] / 2 - 1)*spaceOffX + spaceOffX/2
-			end				
-		else
-			if direction == lt.Constants.DIRECTION.XI or direction == lt.Constants.DIRECTION.DONG then
-				startY = math.floor(#self._allPlayerSpecialOutCardsValue[direction] / 2)*spaceOffY
-			else
-				startX = math.floor(#self._allPlayerSpecialOutCardsValue[direction] / 2)*spaceOffX
-			end		
-		end 
+		--配套居中排版
+		-- if #self._allPlayerSpecialOutCardsValue[direction] % 2 == 0 then--偶数个
+		-- 	if direction == lt.Constants.DIRECTION.XI or direction == lt.Constants.DIRECTION.DONG then
+		-- 		startY = (#self._allPlayerSpecialOutCardsValue[direction] / 2 - 1)*spaceOffY + spaceOffY/2
+		-- 	else
+		-- 		startX = (#self._allPlayerSpecialOutCardsValue[direction] / 2 - 1)*spaceOffX + spaceOffX/2
+		-- 	end				
+		-- else
+		-- 	if direction == lt.Constants.DIRECTION.XI or direction == lt.Constants.DIRECTION.DONG then
+		-- 		startY = math.floor(#self._allPlayerSpecialOutCardsValue[direction] / 2)*spaceOffY
+		-- 	else
+		-- 		startX = math.floor(#self._allPlayerSpecialOutCardsValue[direction] / 2)*spaceOffX
+		-- 	end		
+		-- end 
 
 		for i,info in ipairs(self._allPlayerSpecialOutCardsValue[direction]) do
 			local node = self._allPlayerSpecialOutCardsNode[direction][i]
@@ -779,6 +780,18 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				self._allPlayerSpecialOutCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 			end
 
+			--居中扩散排版
+			-- if direction == lt.Constants.DIRECTION.XI then
+			-- 	node:setPosition(ccp(startX, startY - (i-1)*spaceOffY))
+			-- elseif direction == lt.Constants.DIRECTION.NAN then
+			-- 	node:setPosition(ccp(-startX + (i-1)*spaceOffX, startY))
+			-- elseif direction == lt.Constants.DIRECTION.DONG then
+			-- 	node:setPosition(ccp(startX, -startY + (i-1)*spaceOffY))
+			-- elseif direction == lt.Constants.DIRECTION.BEI then
+			-- 	node:setPosition(ccp(startX - (i-1)*spaceOffX, startY))
+			-- end
+
+			--顺序排版
 			if direction == lt.Constants.DIRECTION.XI then
 				node:setPosition(ccp(startX, startY - (i-1)*spaceOffY))
 			elseif direction == lt.Constants.DIRECTION.NAN then
