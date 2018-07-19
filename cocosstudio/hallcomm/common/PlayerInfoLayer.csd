@@ -119,7 +119,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Journal" ActionTag="1257903715" Tag="285" IconVisible="False" LeftMargin="341.3688" RightMargin="236.6312" TopMargin="61.8028" BottomMargin="257.1972" FontSize="32" LabelText="历史记录" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_Journal" ActionTag="1257903715" VisibleForFrame="False" Tag="285" IconVisible="False" LeftMargin="341.3688" RightMargin="236.6312" TopMargin="61.8028" BottomMargin="257.1972" FontSize="32" LabelText="历史记录" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="128.0000" Y="33.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="341.3688" Y="273.6972" />
@@ -130,7 +130,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_Line" ActionTag="-782512834" Tag="287" IconVisible="False" LeftMargin="345.6413" RightMargin="238.3587" TopMargin="90.3027" BottomMargin="255.6973" Scale9Enable="True" LeftEage="2" RightEage="2" TopEage="1" BottomEage="1" Scale9OriginX="2" Scale9OriginY="1" Scale9Width="5" Scale9Height="4" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_Line" ActionTag="-782512834" VisibleForFrame="False" Tag="287" IconVisible="False" LeftMargin="345.6413" RightMargin="238.3587" TopMargin="90.3027" BottomMargin="255.6973" Scale9Enable="True" LeftEage="2" RightEage="2" TopEage="1" BottomEage="1" Scale9OriginX="2" Scale9OriginY="1" Scale9Width="5" Scale9Height="4" ctype="ImageViewObjectData">
                 <Size X="122.0000" Y="6.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="345.6413" Y="258.6973" />
@@ -173,7 +173,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_InvcodeText" ActionTag="243904429" Tag="2007" IconVisible="False" LeftMargin="177.9500" RightMargin="204.0500" TopMargin="183.7089" BottomMargin="132.2911" FontSize="36" LabelText="绑定的推荐码：1001" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_InvcodeText" ActionTag="243904429" VisibleForFrame="False" Tag="2007" IconVisible="False" LeftMargin="177.9500" RightMargin="204.0500" TopMargin="183.7089" BottomMargin="132.2911" FontSize="36" LabelText="绑定的推荐码：1001" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="324.0000" Y="36.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="177.9500" Y="150.2911" />
@@ -184,7 +184,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Btn_wechat" ActionTag="1893179348" Tag="100" IconVisible="False" LeftMargin="515.9400" RightMargin="126.0600" TopMargin="170.0988" BottomMargin="114.9012" Scale9Enable="True" LeftEage="24" RightEage="24" TopEage="24" BottomEage="24" Scale9OriginX="24" Scale9OriginY="24" Scale9Width="16" Scale9Height="19" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Btn_wechat" ActionTag="1893179348" VisibleForFrame="False" Tag="100" IconVisible="False" LeftMargin="515.9400" RightMargin="126.0600" TopMargin="170.0988" BottomMargin="114.9012" Scale9Enable="True" LeftEage="24" RightEage="24" TopEage="24" BottomEage="24" Scale9OriginX="24" Scale9OriginY="24" Scale9Width="16" Scale9Height="19" ctype="ImageViewObjectData">
                 <Size X="64.0000" Y="67.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
                 <Position X="547.9400" Y="181.9012" />
@@ -194,7 +194,7 @@
                 <PreSize X="0.0907" Y="0.1903" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/img/Btn_wechat.png" Plist="hallcomm/common/CommonPlist1.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Wechat" ActionTag="733229766" Tag="113" IconVisible="False" LeftMargin="429.5000" RightMargin="17.5000" TopMargin="114.5000" BottomMargin="190.5000" Scale9Enable="True" LeftEage="54" RightEage="49" TopEage="13" BottomEage="12" Scale9OriginX="54" Scale9OriginY="13" Scale9Width="156" Scale9Height="22" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Wechat" ActionTag="733229766" VisibleForFrame="False" Tag="113" IconVisible="False" LeftMargin="429.5000" RightMargin="17.5000" TopMargin="114.5000" BottomMargin="190.5000" Scale9Enable="True" LeftEage="54" RightEage="49" TopEage="13" BottomEage="12" Scale9OriginX="54" Scale9OriginY="13" Scale9Width="156" Scale9Height="22" ctype="ImageViewObjectData">
                 <Size X="259.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_qipao2_3" ActionTag="1783028635" Tag="120" IconVisible="False" LeftMargin="108.0488" RightMargin="134.9512" TopMargin="41.1348" BottomMargin="-5.1348" ctype="SpriteObjectData">
@@ -228,7 +228,7 @@
                 <PreSize X="0.3669" Y="0.1335" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/img/Image_qipao1.png" Plist="hallcomm/common/CommonPlist1.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Btn_mobile" ActionTag="-993936363" Tag="117" IconVisible="False" LeftMargin="598.9400" RightMargin="43.0600" TopMargin="170.1000" BottomMargin="114.9000" Scale9Enable="True" LeftEage="24" RightEage="24" TopEage="24" BottomEage="24" Scale9OriginX="24" Scale9OriginY="24" Scale9Width="16" Scale9Height="19" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Btn_mobile" ActionTag="-993936363" VisibleForFrame="False" Tag="117" IconVisible="False" LeftMargin="598.9400" RightMargin="43.0600" TopMargin="170.1000" BottomMargin="114.9000" Scale9Enable="True" LeftEage="24" RightEage="24" TopEage="24" BottomEage="24" Scale9OriginX="24" Scale9OriginY="24" Scale9Width="16" Scale9Height="19" ctype="ImageViewObjectData">
                 <Size X="64.0000" Y="67.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
                 <Position X="630.9400" Y="181.9000" />
@@ -238,7 +238,7 @@
                 <PreSize X="0.0907" Y="0.1903" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/img/Btn_mobel.png" Plist="hallcomm/common/CommonPlist1.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Mobile" ActionTag="1856385999" Tag="118" IconVisible="False" LeftMargin="429.5000" RightMargin="17.5000" TopMargin="114.5000" BottomMargin="190.5000" Scale9Enable="True" LeftEage="62" RightEage="54" TopEage="13" BottomEage="12" Scale9OriginX="62" Scale9OriginY="13" Scale9Width="143" Scale9Height="22" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Mobile" ActionTag="1856385999" VisibleForFrame="False" Tag="118" IconVisible="False" LeftMargin="429.5000" RightMargin="17.5000" TopMargin="114.5000" BottomMargin="190.5000" Scale9Enable="True" LeftEage="62" RightEage="54" TopEage="13" BottomEage="12" Scale9OriginX="62" Scale9OriginY="13" Scale9Width="143" Scale9Height="22" ctype="ImageViewObjectData">
                 <Size X="259.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="Image" ActionTag="1051966212" Tag="121" IconVisible="False" LeftMargin="194.0000" RightMargin="49.0000" TopMargin="41.1300" BottomMargin="-5.1300" ctype="SpriteObjectData">
@@ -272,7 +272,7 @@
                 <PreSize X="0.3669" Y="0.1335" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/img/Image_qipao1.png" Plist="hallcomm/common/CommonPlist1.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_29" ActionTag="1535334579" Tag="1633" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="180.1759" RightMargin="281.3746" TopMargin="231.9263" BottomMargin="46.0737" Scale9Enable="True" LeftEage="24" RightEage="24" TopEage="24" BottomEage="24" Scale9OriginX="24" Scale9OriginY="24" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_29" ActionTag="1535334579" VisibleForFrame="False" Tag="1633" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="180.1759" RightMargin="281.3746" TopMargin="231.9263" BottomMargin="46.0737" Scale9Enable="True" LeftEage="24" RightEage="24" TopEage="24" BottomEage="24" Scale9OriginX="24" Scale9OriginY="24" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
                 <Size X="244.4495" Y="74.0000" />
                 <Children>
                   <AbstractNodeData Name="Text_2" ActionTag="2063384554" VisibleForFrame="False" Tag="156" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" RightMargin="28.4495" TopMargin="19.0000" BottomMargin="19.0000" FontSize="36" LabelText="请输入推荐码" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -416,7 +416,7 @@
                 <PreSize X="0.3462" Y="0.2102" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/lobby/img/img_invcodeBg.png" Plist="hallcomm/lobby/LobbyPlist1.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_BangDing" ActionTag="1514043143" Tag="191" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="436.9369" RightMargin="73.0631" TopMargin="223.5177" BottomMargin="36.4823" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="166" Scale9Height="70" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_BangDing" ActionTag="1514043143" VisibleForFrame="False" Tag="191" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="436.9369" RightMargin="73.0631" TopMargin="223.5177" BottomMargin="36.4823" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="166" Scale9Height="70" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="196.0000" Y="92.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_1" ActionTag="886029270" Tag="192" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="52.0000" RightMargin="52.0000" TopMargin="21.5000" BottomMargin="21.5000" LeftEage="30" RightEage="30" TopEage="16" BottomEage="16" Scale9OriginX="30" Scale9OriginY="16" Scale9Width="32" Scale9Height="17" ctype="ImageViewObjectData">
@@ -477,7 +477,7 @@
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/img/img_smz.png" Plist="hallcomm/common/CommonPlist1.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_unBangDing" ActionTag="453240857" Tag="2241" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="226.5317" RightMargin="226.5317" TopMargin="228.5179" BottomMargin="31.4821" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="166" Scale9Height="70" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_unBangDing" ActionTag="453240857" VisibleForFrame="False" Tag="2241" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="226.5317" RightMargin="226.5317" TopMargin="228.5179" BottomMargin="31.4821" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="166" Scale9Height="70" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="252.9366" Y="92.0000" />
                 <Children>
                   <AbstractNodeData Name="Image_1" ActionTag="-732869128" Tag="2242" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="37.9683" RightMargin="37.9683" TopMargin="20.5000" BottomMargin="20.5000" LeftEage="30" RightEage="30" TopEage="16" BottomEage="16" Scale9OriginX="30" Scale9OriginY="16" Scale9Width="117" Scale9Height="19" ctype="ImageViewObjectData">

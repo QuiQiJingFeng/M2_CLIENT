@@ -39,12 +39,19 @@ function WorldMenuLayer:ctor()
     -- 战绩
     local recordBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Button_Rec")
     --个人信息
-    local infoBtn= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Ie_HeadBg"):getChildByName("Ie_Shade")
+    local infoImg = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Ie_HeadBg"):getChildByName("Sprite_HeadDefault")
+
+    local infoBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Ie_HeadBg")
+    
+    local stencil = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Ie_HeadBg"):getChildByName("Sprite_HeadStencil")
+
     local Tt_NickName= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickName")
     -- ID
     local Tt_UserId= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_UserId")
     -- 名字后面三个点
     local Tt_NickNameDDD= baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Tt_NickNameDDD")
+
+
     -- 分享btn
     local shareBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Bn_Share")
     -- 客服btn
@@ -53,6 +60,24 @@ function WorldMenuLayer:ctor()
     local shopBtn = baseLayer:getChildByName("Ie_Bg"):getChildByName("Pl_Info"):getChildByName("Pl_MyInfo"):getChildByName("Bn_Recharge")
 
     local loginData = lt.DataManager:getPlayerInfo()
+    loginData.user_pic = "http://img1.utuku.china.com/0x0/game/20160718/f2547293-78a9-4e50-a80f-727593f8c19f.jpg"
+    dump(loginData, "loginData")
+    lt.HeadImage:setHeadImg(loginData, infoImg)
+    local parent = infoImg:getParent()
+    local px, py = infoImg:getPosition()
+    local parentSzie = parent:getContentSize()
+    local size = parent:getContentSize()
+
+    local clipNode = cc.ClippingNode:create()
+    clipNode:setStencil(stencil)
+    clipNode:setContentSize(size.width, size.height)
+    clipNode:setAlphaThreshold(0.5)
+    clipNode:setAnchorPoint(0.5, 0.5)
+    parent:addChild(clipNode, 100)
+    -- clipNode:setPosition(px, py-5)
+    clipNode:setPosition(parentSzie.width/2, parentSzie.height/2)
+    infoImg:removeFromParent()
+    clipNode:addChild(infoImg)
     local count = 0 
     if not loginData.user_name then
         loginData.user_name = " "
@@ -94,7 +119,7 @@ function WorldMenuLayer:ctor()
     -- lt.CommonUtil:addNodeClickEvent(shareBtn, handler(self, self.onClickshareBtn))
     lt.CommonUtil:addNodeClickEvent(smzBtn, handler(self, self.onClickSMZBtn))
     lt.CommonUtil:addNodeClickEvent(setBtn, handler(self, self.onClickSetBtn))
-    lt.CommonUtil:addNodeClickEvent(infoBtn, handler(self, self.onClickinfoBtn))
+    lt.CommonUtil:addNodeClickEvent(infoBtn, handler(self, self.onClickinfoBtn), false)
     lt.CommonUtil:addNodeClickEvent(createRoomBtn, handler(self, self.onClickCreateRoomBtn))
     lt.CommonUtil:addNodeClickEvent(joinRoomBtn, handler(self, self.onClickJoinRoomBtn))
     lt.CommonUtil:addNodeClickEvent(helpBtn, handler(self, self.onClickhelpBtn))
@@ -106,6 +131,8 @@ function WorldMenuLayer:ctor()
     local UITableView = require("app.UI.UITableView")
     self.tb_room_info = UITableView:bindNode(tb_room_info,"app.Scene.WorldScene.WorldMenuLayerRoomItem")
     self:listenRoomListUpdate()
+    -- infoBtn
+
 end
 
 function WorldMenuLayer:onEnter()
@@ -225,8 +252,8 @@ function WorldMenuLayer:onClickinfoBtn(event)
     ---[[--头像
     local url = "http://neoimaging.beareyes.com.cn/png2/ni_png_2_1518.png"
     local uid = "123456"
-    local HeadLayer = lt.HeadImage.new(url,uid,64,697,1)
-    lt.UILayerManager:addLayer(HeadLayer, true)--]]
+    -- local HeadLayer = lt.HeadImage.new(url,uid,64,697,1)
+    -- lt.UILayerManager:addLayer(HeadLayer, true)--]]
     ---[[
     local lobbyInfoLayer = lt.lobbyInfoLayer.new()
     lt.UILayerManager:addLayer(lobbyInfoLayer, true)--]]
