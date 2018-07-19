@@ -71,6 +71,8 @@ array = {room_id = 10086,sattle_list = {[1] = {user_id = 10086,user_pos = 1,hu_n
 [2] = {user_id = 10087,user_pos = 2,hu_num = -18,ming_gang_num = 2,an_gang_num=5,reward_num = 2},
 [3] = {user_id = 10088,user_pos = 3,hu_num = -17,ming_gang_num = 1,an_gang_num=3,reward_num = 7},
 [4] = {user_id = 10089,user_pos = 4,hu_num = 25,ming_gang_num = 0,an_gang_num=1,reward_num = 3}}}--]]
+    
+    self:setVisible(true)
     local posTableX = {}
     if #array.sattle_list == 2 then
         posTableX = {260,710}

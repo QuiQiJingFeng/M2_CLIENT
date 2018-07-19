@@ -74,17 +74,17 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Btn_Gps" ActionTag="-57564718" Tag="378" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="472.4000" RightMargin="47.6000" TopMargin="152.1616" BottomMargin="74.8384" LeftEage="11" RightEage="11" TopEage="12" BottomEage="12" Scale9OriginX="11" Scale9OriginY="12" Scale9Width="58" Scale9Height="16" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Btn_Gps" ActionTag="-57564718" Tag="378" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="230.0000" RightMargin="290.0000" TopMargin="152.1616" BottomMargin="74.8384" LeftEage="11" RightEage="11" TopEage="12" BottomEage="12" Scale9OriginX="11" Scale9OriginY="12" Scale9Width="58" Scale9Height="16" ctype="ImageViewObjectData">
                 <Size X="80.0000" Y="40.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="512.4000" Y="94.8384" />
+                <Position X="270.0000" Y="94.8384" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8540" Y="0.3552" />
+                <PrePosition X="0.4500" Y="0.3552" />
                 <PreSize X="0.1333" Y="0.1498" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/gps/img_Bubble.png" Plist="hallcomm/common/gpsUi.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="ScrollView_Text" ActionTag="1252397430" Tag="154" IconVisible="False" LeftMargin="230.0731" RightMargin="132.9269" TopMargin="152.3579" BottomMargin="78.6421" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
+              <AbstractNodeData Name="ScrollView_Text" ActionTag="1252397430" VisibleForFrame="False" Tag="154" IconVisible="False" LeftMargin="230.0731" RightMargin="132.9269" TopMargin="152.3579" BottomMargin="78.6421" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
                 <Size X="237.0000" Y="36.0000" />
                 <Children>
                   <AbstractNodeData Name="Text_Gps" ActionTag="402443199" Tag="155" IconVisible="False" LeftMargin="1.1911" RightMargin="498.8089" TopMargin="19.5252" BottomMargin="16.4748" FontSize="36" LabelText="" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -111,7 +111,7 @@
                 <ColorVector ScaleY="1.0000" />
                 <InnerNodeSize Width="500" Height="36" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_GPSBg" ActionTag="-1169047817" Tag="882" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="547.4000" RightMargin="-249.4000" TopMargin="111.8437" BottomMargin="31.1563" Scale9Enable="True" LeftEage="36" RightEage="99" TopEage="40" BottomEage="40" Scale9OriginX="36" Scale9OriginY="40" Scale9Width="167" Scale9Height="44" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_GPSBg" ActionTag="-1169047817" Tag="882" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="311.0000" RightMargin="-13.0000" TopMargin="111.8437" BottomMargin="31.1563" Scale9Enable="True" LeftEage="36" RightEage="99" TopEage="40" BottomEage="40" Scale9OriginX="36" Scale9OriginY="40" Scale9Width="167" Scale9Height="44" ctype="ImageViewObjectData">
                 <Size X="302.0000" Y="124.0000" />
                 <Children>
                   <AbstractNodeData Name="ScrollView" ActionTag="539371405" Tag="129" IconVisible="False" LeftMargin="16.6051" RightMargin="7.3949" TopMargin="3.9920" BottomMargin="9.0080" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
@@ -242,10 +242,10 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="698.4000" Y="93.1563" />
+                <Position X="462.0000" Y="93.1563" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="1.1640" Y="0.3489" />
+                <PrePosition X="0.7700" Y="0.3489" />
                 <PreSize X="0.5033" Y="0.4644" />
                 <FileData Type="MarkedSubImage" Path="hallcomm/common/gps/img_BubbleFrame.png" Plist="hallcomm/common/gpsUi.plist" />
               </AbstractNodeData>

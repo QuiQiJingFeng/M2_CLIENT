@@ -68,14 +68,6 @@ public class WechatDelegate extends BroadcastReceiver {
     private final static int SHARE_IMAGE  = 0x001;
     private static int CALL_BACK = 0x002;
 
-
-    public synchronized static Object getInstance() {
-        if (null == instance) {
-            instance = new WechatDelegate();
-        }
-        return instance;
-    }
-
     @Override
     public void onReceive(Context context, Intent data) {
         Bundle bundle = data.getExtras();

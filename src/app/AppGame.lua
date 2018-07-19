@@ -79,6 +79,8 @@ function AppGame:loadSpriteFrames()
     lt.ResourceManager:addSpriteFrames("hallcomm/common/CommonPlist0.plist", "hallcomm/common/CommonPlist0.png")
     lt.ResourceManager:addSpriteFrames("hallcomm/common/CommonPlist1.plist", "hallcomm/common/CommonPlist1.png")
 
+    lt.ResourceManager:addSpriteFrames("game/zpcomm/zpcommPlist_1.plist", "game/zpcomm/zpcommPlist_1.png")
+
     --lt.ResourceManager:addSpriteFrames("games/hzmj/game_1.plist", "games/hzmj/game_1.png")
 end
 

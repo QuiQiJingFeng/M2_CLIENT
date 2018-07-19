@@ -40,6 +40,22 @@ function JoinRoomLayer:onClickNumKey(event)
 	if #self._numberArray >= 6 then
 		return
 	end
+	
+	lt.SDK.AppActivity.start(function(msg) --GPS
+        print("FYD=====gps>>LUA ",msg)
+        local result = json.decode(msg)
+        --result.lontitude --经度
+        --result.latitude -- 维度
+        --result.addr --地址
+        local url = string.format("http://%s:%d/operator/update_gps",lt.Constants.HOST,lt.Constants.PORT)
+        local body = lt.DataManager:getAuthData()
+        body.latitude = result.latitude -- 维度
+        body.lontitude = result.lontitude --经度
+        lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
+            dump(recv_msg,"FYD=======>>>>")
+        end)
+    end)
+
 	table.insert(self._numberArray, event:getTag())
 	self:configRoomNum()
 	if #self._numberArray == 6 then

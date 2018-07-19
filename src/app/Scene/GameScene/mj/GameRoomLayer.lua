@@ -121,14 +121,11 @@ function GameRoomLayer:onGameConnectAgain()
 	end
 
 	self._sendRequest = false
-	if not lt.DataManager:isClientConnectAgainPlaying() then--入座界面
-		self._gameSelectPosPanel:againConfigUI()
-	else
-		self._gameSelectPosPanel:configPlayer()
-	end	
+	self._gameSelectPosPanel:againConfigUI()
 
 	self:resetCurrentOutPutPlayerPos()
 	self._gameCompassPanel:initGame()
+
 	self._engine:onClientConnectAgain()
 	self:hideHuCardsTipsMj()
 	lt.DataManager:clearPushAllRoomInfo()
@@ -173,8 +170,8 @@ end
 function GameRoomLayer:checkFzb()
 	local equallyTable = {}
 	local gameInfo = lt.DataManager:getGameRoomInfo()
-	if #gameInfo.players > 1 then
-		local Num = 0
+	local Num = 0
+	if #gameInfo.players > 1 then --ip检测信息整理
 		for i=1,#gameInfo.players do
 			if i < #gameInfo.players then
 				if gameInfo.players[i].user_ip == gameInfo.players[i+1].user_ip then
@@ -199,16 +196,6 @@ function GameRoomLayer:checkFzb()
 						if Numbss ~= 1 then
 							table.insert( equallyTable, gameInfo.players[i+1] )
 						end
-						--[[
-						for k,v in pairs(equallyTable) do
-							print("for玄幻",k,v.user_id,gameInfo.players[i].user_id,gameInfo.players[i+1].user_id)
-							if v.user_id ~= gameInfo.players[i].user_id then
-								table.insert( equallyTable, gameInfo.players[i] )
-							end
-							if v.user_id ~= gameInfo.players[i+1].user_id then
-								table.insert( equallyTable, gameInfo.players[i+1] )
-							end
-						end--]]
 					else						
 						table.insert( equallyTable, gameInfo.players[i] )
 						table.insert( equallyTable, gameInfo.players[i+1] )
@@ -216,23 +203,111 @@ function GameRoomLayer:checkFzb()
 				end
 			end
 		end
-		if Num >= 1 then
-			if self._fzbLayer and not tolua.isnull(self._fzbLayer) then
-				self:closeFzbLayer()
-				self._fzbLayer = nil
-				self._fzbLayer = lt.FzbLayer.new(equallyTable, self)
-		   	  	lt.UILayerManager:addLayer(self._fzbLayer,true)
-			else
-				self._fzbLayer = lt.FzbLayer.new(equallyTable, self)
-		   	  	lt.UILayerManager:addLayer(self._fzbLayer,true)
-	   	  	end
-   	  	end
 	end
+
+	local GPSTable = {}
+	-- latitude = 12; 当前的维度
+    -- lontitude = 13;当前的经度
+    --虚拟数据
+    if #gameInfo.players == 1 then
+	    gameInfo.players[1].latitude  = 34.776416
+	    gameInfo.players[1].lontitude = 113.624636
+	elseif #gameInfo.players == 2 then
+		gameInfo.players[1].latitude  = 34.776416
+	    gameInfo.players[1].lontitude = 113.624636
+	    gameInfo.players[2].latitude  = 34.776488
+	    gameInfo.players[2].lontitude = 113.624655
+	elseif #gameInfo.players == 3 then
+		gameInfo.players[1].latitude  = 34.776416
+	    gameInfo.players[1].lontitude = 113.624636
+	    gameInfo.players[2].latitude  = 34.776488
+	    gameInfo.players[2].lontitude = 113.624655
+	    gameInfo.players[3].latitude  = 34.776455
+	    gameInfo.players[3].lontitude = 113.624644
+	elseif #gameInfo.players == 4 then
+		gameInfo.players[1].latitude  = 34.776416
+	    gameInfo.players[1].lontitude = 113.624636
+	    gameInfo.players[2].latitude  = 34.776417
+	    gameInfo.players[2].lontitude = 113.624637
+	    gameInfo.players[3].latitude  = 34.776455
+	    gameInfo.players[3].lontitude = 113.624644
+	    gameInfo.players[4].latitude  = 34.776419
+	    gameInfo.players[4].lontitude = 113.624638
+	end
+
+	if #gameInfo.players > 1 then --GPS检测信息整理
+		for i=1,#gameInfo.players do
+			for k,v in ipairs(gameInfo.players) do
+			    if v.user_id ~= gameInfo.players[i].user_id then
+				    local bCheck = false
+				    for j = 1,#GPSTable do
+						if (GPSTable[j][1].user_id == gameInfo.players[i].user_id and GPSTable[j][2].user_id == v.user_id ) or (GPSTable[j][2].user_id == gameInfo.players[i].user_id and GPSTable[j][1].user_id == v.user_id) then
+							bCheck = true
+						end
+					end
+					if bCheck == false then
+						local juli = self:getDistance(gameInfo.players[i].latitude,gameInfo.players[i].lontitude,v.latitude,v.lontitude)
+						if juli < 500 then
+							local interimTable = {}
+							table.insert( interimTable, gameInfo.players[i] )
+							table.insert( interimTable, v )
+							table.insert( interimTable, juli)
+							table.insert( GPSTable, interimTable )
+							Num = Num + 1
+						end
+					end
+					
+				end
+				
+			end
+		end
+	end
+
+	if Num >= 1 then
+		if self._fzbLayer and not tolua.isnull(self._fzbLayer) then
+			self:closeFzbLayer()
+			self._fzbLayer = nil
+			self._fzbLayer = lt.FzbLayer.new(equallyTable,GPSTable, self)
+			lt.UILayerManager:addLayer(self._fzbLayer,true)
+		else
+			self._fzbLayer = lt.FzbLayer.new(equallyTable,GPSTable, self)
+		   	lt.UILayerManager:addLayer(self._fzbLayer,true)
+	   	end
+   	end
+
+end
+
+function GameRoomLayer:rad(d)
+    return d * math.pi / 180.0
+end
+--[[
+ * 根据两点的经纬度，计算出其之间的距离（返回单位为km）
+ * @param lat1 纬度1
+ * @param lng1 经度1
+ * @param lat2 纬度2
+ * @param lng2 经度2
+ * @return --]]
+
+function GameRoomLayer:getDistance(lat1,lng1,lat2,lng2)
+    local dd = 6378.137--地球半径
+    local radLat1 = self:rad(lat1)
+    local radLat2 = self:rad(lat2)
+    local a = radLat1 - radLat2
+    local b = self:rad(lng1) - self:rad(lng2)
+    local s = 2 * math.asin(math.sqrt(math.pow(math.sin(a/2),2) + 
+    math.cos(radLat1)*math.cos(radLat2)*math.pow(math.sin(b/2),2)))
+
+    s = s * dd
+    return s * 1000-- 单位米
 end
 
 --设置房间背景颜色
 function GameRoomLayer:setRoomBg(id)
 	self._gameBgPanel:setRoomBg(id)
+end
+
+function GameRoomLayer:configChatVisible(bool)
+	self._gameSetPanel:configChatVisible(bool)
 end
 
 function GameRoomLayer:showHuCardsTipsMj()
@@ -275,21 +350,7 @@ function GameRoomLayer:autoPutOutCard()
 end
 
 function GameRoomLayer:UpdateCardBgColor() 
-	local gameInfo = lt.DataManager:getGameRoomInfo()
-	local playerNum = gameInfo.room_setting.seat_num
-	local currentGameDirections = nil
-	if playerNum == 2 then--二人麻将
-		currentGameDirections = {2, 4}
-	elseif playerNum == 3 then
-		currentGameDirections = {1, 2, 3}
-	elseif playerNum == 4 then
-		currentGameDirections = {1, 2, 3, 4} 
-	end
-	for k,v in pairs(currentGameDirections) do
-		--self._engine:cardBgColor(true)
-		--self._engine:configAllPlayerCards(v, true, true, true, true)
-		self._engine:changeCradColor(v)
-	end
+	self._engine:changeCradColor()
 end
 
 function GameRoomLayer:isVisibleGameActionBtnsPanel() 
@@ -416,14 +477,17 @@ function GameRoomLayer:onDealDown(msg)--发牌
 		tlAct:gotoFrameAndPlay(0, false)
 	    tlAct:clearFrameEventCallFunc() 
 	    tlAct:setFrameEventCallFunc(func)
-	    self._gameSelectPosPanel:HideReady()
 	end
 end
 
 function GameRoomLayer:onPushDrawCard(msg)--通知有人摸牌
 
 	local direction = self:getPlayerDirectionByPos(msg.user_pos)
-	self._engine:getOneHandCardAtDirection(direction, msg.card)--起了一张牌
+	
+	if not msg.in_liangsidayi then
+		self._engine:getOneHandCardAtDirection(direction, msg.card)--起了一张牌
+	end
+
 	self._engine:configAllPlayerCards(direction, false, true, false, false)
 
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
@@ -741,12 +805,13 @@ function GameRoomLayer:showGameResultTotalEndLayer()
 			self._resultTotalLayer = lt.GmaeResultTotalEndLayer.new(self._totalOverDataInfo, self)
 			lt.UILayerManager:addLayer(self._resultTotalLayer,true)
 		end
+		self._resultTotalLayer:setVisible(true)
 		self._resultTotalLayer:show(self._totalOverDataInfo)
 	end
 end
 
 function GameRoomLayer:closeGmaeResultTotalEndLayer()
-	lt.UILayerManager:removeLayer(self._resultTotalLayer)
+	self._resultTotalLayer:setVisible(false)
 end
 
 function GameRoomLayer:onNoticePao(msg)--这里监听是为了通知跑的时候把防作弊给消除掉

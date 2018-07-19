@@ -47,9 +47,9 @@ function AuthenticationLayer:onSure(event)
 				           dump(recv_msg,"FYD====认证结果============>>>>")
 				           local msg = json.decode(recv_msg)
 				           if msg.result == "success" then
-				           		lt.MsgboxLayer:showMsgBox("认证成功", false,function() end, function() end, true, 15)
+				           		lt.MsgboxLayer:showMsgBox("认证成功", true,function() self:Close() end, function() self:Close() end, true, nil)
 				           else
-				           		lt.MsgboxLayer:showMsgBox("认证失败，请正确填写信息!", false,function() end, function()  end, true, 15)
+				           		lt.MsgboxLayer:showMsgBox("认证失败，请正确填写信息!", true,function() end, function()  end, true, 15)
 				           		self._name_input:setText(nil)
 								self._sehnfen_input:setText(nil)
 								self._shouji_input:setText(nil)
@@ -57,13 +57,13 @@ function AuthenticationLayer:onSure(event)
 				           end
 				    end)
 				else
-					lt.MsgboxLayer:showMsgBox("请输入正确的验证码", false,function()   end, function()  end, true, 15)
+					lt.MsgboxLayer:showMsgBox("请输入正确的验证码", true,function()   end, function()  end, true, 15)
 				end
 			else
-				lt.MsgboxLayer:showMsgBox("请输入正确的身份证号", false,function()   end, function()  end, true, 15)
+				lt.MsgboxLayer:showMsgBox("请输入正确的身份证号", true,function()   end, function()  end, true, 15)
 			end
 		else
-			lt.MsgboxLayer:showMsgBox("请输入正确的手机号", false,function()  end, function()  end, true, 15)
+			lt.MsgboxLayer:showMsgBox("请输入正确的手机号", true,function()  end, function()  end, true, 15)
 		end
 	end
 
@@ -77,10 +77,10 @@ function AuthenticationLayer:Result(event)
 	    local body = lt.DataManager:getAuthData()
 	    body.phone = shouji_Text
 	    lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
-	       lt.MsgboxLayer:showMsgBox("发送成功", false,function()  print("===1===")  end, function()  print("===2===") end, true, 15)
+	       lt.MsgboxLayer:showMsgBox("发送成功", true,function()   end, function()  end, true, 15)
 	    end)
 	else
-		lt.MsgboxLayer:showMsgBox("请输入正确的手机号", false,function()  print("===1===")  end, function()  print("===2===") end, true, 15)
+		lt.MsgboxLayer:showMsgBox("请输入正确的手机号", true,function()  end, function() end, true, 15)
 	end
 
 end

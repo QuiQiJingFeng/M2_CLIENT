@@ -421,6 +421,7 @@ function CreateRoomLayer:initTDHRule( ... )
         roundPalel.selectNode = roundPalel:getChildByName("Image_Select")   
         roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
         roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundPalel._textNode2:setVisible(false)
         roundTable[i] = roundPalel
 
         lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
@@ -698,6 +699,7 @@ function CreateRoomLayer:initPLZRule( ... )
         roundPalel.selectNode = roundPalel:getChildByName("Image_Select")   
         roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
         roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundPalel._textNode2:setVisible(false)
         roundTable[i] = roundPalel
 
         lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
@@ -913,6 +915,7 @@ function CreateRoomLayer:initDDZRule( ... )
         roundPalel.selectNode = roundPalel:getChildByName("Image_Select")   
         roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
         roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundPalel._textNode2:setVisible(false)
         roundTable[i] = roundPalel
 
         lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
@@ -1117,6 +1120,7 @@ function CreateRoomLayer:initHZMJRule( ... )
 		roundPalel.selectNode = roundPalel:getChildByName("Image_Select")	
 		roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
         roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundPalel._textNode2:setVisible(false)
 		roundTable[i] = roundPalel
 
 		lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
@@ -1463,6 +1467,7 @@ function CreateRoomLayer:initSQMJRule( ... )
         roundPalel.selectNode = roundPalel:getChildByName("Image_Select")   
         roundPalel._textNode = roundPalel:getChildByName("Text_Pay")
         roundPalel._textNode2 = roundPalel:getChildByName("Text_91")
+        roundPalel._textNode2:setVisible(false)
         roundTable[i] = roundPalel
 
         lt.CommonUtil:addNodeClickEvent(roundPalel, function( ... )
@@ -2004,8 +2009,21 @@ end
 -- end
 
 function CreateRoomLayer:sendCreateRoom( ... )
+    lt.SDK.AppActivity.start(function(msg) --GPS
+        print("FYD=====gps>>LUA ",msg)
+        local result = json.decode(msg)
+        --result.lontitude --经度
+        --result.latitude -- 维度
+        --result.addr --地址
+        local url = string.format("http://%s:%d/operator/update_gps",lt.Constants.HOST,lt.Constants.PORT)
+        local body = lt.DataManager:getAuthData()
+        body.latitude = result.latitude -- 维度
+        body.lontitude = result.lontitude --经度
+        lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
+            dump(recv_msg,"FYD=======>>>>")
+        end)
+    end)
     
-
     lt.CommonUtil:selectServerLogin(self.selectTable.game_type, function(result)
         if result ~= "success" then
             return

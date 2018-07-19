@@ -78,7 +78,7 @@ cCardValue"
 Result
 success
 	auth_fail
-³<
+Õ<
 msg/user.protomsg.user"H
 FastSpakeReq
 user_pos (RuserPos
@@ -91,7 +91,7 @@ fast_index (	R	fastIndex"F
 GPItem
 value (Rvalue
 from (Rfrom
-type (Rtype"¦
+type (Rtype"à
 UserInfo
 user_id (RuserId
 	user_name (	RuserName
@@ -106,7 +106,9 @@ fast_index (	R	fastIndex"F
 disconnect
  (R
 disconnect
-sex (Rsex" 
+sex (Rsex
+latitude (Rlatitude
+	lontitude (R	lontitude" 
 RoomSetting
 	game_type (RgameType
 round (Rround
@@ -196,11 +198,12 @@ expireTime
 randomNums
 	cur_round (RcurRound<
 four_card_list (2.msg.user.FourCardItemRfourCardList
-huicard (Rhuicard"V
+huicard (Rhuicard"}
 PushDrawCard
 user_id (RuserId
 card (Rcard
-user_pos (RuserPos"Œ
+user_pos (RuserPos%
+in_liangsidayi (RinLiangsidayi"Œ
 PushPlayCard
 user_id (RuserId
 user_pos (RuserPos
@@ -209,12 +212,11 @@ randomNums
 
 card_stack (2.msg.user.GPItemR	cardStack 
 userCardNum (RuserCardNum<
-four_card_list (2.msg.user.FourCardItemRfourCardList"–
+four_card_list (2.msg.user.FourCardItemRfourCardList"X
 NoticePlayCard
 user_id (RuserId
 card (Rcard
-user_pos (RuserPos<
-four_card_list (2.msg.user.FourCardItemRfourCardList"j
+user_pos (RuserPos"j
 NoticePengCard
 user_id (RuserId
 user_pos (RuserPos$

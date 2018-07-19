@@ -538,6 +538,7 @@
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/jingfeng/M2/M2_CLIENT/frameworks/runtime-src/proj.android-studio/app/libs/bugly_agent.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/jingfeng/M2/M2_CLIENT/frameworks/runtime-src/proj.android-studio/app/libs/org.apache.http.legacy.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/Users/jingfeng/M2/M2_CLIENT/frameworks/runtime-src/proj.android-studio/app/libs/BaiduLBS_Android.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/jingfeng/M2/M2_CLIENT/frameworks/runtime-src/proj.android-studio/app/libs/libammsdk.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/jingfeng/M2/M2_CLIENT/frameworks/runtime-src/proj.android-studio/app/libs/bugly_crash_release.jar:unspecified@jar" level="project" />
     <orderEntry type="module" module-name="libcocos2dx" />

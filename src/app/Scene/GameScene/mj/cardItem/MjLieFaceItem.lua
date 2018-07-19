@@ -24,7 +24,7 @@ function MjLieFaceItem:ctor(handDirection)
 	self._spriteArrow = self._rootNode:getChildByName("Sprite_Arrow")
 
 	self._tingIcon = self._rootNode:getChildByName("Sprite_TingArrow")
-	self._bg = self._rootNode:getChildByName("Sprite_Back")
+	self._bg = self._rootNode:getChildByName("Sprite_Bg")
 
 	self:showNormal()
 end

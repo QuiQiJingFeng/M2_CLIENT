@@ -186,7 +186,14 @@ function GameSelectPosPanel:onHeadEvent(event)
 	local info = lt.DataManager:getPlayerInfoByPos(pos)
 
 	self._gamePlayerinfoLayer = lt.GamePlayerinfoLayer.new(info)
+	self._gamePlayerinfoLayer:UpdateInfo()
 	lt.UILayerManager:addLayer(self._gamePlayerinfoLayer,true)
+end
+
+function GameSelectPosPanel:onRefreshRoomInfo(msg)
+	if self._gamePlayerinfoLayer then
+		self._gamePlayerinfoLayer:UpdateInfo()
+	end
 end
 
 function GameSelectPosPanel:RestartShow()--游戏结束把听牌标识全false
@@ -244,12 +251,15 @@ function GameSelectPosPanel:againConfigUI()-- 继续游戏 不退程序断线 �
 
 	self:clientConnectShowPao()
 
+	if lt.DataManager:isClientConnectAgainPlaying() then
+		self:HideReady()
+	end
 	-- if lt.DataManager:isClientConnectAgain() then
 	-- 	self:configPlayerScore()
 	-- end
 end
 
-function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果在选座位阶段 会走 initGame
+function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连 会走 initGame
 	for i,v in ipairs(self._currentSitPosArray) do
 		v:setVisible(true)
 	end
@@ -258,6 +268,9 @@ function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连如果
 	self:configPlayerScore()
 
 	self:clientConnectShowPao()
+	if lt.DataManager:isClientConnectAgainPlaying() then
+		self:HideReady()
+	end
 end
 
 function GameSelectPosPanel:clientConnectShowPao()
@@ -302,11 +315,10 @@ function GameSelectPosPanel:configPlayer() --头像
 	local gameRoomInfo = lt.DataManager:getGameRoomInfo()
 	local allRoomInfo = lt.DataManager:getPushAllRoomInfo()
 	
-	if lt.DataManager:isClientConnectAgainPlaying() then--断线重连 牌局中
-		self._allPlayerSitOk = true
+	if lt.DataManager:getMyselfPositionInfo().is_sit then
 		for i,v in ipairs(self._currentSitPosArray) do
 			v:setVisible(false)
-		end
+		end		
 	end
 
     for k,playerLogo in pairs(self._currentPlayerLogArray) do
@@ -339,6 +351,7 @@ function GameSelectPosPanel:configPlayer() --头像
 				end
 
 				if player.user_id ~= lt.DataManager:getPlayerInfo().user_id then--别的玩家的头像
+					
 					if not lt.DataManager:getRePlayState() then--回放
 						sitNode:setVisible(false)
 					else
@@ -434,6 +447,7 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 	    local time = 0.5
 	    if du == 0 then
 	    	time = 0
+	    	self._deleget:configChatVisible(true)
 	    	self:configPlayer()
 	    	if CallFunc then
 				CallFunc()
@@ -447,6 +461,7 @@ function GameSelectPosPanel:configRotation(isClick, CallFunc)
 		
     	local headVisible = function ( )
 			self._selectPositionNode:setVisible(false)
+			self._deleget:configChatVisible(true)
 			self:configPlayer()
 			if CallFunc then
 				CallFunc()
@@ -823,7 +838,7 @@ function GameSelectPosPanel:onPushSitDown(msg) --推送坐下的信息
 				self._allPlayerSitOk = false
 			end
 
-			if not isSendSit then
+			if not isSendSit then--不是自己点击入座导致的
 				self:configPlayer()--初始化玩家
 			end
 		end
@@ -833,7 +848,7 @@ end
 
 function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
 	self._nodePaoLayer:setVisible(false)
-	
+	self:HideReady()
 	--进入游戏之中后 隐藏邀请按钮
 	
 	lt.GameEventManager:post(lt.GameEventManager.EVENT.HIDE_INVITE_BTN)
@@ -926,6 +941,151 @@ function GameSelectPosPanel:onNoticePao(msg)
 	end
 end
 
+function GameSelectPosPanel:createChatNotice(direc)
+	local node = cc.Node:create()
+	local chatPanel = nil
+	if direc == lt.Constants.DIRECTION.NAN then
+		chatPanel = ccui.ImageView:create("game/mjcomm/part/bgPaoPaoLeft.png",1)
+		chatPanel:setAnchorPoint(0,0)
+		node:setPosition(-40, 40)
+	elseif direc == lt.Constants.DIRECTION.DONG then
+		chatPanel = ccui.ImageView:create("game/mjcomm/part/bgPaoPaoRight.png",1)
+		chatPanel:setAnchorPoint(1,0)
+		node:setPosition(40, 40)
+	elseif direc == lt.Constants.DIRECTION.BEI then
+		chatPanel = ccui.ImageView:create("game/mjcomm/part/bgPaoPaoLeft.png",1)
+		chatPanel:setAnchorPoint(0,0)
+		chatPanel:setScaleY(-1)
+		node:setPosition(-40, -40)
+	elseif direc == lt.Constants.DIRECTION.XI then
+		chatPanel = ccui.ImageView:create("game/mjcomm/part/bgPaoPaoRight.png",1)
+		chatPanel:setAnchorPoint(1,0)
+		chatPanel:setScaleX(-1)
+		node:setPosition(-40, 40)
+	end
+	chatPanel:setScale9Enabled(true)
+
+	local textWord = cc.Label:createWithSystemFont("", "Helvetica", 28)
+	local spritExpression = display.newSprite("#game/zpcomm/img/ButtonChatIcon1.png")
+	textWord:setTag(1)
+	spritExpression:setTag(2)
+	chatPanel:setTag(3)
+
+	node:addChild(chatPanel)
+	node:addChild(textWord)
+	node:addChild(spritExpression)
+	return node
+end
+
+function GameSelectPosPanel:onNoticeFastSpake(tObj)
+	dump(tObj, "noticeFastSPake")
+	local idx = self:getPlayerDirectionByPos(tObj.user_pos)
+
+	if not self._currentPlayerLogArray[idx] then
+		return
+	end
+	local contentNode = self._currentPlayerLogArray[idx]:getChildByTag(666)
+	if not contentNode then
+		contentNode = self:createChatNotice(idx)
+		if not contentNode then
+			return
+		end
+		self._currentPlayerLogArray[idx]:addChild(contentNode)
+		contentNode:setTag(666)
+	end
+
+	local imgFace = nil
+	local txtWorld = nil
+	local imgBg = nil
+
+	txtWorld = contentNode:getChildByTag(1)
+	imgFace = contentNode:getChildByTag(2)
+	imgBg = contentNode:getChildByTag(3)
+	if not txtWorld or not imgFace or not imgBg then
+		return
+	end
+
+	local strChat = tObj.fast_index
+	local tDDZFastInfo =  {
+		"快点啊,都等的我花儿都谢了！",
+        "别吵了,专心玩游戏！",
+        "你是妹妹还是哥哥啊？",
+        "大家好,很高兴见到各位！",
+        "又断线了,网络怎么这么差！",
+        "和你合作真是太愉快了。",
+        "下次再玩吧,我要走了。",
+        "不要走,决战到天亮。",
+        "我们交个朋友吧,告诉我你的联系方法。",
+        "各位,真不好意思,我要离开会。",
+        "你的牌打的太好了！",
+        "再见了,我会想念大家的！",
+	}
+    -- 快捷和表情
+    if string.find(strChat,"/00") ~= nil and string.len(strChat) > 3 then
+        local intIndex = tonumber( string.sub(strChat,4) )
+        if intIndex ~= nil then           
+            -- 表情
+            if intIndex > 1 and intIndex < 31 then  
+                intIndex = intIndex - 1    
+                local strSprite = string.format("game/zpcomm/img/ButtonChatIcon%d.png",intIndex) 
+                local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(strSprite)
+                imgFace:setSpriteFrame(frame)
+                imgFace:setVisible(true)
+                txtWorld:setVisible(false)
+
+				imgBg:setCapInsets(cc.size(0, 0, imgFace:getBoundingBox().width + 10, imgFace:getBoundingBox().height + 30))
+
+                imgBg:setContentSize(cc.size(imgFace:getBoundingBox().width + 10, imgFace:getBoundingBox().height + 30))
+
+            -- 快捷
+            elseif intIndex > 101 and intIndex < 102 + #tDDZFastInfo then
+
+                imgFace:setVisible(false) 
+
+                intIndex = intIndex-101   
+
+				txtWorld:setVisible(true) 
+				txtWorld:setString(tDDZFastInfo[intIndex])
+				imgBg:setCapInsets(cc.size(0, 0, txtWorld:getContentSize().width+30, txtWorld:getContentSize().height + 30))
+				imgBg:setContentSize(cc.size(txtWorld:getContentSize().width+30, txtWorld:getContentSize().height + 30))
+                --播放说话音效
+                local iChatStrIdx = -1
+                for var = 1, #tDDZFastInfo do
+                    if var == intIndex then
+                        iChatStrIdx = var - 1
+                        break
+                    end
+                end
+                lt.AudioManager:playFastChatSound(iChatStrIdx, sex)
+            end
+            local width = imgBg:getContentSize().width / 2
+            local height = imgBg:getContentSize().height / 2 + 8
+			if idx == lt.Constants.DIRECTION.NAN then
+			elseif idx == lt.Constants.DIRECTION.DONG then
+				width = -width
+			elseif idx == lt.Constants.DIRECTION.BEI then
+				height = -height
+			elseif idx == lt.Constants.DIRECTION.XI then
+
+			end
+            txtWorld:setPosition(width, height)
+            imgFace:setPosition(width, height)
+            contentNode:setVisible(true)
+
+            local function funHideChat()
+                contentNode:setVisible(false)
+                txtWorld:setVisible(false)
+                imgFace:setVisible(false)
+            end
+            if self["m_chatPaoPaoListener_"..idx] then
+            	lt.scheduler.unscheduleGlobal(self["m_chatPaoPaoListener_"..idx])
+            end
+            
+            self["m_chatPaoPaoListener_"..idx] = lt.scheduler.performWithDelayGlobal(funHideChat, 3)
+        end
+    end
+end
+
 function GameSelectPosPanel:onEnter()   
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.DEAL_DOWN, handler(self, self.onDealDown), "GameSelectPosPanel:onDealDown")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.SIT_DOWN, handler(self, self.onSitDownResponse), "GameSelectPosPanel:onSitDownResponse")
@@ -936,6 +1096,8 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, handler(self, self.onRefreshGameOver), "GameSelectPosPanel:onRefreshGameOver")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, handler(self, self.onClientConnectAgain), "GameSelectPosPanel:onClientConnectAgain")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, handler(self, self.onNoticePao), "GameSelectPosPanel.onNoticePao")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_FAST_SPAKE, handler(self, self.onNoticeFastSpake), "GameSelectPosPanel:onNoticeFastSpake")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.onRefreshRoomInfo), "GameSelectPosPanel.onRefreshRoomInfo")
 end
 
 function GameSelectPosPanel:onExit()
@@ -948,6 +1110,8 @@ function GameSelectPosPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.Game_OVER_REFRESH, "GameSelectPosPanel:onRefreshGameOver")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN, "GameSelectPosPanel:onClientConnectAgain")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PAO, "GameSelectPosPanel.onNoticePao")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_FAST_SPAKE, "GameSelectPosPanel:onNoticeFastSpake")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "GameSelectPosPanel.onRefreshRoomInfo")
 end
 
 return GameSelectPosPanel
