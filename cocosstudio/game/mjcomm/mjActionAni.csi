@@ -51,6 +51,7 @@
       <FilePathData Path="game/mjcomm/cardBgGreen/mjStandFace.png" />
       <FilePathData Path="game/mjcomm/cardBgYellow/mjStandFace.png" />
       <FilePathData Path="game/mjcomm/cardBgBlue/mjStandFace.png" />
+      <FilePathData Path="game/mjcomm/animation/aniWord/wordBh.png" />
     </ImageFiles>
     <MaxSize Width="1024" Height="2048" />
   </Content>

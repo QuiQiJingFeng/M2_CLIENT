@@ -989,8 +989,13 @@ function MjEngine:getOneOutCardAtDirection(direction, value, isSpecialCard)
 	end
 end
 
+function MjEngine:setTingAutoOutCardValue(direction, value)--自己的
+	if direction == lt.Constants.DIRECTION.NAN then
+		self._tingOutCardValue = value
+	end
+end
+
 function MjEngine:getOneHandCardAtDirection(direction, value)--起了一张牌
-	self._tingOutCardValue = value
 	value = value or 99
 	self._allPlayerStandHandCardsValue[direction] = self._allPlayerStandHandCardsValue[direction] or {}
 	table.insert(self._allPlayerStandHandCardsValue[direction], value)
@@ -1377,6 +1382,7 @@ function MjEngine:autoPutOutCard()--自动出牌
 		local function func()
 		   local statee = 1
 		   self._clickCardCallback(self._tingOutCardValue,statee)			
+			self._tingOutCardValue = nil
 		end
 		local delay = cc.DelayTime:create(1)
 		local func1 = cc.CallFunc:create(func)
@@ -2185,7 +2191,8 @@ function MjEngine:onClientConnectAgain()--  断线重连
         tObjPeng = nil,
         tObjGang = nil,
         tObjHu = nil,--抢杠胡
-        tObjTing = nil
+        tObjTing = nil,
+        tObjYingKou = nil,
     }
 
 	local state = 0 --  1摸牌出牌  2 碰牌出牌 
@@ -2217,8 +2224,8 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	   tObjCpghObj = self:checkMyHandButtonActionStatu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], state, tObjCpghObj)
 	end
 
+	local operatorList = {}
 	if allRoomInfo.operators then
-		local operatorList = {}
 		for i,operator in ipairs(allRoomInfo.operators) do
 			if operator == "CHI" or  operator == "PENG" or operator == "GANG" or operator == "HU" then
 				table.insert(operatorList, operator)
@@ -2243,8 +2250,9 @@ function MjEngine:onClientConnectAgain()--  断线重连
         			tObjCpghObj.tObjGang = tObjCpghObj.tObjGang or {}
         			table.insert(tObjCpghObj.tObjGang, allRoomInfo.put_card)
         		end
-        	elseif state == "HU" then--抢杠胡
+        	elseif state == "HU" then--抢杠胡 点炮胡
         		tObjCpghObj.tObjHu = {}
+        		tObjCpghObj.tObjYingKou = {}
         	end
         end
 	end
@@ -2263,7 +2271,11 @@ function MjEngine:onClientConnectAgain()--  断线重连
     --显示吃碰杠胡控件
     self._deleget:viewHideActPanelAndMenu()
     self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
-    self._deleget:viewActionButtons(tObjCpghObj, true)
+    local isPassSendMsg = false
+    if #operatorList > 0 then
+    	isPassSendMsg = true
+    end
+    self._deleget:viewActionButtons(tObjCpghObj, isPassSendMsg)
     
 	for i,direction in ipairs(self._currentGameDirections) do
 		self:configAllPlayerCards(direction, true, true, true, true)

@@ -1057,7 +1057,7 @@ function GameSelectPosPanel:onNoticeFastSpake(tObj)
                         break
                     end
                 end
-                lt.AudioManager:playFastChatSound(iChatStrIdx, sex)
+                lt.AudioManager:playFastChatSound(iChatStrIdx, tObj.user_pos)
             end
             local width = imgBg:getContentSize().width / 2
             local height = imgBg:getContentSize().height / 2 + 8

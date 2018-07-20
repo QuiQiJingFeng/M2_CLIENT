@@ -53,6 +53,8 @@ GUO     过]]--
 
     NOTICE_SPECIAL_EVENT = "notice_special_event",  --通知有人吃椪杠胡
     PUSH_PLAYER_OPERATOR_STATE = "push_player_operator_state",--通知客户端当前 碰/杠 状态
+    NOTICE_YING_KOU = "notice_ying_kou",
+    PUSH_PLAYER_PAO = "push_player_pao",
 
     NOTICE_GAME_OVER = "notice_game_over",--通知客户端 本局结束 带结算
     NOTICE_TOTAL_SATTLE  = "notice_total_sattle",--刷新总结算

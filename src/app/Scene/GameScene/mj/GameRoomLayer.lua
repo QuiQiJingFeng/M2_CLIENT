@@ -493,10 +493,11 @@ function GameRoomLayer:onPushDrawCard(msg)--通知有人摸牌
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
 
 		--检测自己的手牌情况  --吃椪杠胡
-		--self:checkMyHandStatu()
 		self._ischeckMyHandStatu = true
 
 		self:refreshHuCardNum(msg.card, 1)
+
+		self._engine:setTingAutoOutCardValue(direction, msg.card)
 	end
 end
 
@@ -587,8 +588,8 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 				-- if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
 				-- 	self._engine:goOutOneHandSpecialCardAtDirection(direction, value)
 				-- end
-				lt.AudioManager:playSpecialEventSound(8)
-				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
+				lt.AudioManager:playSpecialEventSound(8, msg.user_pos)
+				--lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				break
 			end
 		end
@@ -603,14 +604,14 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 						card = msg.card,
 					}
 					specialRefresh = true
-					lt.AudioManager:playSpecialEventSound(9)
+					lt.AudioManager:playSpecialEventSound(9, msg.user_pos)
 					lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				end
 			end
 		end
  
-		if not specialRefresh then
-			lt.AudioManager:playMjCardSound(value, 0)
+		if not specialRefresh and value ~= 99 then
+			lt.AudioManager:playMjCardSound(value, msg.user_pos)
 		end
 	end
 
@@ -655,7 +656,8 @@ function GameRoomLayer:onPushPlayerOperatorState(msg)--通知客户端当前 碰
             tObjChi = nil,
             tObjPeng = nil,
             tObjGang = nil,
-            tObjHu = nil--抢杠胡
+            tObjHu = nil,--抢杠胡
+            tObjYingKou = false
         }
         if msg.operator_list then
 	        for k,state in pairs(msg.operator_list) do
@@ -669,9 +671,9 @@ function GameRoomLayer:onPushPlayerOperatorState(msg)--通知客户端当前 碰
 	        			tObjCpghObj.tObjGang = {}
 	        			table.insert(tObjCpghObj.tObjGang, msg.card)
 	        		end
-	        	elseif state == "HU" then--抢杠胡
+	        	elseif state == "HU" then--抢杠胡 点炮胡
 	        		tObjCpghObj.tObjHu = {}
-
+	        		tObjCpghObj.tObjYingKou = true
 	        	end
 	        end
         end
@@ -703,7 +705,7 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	end
 	self._engine:noticeSpecialEvent(msg)
 
-	lt.AudioManager:playSpecialEventSound(msg.item["type"])
+	lt.AudioManager:playSpecialEventSound(msg.item["type"], msg.user_pos)
 end
 
 function GameRoomLayer:ShowTingGang(direction)
