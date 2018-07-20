@@ -34,7 +34,6 @@ local GameConf = require("app.Common.GameConf")
 function CreateRoomLayer:ctor()
 
 	CreateRoomLayer.super.ctor(self)
-
 	self.iBaseScore = {1, 2, 3, 5, 8, 10, 20, 30, 50, 100}
 	self.g_tEnterData = {}
 	local layer = self
@@ -256,7 +255,7 @@ function CreateRoomLayer:onjoinRoomResponse( tObj )
         -- end
         self:onClose()
     else
-        lt.PromptPanel:showPrompt(lt.Constants.PROMPT[tObj.result])
+        lt.PromptPanel:showPrompt(lt.LanguageString:getString(tObj.result))
     end
 end
 
