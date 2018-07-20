@@ -472,7 +472,7 @@ function GameRoomLayer:onDealDown(msg)--发牌
 
 			end
 		end
-		
+		lt.AudioManager:playSound("game/mjcomm/sound/mj/", "zhise")
 	 	action_node:runAction(tlAct)
 		tlAct:gotoFrameAndPlay(0, false)
 	    tlAct:clearFrameEventCallFunc() 

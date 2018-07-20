@@ -2,7 +2,7 @@
   <PropertyGroup Name="Ani_shaizi" Type="Node" ID="a21d72b4-e276-46c7-90d9-f481ee5e5f83" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="45" Speed="1.0000">
+      <Animation Duration="60" Speed="1.0000">
         <Timeline ActionTag="1862061015" Property="FileData">
           <TextureFrame FrameIndex="0" Tween="False">
             <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_1.png" Plist="game/mjcomm/mjActionAni.plist" />
@@ -31,6 +31,48 @@
           <TextureFrame FrameIndex="40" Tween="False">
             <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_9.png" Plist="game/mjcomm/mjActionAni.plist" />
           </TextureFrame>
+          <TextureFrame FrameIndex="45" Tween="False">
+            <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_8.png" Plist="game/mjcomm/mjActionAni.plist" />
+          </TextureFrame>
+          <TextureFrame FrameIndex="50" Tween="False">
+            <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_7.png" Plist="game/mjcomm/mjActionAni.plist" />
+          </TextureFrame>
+          <TextureFrame FrameIndex="55" Tween="False">
+            <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_6.png" Plist="game/mjcomm/mjActionAni.plist" />
+          </TextureFrame>
+        </Timeline>
+        <Timeline ActionTag="1862061015" Property="Position">
+          <PointFrame FrameIndex="45" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="50" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="55" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="1862061015" Property="Scale">
+          <ScaleFrame FrameIndex="45" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="50" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="55" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="1862061015" Property="RotationSkew">
+          <ScaleFrame FrameIndex="45" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="50" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="55" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
         </Timeline>
         <Timeline ActionTag="914479717" Property="FileData">
           <TextureFrame FrameIndex="5" Tween="False">
@@ -60,12 +102,54 @@
           <TextureFrame FrameIndex="45" Tween="False">
             <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_9.png" Plist="game/mjcomm/mjActionAni.plist" />
           </TextureFrame>
+          <TextureFrame FrameIndex="50" Tween="False">
+            <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_8.png" Plist="game/mjcomm/mjActionAni.plist" />
+          </TextureFrame>
+          <TextureFrame FrameIndex="55" Tween="False">
+            <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_7.png" Plist="game/mjcomm/mjActionAni.plist" />
+          </TextureFrame>
+          <TextureFrame FrameIndex="60" Tween="False">
+            <TextureFile Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_6.png" Plist="game/mjcomm/mjActionAni.plist" />
+          </TextureFrame>
+        </Timeline>
+        <Timeline ActionTag="914479717" Property="Position">
+          <PointFrame FrameIndex="50" X="45.6915" Y="72.3622">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="55" X="45.6915" Y="72.3622">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="60" X="45.6915" Y="72.3622">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="914479717" Property="Scale">
+          <ScaleFrame FrameIndex="50" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="55" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="60" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="914479717" Property="RotationSkew">
+          <ScaleFrame FrameIndex="50" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="55" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="60" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
         </Timeline>
       </Animation>
       <ObjectData Name="Node" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Sprite_2" ActionTag="1862061015" Tag="3" IconVisible="False" LeftMargin="-23.0000" RightMargin="-23.0000" TopMargin="-23.0000" BottomMargin="-23.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_2" ActionTag="1862061015" Tag="3" IconVisible="False" LeftMargin="-43.0000" RightMargin="-43.0000" TopMargin="-70.0000" BottomMargin="-70.0000" ctype="SpriteObjectData">
             <Size X="86.0000" Y="140.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
@@ -73,7 +157,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_7.png" Plist="game/mjcomm/mjActionAni.plist" />
+            <FileData Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_6.png" Plist="game/mjcomm/mjActionAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_2_0" ActionTag="914479717" Tag="4" IconVisible="False" LeftMargin="2.6915" RightMargin="-88.6915" TopMargin="-142.3622" BottomMargin="2.3622" ctype="SpriteObjectData">
@@ -84,7 +168,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_6.png" Plist="game/mjcomm/mjActionAni.plist" />
+            <FileData Type="MarkedSubImage" Path="game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_5.png" Plist="game/mjcomm/mjActionAni.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>
