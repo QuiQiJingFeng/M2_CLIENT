@@ -25,7 +25,8 @@ function GameActionBtnsPanel:ctor(deleget)
     self.m_objCommonUi.m_btnHu = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Hu")
     self.m_objCommonUi.m_btnPass = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Pass")
     self.m_objCommonUi.m_btnTing = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_Ting")
-    
+    self.m_objCommonUi.m_btnYingKou = self.m_objCommonUi.m_nodeActionBtns:getChildByName("Button_YingKou")
+
     self.m_objCommonUi.m_nodeCardsMenu = self:getChildByName("Node_CardsMenu") --吃碰杠胡二级菜单
     self.m_objCommonUi.m_btnMenuPass = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Button_Pass")
     self.m_objCommonUi.m_imgCardsMenuBg = self.m_objCommonUi.m_nodeCardsMenu:getChildByName("Image_Bg")
@@ -55,6 +56,10 @@ function GameActionBtnsPanel:ctor(deleget)
 
     if self.m_objCommonUi.m_btnMenuPass then
         table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnMenuPass)
+    end
+
+    if self.m_objCommonUi.m_btnYingKou then
+        table.insert(self.m_objCommonUi.m_tArrActionBtn, self.m_objCommonUi.m_btnYingKou)
     end
 
     local tArrNodeActionBtnsChildren = self.m_objCommonUi.m_nodeActionBtns:getChildren()
@@ -181,6 +186,10 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
             self:onHuAction(pSender.tObjData, 1)
             self:viewHideActPanelAndMenu()
         end
+    elseif pSender == self.m_objCommonUi.m_btnYingKou then
+
+        self:onHuAction(pSender.tObjData, 1)
+        self:viewHideActPanelAndMenu()
 
     elseif pSender == self.m_objCommonUi.m_btnPass then
         if pSender.isPassSendMsg then
@@ -196,7 +205,7 @@ function GameActionBtnsPanel:onClickCpghEvent(pSender)
         end
         local isBaoTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
 
-        if isBaoTing then
+        if isBaoTing then-- 没有 点炮胡 抢杠胡的过
             self._deleget:autoPutOutCard()
         end
 
@@ -267,6 +276,12 @@ function GameActionBtnsPanel:onHuAction(tObj, index)
     lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
 end
 
+--发送硬扣按钮的请求
+function GameActionBtnsPanel:onYingKouAction(tObj, index)
+    local arg = {command = "YING_KOU"}
+    lt.NetWork:sendTo(lt.GameEventManager.EVENT.GAME_CMD, arg)
+end
+
 --发送过按钮的请求
 function GameActionBtnsPanel:onPassAction()
     local arg = {command = "GUO"}
@@ -322,12 +337,21 @@ function GameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
         local isHu = tObjCpghObj.tObjHu ~= nil
         self:setBtnEnabled(self.m_objCommonUi.m_btnHu, isHu)
     end
+
+    if self.m_objCommonUi.m_btnYingKou then
+        local isYingKou = tObjCpghObj.tObjYingKou ~= nil
+        self:setBtnEnabled(self.m_objCommonUi.m_btnYingKou, isYingKou)
+    end
+
     local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
+    local gameType = lt.DataManager:getGameRoomSetInfo().game_type 
+
     if tObjCpghObj.tObjHu and isTing then
         self:setBtnEnabled(self.m_objCommonUi.m_btnPass,false) --推倒胡胡牌不能过
     else
         self:setBtnEnabled(self.m_objCommonUi.m_btnPass, true)
-    end
+    end        
+
     self.m_objCommonUi.m_btnPass.isPassSendMsg = isPassSendMsg --是否发请求
 
     local count = 0
@@ -381,6 +405,10 @@ function GameActionBtnsPanel:resetActionButtonsData(tObjCpghObj)
     end
     if self.m_objCommonUi.m_btnHu then
         self.m_objCommonUi.m_btnHu.tObjData = tObjCpghObj.tObjHu
+    end
+
+    if self.m_objCommonUi.m_btnYingKou then
+        self.m_objCommonUi.m_btnYingKou.tObjData = tObjCpghObj.tObjYingKou
     end
 
     -- --判断是不是自摸胡，按钮显示不一样
@@ -748,16 +776,54 @@ function GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent(msg)
     end    
 end
 
+function GameActionBtnsPanel:onNoticeYingKou(msg)  
+
+    if not msg.user_pos or not msg.card then
+        return
+    end
+    local direction = self._deleget:getPlayerDirectionByPos(msg.user_pos) 
+    if not direction or not self._specialEventNode[direction] then
+        return
+    end
+--user_pos   card
+
+    self._specialEventNode[direction]:setVisible(true)
+    local light = self._specialEventNode[direction]:getChildByName("Sprite_Light")
+    local word = self._specialEventNode[direction]:getChildByName("Sprite_Word")
+
+    local path = "game/mjcomm/animation/aniWord/wordMao.png"
+
+    word:setSpriteFrame(path)
+    
+    for i=1,12 do
+
+        local delay = cc.DelayTime:create(0.1 * i)
+
+        local func1 = cc.CallFunc:create(function()
+            local framePath = "game/mjcomm/animation/aniActionLight/aniAction_"..i..".png"
+            light:setSpriteFrame(framePath)
+            if i == 12 then
+                self._specialEventNode[direction]:setVisible(false)
+            end
+        end)
+        local sequence = cc.Sequence:create(delay, func1)
+        light:runAction(sequence)
+    end    
+end
+
 function GameActionBtnsPanel:onEnter()   
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, handler(self, self.onNoticeSpecialEvent), "GameActionBtnsPanel.onNoticeSpecialEvent")
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, handler(self, self.onNoticeSpecialBuFlowerEvent), "GameActionBtnsPanel.onNoticeSpecialBuFlowerEvent")
+
+    lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_YING_KOU, handler(self, self.onNoticeYingKou), "GameActionBtnsPanel.onNoticeYingKou")
 end
 
 function GameActionBtnsPanel:onExit()
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_EVENT, "GameActionBtnsPanel:onNoticeSpecialEvent")
-
     lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, "GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent")
+    lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_YING_KOU, "GameActionBtnsPanel:onNoticeYingKou")
+
 end
 
 return GameActionBtnsPanel

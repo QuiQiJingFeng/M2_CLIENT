@@ -387,8 +387,11 @@ function AudioManager:buttonClicked()
 	self:playSound("game/mjcomm/sound/mj/", "btn")
 end
 
-function AudioManager:playMjCardSound(value, sex)--0 女 1 男
-
+function AudioManager:playMjCardSound(value, pos)--0 女 1 男
+	local sex = 0
+	if lt.DataManager:getPlayerInfoByPos(pos) then
+		sex = lt.DataManager:getPlayerInfoByPos(pos).sex
+	end
 	sex = sex or 0
 	local path = "game/mjcomm/sound/mj/"
 	local soundStr = "m"
@@ -400,7 +403,12 @@ function AudioManager:playMjCardSound(value, sex)--0 女 1 男
 	self:playSound(path, soundStr)
 end
 
-function AudioManager:playSpecialEventSound(type, sex)--0 女 1 男
+function AudioManager:playSpecialEventSound(type, pos)--0 女 1 男
+	
+	local sex = 0
+	if lt.DataManager:getPlayerInfoByPos(pos) then
+		sex = lt.DataManager:getPlayerInfoByPos(pos).sex
+	end
 	sex = sex or 0
 	--<1 吃 2 碰 3 碰杠 4明杠 5 暗杠 6 胡 7听>
 	local path = "game/mjcomm/sound/mj/"
@@ -424,13 +432,17 @@ function AudioManager:playSpecialEventSound(type, sex)--0 女 1 男
 	elseif type == 8 then
 		soundStr = soundStr.."buhua"
 	elseif type == 9 then
-		soundStr = soundStr.."huanpai"
+		soundStr = soundStr.."piao"
 	end
 	self:playSound(path, soundStr)
 end
 
-function AudioManager:playFastChatSound(iChatStrIdx, sex)
+function AudioManager:playFastChatSound(iChatStrIdx, pos)
 
+	local sex = 0
+	if lt.DataManager:getPlayerInfoByPos(pos) then
+		sex = lt.DataManager:getPlayerInfoByPos(pos).sex
+	end
 	sex = sex or 0
 	local path = "game/mjcomm/sound/mj/"
 	local soundStr = "m"
