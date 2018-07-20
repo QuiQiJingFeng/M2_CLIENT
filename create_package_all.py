@@ -4,7 +4,7 @@ import os
 import json
 import sys
 from Utils import Utils
-
+import shutil
 VERSION = "1.4.0"
 
 URL = "http://lsjgame.oss-cn-hongkong.aliyuncs.com/HotUpdate/"
@@ -35,7 +35,9 @@ XXTEA_SINGIN = 'gclR3cu9'
 FILETERS_LIST = ['*.png','*.csb','*.plist','*.json','*.pb','*.atlas','*.lua','*.ogg','*.mp3','*.ttf']
 RB_MODE_LIST = ['.png','.csb','.pb','.mp3','.ogg']
 
-os.system('rm -r package;mkdir package;')
+shutil.rmtree("package")    #递归删除文件夹
+
+os.system('mkdir package;')
 print("加密开始")
 # 加密lua文件 并将加密后的文件写入package目录
 Utils.encryptorDecryptFile(True,'src','package',XXTEA_KEY,XXTEA_SINGIN,FILETERS_LIST)
@@ -75,4 +77,5 @@ with open("version.manifest", 'w') as f:
 with open("project.manifest", 'w') as f:
     json.dump(ASSETS_INFO, f, indent=4, sort_keys=True)
 
-os.system('rm -r res;rm -r src;')
+shutil.rmtree("src")    #递归删除文件夹
+shutil.rmtree("res")    #递归删除文件夹

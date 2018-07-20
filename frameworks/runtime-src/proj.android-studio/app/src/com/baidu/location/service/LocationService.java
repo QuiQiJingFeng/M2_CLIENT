@@ -1,4 +1,4 @@
-package com.common.service;
+package com.baidu.location.service;
 
 import android.content.Context;
 
