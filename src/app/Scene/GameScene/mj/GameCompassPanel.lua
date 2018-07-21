@@ -291,6 +291,18 @@ function GameCompassPanel:onUpdate(delt)
 
 	end	
 
+	if self.UPDATETIME - self._time <= 5 then
+		local gameState = lt.DataManager:getGameState()
+		if gameState == lt.Constants.ROOM_STATE.GAME_PREPARE then
+			local meSelfInfo = lt.DataManager:getMyselfPositionInfo()
+			if meSelfInfo and not meSelfInfo.is_sit then
+				lt.AudioManager:playSound("game/mjcomm/sound/mj/", "clock")
+			end
+		elseif gameState == lt.Constants.ROOM_STATE.GAME_PLAYING then
+			lt.AudioManager:playSound("game/mjcomm/sound/mj/", "clock")
+		end
+	end
+
 	self._timeClock:setString(self.UPDATETIME - self._time)
 	self._time = self._time + delt
 

@@ -243,12 +243,13 @@ function MjEngine:getShowCardsLayer()
 end
 
 function MjEngine:angainConfigUi()--继续游戏
+	lt.DataManager:setGameState(lt.Constants.ROOM_STATE.GAME_PREPARE)
 	self:clearUiData()
 	self._showCardsLayer:setVisible(false)
 end
 
 function MjEngine:sendCards(msg, pos)--发牌 13张
-
+	lt.DataManager:setGameState(lt.Constants.ROOM_STATE.GAME_PLAYING)
 	local direction = lt.DataManager:getPlayerDirectionByPos(pos)
 
 	self._showCardsLayer:setVisible(true)

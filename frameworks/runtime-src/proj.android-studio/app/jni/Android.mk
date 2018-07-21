@@ -26,7 +26,7 @@ endef
  
 # 遍历Classes目录
 ALLFILES = $(call walk, $(LOCAL_PATH)/../../../Classes)
- 
+
 FILE_LIST := hellolua/main.cpp
 # 从所有文件中提取出所有.cpp和.c文件文件
 FILE_LIST += $(filter %.cpp %.c, $(ALLFILES))
@@ -35,8 +35,16 @@ LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)
                    
 FILE_INCLUDES := $(shell find $(LOCAL_PATH)/../../../Classes -type d)
 
-LOCAL_C_INCLUDES := $(FILE_INCLUDES)   
-
+#LOCAL_C_INCLUDES := $(FILE_INCLUDES)
+LOCAL_C_INCLUDES := \
+$(LOCAL_PATH)/../../../Classes \
+$(LOCAL_PATH)/../../../Classes/bit \
+$(LOCAL_PATH)/../../../Classes/crypt \
+$(LOCAL_PATH)/../../../Classes/md5 \
+$(LOCAL_PATH)/../../../Classes/pbc \
+$(LOCAL_PATH)/../../../Classes/lame \
+$(LOCAL_PATH)/../../../Classes/common \
+$(LOCAL_PATH)/../../../Classes/bugly
 
 
 
