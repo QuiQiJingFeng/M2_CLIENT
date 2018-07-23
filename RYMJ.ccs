@@ -564,6 +564,7 @@
                 <Image Name="aniTing_9.png" />
               </Folder>
               <Folder Name="aniWord">
+                <Image Name="wordBh.png" />
                 <Image Name="wordChi.png" />
                 <Image Name="wordGang.png" />
                 <Image Name="wordHu.png" />

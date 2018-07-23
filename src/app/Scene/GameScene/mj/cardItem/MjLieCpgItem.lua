@@ -139,7 +139,7 @@ function MjLieCpgItem:setCardBgColor(color,direction)--设置出的牌背面颜�
 			--设置暗杠麻将背景
 			local bg = self._rootNode:getChildByName("MJ_Cpg_"..i):getChildByName("Sprite_Back")
 			if direction == lt.Constants.DIRECTION.NAN then
-				bg:setSpriteFrame("game/mjcomm/"..color.."/mjStandBack.png")
+				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieVerticalBack.png")
 			elseif direction == lt.Constants.DIRECTION.XI then
 				bg:setSpriteFrame("game/mjcomm/"..color.."/mjLieHorizontalBack.png")
 			elseif direction == lt.Constants.DIRECTION.DONG then --

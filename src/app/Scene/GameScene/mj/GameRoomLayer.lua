@@ -472,7 +472,7 @@ function GameRoomLayer:onDealDown(msg)--发牌
 
 			end
 		end
-		
+		lt.AudioManager:playSound("game/mjcomm/sound/mj/", "zhise")
 	 	action_node:runAction(tlAct)
 		tlAct:gotoFrameAndPlay(0, false)
 	    tlAct:clearFrameEventCallFunc() 
@@ -493,10 +493,11 @@ function GameRoomLayer:onPushDrawCard(msg)--通知有人摸牌
 	if lt.DataManager:getMyselfPositionInfo().user_pos == msg.user_pos then 
 
 		--检测自己的手牌情况  --吃椪杠胡
-		--self:checkMyHandStatu()
 		self._ischeckMyHandStatu = true
 
 		self:refreshHuCardNum(msg.card, 1)
+
+		self._engine:setTingAutoOutCardValue(direction, msg.card)
 	end
 end
 
@@ -587,8 +588,8 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 				-- if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
 				-- 	self._engine:goOutOneHandSpecialCardAtDirection(direction, value)
 				-- end
-				lt.AudioManager:playSpecialEventSound(8)
-				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
+				lt.AudioManager:playSpecialEventSound(8, msg.user_pos)
+				--lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				break
 			end
 		end
@@ -603,31 +604,39 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 						card = msg.card,
 					}
 					specialRefresh = true
-					lt.AudioManager:playSpecialEventSound(9)
+					lt.AudioManager:playSpecialEventSound(9, msg.user_pos)
 					lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				end
 			end
 		end
  
-		if not specialRefresh then
-			lt.AudioManager:playMjCardSound(value, 0)
+		if not specialRefresh and value ~= 99 then
+			lt.AudioManager:playMjCardSound(value, msg.user_pos)
 		end
 	end
 
 	--把这张牌加到out  先通知noticeSpecial 再 NoticePlayCard
-	self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
-	
-	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
-		self:refreshHuCardNum(msg.card, 2)
+	if not lt.DataManager:getRePlayState() then
+		self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
+	else
+		if value ~= 99 then
+			self._engine:getOneOutCardAtDirection(direction, value, specialRefresh)
+		end
 	end
 
 	--其他玩家从手牌中去掉  （自己的在点击牌出牌的时候处理）
 	if lt.DataManager:getRePlayState() then
-		self._engine:goOutOneHandCardAtDirection(direction, value)
+		if value ~= 99 then--报听出牌会是99  在noticeSpecial里处理
+			self._engine:goOutOneHandCardAtDirection(direction, value)
+		end
 	else
 		if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
 			self._engine:goOutOneHandCardAtDirection(direction, value)
 		end
+	end
+
+	if msg.user_pos ~= lt.DataManager:getMyselfPositionInfo().user_pos then
+		self:refreshHuCardNum(msg.card, 2)
 	end
 
 	self._engine:configAllPlayerCards(direction, false, true, true, specialRefresh)
@@ -647,7 +656,8 @@ function GameRoomLayer:onPushPlayerOperatorState(msg)--通知客户端当前 碰
             tObjChi = nil,
             tObjPeng = nil,
             tObjGang = nil,
-            tObjHu = nil--抢杠胡
+            tObjHu = nil,--抢杠胡
+            tObjYingKou = false
         }
         if msg.operator_list then
 	        for k,state in pairs(msg.operator_list) do
@@ -661,9 +671,9 @@ function GameRoomLayer:onPushPlayerOperatorState(msg)--通知客户端当前 碰
 	        			tObjCpghObj.tObjGang = {}
 	        			table.insert(tObjCpghObj.tObjGang, msg.card)
 	        		end
-	        	elseif state == "HU" then--抢杠胡
+	        	elseif state == "HU" then--抢杠胡 点炮胡
 	        		tObjCpghObj.tObjHu = {}
-
+	        		tObjCpghObj.tObjYingKou = true
 	        	end
 	        end
         end
@@ -695,7 +705,7 @@ function GameRoomLayer:onNoticeSpecialEvent(msg)--通知有人吃椪杠胡。。
 	end
 	self._engine:noticeSpecialEvent(msg)
 
-	lt.AudioManager:playSpecialEventSound(msg.item["type"])
+	lt.AudioManager:playSpecialEventSound(msg.item["type"], msg.user_pos)
 end
 
 function GameRoomLayer:ShowTingGang(direction)

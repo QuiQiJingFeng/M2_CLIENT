@@ -82,8 +82,22 @@ function DataManager:onPushAllRoomInfo(msg)
         self._getTingPlayerInfo = msg.ting_list
     end 
 
+    if msg.card_list then
+        self:setGameState(lt.Constants.ROOM_STATE.GAME_PLAYING)
+    else
+        self:setGameState(lt.Constants.ROOM_STATE.GAME_PREPARE)
+    end 
+
     self._pushAllRoomInfo = clone(msg) 
     lt.GameEventManager:post(lt.GameEventManager.EVENT.CLIENT_CONNECT_AGAIN)
+end
+
+function DataManager:setGameState(state)
+    self._curGameState = state
+end
+
+function DataManager:getGameState()
+    return self._curGameState or lt.Constants.ROOM_STATE.GAME_PREPARE
 end
 
 function DataManager:isClientConnectAgain()

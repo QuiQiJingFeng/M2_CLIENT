@@ -40,8 +40,14 @@ function JoinRoomLayer:onClickNumKey(event)
 	if #self._numberArray >= 6 then
 		return
 	end
-	
-	lt.SDK.AppActivity.start(function(msg) --GPS
+	local getLatitude = function(call_back)
+        return call_back(json.encode({latitude=0,lontitude=0}))
+    end
+    if device.platform == "ios" or device.platform == "android" then
+        getLatitude = lt.SDK.AppActivity.start
+    end
+
+    getLatitude(function(msg) --GPS
         print("FYD=====gps>>LUA ",msg)
         local result = json.decode(msg)
         --result.lontitude --经度
@@ -52,52 +58,55 @@ function JoinRoomLayer:onClickNumKey(event)
         body.latitude = result.latitude -- 维度
         body.lontitude = result.lontitude --经度
         lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
-            dump(recv_msg,"FYD=======>>>>")
+        	recv_msg = json.decode(recv_msg)
+            if recv_msg.result == "success" then
+            	table.insert(self._numberArray, event:getTag())
+				self:configRoomNum()
+				if #self._numberArray == 6 then
+					local roomNum = ""
+					for i,v in ipairs(self._numberArray) do
+						roomNum = roomNum..v
+					end
+					dump(roomNum, "roomNum")
+
+					lt.CommonUtil:sepecailServerLogin(roomNum,function(result) 
+
+						dump(result, "result")
+			            if result ~= "success" then
+			                print("connect failed")
+			                return
+			            end
+			            local arg = {room_id = roomNum}--weixin
+						lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
+
+						print("%%%%%%%%%%%%%%%%%%%%%%%%%%", tonumber(roomNum))
+					end, function( result )
+						dump(result, "ERRresult")
+						local this = self
+						this._numberArray = {}
+						this:configRoomNum()				
+
+						-- 没有此房间
+						if result == "no_server_info" then
+							lt.MsgboxLayer:showMsgBox(string.format("加入失败, 房间%d不存在", roomNum), true, function()
+								-- this._numberArray = {}
+								-- this:configRoomNum()				
+					        end, function() end, true)
+
+						-- 人数已满
+						elseif result == "no_position" then
+							lt.MsgboxLayer:showMsgBox(string.format("加入失败, 房间%d人数已满", roomNum), true, function()
+					        end, function() end, true)
+					    elseif result == "no_position" then
+									    	
+						end
+					end)
+				end
+            end
         end)
     end)
 
-	table.insert(self._numberArray, event:getTag())
-	self:configRoomNum()
-	if #self._numberArray == 6 then
-		local roomNum = ""
-		for i,v in ipairs(self._numberArray) do
-			roomNum = roomNum..v
-		end
-		dump(roomNum, "roomNum")
 
-		lt.CommonUtil:sepecailServerLogin(roomNum,function(result) 
-
-			dump(result, "result")
-            if result ~= "success" then
-                print("connect failed")
-                return
-            end
-            local arg = {room_id = roomNum}--weixin
-			lt.NetWork:sendTo(lt.GameEventManager.EVENT.JOIN_ROOM, arg)
-
-			print("%%%%%%%%%%%%%%%%%%%%%%%%%%", tonumber(roomNum))
-		end, function( result )
-			dump(result, "ERRresult")
-			local this = self
-			this._numberArray = {}
-			this:configRoomNum()				
-
-			-- 没有此房间
-			if result == "no_server_info" then
-				lt.MsgboxLayer:showMsgBox(string.format("加入失败, 房间%d不存在", roomNum), true, function()
-					-- this._numberArray = {}
-					-- this:configRoomNum()				
-		        end, function() end, true)
-
-			-- 人数已满
-			elseif result == "no_position" then
-				lt.MsgboxLayer:showMsgBox(string.format("加入失败, 房间%d人数已满", roomNum), true, function()
-		        end, function() end, true)
-		    elseif result == "no_position" then
-						    	
-			end
-		end)
-	end
 end
 
 function JoinRoomLayer:configRoomNum()

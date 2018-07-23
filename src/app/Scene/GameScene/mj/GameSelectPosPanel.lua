@@ -821,6 +821,7 @@ function GameSelectPosPanel:onPushSitDown(msg) --推送坐下的信息
 
 				if player.user_id == sitPlayer.user_id then
 					player.is_sit = true
+					player.disconnect = false
 					player.user_pos = sitPlayer.user_pos
 					break
 				end
@@ -1056,7 +1057,7 @@ function GameSelectPosPanel:onNoticeFastSpake(tObj)
                         break
                     end
                 end
-                lt.AudioManager:playFastChatSound(iChatStrIdx, sex)
+                lt.AudioManager:playFastChatSound(iChatStrIdx, tObj.user_pos)
             end
             local width = imgBg:getContentSize().width / 2
             local height = imgBg:getContentSize().height / 2 + 8

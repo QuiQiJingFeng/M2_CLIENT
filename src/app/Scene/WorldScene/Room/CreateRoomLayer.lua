@@ -34,7 +34,6 @@ local GameConf = require("app.Common.GameConf")
 function CreateRoomLayer:ctor()
 
 	CreateRoomLayer.super.ctor(self)
-
 	self.iBaseScore = {1, 2, 3, 5, 8, 10, 20, 30, 50, 100}
 	self.g_tEnterData = {}
 	local layer = self
@@ -256,7 +255,7 @@ function CreateRoomLayer:onjoinRoomResponse( tObj )
         -- end
         self:onClose()
     else
-        lt.PromptPanel:showPrompt(lt.Constants.PROMPT[tObj.result])
+        lt.PromptPanel:showPrompt(lt.LanguageString:getString(tObj.result))
     end
 end
 
@@ -2009,7 +2008,15 @@ end
 -- end
 
 function CreateRoomLayer:sendCreateRoom( ... )
-    lt.SDK.AppActivity.start(function(msg) --GPS
+
+    local getLatitude = function(call_back)
+        return call_back(json.encode({latitude=0,lontitude=0}))
+    end
+    if device.platform == "ios" or device.platform == "android" then
+        getLatitude = lt.SDK.AppActivity.start
+    end
+
+    getLatitude(function(msg) --GPS
         print("FYD=====gps>>LUA ",msg)
         local result = json.decode(msg)
         --result.lontitude --经度
@@ -2020,35 +2027,39 @@ function CreateRoomLayer:sendCreateRoom( ... )
         body.latitude = result.latitude -- 维度
         body.lontitude = result.lontitude --经度
         lt.CommonUtil:sendXMLHTTPrequrest("POST",url,body,function(recv_msg) 
-            dump(recv_msg,"FYD=======>>>>")
+            recv_msg = json.decode(recv_msg)
+            if recv_msg.result == "success" then
+                lt.CommonUtil:selectServerLogin(self.selectTable.game_type, function(result)
+                    if result ~= "success" then
+                        print("result---->>>>",result)
+                        return
+                    end 
+                    local tempTable  = {}
+                    tempTable.game_type = self.selectTable.game_type
+                    tempTable.pay_type =  self.selectTable.pay
+                    tempTable.round = self.selectTable.round
+                    tempTable.seat_num = self.selectTable.playNum
+
+                    tempTable.other_setting = {}
+                    for i = 1, #self.selectTable.other_setting do
+                        tempTable.other_setting[i] = self.selectTable.other_setting[i]
+                    end
+
+                    tempTable.is_friend_room = false
+                    tempTable.is_open_voice = false
+                    tempTable.is_open_gps = false
+
+                    lt.CommonUtil.dump(tempTable, "创建房间")
+
+                    local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = { room_setting = tempTable}}
+                    -- 发送消息
+                    lt.NetWork:send(msg)
+                end)
+            end
         end)
     end)
     
-    lt.CommonUtil:selectServerLogin(self.selectTable.game_type, function(result)
-        if result ~= "success" then
-            return
-        end 
-        local tempTable  = {}
-        tempTable.game_type = self.selectTable.game_type
-        tempTable.pay_type =  self.selectTable.pay
-        tempTable.round = self.selectTable.round
-        tempTable.seat_num = self.selectTable.playNum
 
-        tempTable.other_setting = {}
-        for i = 1, #self.selectTable.other_setting do
-            tempTable.other_setting[i] = self.selectTable.other_setting[i]
-        end
-
-        tempTable.is_friend_room = false
-        tempTable.is_open_voice = false
-        tempTable.is_open_gps = false
-
-        lt.CommonUtil.dump(tempTable, "创建房间")
-
-        local msg = {[lt.GameEventManager.EVENT.CREATE_ROOM] = { room_setting = tempTable}}
-        -- 发送消息
-        lt.NetWork:send(msg)
-    end)
 end
 
 function CreateRoomLayer:buttonClicked(pSender)

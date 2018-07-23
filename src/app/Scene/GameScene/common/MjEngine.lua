@@ -131,8 +131,8 @@ function MjEngine:open(deleget)
 
 	self._allOutCardsPanelPos = {--不同玩家人数 不同方位
 		[2] = {
-			[4] = ccp(0, 153),
-			[2] = ccp(0, -140),
+			[4] = ccp(0, 133),
+			[2] = ccp(0, -128),
 		} ,
 
 		[3] = {
@@ -149,10 +149,10 @@ function MjEngine:open(deleget)
 	}
 
 	self._allSpecialOutCardsPanelPos = {
-		ccp(-380, 0),
-		ccp(0, -225),
-		ccp(385, 0),
-		ccp(0, 230),
+		ccp(-400, 200),
+		ccp(-400, -220),
+		ccp(400, -150),
+		ccp(300, 225),
 	}
 
 	self._allOutCardsNodePos = {}--所有方位出的牌的位置 按照ccb资源上的位置
@@ -243,12 +243,13 @@ function MjEngine:getShowCardsLayer()
 end
 
 function MjEngine:angainConfigUi()--继续游戏
+	lt.DataManager:setGameState(lt.Constants.ROOM_STATE.GAME_PREPARE)
 	self:clearUiData()
 	self._showCardsLayer:setVisible(false)
 end
 
 function MjEngine:sendCards(msg, pos)--发牌 13张
-
+	lt.DataManager:setGameState(lt.Constants.ROOM_STATE.GAME_PLAYING)
 	local direction = lt.DataManager:getPlayerDirectionByPos(pos)
 
 	self._showCardsLayer:setVisible(true)
@@ -290,10 +291,10 @@ function MjEngine:sendCards(msg, pos)--发牌 13张
 
 		self:sortHandValue(direction)
 
-		local sortFun = function(a, b)
-			return a < b
-		end
-		table.sort(self._allPlayerLightHandCardsValue[direction], sortFun)
+		-- local sortFun = function(a, b)
+		-- 	return a < b
+		-- end
+		-- table.sort(self._allPlayerLightHandCardsValue[direction], sortFun)
 
 		self:sendCardsEffect()
 	end
@@ -682,7 +683,7 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 		end
 	end
 
-	--出牌
+	--出牌 (注意牌的层级 上下根据y坐标判断， 左右方向根据顺序)
 	if refreshOut then
 		local cardZorder = 0
 		if not self._allPlayerOutCardsNode[direction] then
@@ -692,15 +693,34 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 		for i,v in ipairs(self._allPlayerOutCardsNode[direction]) do
 			v:setVisible(false)
 		end
+		local baseZorder = nil
+		local basePosxy = nil
 
 		self._allPlayerOutCardsValue[direction] = self._allPlayerOutCardsValue[direction] or {}
 		for i,info in ipairs(self._allPlayerOutCardsValue[direction]) do
 			local node = self._allPlayerOutCardsNode[direction][i]
+			
+			if direction == lt.Constants.DIRECTION.NAN or direction == lt.Constants.DIRECTION.BEI then
+				if i == 1 then
+					baseZorder = 1
+					basePosxy = self._allOutCardsNodePos[tostring(direction)][i].y
+				end
+				local tempPosxy = nil
+				tempPosxy = self._allOutCardsNodePos[tostring(direction)][i].y
 
-			if direction == lt.Constants.DIRECTION.DONG or direction == lt.Constants.DIRECTION.BEI then
-				cardZorder = cardZorder - 1
+				if basePosxy and baseZorder then
+					if basePosxy == tempPosxy then
+						cardZorder = baseZorder
+					else
+						cardZorder = -math.floor((tempPosxy - basePosxy) / 54 + 0.5) * baseZorder --四舍五入
+					end
+				end		
 			else
-				cardZorder = cardZorder + 1
+           		if direction == lt.Constants.DIRECTION.DONG then
+           			cardZorder = cardZorder - 1
+           		else
+           			cardZorder = cardZorder + 1
+           		end
 			end
 
 			if node then
@@ -745,19 +765,20 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 		local startX = 0
 		local startY = 0
 
-		if #self._allPlayerSpecialOutCardsValue[direction] % 2 == 0 then--偶数个
-			if direction == lt.Constants.DIRECTION.XI or direction == lt.Constants.DIRECTION.DONG then
-				startY = (#self._allPlayerSpecialOutCardsValue[direction] / 2 - 1)*spaceOffY + spaceOffY/2
-			else
-				startX = (#self._allPlayerSpecialOutCardsValue[direction] / 2 - 1)*spaceOffX + spaceOffX/2
-			end				
-		else
-			if direction == lt.Constants.DIRECTION.XI or direction == lt.Constants.DIRECTION.DONG then
-				startY = math.floor(#self._allPlayerSpecialOutCardsValue[direction] / 2)*spaceOffY
-			else
-				startX = math.floor(#self._allPlayerSpecialOutCardsValue[direction] / 2)*spaceOffX
-			end		
-		end 
+		--配套居中排版
+		-- if #self._allPlayerSpecialOutCardsValue[direction] % 2 == 0 then--偶数个
+		-- 	if direction == lt.Constants.DIRECTION.XI or direction == lt.Constants.DIRECTION.DONG then
+		-- 		startY = (#self._allPlayerSpecialOutCardsValue[direction] / 2 - 1)*spaceOffY + spaceOffY/2
+		-- 	else
+		-- 		startX = (#self._allPlayerSpecialOutCardsValue[direction] / 2 - 1)*spaceOffX + spaceOffX/2
+		-- 	end				
+		-- else
+		-- 	if direction == lt.Constants.DIRECTION.XI or direction == lt.Constants.DIRECTION.DONG then
+		-- 		startY = math.floor(#self._allPlayerSpecialOutCardsValue[direction] / 2)*spaceOffY
+		-- 	else
+		-- 		startX = math.floor(#self._allPlayerSpecialOutCardsValue[direction] / 2)*spaceOffX
+		-- 	end		
+		-- end 
 
 		for i,info in ipairs(self._allPlayerSpecialOutCardsValue[direction]) do
 			local node = self._allPlayerSpecialOutCardsNode[direction][i]
@@ -779,6 +800,18 @@ function MjEngine:configAllPlayerCards(direction, refreshCpg, refreshHand, refre
 				self._allPlayerSpecialOutCardsPanel[direction]:addChild(node:getRootNode(), cardZorder)
 			end
 
+			--居中扩散排版
+			-- if direction == lt.Constants.DIRECTION.XI then
+			-- 	node:setPosition(ccp(startX, startY - (i-1)*spaceOffY))
+			-- elseif direction == lt.Constants.DIRECTION.NAN then
+			-- 	node:setPosition(ccp(-startX + (i-1)*spaceOffX, startY))
+			-- elseif direction == lt.Constants.DIRECTION.DONG then
+			-- 	node:setPosition(ccp(startX, -startY + (i-1)*spaceOffY))
+			-- elseif direction == lt.Constants.DIRECTION.BEI then
+			-- 	node:setPosition(ccp(startX - (i-1)*spaceOffX, startY))
+			-- end
+
+			--顺序排版
 			if direction == lt.Constants.DIRECTION.XI then
 				node:setPosition(ccp(startX, startY - (i-1)*spaceOffY))
 			elseif direction == lt.Constants.DIRECTION.NAN then
@@ -957,8 +990,13 @@ function MjEngine:getOneOutCardAtDirection(direction, value, isSpecialCard)
 	end
 end
 
+function MjEngine:setTingAutoOutCardValue(direction, value)--自己的
+	if direction == lt.Constants.DIRECTION.NAN then
+		self._tingOutCardValue = value
+	end
+end
+
 function MjEngine:getOneHandCardAtDirection(direction, value)--起了一张牌
-	self._tingOutCardValue = value
 	value = value or 99
 	self._allPlayerStandHandCardsValue[direction] = self._allPlayerStandHandCardsValue[direction] or {}
 	table.insert(self._allPlayerStandHandCardsValue[direction], value)
@@ -1345,6 +1383,7 @@ function MjEngine:autoPutOutCard()--自动出牌
 		local function func()
 		   local statee = 1
 		   self._clickCardCallback(self._tingOutCardValue,statee)			
+			self._tingOutCardValue = nil
 		end
 		local delay = cc.DelayTime:create(1)
 		local func1 = cc.CallFunc:create(func)
@@ -1992,7 +2031,7 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 	--听牌处理
 	if msg.item["type"] == 7 then
-		local directionn = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
+		local direction = lt.DataManager:getPlayerDirectionByPos(msg.item["from"])
 		lt.CommonUtil.print("noticeSpecialEvent==>推倒胡收到听牌的消息",msg.item["value"],directionn)
 
 		local tingInfo = lt.DataManager:getTingPlayerInfo()
@@ -2013,15 +2052,22 @@ function MjEngine:noticeSpecialEvent(msg)-- 有人吃椪杠胡听
 
 		lt.CommonUtil.print("noticeSpecialEvent==>",tingInfo)
 
-		if self._isNeedBaoTing then
-			if not self._isAnTing then--明听发的不走这里
-				self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+		-- if self._isNeedBaoTing then
+		-- 	if not self._isAnTing then--明听发的不走这里
+		-- 		self:goOutOneHandCardAtDirection(direction, msg.item["value"])
+		-- 	end
+		-- end
+
+		local value = msg.item["value"]
+		if lt.DataManager:getRePlayState() then--听牌出牌
+			if self._isNeedBaoTing and self._isAnTing then--回放 暗听需要明牌
+				self:getOneOutCardAtDirection(direction, value)
+				self:goOutOneHandCardAtDirection(direction, value)
 			end
 		end
 	end
 
 	self:configAllPlayerCards(direction, true, true, true, false)--4 false --> true 
-
 end
 
 function MjEngine:setHuiCardValue(huiValue)
@@ -2146,7 +2192,8 @@ function MjEngine:onClientConnectAgain()--  断线重连
         tObjPeng = nil,
         tObjGang = nil,
         tObjHu = nil,--抢杠胡
-        tObjTing = nil
+        tObjTing = nil,
+        tObjYingKou = nil,
     }
 
 	local state = 0 --  1摸牌出牌  2 碰牌出牌 
@@ -2178,8 +2225,8 @@ function MjEngine:onClientConnectAgain()--  断线重连
 	   tObjCpghObj = self:checkMyHandButtonActionStatu(self._allPlayerHandCardsValue[lt.Constants.DIRECTION.NAN], state, tObjCpghObj)
 	end
 
+	local operatorList = {}
 	if allRoomInfo.operators then
-		local operatorList = {}
 		for i,operator in ipairs(allRoomInfo.operators) do
 			if operator == "CHI" or  operator == "PENG" or operator == "GANG" or operator == "HU" then
 				table.insert(operatorList, operator)
@@ -2204,8 +2251,9 @@ function MjEngine:onClientConnectAgain()--  断线重连
         			tObjCpghObj.tObjGang = tObjCpghObj.tObjGang or {}
         			table.insert(tObjCpghObj.tObjGang, allRoomInfo.put_card)
         		end
-        	elseif state == "HU" then--抢杠胡
+        	elseif state == "HU" then--抢杠胡 点炮胡
         		tObjCpghObj.tObjHu = {}
+        		tObjCpghObj.tObjYingKou = {}
         	end
         end
 	end
@@ -2224,7 +2272,11 @@ function MjEngine:onClientConnectAgain()--  断线重连
     --显示吃碰杠胡控件
     self._deleget:viewHideActPanelAndMenu()
     self._deleget:resetActionButtonsData(tObjCpghObj)--将牌的数据绑定到按钮上
-    self._deleget:viewActionButtons(tObjCpghObj, true)
+    local isPassSendMsg = false
+    if #operatorList > 0 then
+    	isPassSendMsg = true
+    end
+    self._deleget:viewActionButtons(tObjCpghObj, isPassSendMsg)
     
 	for i,direction in ipairs(self._currentGameDirections) do
 		self:configAllPlayerCards(direction, true, true, true, true)

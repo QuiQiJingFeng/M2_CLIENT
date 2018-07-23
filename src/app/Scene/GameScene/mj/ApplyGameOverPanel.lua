@@ -121,7 +121,7 @@ function ApplyGameOverPanel:onUpdate(dt)
         
         if self._timeNumber == 0 then
         	cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.schedule_id)
-        	lt.UILayerManager:removeLayer(self)
+        	self:onClose()
         end
 	end
 
