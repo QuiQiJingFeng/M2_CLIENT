@@ -42,14 +42,18 @@ print("加密开始")
 # 加密lua文件 并将加密后的文件写入package目录
 Utils.encryptorDecryptFile(True,'src','package',XXTEA_KEY,XXTEA_SINGIN,FILETERS_LIST)
 # 加密资源文件 并将加密后的文件写入package目录
-Utils.encryptorDecryptFile(True,'package_res','package',XXTEA_KEY,XXTEA_SINGIN,FILETERS_LIST,[],RB_MODE_LIST)
+Utils.encryptorDecryptFile(True,'res','package',XXTEA_KEY,XXTEA_SINGIN,FILETERS_LIST,[],RB_MODE_LIST)
 print("加密完毕")
-
-os.rename("package/package_res","package/res")
-
 ASSETS_CONFIG = {
     'src.zip':{'dir':'src'},
-    'games.zip':{'dir':'res/games'}
+    'Default.zip':{'dir':'res/Default'},
+    'card.zip':{'dir':'res/card'},
+    'game.zip':{'dir':'res/game'},
+    'games.zip':{'dir':'res/games'},
+    'hallcomm.zip':{'dir':'res/hallcomm'},
+    'proto.zip':{'dir':'res/proto'},
+    'string.zip':{'dir':'res/string'},
+    'alloutcardpos.zip':{'dir':'res/alloutcardpos'}
 }
 
 # 切换目录
