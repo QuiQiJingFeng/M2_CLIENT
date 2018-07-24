@@ -5,7 +5,7 @@ import json
 import sys
 from Utils import Utils
 import shutil
-VERSION = "1.4.0"
+VERSION = "1.0.0"
 
 URL = "http://lsjgame.oss-cn-hongkong.aliyuncs.com/HotUpdate/"
 
