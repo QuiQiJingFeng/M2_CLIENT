@@ -270,7 +270,7 @@ class Utils:
     # @rblist 对于二进制文件 以rb方式读取,文本文件以rU方式读取
     # XXTEA_KEY = "10cc4fdee2fcd047"  XXTEA_SIGN = "gclR3cu9"
     @staticmethod
-    def encryptorDecryptFile(isEncrypt=True, rootDir='src', outDir='.', xxteKey='10cc4fdee2fcd047', xxteaSign='gclR3cu9', includes=['*.lua'], excludes=[],rblist=['*.csb','*.png']):
+    def encryptorDecryptFile(isEncrypt=True, rootDir='src', outDir='.', xxteKey='10cc4fdee2fcd047', xxteaSign='gclR3cu9', includes=['*.lua'], excludes=[],rblist=['*.csb','*.png'],skip=['.mp3']):
         _DELTA = 0x9E3779B9
 
         def _long2str(v, w):
@@ -348,9 +348,13 @@ class Utils:
                             mode = 'rb'
                         file = open(os.path.join(root, f), mode)
                         s = file.read()
-                        str = Encrypt(s, xxteKey)
+                        if suffix in skip:
+                            str = s
+                        else:
+                            str = Encrypt(s, xxteKey)
+                            str = xxteaSign + str
                         file.close()
-                        str = xxteaSign + str
+                        
                         outpath = os.path.join(outDir,root)
                         if(not os.path.exists(outpath)):  
                             os.makedirs(os.path.join(outDir,root))
