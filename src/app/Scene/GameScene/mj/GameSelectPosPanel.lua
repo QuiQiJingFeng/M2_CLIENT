@@ -168,7 +168,7 @@ function GameSelectPosPanel:ctor(deleget, cardsPanel)
 		end
 	end
 
-	for k,node in pairs(self._PlayHeadTable) do
+	for k,node in ipairs(self._PlayHeadTable) do
         lt.CommonUtil:addNodeClickEvent(node, handler(self, self.onHeadEvent))
     end
 
@@ -339,6 +339,10 @@ function GameSelectPosPanel:configPlayer() --头像
 				if name then
 					name:setString(player.user_name)
 				end
+
+				local img = playerLog:getChildByName("Image_HeadBg"):getChildByName("Image_Head")
+				--player.user_pic = "http://img1.utuku.china.com/0x0/game/20160718/f2547293-78a9-4e50-a80f-727593f8c19f.jpg"
+    			lt.HeadImage:setHeadImg(player, img)
 
 				--playerLog:getChildByName("Sprite_Zhuang"):setVisible(false)
 				playerLog:getChildByName("Sprite_Disconnect"):setVisible(false)

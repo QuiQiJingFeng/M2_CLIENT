@@ -168,113 +168,116 @@ end
 
 --检测是否需要防作弊
 function GameRoomLayer:checkFzb()
-	local equallyTable = {}
-	local gameInfo = lt.DataManager:getGameRoomInfo()
-	local Num = 0
-	if #gameInfo.players > 1 then --ip检测信息整理
-		for i=1,#gameInfo.players do
-			if i < #gameInfo.players then
-				if gameInfo.players[i].user_ip == gameInfo.players[i+1].user_ip then
-					Num = Num + 1
-					if #equallyTable >= 2 then
-						print(#equallyTable)
-						local Numbs = 0
-						for t=1,#equallyTable do
-							if equallyTable[t].user_id == gameInfo.players[i].user_id then
-								Numbs = 1--等于1代表有这个值
+	if not lt.DataManager:getRePlayState() then--回放的时候不显示防作弊
+		local equallyTable = {}
+		local gameInfo = lt.DataManager:getGameRoomInfo()
+		local Num = 0
+		if #gameInfo.players > 2 then --ip检测信息整理
+			for i=1,#gameInfo.players do
+				if i < #gameInfo.players then
+					if gameInfo.players[i].user_ip == gameInfo.players[i+1].user_ip then
+						Num = Num + 1
+						if #equallyTable >= 2 then
+							print(#equallyTable)
+							local Numbs = 0
+							for t=1,#equallyTable do
+								if equallyTable[t].user_id == gameInfo.players[i].user_id then
+									Numbs = 1--等于1代表有这个值
+								end
 							end
-						end
-						if Numbs ~= 1 then--不等于1没有相同的值
+							if Numbs ~= 1 then--不等于1没有相同的值
+								table.insert( equallyTable, gameInfo.players[i] )
+							end
+							local Numbss = 0
+							for j=1,#equallyTable do
+								if equallyTable[j].user_id == gameInfo.players[i+1].user_id then
+									Numbss = 1
+								end
+							end
+							if Numbss ~= 1 then
+								table.insert( equallyTable, gameInfo.players[i+1] )
+							end
+						else						
 							table.insert( equallyTable, gameInfo.players[i] )
-						end
-						local Numbss = 0
-						for j=1,#equallyTable do
-							if equallyTable[j].user_id == gameInfo.players[i+1].user_id then
-								Numbss = 1
-							end
-						end
-						if Numbss ~= 1 then
 							table.insert( equallyTable, gameInfo.players[i+1] )
-						end
-					else						
-						table.insert( equallyTable, gameInfo.players[i] )
-						table.insert( equallyTable, gameInfo.players[i+1] )
-					end 
+						end 
+					end
 				end
 			end
 		end
-	end
 
-	local GPSTable = {}
-	-- latitude = 12; 当前的维度
-    -- lontitude = 13;当前的经度
-    --虚拟数据
-    if #gameInfo.players == 1 then
-	    gameInfo.players[1].latitude  = 34.776416
-	    gameInfo.players[1].lontitude = 113.624636
-	elseif #gameInfo.players == 2 then
-		gameInfo.players[1].latitude  = 34.776416
-	    gameInfo.players[1].lontitude = 113.624636
-	    gameInfo.players[2].latitude  = 34.776488
-	    gameInfo.players[2].lontitude = 113.624655
-	elseif #gameInfo.players == 3 then
-		gameInfo.players[1].latitude  = 34.776416
-	    gameInfo.players[1].lontitude = 113.624636
-	    gameInfo.players[2].latitude  = 34.776488
-	    gameInfo.players[2].lontitude = 113.624655
-	    gameInfo.players[3].latitude  = 34.776455
-	    gameInfo.players[3].lontitude = 113.624644
-	elseif #gameInfo.players == 4 then
-		gameInfo.players[1].latitude  = 34.776416
-	    gameInfo.players[1].lontitude = 113.624636
-	    gameInfo.players[2].latitude  = 34.776417
-	    gameInfo.players[2].lontitude = 113.624637
-	    gameInfo.players[3].latitude  = 34.776455
-	    gameInfo.players[3].lontitude = 113.624644
-	    gameInfo.players[4].latitude  = 34.776419
-	    gameInfo.players[4].lontitude = 113.624638
-	end
+		local GPSTable = {}
+		-- latitude = 12; 当前的维度
+	    -- lontitude = 13;当前的经度
+	    --虚拟数据
+	    if device.platform ~= "ios" and device.platform ~= "android" then
+		    if #gameInfo.players == 1 then
+			    gameInfo.players[1].latitude  = 34.776416
+			    gameInfo.players[1].lontitude = 113.624636
+			elseif #gameInfo.players == 2 then
+				gameInfo.players[1].latitude  = 34.776416
+			    gameInfo.players[1].lontitude = 113.624636
+			    gameInfo.players[2].latitude  = 34.776488
+			    gameInfo.players[2].lontitude = 113.624655
+			elseif #gameInfo.players == 3 then
+				gameInfo.players[1].latitude  = 34.776416
+			    gameInfo.players[1].lontitude = 113.624636
+			    gameInfo.players[2].latitude  = 34.776488
+			    gameInfo.players[2].lontitude = 113.624655
+			    gameInfo.players[3].latitude  = 34.776455
+			    gameInfo.players[3].lontitude = 113.624644
+			elseif #gameInfo.players == 4 then
+				gameInfo.players[1].latitude  = 34.776416
+			    gameInfo.players[1].lontitude = 113.624636
+			    gameInfo.players[2].latitude  = 34.776417
+			    gameInfo.players[2].lontitude = 113.624637
+			    gameInfo.players[3].latitude  = 34.776455
+			    gameInfo.players[3].lontitude = 113.624644
+			    gameInfo.players[4].latitude  = 34.776419
+			    gameInfo.players[4].lontitude = 113.624638
+			end
+		end
 
-	if #gameInfo.players > 1 then --GPS检测信息整理
-		for i=1,#gameInfo.players do
-			for k,v in ipairs(gameInfo.players) do
-			    if v.user_id ~= gameInfo.players[i].user_id then
-				    local bCheck = false
-				    for j = 1,#GPSTable do
-						if (GPSTable[j][1].user_id == gameInfo.players[i].user_id and GPSTable[j][2].user_id == v.user_id ) or (GPSTable[j][2].user_id == gameInfo.players[i].user_id and GPSTable[j][1].user_id == v.user_id) then
-							bCheck = true
+		if #gameInfo.players > 2 then --GPS检测信息整理
+			for i=1,#gameInfo.players do
+				for k,v in ipairs(gameInfo.players) do
+				    if v.user_id ~= gameInfo.players[i].user_id then
+					    local bCheck = false
+					    for j = 1,#GPSTable do
+							if (GPSTable[j][1].user_id == gameInfo.players[i].user_id and GPSTable[j][2].user_id == v.user_id ) or (GPSTable[j][2].user_id == gameInfo.players[i].user_id and GPSTable[j][1].user_id == v.user_id) then
+								bCheck = true
+							end
 						end
-					end
-					if bCheck == false then
-						local juli = self:getDistance(gameInfo.players[i].latitude,gameInfo.players[i].lontitude,v.latitude,v.lontitude)
-						if juli < 500 then
-							local interimTable = {}
-							table.insert( interimTable, gameInfo.players[i] )
-							table.insert( interimTable, v )
-							table.insert( interimTable, juli)
-							table.insert( GPSTable, interimTable )
-							Num = Num + 1
+						if bCheck == false then
+							local juli = self:getDistance(gameInfo.players[i].latitude,gameInfo.players[i].lontitude,v.latitude,v.lontitude)
+							if juli < 500 then
+								local interimTable = {}
+								table.insert( interimTable, gameInfo.players[i] )
+								table.insert( interimTable, v )
+								table.insert( interimTable, juli)
+								table.insert( GPSTable, interimTable )
+								Num = Num + 1
+							end
 						end
+						
 					end
 					
 				end
-				
 			end
 		end
-	end
 
-	if Num >= 1 then
-		if self._fzbLayer and not tolua.isnull(self._fzbLayer) then
-			self:closeFzbLayer()
-			self._fzbLayer = nil
-			self._fzbLayer = lt.FzbLayer.new(equallyTable,GPSTable, self)
-			lt.UILayerManager:addLayer(self._fzbLayer,true)
-		else
-			self._fzbLayer = lt.FzbLayer.new(equallyTable,GPSTable, self)
-		   	lt.UILayerManager:addLayer(self._fzbLayer,true)
+		if Num >= 1 then
+			if self._fzbLayer and not tolua.isnull(self._fzbLayer) then
+				self:closeFzbLayer()
+				self._fzbLayer = nil
+				self._fzbLayer = lt.FzbLayer.new(equallyTable,GPSTable, self)
+				lt.UILayerManager:addLayer(self._fzbLayer,true)
+			else
+				self._fzbLayer = lt.FzbLayer.new(equallyTable,GPSTable, self)
+			   	lt.UILayerManager:addLayer(self._fzbLayer,true)
+		   	end
 	   	end
-   	end
-
+    end
 end
 
 function GameRoomLayer:rad(d)

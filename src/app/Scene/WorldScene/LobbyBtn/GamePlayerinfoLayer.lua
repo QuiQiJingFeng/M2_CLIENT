@@ -35,6 +35,7 @@ function GamePlayerinfoLayer:ctor(info)
 
 	local Ie_Head = mainLayer:getChildByName("Ie_Head")
 	local BG16 = Ie_Head:getChildByName("BG16")--头像
+	lt.HeadImage:setHeadImg(info, BG16)
 
 	local Text_Money = mainLayer:getChildByName("Text_Money")
 	Text_Money:setString("金币: "..info.gold_num)
@@ -53,30 +54,32 @@ end
 function GamePlayerinfoLayer:UpdateInfo()
 	local gameInfo = lt.DataManager:getGameRoomInfo()
 	    --虚拟数据
-    if #gameInfo.players == 1 then
-	    gameInfo.players[1].latitude  = 34.776416
-	    gameInfo.players[1].lontitude = 113.624636
-	elseif #gameInfo.players == 2 then
-		gameInfo.players[1].latitude  = 34.776416
-	    gameInfo.players[1].lontitude = 113.624636
-	    gameInfo.players[2].latitude  = 34.776488
-	    gameInfo.players[2].lontitude = 113.624655
-	elseif #gameInfo.players == 3 then
-		gameInfo.players[1].latitude  = 34.776416
-	    gameInfo.players[1].lontitude = 113.624636
-	    gameInfo.players[2].latitude  = 34.776488
-	    gameInfo.players[2].lontitude = 113.624655
-	    gameInfo.players[3].latitude  = 34.776455
-	    gameInfo.players[3].lontitude = 113.624644
-	elseif #gameInfo.players == 4 then
-		gameInfo.players[1].latitude  = 34.776416
-	    gameInfo.players[1].lontitude = 113.624636
-	    gameInfo.players[2].latitude  = 34.776417
-	    gameInfo.players[2].lontitude = 113.624637
-	    gameInfo.players[3].latitude  = 34.776455
-	    gameInfo.players[3].lontitude = 113.624644
-	    gameInfo.players[4].latitude  = 34.776419
-	    gameInfo.players[4].lontitude = 113.624638
+		if device.platform ~= "ios" and device.platform ~= "android" then
+		    if #gameInfo.players == 1 then
+		    gameInfo.players[1].latitude  = 34.776416
+		    gameInfo.players[1].lontitude = 113.624636
+		elseif #gameInfo.players == 2 then
+			gameInfo.players[1].latitude  = 34.776416
+		    gameInfo.players[1].lontitude = 113.624636
+		    gameInfo.players[2].latitude  = 34.776488
+		    gameInfo.players[2].lontitude = 113.624655
+		elseif #gameInfo.players == 3 then
+			gameInfo.players[1].latitude  = 34.776416
+		    gameInfo.players[1].lontitude = 113.624636
+		    gameInfo.players[2].latitude  = 34.776488
+		    gameInfo.players[2].lontitude = 113.624655
+		    gameInfo.players[3].latitude  = 34.776455
+		    gameInfo.players[3].lontitude = 113.624644
+		elseif #gameInfo.players == 4 then
+			gameInfo.players[1].latitude  = 34.776416
+		    gameInfo.players[1].lontitude = 113.624636
+		    gameInfo.players[2].latitude  = 34.776417
+		    gameInfo.players[2].lontitude = 113.624637
+		    gameInfo.players[3].latitude  = 34.776455
+		    gameInfo.players[3].lontitude = 113.624644
+		    gameInfo.players[4].latitude  = 34.776419
+		    gameInfo.players[4].lontitude = 113.624638
+		end
 	end
 	local GpsTable = {}
 	for k,v in ipairs(gameInfo.players) do
