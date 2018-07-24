@@ -137,6 +137,18 @@ end
 
 function WorldMenuLayer:onEnter()
     print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%++++++++")
+    if device.platform == "ios" or device.platform == "android" then
+        lt.SDK.AppActivity.start(function (msg)
+            print("===========GPS========>>>>>1111")
+            lt.SDK.AppActivity.start(function (msg)
+                print("===========GPS========>>>>>2222")
+                lt.SDK.AppActivity.start(function (msg)
+                    print("===========GPS========>>>>>3333")
+                end)
+            end)
+        end)
+    end
+    
     lt.AudioManager:playMusic("hallcomm/sound/lobby/", "bg_music", true)
 
     lt.GameEventManager:addListener(lt.GameEventManager.EVENT.ROOM_LIST_UPDATE, handler(self, self.listenRoomListUpdate), "WorldMenuLayer.listenRoomListUpdate")
