@@ -6,46 +6,46 @@
       <ObjectData Name="Layer" Tag="10" ctype="GameLayerObjectData">
         <Size X="1334.0000" Y="750.0000" />
         <Children>
-          <AbstractNodeData Name="Ie_Mark" ActionTag="-689187590" Tag="11" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="1.4038" RightMargin="-1.4038" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" Scale9Enable="True" LeftEage="17" RightEage="17" TopEage="15" BottomEage="15" Scale9OriginX="17" Scale9OriginY="15" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
-            <Size X="1334.0000" Y="750.0000" />
+          <AbstractNodeData Name="Ie_Mark" ActionTag="-689187590" Tag="11" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="641.9038" RightMargin="639.0962" TopMargin="351.0000" BottomMargin="351.0000" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" Scale9Enable="True" LeftEage="17" RightEage="17" TopEage="15" BottomEage="15" Scale9OriginX="17" Scale9OriginY="15" Scale9Width="19" Scale9Height="18" ctype="ImageViewObjectData">
+            <Size X="53.0000" Y="48.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="668.4038" Y="375.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5011" Y="0.5000" />
-            <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="MarkedSubImage" Path="games/comm/launch/BG1.png" Plist="comm/launch/LaunchPlist1.plist" />
+            <PreSize X="0.0397" Y="0.0640" />
+            <FileData Type="MarkedSubImage" Path="games/comm/launch/BG1.png" Plist="games/comm/launch/LaunchPlist1.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Ie_Bg" ActionTag="2100623713" Tag="402" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="201.9334" RightMargin="201.9333" TopMargin="63.4152" BottomMargin="63.4152" TouchEnable="True" Scale9Enable="True" LeftEage="20" RightEage="20" TopEage="20" BottomEage="20" Scale9OriginX="20" Scale9OriginY="20" Scale9Width="20" Scale9Height="17" ctype="ImageViewObjectData">
-            <Size X="930.1332" Y="623.1696" />
+          <AbstractNodeData Name="Ie_Bg" ActionTag="2100623713" Tag="402" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="202.0000" RightMargin="202.0000" TopMargin="63.5000" BottomMargin="63.5000" TouchEnable="True" Scale9Enable="True" LeftEage="20" RightEage="20" TopEage="20" BottomEage="20" Scale9OriginX="20" Scale9OriginY="20" Scale9Width="20" Scale9Height="17" ctype="ImageViewObjectData">
+            <Size X="930.0000" Y="623.0000" />
             <Children>
-              <AbstractNodeData Name="Bn_Sure" ActionTag="590260423" Tag="403" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="349.1858" RightMargin="349.1858" TopMargin="517.6696" BottomMargin="10.5000" Scale9Enable="True" LeftEage="81" RightEage="81" TopEage="27" BottomEage="27" Scale9OriginX="81" Scale9OriginY="27" Scale9Width="6" Scale9Height="41" ctype="ImageViewObjectData">
-                <Size X="231.7616" Y="95.0000" />
+              <AbstractNodeData Name="Bn_Sure" ActionTag="590260423" Tag="403" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="349.5000" RightMargin="349.5000" TopMargin="517.5000" BottomMargin="10.5000" Scale9Enable="True" LeftEage="81" RightEage="81" TopEage="27" BottomEage="27" Scale9OriginX="81" Scale9OriginY="27" Scale9Width="6" Scale9Height="41" ctype="ImageViewObjectData">
+                <Size X="231.0000" Y="95.0000" />
                 <Children>
-                  <AbstractNodeData Name="ImageText3" ActionTag="-324008810" Tag="404" IconVisible="False" LeftMargin="60.8141" RightMargin="53.9475" TopMargin="31.5555" BottomMargin="26.4445" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="ImageText3" ActionTag="-324008810" Tag="404" IconVisible="False" LeftMargin="60.8141" RightMargin="53.1859" TopMargin="31.5555" BottomMargin="26.4445" ctype="SpriteObjectData">
                     <Size X="117.0000" Y="37.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="119.3141" Y="44.9445" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5148" Y="0.4731" />
-                    <PreSize X="0.5048" Y="0.3895" />
-                    <FileData Type="MarkedSubImage" Path="games/comm/launch/ImageText3.png" Plist="comm/launch/LaunchPlist1.plist" />
+                    <PrePosition X="0.5165" Y="0.4731" />
+                    <PreSize X="0.5065" Y="0.3895" />
+                    <FileData Type="MarkedSubImage" Path="games/comm/launch/ImageText3.png" Plist="games/comm/launch/LaunchPlist1.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="465.0666" Y="58.0000" />
+                <Position X="465.0000" Y="58.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.0931" />
-                <PreSize X="0.2492" Y="0.1524" />
-                <FileData Type="MarkedSubImage" Path="games/comm/launch/ButtonSure.png" Plist="comm/launch/LaunchPlist1.plist" />
+                <PreSize X="0.2484" Y="0.1525" />
+                <FileData Type="MarkedSubImage" Path="game/mjcomm/button/btnGreen.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Ie_InfoBg" ActionTag="2079976842" Tag="407" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="41.0256" RightMargin="41.0256" TopMargin="60.8837" BottomMargin="112.5439" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="11" Scale9Height="7" ctype="ImageViewObjectData">
-                <Size X="848.0819" Y="449.7421" />
+              <AbstractNodeData Name="Ie_InfoBg" ActionTag="2079976842" Tag="407" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="41.0000" RightMargin="41.0000" TopMargin="60.8671" BottomMargin="113.1329" Scale9Enable="True" LeftEage="10" RightEage="10" TopEage="10" BottomEage="10" Scale9OriginX="10" Scale9OriginY="10" Scale9Width="11" Scale9Height="7" ctype="ImageViewObjectData">
+                <Size X="848.0000" Y="449.0000" />
                 <Children>
-                  <AbstractNodeData Name="ListView" ActionTag="806670369" Tag="75" IconVisible="False" LeftMargin="8.4244" RightMargin="7.8289" TopMargin="8.2429" BottomMargin="16.8490" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+                  <AbstractNodeData Name="ListView" ActionTag="806670369" Tag="75" IconVisible="False" LeftMargin="8.4244" RightMargin="7.7469" TopMargin="7.5008" BottomMargin="16.8490" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                     <Size X="831.8287" Y="424.6502" />
                     <Children>
                       <AbstractNodeData Name="Tt_Rule0" ActionTag="1648355280" Tag="409" IconVisible="False" RightMargin="39.8287" BottomMargin="2466.0000" FontSize="18" LabelText="《健康游戏忠告》&#xA;抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。&#xA;湿度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。&#xA;倡导理性消费，倡导竞技快乐。&#xA;严禁恶意利用本游戏进行读报等违法犯罪行为，一经发现，立即封停账号、并向公安机关举报。&#xA;欢迎使用荆州麻将的服务，请您（以下可称“用户”或“玩家”或“您”）仔细阅读条款：如果您&#xA;未满18周岁，请在法定监护人的陪同下阅读本协议。本协议系您与荆州麻将之间就《荆州麻将》&#xA;（以下称本游戏）所订立的权利义务范围。如果您对本协议的任何条款及/或荆州麻将随时对其的修&#xA;改表示异议，您可以选择不进入本游戏，进入本游戏或使用荆州麻将服务，则意味着您同意遵守本&#xA;协议全部约定，包括荆州麻将对协议随时所做的任何修改，并完全服从荆州麻将的统一管理。&#xA;一、定义&#xA;1.1本协议：指本协议正文及其修订版本、本游戏的规则及其修订版本。本协议同时还包括文化部依&#xA;据《网络游戏管理暂行办法》（文化部令第49号）制度的《网络游戏服务格式化协议必备条款》（详&#xA;见附录）。&#xA;1.2游戏规则：指荆州麻将不时发布并修订的关于游戏的用户协议、游戏规则、游戏公告及通知、指&#xA;引、说明等内容。&#xA;1.3您：又称“玩家”或“用户”、指接受荆州麻将服务的自然人。&#xA;1.4游戏数据：指您在使用荆州麻将服务过程中产生的并存储于服务器的各种数据信息，包括游戏日&#xA;志、安全日志等。&#xA;1.5房卡：您进入并使用本游戏服务所需购买、消耗的游戏卡。房卡不可再玩家间交易，不能与游戏&#xA;中的积分相对管，仅用于进入并使用本游戏。&#xA;二、账号&#xA;2.1本游戏暂仅能通过微信验证登录，未来不排除将引入其他第三方账户体系用于登录本游戏。请您&#xA;妥善保管您的各类账户和密码，确保账户安全。如果您将账户、密码转让、出售或出借予他人使用，&#xA;或授权他人使用账号，应对被授权人在该账号下发生所有行为负全部责任，大巴对您前述行为所造&#xA;成的任何后果，不承担任何法律责任。&#xA;2.2如果荆州麻将在今后自建账号体系，则账户的所有权归荆州麻将，您在完成注册申请手续后，仅&#xA;获得荆州麻将账户的使用权。您应提供及时、详尽及准确的个人资料，并不断更新注册信息。因注&#xA;册信息不真实而导致的问题及后果，荆州麻将对此不负任何责任。因黑客行为等第三方因素或用户&#xA;自身原因导致的账号安全问题，荆州麻将对受影响玩家不承担任何法律责任。&#xA;2.3您应当通过真实身份信息认证注册账号，且您提交的账号名称、头像和简介等注册信息中不得出&#xA;现违法和不良信息，经闲来游戏审核，如存在上述情况，荆州麻将将不予注册；同时，在注册后，&#xA;如发现您以虚假信息骗取账号名称注册，或账号头像、简介等注册信息存在违法和不良信息的，大&#xA;巴游戏有权不经通知单方采取限期改正、暂停使用、注销登记、收回等措施。&#xA;2.4您如果需要使用和享受荆州麻将服务，您需要按照《网络游戏管理暂行规定》及文化部《网络游&#xA;戏服务格式化协议必备条款》的要求，登录实名注册系统并进行实名注册。&#xA;2.5您充分理解并同意：荆州麻将会按照国家相关要求将您的实名注册信息运用于防沉迷系统之中，&#xA;既荆州麻将可能会根据您的实名注册信息判断您是否年满18周岁，从而决定是否对您的游戏账号予&#xA;以防沉迷限制。并且，若您未满18周岁，荆州麻将会根据有关规则及您家长的要求对您的账户进行&#xA;限制。&#xA;2.6如果您长期连续未登陆，您在游戏内的游戏数据可能会由于技术原因被删除，对此荆州麻将不承&#xA;担任何责任。&#xA;三、荆州麻将服务&#xA;3.1荆州麻将将向您提供本游戏作为休闲娱乐之用，荆州麻将严禁一切形式的赌博和其他违法犯罪活&#xA;动。请您适度游戏，荆州麻将将与您共同打造绿色的休闲平台。&#xA;3.2在您遵守本协议及相关法律法规的前提下，荆州麻将给予您一项不可转让及非排他性的许可，以&#xA;使用荆州麻将服务。您使用荆州麻将服务仅可以非商业目的使用，包括：&#xA;（1）接收、下载、安装、启动、升级、登陆、显示、运行本游戏；&#xA;（2）创建游戏角色，设置角色名（本游戏暂不支持）；查阅游戏规则、用户个人资料、游戏对局结&#xA;果，开设游戏房间、设置游戏参数、使用聊天功能、社交分享功能；&#xA;（3）使用本游戏支持并允许的其他某一项或几项功能。&#xA;3.3您充分理解并同意：享受本游戏服务，&#xA;需购买并消耗房卡；房卡可通过线上途径购得；房卡使用期限为自您获得房卡之日起至游戏终止运&#xA;营（无论任何原因导致运营终止）之日止。一旦本协议终止或者本游戏终止运营，您将无法继续使&#xA;用房卡；一旦购买房卡完成，除非荆州麻将同意，您将不得撤销交易或要求将所购房卡回兑成相应&#xA;的现金或者其他等价物。&#xA;3.4本游戏暂不支持任何虚拟货币、虚拟物品等。" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -86,8 +86,8 @@
                     <Position X="8.4244" Y="441.4992" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0099" Y="0.9817" />
-                    <PreSize X="0.9808" Y="0.9442" />
+                    <PrePosition X="0.0099" Y="0.9833" />
+                    <PreSize X="0.9809" Y="0.9458" />
                     <SingleColor A="255" R="150" G="150" B="255" />
                     <FirstColor A="255" R="150" G="150" B="255" />
                     <EndColor A="255" R="255" G="255" B="255" />
@@ -95,12 +95,12 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-                <Position X="465.0666" Y="562.2859" />
+                <Position X="465.0000" Y="562.1329" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.9023" />
-                <PreSize X="0.9118" Y="0.7217" />
-                <FileData Type="MarkedSubImage" Path="games/comm/launch/BG4.png" Plist="comm/launch/LaunchPlist1.plist" />
+                <PreSize X="0.9118" Y="0.7207" />
+                <FileData Type="MarkedSubImage" Path="games/comm/launch/BG4.png" Plist="games/comm/launch/LaunchPlist1.plist" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -108,8 +108,8 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="0.6973" Y="0.8309" />
-            <FileData Type="MarkedSubImage" Path="games/comm/launch/BG5.png" Plist="comm/launch/LaunchPlist1.plist" />
+            <PreSize X="0.6972" Y="0.8307" />
+            <FileData Type="MarkedSubImage" Path="games/comm/launch/BG5.png" Plist="games/comm/launch/LaunchPlist1.plist" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

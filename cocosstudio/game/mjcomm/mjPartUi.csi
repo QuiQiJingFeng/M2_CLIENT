@@ -58,7 +58,6 @@
       <FilePathData Path="game/mjcomm/part/numLost.png" />
       <FilePathData Path="game/mjcomm/part/numWin.png" />
       <FilePathData Path="game/mjcomm/part/rule_bg.png" />
-      <FilePathData Path="game/mjcomm/part/Sp_TipYinDao.png" />
       <FilePathData Path="game/mjcomm/part/Sp_yinDaoKnow.png" />
       <FilePathData Path="game/mjcomm/part/surplus_cardBg.png" />
       <FilePathData Path="game/mjcomm/part/tableRule_bg.png" />
@@ -158,10 +157,8 @@
       <FilePathData Path="game/mjcomm/words/wordZhang.png" />
       <FilePathData Path="game/mjcomm/words/wordZhi.png" />
       <FilePathData Path="game/mjcomm/part/btnGameLayerShare.png" />
-      <FilePathData Path="game/mjcomm/part/btn_ChatLead.png" />
       <FilePathData Path="game/mjcomm/part/smallLoading_bg.png" />
       <FilePathData Path="game/mjcomm/part/bgMark_1.png" />
-      <FilePathData Path="game/mjcomm/part/btn_gift.png" />
       <FilePathData Path="game/mjcomm/part/img_TiShiArrow.png" />
       <FilePathData Path="game/mjcomm/gwidget/img/BG10.png" />
       <FilePathData Path="game/mjcomm/gwidget/img/BG4.png" />

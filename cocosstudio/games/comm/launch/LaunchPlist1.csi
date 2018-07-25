@@ -1,6 +1,24 @@
 <PlistInfoProjectFile>
   <PropertyGroup Name="LaunchPlist1" Type="Plist" ID="3b55b8a3-fc39-4155-9e10-92100c576d71" Version="3.10.0.0" />
   <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="games/comm/launch/BG1.png" />
+      <FilePathData Path="games/comm/launch/BG4.png" />
+      <FilePathData Path="games/comm/launch/BG5.png" />
+      <FilePathData Path="games/comm/launch/BG9.png" />
+      <FilePathData Path="games/comm/launch/ButtonSure.png" />
+      <FilePathData Path="games/comm/launch/Check0.png" />
+      <FilePathData Path="games/comm/launch/Check1.png" />
+      <FilePathData Path="games/comm/launch/daopying.png" />
+      <FilePathData Path="games/comm/launch/ImageText1.png" />
+      <FilePathData Path="games/comm/launch/ImageText2.png" />
+      <FilePathData Path="games/comm/launch/ImageText3.png" />
+      <FilePathData Path="games/comm/launch/ImageText5.png" />
+      <FilePathData Path="games/comm/launch/UpdateProgress0.png" />
+      <FilePathData Path="games/comm/launch/UpdateProgress1.png" />
+      <FilePathData Path="games/comm/launch/UpdateProgress2.png" />
+      <FilePathData Path="games/comm/launch/BG3.png" />
+    </ImageFiles>
     <MaxSize Width="1024" Height="512" />
   </Content>
 </PlistInfoProjectFile>

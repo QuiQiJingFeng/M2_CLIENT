@@ -97,7 +97,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5051" Y="-0.1189" />
                     <PreSize X="1.1290" Y="0.0857" />
-                    <FileData Type="Normal" Path="games/comm/launch/daopying.png" Plist="" />
+                    <FileData Type="MarkedSubImage" Path="games/comm/launch/daopying.png" Plist="games/comm/launch/LaunchPlist1.plist" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -119,7 +119,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4868" Y="-0.1230" />
                     <PreSize X="1.1290" Y="0.0857" />
-                    <FileData Type="Normal" Path="games/comm/launch/daopying.png" Plist="" />
+                    <FileData Type="MarkedSubImage" Path="games/comm/launch/daopying.png" Plist="games/comm/launch/LaunchPlist1.plist" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Sprite_PeopleWoman" ActionTag="-347891643" Tag="631" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-25.3785" RightMargin="5.3785" TopMargin="-48.0005" BottomMargin="84.0005" ctype="SpriteObjectData">
                     <Size X="330.0000" Y="314.0000" />

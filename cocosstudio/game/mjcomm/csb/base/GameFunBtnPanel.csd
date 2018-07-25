@@ -404,22 +404,22 @@
             <FileData Type="MarkedSubImage" Path="game/mjcomm/part/surplus_cardBg.png" Plist="game/mjcomm/mjPartUi.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="Bg_MaskGiftLead" ActionTag="1384333602" Tag="116" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="0.0009" RightMargin="-0.0010" TopMargin="-0.0001" BottomMargin="0.0001" TouchEnable="True" StretchWidthEnable="True" StretchHeightEnable="True" Scale9Enable="True" LeftEage="17" RightEage="17" TopEage="17" BottomEage="17" Scale9OriginX="17" Scale9OriginY="17" Scale9Width="19" Scale9Height="14" ctype="ImageViewObjectData">
-            <Size X="1334.0001" Y="750.0000" />
+            <Size X="1334.0000" Y="750.0000" />
             <Children>
-              <AbstractNodeData Name="Node_Gift" ActionTag="710389613" Tag="292" IconVisible="True" LeftMargin="403.8504" RightMargin="930.1497" TopMargin="278.1082" BottomMargin="471.8918" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_Gift" ActionTag="710389613" Tag="292" IconVisible="True" LeftMargin="403.8504" RightMargin="930.1496" TopMargin="278.1082" BottomMargin="471.8918" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="Image_gift" ActionTag="642988098" Tag="87" IconVisible="False" LeftMargin="-404.3038" RightMargin="54.3038" TopMargin="-231.3987" BottomMargin="50.3987" TouchEnable="True" LeftEage="115" RightEage="115" TopEage="59" BottomEage="59" Scale9OriginX="115" Scale9OriginY="59" Scale9Width="120" Scale9Height="63" ctype="ImageViewObjectData">
-                    <Size X="350.0000" Y="181.0000" />
+                  <AbstractNodeData Name="Image_gift" ActionTag="642988098" VisibleForFrame="False" Tag="87" IconVisible="False" LeftMargin="-252.3038" RightMargin="206.3038" TopMargin="-163.8987" BottomMargin="117.8987" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="16" Scale9Height="16" ctype="ImageViewObjectData">
+                    <Size X="46.0000" Y="46.0000" />
                     <Children>
-                      <AbstractNodeData Name="Image_152" CanEdit="False" ActionTag="942998150" Tag="693" IconVisible="False" LeftMargin="90.9575" RightMargin="101.0425" TopMargin="92.6198" BottomMargin="22.3802" LeftEage="52" RightEage="52" TopEage="21" BottomEage="21" Scale9OriginX="52" Scale9OriginY="21" Scale9Width="54" Scale9Height="24" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="Image_152" CanEdit="False" ActionTag="942998150" Tag="693" IconVisible="False" LeftMargin="90.9575" RightMargin="-202.9575" TopMargin="-42.3802" BottomMargin="22.3802" LeftEage="52" RightEage="52" TopEage="21" BottomEage="21" Scale9OriginX="52" Scale9OriginY="21" Scale9Width="54" Scale9Height="24" ctype="ImageViewObjectData">
                         <Size X="158.0000" Y="66.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="169.9575" Y="55.3802" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.4856" Y="0.3060" />
-                        <PreSize X="0.4514" Y="0.3646" />
+                        <PrePosition X="3.6947" Y="1.2039" />
+                        <PreSize X="3.4348" Y="1.4348" />
                         <FileData Type="MarkedSubImage" Path="game/mjcomm/part/Sp_yinDaoKnow.png" Plist="game/mjcomm/mjPartUi.plist" />
                       </AbstractNodeData>
                     </Children>
@@ -429,17 +429,17 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="MarkedSubImage" Path="game/mjcomm/part/btn_gift.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Image_9" ActionTag="-736653127" Tag="117" RotationSkewX="-30.0000" RotationSkewY="-30.0000" IconVisible="False" LeftMargin="-55.8927" RightMargin="7.8927" TopMargin="-51.8877" BottomMargin="-8.1123" LeftEage="15" RightEage="15" TopEage="19" BottomEage="19" Scale9OriginX="15" Scale9OriginY="19" Scale9Width="18" Scale9Height="22" ctype="ImageViewObjectData">
-                    <Size X="48.0000" Y="60.0000" />
+                  <AbstractNodeData Name="Image_9" ActionTag="-736653127" VisibleForFrame="False" Tag="117" RotationSkewX="-30.0000" RotationSkewY="-30.0000" IconVisible="False" LeftMargin="-54.9591" RightMargin="8.9591" TopMargin="-47.1137" BottomMargin="1.1137" LeftEage="15" RightEage="15" TopEage="19" BottomEage="19" Scale9OriginX="15" Scale9OriginY="19" Scale9Width="16" Scale9Height="8" ctype="ImageViewObjectData">
+                    <Size X="46.0000" Y="46.0000" />
                     <AnchorPoint ScaleX="0.4668" ScaleY="0.6590" />
                     <Position X="-33.4863" Y="31.4277" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="MarkedSubImage" Path="game/mjcomm/part/img_TiShiArrow.png" Plist="game/mjcomm/mjPartUi.plist" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
@@ -451,7 +451,7 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="667.0010" Y="375.0001" />
+            <Position X="667.0009" Y="375.0001" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
@@ -468,28 +468,28 @@
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="MarkedSubImage" Path="game/mjcomm/gwidget/img/bgWinMask.png" Plist="game/mjcomm/mjShaiZiAni.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Btn_ChatLead" ActionTag="1487958524" Tag="259" IconVisible="False" LeftMargin="570.0563" RightMargin="173.9437" TopMargin="19.3091" BottomMargin="394.6909" TouchEnable="True" LeftEage="194" RightEage="194" TopEage="110" BottomEage="110" Scale9OriginX="194" Scale9OriginY="110" Scale9Width="244" Scale9Height="84" ctype="ImageViewObjectData">
-            <Size X="590.0000" Y="336.0000" />
+          <AbstractNodeData Name="Btn_ChatLead" ActionTag="1487958524" VisibleForFrame="False" Tag="259" IconVisible="False" LeftMargin="842.0563" RightMargin="445.9437" TopMargin="164.3091" BottomMargin="539.6909" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="16" Scale9Height="16" ctype="ImageViewObjectData">
+            <Size X="46.0000" Y="46.0000" />
             <Children>
-              <AbstractNodeData Name="Image_9_0" ActionTag="-336698252" Tag="118" RotationSkewX="-30.0000" RotationSkewY="-30.0000" IconVisible="False" LeftMargin="579.5172" RightMargin="-37.5172" TopMargin="322.4122" BottomMargin="-46.4122" LeftEage="15" RightEage="15" TopEage="19" BottomEage="19" Scale9OriginX="15" Scale9OriginY="19" Scale9Width="18" Scale9Height="22" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_9_0" ActionTag="-336698252" Tag="118" RotationSkewX="-30.0000" RotationSkewY="-30.0000" IconVisible="False" LeftMargin="579.5172" RightMargin="-581.5172" TopMargin="32.4122" BottomMargin="-46.4122" LeftEage="15" RightEage="15" TopEage="19" BottomEage="19" Scale9OriginX="15" Scale9OriginY="19" Scale9Width="18" Scale9Height="22" ctype="ImageViewObjectData">
                 <Size X="48.0000" Y="60.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="603.5172" Y="-16.4122" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="1.0229" Y="-0.0488" />
-                <PreSize X="0.0814" Y="0.1786" />
+                <PrePosition X="13.1199" Y="-0.3568" />
+                <PreSize X="1.0435" Y="1.3043" />
                 <FileData Type="MarkedSubImage" Path="game/mjcomm/part/img_TiShiArrow.png" Plist="game/mjcomm/mjPartUi.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Image_152_0" ActionTag="1788800363" Tag="694" IconVisible="False" LeftMargin="223.1745" RightMargin="208.8255" TopMargin="248.0716" BottomMargin="21.9284" LeftEage="52" RightEage="52" TopEage="21" BottomEage="21" Scale9OriginX="52" Scale9OriginY="21" Scale9Width="54" Scale9Height="24" ctype="ImageViewObjectData">
-                <Size X="158.0000" Y="66.0000" />
+              <AbstractNodeData Name="Image_152_0" ActionTag="1788800363" VisibleForFrame="False" Tag="694" IconVisible="False" LeftMargin="279.1745" RightMargin="-279.1745" TopMargin="-31.9284" BottomMargin="31.9284" LeftEage="15" RightEage="15" TopEage="21" BottomEage="21" Scale9OriginX="15" Scale9OriginY="21" Scale9Width="16" Scale9Height="4" ctype="ImageViewObjectData">
+                <Size X="46.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="302.1745" Y="54.9284" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5122" Y="0.1635" />
-                <PreSize X="0.2678" Y="0.1964" />
-                <FileData Type="MarkedSubImage" Path="game/mjcomm/part/Sp_yinDaoKnow.png" Plist="game/mjcomm/mjPartUi.plist" />
+                <PrePosition X="6.5690" Y="1.1941" />
+                <PreSize X="1.0000" Y="1.0000" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -497,21 +497,21 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.6485" Y="0.7503" />
-            <PreSize X="0.4423" Y="0.4480" />
-            <FileData Type="MarkedSubImage" Path="game/mjcomm/part/btn_ChatLead.png" Plist="game/mjcomm/mjPartUi.plist" />
+            <PreSize X="0.0345" Y="0.0613" />
+            <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Btn_LeadBg" ActionTag="-1462399103" Tag="3222" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1030.2186" RightMargin="83.7814" TopMargin="102.9384" BottomMargin="486.0616" LeftEage="72" RightEage="72" TopEage="53" BottomEage="53" Scale9OriginX="72" Scale9OriginY="53" Scale9Width="76" Scale9Height="55" ctype="ImageViewObjectData">
-            <Size X="220.0000" Y="161.0000" />
+          <AbstractNodeData Name="Btn_LeadBg" ActionTag="-1462399103" VisibleForFrame="False" Tag="3222" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1117.2186" RightMargin="170.7814" TopMargin="160.4384" BottomMargin="543.5616" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="16" Scale9Height="16" ctype="ImageViewObjectData">
+            <Size X="46.0000" Y="46.0000" />
             <Children>
-              <AbstractNodeData Name="Btn_Know" ActionTag="-1607961496" Tag="3223" IconVisible="False" LeftMargin="28.6583" RightMargin="33.3417" TopMargin="78.3015" BottomMargin="16.6985" TouchEnable="True" LeftEage="72" RightEage="72" TopEage="21" BottomEage="21" Scale9OriginX="72" Scale9OriginY="21" Scale9Width="14" Scale9Height="24" ctype="ImageViewObjectData">
-                <Size X="158.0000" Y="66.0000" />
+              <AbstractNodeData Name="Btn_Know" ActionTag="-1607961496" VisibleForFrame="False" Tag="3223" IconVisible="False" LeftMargin="84.6583" RightMargin="-84.6583" TopMargin="-26.6985" BottomMargin="26.6985" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="21" BottomEage="21" Scale9OriginX="15" Scale9OriginY="21" Scale9Width="16" Scale9Height="4" ctype="ImageViewObjectData">
+                <Size X="46.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="107.6583" Y="49.6985" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4894" Y="0.3087" />
-                <PreSize X="0.7182" Y="0.4099" />
-                <FileData Type="MarkedSubImage" Path="game/mjcomm/part/Sp_yinDaoKnow.png" Plist="game/mjcomm/mjPartUi.plist" />
+                <PrePosition X="2.3404" Y="1.0804" />
+                <PreSize X="1.0000" Y="1.0000" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -519,8 +519,8 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8547" Y="0.7554" />
-            <PreSize X="0.1649" Y="0.2147" />
-            <FileData Type="MarkedSubImage" Path="game/mjcomm/part/Sp_TipYinDao.png" Plist="game/mjcomm/mjPartUi.plist" />
+            <PreSize X="0.0345" Y="0.0613" />
+            <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="Panel_RecordCtrl" ActionTag="-508810728" VisibleForFrame="False" Tag="77" IconVisible="False" LeftMargin="487.0000" RightMargin="487.0000" TopMargin="444.4400" BottomMargin="194.5600" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Enable="True" LeftEage="56" RightEage="56" TopEage="44" BottomEage="44" Scale9OriginX="56" Scale9OriginY="44" Scale9Width="4" Scale9Height="23" ctype="PanelObjectData">
             <Size X="360.0000" Y="111.0000" />

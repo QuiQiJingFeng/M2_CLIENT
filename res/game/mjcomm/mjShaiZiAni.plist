@@ -158,17 +158,6 @@
 				<key>sourceSize</key>
 				<string>{176,168}</string>
 			</dict>
-			<key>game/mjcomm/button/btnMao.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{72,1797},{176,168}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{176,168}</string>
-			</dict>
 			<key>game/mjcomm/button/btnMore.png</key>
 			<dict>
 				<key>frame</key>
@@ -183,7 +172,7 @@
 			<key>game/mjcomm/button/btnPass.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{760,1770},{148,145}}</string>
+				<string>{{420,1809},{148,145}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -194,11 +183,11 @@
 			<key>game/mjcomm/button/btnPeng.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{242,1797},{176,168}}</string>
+				<string>{{72,1797},{176,168}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{176,168}</string>
 			</dict>
@@ -249,11 +238,11 @@
 			<key>game/mjcomm/button/btnTing.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{590,1770},{176,168}}</string>
+				<string>{{242,1797},{176,168}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{176,168}</string>
 			</dict>
@@ -403,11 +392,11 @@
 			<key>game/mjcomm/gwidget/img/BG21.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{420,1809},{159,139}}</string>
+				<string>{{590,1770},{159,139}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{159,139}</string>
 			</dict>
@@ -458,7 +447,7 @@
 			<key>game/mjcomm/gwidget/img/commBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{760,1917},{129,135}}</string>
+				<string>{{731,1770},{129,135}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>

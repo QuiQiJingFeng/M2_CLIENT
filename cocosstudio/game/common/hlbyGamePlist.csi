@@ -1,6 +1,0 @@
-<PlistInfoProjectFile>
-  <PropertyGroup Name="hlbyGamePlist" Type="Plist" ID="e6f3ff85-0722-4c34-baec-0782edac0b30" Version="3.10.0.0" />
-  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
-    <MaxSize Width="1024" Height="1024" />
-  </Content>
-</PlistInfoProjectFile>

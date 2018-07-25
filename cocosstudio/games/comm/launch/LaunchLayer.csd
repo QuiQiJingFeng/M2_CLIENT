@@ -17,7 +17,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4968" Y="0.5695" />
                 <PreSize X="0.5060" Y="0.5600" />
-                <FileData Type="Normal" Path="games/comm/launch/BG3.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="games/comm/launch/BG3.png" Plist="games/comm/launch/LaunchPlist1.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Text_3" ActionTag="463929288" Tag="852" IconVisible="False" HorizontalEdge="RightEdge" VerticalEdge="TopEdge" LeftMargin="1323.0002" RightMargin="10.9998" TopMargin="-0.0001" BottomMargin="750.0001" FontSize="36" LabelText="" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -96,7 +96,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" />
                 <PreSize X="1.0000" Y="0.1850" />
-                <FileData Type="Normal" Path="games/comm/launch/BG1.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="games/comm/launch/BG1.png" Plist="games/comm/launch/LaunchPlist1.plist" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
