@@ -7,7 +7,7 @@
 			<key>game/mjcomm/part/bgAlphaRect.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{263,251},{4,4}}</string>
+				<string>{{982,2},{4,4}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -18,7 +18,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{814,1068},{200,200}}</string>
+				<string>{{2,1389},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -29,7 +29,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_10.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{814,1272},{200,200}}</string>
+				<string>{{2,1593},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -40,7 +40,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_11.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{814,1476},{200,200}}</string>
+				<string>{{672,1401},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -51,7 +51,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_12.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{252,1381},{200,200}}</string>
+				<string>{{206,1595},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -62,7 +62,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{546,1509},{200,200}}</string>
+				<string>{{2,1797},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -73,7 +73,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{750,1680},{200,200}}</string>
+				<string>{{410,1595},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -84,7 +84,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,1395},{200,200}}</string>
+				<string>{{614,1605},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -95,7 +95,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{206,1585},{200,200}}</string>
+				<string>{{818,1605},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -106,7 +106,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{500,1713},{200,200}}</string>
+				<string>{{206,1799},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -117,7 +117,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_7.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,1599},{200,200}}</string>
+				<string>{{410,1799},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -128,7 +128,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_8.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{206,1789},{200,200}}</string>
+				<string>{{614,1809},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -139,7 +139,7 @@
 			<key>game/mjcomm/animation/aniActionLight/aniAction_9.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,1803},{200,200}}</string>
+				<string>{{818,1809},{200,200}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -150,18 +150,18 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZi_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{854,506},{86,140}}</string>
+				<string>{{252,251},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{86,140}</string>
 			</dict>
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZi_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{521,257},{86,140}}</string>
+				<string>{{252,395},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -172,7 +172,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZi_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{521,401},{86,140}}</string>
+				<string>{{252,539},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -183,29 +183,29 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZi_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{847,596},{86,140}}</string>
+				<string>{{252,683},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{86,140}</string>
 			</dict>
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZi_5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{847,686},{86,140}}</string>
+				<string>{{592,652},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{86,140}</string>
 			</dict>
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZi_6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{513,545},{86,140}}</string>
+				<string>{{252,827},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -216,7 +216,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{513,689},{86,140}}</string>
+				<string>{{592,796},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -227,7 +227,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{502,833},{86,140}}</string>
+				<string>{{932,735},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -238,7 +238,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{502,977},{86,140}}</string>
+				<string>{{932,879},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -249,7 +249,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{502,1121},{86,140}}</string>
+				<string>{{252,971},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -260,7 +260,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{502,1265},{86,140}}</string>
+				<string>{{252,1115},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -271,7 +271,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{456,1409},{86,140}}</string>
+				<string>{{592,940},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -282,7 +282,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_7.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{456,1553},{86,140}}</string>
+				<string>{{592,1084},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -293,7 +293,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_8.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{410,1697},{86,140}}</string>
+				<string>{{932,1023},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -304,7 +304,7 @@
 			<key>game/mjcomm/animation/aniShaiZi/aniShaiZiScroll_9.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{704,1884},{86,140}}</string>
+				<string>{{932,1167},{86,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -315,7 +315,7 @@
 			<key>game/mjcomm/animation/aniTing/aniTing_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{263,493},{246,218}}</string>
+				<string>{{342,485},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -326,18 +326,18 @@
 			<key>game/mjcomm/animation/aniTing/aniTing_10.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{603,759},{246,218}}</string>
+				<string>{{2,723},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{246,218}</string>
 			</dict>
 			<key>game/mjcomm/animation/aniTing/aniTing_11.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,507},{246,218}}</string>
+				<string>{{342,707},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -348,7 +348,7 @@
 			<key>game/mjcomm/animation/aniTing/aniTing_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{252,715},{246,218}}</string>
+				<string>{{2,945},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -359,7 +359,7 @@
 			<key>game/mjcomm/animation/aniTing/aniTing_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,729},{246,218}}</string>
+				<string>{{682,735},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -370,7 +370,7 @@
 			<key>game/mjcomm/animation/aniTing/aniTing_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{252,937},{246,218}}</string>
+				<string>{{342,929},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -381,29 +381,29 @@
 			<key>game/mjcomm/animation/aniTing/aniTing_5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{592,1009},{246,218}}</string>
+				<string>{{2,1167},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{246,218}</string>
 			</dict>
 			<key>game/mjcomm/animation/aniTing/aniTing_6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{592,1259},{246,218}}</string>
+				<string>{{682,957},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{246,218}</string>
 			</dict>
 			<key>game/mjcomm/animation/aniTing/aniTing_7.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,951},{246,218}}</string>
+				<string>{{682,1179},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -414,7 +414,7 @@
 			<key>game/mjcomm/animation/aniTing/aniTing_8.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{252,1159},{246,218}}</string>
+				<string>{{342,1151},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -425,7 +425,7 @@
 			<key>game/mjcomm/animation/aniTing/aniTing_9.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,1173},{246,218}}</string>
+				<string>{{252,1373},{246,218}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -436,7 +436,7 @@
 			<key>game/mjcomm/animation/aniWord/wordChi.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,251},{257,252}}</string>
+				<string>{{345,229},{257,252}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -447,7 +447,7 @@
 			<key>game/mjcomm/animation/aniWord/wordGang.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{618,2},{256,238}}</string>
+				<string>{{702,257},{256,238}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -458,7 +458,7 @@
 			<key>game/mjcomm/animation/aniWord/wordHu.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{271,257},{232,246}}</string>
+				<string>{{2,251},{232,246}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -469,7 +469,7 @@
 			<key>game/mjcomm/animation/aniWord/wordLai.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{345,2},{251,269}}</string>
+				<string>{{709,2},{251,269}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -480,11 +480,11 @@
 			<key>game/mjcomm/animation/aniWord/wordPeng.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{618,244},{261,232}}</string>
+				<string>{{702,499},{261,232}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{261,232}</string>
 			</dict>
@@ -502,40 +502,40 @@
 			<key>game/mjcomm/cardBgGreen/mjStandFace.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{878,2},{92,137}}</string>
+				<string>{{606,229},{92,137}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{92,137}</string>
 			</dict>
 			<key>game/mjcomm/cardBgYellow/mjStandFace.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{878,98},{92,137}}</string>
+				<string>{{606,370},{92,137}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{92,137}</string>
 			</dict>
 			<key>game/mjcomm/cardBgBlue/mjStandFace.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{878,194},{92,137}}</string>
+				<string>{{592,511},{92,137}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{92,137}</string>
 			</dict>
 			<key>game/mjcomm/animation/aniWord/wordBh.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{854,290},{212,166}}</string>
+				<string>{{502,1373},{212,166}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -546,24 +546,24 @@
 			<key>game/mjcomm/animation/aniWord/wordPiao.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{611,509},{232,246}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{232,246}</string>
-			</dict>
-			<key>game/mjcomm/animation/aniWord/yingkou.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{825,776},{288,179}}</string>
+				<string>{{2,487},{232,246}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<true />
 				<key>sourceSize</key>
-				<string>{288,179}</string>
+				<string>{232,246}</string>
+			</dict>
+			<key>game/mjcomm/animation/aniWord/wordYk.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{345,2},{360,223}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{360,223}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>

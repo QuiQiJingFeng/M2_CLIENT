@@ -221,6 +221,8 @@ function MjEngine:clearUiData()
 	end
 	self._allLieFaceCardNode = {}
 	lt.DataManager:getTingPlayerInfo(true)
+	lt.DataManager:getPaoPlayerInfo(true)
+	lt.DataManager:getYingkouPlayerInfo(true)
 
 	self._isSelectTing = false
 	self._deleget:hideHuCardsTipsMj()
@@ -249,7 +251,6 @@ function MjEngine:angainConfigUi()--继续游戏
 end
 
 function MjEngine:sendCards(msg, pos)--发牌 13张
-	lt.DataManager:setGameState(lt.Constants.ROOM_STATE.GAME_PLAYING)
 	local direction = lt.DataManager:getPlayerDirectionByPos(pos)
 
 	self._showCardsLayer:setVisible(true)
@@ -1402,12 +1403,26 @@ function MjEngine:isCanTingCard() --是否可以听牌 仅仅为了显示听的�
 			--table.insert(self._allHandCardsTingValue,value)
 			--handNode:showTing()--显示听得标志
 			if self._gameRoomInfo.room_setting.game_type == lt.Constants.GAME_TYPE.SQMJ then
-				for i,v in ipairs(self._allPlayerStandHandCardsValue[lt.Constants.DIRECTION.NAN]) do
-					if value == v then
-						isCanTing = true
-						break
-					end
+				if self:isFlower(value) then
+					isCanTing = true
+				else
+					if #self._allPlayerLightHandCardsValue[lt.Constants.DIRECTION.NAN] < 4 then
+						for i,v in ipairs(self._allPlayerStandHandCardsValue[lt.Constants.DIRECTION.NAN]) do
+							if value == v then
+								isCanTing = true
+								break
+							end
+						end		
+					else
+						for i,v in ipairs(self._allPlayerLightHandCardsValue[lt.Constants.DIRECTION.NAN]) do
+							if value == v then
+								isCanTing = true
+								break
+							end
+						end									
+					end					
 				end
+
 			else
 				isCanTing = true
 			end

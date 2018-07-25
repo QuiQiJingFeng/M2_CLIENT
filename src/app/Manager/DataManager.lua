@@ -82,6 +82,14 @@ function DataManager:onPushAllRoomInfo(msg)
         self._getTingPlayerInfo = msg.ting_list
     end 
 
+    if msg.pao_list then
+        self._getPaoPlayerInfo = msg.pao_list
+    end 
+
+    if msg.yingKou_list then
+        self._getYingkouPlayerInfo = msg.kou_list
+    end 
+
     if msg.card_list then
         self:setGameState(lt.Constants.ROOM_STATE.GAME_PLAYING)
     else
@@ -97,7 +105,8 @@ function DataManager:setGameState(state)
 end
 
 function DataManager:getGameState()
-    return self._curGameState or lt.Constants.ROOM_STATE.GAME_PREPARE
+    self._curGameState = self._curGameState or lt.Constants.ROOM_STATE.GAME_PREPARE
+    return self._curGameState
 end
 
 function DataManager:isClientConnectAgain()
@@ -320,6 +329,20 @@ function DataManager:getTingPlayerInfo(flag)
         self._getTingPlayerInfo = {}
     end
     return self._getTingPlayerInfo
+end
+
+function DataManager:getPaoPlayerInfo(flag)
+    if not self._getPaoPlayerInfo or flag then
+        self._getPaoPlayerInfo = {}
+    end
+    return self._getPaoPlayerInfo
+end
+
+function DataManager:getYingkouPlayerInfo(flag)
+    if not self._getYingkouPlayerInfo or flag then
+        self._getYingkouPlayerInfo = {}
+    end
+    return self._getYingkouPlayerInfo
 end
 
 function DataManager:isTingPlayerByPos(pos)

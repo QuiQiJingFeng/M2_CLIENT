@@ -339,8 +339,7 @@ function GameActionBtnsPanel:viewActionButtons(tObjCpghObj, isPassSendMsg)
     end
 
     if self.m_objCommonUi.m_btnYingKou then
-        local isYingKou = tObjCpghObj.tObjYingKou ~= nil
-        self:setBtnEnabled(self.m_objCommonUi.m_btnYingKou, isYingKou)
+        self:setBtnEnabled(self.m_objCommonUi.m_btnYingKou, tObjCpghObj.tObjYingKou)
     end
 
     local isTing = lt.DataManager:isTingPlayerByPos(lt.DataManager:getMyselfPositionInfo().user_pos)
@@ -719,7 +718,8 @@ function GameActionBtnsPanel:onNoticeSpecialEvent(msg)
     elseif msg.item["type"] == 7 then
         path = "game/mjcomm/animation/aniTing/aniTing_11.png"--wordZm
     end
-    word:setSpriteFrame(path)
+
+    word:setSpriteFrame(path)--setTexture  setSpriteFrame
     
     for i=1,12 do
         local delay = cc.DelayTime:create(0.1 * i)
@@ -753,9 +753,9 @@ function GameActionBtnsPanel:onNoticeSpecialBuFlowerEvent(msg)
     local path = "game/mjcomm/animation/aniWord/wordLai.png"
 
     if msg.type == 1 then--补花
-        path = "game/mjcomm/animation/aniWord/wordLai.png"
+        path = "game/mjcomm/animation/aniWord/wordBh.png"
     elseif msg.type == 2 then--飘癞子
-        path = "game/mjcomm/animation/aniWord/wordLai.png"
+        path = "game/mjcomm/animation/aniWord/wordPiao.png"
     end
 
     word:setSpriteFrame(path)
@@ -791,7 +791,7 @@ function GameActionBtnsPanel:onNoticeYingKou(msg)
     local light = self._specialEventNode[direction]:getChildByName("Sprite_Light")
     local word = self._specialEventNode[direction]:getChildByName("Sprite_Word")
 
-    local path = "game/mjcomm/animation/aniWord/wordMao.png"
+    local path = "game/mjcomm/animation/aniWord/wordYk.png"
 
     word:setSpriteFrame(path)
     

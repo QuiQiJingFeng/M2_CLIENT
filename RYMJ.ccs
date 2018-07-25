@@ -570,8 +570,8 @@
                 <Image Name="wordMao.png" />
                 <Image Name="wordPeng.png" />
                 <Image Name="wordPiao.png" />
+                <Image Name="wordYk.png" />
                 <Image Name="wordZm.png" />
-                <Image Name="yingkou.png" />
               </Folder>
             </Folder>
             <Folder Name="button">

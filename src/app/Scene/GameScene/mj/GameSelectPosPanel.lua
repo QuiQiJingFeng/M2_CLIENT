@@ -254,18 +254,22 @@ function GameSelectPosPanel:againConfigUI()-- 继续游戏 不退程序断线 �
 	if lt.DataManager:isClientConnectAgainPlaying() then
 		self:HideReady()
 	end
+
+	self:configPlayerProperty()
+
 	-- if lt.DataManager:isClientConnectAgain() then
 	-- 	self:configPlayerScore()
 	-- end
 end
 
-function GameSelectPosPanel:initGame()-- 正常顺序游戏和断线重连 会走 initGame
+function GameSelectPosPanel:initGame()-- 正常顺序游戏和退程序重连 会走 initGame
 	for i,v in ipairs(self._currentSitPosArray) do
 		v:setVisible(true)
 	end
 
 	self:configRotation()--初始化座位方位
 	self:configPlayerScore()
+	self:configPlayerProperty()
 
 	self:clientConnectShowPao()
 	if lt.DataManager:isClientConnectAgainPlaying() then
@@ -743,6 +747,90 @@ function GameSelectPosPanel:configPlayerScore() --初始化和断线重连
 	end
 end
 
+function GameSelectPosPanel:configPlayerProperty(pos)
+	
+	local state = lt.DataManager:getGameState()
+	if state == lt.Constants.ROOM_STATE.GAME_PREPARE then
+		return
+	end
+
+	if pos then
+		self:configProperty(pos)
+	else
+		for pos=1,self._playerNum do
+			self:configProperty(pos)
+		end
+	end
+end
+
+function GameSelectPosPanel:configProperty(pos)
+
+	local direc = self:getPlayerDirectionByPos(pos)
+	if not direc or not self._currentPlayerLogArray[direc] then
+		return
+	end
+
+	local paoList = lt.DataManager:getPaoPlayerInfo()
+	local yingKouList = lt.DataManager:getYingkouPlayerInfo()
+
+	local posX = 0
+	local posY = 50
+	local offY = 0
+	local offX = 0
+	if direc == lt.Constants.DIRECTION.NAN then
+		posY = -50
+		offX = 60
+	elseif direc == lt.Constants.DIRECTION.DONG then
+		offY = 30
+	elseif direc == lt.Constants.DIRECTION.BEI then
+		posY = -50
+		offX = 60
+	elseif direc == lt.Constants.DIRECTION.XI then
+		offY = 30
+	end
+
+	local contentNode = self._currentPlayerLogArray[direc]:getChildByTag(888)
+	if contentNode then
+		contentNode:removeFromParent()
+	end
+	contentNode = cc.Node:create()
+	contentNode:setPosition(0, 0)
+	contentNode:setTag(888)
+	self._currentPlayerLogArray[direc]:addChild(contentNode)
+	
+	local isPao = false
+	local isYingkou = false
+	for k,v in pairs(paoList) do
+		if v.user_pos == pos and v.pao then
+			isPao = true
+			break
+		end
+	end
+	for k,v in pairs(yingKouList) do
+		if v.user_pos == pos and v.kou then
+			isYingkou = true
+			break
+		end
+	end
+	if isPao then
+		local tipIcon = ccui.ImageView:create("game/mjcomm/part/pao1Tip.png",1)
+		tipIcon:setAnchorPoint(0.5,0.5)
+		tipIcon:setPosition(posX, posY)
+		contentNode:addChild(tipIcon)
+		posY = posY + offY
+		posX = posX + offX
+	end
+
+	if isYingkou then
+		local tipIcon = ccui.ImageView:create("game/mjcomm/part/yingkouTip.png",1)
+		tipIcon:setAnchorPoint(0.5,0.5)
+		tipIcon:setPosition(posX, posY)
+		contentNode:addChild(tipIcon)
+		posY = posY + offY
+		posX = posX + offX
+	end	
+end
+
 function GameSelectPosPanel:getPlayerDirectionByPos(playerPos) 
 	for pos,sitNode in ipairs(self._currentSitPosArray) do
 		if sitNode:getTag() == playerPos then
@@ -881,7 +969,34 @@ function GameSelectPosPanel:onDealDown(msg)   --发牌13张手牌
 	if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
 		self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	end
+	lt.DataManager:setGameState(lt.Constants.ROOM_STATE.GAME_PLAYING)
+	
+	self:configPlayerProperty()
+end
 
+function GameSelectPosPanel:onNoticePao(msg) 
+	if not lt.DataManager:getRePlayState() then
+		self._nodePaoLayer:setVisible(true)
+	end
+end
+
+function GameSelectPosPanel:pushPlayerPao(msg) 
+	local paoList = lt.DataManager:getPaoPlayerInfo()
+	table.insert(paoList, msg)
+	self:configPlayerProperty(msg.user_pos)
+end
+
+function GameSelectPosPanel:onNoticeYingKou(msg)
+	
+	
+	local yingKouList = lt.DataManager:getYingkouPlayerInfo()
+
+	local info = {}
+	info["user_pos"] = msg.user_pos
+	info["kou"] = true
+	table.insert(yingKouList, info)
+
+	self:configPlayerProperty(msg.user_pos)
 end
 
 function GameSelectPosPanel:onNoticePlayerConnectState(msg)   --玩家在线情况
@@ -892,22 +1007,6 @@ function GameSelectPosPanel:onNoticePlayerConnectState(msg)   --玩家在线情�
 			logoNode:getChildByName("Sprite_Disconnect"):setVisible(false) --断线标识
 		else
 			logoNode:getChildByName("Sprite_Disconnect"):setVisible(true) --断线标识
-		end
-	end
-
-end
-
-function GameSelectPosPanel:onRefreshGameOver()   --结算
-	self._allPlayerSitOk = false
-	if lt.DataManager:getGameOverInfo().players then
-		for i,v in ipairs(lt.DataManager:getGameOverInfo().players) do
-			local direction = self:getPlayerDirectionByPos(v.user_pos)
-			local logoNode = self._currentPlayerLogArray[direction]
-			if logoNode then
-				local scoreText = logoNode:getChildByName("Text_Amount")--99999
-
-				scoreText:setString(v.score)
-			end
 		end
 	end
 
@@ -926,6 +1025,22 @@ function GameSelectPosPanel:onRefreshScoreResponse(msg)   --玩家刷新积分�
 	end
 end
 
+function GameSelectPosPanel:onRefreshGameOver()   --结算
+	self._allPlayerSitOk = false
+	if lt.DataManager:getGameOverInfo().players then
+		for i,v in ipairs(lt.DataManager:getGameOverInfo().players) do
+			local direction = self:getPlayerDirectionByPos(v.user_pos)
+			local logoNode = self._currentPlayerLogArray[direction]
+			if logoNode then
+				local scoreText = logoNode:getChildByName("Text_Amount")--99999
+
+				scoreText:setString(v.score)
+			end
+		end
+	end
+
+end
+
 function GameSelectPosPanel:onClientConnectAgain() 
 	self:configPlayerScore()
 
@@ -938,12 +1053,6 @@ function GameSelectPosPanel:onClientConnectAgain()
 	-- if self._zhuangDirection and self._currentPlayerLogArray[self._zhuangDirection] then
 	-- 	self._currentPlayerLogArray[self._zhuangDirection]:getChildByName("Sprite_Zhuang"):setVisible(true)
 	-- end
-end
-
-function GameSelectPosPanel:onNoticePao(msg) 
-	if not lt.DataManager:getRePlayState() then
-		self._nodePaoLayer:setVisible(true)
-	end
 end
 
 function GameSelectPosPanel:createChatNotice(direc)
@@ -1103,6 +1212,8 @@ function GameSelectPosPanel:onEnter()
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_PAO, handler(self, self.onNoticePao), "GameSelectPosPanel.onNoticePao")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_FAST_SPAKE, handler(self, self.onNoticeFastSpake), "GameSelectPosPanel:onNoticeFastSpake")
 	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, handler(self, self.onRefreshRoomInfo), "GameSelectPosPanel.onRefreshRoomInfo")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.NOTICE_YING_KOU, handler(self, self.onNoticeYingKou), "GameSelectPosPanel.onNoticeYingKou")
+	lt.GameEventManager:addListener(lt.GameEventManager.EVENT.PUSH_PLAYER_PAO, handler(self, self.pushPlayerPao), "GameSelectPosPanel.pushPlayerPao")
 end
 
 function GameSelectPosPanel:onExit()
@@ -1117,6 +1228,8 @@ function GameSelectPosPanel:onExit()
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_PAO, "GameSelectPosPanel.onNoticePao")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_FAST_SPAKE, "GameSelectPosPanel:onNoticeFastSpake")
 	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.REFRESH_POSITION_INFO, "GameSelectPosPanel.onRefreshRoomInfo")
+	lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.NOTICE_YING_KOU, "GameSelectPosPanel.onNoticeYingKou")
+		lt.GameEventManager:removeListener(lt.GameEventManager.EVENT.PUSH_PLAYER_PAO, "GameSelectPosPanel.pushPlayerPao")
 end
 
 return GameSelectPosPanel

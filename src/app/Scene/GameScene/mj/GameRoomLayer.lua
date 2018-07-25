@@ -85,10 +85,9 @@ function GameRoomLayer:getotersCard(value)
 end
 
 function GameRoomLayer:againConfigUI()  
+	self._engine:angainConfigUi()
 	self._gameSelectPosPanel:againConfigUI()
 	self._gameCompassPanel:initGame()
-
-	self._engine:angainConfigUi()
 end
 
 function GameRoomLayer:resetCurrentOutPutPlayerPos()
@@ -592,7 +591,7 @@ function GameRoomLayer:onNoticePlayCard(msg)--通知其他人有人出牌
 				-- 	self._engine:goOutOneHandSpecialCardAtDirection(direction, value)
 				-- end
 				lt.AudioManager:playSpecialEventSound(8, msg.user_pos)
-				--lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
+				lt.GameEventManager:post(lt.GameEventManager.EVENT.NOTICE_SPECIAL_BUFLOWER, info)
 				break
 			end
 		end
