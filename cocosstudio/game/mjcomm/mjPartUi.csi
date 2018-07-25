@@ -169,6 +169,8 @@
       <FilePathData Path="game/mjcomm/part/iconTingAll.png" />
       <FilePathData Path="game/mjcomm/part/iconTingBest.png" />
       <FilePathData Path="game/mjcomm/part/image_oppTing.png" />
+      <FilePathData Path="game/mjcomm/part/yingkouTip.png" />
+      <FilePathData Path="game/mjcomm/part/pao1Tip.png" />
     </ImageFiles>
     <MaxSize Width="1024" Height="2048" />
   </Content>

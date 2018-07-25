@@ -62,7 +62,7 @@
 			<key>game/mjcomm/part/bgActionMenu.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{700,930},{37,55}}</string>
+				<string>{{314,1043},{37,55}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -271,7 +271,7 @@
 			<key>game/mjcomm/part/bgRedMask.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{570,1083},{20,20}}</string>
+				<string>{{668,1023},{20,20}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -348,11 +348,11 @@
 			<key>game/mjcomm/part/iconCoin.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{631,1029},{30,32}}</string>
+				<string>{{192,1155},{30,32}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{30,32}</string>
 			</dict>
@@ -436,7 +436,7 @@
 			<key>game/mjcomm/part/iconRecordPause.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{440,996},{41,51}}</string>
+				<string>{{358,1033},{41,51}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -447,7 +447,7 @@
 			<key>game/mjcomm/part/iconRecordPlay.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{694,989},{41,55}}</string>
+				<string>{{694,995},{41,55}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -458,11 +458,11 @@
 			<key>game/mjcomm/part/iconRecordSlow.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{52,1222},{43,37}}</string>
+				<string>{{438,1061},{43,37}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{43,37}</string>
 			</dict>
@@ -502,18 +502,18 @@
 			<key>game/mjcomm/part/iconWarn.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{112,1190},{44,40}}</string>
+				<string>{{587,1046},{44,40}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{44,40}</string>
 			</dict>
 			<key>game/mjcomm/part/iconZhuang.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{358,1033},{42,49}}</string>
+				<string>{{355,1088},{42,49}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -546,7 +546,7 @@
 			<key>game/mjcomm/part/image_redpoint.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{485,1013},{42,43}}</string>
+				<string>{{540,1021},{42,43}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -876,7 +876,7 @@
 			<key>game/mjcomm/words/wordBei.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{161,1178},{27,26}}</string>
+				<string>{{112,1190},{27,26}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -887,44 +887,44 @@
 			<key>game/mjcomm/words/wordBigBei.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{532,1058},{32,34}}</string>
+				<string>{{401,1097},{32,34}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{32,34}</string>
 			</dict>
 			<key>game/mjcomm/words/wordBigDong.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{400,1087},{33,34}}</string>
+				<string>{{631,988},{33,34}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{33,34}</string>
 			</dict>
 			<key>game/mjcomm/words/wordBigNan.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{532,1021},{33,34}}</string>
+				<string>{{631,1026},{33,34}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{33,34}</string>
 			</dict>
 			<key>game/mjcomm/words/wordBigXi.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{483,1059},{33,32}}</string>
+				<string>{{401,1135},{33,32}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{33,32}</string>
 			</dict>
@@ -964,7 +964,7 @@
 			<key>game/mjcomm/words/wordChangTable.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{741,980},{77,42}}</string>
+				<string>{{740,980},{77,42}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1052,7 +1052,7 @@
 			<key>game/mjcomm/words/wordDian.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{739,1026},{26,26}}</string>
+				<string>{{323,1171},{26,26}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1074,11 +1074,11 @@
 			<key>game/mjcomm/words/wordDong.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{570,1021},{27,26}}</string>
+				<string>{{340,1141},{27,26}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{27,26}</string>
 			</dict>
@@ -1107,7 +1107,7 @@
 			<key>game/mjcomm/words/wordGrayBei.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{666,1023},{24,24}}</string>
+				<string>{{228,1185},{24,24}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1118,7 +1118,7 @@
 			<key>game/mjcomm/words/wordGrayDong.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{665,1051},{24,24}}</string>
+				<string>{{192,1189},{24,24}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1129,7 +1129,7 @@
 			<key>game/mjcomm/words/wordGrayNan.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{631,1065},{24,24}}</string>
+				<string>{{256,1185},{24,24}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1140,7 +1140,7 @@
 			<key>game/mjcomm/words/wordGrayXi.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{600,1076},{24,24}}</string>
+				<string>{{143,1210},{24,24}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1151,11 +1151,11 @@
 			<key>game/mjcomm/words/wordGui.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{438,1051},{44,41}}</string>
+				<string>{{480,1051},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{44,41}</string>
 			</dict>
@@ -1294,11 +1294,11 @@
 			<key>game/mjcomm/words/wordNan.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{600,1046},{27,26}}</string>
+				<string>{{371,1141},{27,26}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{27,26}</string>
 			</dict>
@@ -1382,11 +1382,11 @@
 			<key>game/mjcomm/words/wordReplay.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{314,1043},{56,34}}</string>
+				<string>{{480,1013},{56,34}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{56,34}</string>
 			</dict>
@@ -1503,7 +1503,7 @@
 			<key>game/mjcomm/words/wordShe.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{352,1086},{44,41}}</string>
+				<string>{{528,1067},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1514,7 +1514,7 @@
 			<key>game/mjcomm/words/wordSheng.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{244,1095},{44,41}}</string>
+				<string>{{479,1096},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1635,18 +1635,18 @@
 			<key>game/mjcomm/words/wordXi.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{570,1052},{27,26}}</string>
+				<string>{{292,1147},{27,26}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{27,26}</string>
 			</dict>
 			<key>game/mjcomm/words/wordYin.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{292,1103},{44,41}}</string>
+				<string>{{244,1095},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1668,7 +1668,7 @@
 			<key>game/mjcomm/words/wordZe.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{244,1140},{44,41}}</string>
+				<string>{{292,1102},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1679,7 +1679,7 @@
 			<key>game/mjcomm/words/wordZhang.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{694,1048},{26,26}}</string>
+				<string>{{292,1177},{26,26}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1690,7 +1690,7 @@
 			<key>game/mjcomm/words/wordZhi.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{192,1155},{44,41}}</string>
+				<string>{{244,1140},{44,41}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1745,11 +1745,11 @@
 			<key>game/mjcomm/gwidget/img/BG10.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,1252},{37,42}}</string>
+				<string>{{437,1108},{37,42}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{37,42}</string>
 			</dict>
@@ -1778,7 +1778,7 @@
 			<key>game/mjcomm/gwidget/img/refreshCoinIcon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{631,988},{37,31}}</string>
+				<string>{{403,1056},{37,31}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -1800,11 +1800,11 @@
 			<key>game/mjcomm/part/ting_red1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{404,1056},{27,28}}</string>
+				<string>{{161,1178},{27,28}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{27,28}</string>
 			</dict>
@@ -1841,6 +1841,28 @@
 				<key>sourceSize</key>
 				<string>{45,11}</string>
 			</dict>
+			<key>game/mjcomm/part/yingkouTip.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{700,930},{61,36}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{61,36}</string>
+			</dict>
+			<key>game/mjcomm/part/pao1Tip.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{440,996},{61,36}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{61,36}</string>
+			</dict>
 		</dict>
 		<key>metadata</key>
 		<dict>
@@ -1851,14 +1873,14 @@
 			<key>realTextureFileName</key>
 			<string>mjPartUi.png</string>
 			<key>size</key>
-			<string>{1024,1291}</string>
+			<string>{1024,1282}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
 			<integer>1024</integer>
 			<key>height</key>
-			<integer>1291</integer>
+			<integer>1282</integer>
 		</dict>
 	</dict>
 </plist>

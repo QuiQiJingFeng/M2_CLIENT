@@ -569,7 +569,9 @@
                 <Image Name="wordLai.png" />
                 <Image Name="wordMao.png" />
                 <Image Name="wordPeng.png" />
+                <Image Name="wordPiao.png" />
                 <Image Name="wordZm.png" />
+                <Image Name="yingkou.png" />
               </Folder>
             </Folder>
             <Folder Name="button">
@@ -971,6 +973,7 @@
               <Image Name="numHuTips.png" />
               <Image Name="numLost.png" />
               <Image Name="numWin.png" />
+              <Image Name="pao1Tip.png" />
               <Image Name="rule_bg.png" />
               <Image Name="smallLoading_bg.png" />
               <Image Name="Sp_TipYinDao.png" />
@@ -992,6 +995,7 @@
               <Image Name="wordPlay.png" />
               <Image Name="wordRecordFast.png" />
               <Image Name="wordRecordPlay.png" />
+              <Image Name="yingkouTip.png" />
             </Folder>
             <Folder Name="sound">
               <Folder Name="bg_music">
